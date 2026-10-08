@@ -1,0 +1,34 @@
+audit:
+  stage: tags
+  run: perfume-db-2026-10-07
+  overall_status: FAIL
+  summary: "표본 150개 중 FAIL 2개, UNVERIFIED 1개, 나머지 147개는 PASS. FAIL 2개는 모두 brand_experience 태그다. 하나는 오래 써 왔다는 말이 가짜 의심의 근거로만 쓰였는데 positive로 달렸고(스키마 exclude 위반), 다른 하나는 quote가 따로 떼어 읽으면 이 향을 여러 병 샀다는 뜻으로 읽힌다. FAIL 비율 판정은 eval_gold.py audit에 맡긴다."
+  checked: 150
+  findings:
+    - review_id: R3HTG089Q8UVI8
+      topic: brand_experience
+      status: FAIL
+      finding: "원문은 'I’ve been using this for years ... This fragrance seems to be off as if it’s an imitation'이다. 오래 써 왔다는 말이 가짜 의심의 근거로 쓰였다. 스키마 brand_experience exclude('오래 써 왔다는 말이 가짜 의심의 근거로만 쓰이면 trust')에 해당하고, trust negative 태그('as if it’s an imitation')는 이미 있다. 같은 회차의 R1VCPTPZQPGX88, RQ8OA7VDO8VHV도 같은 구조인데 brand_experience를 달지 않았다."
+      required_action: "brand_experience positive 태그를 지운다. 같은 리뷰의 longevity_projection positive('the fragrance is not overwhelming but very soft')도 예전 병 이야기라 이 제품 태그가 아니다. 이것을 지우면 overall은 남은 주제(trust, scent, safety 모두 negative)에 따라 mixed에서 negative로 다시 정한다."
+    - review_id: R8O6FTAMPPSYB
+      topic: brand_experience
+      status: FAIL
+      finding: "원문은 'I did buy 4 in total and out of the four I did enjoy two other ones but this one is not my preference'다. 같은 브랜드 향 4개를 사서 다른 두 향이 좋았다는 뜻이고 이 향은 싫다는 리뷰다(제목 Not for me). quote 'I did buy 4 in total'만 떼어 읽으면 이 제품을 여러 병 산 애용 신호로 읽혀 리포트 인용에서 뜻이 뒤집힌다."
+      required_action: "topic(brand_experience)과 sentiment(positive)는 두고, quote를 브랜드 다른 향 호감을 직접 말하는 'out of the four I did enjoy two other ones'로 바꾼다."
+    - review_id: RK3CV5ZL3MB2U
+      topic: quality
+      status: UNVERIFIED
+      finding: "원문은 'Sprayer was not working product box. Come damage product come damage.'다. 받았을 때 분사기가 작동하지 않았고 파손을 함께 말한다. 스키마는 쓰다가 생긴 고장과 제조 불량은 quality, 받았을 때의 파손은 shipping으로 나눈다. 이 리뷰는 분사기가 제조 불량인지 배송 중 파손인지 원문만으로 정할 수 없다."
+      required_action: "'받았을 때부터 작동하지 않는 분사기(파손 언급 동반)'를 quality와 shipping 중 어디로 볼지 민재님이 정한다. shipping으로 정하면 quality 태그를 지운다(shipping negative 태그는 이미 있음)."
+  missed:
+    - {review_id: R3K2UHY4603CRW, topic: longevity_projection, reason: "no se siente (향이 느껴지지 않음, 세기 불만 negative)"}
+    - {review_id: R187EZAUQ8D32T, topic: trust, reason: "have bought it several times, but this bottle is weak (예전에 산 같은 제품보다 약하다는 비교, 스키마상 trust와 longevity_projection 둘 다)"}
+    - {review_id: R2VGSG5G7C47W5, topic: trust, reason: "not as good as it use to be (예전 같은 제품과 비교, 같은 ASIN의 R1ISNSZNBCFYTZ 'Not as it used to be'는 trust로 태깅됨)"}
+    - {review_id: R3LHM29XXXIQ1R, topic: longevity_projection, reason: "It smelled almost stronger. (Target에서 산 같은 제품과 세기 비교, Scary!!!로 부정 맥락)"}
+    - {review_id: R1XLSV63CR5GSO, topic: customer_service, reason: "then you can even returned not recommended (문맥상 반품도 안 된다는 불만 negative)"}
+    - {review_id: R3F2ZBZ48TZ7YA, topic: brand_experience, reason: "Move on to something different. (사지 말라는 비추천 negative)"}
+    - {review_id: RS1MO5HQ7J5E2, topic: trust, reason: "be careful buying it here (이 판매자에게서 사는 것을 경계하라는 말, trust include의 판매자 비추천)"}
+    - {review_id: R33A7FAYZA2DPO, topic: brand_experience, reason: "Got this for my gf as a gift because it's her favorite (애용 신호 positive)"}
+    - {review_id: R1EBXVKCXSHH9C, topic: price_value, reason: "perfumes more expensive than this one that doesnt last as long as this one (더 비싼 제품보다 낫다는 가격 대비 가치 positive)"}
+    - {review_id: RNL7EAGWBTPAM, topic: bottle_design, reason: "I purchased the small bottle ... I used most of it in 2 days! (용량이 금방 바닥남 negative)"}
+  next_action: PROCEED

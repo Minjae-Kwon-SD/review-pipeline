@@ -1,0 +1,250 @@
+{
+  "checked_at": "2026-10-07T19:04:47+09:00",
+  "tags_file": "04_tags.jsonl",
+  "warnings": 34,
+  "by_sentiment": {
+    "positive": 8,
+    "negative": 25,
+    "mixed": 1
+  },
+  "items": [
+    {
+      "review_id": "R2KQHPSE90CGY1",
+      "topic": "longevity_projection",
+      "sentiment": "positive",
+      "quote": "stays with you",
+      "negation": "not"
+    },
+    {
+      "review_id": "R1KAD88PU7ZRBZ",
+      "topic": "longevity_projection",
+      "sentiment": "negative",
+      "quote": "no dura nada la fijación",
+      "negation": "no"
+    },
+    {
+      "review_id": "R2UN5MM5PV5EDK",
+      "topic": "scent",
+      "sentiment": "negative",
+      "quote": "el olor es diferente",
+      "negation": "no"
+    },
+    {
+      "review_id": "R2QWCBOHX0IIK4",
+      "topic": "brand_experience",
+      "sentiment": "negative",
+      "quote": "do not purchase the eternity for women",
+      "negation": "not"
+    },
+    {
+      "review_id": "R2520K7UXLUVBK",
+      "topic": "trust",
+      "sentiment": "negative",
+      "quote": "es una estafa",
+      "negation": "no"
+    },
+    {
+      "review_id": "RIMA1R834G05R",
+      "topic": "price_value",
+      "sentiment": "negative",
+      "quote": "for that amount high",
+      "negation": "didn't"
+    },
+    {
+      "review_id": "R29AJ7AM4NWRLK",
+      "topic": "trust",
+      "sentiment": "negative",
+      "quote": "they've changed the formula",
+      "negation": "not"
+    },
+    {
+      "review_id": "RHEE9J6Q6V2MA",
+      "topic": "customer_service",
+      "sentiment": "negative",
+      "quote": "me gustaría regresarlo y que me devolvieran mi dinero",
+      "negation": "no"
+    },
+    {
+      "review_id": "R1CO9CTVFB1EH5",
+      "topic": "trust",
+      "sentiment": "negative",
+      "quote": "FAKE, FAKE, FAKE",
+      "negation": "not"
+    },
+    {
+      "review_id": "RQOBO5O374DB2",
+      "topic": "longevity_projection",
+      "sentiment": "negative",
+      "quote": "se volatiza súper pronto el aroma",
+      "negation": "no"
+    },
+    {
+      "review_id": "RSG5KSICI9GQ",
+      "topic": "longevity_projection",
+      "sentiment": "negative",
+      "quote": "aroma nada duradero",
+      "negation": "no"
+    },
+    {
+      "review_id": "R27AB5RGDGPQDQ",
+      "topic": "trust",
+      "sentiment": "negative",
+      "quote": "I was just a little put off with the slight difference in color of the Eternity",
+      "negation": "won't"
+    },
+    {
+      "review_id": "R2EPXOCQT50GHB",
+      "topic": "longevity_projection",
+      "sentiment": "positive",
+      "quote": "not to strong",
+      "negation": "not"
+    },
+    {
+      "review_id": "R18BLPFIGWE423",
+      "topic": "scent",
+      "sentiment": "negative",
+      "quote": "it smells different",
+      "negation": "don't"
+    },
+    {
+      "review_id": "R2BLBNG6DDEY05",
+      "topic": "scent",
+      "sentiment": "negative",
+      "quote": "smells like old lady",
+      "negation": "not"
+    },
+    {
+      "review_id": "RFAHMS2P3SUPE",
+      "topic": "longevity_projection",
+      "sentiment": "negative",
+      "quote": "after 30 min you cannot smell it on skin",
+      "negation": "not"
+    },
+    {
+      "review_id": "R1NMHASRB6N4JM",
+      "topic": "overall",
+      "sentiment": "mixed",
+      "quote": "this could be a good option",
+      "negation": "won't"
+    },
+    {
+      "review_id": "R2CE3LOQOMPNON",
+      "topic": "price_value",
+      "sentiment": "positive",
+      "quote": "which is fine for the price",
+      "negation": "doesn't"
+    },
+    {
+      "review_id": "RFBCL8OHZVT2V",
+      "topic": "scent",
+      "sentiment": "negative",
+      "quote": "it’s not vanilla as I thought it would be",
+      "negation": "isn't"
+    },
+    {
+      "review_id": "R30TSZV5Z4N8E6",
+      "topic": "scent",
+      "sentiment": "negative",
+      "quote": "it reminds me of a perfume a more elderly woman would wear",
+      "negation": "not"
+    },
+    {
+      "review_id": "RD43GNATAKUQZ",
+      "topic": "brand_experience",
+      "sentiment": "negative",
+      "quote": "just don’t buy",
+      "negation": "not"
+    },
+    {
+      "review_id": "R1OOIR3FSG877V",
+      "topic": "overall",
+      "sentiment": "negative",
+      "quote": "no sirve",
+      "negation": "no"
+    },
+    {
+      "review_id": "R3W3FAYLHBYMFC",
+      "topic": "overall",
+      "sentiment": "positive",
+      "quote": "its good",
+      "negation": "no"
+    },
+    {
+      "review_id": "R3K6GYXZTOQBQ9",
+      "topic": "overall",
+      "sentiment": "negative",
+      "quote": "I’m so disappointed",
+      "negation": "no"
+    },
+    {
+      "review_id": "R24ZECLLTT3C7B",
+      "topic": "longevity_projection",
+      "sentiment": "negative",
+      "quote": "smelling is to mild",
+      "negation": "not"
+    },
+    {
+      "review_id": "R1CX3R6UQLOFAJ",
+      "topic": "scent",
+      "sentiment": "negative",
+      "quote": "it is definitely an older women smell",
+      "negation": "isn't"
+    },
+    {
+      "review_id": "R1X374KLLAQQ4I",
+      "topic": "brand_experience",
+      "sentiment": "negative",
+      "quote": "I wouldn’t repurchase and I don’t recommend it",
+      "negation": "no"
+    },
+    {
+      "review_id": "R38MXKLLL7VPBH",
+      "topic": "longevity_projection",
+      "sentiment": "positive",
+      "quote": "didn't wear off quickly",
+      "negation": "not"
+    },
+    {
+      "review_id": "R38N06POSD3J3D",
+      "topic": "overall",
+      "sentiment": "positive",
+      "quote": "estou muito satisfeito com essa obra-prima da Jean Paul Gaultier",
+      "negation": "no"
+    },
+    {
+      "review_id": "R102M04EISH23G",
+      "topic": "shipping",
+      "sentiment": "negative",
+      "quote": "the bottle was leaking and only about halfway full",
+      "negation": "wasn't"
+    },
+    {
+      "review_id": "R11PXJQ5MHMYUY",
+      "topic": "brand_experience",
+      "sentiment": "negative",
+      "quote": "no lo compren",
+      "negation": "no"
+    },
+    {
+      "review_id": "R11PXJQ5MHMYUY",
+      "topic": "trust",
+      "sentiment": "negative",
+      "quote": "los rellenan con alcohol",
+      "negation": "no"
+    },
+    {
+      "review_id": "R4HIEA8AQ8G98",
+      "topic": "overall",
+      "sentiment": "positive",
+      "quote": "I'm very lucky that this works amazing all my skin",
+      "negation": "nothing"
+    },
+    {
+      "review_id": "R31Y1IVEK6C57J",
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "I like how soft and musky it is.",
+      "negation": "not"
+    }
+  ]
+}

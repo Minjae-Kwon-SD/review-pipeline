@@ -1,0 +1,59 @@
+topic: customer_service
+directions:
+  negative:
+    labels:
+      - id: not_returnable
+        name_ko: 반품·환불 불가
+        name_en: Not returnable
+        include: >-
+          향수라서, 아마존 규정이나 위험물이라서, 반품 옵션이 없어서 반품이나 환불을 할 수 없다는 말.
+          "they won't let me return", "If I could return it, I would"처럼 반품을 못 해 아쉽다는 말, 반품이 안 돼 남에게 줬다는 말도 포함
+        exclude: >-
+          반품 기간이 지났거나 이미 개봉해서 못 돌려보낸다는 말은 return_window_missed.
+          판매자 태도, 연락 불가, 처리 과정이 어렵다, 교체를 거절했다는 말은 seller_unhelpful.
+          반품, 환불, 교체를 해 달라는 요청만 있으면 refund_request
+        examples:
+          - {review_id: R2AJYI0V67WG2L, quote: "this type of purchase cannot be returned because it is a perfume"}
+          - {review_id: R1YXB7CP917VN9, quote: "It is not returnable"}
+        approx_count: 57
+      - id: refund_request
+        name_ko: 환불·교체 요청
+        name_en: Requests refund or replacement
+        include: 리뷰 안에서 환불, 반품, 교체, 주문 취소를 해 달라고 요청하는 말("I want a TOTAL Refund", "Can you send a replacement?", "want my money back")
+        exclude: >-
+          반품이 안 된다는 사실을 말하면 not_returnable. 요청했는데 판매자가 거절하거나 응대가 나빴다는 말은 seller_unhelpful
+        examples:
+          - {review_id: R36SSTLD7LC0WN, quote: "I want a TOTAL Refund"}
+          - {review_id: RUMISBOJKGJG5, quote: "Can you send a replacement?"}
+        approx_count: 11
+      - id: seller_unhelpful
+        name_ko: 판매자 응대 불만
+        name_en: Unhelpful seller support
+        include: >-
+          판매자나 회사의 불친절, 무성의한 답변, 연락할 길이 없음, 반품·교환 처리 과정이 어렵다,
+          문제를 말했는데 교체나 조치를 해 주지 않았다("would not replace", "seller has been impossible to deal with")
+        exclude: >-
+          상품 규정상 반품이 안 된다는 말만 있으면 not_returnable. 기간이 지나 조치를 못 받았다는 말은 return_window_missed
+        examples:
+          - {review_id: R1IGZ4P4BM2BRJ, quote: "seller has been impossible to deal with"}
+          - {review_id: R1TDEV9S3R58C2, quote: "there is absolutely no support or way to contact the seller"}
+        approx_count: 10
+      - id: return_window_missed
+        name_ko: 반품 기간 놓침
+        name_en: Missed return window
+        include: 반품 기한이 지나서(또는 이미 개봉해서) 돌려보낼 수 없게 됐다는 말("my return window closed", "past 30 days since purchase")
+        exclude: 기간과 상관없이 향수라서, 규정상 반품이 안 된다는 말은 not_returnable
+        examples:
+          - {review_id: R2WS73M76T1F87, quote: "my return window closed about 10 days ago"}
+          - {review_id: R1LAZX7YC5SB5V, quote: "Just missed the return deadline by 2 days"}
+        approx_count: 5
+    other_approx_count: 2
+    notes: >-
+      반품 불가가 표본의 약 3분의 2라 대부분이 not_returnable에 몰림. "they won't allow me to return"처럼 판매자 거절인지 상품 규정인지
+      알 수 없는 말은 not_returnable로 셈. return_window_missed는 기간 경과 4개에 개봉해서 못 돌려보낸 1개(R2I1J1CTT4XFQV)를 더해 5% 경계를 겨우 넘김.
+      구매 전에 반품 불가를 몰랐다는 말(R22BUJ1Q76GCH8, R3NNE65IW8H752 등 어림 3개)은 따로 나누기에 적어 not_returnable에 넣음.
+      기타는 "返品しました"(반품함), "A REFUND WAS GIVEN"(환불받았는데 부정으로 태깅됨).
+  positive:
+    labels: []
+    other_approx_count: 6
+    notes: only_other(인용 6개, 표본 없음)

@@ -1,0 +1,12 @@
+review_id,asin,star,date,title,body,verified,vine
+B0TESTAAA1-01,B0TESTAAA1,1,2026-09-01,Waste,"Lasts maybe an hour. Total waste.",true,false
+B0TESTAAA1-02,B0TESTAAA1,2,2026-09-02,Meh,"The scent fades after two hours, disappointing.",true,false
+B0TESTAAA1-03,B0TESTAAA1,3,2026-09-03,Pricey,"Smell is ok but too expensive for the size.",true,false
+B0TESTAAA1-04,B0TESTAAA1,4,2026-09-04,Pretty,"Lovely floral scent, very feminine.",true,false
+B0TESTAAA1-05,B0TESTAAA1,5,2026-09-05,Perfect,"Gorgeous scent and it lasts all day long!",true,true
+B0TESTBBB2-01,B0TESTBBB2,1,2026-09-01,Gone,"Gone in 30 minutes. Smells like alcohol at first.",true,false
+B0TESTBBB2-02,B0TESTBBB2,1,2026-09-02,No,"Does not last at all, I could not smell it after an hour.",false,false
+B0TESTBBB2-03,B0TESTBBB2,2,2026-09-03,Too sweet,"I don’t like the smell, too sweet.",true,false
+B0TESTBBB2-04,B0TESTBBB2,3,2026-09-04,Okay,"Lasts a few hours, not bad, not great.",true,false
+B0TESTBBB2-05,B0TESTBBB2,4,2026-09-05,Nice,"Nice vanilla scent, compliments at work.",true,false
+B0TESTBBB2-06,B0TESTBBB2,5,2026-09-06,Love,"Love it, lasts all day and great value!",true,false

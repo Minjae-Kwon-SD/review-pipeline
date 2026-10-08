@@ -1,0 +1,91 @@
+topic: price_value
+directions:
+  negative:
+    labels:
+      - id: too_expensive
+        name_ko: 그냥 비쌈
+        name_en: Too expensive
+        include: 용량이나 성능 같은 비교 대상 없이 가격 수준 자체가 비싸다, 조금 비싸다, 더 쌌으면 좋겠다는 말("Overpriced", "Pricey", "tan caro")
+        exclude: 병 크기나 용량에 비해 비싸다는 말은 small_for_price, 받은 제품이 값만큼 못하다는 말은 not_worth_price, 지속력에 비해 비싸다는 말은 not_lasting_for_price
+        examples:
+          - {review_id: R3OG30U20R3UNI, quote: "Overpriced"}
+          - {review_id: R1WLKECRSCRWPW, quote: "very expensive though"}
+        approx_count: 24
+      - id: small_for_price
+        name_ko: 용량에 비해 비쌈
+        name_en: Too small for the price
+        include: 병이 작다, 몇 ml밖에 안 된다는 말과 함께 그 값이 비싸다고 하는 말("tiny bottle for the price", "30 ml por este precio")
+        exclude: 가격 말 없이 병이 작다는 말은 bottle_design(이 주제 아님), 용량 언급 없이 비싸다는 말은 too_expensive
+        examples:
+          - {review_id: R2M38B7M76GHVM, quote: "Was way too expensive for the tiny bottle."}
+          - {review_id: R2RKARC8NRGUCQ, quote: "Demasiado caro, 30 ml por este precio"}
+        approx_count: 18
+      - id: not_worth_price
+        name_ko: 값만큼 못함
+        name_en: Not worth the price
+        include: 받은 제품(품질, 기대, 전반)이 낸 값에 못 미친다, 가격 대비 별로다, 할인해야 살 만하다는 말("Not worth the cost", "Preis-Leistung geht so", "$116.00 for NOTHING")
+        exclude: 못 미치는 이유가 지속력이면 not_lasting_for_price, 용량이면 small_for_price, 가격 수준만 말하면 too_expensive
+        examples:
+          - {review_id: R9ZEWAM020WG9, quote: "Not worth the cost"}
+          - {review_id: R28CUG81AXYYHI, quote: "a little basic in my opinion considering the price"}
+        approx_count: 17
+      - id: not_lasting_for_price
+        name_ko: 지속력에 비해 비쌈
+        name_en: Too expensive for how short it lasts
+        include: 이 값이면 더 오래가야 한다, 비싼데 금방 날아간다처럼 가격과 지속력을 함께 묶어 말하는 부분
+        exclude: 가격 말 없이 금방 날아간다는 말은 longevity_projection(이 주제 아님), 이유 없는 값어치 불만은 not_worth_price
+        examples:
+          - {review_id: RPK76O08CXYUS, quote: "Very expensive for it not to last"}
+          - {review_id: R26U67LD084EK3, quote: "you spend $50 and you only smell good for an hour or two"}
+        approx_count: 4
+    other_approx_count: 8
+    notes: "기타에는 가격 인상(\"The price was almost doubled\", 같은 값에 양이 줄었다, 3개), 다른 매장이나 다른 제품이 더 싸다(Walmart, 정규 매장, Lattafa, 3개), \"price was too good to be true\"(가짜 의심 성격, trust 쪽), \"$37 for 2 uses\"(용량인지 분사 문제인지 불분명)가 있음. 가격 인상은 5% 미만이라 라벨로 만들지 않았지만 다음 회차에 늘면 따로 볼 만함."
+  positive:
+    labels:
+      - id: good_price
+        name_ko: 가격이 좋음
+        name_en: Good or affordable price
+        include: 가격 자체가 싸다, 적당하다, 좋은 가격이다, 좋은 딜이다는 말("Great price", "Very affordable", "Buen precio", "only $30")
+        exclude: 가격에 비해 제품이 좋다, 값어치를 한다는 말은 good_value, 용량 대비 값은 size_for_price, 원조 향수나 다른 매장보다 싸다는 비교는 cheaper_than_alternatives
+        examples:
+          - {review_id: R553UQ8LUZP0O, quote: "Very affordable"}
+          - {review_id: RZL9EL6VC8P7Y, quote: "Great price."}
+        approx_count: 42
+      - id: good_value
+        name_ko: 값어치를 함
+        name_en: Worth the money
+        include: 낸 값에 비해 제품(품질, 향, 세기, 전반)이 좋다, 돈값을 한다는 말("Good value for the money", "worth my money", "for the price it's a decent product", "Bom custo benefício")
+        exclude: 가격 수준만 칭찬하면 good_price, 용량 대비 값이면 size_for_price
+        examples:
+          - {review_id: R22KP4UHOX1JCN, quote: "Good value for the money"}
+          - {review_id: RI6ECRUKWAGQU, quote: "For the price point, that's genuinely impressive."}
+        approx_count: 23
+      - id: cheaper_than_alternatives
+        name_ko: 원조나 다른 곳보다 쌈
+        name_en: Cheaper than the original or other stores
+        include: 원조 향수(듀프 대상)나 다른 매장(Macy's 등)보다 훨씬 싸다는 비교("at a fraction of the cost", "under $40 vs $100 plus")
+        exclude: 비교 대상 없이 싸다는 말은 good_price
+        examples:
+          - {review_id: R1ZD5J2BF3RTMC, quote: "the under $40 vs $100 plus was to tempting"}
+          - {review_id: R3T4C0OHINQFYF, quote: "looks real.. not sure why Macy's is more expensive"}
+        approx_count: 7
+      - id: size_for_price
+        name_ko: 용량 대비 값이 좋음
+        name_en: Good size for the price
+        include: 병 크기나 용량에 비해 값이 좋다는 말("Great size for the price", "Big size for an affordable price")
+        exclude: 가격 말 없이 병 크기가 좋다는 말은 bottle_design(이 주제 아님), 용량 언급 없는 가격 칭찬은 good_price
+        examples:
+          - {review_id: R297F9WD8P3TY9, quote: "it was a great price for the size"}
+          - {review_id: R3R6ZPYXB9A5CA, quote: "Big size for an affordable price"}
+        approx_count: 5
+      - id: pricey_but_acceptable
+        name_ko: 비싸지만 감수할 만함
+        name_en: Pricey but acceptable
+        include: 비싸다고 인정하면서 조금 비싼 정도다, 어디서나 그 값이다, 가끔은 써도 된다처럼 받아들이는 말(주로 mixed 인용의 받아들이는 부분)
+        exclude: 받아들인다는 말 없이 비싸다고만 하면 부정 방향 too_expensive, 비싸지만 제품이 값을 한다고 하면 good_value
+        examples:
+          - {review_id: R3RMC5DQ1R25C9, quote: "Pricey, but not terribly!"}
+          - {review_id: R27AB5RGDGPQDQ, quote: "Price for this item is high but it's high in every store."}
+        approx_count: 5
+    other_approx_count: 1
+    notes: "good_price와 good_value 경계는 가격 수준 자체를 칭찬하는지(\"Great Price for this product!\"는 good_price), 제품이 값을 한다고 하는지(\"Great product for the price\"는 good_value)로 나눔. 기타 1개는 \"I can't exactly say they're worth the price\"(mixed지만 칭찬 부분이 드러나지 않음). 부정 표본과 긍정 표본에 같은 mixed 인용 9개가 함께 들어 있음."

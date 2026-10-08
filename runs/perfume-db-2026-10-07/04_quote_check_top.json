@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-10-07T16:05:04+09:00",
+  "model": "top",
+  "only": null,
+  "batches": {
+    "gold": {
+      "status": "PASS",
+      "asin": null,
+      "reviews": 30,
+      "tags": 104,
+      "quote_exact": 104,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": []
+    }
+  },
+  "status": "PASS",
+  "failed_batches": []
+}

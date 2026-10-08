@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "amz-review": {
+      "type": "http",
+      "url": "https://backend-v060-production.up.railway.app/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${AMZ_REVIEW_TOKEN}"
+      }
+    },
+    "spd-amz-market": {
+      "type": "http",
+      "url": "https://mcp-spd-amz-market.up.railway.app/mcp"
+    },
+    "spd-amz-rank": {
+      "type": "http",
+      "url": "https://mcp-spd-amz-rank.up.railway.app/mcp"
+    }
+  }
+}

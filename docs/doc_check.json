@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-10-08T19:53:27+09:00",
+  "status": "PASS",
+  "docs": {
+    "README.md": {
+      "unknown_numbers": [],
+      "missing_paths": [],
+      "middle_dots": 0
+    },
+    "docs/walkthrough.md": {
+      "unknown_numbers": [],
+      "missing_paths": [],
+      "middle_dots": 0
+    }
+  },
+  "errors": []
+}

@@ -1,0 +1,1443 @@
+{
+  "total_reviews": 1212,
+  "topics": {
+    "bottle_design.negative": {
+      "topic": "bottle_design",
+      "direction": "negative",
+      "units": 35,
+      "other_units": 3,
+      "other_pct": 8.6,
+      "labels": [
+        {
+          "id": "bottle_too_small",
+          "name_ko": "병이 작음",
+          "name_en": "Bottle too small",
+          "reviews": 27,
+          "weighted_pct": 1.2,
+          "by_asin": {
+            "B00021AJ5I": 16,
+            "B0009OAI8Q": 9,
+            "B0BZDZJDTG": 1,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "sprayer_problem",
+          "name_ko": "분사기 불만",
+          "name_en": "Poor sprayer",
+          "reviews": 3,
+          "weighted_pct": 0.0,
+          "by_asin": {
+            "B00021AJ5I": 1,
+            "B0BZDZJDTG": 2
+          }
+        },
+        {
+          "id": "bottle_leaks",
+          "name_ko": "병이 샘",
+          "name_en": "Bottle leaks",
+          "reviews": 2,
+          "weighted_pct": 0.0,
+          "by_asin": {
+            "B0009OAI8Q": 1,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 3,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B00021AJ5I": 1,
+            "B08FBQWRYC": 1,
+            "B0GFGL26JD": 1
+          }
+        }
+      ]
+    },
+    "bottle_design.positive": {
+      "topic": "bottle_design",
+      "direction": "positive",
+      "units": 78,
+      "other_units": 3,
+      "other_pct": 3.8,
+      "labels": [
+        {
+          "id": "pretty_bottle",
+          "name_ko": "병이 예쁨",
+          "name_en": "Attractive bottle",
+          "reviews": 35,
+          "weighted_pct": 3.8,
+          "by_asin": {
+            "B00021AJ5I": 3,
+            "B0009OAI8Q": 9,
+            "B08FBQWRYC": 5,
+            "B09X5BQ969": 7,
+            "B0BZDZJDTG": 11
+          }
+        },
+        {
+          "id": "good_size",
+          "name_ko": "용량이 알맞거나 넉넉함",
+          "name_en": "Good size",
+          "reviews": 16,
+          "weighted_pct": 1.8,
+          "by_asin": {
+            "B00021AJ5I": 5,
+            "B0009OAI8Q": 1,
+            "B09X5BQ969": 4,
+            "B0BZDZJDTG": 3,
+            "B0GFGL26JD": 3
+          }
+        },
+        {
+          "id": "purse_portable",
+          "name_ko": "휴대하기 좋음",
+          "name_en": "Portable for purse or travel",
+          "reviews": 11,
+          "weighted_pct": 1.7,
+          "by_asin": {
+            "B00021AJ5I": 4,
+            "B08FBQWRYC": 2,
+            "B0BZDZJDTG": 1,
+            "B0GFGL26JD": 4
+          }
+        },
+        {
+          "id": "magnetic_cap",
+          "name_ko": "자석 뚜껑이 좋음",
+          "name_en": "Magnetic cap",
+          "reviews": 10,
+          "weighted_pct": 0.9,
+          "by_asin": {
+            "B0BZDZJDTG": 10
+          }
+        },
+        {
+          "id": "sprayer_good",
+          "name_ko": "분사가 잘 됨",
+          "name_en": "Sprays well",
+          "reviews": 8,
+          "weighted_pct": 0.7,
+          "by_asin": {
+            "B00021AJ5I": 3,
+            "B0BZDZJDTG": 5
+          }
+        },
+        {
+          "id": "build_quality",
+          "name_ko": "병 만듦새가 좋음",
+          "name_en": "Well-made bottle",
+          "reviews": 7,
+          "weighted_pct": 0.7,
+          "by_asin": {
+            "B09X5BQ969": 1,
+            "B0BZDZJDTG": 6
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 3,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B00021AJ5I": 2,
+            "B0BZDZJDTG": 1
+          }
+        }
+      ]
+    },
+    "brand_experience.negative": {
+      "topic": "brand_experience",
+      "direction": "negative",
+      "units": 83,
+      "other_units": 7,
+      "other_pct": 8.4,
+      "labels": [
+        {
+          "id": "advise_against",
+          "name_ko": "비추천, 사지 말라",
+          "name_en": "Advises others against buying",
+          "reviews": 50,
+          "weighted_pct": 0.9,
+          "by_asin": {
+            "B00021AJ5I": 15,
+            "B0009OAI8Q": 8,
+            "B08FBQWRYC": 6,
+            "B09X5BQ969": 2,
+            "B0BZDZJDTG": 15,
+            "B0GFGL26JD": 4
+          }
+        },
+        {
+          "id": "no_repurchase",
+          "name_ko": "다시 사지 않겠다",
+          "name_en": "Will not repurchase",
+          "reviews": 26,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B00021AJ5I": 9,
+            "B0009OAI8Q": 5,
+            "B09X5BQ969": 3,
+            "B0BZDZJDTG": 8,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 7,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B00021AJ5I": 2,
+            "B08FBQWRYC": 1,
+            "B0BZDZJDTG": 3,
+            "B0GFGL26JD": 1
+          }
+        }
+      ]
+    },
+    "brand_experience.positive": {
+      "topic": "brand_experience",
+      "direction": "positive",
+      "units": 159,
+      "other_units": 3,
+      "other_pct": 1.9,
+      "labels": [
+        {
+          "id": "favorite_signature",
+          "name_ko": "최애, 시그니처 향",
+          "name_en": "Favorite or signature scent",
+          "reviews": 56,
+          "weighted_pct": 11.5,
+          "by_asin": {
+            "B00021AJ5I": 23,
+            "B0009OAI8Q": 5,
+            "B08FBQWRYC": 4,
+            "B09X5BQ969": 6,
+            "B0BZDZJDTG": 6,
+            "B0GFGL26JD": 12
+          }
+        },
+        {
+          "id": "recommends",
+          "name_ko": "추천, 사라고 권함",
+          "name_en": "Recommends to others",
+          "reviews": 38,
+          "weighted_pct": 6.6,
+          "by_asin": {
+            "B00021AJ5I": 11,
+            "B0009OAI8Q": 1,
+            "B08FBQWRYC": 2,
+            "B09X5BQ969": 9,
+            "B0BZDZJDTG": 10,
+            "B0GFGL26JD": 5
+          }
+        },
+        {
+          "id": "will_repurchase",
+          "name_ko": "다시 사겠다",
+          "name_en": "Will repurchase",
+          "reviews": 23,
+          "weighted_pct": 4.0,
+          "by_asin": {
+            "B00021AJ5I": 5,
+            "B09X5BQ969": 8,
+            "B0BZDZJDTG": 6,
+            "B0GFGL26JD": 4
+          }
+        },
+        {
+          "id": "repeat_long_time_user",
+          "name_ko": "여러 병째, 수년째 애용",
+          "name_en": "Repeat or long-time user",
+          "reviews": 22,
+          "weighted_pct": 3.2,
+          "by_asin": {
+            "B00021AJ5I": 10,
+            "B0009OAI8Q": 3,
+            "B08FBQWRYC": 2,
+            "B09X5BQ969": 1,
+            "B0GFGL26JD": 6
+          }
+        },
+        {
+          "id": "brand_affinity",
+          "name_ko": "브랜드 호감, 다른 향도 좋다",
+          "name_en": "Brand affinity",
+          "reviews": 17,
+          "weighted_pct": 2.1,
+          "by_asin": {
+            "B0009OAI8Q": 1,
+            "B08FBQWRYC": 1,
+            "B09X5BQ969": 1,
+            "B0BZDZJDTG": 12,
+            "B0GFGL26JD": 2
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 3,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B00021AJ5I": 2,
+            "B0GFGL26JD": 1
+          }
+        }
+      ]
+    },
+    "customer_service.negative": {
+      "topic": "customer_service",
+      "direction": "negative",
+      "units": 85,
+      "other_units": 2,
+      "other_pct": 2.4,
+      "labels": [
+        {
+          "id": "not_returnable",
+          "name_ko": "반품이나 환불 불가",
+          "name_en": "Not returnable",
+          "reviews": 58,
+          "weighted_pct": 1.4,
+          "by_asin": {
+            "B00021AJ5I": 11,
+            "B0009OAI8Q": 5,
+            "B08FBQWRYC": 3,
+            "B09X5BQ969": 5,
+            "B0BZDZJDTG": 26,
+            "B0GFGL26JD": 8
+          }
+        },
+        {
+          "id": "refund_request",
+          "name_ko": "환불이나 교체 요청",
+          "name_en": "Requests refund or replacement",
+          "reviews": 11,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B00021AJ5I": 6,
+            "B0009OAI8Q": 4,
+            "B0BZDZJDTG": 1
+          }
+        },
+        {
+          "id": "seller_unhelpful",
+          "name_ko": "판매자 응대 불만",
+          "name_en": "Unhelpful seller support",
+          "reviews": 10,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B00021AJ5I": 2,
+            "B08FBQWRYC": 7,
+            "B0BZDZJDTG": 1
+          }
+        },
+        {
+          "id": "return_window_missed",
+          "name_ko": "반품 기간 놓침",
+          "name_en": "Missed return window",
+          "reviews": 5,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B00021AJ5I": 3,
+            "B0009OAI8Q": 1,
+            "B08FBQWRYC": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 2,
+          "weighted_pct": 0.0,
+          "by_asin": {
+            "B00021AJ5I": 1,
+            "B0009OAI8Q": 1
+          }
+        }
+      ]
+    },
+    "customer_service.positive": {
+      "topic": "customer_service",
+      "direction": "positive",
+      "units": 6,
+      "other_units": 6,
+      "other_pct": 100.0,
+      "labels": [
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 6,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B00021AJ5I": 2,
+            "B0009OAI8Q": 2,
+            "B08FBQWRYC": 2
+          }
+        }
+      ]
+    },
+    "longevity_projection.negative": {
+      "topic": "longevity_projection",
+      "direction": "negative",
+      "units": 364,
+      "other_units": 7,
+      "other_pct": 1.9,
+      "labels": [
+        {
+          "id": "fades_fast",
+          "name_ko": "금방 날아감",
+          "name_en": "Fades quickly",
+          "reviews": 231,
+          "weighted_pct": 5.9,
+          "by_asin": {
+            "B00021AJ5I": 98,
+            "B0009OAI8Q": 17,
+            "B08FBQWRYC": 7,
+            "B09X5BQ969": 15,
+            "B0BZDZJDTG": 75,
+            "B0GFGL26JD": 19
+          }
+        },
+        {
+          "id": "weak_scent",
+          "name_ko": "처음부터 약함",
+          "name_en": "Weak or barely there",
+          "reviews": 67,
+          "weighted_pct": 1.8,
+          "by_asin": {
+            "B00021AJ5I": 28,
+            "B0009OAI8Q": 6,
+            "B08FBQWRYC": 6,
+            "B09X5BQ969": 3,
+            "B0BZDZJDTG": 15,
+            "B0GFGL26JD": 9
+          }
+        },
+        {
+          "id": "too_strong",
+          "name_ko": "너무 셈",
+          "name_en": "Too strong",
+          "reviews": 50,
+          "weighted_pct": 1.2,
+          "by_asin": {
+            "B00021AJ5I": 3,
+            "B0009OAI8Q": 20,
+            "B09X5BQ969": 13,
+            "B0BZDZJDTG": 13,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "shorter_than_hoped",
+          "name_ko": "기대보다 짧음",
+          "name_en": "Shorter than hoped",
+          "reviews": 28,
+          "weighted_pct": 2.4,
+          "by_asin": {
+            "B00021AJ5I": 7,
+            "B0009OAI8Q": 4,
+            "B08FBQWRYC": 2,
+            "B09X5BQ969": 1,
+            "B0BZDZJDTG": 9,
+            "B0GFGL26JD": 5
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 7,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B00021AJ5I": 1,
+            "B0009OAI8Q": 3,
+            "B08FBQWRYC": 2,
+            "B0BZDZJDTG": 1
+          }
+        }
+      ]
+    },
+    "longevity_projection.positive": {
+      "topic": "longevity_projection",
+      "direction": "positive",
+      "units": 144,
+      "other_units": 4,
+      "other_pct": 2.8,
+      "labels": [
+        {
+          "id": "long_lasting",
+          "name_ko": "오래감",
+          "name_en": "Long-lasting",
+          "reviews": 117,
+          "weighted_pct": 18.0,
+          "by_asin": {
+            "B00021AJ5I": 24,
+            "B0009OAI8Q": 9,
+            "B08FBQWRYC": 16,
+            "B09X5BQ969": 31,
+            "B0BZDZJDTG": 28,
+            "B0GFGL26JD": 9
+          }
+        },
+        {
+          "id": "not_overpowering",
+          "name_ko": "과하지 않은 세기",
+          "name_en": "Not overpowering",
+          "reviews": 16,
+          "weighted_pct": 2.4,
+          "by_asin": {
+            "B00021AJ5I": 4,
+            "B08FBQWRYC": 2,
+            "B09X5BQ969": 4,
+            "B0GFGL26JD": 6
+          }
+        },
+        {
+          "id": "strong_presence",
+          "name_ko": "진하고 잘 퍼짐",
+          "name_en": "Strong presence",
+          "reviews": 11,
+          "weighted_pct": 2.1,
+          "by_asin": {
+            "B00021AJ5I": 1,
+            "B0009OAI8Q": 4,
+            "B08FBQWRYC": 2,
+            "B09X5BQ969": 1,
+            "B0BZDZJDTG": 3
+          }
+        },
+        {
+          "id": "little_goes_far",
+          "name_ko": "조금만 써도 충분",
+          "name_en": "A little goes a long way",
+          "reviews": 10,
+          "weighted_pct": 0.9,
+          "by_asin": {
+            "B00021AJ5I": 2,
+            "B0009OAI8Q": 2,
+            "B09X5BQ969": 4,
+            "B0BZDZJDTG": 1,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 4,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B00021AJ5I": 1,
+            "B0009OAI8Q": 1,
+            "B0GFGL26JD": 2
+          }
+        }
+      ]
+    },
+    "packaging.negative": {
+      "topic": "packaging",
+      "direction": "negative",
+      "units": 17,
+      "other_units": 17,
+      "other_pct": 100.0,
+      "labels": [
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 17,
+          "weighted_pct": 1.3,
+          "by_asin": {
+            "B00021AJ5I": 2,
+            "B0009OAI8Q": 1,
+            "B08FBQWRYC": 12,
+            "B0BZDZJDTG": 2
+          }
+        }
+      ]
+    },
+    "packaging.positive": {
+      "topic": "packaging",
+      "direction": "positive",
+      "units": 23,
+      "other_units": 4,
+      "other_pct": 17.4,
+      "labels": [
+        {
+          "id": "pretty_presentation",
+          "name_ko": "상자와 포장이 예쁨",
+          "name_en": "Attractive box and presentation",
+          "reviews": 12,
+          "weighted_pct": 1.5,
+          "by_asin": {
+            "B0009OAI8Q": 3,
+            "B09X5BQ969": 1,
+            "B0BZDZJDTG": 8
+          }
+        },
+        {
+          "id": "well_protected",
+          "name_ko": "꼼꼼하게 포장되어 병을 잘 보호함",
+          "name_en": "Well packed and protective",
+          "reviews": 6,
+          "weighted_pct": 0.8,
+          "by_asin": {
+            "B00021AJ5I": 2,
+            "B0009OAI8Q": 1,
+            "B0BZDZJDTG": 1,
+            "B0GFGL26JD": 2
+          }
+        },
+        {
+          "id": "matches_original",
+          "name_ko": "포장이 원래 것과 같음",
+          "name_en": "Packaging matches the original",
+          "reviews": 2,
+          "weighted_pct": 0.0,
+          "by_asin": {
+            "B00021AJ5I": 1,
+            "B0009OAI8Q": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 4,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B08FBQWRYC": 1,
+            "B09X5BQ969": 1,
+            "B0BZDZJDTG": 2
+          }
+        }
+      ]
+    },
+    "price_value.negative": {
+      "topic": "price_value",
+      "direction": "negative",
+      "units": 71,
+      "other_units": 8,
+      "other_pct": 11.3,
+      "labels": [
+        {
+          "id": "too_expensive",
+          "name_ko": "그냥 비쌈",
+          "name_en": "Too expensive",
+          "reviews": 26,
+          "weighted_pct": 1.9,
+          "by_asin": {
+            "B00021AJ5I": 18,
+            "B0009OAI8Q": 1,
+            "B08FBQWRYC": 3,
+            "B0BZDZJDTG": 1,
+            "B0GFGL26JD": 3
+          }
+        },
+        {
+          "id": "not_worth_price",
+          "name_ko": "값만큼 못함",
+          "name_en": "Not worth the price",
+          "reviews": 17,
+          "weighted_pct": 0.8,
+          "by_asin": {
+            "B00021AJ5I": 4,
+            "B0009OAI8Q": 1,
+            "B08FBQWRYC": 6,
+            "B09X5BQ969": 1,
+            "B0BZDZJDTG": 2,
+            "B0GFGL26JD": 3
+          }
+        },
+        {
+          "id": "small_for_price",
+          "name_ko": "용량에 비해 비쌈",
+          "name_en": "Too small for the price",
+          "reviews": 16,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B00021AJ5I": 12,
+            "B0009OAI8Q": 2,
+            "B08FBQWRYC": 1,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "not_lasting_for_price",
+          "name_ko": "지속력에 비해 비쌈",
+          "name_en": "Too expensive for how short it lasts",
+          "reviews": 4,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B0BZDZJDTG": 3,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 8,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B00021AJ5I": 3,
+            "B0009OAI8Q": 2,
+            "B0BZDZJDTG": 1,
+            "B0GFGL26JD": 2
+          }
+        }
+      ]
+    },
+    "price_value.positive": {
+      "topic": "price_value",
+      "direction": "positive",
+      "units": 83,
+      "other_units": 1,
+      "other_pct": 1.2,
+      "labels": [
+        {
+          "id": "good_price",
+          "name_ko": "가격이 좋음",
+          "name_en": "Good or affordable price",
+          "reviews": 43,
+          "weighted_pct": 4.0,
+          "by_asin": {
+            "B00021AJ5I": 17,
+            "B0009OAI8Q": 7,
+            "B09X5BQ969": 12,
+            "B0BZDZJDTG": 6,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "good_value",
+          "name_ko": "값어치를 함",
+          "name_en": "Worth the money",
+          "reviews": 23,
+          "weighted_pct": 2.7,
+          "by_asin": {
+            "B00021AJ5I": 5,
+            "B0009OAI8Q": 2,
+            "B08FBQWRYC": 1,
+            "B09X5BQ969": 5,
+            "B0BZDZJDTG": 7,
+            "B0GFGL26JD": 3
+          }
+        },
+        {
+          "id": "cheaper_than_alternatives",
+          "name_ko": "원조나 다른 곳보다 쌈",
+          "name_en": "Cheaper than the original or other stores",
+          "reviews": 6,
+          "weighted_pct": 1.5,
+          "by_asin": {
+            "B0009OAI8Q": 1,
+            "B0BZDZJDTG": 5
+          }
+        },
+        {
+          "id": "pricey_but_acceptable",
+          "name_ko": "비싸지만 감수할 만함",
+          "name_en": "Pricey but acceptable",
+          "reviews": 6,
+          "weighted_pct": 1.1,
+          "by_asin": {
+            "B00021AJ5I": 2,
+            "B0009OAI8Q": 1,
+            "B08FBQWRYC": 2,
+            "B0BZDZJDTG": 1
+          }
+        },
+        {
+          "id": "size_for_price",
+          "name_ko": "용량 대비 값이 좋음",
+          "name_en": "Good size for the price",
+          "reviews": 4,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B00021AJ5I": 1,
+            "B0009OAI8Q": 2,
+            "B09X5BQ969": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 1,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B08FBQWRYC": 1
+          }
+        }
+      ]
+    },
+    "quality.negative": {
+      "topic": "quality",
+      "direction": "negative",
+      "units": 64,
+      "other_units": 5,
+      "other_pct": 7.8,
+      "labels": [
+        {
+          "id": "old_or_spoiled",
+          "name_ko": "오래됐거나 변질됨",
+          "name_en": "Old, expired or spoiled",
+          "reviews": 18,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B00021AJ5I": 6,
+            "B0009OAI8Q": 7,
+            "B08FBQWRYC": 3,
+            "B0BZDZJDTG": 1,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "sprayer_defective",
+          "name_ko": "분사기 불량",
+          "name_en": "Defective sprayer",
+          "reviews": 13,
+          "weighted_pct": 0.3,
+          "by_asin": {
+            "B00021AJ5I": 2,
+            "B0009OAI8Q": 3,
+            "B08FBQWRYC": 3,
+            "B09X5BQ969": 2,
+            "B0BZDZJDTG": 3
+          }
+        },
+        {
+          "id": "sprayer_stopped_working",
+          "name_ko": "쓰다가 분사기 고장",
+          "name_en": "Sprayer stopped working after use",
+          "reviews": 12,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B00021AJ5I": 1,
+            "B0009OAI8Q": 1,
+            "B08FBQWRYC": 3,
+            "B09X5BQ969": 1,
+            "B0BZDZJDTG": 6
+          }
+        },
+        {
+          "id": "missing_parts",
+          "name_ko": "부품 빠짐",
+          "name_en": "Missing parts",
+          "reviews": 9,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B00021AJ5I": 1,
+            "B0009OAI8Q": 8
+          }
+        },
+        {
+          "id": "poor_quality_general",
+          "name_ko": "품질이 나쁨(구체 없음)",
+          "name_en": "Poor quality in general",
+          "reviews": 7,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B0009OAI8Q": 2,
+            "B08FBQWRYC": 3,
+            "B09X5BQ969": 1,
+            "B0BZDZJDTG": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 5,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B00021AJ5I": 2,
+            "B08FBQWRYC": 2,
+            "B0GFGL26JD": 1
+          }
+        }
+      ]
+    },
+    "quality.positive": {
+      "topic": "quality",
+      "direction": "positive",
+      "units": 7,
+      "other_units": 7,
+      "other_pct": 100.0,
+      "labels": [
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 7,
+          "weighted_pct": 2.1,
+          "by_asin": {
+            "B00021AJ5I": 3,
+            "B0009OAI8Q": 2,
+            "B08FBQWRYC": 1,
+            "B09X5BQ969": 1
+          }
+        }
+      ]
+    },
+    "safety.negative": {
+      "topic": "safety",
+      "direction": "negative",
+      "units": 18,
+      "other_units": 18,
+      "other_pct": 100.0,
+      "labels": [
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 18,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B00021AJ5I": 3,
+            "B0009OAI8Q": 5,
+            "B08FBQWRYC": 2,
+            "B09X5BQ969": 4,
+            "B0BZDZJDTG": 4
+          }
+        }
+      ]
+    },
+    "safety.positive": {
+      "topic": "safety",
+      "direction": "positive",
+      "units": 4,
+      "other_units": 4,
+      "other_pct": 100.0,
+      "labels": [
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 4,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B00021AJ5I": 3,
+            "B0BZDZJDTG": 1
+          }
+        }
+      ]
+    },
+    "scent.negative": {
+      "topic": "scent",
+      "direction": "negative",
+      "units": 318,
+      "other_units": 21,
+      "other_pct": 6.6,
+      "labels": [
+        {
+          "id": "dislike_general",
+          "name_ko": "향이 싫음(이유 없음)",
+          "name_en": "Dislikes the scent (no specifics)",
+          "reviews": 99,
+          "weighted_pct": 2.4,
+          "by_asin": {
+            "B00021AJ5I": 26,
+            "B0009OAI8Q": 24,
+            "B08FBQWRYC": 5,
+            "B09X5BQ969": 13,
+            "B0BZDZJDTG": 26,
+            "B0GFGL26JD": 5
+          }
+        },
+        {
+          "id": "differs_from_original",
+          "name_ko": "원래 알던 향과 다름",
+          "name_en": "Smells different from the original",
+          "reviews": 52,
+          "weighted_pct": 1.4,
+          "by_asin": {
+            "B00021AJ5I": 30,
+            "B0009OAI8Q": 13,
+            "B08FBQWRYC": 2,
+            "B0BZDZJDTG": 6,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "old_lady_mature",
+          "name_ko": "나이 든 사람 향",
+          "name_en": "Old-lady or mature scent",
+          "reviews": 41,
+          "weighted_pct": 1.1,
+          "by_asin": {
+            "B00021AJ5I": 4,
+            "B0009OAI8Q": 16,
+            "B09X5BQ969": 3,
+            "B0BZDZJDTG": 17,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "missing_described_notes",
+          "name_ko": "설명한 노트가 안 남",
+          "name_en": "Advertised notes missing",
+          "reviews": 34,
+          "weighted_pct": 0.7,
+          "by_asin": {
+            "B09X5BQ969": 2,
+            "B0BZDZJDTG": 32
+          }
+        },
+        {
+          "id": "disliked_note_profile",
+          "name_ko": "특정 노트나 성격이 싫음",
+          "name_en": "Dislikes a specific note or character",
+          "reviews": 25,
+          "weighted_pct": 1.1,
+          "by_asin": {
+            "B00021AJ5I": 9,
+            "B0009OAI8Q": 4,
+            "B08FBQWRYC": 1,
+            "B09X5BQ969": 5,
+            "B0BZDZJDTG": 5,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "cheap_artificial",
+          "name_ko": "싸구려, 인공적인 냄새",
+          "name_en": "Cheap or artificial smell",
+          "reviews": 19,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B00021AJ5I": 1,
+            "B0009OAI8Q": 2,
+            "B09X5BQ969": 6,
+            "B0BZDZJDTG": 9,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "unpleasant_likeness",
+          "name_ko": "불쾌한 물건 냄새",
+          "name_en": "Smells like an unpleasant non-perfume thing",
+          "reviews": 17,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B00021AJ5I": 3,
+            "B0009OAI8Q": 4,
+            "B08FBQWRYC": 2,
+            "B09X5BQ969": 3,
+            "B0BZDZJDTG": 2,
+            "B0GFGL26JD": 3
+          }
+        },
+        {
+          "id": "alcohol_smell",
+          "name_ko": "알코올 냄새",
+          "name_en": "Smells of alcohol",
+          "reviews": 16,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B00021AJ5I": 5,
+            "B0009OAI8Q": 2,
+            "B08FBQWRYC": 1,
+            "B09X5BQ969": 3,
+            "B0BZDZJDTG": 4,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 21,
+          "weighted_pct": 0.7,
+          "by_asin": {
+            "B00021AJ5I": 4,
+            "B0009OAI8Q": 4,
+            "B08FBQWRYC": 2,
+            "B09X5BQ969": 3,
+            "B0BZDZJDTG": 7,
+            "B0GFGL26JD": 1
+          }
+        }
+      ]
+    },
+    "scent.positive": {
+      "topic": "scent",
+      "direction": "positive",
+      "units": 488,
+      "other_units": 21,
+      "other_pct": 4.3,
+      "labels": [
+        {
+          "id": "smells_good_general",
+          "name_ko": "향이 좋음(이유 없음)",
+          "name_en": "Smells good (no specifics)",
+          "reviews": 355,
+          "weighted_pct": 42.1,
+          "by_asin": {
+            "B00021AJ5I": 84,
+            "B0009OAI8Q": 26,
+            "B08FBQWRYC": 40,
+            "B09X5BQ969": 63,
+            "B0BZDZJDTG": 101,
+            "B0GFGL26JD": 41
+          }
+        },
+        {
+          "id": "appealing_character",
+          "name_ko": "노트나 분위기가 좋음",
+          "name_en": "Likes the notes or character",
+          "reviews": 89,
+          "weighted_pct": 13.7,
+          "by_asin": {
+            "B00021AJ5I": 20,
+            "B0009OAI8Q": 2,
+            "B08FBQWRYC": 9,
+            "B09X5BQ969": 14,
+            "B0BZDZJDTG": 21,
+            "B0GFGL26JD": 23
+          }
+        },
+        {
+          "id": "compliments",
+          "name_ko": "남에게 칭찬받음",
+          "name_en": "Gets compliments",
+          "reviews": 35,
+          "weighted_pct": 5.0,
+          "by_asin": {
+            "B00021AJ5I": 5,
+            "B08FBQWRYC": 3,
+            "B09X5BQ969": 9,
+            "B0BZDZJDTG": 3,
+            "B0GFGL26JD": 15
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 21,
+          "weighted_pct": 2.8,
+          "by_asin": {
+            "B00021AJ5I": 4,
+            "B0009OAI8Q": 3,
+            "B0BZDZJDTG": 14
+          }
+        }
+      ]
+    },
+    "shipping.negative": {
+      "topic": "shipping",
+      "direction": "negative",
+      "units": 65,
+      "other_units": 3,
+      "other_pct": 4.6,
+      "labels": [
+        {
+          "id": "arrived_broken",
+          "name_ko": "깨지거나 부서져 도착",
+          "name_en": "Arrived broken or damaged",
+          "reviews": 24,
+          "weighted_pct": 0.9,
+          "by_asin": {
+            "B00021AJ5I": 2,
+            "B08FBQWRYC": 21,
+            "B0BZDZJDTG": 1
+          }
+        },
+        {
+          "id": "leaked_in_transit",
+          "name_ko": "새거나 흘러서 도착",
+          "name_en": "Leaked or spilled in transit",
+          "reviews": 21,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B00021AJ5I": 5,
+            "B0009OAI8Q": 2,
+            "B08FBQWRYC": 14
+          }
+        },
+        {
+          "id": "arrived_underfilled",
+          "name_ko": "내용물이 덜 든 채 도착",
+          "name_en": "Arrived partly empty",
+          "reviews": 6,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B00021AJ5I": 2,
+            "B08FBQWRYC": 2,
+            "B0GFGL26JD": 2
+          }
+        },
+        {
+          "id": "slow_delivery",
+          "name_ko": "배송이 느림",
+          "name_en": "Slow or late delivery",
+          "reviews": 6,
+          "weighted_pct": 0.3,
+          "by_asin": {
+            "B00021AJ5I": 4,
+            "B08FBQWRYC": 1,
+            "B0BZDZJDTG": 1
+          }
+        },
+        {
+          "id": "wrong_or_opened_item",
+          "name_ko": "주문과 다른 상품이나 개봉된 상품",
+          "name_en": "Wrong item or opened/used item",
+          "reviews": 6,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B00021AJ5I": 3,
+            "B08FBQWRYC": 3
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B0009OAI8Q": 1,
+            "B08FBQWRYC": 1,
+            "B0GFGL26JD": 1
+          }
+        }
+      ]
+    },
+    "shipping.positive": {
+      "topic": "shipping",
+      "direction": "positive",
+      "units": 26,
+      "other_units": 3,
+      "other_pct": 11.5,
+      "labels": [
+        {
+          "id": "fast_delivery",
+          "name_ko": "빠르거나 제때 배송",
+          "name_en": "Fast or on-time delivery",
+          "reviews": 15,
+          "weighted_pct": 1.5,
+          "by_asin": {
+            "B00021AJ5I": 4,
+            "B0009OAI8Q": 4,
+            "B08FBQWRYC": 3,
+            "B0BZDZJDTG": 2,
+            "B0GFGL26JD": 2
+          }
+        },
+        {
+          "id": "arrived_intact",
+          "name_ko": "멀쩡하고 제대로 도착",
+          "name_en": "Arrived intact and as ordered",
+          "reviews": 10,
+          "weighted_pct": 1.4,
+          "by_asin": {
+            "B00021AJ5I": 6,
+            "B08FBQWRYC": 2,
+            "B0BZDZJDTG": 1,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 3,
+          "weighted_pct": 0.0,
+          "by_asin": {
+            "B00021AJ5I": 2,
+            "B0009OAI8Q": 1
+          }
+        }
+      ]
+    },
+    "trust.negative": {
+      "topic": "trust",
+      "direction": "negative",
+      "units": 172,
+      "other_units": 12,
+      "other_pct": 7.0,
+      "labels": [
+        {
+          "id": "fake_asserted",
+          "name_ko": "가짜라고 단정",
+          "name_en": "Asserted fake",
+          "reviews": 43,
+          "weighted_pct": 0.8,
+          "by_asin": {
+            "B00021AJ5I": 31,
+            "B0009OAI8Q": 2,
+            "B08FBQWRYC": 9,
+            "B0BZDZJDTG": 1
+          }
+        },
+        {
+          "id": "authenticity_doubt",
+          "name_ko": "정품인지 의심",
+          "name_en": "Doubts authenticity",
+          "reviews": 36,
+          "weighted_pct": 1.1,
+          "by_asin": {
+            "B00021AJ5I": 28,
+            "B0009OAI8Q": 3,
+            "B08FBQWRYC": 4,
+            "B09X5BQ969": 1
+          }
+        },
+        {
+          "id": "differs_from_genuine",
+          "name_ko": "정품이나 늘 쓰던 것과 향이 다름",
+          "name_en": "Smells different from genuine",
+          "reviews": 35,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B00021AJ5I": 26,
+            "B0009OAI8Q": 4,
+            "B0BZDZJDTG": 2,
+            "B0GFGL26JD": 3
+          }
+        },
+        {
+          "id": "formula_changed",
+          "name_ko": "예전과 달라짐(제조법 변경 의심)",
+          "name_en": "Changed from before (reformulation)",
+          "reviews": 18,
+          "weighted_pct": 0.7,
+          "by_asin": {
+            "B00021AJ5I": 6,
+            "B0009OAI8Q": 8,
+            "B09X5BQ969": 2,
+            "B0GFGL26JD": 2
+          }
+        },
+        {
+          "id": "diluted_or_tampered",
+          "name_ko": "희석되거나 손댄 것 같음",
+          "name_en": "Diluted or tampered",
+          "reviews": 16,
+          "weighted_pct": 0.3,
+          "by_asin": {
+            "B00021AJ5I": 7,
+            "B0009OAI8Q": 1,
+            "B08FBQWRYC": 2,
+            "B0BZDZJDTG": 4,
+            "B0GFGL26JD": 2
+          }
+        },
+        {
+          "id": "weaker_than_genuine",
+          "name_ko": "정품이나 예전 것보다 약하고 짧음",
+          "name_en": "Weaker than genuine or before",
+          "reviews": 13,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B00021AJ5I": 8,
+            "B0009OAI8Q": 2,
+            "B08FBQWRYC": 1,
+            "B0BZDZJDTG": 1,
+            "B0GFGL26JD": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 12,
+          "weighted_pct": 0.3,
+          "by_asin": {
+            "B00021AJ5I": 6,
+            "B0009OAI8Q": 2,
+            "B08FBQWRYC": 3,
+            "B0BZDZJDTG": 1
+          }
+        }
+      ]
+    },
+    "trust.positive": {
+      "topic": "trust",
+      "direction": "positive",
+      "units": 23,
+      "other_units": 0,
+      "other_pct": 0.0,
+      "labels": [
+        {
+          "id": "authentic_confirmed",
+          "name_ko": "정품이다, 정품 같다",
+          "name_en": "Authentic",
+          "reviews": 17,
+          "weighted_pct": 2.5,
+          "by_asin": {
+            "B00021AJ5I": 9,
+            "B0009OAI8Q": 3,
+            "B08FBQWRYC": 5
+          }
+        },
+        {
+          "id": "same_as_original",
+          "name_ko": "원래 것, 매장 것과 같음",
+          "name_en": "Same as original or store",
+          "reviews": 6,
+          "weighted_pct": 1.9,
+          "by_asin": {
+            "B00021AJ5I": 3,
+            "B0009OAI8Q": 1,
+            "B0BZDZJDTG": 2
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 0,
+          "weighted_pct": 0.0,
+          "by_asin": {}
+        }
+      ]
+    }
+  },
+  "overlap": {
+    "labels": [
+      "scent.negative.differs_from_original",
+      "trust.negative.differs_from_genuine"
+    ],
+    "names": [
+      "원래 알던 향과 다름",
+      "정품이나 늘 쓰던 것과 향이 다름"
+    ],
+    "reviews": 21,
+    "weighted_pct": 0.4,
+    "review_ids": [
+      "R18BLPFIGWE423",
+      "R1NB8BUWMF8QEQ",
+      "R1R4KIBKJSBU2S",
+      "R1TTWUE04LOARC",
+      "R28QRZCFOJH8QG",
+      "R297F9WD8P3TY9",
+      "R2B26WRA6MRX37",
+      "R2NKW7XTDK219O",
+      "R2PF4J8H8VLA1",
+      "R2VB4M9Y2AWKO9",
+      "R34VA7OGPLLCMC",
+      "R386HROHZR98N9",
+      "R3AJB6FYM381NQ",
+      "R3CNT8RBRINXDS",
+      "R3QZEQQD21EIWP",
+      "R3UOR9KJ2XOX1M",
+      "RFCR1X0F0C532",
+      "RFGNKRJZIRUKU",
+      "RITE6TUC3TTUA",
+      "RPIT72KK8P43P",
+      "RY81CPM5RECR"
+    ]
+  }
+}

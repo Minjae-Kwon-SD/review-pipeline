@@ -1,0 +1,203 @@
+{
+  "checked_on": "2026-10-07",
+  "source": "spd-amz-market products_variations (marketplace US)",
+  "asins": {
+    "B00021AJ5I": {
+      "parent_asin": "B0H62MKNTJ",
+      "price_band": "36.00~115.54달러(0.33~3.3 fl oz)",
+      "price_usd": "115.54",
+      "variants": [
+        {
+          "asin": "B0CN7QQNZ3",
+          "size": "0.33 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 36.0
+        },
+        {
+          "asin": "B00021AJ5I",
+          "size": "3.3 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 115.54
+        },
+        {
+          "asin": "B000C1UBQU",
+          "size": "1 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 75.0
+        },
+        {
+          "asin": "B0009OAGQU",
+          "size": "1.6 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 100.0
+        }
+      ]
+    },
+    "B0BZDZJDTG": {
+      "parent_asin": "B0HDT27STG",
+      "price_band": "26.12~79.00달러(1.7~3.4 fl oz)",
+      "price_usd": "26.12",
+      "variants": [
+        {
+          "asin": "B0BZDZJDTG",
+          "size": "1.7 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 26.12
+        },
+        {
+          "asin": "B0BZD3PQVZ",
+          "size": "1.7 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 44.52
+        },
+        {
+          "asin": "B0BZF8P4D1",
+          "size": "1.7 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 34.97
+        },
+        {
+          "asin": "B0C1C2QY5K",
+          "size": "1.7 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 40.29
+        },
+        {
+          "asin": "B0D7D6R7YY",
+          "size": "3.4 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 61.29
+        },
+        {
+          "asin": "B0DGSP737B",
+          "size": "3.4 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 79.0
+        },
+        {
+          "asin": "B0DGT8FY7V",
+          "size": "3.4 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 47.75
+        },
+        {
+          "asin": "B0DGSQ2ZMD",
+          "size": "3.4 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 59.0
+        },
+        {
+          "asin": "B0H34CCFFL",
+          "size": "1.7 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 49.0
+        },
+        {
+          "asin": "B0H348KCK4",
+          "size": "1.7 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 49.0
+        },
+        {
+          "asin": "B0H34G2CVQ",
+          "size": "1.7 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 49.09
+        },
+        {
+          "asin": "B0H345XMSD",
+          "size": "1.7 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 49.0
+        }
+      ]
+    },
+    "B0009OAI8Q": {
+      "parent_asin": "B0FFPC31YQ",
+      "price_band": "16.97~35.55달러(0.5~10.4 fl oz)",
+      "price_usd": "25.73",
+      "variants": [
+        {
+          "asin": "B0009OAI8Q",
+          "size": "3.3 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 25.73
+        },
+        {
+          "asin": "B000BC1FBK",
+          "size": "0.5 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 16.97
+        },
+        {
+          "asin": "B0009OAI8G",
+          "size": "1.7 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 29.68
+        },
+        {
+          "asin": "B0FLFBBPZB",
+          "size": "10.4 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 35.55
+        }
+      ]
+    },
+    "B09X5BQ969": {
+      "parent_asin": "B0GFFVH9DV",
+      "price_band": "20.99달러(3.34~3.4 fl oz)",
+      "price_usd": "20.99",
+      "variants": [
+        {
+          "asin": "B09X5BQ969",
+          "size": "3.38 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 20.99
+        },
+        {
+          "asin": "B08XBVLF8B",
+          "size": "3.34 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 20.99
+        },
+        {
+          "asin": "B0BMLRHC6T",
+          "size": "3.4 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 20.99
+        },
+        {
+          "asin": "B09X9XPKX5",
+          "size": "3.4 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 20.99
+        }
+      ]
+    },
+    "B08FBQWRYC": {
+      "parent_asin": "B0BGZWM1H6",
+      "price_band": "37.00~208.00달러(0.34~6.8 fl oz)",
+      "price_usd": "153.10",
+      "variants": [
+        {
+          "asin": "B08FBQHY35",
+          "size": "2.5 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 120.7
+        },
+        {
+          "asin": "B0H8RD95FN",
+          "size": "0.34 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 37.0
+        },
+        {
+          "asin": "B08FBQWRYC",
+          "size": "4.2 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 153.1
+        },
+        {
+          "asin": "B08GBY9QXX",
+          "size": "6.8 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 208.0
+        }
+      ]
+    },
+    "B0GFGL26JD": {
+      "parent_asin": "B0GPH36XYP",
+      "price_band": "32.00~116.00달러(0.27~3.4 fl oz)",
+      "price_usd": "82.00",
+      "variants": [
+        {
+          "asin": "B0DNCMDLSY",
+          "size": "0.27 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 32.0
+        },
+        {
+          "asin": "B0GFGL26JD",
+          "size": "1.7 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 82.0
+        },
+        {
+          "asin": "B0CQPMGQHZ",
+          "size": "3.4 Fl Oz (Pack of 1)",
+          "buyBoxPrice": 116.0
+        }
+      ]
+    }
+  }
+}

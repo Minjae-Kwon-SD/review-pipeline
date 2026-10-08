@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python scripts/*)",
+      "Edit(/runs/**)"
+    ],
+    "deny": [
+      "mcp__amz-review__scrape_reviews"
+    ]
+  },
+  "hooks": {
+    "SubagentStart": [
+      {
+        "matcher": "asin-selector|schema-drafter|detail-schema-drafter|detail-extractor|benchmark-researcher|guide-writer|report-translator|product-spec-collector|review-tagger|issue-labeler|issue-tagger|report-writer|evidence-auditor",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/timing.py"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "asin-selector|schema-drafter|detail-schema-drafter|detail-extractor|benchmark-researcher|guide-writer|report-translator|product-spec-collector|review-tagger|issue-labeler|issue-tagger|report-writer|evidence-auditor",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/timing.py"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+# 초안(2026-10-07). 무엇을 올릴지는 민재님이 정한다. 근거와 표는 docs/github_upload_plan.md.
+
+# 비밀번호와 키는 저장소에 넣지 않는다(amz-review 토큰은 환경 변수 AMZ_REVIEW_TOKEN으로만 읽음)
+.env
+*.key
+*pwd*.txt
+.claude/settings.local.json
+__pycache__/
+
+# 공유 리뷰 DB와 시장 도구에서 받은 응답 원문(리뷰 원문 덤프 포함)
+runs/*/raw/
+runs/*/market/raw/
+docs/mcp_samples/
+
+# 정답 세트(채점 기준, 태거와 감사관에게도 숨기는 폴더)
+runs/*/gold/
+
+# 리뷰 원문 덤프와 그 표본, 묶음 입력
+runs/*/02_reviews.csv
+runs/*/03_schema_input.csv
+runs/*/03_schema_sample.csv
+runs/*/13_detail_sample.csv
+runs/*/07a_issue_samples/
+runs/*/07b_label_input/
+runs/*/14_detail_input/
+runs/*/14_rejudge_input/
+
+# 비용 기록
+runs/*/costs.jsonl
+
+# 판 바꾸기 전 백업과 버린 판
+runs/*/*_v[0-9]*.*
+runs/*/*_before_*.*
+runs/*/*_retry_rejected.*
+
+# 개인 PC 경로가 든 미리보기 설정
+.claude/launch.json
+
+# 판 바꾸기 전 백업(G4 뒤)
+runs/*/*_g[0-9].*
+
+# 정답 세트에서 나온 파일(정답 세트 리뷰 id와 태그, 채점 불일치 목록)
+runs/*/04_tags_*_gold*.jsonl
+runs/*/04_gold_eval*
+
+# 웹 출처 페이지 글자 저장본(다른 사이트 글이라 올리지 않음)
+runs/*/research_cache/
+
+# 저장소에서 뺀 옛 시험 회차와 임시 파일(PC에는 남김, 2026-10-08 민재님 "빼버려")
+scratch_en_diff.md
+runs/perfume-2026-10-07/
+runs/*/packets/
+
+# 비교 실행 사본(리뷰 원문 포함)
+runs/perfume-cmp*/
+
+# 회사 저장소로 옮기며 뺀 것(2026-10-08 민재님 "빼"). PC 파일은 남김
+# 정답 세트 리뷰 id가 든 태깅 묶음 계획
+runs/*/04_batches.json
+# G6 시점 영어판(영어판은 제출 전 요청이 있을 때 한국어 최신판으로 다시 만듦)
+runs/*/06_report_en.html
+runs/*/06_report_en.md
+# 판 바꾸기 전 백업(이름에 _g숫자p숫자, 예: _g6p2)
+runs/*/*_g[0-9]p[0-9]*.*

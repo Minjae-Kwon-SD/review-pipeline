@@ -1,0 +1,620 @@
+{
+  "R11ZUG0KJFP5C0": [
+    {
+      "topic": "bottle_design",
+      "sentiment": "positive",
+      "quote": "The presentation and bottle size and weight were impeccable"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "negative",
+      "quote": "It was just not a great experience, I suppose."
+    },
+    {
+      "topic": "scent",
+      "sentiment": "negative",
+      "quote": "overwhelmingly powdery and soapy"
+    }
+  ],
+  "R1528CQ8SFSG5O": [
+    {
+      "topic": "bottle_design",
+      "sentiment": "positive",
+      "quote": "The 3.4 oz bottle is a great size"
+    },
+    {
+      "topic": "brand_experience",
+      "sentiment": "positive",
+      "quote": "this one is definitely worth trying!"
+    },
+    {
+      "topic": "longevity_projection",
+      "sentiment": "positive",
+      "quote": "It lasts well throughout the day, and a few sprays are all I need."
+    },
+    {
+      "topic": "overall",
+      "sentiment": "positive",
+      "quote": "I was pleasantly surprised by Bellavita Luxury Honey Oud!"
+    },
+    {
+      "topic": "price_value",
+      "sentiment": "positive",
+      "quote": "a great size for the price"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "smells much more expensive than I expected"
+    }
+  ],
+  "R1688LKF56GMYH": [
+    {
+      "topic": "overall",
+      "sentiment": "negative",
+      "quote": "Estuche dañado, frasco casi vacío."
+    },
+    {
+      "topic": "packaging",
+      "sentiment": "negative",
+      "quote": "el estuche de metal muy golpeado"
+    },
+    {
+      "topic": "shipping",
+      "sentiment": "negative",
+      "quote": "El frasco del perfume casi vacío."
+    }
+  ],
+  "R17P0BA3UA82A6": [
+    {
+      "topic": "longevity_projection",
+      "sentiment": "negative",
+      "quote": "fragrance lasted only minutes at best"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "mixed",
+      "quote": "Nice fragrance but doesn't last"
+    },
+    {
+      "topic": "quality",
+      "sentiment": "negative",
+      "quote": "this one may have been old"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "Nice fragrance"
+    }
+  ],
+  "R1PYYRVUR8GWQZ": [
+    {
+      "topic": "brand_experience",
+      "sentiment": "negative",
+      "quote": "Do not recommend."
+    },
+    {
+      "topic": "customer_service",
+      "sentiment": "negative",
+      "quote": "I am unable to return it due to Amazon rules"
+    },
+    {
+      "topic": "longevity_projection",
+      "sentiment": "negative",
+      "quote": "It is over powering"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "negative",
+      "quote": "smells terrible"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "negative",
+      "quote": "smells terrible"
+    },
+    {
+      "topic": "trust",
+      "sentiment": "negative",
+      "quote": "It smells nothing like true Calvin Klein Eternity."
+    }
+  ],
+  "R1ZD5J2BF3RTMC": [
+    {
+      "topic": "bottle_design",
+      "sentiment": "positive",
+      "quote": "The bottle OMG way bigger than expected & well constructed"
+    },
+    {
+      "topic": "brand_experience",
+      "sentiment": "positive",
+      "quote": "I will definitely buy this scent many more times"
+    },
+    {
+      "topic": "longevity_projection",
+      "sentiment": "positive",
+      "quote": "seems to last longer than I expected"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "positive",
+      "quote": "SO happy I did!!!"
+    },
+    {
+      "topic": "packaging",
+      "sentiment": "positive",
+      "quote": "First the presentation & box is simple but in a classy way"
+    },
+    {
+      "topic": "price_value",
+      "sentiment": "positive",
+      "quote": "the under $40 vs $100 plus was to tempting"
+    },
+    {
+      "topic": "safety",
+      "sentiment": "positive",
+      "quote": "This scent did not give my skin any reaction or issue"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "it is soooo good!"
+    }
+  ],
+  "R298AUEWZENXSP": [
+    {
+      "topic": "bottle_design",
+      "sentiment": "positive",
+      "quote": "The bottle is nice though."
+    },
+    {
+      "topic": "customer_service",
+      "sentiment": "negative",
+      "quote": "I would not purchase it blindly because you cannot return."
+    },
+    {
+      "topic": "overall",
+      "sentiment": "mixed",
+      "quote": "Keep your money"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "negative",
+      "quote": "This does not smell good!"
+    }
+  ],
+  "R2GVQ8DVF092TY": [
+    {
+      "topic": "brand_experience",
+      "sentiment": "positive",
+      "quote": "My wife has used this for 50 years"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "positive",
+      "quote": "As long as it keeps my wife happy"
+    }
+  ],
+  "R2KW50446AUSFC": [
+    {
+      "topic": "brand_experience",
+      "sentiment": "positive",
+      "quote": "One of my favorite fragrances!"
+    },
+    {
+      "topic": "longevity_projection",
+      "sentiment": "neutral",
+      "quote": "I’d say the scent lasts a few hours."
+    },
+    {
+      "topic": "overall",
+      "sentiment": "positive",
+      "quote": "Good fragrance!"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "I always get compliments about how good I smell"
+    }
+  ],
+  "R2L2RUMH85P11X": [
+    {
+      "topic": "longevity_projection",
+      "sentiment": "negative",
+      "quote": "just a few hours later the smell was gone"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "negative",
+      "quote": "Buyer beware !!!"
+    },
+    {
+      "topic": "trust",
+      "sentiment": "negative",
+      "quote": "The cynic in me says I got a generic brand"
+    }
+  ],
+  "R2MM4NAPNXXVKJ": [
+    {
+      "topic": "bottle_design",
+      "sentiment": "positive",
+      "quote": "It never leaks and js easy and light weight enough to transport."
+    },
+    {
+      "topic": "brand_experience",
+      "sentiment": "positive",
+      "quote": "It is my every day"
+    },
+    {
+      "topic": "longevity_projection",
+      "sentiment": "positive",
+      "quote": "It lasts all day too"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "positive",
+      "quote": "Best perfume ever invented"
+    },
+    {
+      "topic": "price_value",
+      "sentiment": "positive",
+      "quote": "This is always worth my money."
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "This is a perfume I ALWAYS get compliments on."
+    }
+  ],
+  "R2VB4M9Y2AWKO9": [
+    {
+      "topic": "overall",
+      "sentiment": "negative",
+      "quote": "Buyer Beware"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "negative",
+      "quote": "the scent is NOT Calvin Klein's ETERNITY"
+    },
+    {
+      "topic": "trust",
+      "sentiment": "negative",
+      "quote": "the scent is NOT Calvin Klein's ETERNITY"
+    }
+  ],
+  "R2WLZEYU4QJSNX": [
+    {
+      "topic": "longevity_projection",
+      "sentiment": "negative",
+      "quote": "It also didn’t last on me"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "negative",
+      "quote": "for me this one wasn’t worth the purchase"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "negative",
+      "quote": "very chemical and artificial"
+    }
+  ],
+  "R35BQ1BTF2Q094": [
+    {
+      "topic": "bottle_design",
+      "sentiment": "negative",
+      "quote": "I thought it would be bigger"
+    },
+    {
+      "topic": "brand_experience",
+      "sentiment": "positive",
+      "quote": "One of my signature perfume."
+    },
+    {
+      "topic": "overall",
+      "sentiment": "mixed",
+      "quote": "It's smells good. However I thought it would be bigger."
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "It's smells good"
+    }
+  ],
+  "R38FLXFQ85RK5L": [
+    {
+      "topic": "bottle_design",
+      "sentiment": "positive",
+      "quote": "the magnetic cap and atomizer are really nice"
+    },
+    {
+      "topic": "longevity_projection",
+      "sentiment": "negative",
+      "quote": "the scent only lasts about 10 minutes on the skin, hair and clothing"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "mixed",
+      "quote": "You get what you pay for."
+    },
+    {
+      "topic": "price_value",
+      "sentiment": "negative",
+      "quote": "knew this price was too good to be true"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "Smells nice"
+    }
+  ],
+  "R3AOLDFQH1SQI9": [
+    {
+      "topic": "longevity_projection",
+      "sentiment": "positive",
+      "quote": "lasts long"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "mixed",
+      "quote": "The cologne itself smells good but was leaking when I received it"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "smells good"
+    },
+    {
+      "topic": "shipping",
+      "sentiment": "negative",
+      "quote": "was leaking when I received it"
+    }
+  ],
+  "R3EQPMY67MEHQT": [
+    {
+      "topic": "longevity_projection",
+      "sentiment": "negative",
+      "quote": "no dura nada"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "mixed",
+      "quote": "Huele rico pero no dura nada"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "Huele rico"
+    }
+  ],
+  "R3IYVVJV43EN5": [
+    {
+      "topic": "longevity_projection",
+      "sentiment": "negative",
+      "quote": "The perfume had no scent"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "negative",
+      "quote": "it was a disappointment"
+    },
+    {
+      "topic": "price_value",
+      "sentiment": "negative",
+      "quote": "high price for a small spray"
+    },
+    {
+      "topic": "quality",
+      "sentiment": "negative",
+      "quote": "Maybe it was old"
+    }
+  ],
+  "R3REJQDLEML9QP": [
+    {
+      "topic": "brand_experience",
+      "sentiment": "positive",
+      "quote": "I will never be without it."
+    },
+    {
+      "topic": "overall",
+      "sentiment": "positive",
+      "quote": "Makes the Angels jealous"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "soft gentle floral fragrance and yet clean and refreshing"
+    }
+  ],
+  "R3SW3QNSYA0ROA": [
+    {
+      "topic": "overall",
+      "sentiment": "positive",
+      "quote": "Me gusta mucho"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "todos mis compañeros del trabajo me dicen hueles bien"
+    }
+  ],
+  "R3U6GO0XSF7HY4": [
+    {
+      "topic": "brand_experience",
+      "sentiment": "positive",
+      "quote": "I have been wearing this fragrance for over 20 years"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "positive",
+      "quote": "Signature Scent, Why Change A Good Thing"
+    },
+    {
+      "topic": "price_value",
+      "sentiment": "positive",
+      "quote": "it is always a fantastic deal then!"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "Calvin Klein Eternity smells so nice!"
+    }
+  ],
+  "R4HVFOK3EB74D": [
+    {
+      "topic": "longevity_projection",
+      "sentiment": "negative",
+      "quote": "there is no longevity!"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "mixed",
+      "quote": "The only caveat is that there is no longevity!"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "It's a gorgeous, wonderful scent"
+    }
+  ],
+  "R592MF5L4QC3Z": [
+    {
+      "topic": "longevity_projection",
+      "sentiment": "positive",
+      "quote": "it does last all day"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "positive",
+      "quote": "If you know, you know."
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "It does not smell cheap at all."
+    }
+  ],
+  "RCS1EXNM71HF": [
+    {
+      "topic": "longevity_projection",
+      "sentiment": "mixed",
+      "quote": "That one-and-only squirt lasted for a whole day in our living room"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "negative",
+      "quote": "One sniff in the air and the excitement was over."
+    },
+    {
+      "topic": "scent",
+      "sentiment": "negative",
+      "quote": "it smells like your great grandmother"
+    }
+  ],
+  "RE6BXDD0FAGRD": [
+    {
+      "topic": "longevity_projection",
+      "sentiment": "negative",
+      "quote": "I was disappointed by how short-lived it was"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "negative",
+      "quote": "DO NOT PURCHASE ON AMAZON"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "The scent was perfect"
+    },
+    {
+      "topic": "trust",
+      "sentiment": "negative",
+      "quote": "odds are it’s probably watered down or messed with"
+    }
+  ],
+  "RI6ECRUKWAGQU": [
+    {
+      "topic": "bottle_design",
+      "sentiment": "positive",
+      "quote": "the bottle itself looks clean and minimal"
+    },
+    {
+      "topic": "brand_experience",
+      "sentiment": "positive",
+      "quote": "I've since recommended it to several friends"
+    },
+    {
+      "topic": "longevity_projection",
+      "sentiment": "positive",
+      "quote": "What surprised me most is the longevity."
+    },
+    {
+      "topic": "overall",
+      "sentiment": "positive",
+      "quote": "Dossier has earned a loyal customer with this one."
+    },
+    {
+      "topic": "price_value",
+      "sentiment": "positive",
+      "quote": "For the price point, that's genuinely impressive."
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "The scent is warm, soft, and just sophisticated enough"
+    }
+  ],
+  "RQJ16O3F406PY": [
+    {
+      "topic": "brand_experience",
+      "sentiment": "positive",
+      "quote": "It is definitely my go-to for sure."
+    },
+    {
+      "topic": "overall",
+      "sentiment": "positive",
+      "quote": "Obsessed 😍😍😍"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "positive",
+      "quote": "more compliments on than my expensive perfumes"
+    }
+  ],
+  "RSXO66KNMLOM3": [
+    {
+      "topic": "longevity_projection",
+      "sentiment": "positive",
+      "quote": "It last a long time, over a day I’ll say"
+    },
+    {
+      "topic": "overall",
+      "sentiment": "mixed",
+      "quote": "Definitely different than what I expected"
+    },
+    {
+      "topic": "quality",
+      "sentiment": "negative",
+      "quote": "it smelled expired"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "mixed",
+      "quote": "spicy, sweet, then after a few minutes it smells ok"
+    }
+  ],
+  "RYPYPX8NXLAO6": [
+    {
+      "topic": "overall",
+      "sentiment": "negative",
+      "quote": "I wasn’t too keen on it"
+    },
+    {
+      "topic": "scent",
+      "sentiment": "negative",
+      "quote": "smells identical to Hawaiian Tropic tanning oil from the 90s"
+    }
+  ]
+}

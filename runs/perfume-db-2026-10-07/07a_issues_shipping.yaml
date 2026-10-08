@@ -1,0 +1,73 @@
+topic: shipping
+directions:
+  negative:
+    labels:
+      - id: arrived_broken
+        name_ko: 깨지거나 부서져 도착
+        name_en: Arrived broken or damaged
+        include: 받았을 때 병, 뚜껑, 분사구가 깨지거나 금 가거나 부러져 있었다, 상품이나 소포가 손상돼 왔다는 말("Broken", "Came damaged", "Llegó roto"). 시점 없는 "Broken"도 여기
+        exclude: 새거나 흘렀다는 말이 함께 있으면 leaked_in_transit. 겉 부서짐 없이 분사기가 작동하지 않는 것은 quality(이 주제 아님). 겉상자만 찌그러진 것은 packaging
+        examples:
+          - {review_id: RYXW6V35RZ6TV, quote: "The bottle was delivered cracked."}
+          - {review_id: R3OF64V1YOE64B, quote: "Llegó roto"}
+        approx_count: 23
+      - id: leaked_in_transit
+        name_ko: 새거나 흘러서 도착
+        name_en: Leaked or spilled in transit
+        include: 받았을 때 향수가 새고 있었다, 상자나 소포가 향수에 젖었다, 상자 안에 쏟아졌다는 말. 시점 없는 "Leaking"도 여기. 새서 양이 줄었다는 말, 깨져서 샌다는 말도 여기
+        exclude: 샌 이야기 없이 양만 덜 들어 있으면 arrived_underfilled. 새는 말 없이 깨짐만 있으면 arrived_broken. 여행이나 들고 다닐 때 샌다는 말은 bottle_design(이 주제 아님)
+        examples:
+          - {review_id: R3AOLDFQH1SQI9, quote: "was leaking when I received it"}
+          - {review_id: R2JKQ4KZTJS527, quote: "Casi la mitad del perfume se derramó en la caja."}
+        approx_count: 21
+      - id: arrived_underfilled
+        name_ko: 내용물이 덜 든 채 도착
+        name_en: Arrived partly empty
+        include: 받았을 때 병이 반쯤 비었다, 거의 비었다, 일부(1/5, 1/4)가 없었다는 말
+        exclude: 샜다, 흘렀다는 말이 함께 있으면 leaked_in_transit. 주문한 것보다 작은 용량의 병이 온 것은 wrong_or_opened_item
+        examples:
+          - {review_id: R95G0ZJBYOR7O, quote: "bottle was half empty"}
+          - {review_id: R19Q1I5RT9RW9D, quote: "my spray arrived with 1/5th of the product gone"}
+        approx_count: 6
+      - id: wrong_or_opened_item
+        name_ko: 주문과 다른 상품이나 개봉된 상품
+        name_en: Wrong item or opened/used item
+        include: 주문하지 않은 상품이나 다른 용량의 병이 왔다, 이미 열렸거나 쓰던 상품이 왔다는 말
+        exclude: 가짜나 정품 의심이 근거로 붙으면 trust(이 주제 아님). 같은 제품인데 내용물만 덜 들었으면 arrived_underfilled
+        examples:
+          - {review_id: R29H861VW9PEE1, quote: "Diesen Artikel habe ich nicht bestellt."}
+          - {review_id: R2K27HLM5BUOS7, quote: "I received an opened and used bottle"}
+        approx_count: 6
+      - id: slow_delivery
+        name_ko: 배송이 느림
+        name_en: Slow or late delivery
+        include: 배송이 늦었다, 느렸다, 한참 만에 겨우 왔다는 말
+        exclude: 배달 위치나 기사 처리 불만은 기타. 도착 상태 불만은 위 라벨들
+        examples:
+          - {review_id: R2O45DJB4MICJI, quote: "Delivery was very slow."}
+          - {review_id: R35P17YBF43WOE, quote: "llego tarde"}
+        approx_count: 6
+    other_approx_count: 3
+    notes: 깨짐과 누출이 같이 나오면 누출(leaked_in_transit)로 센다. 기타는 배달 위치와 기사 처리(문 밖 나무 뒤, 우편함에 쑤셔 넣음, 2개, 5% 미만이라 라벨 안 만듦)와 뜻이 애매한 "delivered without the product, being broken"(R1CAOA6U7EFP8O) 1개. 다른 상품과 개봉 상품은 각각 3개(5% 미만)라 한 라벨로 합침. 인용 41개가 B08FBQWRYC에서 나와 파손과 누출이 이 ASIN에 몰려 있음
+  positive:
+    labels:
+      - id: fast_delivery
+        name_ko: 빠르거나 제때 배송
+        name_en: Fast or on-time delivery
+        include: 배송이 빨랐다, 제때 왔다, 예정보다 일찍 왔다는 말
+        exclude: 도착 상태(멀쩡하다, 제대로 왔다)만 말하면 arrived_intact
+        examples:
+          - {review_id: R2LQGD37514J9F, quote: "fast shipping"}
+          - {review_id: R18H8U3BEZGOZA, quote: "llegó un día antes de lo esperado"}
+        approx_count: 15
+      - id: arrived_intact
+        name_ko: 멀쩡하고 제대로 도착
+        name_en: Arrived intact and as ordered
+        include: 깨지거나 새지 않고 좋은 상태로 왔다, 빠진 것 없이 주문대로 제대로 왔다, 판매자가 잘 보내 줬다는 말
+        exclude: 속도만 말하면 fast_delivery. 정품 같다는 말은 trust(이 주제 아님). 상자 디자인이나 보호력 칭찬은 packaging(이 주제 아님)
+        examples:
+          - {review_id: R2BTMJDX2GACW6, quote: "It arrived in great condition"}
+          - {review_id: R3BCD96QKPFUIE, quote: "Todo llegó perfecto sin falta de producto"}
+        approx_count: 12
+    other_approx_count: 1
+    notes: '"Package came on time with no damage."(RFKZ7EJ1U4UYQ)와 "El producto llego bien y la mensajería entrego bien en la fecha acordada."(R14YS8XFVTOZTS)는 속도와 상태를 함께 칭찬해 두 라벨에 모두 셌다(approx_count 합이 표본 수보다 2 많음). 기타는 무엇이 좋았는지 없는 "Good delivery" 1개'

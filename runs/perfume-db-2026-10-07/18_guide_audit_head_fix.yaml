@@ -1,0 +1,8 @@
+audit:
+  stage: guide
+  run: perfume-db-2026-10-07
+  overall_status: PASS
+  summary: 30행의 숫자와 기간은 16_guide_metrics.json의 head.fastest_term, head.growth_weeks, m.growth_candidates, m.growth_ranked 값과 글자까지 같다. 끝 문장은 이제 '1년 전 같은 주와 견줘 해마다 도는 계절 영향은 걸러지지만, 4주씩만 견줘 한때의 유행이나 행사와 가려내지 못한다'고 써서 같은 주끼리 견주는 방식과 맞다.
+  checked: 11
+  findings: []
+  next_action: PROCEED

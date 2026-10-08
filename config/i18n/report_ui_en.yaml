@@ -1,0 +1,188 @@
+# 리뷰 리포트 HTML(render_html.py)의 화면 문구 영어판. 키는 한국어 원문(스크립트 안 문구 그대로), 값은 영어.
+# {이름} 자리는 스크립트가 숫자나 이름을 넣는 곳이라 영어에도 같은 이름으로 둔다. 빠진 키가 있으면 영어판 만들기가 실패한다.
+title: "Amazon Review Analysis: Perfume (EDP/EDT)"
+chapters:
+  1: Distribution Overview
+  2: Mentions and Sentiment by Topic
+  3: Topic Evaluation
+  4: Impact Analysis
+  5: Time Trends
+  6: Co-occurring Topics
+  7: Reliability Signals
+  8: Key Insights
+  9: Brand (ASIN) Comparison
+  10: Brand Deep Dive
+  11: Variant (Size) Signals
+  12: Review Explorer
+  13: Strategy Direction
+md_markers:
+  reading: "**Data Reading**"
+  strengths: "Strengths"
+  weaknesses: "Weaknesses"
+  bullet: "^- (Strength|Weakness) \\d+:\\s*(.*)$"
+  bullet_map: {Strength: 강점, Weakness: 약점}
+  product: "Product"
+  branding: "Branding"
+  appendix: "## Appendix"
+  label_count: "{name} ({n} reviews)"
+  label_count_re: "{name} \\((\\d+) reviews\\)"
+  symptom_re: "{name} (\\d+) \\(weighted"
+  symptom_text: "{name} {n}"
+  overlap_re: "reviews with both labels: {n}"
+strings:
+  "카테고리와 무관한 리뷰 {n}개(off_category)와 승인 스키마에 없는 주제의 태그 {u}개는 모든 집계에서 뺐습니다.": "{n} off-category reviews and {u} tags with topics outside the approved schema were excluded from all counts."
+  "데이터 읽기": "Data Reading"
+  "ASIN": "ASINs"
+  "리뷰": "Reviews"
+  "태그(리뷰 x 주제)": "Tags (review x topic)"
+  "평균 별점(가중)": "Average rating (weighted)"
+  "브랜드": "Brands"
+  "리뷰 기간": "Review period"
+  "안내": "Notes"
+  "숫자, 막대, 표 행, 인용을 누르면 그 바탕이 된 리뷰 원문이 열립니다.": "Click any number, bar, table row or quote to open the original reviews behind it."
+  "{s} 태그가 있는 리뷰": "Reviews with a {s} tag"
+  "가중": "weighted"
+  "감성 구성(태그 기준)": "Sentiment mix (by tag)"
+  "태그": "tags"
+  "제품과 브랜드 주제": "Product vs. brand topics"
+  "표본(모은 그대로), 평균 {v}": "Sample (as collected), average {v}"
+  "아마존 실제 분포, 가중 평균 {v}": "Amazon actual distribution, weighted average {v}"
+  "표본이 없는 별점 묶음의 실제 비율 {v}는 가중 결과에서 빠졌습니다.": "The real share of star groups with no sample ({v}) is excluded from the weighted results."
+  "{s}★ 리뷰": "{s}★ reviews"
+  "태그(리뷰 x 주제) 기준 감성 구성, 제품과 브랜드 주제 비중, 별점 분포": "Sentiment mix at the tag (review x topic) level, product vs. brand topic share, and star distribution"
+  "언급": "Mentions"
+  "부정 비율": "Neg %"
+  "막대 길이는 언급 수(리뷰 수), 색은 감성 구성(초록 긍정, 빨강 부정, 주황 혼합, 회색 중립)": "Bar length = mentions (reviews); color = sentiment mix (green positive, red negative, orange mixed, gray neutral)"
+  "주제": "Topic"
+  "가중 부정 비율": "Weighted neg %"
+  "부정 언급 리뷰어(가중)": "Negative reviewers (weighted)"
+  "긍정 언급 리뷰어(가중)": "Positive reviewers (weighted)"
+  "{t} {s}": "{t}: {s}"
+  "원본 수는 \"무엇을 불평하는가\", 가중 비율은 아마존 실제 별점 분포로 되돌린 \"얼마나 흔한가\"입니다. 숫자를 누르면 그 리뷰가 열립니다.": "Raw counts show what people complain about; weighted rates restore Amazon's real star mix and show how common it is. Click a number to open those reviews."
+  "모은 표본의 원본 수와, 실제 별점 분포로 되돌린 가중 비율": "Raw counts from the collected sample, plus weighted rates that restore the real star mix"
+  "영향 분석": "Impact analysis"
+  "{t} 부정 리뷰": "{t}: negative reviews"
+  "빨간 점: 그 주제를 부정으로 말한 리뷰의 가중 평균 별점(점 크기는 리뷰 수), 초록 점: 나머지 리뷰의 가중 평균 별점. 부정 언급 리뷰 {n}개 이상인 주제만.": "Red dot: weighted average rating of reviews with a negative mention of the topic (dot size = reviews). Green dot: weighted average of all other reviews. Topics with {n}+ negative reviews only."
+  "부정 언급 리뷰": "Negative reviews"
+  "부정 리뷰 평균": "Negative-review avg"
+  "나머지 평균": "Others avg"
+  "격차": "Gap"
+  "영향 분석: 어느 불만이 별점을 가장 깎는가": "Impact Analysis: Which Complaints Cost the Most Stars"
+  "그 주제를 부정으로 말한 리뷰와 나머지 리뷰의 가중 평균 별점 비교": "Weighted average rating of reviews with a negative mention of each topic vs. all other reviews"
+  "{p} 리뷰": "{p} reviews"
+  "리뷰 {v}": "Reviews {v}"
+  "표본 평균 {v}": "Sample avg {v}"
+  "가중 부정 {v}": "Weighted neg {v}"
+  "부정 태그 {v}": "Neg tags {v}"
+  "{p} {t} 부정": "{p}: {t} negative"
+  "진행 중인 분기({d}부터)의 리뷰 {n}는 기간에서 뺐습니다.": "Reviews from the quarter in progress (from {d}), {n}, are excluded from the periods."
+  "진행 중인 분기 리뷰": "Reviews from the quarter in progress"
+  "{n}개": "{n}"
+  "막대: 그 기간 리뷰의 가중 별점 묶음 비율(빨강 1~2★, 주황 3★, 초록 4~5★).": "Bars: weighted star-group mix of that period's reviews (red 1-2★, orange 3★, green 4-5★)."
+  "기간별 부정 태그의 주제 비중": "Topic share of negative tags by period"
+  "리뷰 날짜 기준. 공유 DB 표본이라 오래된 기간은 낮은 별점 위주일 수 있어, 별점 수준보다 불만 구성을 읽습니다": "By review date. The shared-DB sample can hold mostly low-star reviews in older periods, so read the complaint mix, not the rating level"
+  "함께 나오는 부정 주제(리뷰 수)": "Negative topics appearing together (reviews)"
+  "함께 나오는 긍정 주제(리뷰 수)": "Positive topics appearing together (reviews)"
+  "한 리뷰 안에서 두 주제가 같은 감성으로 함께 나온 수입니다. 원인이 아니라 함께 나온다는 뜻입니다.": "Counts of reviews where both topics appear with the same sentiment. This shows co-occurrence, not cause."
+  "같은 리뷰에 함께 나온 주제 쌍(행을 누르면 두 주제를 모두 말한 리뷰)": "Topic pairs in the same review (click a row to see reviews mentioning both)"
+  "확인된 구매": "Verified purchase"
+  "확인 안 된 구매": "Unverified purchase"
+  "{l} 리뷰": "{l} reviews"
+  "{l}, 평균 {s}, 1~2★ {p}": "{l}, average {s}, 1-2★ {p}"
+  "도움돼요가 있는 리뷰": "Reviews with helpful votes"
+  "도움돼요가 있는 리뷰(표 {t}개), 1~2★ 쪽 {n}, 4~5★ 쪽 {p}": "Reviews with helpful votes ({t} votes), on 1-2★ {n}, on 4-5★ {p}"
+  "{t} 부정": "{t}: negative"
+  "도움돼요로 가중한 불만 순위": "Complaint ranking weighted by helpful votes"
+  "도움돼요 표": "Helpful votes"
+  "비중": "Share"
+  "도움돼요가 가장 많은 리뷰": "Most helpful reviews"
+  "별점": "Stars"
+  "제목(원문)": "Title (original)"
+  "표": "Votes"
+  "이 장의 숫자는 모두 원본(가중 안 함)입니다.": "All numbers in this section are raw (not weighted)."
+  "확인된 구매, Vine, 도움돼요로 리뷰 데이터 자체를 점검": "Checking the review data itself with verified purchases, Vine and helpful votes"
+  "안전 부정: {s}": "Safety negative: {s}"
+  "증상별 분류(07c)": "By symptom (07c)"
+  "기타만": "Other only"
+  "나머지 라벨 {n}개": "{n} more labels"
+  "향 부정 \"{a}\"과 신뢰 부정 \"{b}\"이 함께 붙은 리뷰 {n}(가중 {p}). 두 수를 더해 읽지 않습니다.": "Reviews with both the scent negative \"{a}\" and the trust negative \"{b}\" labels: {n} (weighted {p}). Do not add the two counts."
+  "두 라벨이 함께 붙은 리뷰": "Reviews with both labels"
+  "주제와 방향마다 리뷰 수가 많은 라벨 3개(기타 제외), 괄호는 가중 비율(그 라벨 리뷰의 가중치 합 ÷ 전체 리뷰 가중치 합). 기타 비율은 승인 라벨에 들지 않은 인용 비율. 안전 부정은 라벨 대신 증상별 분류 전부(07c, 알레르기 언급은 본인 반응을 직접 묘사하지 않은 리뷰).": "Top 3 labels by reviews for each topic and direction (Other excluded); parentheses show the weighted share (label reviews' weight / all reviews' weight). Other % = share of quotes outside the approved labels. Safety negatives are shown by symptom instead of labels (07c; allergy mention = no first-hand description of a reaction)."
+  "세부 이슈(라벨을 누르면 그 리뷰)": "Sub-issues (click a label to see its reviews)"
+  "방향": "Direction"
+  "세부 이슈(리뷰 수, 가중 비율)": "Sub-issues (reviews, weighted share)"
+  "기타 비율": "Other %"
+  "{t}({d})": "{t} ({d})"
+  "강점": "Strengths"
+  "약점": "Weaknesses"
+  "근거 부족": "Not enough evidence"
+  "이번에 고른 상품 표본의 강점과 약점. 세부 이슈 개수와 인용을 누르면 리뷰 원문이 열립니다": "Strengths and weaknesses in this sample of selected products. Click a sub-issue count or quote to open the original reviews"
+  "{b}: {t} 긍정": "{b}: {t} positive"
+  "{b}: {t} 부정": "{b}: {t} negative"
+  "브랜드, ASIN": "Brand, ASIN"
+  "가격대(현재)": "Price band (current)"
+  "아마존 별점": "Amazon rating"
+  "표본 리뷰": "Sample reviews"
+  "가중 평균": "Weighted avg"
+  "가중 긍정 / 부정": "Weighted pos / neg"
+  "가장 큰 강점(긍정 언급 리뷰어, 가중)": "Top strength (positive reviewers, weighted)"
+  "가장 큰 약점(부정 언급 리뷰어, 가중)": "Top weakness (negative reviewers, weighted)"
+  "{t}라 브랜드끼리의 비교는 참고용입니다.": "{t}, so brand comparisons are for reference only."
+  "ASIN {n}개, 브랜드마다 하나": "{n} ASINs, one per brand"
+  "{b}: {t}": "{b}: {t}"
+  "{b}: {k}": "{b}: {k}"
+  "리뷰 {n}개": "{n} reviews"
+  "주제 평가(언급 상위 8개, 전체 만족도 제외)": "Topic evaluation (top 8 by mentions, overall satisfaction excluded)"
+  "긍정": "Pos"
+  "부정": "Neg"
+  "브랜드 버튼을 누르면 그 브랜드의 주제 평가와 강점, 약점(세부 이슈 개수는 그 브랜드 안 리뷰 수)": "Click a brand to see its topic evaluation, strengths and weaknesses (sub-issue counts are reviews within that brand)"
+  "{t} 부정 비율": "{t} neg"
+  "{b} {v}": "{b} {v}"
+  "태그가 적어 숨긴 변형: {v}": "Variants hidden for too few tags: {v}"
+  "용량": "Size"
+  "현재 가격": "Current price"
+  "온스당 가격": "Price per oz"
+  "부정 비율은 그 용량 리뷰 가운데 그 주제를 부정으로 말한 리뷰의 가중 비율입니다. 같은 ASIN 안에서만 비교하고, 가격은 {d}에 조회한 현재 가격입니다. 리뷰 수가 적은 용량은 순위로 읽지 않습니다.": "Negative rate = weighted share of that size's reviews with a negative mention of the topic. Compare within the same ASIN only; prices are current prices checked on {d}. Do not rank sizes with few reviews."
+  "같은 ASIN 안 용량별 부정 비율과 온스당 가격(리뷰 15개 이상인 용량)": "Negative rates and price per ounce by size within each ASIN (sizes with 15+ reviews)"
+  "{t} {d}: {l}": "{t} {d}: {l}"
+  "브랜드 전체": "All brands"
+  "주제 전체": "All topics"
+  "감성": "Sentiment"
+  "감성 전체": "All sentiments"
+  "세부 이슈": "Sub-issue"
+  "세부 이슈 전체": "All sub-issues"
+  "별점 전체": "All stars"
+  "기간": "Period"
+  "기간 전체": "All periods"
+  "구매 확인": "Verified"
+  "구매 확인 전체": "All purchases"
+  "본문 검색(원문)": "Search text (original)"
+  "본문 검색": "Search text"
+  "초기화": "Reset"
+  "모든 리뷰를 걸러 원문을 읽습니다. 위 장의 숫자를 여기서 다시 확인할 수 있습니다": "Filter all reviews and read the originals; every figure above can be re-checked here"
+  "제품": "Product"
+  "브랜딩": "Branding"
+  "위 데이터에서 나온 할 일(괄호는 근거가 나온 장). 제품과 브랜딩 탭": "Actions derived from the data above (section references in parentheses), in Product and Branding tabs"
+  "주의 사항(방법과 한계)": "Caveats (method and limits)"
+  "안전 판정: 안전 주제로 태깅된 인용 전부를 상위 모델이 원문과 대조해 몸 증상 여부와 종류를 정했습니다(07c_safety_check.md).": "Safety review: every quote tagged with the safety topic was checked against the original by the top model to decide whether and which body symptom it reports (07c_safety_check.md)."
+  "만든 날 {d}(v1 HTML, {ed}), 회차 {r}. 원본: 02_reviews.csv(리뷰 {n}개), 04_tags.jsonl(태그 {t}개), 05_metrics.json, 07b_issue_counts.json, 07c_safety_summary.json, {md}": "Generated {d} (v1 HTML, {ed}), run {r}. Sources: 02_reviews.csv ({n} reviews), 04_tags.jsonl ({t} tags), 05_metrics.json, 07b_issue_counts.json, 07c_safety_summary.json, {md}"
+  "한국어판": "English edition"
+  "목차": "Contents"
+ui:
+  all: All
+  close: Close
+  variant: variant
+  verified: Verified
+  unverified: Unverified
+  helpful: Helpful
+  more: Show more
+  reviews: Reviews
+  count_suffix: ""
+  sample_avg: Sample avg
+  full: Full review
+  tags: Tags
+  positive: positive
+  negative: negative
+notes_patterns:
+  - {re: 'ASIN당 표본 리뷰 (\d+)~(\d+)개', en: '{0} to {1} sample reviews per ASIN'}
+  - {re: 'ASIN당 표본 리뷰 (\d+)개', en: '{0} sample reviews per ASIN'}

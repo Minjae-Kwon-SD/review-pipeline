@@ -1,0 +1,8 @@
+audit:
+  stage: guide
+  run: perfume-db-2026-10-07
+  overall_status: PASS
+  summary: 18_guide_changed.md의 바뀐 줄(17_guide.md 107행)에 있는 숫자 7개가 모두 16_guide_metrics.json의 해당 키 값과 같고, 대상(scent_accuracy 비교 기준)과 지표(리뷰 수)도 같다. "YSL Black Opium이 가장 자주 나온다"는 comparison_named 목록이 뒷받침한다.
+  checked: 8
+  findings: []
+  next_action: PROCEED

@@ -1,0 +1,116 @@
+{
+  "made_at": "2026-10-07T23:21:14+09:00",
+  "run": "perfume-db-2026-10-07",
+  "products": [
+    {
+      "asin": "B00021AJ5I",
+      "brand": "Calvin Klein",
+      "amazon_title": "Calvin Klein Eternity For Women Eau de Parfum 3.3 fl oz",
+      "size": "3.3 Fl Oz (Pack of 1)",
+      "unit_value": 3.3,
+      "unit_type": "Fl Oz"
+    },
+    {
+      "asin": "B0BZDZJDTG",
+      "brand": "Dossier",
+      "amazon_title": "Dossier - Ambery Vanilla - Inspired by Black Opium - Women EDP",
+      "size": "1.7 Fl Oz (Pack of 1)",
+      "unit_value": 1.7,
+      "unit_type": "Fl Oz"
+    },
+    {
+      "asin": "B0009OAI8Q",
+      "brand": "Elizabeth Taylor",
+      "amazon_title": "Elizabeth Taylor White Diamonds Eau de Toilette for Women, 3.3 fl oz",
+      "size": "3.3 Fl Oz (Pack of 1)",
+      "unit_value": 3.3,
+      "unit_type": "Fl Oz"
+    },
+    {
+      "asin": "B09X5BQ969",
+      "brand": "Bella Vita Luxury",
+      "amazon_title": "Bellavita Luxury Honey Oud Eau de Parfum | 100 ml (3.4 fl.oz.) | Perfume for Men and Women | Sweet Honey, Bergamot, Oud, and Amber Notes",
+      "size": "3.38 Fl Oz (Pack of 1)",
+      "unit_value": 3.38,
+      "unit_type": "Fl Oz"
+    },
+    {
+      "asin": "B08FBQWRYC",
+      "brand": "Jean Paul Gaultier",
+      "amazon_title": "Jean Paul Gaultier Le Male Le Parfum for Men - 4.2 oz",
+      "size": "4.2 Fl Oz (Pack of 1)",
+      "unit_value": 4.2,
+      "unit_type": "Fl Oz"
+    },
+    {
+      "asin": "B0GFGL26JD",
+      "brand": "Glossier",
+      "amazon_title": "Glossier You Eau de Parfum, Unisex Skin-Scent Enhancer, 50 ml",
+      "size": "1.7 Fl Oz (Pack of 1)",
+      "unit_value": 1.7,
+      "unit_type": "Fl Oz"
+    }
+  ],
+  "items": [
+    {
+      "id": "concentration",
+      "name_ko": "농도",
+      "ask": "제품 유형과 농도(Eau de Toilette, Eau de Parfum, Parfum, Extrait, Body Mist 등). 향료 비율(%)이 적혀 있으면 그 비율",
+      "format": "text"
+    },
+    {
+      "id": "notes_top",
+      "name_ko": "탑 노트",
+      "ask": "공식 노트 구성 가운데 탑(top, head) 노트 목록",
+      "format": "list"
+    },
+    {
+      "id": "notes_middle",
+      "name_ko": "미들 노트",
+      "ask": "공식 노트 구성 가운데 미들(middle, heart) 노트 목록",
+      "format": "list"
+    },
+    {
+      "id": "notes_base",
+      "name_ko": "베이스 노트",
+      "ask": "공식 노트 구성 가운데 베이스(base, dry down) 노트 목록. 탑, 미들, 베이스로 나누지 않고 노트만 적었으면 여기 말고 notes_all",
+      "format": "list"
+    },
+    {
+      "id": "notes_all",
+      "name_ko": "노트(층 구분 없음)",
+      "ask": "탑, 미들, 베이스로 나누지 않고 적은 노트 목록",
+      "format": "list"
+    },
+    {
+      "id": "size_price",
+      "name_ko": "용량과 가격",
+      "ask": "출처 사이트에 적힌 용량과 그 가격(통화 포함). 여러 용량이면 모두",
+      "format": "list"
+    },
+    {
+      "id": "sprayer_bottle",
+      "name_ko": "분사기와 병",
+      "ask": "분사기 종류(펌프 스프레이, 롤온 등), 병 재질, 뚜껑(자석 등), 리필 가능 여부 같은 병과 분사기 설명",
+      "format": "text"
+    },
+    {
+      "id": "ingredients",
+      "name_ko": "전 성분",
+      "ask": "전 성분 목록(INCI). 있는 그대로",
+      "format": "text"
+    },
+    {
+      "id": "allergens",
+      "name_ko": "표시된 알레르기 성분",
+      "ask": "전 성분이나 표시에 나온 향료 알레르기 성분(예: Limonene, Linalool, Citronellol, Geraniol, Coumarin 같은 표시 성분) 목록",
+      "format": "list"
+    },
+    {
+      "id": "sample_mini_refill",
+      "name_ko": "샘플, 미니, 리필",
+      "ask": "같은 향의 샘플, 미니(여행용), 리필을 파는지와 그 용량",
+      "format": "text"
+    }
+  ]
+}

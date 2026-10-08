@@ -1,0 +1,8 @@
+audit:
+  stage: translation
+  run: perfume-db-2026-10-07
+  overall_status: PASS
+  summary: "line 49는 'long-time loyal use'로 과거부터 써 온 뜻이 되었고, line 151은 원문 R1T7FSK04S0DMQ(collar가 충전되지 않음)와 같은 'rechargeable collar'로 고쳐져 두 줄 모두 원문과 뜻이 맞음"
+  checked: 2
+  findings: []
+  next_action: PROCEED

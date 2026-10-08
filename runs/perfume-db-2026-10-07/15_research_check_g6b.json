@@ -1,0 +1,754 @@
+{
+  "checked_at": "2026-10-08T11:12:47+09:00",
+  "claims": 104,
+  "verified": 72,
+  "verified_from_cache": 0,
+  "by_area": {
+    "industry": {
+      "verified": 8,
+      "unverified": 8
+    },
+    "market": {
+      "verified": 3,
+      "unverified": 11
+    },
+    "regulation": {
+      "verified": 29,
+      "unverified": 11
+    },
+    "testing": {
+      "verified": 32,
+      "unverified": 2
+    }
+  },
+  "items": [
+    {
+      "id": "mkt_01",
+      "area": "market",
+      "url": "https://www.circana.com/post/us-prestige-and-mass-beauty-retail-deliver-a-positive-performance-in-2025-circana-reports",
+      "status": "unverified",
+      "reason": "HTTP 429"
+    },
+    {
+      "id": "mkt_02",
+      "area": "market",
+      "url": "https://www.circana.com/post/us-prestige-and-mass-beauty-retail-deliver-a-positive-performance-in-2025-circana-reports",
+      "status": "unverified",
+      "reason": "HTTP 429"
+    },
+    {
+      "id": "mkt_03",
+      "area": "market",
+      "url": "https://www.circana.com/post/us-prestige-and-mass-beauty-retail-deliver-a-positive-performance-in-2025-circana-reports",
+      "status": "unverified",
+      "reason": "HTTP 429"
+    },
+    {
+      "id": "mkt_04",
+      "area": "market",
+      "url": "https://www.circana.com/post/us-prestige-and-mass-beauty-retail-deliver-a-positive-performance-in-2025-circana-reports",
+      "status": "unverified",
+      "reason": "HTTP 429"
+    },
+    {
+      "id": "mkt_05",
+      "area": "market",
+      "url": "https://www.circana.com/post/us-beauty-industry-sales-grow-for-the-fourth-consecutive-year-circana-reports",
+      "status": "unverified",
+      "reason": "HTTP 429"
+    },
+    {
+      "id": "mkt_06",
+      "area": "market",
+      "url": "https://www.circana.com/post/us-beauty-industry-sales-grow-for-the-fourth-consecutive-year-circana-reports",
+      "status": "unverified",
+      "reason": "HTTP 429"
+    },
+    {
+      "id": "mkt_07",
+      "area": "market",
+      "url": "https://www.circana.com/post/us-beauty-industry-sales-grow-for-the-fourth-consecutive-year-circana-reports",
+      "status": "unverified",
+      "reason": "HTTP 429"
+    },
+    {
+      "id": "mkt_08",
+      "area": "market",
+      "url": "https://www.circana.com/post/us-beauty-industry-sales-grow-for-the-fourth-consecutive-year-circana-reports",
+      "status": "unverified",
+      "reason": "HTTP 429"
+    },
+    {
+      "id": "mkt_09",
+      "area": "market",
+      "url": "https://www.circana.com/post/us-beauty-industry-sales-accelerate-in-q3-circana-reports",
+      "status": "unverified",
+      "reason": "HTTP 429"
+    },
+    {
+      "id": "mkt_10",
+      "area": "market",
+      "url": "https://www.circana.com/post/us-beauty-industry-sales-accelerate-in-q3-circana-reports",
+      "status": "unverified",
+      "reason": "HTTP 429"
+    },
+    {
+      "id": "mkt_11",
+      "area": "market",
+      "url": "https://www.circana.com/post/us-beauty-industry-grows-in-the-first-half-of-2025-circana-reports",
+      "status": "unverified",
+      "reason": "HTTP 429"
+    },
+    {
+      "id": "mkt_12",
+      "area": "market",
+      "url": "https://www.imarcgroup.com/united-states-perfume-market",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "mkt_13",
+      "area": "market",
+      "url": "https://store.marketline.com/report/usa-fragrances-market-analysis/",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "mkt_14",
+      "area": "market",
+      "url": "https://www.kenresearch.com/industry-reports/usa-fragrance-market.md",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_01",
+      "area": "industry",
+      "url": "https://dossier.co/products/aromatic-star-anise",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_02",
+      "area": "industry",
+      "url": "https://dossier.co/products/aromatic-star-anise",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_03",
+      "area": "industry",
+      "url": "https://dossier.co/pages/faq",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_04",
+      "area": "industry",
+      "url": "https://www.lattafa-usa.com/products/yara.json",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "ind_05",
+      "area": "industry",
+      "url": "https://www.lattafa-usa.com/pages/about-us",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_06",
+      "area": "industry",
+      "url": "https://www.glossier.com/products/glossier-you.json",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "ind_07",
+      "area": "industry",
+      "url": "https://www.glossier.com/products/glossier-you",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_08",
+      "area": "industry",
+      "url": "https://arianagrandefragrances.com/products/cloud.json",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "ind_09",
+      "area": "industry",
+      "url": "https://dimebeautyco.com/products/stay-awhile-perfume.json",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "ind_10",
+      "area": "industry",
+      "url": "https://philosophy.com/products/pure-grace-eau-de-toilette.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_11",
+      "area": "industry",
+      "url": "https://philosophy.com/products/pure-grace-eau-de-toilette-pen-spray.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_12",
+      "area": "industry",
+      "url": "https://perfumania.com/products/versace-bright-crystal-perfume-eau-de-toilette-for-women.json",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "ind_13",
+      "area": "industry",
+      "url": "https://www.moodiedavittreport.com/compact-and-collectible-coty-unveils-daisy-petals-marc-jacobs/",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "ind_14",
+      "area": "industry",
+      "url": "https://www.cosmeticsbusiness.com/mugler-revamps-refillable-station-for-signature-scents-157642",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_01",
+      "area": "regulation",
+      "url": "https://www.fda.gov/cosmetics/cosmetic-ingredients/fragrances-cosmetics",
+      "status": "unverified",
+      "reason": "HTTP 404"
+    },
+    {
+      "id": "reg_02",
+      "area": "regulation",
+      "url": "https://www.fda.gov/cosmetics/cosmetic-ingredients/fragrances-cosmetics",
+      "status": "unverified",
+      "reason": "HTTP 404"
+    },
+    {
+      "id": "reg_03",
+      "area": "regulation",
+      "url": "https://www.law.cornell.edu/cfr/text/21/701.3",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_04",
+      "area": "regulation",
+      "url": "https://www.law.cornell.edu/cfr/text/21/701.13",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "reg_05",
+      "area": "regulation",
+      "url": "https://www.fda.gov/cosmetics/cosmetics-laws-regulations/modernization-cosmetics-regulation-act-2022-mocra",
+      "status": "unverified",
+      "reason": "HTTP 404"
+    },
+    {
+      "id": "reg_06",
+      "area": "regulation",
+      "url": "https://www.fda.gov/cosmetics/cosmetics-laws-regulations/modernization-cosmetics-regulation-act-2022-mocra",
+      "status": "unverified",
+      "reason": "HTTP 404"
+    },
+    {
+      "id": "reg_07",
+      "area": "regulation",
+      "url": "https://www.fda.gov/cosmetics/cosmetics-laws-regulations/modernization-cosmetics-regulation-act-2022-mocra",
+      "status": "unverified",
+      "reason": "HTTP 404"
+    },
+    {
+      "id": "reg_08",
+      "area": "regulation",
+      "url": "https://www.cov.com/en/news-and-insights/insights/2025/09/mocra-implementation-fda-spring-2025-unified-agenda-update",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_09",
+      "area": "regulation",
+      "url": "https://dicentra.com/blog/cosmetic-regulations/mocra-in-2026-what-has-changed-and-what-does-fda-expect-from-the-cosmetics-industry",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_10",
+      "area": "regulation",
+      "url": "https://cosmeticsbusiness.com/california-passes-cosmetic-fragrance-and-flavor-right-to-know-act--170342",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "reg_11",
+      "area": "regulation",
+      "url": "https://cosmeticsbusiness.com/california-passes-cosmetic-fragrance-and-flavor-right-to-know-act--170342",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "reg_12",
+      "area": "regulation",
+      "url": "https://ww2.arb.ca.gov/excell-brands-llc-case-settlement",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_13",
+      "area": "regulation",
+      "url": "https://ecology.wa.gov/waste-toxics/reducing-toxic-chemicals/washingtons-toxics-in-products-laws/toxic-free-cosmetics-act",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_14",
+      "area": "regulation",
+      "url": "https://ecology.wa.gov/waste-toxics/reducing-toxic-chemicals/washingtons-toxics-in-products-laws/toxic-free-cosmetics-act",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_15",
+      "area": "regulation",
+      "url": "https://news.usps.com/2025/12/03/when-it-comes-to-shipping-this-item-these-precautions-make-scents/",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_16",
+      "area": "regulation",
+      "url": "https://news.usps.com/2025/12/03/when-it-comes-to-shipping-this-item-these-precautions-make-scents/",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_17",
+      "area": "regulation",
+      "url": "https://news.usps.com/2025/12/03/when-it-comes-to-shipping-this-item-these-precautions-make-scents/",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_18",
+      "area": "regulation",
+      "url": "https://pe.usps.com/text/pub52/pub52c3_022.htm",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_19",
+      "area": "regulation",
+      "url": "https://cameochemicals.noaa.gov/unna/1266",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_20",
+      "area": "regulation",
+      "url": "https://ul.com/news/ifra-notifies-51st-amendment-ifra-standards",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_21",
+      "area": "regulation",
+      "url": "https://client.cosmeticobs.com/en/articles/ifra-65/ifra-52-the-end-of-consultation-letter-9407?page=1",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_22",
+      "area": "regulation",
+      "url": "https://www.fda.gov/cosmetics/cosmetics-labeling-claims/hypoallergenic-cosmetics",
+      "status": "unverified",
+      "reason": "HTTP 404"
+    },
+    {
+      "id": "reg_23",
+      "area": "regulation",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/cbp-fort-lauderdale-seizes-over-8500-counterfeit-designer-brand",
+      "status": "unverified",
+      "reason": "HTTP 403"
+    },
+    {
+      "id": "tst_01",
+      "area": "testing",
+      "url": "https://store.astm.org/e1958-22.html",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_02",
+      "area": "testing",
+      "url": "https://store.astm.org/e0544-24.html",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_03",
+      "area": "testing",
+      "url": "https://store.astm.org/d4991-25.html",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_04",
+      "area": "testing",
+      "url": "https://www.law.cornell.edu/cfr/text/49/173.27",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "tst_05",
+      "area": "testing",
+      "url": "https://ista.org/test_procedures.php",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_06",
+      "area": "testing",
+      "url": "https://store.astm.org/d4169-23e01.html",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_07",
+      "area": "testing",
+      "url": "https://www.evs.ee/en/iso-22716-2007",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_08",
+      "area": "testing",
+      "url": "https://www.evs.ee/en/iso-tr-18811-2018",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_09",
+      "area": "testing",
+      "url": "https://www.ftc.gov/legal-library/browse/ftc-policy-statement-regarding-advertising-substantiation",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_10",
+      "area": "testing",
+      "url": "https://www.ftc.gov/legal-library/browse/ftc-policy-statement-regarding-advertising-substantiation",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_15",
+      "area": "industry",
+      "url": "https://aptar.com/en-us/products/precious-sensea-sensorial-prestige-fragrance-pump",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "ind_16",
+      "area": "industry",
+      "url": "https://aptar.com/en-us/products/precious-sensea-sensorial-prestige-fragrance-pump",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "reg_24",
+      "area": "regulation",
+      "url": "https://www.ul.com/news/eu-amends-cosmetics-regulation-regarding-fragrance-allergens",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "reg_25",
+      "area": "regulation",
+      "url": "https://coslaw.eu/more-allergens-to-be-individually-labelled-cosmetics/",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_26",
+      "area": "regulation",
+      "url": "https://www.ul.com/news/eu-amends-cosmetics-regulation-regarding-fragrance-allergens",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_27",
+      "area": "regulation",
+      "url": "https://ecomundo.eu/en/blog/fragrance-allergen-labelling",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_28",
+      "area": "regulation",
+      "url": "https://www.ul.com/news/eu-amends-cosmetics-regulation-regarding-fragrance-allergens",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_29",
+      "area": "regulation",
+      "url": "https://www.ul.com/news/eu-amends-cosmetics-regulation-regarding-fragrance-allergens",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_30",
+      "area": "regulation",
+      "url": "https://www.ul.com/news/eu-amends-cosmetics-regulation-regarding-fragrance-allergens",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_31",
+      "area": "regulation",
+      "url": "https://coslaw.eu/more-allergens-to-be-individually-labelled-cosmetics/",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_32",
+      "area": "regulation",
+      "url": "https://www.ikw.org/en/annual-report/2024/2025/beauty-care/fragrances",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_33",
+      "area": "regulation",
+      "url": "https://www.law.cornell.edu/uscode/text/21/364e",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_34",
+      "area": "regulation",
+      "url": "https://www.law.cornell.edu/uscode/text/21/364e",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_35",
+      "area": "regulation",
+      "url": "https://www.law.cornell.edu/uscode/text/21/364e",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_36",
+      "area": "regulation",
+      "url": "https://cosmetic.chemlinked.com/news/cosmetic-news/us-fda-sets-november-2026-timeline-for-formaldehyde-ban-and-fragrance-allergen-rule",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_37",
+      "area": "regulation",
+      "url": "https://cosmetic.chemlinked.com/news/cosmetic-news/us-fda-sets-november-2026-timeline-for-formaldehyde-ban-and-fragrance-allergen-rule",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_38",
+      "area": "regulation",
+      "url": "https://gazette.gc.ca/rp-pr/p2/2024/2024-04-24/html/sor-dors63-eng.html",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_39",
+      "area": "regulation",
+      "url": "https://gazette.gc.ca/rp-pr/p2/2024/2024-04-24/html/sor-dors63-eng.html",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_40",
+      "area": "regulation",
+      "url": "https://gazette.gc.ca/rp-pr/p2/2024/2024-04-24/html/sor-dors63-eng.html",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_11",
+      "area": "testing",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:18177987&format=json&resultType=core",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_12",
+      "area": "testing",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:18177987&format=json&resultType=core",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_13",
+      "area": "testing",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:18177987&format=json&resultType=core",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_14",
+      "area": "testing",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:18177987&format=json&resultType=core",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_15",
+      "area": "testing",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:18177987&format=json&resultType=core",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_16",
+      "area": "testing",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:33093296&format=json&resultType=core",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_17",
+      "area": "testing",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:33093296&format=json&resultType=core",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_18",
+      "area": "testing",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:33093296&format=json&resultType=core",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_19",
+      "area": "testing",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:33093296&format=json&resultType=core",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_20",
+      "area": "testing",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:33093296&format=json&resultType=core",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_21",
+      "area": "testing",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:19514927&format=json&resultType=core",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_22",
+      "area": "testing",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:29656566&format=json&resultType=core",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_23",
+      "area": "testing",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:29656566&format=json&resultType=core",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_24",
+      "area": "testing",
+      "url": "https://cptclabs.com/ript-testing-essentials/",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_25",
+      "area": "testing",
+      "url": "https://cptclabs.com/ript-testing-essentials/",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_26",
+      "area": "testing",
+      "url": "https://cptclabs.com/ript-testing-essentials/",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_27",
+      "area": "testing",
+      "url": "https://cptclabs.com/sensitization-and-irritation/",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_28",
+      "area": "testing",
+      "url": "https://cptclabs.com/sensitization-and-irritation/",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "tst_29",
+      "area": "testing",
+      "url": "https://cptclabs.com/patch-testing/",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_30",
+      "area": "testing",
+      "url": "https://store.astm.org/d3890-18r25.html",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_31",
+      "area": "testing",
+      "url": "https://store.astm.org/d4336-18r25.html",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_32",
+      "area": "testing",
+      "url": "https://store.astm.org/d4336-18r25.html",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_33",
+      "area": "testing",
+      "url": "https://store.astm.org/d4041_d4041m-05r25.html",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_34",
+      "area": "testing",
+      "url": "https://store.astm.org/d4041_d4041m-05r25.html",
+      "status": "verified",
+      "source": "live"
+    }
+  ]
+}

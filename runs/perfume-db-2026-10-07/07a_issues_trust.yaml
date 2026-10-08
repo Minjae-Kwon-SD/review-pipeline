@@ -1,0 +1,82 @@
+topic: trust
+directions:
+  negative:
+    labels:
+      - id: fake_asserted
+        name_ko: 가짜라고 단정
+        name_en: Asserted fake
+        include: 근거나 망설임 없이 가짜, 정품 아님, 사기, 복제품이라고 잘라 말함("Fake", "No es original", "Scam", "knock off", "Not Eternity")
+        exclude: maybe, not sure, creo, sospecho, dúvida처럼 망설이며 말하면 authenticity_doubt. 향(smell, scent, fragrance, olor, cheiro, Duft)이 다르다고 비교하면 differs_from_genuine. 물 탔다, 손댔다는 말은 diluted_or_tampered
+        examples:
+          - {review_id: R15HIDYPL5720F, quote: "knew instantly this was a fake"}
+          - {review_id: RRQTBBAMWACKD, quote: "No es original"}
+        approx_count: 35
+      - id: authenticity_doubt
+        name_ko: 정품인지 의심
+        name_en: Doubts authenticity
+        include: 정품인지 확신하지 못하고 의심함(maybe, may not, not sure, I think, I don't believe, seems, creo, sospecho, parece, dúvida, Suspicious)
+        exclude: 망설임 없이 가짜라고 단정하면 fake_asserted. 의심의 근거로 향이나 세기 비교, 희석을 말하면 그 라벨(differs_from_genuine, weaker_than_genuine, diluted_or_tampered)
+        examples:
+          - {review_id: R1YDXT5P13GTSC, quote: "May not be the real thing"}
+          - {review_id: R2XAQXLR0QWVH5, quote: "I'm questioning the authenticity of the product."}
+        approx_count: 31
+      - id: differs_from_genuine
+        name_ko: 정품이나 늘 쓰던 것과 향이 다름
+        name_en: Smells different from genuine
+        include: 정품, 매장에서 맡거나 산 것, 갖고 있는 병, 늘 사던 같은 제품과 향이나 제품이 다르다(무엇이 다른지 말이 없는 "IT IS NOT THE SAME."도 포함)
+        exclude: 세기나 지속력이 다르다는 비교는 weaker_than_genuine. 예전보다 바뀌었다, 제조법이 바뀌었다처럼 시간에 따른 변화는 formula_changed. 향 언급 없이 정품이 아니라고만 하면 fake_asserted
+        examples:
+          - {review_id: R18BLPFIGWE423, quote: "It is not the same as what I smelled in the store."}
+          - {review_id: R1FNK1M1D36AK9, quote: "I have the big bottle and this one smells nothing like it"}
+        approx_count: 29
+      - id: formula_changed
+        name_ko: 예전과 달라짐(제조법 변경 의심)
+        name_en: Changed from before (reformulation)
+        include: 제품이 예전과 달라졌다, 제조사가 제조법이나 성분을 바꾼 것 같다(formula, ingredients, used to be, anymore, now, of the past, 20 yrs ago, hace unos años)
+        exclude: 세기나 지속력이 예전보다 약해졌다는 말은 weaker_than_genuine. 시간 비교 없이 정품, 매장 것, 갖고 있는 병과 다르다는 말은 differs_from_genuine
+        examples:
+          - {review_id: R29AJ7AM4NWRLK, quote: "they've changed the formula"}
+          - {review_id: R1ISNSZNBCFYTZ, quote: "Not as it used to be."}
+        approx_count: 16
+      - id: diluted_or_tampered
+        name_ko: 희석되거나 손댄 것 같음
+        name_en: Diluted or tampered
+        include: 물이나 알코올을 탔다, 희석됐다, 누가 열어서 손댔다, 변조됐다("watered down", "Mostly water", "tampered", "adulterado", "薄めている")
+        exclude: 희석 의심 없이 정품보다 약하다, 금방 날아간다는 비교는 weaker_than_genuine. 오래돼 변질된 것 같다는 말만 있으면 quality(이 주제 아님)
+        examples:
+          - {review_id: R31TRJEEWBZVEB, quote: "Watered down version"}
+          - {review_id: R3U8G2B77HUP9O, quote: "someone may have opened or tampered with the perfume before shipping"}
+        approx_count: 14
+      - id: weaker_than_genuine
+        name_ko: 정품이나 예전 것보다 약하고 짧음
+        name_en: Weaker than genuine or before
+        include: 매장(Walmart, Macy's, Sephora, Target) 제품, 예전에 산 같은 제품, 갖고 있는 같은 향보다 향이 약하거나 지속력이 짧다, 세기가 바뀌었다
+        exclude: 비교 대상 없이 약하다, 금방 날아간다는 말은 longevity_projection(이 주제 아님). 물이나 알코올을 탔다는 말은 diluted_or_tampered
+        examples:
+          - {review_id: R24ZECLLTT3C7B, quote: "Walmart perfume is way more stronger then Amazon"}
+          - {review_id: R1EOXLERGBKDOC, quote: "The smell is so faint compared to the exact bottle I bought at Sephora."}
+        approx_count: 13
+    other_approx_count: 12
+    notes: 기타 12개 중 이 판매자에게서 사지 마라(어림 5개), 병 색이나 겉모양이 다르다(어림 3개), 원산지 표기 불만(어림 2개)은 5% 미만이라 라벨로 만들지 않음. "fake, don't buy from here"처럼 판매자 비추천에 가짜 단정이 붙으면 fake_asserted로 셈. R1HVR0C5JIW50O("seem like the real stuff")는 negative로 태깅됐지만 내용은 정품 같다는 말이라 태그 감성 확인이 필요하고, R2JMS6R5PPXRO6("the scent is off")은 변질(quality)일 수도 있어 기타로 둠.
+  positive:
+    labels:
+      - id: authentic_confirmed
+        name_ko: 정품이다, 정품 같다
+        name_en: Authentic
+        include: 정품이다, 진짜다, 가짜가 아니다, 정품 같아 보인다("It is the real deal.", "es original", "no knock off", "looks real", "Authentic looking bottle")
+        exclude: 원래 제품, 매장 제품, 기억하는 향과 같다고 비교하면 same_as_original
+        examples:
+          - {review_id: R3GH6I54IBDV3J, quote: "It is the real deal."}
+          - {review_id: R3UD73SOIQ7BG2, quote: "this is definitely not fake"}
+        approx_count: 17
+      - id: same_as_original
+        name_ko: 원래 것, 매장 것과 같음
+        name_en: Same as original or store
+        include: 원래 제품, 매장(소매점, 미국 매장) 제품, 예전에 쓰던 것과 향이나 제품이 같다("Same as original", "smells as I remember", "Same as retail stores")
+        exclude: 비교 없이 정품이다, 정품 같다고만 하면 authentic_confirmed
+        examples:
+          - {review_id: R1U2ZZ3REP6M9Q, quote: "Same as original"}
+          - {review_id: R1C9LFWKV03B2T, quote: "Same as retail stores"}
+        approx_count: 6
+    other_approx_count: 0
+    notes: 혼합 인용 R18H8U3BEZGOZA("todo parece ser original, solo la duración es lo que me extraño")는 칭찬 부분으로 authentic_confirmed, 불만 부분(지속력이 이상함)으로 부정 쪽 weaker_than_genuine에 셈.

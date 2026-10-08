@@ -1,0 +1,39 @@
+category: perfume
+version: fixture
+# 손계산 픽스처는 리뷰마다 overall을 달지 않았다(실제 승인 스키마는 이 키가 없어 overall이 리뷰마다 필요함)
+overall_required: false
+topics:
+  - id: longevity_projection
+    name_ko: 지속력과 확산력
+    side: P
+    definition: 향이 몇 시간 가는지, 주변에 얼마나 퍼지는지
+    include: [지속 시간, 잔향, 확산]
+    exclude: [향 자체의 호불호는 scent]
+    examples:
+      - review_id: B0TESTBBB2-02
+        quote: "Does not last at all"
+    confusions: 향이 금방 날아간다는 말은 지속력, 향이 싫다는 말은 scent
+  - id: scent
+    name_ko: 향
+    side: P
+    definition: 향 자체의 호불호와 향 계열
+    include: [플로럴, 바닐라, 달다]
+    exclude: [지속 시간]
+    examples: []
+    confusions: ""
+  - id: price_value
+    name_ko: 가격 대비 가치
+    side: B
+    definition: 가격, 용량 대비 값어치, 할인
+    include: [비싸다, 가성비]
+    exclude: []
+    examples: []
+    confusions: ""
+  - id: overall
+    name_ko: 전체 만족도
+    side: P
+    definition: 특정 속성 없이 좋다, 나쁘다
+    include: [좋아요, 별로]
+    exclude: []
+    examples: []
+    confusions: ""

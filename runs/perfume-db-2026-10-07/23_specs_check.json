@@ -1,0 +1,398 @@
+{
+  "checked_at": "2026-10-08T09:35:52+09:00",
+  "status": "PASS",
+  "by_asin": {
+    "B00021AJ5I": {
+      "verified": 10,
+      "dropped": 0
+    },
+    "B0BZDZJDTG": {
+      "verified": 12,
+      "dropped": 0
+    },
+    "B0009OAI8Q": {
+      "verified": 3,
+      "dropped": 0
+    },
+    "B09X5BQ969": {
+      "verified": 12,
+      "dropped": 0
+    },
+    "B08FBQWRYC": {
+      "verified": 7,
+      "dropped": 0
+    },
+    "B0GFGL26JD": {
+      "verified": 8,
+      "dropped": 0
+    }
+  },
+  "verified": 52,
+  "dropped": 0,
+  "items": [
+    {
+      "asin": "B00021AJ5I",
+      "item": "concentration",
+      "url": "https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B00021AJ5I",
+      "item": "notes_top",
+      "url": "https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B00021AJ5I",
+      "item": "notes_middle",
+      "url": "https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B00021AJ5I",
+      "item": "notes_base",
+      "url": "https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B00021AJ5I",
+      "item": "size_price",
+      "url": "https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B00021AJ5I",
+      "item": "size_price",
+      "url": "https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B00021AJ5I",
+      "item": "ingredients",
+      "url": "https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B00021AJ5I",
+      "item": "ingredients",
+      "url": "https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B00021AJ5I",
+      "item": "allergens",
+      "url": "https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B00021AJ5I",
+      "item": "allergens",
+      "url": "https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0BZDZJDTG",
+      "item": "concentration",
+      "url": "https://dossier.co/products/ambery-vanilla",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0BZDZJDTG",
+      "item": "concentration",
+      "url": "https://dossier.co/products/ambery-vanilla",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0BZDZJDTG",
+      "item": "notes_top",
+      "url": "https://dossier.co/products/ambery-vanilla",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0BZDZJDTG",
+      "item": "notes_middle",
+      "url": "https://dossier.co/products/ambery-vanilla",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0BZDZJDTG",
+      "item": "notes_base",
+      "url": "https://dossier.co/products/ambery-vanilla",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0BZDZJDTG",
+      "item": "size_price",
+      "url": "https://dossier.co/products/ambery-vanilla",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0BZDZJDTG",
+      "item": "ingredients",
+      "url": "https://dossier.co/products/ambery-vanilla",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0BZDZJDTG",
+      "item": "ingredients",
+      "url": "https://dossier.co/products/ambery-vanilla",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0BZDZJDTG",
+      "item": "ingredients",
+      "url": "https://dossier.co/products/ambery-vanilla",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0BZDZJDTG",
+      "item": "allergens",
+      "url": "https://dossier.co/products/ambery-vanilla",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0BZDZJDTG",
+      "item": "allergens",
+      "url": "https://dossier.co/products/ambery-vanilla",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0BZDZJDTG",
+      "item": "allergens",
+      "url": "https://dossier.co/products/ambery-vanilla",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0009OAI8Q",
+      "item": "concentration",
+      "url": "https://www.healthylife.com.au/products/elizabeth-taylor-white-diamonds-eau-de-toilette100ml",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0009OAI8Q",
+      "item": "notes_all",
+      "url": "https://www.healthylife.com.au/products/elizabeth-taylor-white-diamonds-eau-de-toilette100ml",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0009OAI8Q",
+      "item": "size_price",
+      "url": "https://www.healthylife.com.au/products/elizabeth-taylor-white-diamonds-eau-de-toilette100ml",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B09X5BQ969",
+      "item": "concentration",
+      "url": "https://bellavitaorganic.com/products/honey-oud-unisex-perfume",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B09X5BQ969",
+      "item": "notes_top",
+      "url": "https://bellavitaorganic.com/products/honey-oud-unisex-perfume",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B09X5BQ969",
+      "item": "notes_middle",
+      "url": "https://bellavitaorganic.com/products/honey-oud-unisex-perfume",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B09X5BQ969",
+      "item": "notes_base",
+      "url": "https://bellavitaorganic.com/products/honey-oud-unisex-perfume",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B09X5BQ969",
+      "item": "size_price",
+      "url": "https://bellavitaorganic.com/products/honey-oud-unisex-perfume",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B09X5BQ969",
+      "item": "size_price",
+      "url": "https://bellavitaorganic.com/products/honey-oud-unisex-perfume",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B09X5BQ969",
+      "item": "size_price",
+      "url": "https://bellavitaorganic.com/products/honey-oud-unisex-perfume",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B09X5BQ969",
+      "item": "size_price",
+      "url": "https://bellavitaorganic.com/products/honey-oud-unisex-perfume-20ml",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B09X5BQ969",
+      "item": "size_price",
+      "url": "https://bellavitaorganic.com/products/honey-oud-unisex-perfume-20ml",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B09X5BQ969",
+      "item": "size_price",
+      "url": "https://bellavitaorganic.com/products/honey-oud-unisex-perfume-20ml",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B09X5BQ969",
+      "item": "ingredients",
+      "url": "https://bellavitaorganic.com/products/honey-oud-unisex-perfume",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B09X5BQ969",
+      "item": "sample_mini_refill",
+      "url": "https://bellavitaorganic.com/products/honey-oud-unisex-perfume-20ml",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B08FBQWRYC",
+      "item": "concentration",
+      "url": "https://www.ulta.com/p/le-male-le-parfum-pimprod2023265",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B08FBQWRYC",
+      "item": "notes_top",
+      "url": "https://www.ulta.com/p/le-male-le-parfum-pimprod2023265",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B08FBQWRYC",
+      "item": "notes_middle",
+      "url": "https://www.ulta.com/p/le-male-le-parfum-pimprod2023265",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B08FBQWRYC",
+      "item": "notes_base",
+      "url": "https://www.ulta.com/p/le-male-le-parfum-pimprod2023265",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B08FBQWRYC",
+      "item": "size_price",
+      "url": "https://www.ulta.com/p/le-male-le-parfum-pimprod2023265",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B08FBQWRYC",
+      "item": "ingredients",
+      "url": "https://www.ulta.com/p/le-male-le-parfum-pimprod2023265",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B08FBQWRYC",
+      "item": "allergens",
+      "url": "https://www.ulta.com/p/le-male-le-parfum-pimprod2023265",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0GFGL26JD",
+      "item": "concentration",
+      "url": "https://www.glossier.com/products/glossier-you",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0GFGL26JD",
+      "item": "notes_top",
+      "url": "https://www.glossier.com/products/glossier-you",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0GFGL26JD",
+      "item": "notes_middle",
+      "url": "https://www.glossier.com/products/glossier-you",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0GFGL26JD",
+      "item": "notes_base",
+      "url": "https://www.glossier.com/products/glossier-you",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0GFGL26JD",
+      "item": "size_price",
+      "url": "https://www.glossier.com/products/glossier-you",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0GFGL26JD",
+      "item": "ingredients",
+      "url": "https://www.glossier.com/products/glossier-you",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0GFGL26JD",
+      "item": "allergens",
+      "url": "https://www.glossier.com/products/glossier-you",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0GFGL26JD",
+      "item": "sample_mini_refill",
+      "url": "https://www.glossier.com/products/glossier-you",
+      "source_type": "official",
+      "status": "verified"
+    }
+  ]
+}

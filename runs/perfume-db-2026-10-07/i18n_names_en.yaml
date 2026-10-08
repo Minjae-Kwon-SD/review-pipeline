@@ -1,0 +1,250 @@
+note: 승인된 이름은 한국어 이름(03_schema_approved.yaml, 07a_issues_approved.yaml, 07c 증상 분류)이고, 이 파일의 영어 이름은 영어판 화면을 위한 번역이다. 세부 이슈 라벨의 영어 이름은 07a_issues_approved.yaml의 name_en을 그대로 옮겼다.
+topics:
+  price_value: Price & Value
+  brand_experience: Brand Experience
+  trust: Trust & Authenticity
+  shipping: Shipping & Delivery
+  customer_service: Customer Service
+  packaging: Packaging
+  overall: Overall Satisfaction
+  quality: Quality
+  longevity_projection: Longevity & Strength
+  safety: Safety
+  bottle_design: Bottle Design & Size
+  scent: Scent
+symptoms:
+  두통: Headache
+  메스꺼움: Nausea
+  호흡: Breathing
+  어지럼: Dizziness
+  알레르기 언급: Allergy mention
+  피부: Skin
+periods:
+  ~2024년: Through 2024
+  2025년: '2025'
+  2026년 1~6월: 2026 Jan-Jun
+  2026년 7~9월: 2026 Jul-Sep
+sentiments:
+- Positive
+- Negative
+- Mixed
+- Neutral
+sides:
+  P: Product
+  B: Brand
+raw_replace:
+  달러: ' USD'
+labels:
+  price_value.negative.too_expensive:
+    ko: 그냥 비쌈
+    en: Too expensive
+  price_value.negative.small_for_price:
+    ko: 용량에 비해 비쌈
+    en: Too small for the price
+  price_value.negative.not_worth_price:
+    ko: 값만큼 못함
+    en: Not worth the price
+  price_value.negative.not_lasting_for_price:
+    ko: 지속력에 비해 비쌈
+    en: Too expensive for how short it lasts
+  price_value.positive.good_price:
+    ko: 가격이 좋음
+    en: Good or affordable price
+  price_value.positive.good_value:
+    ko: 값어치를 함
+    en: Worth the money
+  price_value.positive.cheaper_than_alternatives:
+    ko: 원조나 다른 곳보다 쌈
+    en: Cheaper than the original or other stores
+  price_value.positive.size_for_price:
+    ko: 용량 대비 값이 좋음
+    en: Good size for the price
+  price_value.positive.pricey_but_acceptable:
+    ko: 비싸지만 감수할 만함
+    en: Pricey but acceptable
+  brand_experience.negative.no_repurchase:
+    ko: 다시 사지 않겠다
+    en: Will not repurchase
+  brand_experience.negative.advise_against:
+    ko: 비추천, 사지 말라
+    en: Advises others against buying
+  brand_experience.positive.recommends:
+    ko: 추천, 사라고 권함
+    en: Recommends to others
+  brand_experience.positive.will_repurchase:
+    ko: 다시 사겠다
+    en: Will repurchase
+  brand_experience.positive.repeat_long_time_user:
+    ko: 여러 병째, 수년째 애용
+    en: Repeat or long-time user
+  brand_experience.positive.favorite_signature:
+    ko: 최애, 시그니처 향
+    en: Favorite or signature scent
+  brand_experience.positive.brand_affinity:
+    ko: 브랜드 호감, 다른 향도 좋다
+    en: Brand affinity
+  trust.negative.fake_asserted:
+    ko: 가짜라고 단정
+    en: Asserted fake
+  trust.negative.authenticity_doubt:
+    ko: 정품인지 의심
+    en: Doubts authenticity
+  trust.negative.differs_from_genuine:
+    ko: 정품이나 늘 쓰던 것과 향이 다름
+    en: Smells different from genuine
+  trust.negative.formula_changed:
+    ko: 예전과 달라짐(제조법 변경 의심)
+    en: Changed from before (reformulation)
+  trust.negative.diluted_or_tampered:
+    ko: 희석되거나 손댄 것 같음
+    en: Diluted or tampered
+  trust.negative.weaker_than_genuine:
+    ko: 정품이나 예전 것보다 약하고 짧음
+    en: Weaker than genuine or before
+  trust.positive.authentic_confirmed:
+    ko: 정품이다, 정품 같다
+    en: Authentic
+  trust.positive.same_as_original:
+    ko: 원래 것, 매장 것과 같음
+    en: Same as original or store
+  shipping.negative.arrived_broken:
+    ko: 깨지거나 부서져 도착
+    en: Arrived broken or damaged
+  shipping.negative.leaked_in_transit:
+    ko: 새거나 흘러서 도착
+    en: Leaked or spilled in transit
+  shipping.negative.arrived_underfilled:
+    ko: 내용물이 덜 든 채 도착
+    en: Arrived partly empty
+  shipping.negative.wrong_or_opened_item:
+    ko: 주문과 다른 상품이나 개봉된 상품
+    en: Wrong item or opened/used item
+  shipping.negative.slow_delivery:
+    ko: 배송이 느림
+    en: Slow or late delivery
+  shipping.positive.fast_delivery:
+    ko: 빠르거나 제때 배송
+    en: Fast or on-time delivery
+  shipping.positive.arrived_intact:
+    ko: 멀쩡하고 제대로 도착
+    en: Arrived intact and as ordered
+  customer_service.negative.not_returnable:
+    ko: 반품이나 환불 불가
+    en: Not returnable
+  customer_service.negative.refund_request:
+    ko: 환불이나 교체 요청
+    en: Requests refund or replacement
+  customer_service.negative.seller_unhelpful:
+    ko: 판매자 응대 불만
+    en: Unhelpful seller support
+  customer_service.negative.return_window_missed:
+    ko: 반품 기간 놓침
+    en: Missed return window
+  packaging.positive.pretty_presentation:
+    ko: 상자와 포장이 예쁨
+    en: Attractive box and presentation
+  packaging.positive.well_protected:
+    ko: 꼼꼼하게 포장되어 병을 잘 보호함
+    en: Well packed and protective
+  packaging.positive.matches_original:
+    ko: 포장이 원래 것과 같음
+    en: Packaging matches the original
+  quality.negative.old_or_spoiled:
+    ko: 오래됐거나 변질됨
+    en: Old, expired or spoiled
+  quality.negative.sprayer_stopped_working:
+    ko: 쓰다가 분사기 고장
+    en: Sprayer stopped working after use
+  quality.negative.sprayer_defective:
+    ko: 분사기 불량
+    en: Defective sprayer
+  quality.negative.missing_parts:
+    ko: 부품 빠짐
+    en: Missing parts
+  quality.negative.poor_quality_general:
+    ko: 품질이 나쁨(구체 없음)
+    en: Poor quality in general
+  longevity_projection.negative.fades_fast:
+    ko: 금방 날아감
+    en: Fades quickly
+  longevity_projection.negative.shorter_than_hoped:
+    ko: 기대보다 짧음
+    en: Shorter than hoped
+  longevity_projection.negative.weak_scent:
+    ko: 처음부터 약함
+    en: Weak or barely there
+  longevity_projection.negative.too_strong:
+    ko: 너무 셈
+    en: Too strong
+  longevity_projection.positive.long_lasting:
+    ko: 오래감
+    en: Long-lasting
+  longevity_projection.positive.not_overpowering:
+    ko: 과하지 않은 세기
+    en: Not overpowering
+  longevity_projection.positive.strong_presence:
+    ko: 진하고 잘 퍼짐
+    en: Strong presence
+  longevity_projection.positive.little_goes_far:
+    ko: 조금만 써도 충분
+    en: A little goes a long way
+  bottle_design.negative.bottle_too_small:
+    ko: 병이 작음
+    en: Bottle too small
+  bottle_design.negative.sprayer_problem:
+    ko: 분사기 불만
+    en: Poor sprayer
+  bottle_design.negative.bottle_leaks:
+    ko: 병이 샘
+    en: Bottle leaks
+  bottle_design.positive.pretty_bottle:
+    ko: 병이 예쁨
+    en: Attractive bottle
+  bottle_design.positive.good_size:
+    ko: 용량이 알맞거나 넉넉함
+    en: Good size
+  bottle_design.positive.purse_portable:
+    ko: 휴대하기 좋음
+    en: Portable for purse or travel
+  bottle_design.positive.magnetic_cap:
+    ko: 자석 뚜껑이 좋음
+    en: Magnetic cap
+  bottle_design.positive.sprayer_good:
+    ko: 분사가 잘 됨
+    en: Sprays well
+  bottle_design.positive.build_quality:
+    ko: 병 만듦새가 좋음
+    en: Well-made bottle
+  scent.negative.dislike_general:
+    ko: 향이 싫음(이유 없음)
+    en: Dislikes the scent (no specifics)
+  scent.negative.differs_from_original:
+    ko: 원래 알던 향과 다름
+    en: Smells different from the original
+  scent.negative.missing_described_notes:
+    ko: 설명한 노트가 안 남
+    en: Advertised notes missing
+  scent.negative.old_lady_mature:
+    ko: 나이 든 사람 향
+    en: Old-lady or mature scent
+  scent.negative.alcohol_smell:
+    ko: 알코올 냄새
+    en: Smells of alcohol
+  scent.negative.disliked_note_profile:
+    ko: 특정 노트나 성격이 싫음
+    en: Dislikes a specific note or character
+  scent.negative.unpleasant_likeness:
+    ko: 불쾌한 물건 냄새
+    en: Smells like an unpleasant non-perfume thing
+  scent.negative.cheap_artificial:
+    ko: 싸구려, 인공적인 냄새
+    en: Cheap or artificial smell
+  scent.positive.smells_good_general:
+    ko: 향이 좋음(이유 없음)
+    en: Smells good (no specifics)
+  scent.positive.appealing_character:
+    ko: 노트나 분위기가 좋음
+    en: Likes the notes or character
+  scent.positive.compliments:
+    ko: 남에게 칭찬받음
+    en: Gets compliments

@@ -1,0 +1,8 @@
+audit:
+  stage: guide
+  run: perfume-db-2026-10-07
+  overall_status: PASS
+  summary: 새 181행은 옛 줄에서 Aptar 문장(ind_15)만 뺐고, 이 문장이 빠져도 남은 문장의 뜻은 그대로다. 남은 숫자 1개(43개), 사양 미확인 주장, 연구 인용 6개(tst_03, tst_30~34)는 16_guide_metrics.json, 23_specs_verified.json, 15_research.yaml의 확인된 주장과 모두 맞는다.
+  checked: 9
+  findings: []
+  next_action: PROCEED

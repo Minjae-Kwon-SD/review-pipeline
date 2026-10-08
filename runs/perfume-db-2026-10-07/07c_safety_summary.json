@@ -1,0 +1,35 @@
+{
+  "negative_symptom": 18,
+  "negative_no_symptom": 0,
+  "positive_symptom": 0,
+  "positive_no_symptom": 4,
+  "other_sentiment": 0,
+  "by_symptom": [
+    {
+      "name": "두통",
+      "reviews": 8,
+      "weighted_pct": 0.2
+    },
+    {
+      "name": "메스꺼움",
+      "reviews": 5,
+      "weighted_pct": 0.1
+    },
+    {
+      "name": "호흡",
+      "reviews": 2,
+      "weighted_pct": 0.1
+    },
+    {
+      "name": "어지럼",
+      "reviews": 1,
+      "weighted_pct": 0.0
+    },
+    {
+      "name": "알레르기 언급",
+      "reviews": 2,
+      "weighted_pct": 0.1
+    }
+  ],
+  "negative_text": "안전 부정 리뷰 18개: 두통 8개(가중 0.2%), 메스꺼움 5개(가중 0.1%), 호흡 2개(가중 0.1%), 어지럼 1개(가중 0.0%), 알레르기 언급 2개(가중 0.1%)"
+}

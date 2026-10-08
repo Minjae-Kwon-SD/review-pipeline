@@ -1,0 +1,474 @@
+{
+  "made_at": "2026-10-08T19:53:26+09:00",
+  "run": "perfume-db-2026-10-07",
+  "facts": {
+    "gold.reviews": {
+      "text": "30개",
+      "source": "05_metrics.json accuracy.gold_reviews"
+    },
+    "gold.f1": {
+      "text": "0.96",
+      "source": "05_metrics.json accuracy.sonnet.topic_f1_text"
+    },
+    "gold.sent": {
+      "text": "93.0%",
+      "source": "05_metrics.json accuracy.sonnet.sentiment_text"
+    },
+    "gold.top_sent": {
+      "text": "90.1%",
+      "source": "05_metrics.json accuracy.top.sentiment_text"
+    },
+    "data.asins": {
+      "text": "6개",
+      "source": "01_asins.csv status=selected"
+    },
+    "data.tags": {
+      "text": "3,497개",
+      "source": "04_tags.jsonl 줄 수"
+    },
+    "data.reviews": {
+      "text": "1,212개",
+      "source": "02_reviews.csv 행 수"
+    },
+    "data.dropped": {
+      "text": "2개",
+      "source": "02_collect_log.json dropped_count"
+    },
+    "data.topics": {
+      "text": "12개",
+      "source": "03_schema_approved.yaml topics"
+    },
+    "data.labels": {
+      "text": "71개",
+      "source": "07a_issues_approved.yaml 라벨 수(other 빼고)"
+    },
+    "gold.tags": {
+      "text": "106개",
+      "source": "gold/gold_tags.jsonl 줄 수(내용은 읽지 않고 줄만 셈)"
+    },
+    "audit.tags": {
+      "text": "147개 중 FAIL 2개(1.4%)",
+      "source": "04_tag_audit_summary.json"
+    },
+    "audit.tags_cons": {
+      "text": "8.3%",
+      "source": "04_tag_audit_summary.json conservative_rate(FAIL + UNVERIFIED + missed)"
+    },
+    "audit.tags_parts": {
+      "text": "UNVERIFIED 1개, 빠진 태그 10개, 뺀 정답 세트 태그 3개",
+      "source": "04_tag_audit_summary.json"
+    },
+    "audit.labels": {
+      "text": "150개 중 FAIL 1개(0.7%)",
+      "source": "07b_issue_audit_summary.json"
+    },
+    "audit.details": {
+      "text": "150개 중 FAIL 4개(2.7%)",
+      "source": "14b_detail_audit_summary.json"
+    },
+    "audit.translation": {
+      "text": "91쌍 중 FAIL 2개(2.2%)",
+      "source": "06_report_en_audit.yaml"
+    },
+    "html.report_numbers": {
+      "text": "1053개",
+      "source": "06_report_html_check.json numbers_checked"
+    },
+    "html.report_drill": {
+      "text": "371개",
+      "source": "06_report_html_check.json drilldowns_checked"
+    },
+    "html.report_kb": {
+      "text": "756KB",
+      "source": "06_report_html_check.json size_kb"
+    },
+    "html.en_numbers": {
+      "text": "957개",
+      "source": "06_report_en_html_check.json"
+    },
+    "html.en_drill": {
+      "text": "371개",
+      "source": "06_report_en_html_check.json"
+    },
+    "html.en_kb": {
+      "text": "749KB",
+      "source": "06_report_en_html_check.json size_kb"
+    },
+    "html.guide_numbers": {
+      "text": "312개",
+      "source": "07_guide_html_check.json numbers_checked"
+    },
+    "html.guide_bundles": {
+      "text": "155개",
+      "source": "07_guide_html_check.json evidence_bundles"
+    },
+    "html.guide_links": {
+      "text": "271개",
+      "source": "07_guide_html_check.json source_links"
+    },
+    "html.guide_kb": {
+      "text": "785KB",
+      "source": "07_guide_html_check.json size_kb"
+    },
+    "detail.values": {
+      "text": "1,629개",
+      "source": "14_detail_check.json values"
+    },
+    "detail.items": {
+      "text": "14개",
+      "source": "13_detail_schema_approved.yaml items"
+    },
+    "research": {
+      "text": "104개 중 80개",
+      "source": "15_research_check.json claims, verified"
+    },
+    "market.calls": {
+      "text": "64번",
+      "source": "market/calls.jsonl 줄 수"
+    },
+    "specs.verified": {
+      "text": "52개",
+      "source": "23_specs_check.json verified"
+    },
+    "specs.products": {
+      "text": "6개",
+      "source": "23_specs_check.json by_asin"
+    },
+    "robust.n": {
+      "text": "2,000번",
+      "source": "05_robustness.json bootstrap.n"
+    },
+    "robust.head_first": {
+      "text": "100.0%",
+      "source": "05_robustness.json texts.head_first"
+    },
+    "robust.head_neg_ci": {
+      "text": "8.2%~11.9%",
+      "source": "05_robustness.json texts.head_neg_ci"
+    },
+    "robust.loo_flips": {
+      "text": "6번 중 0번",
+      "source": "05_robustness.json texts.loo_flips"
+    },
+    "robust.weakest": {
+      "text": "6개 중 5개(리뷰를 다시 뽑아 보면 3~5개)",
+      "source": "05_robustness.json texts.weakest"
+    },
+    "guide.growth": {
+      "text": "\"hair perfume spray\" 최근 4주 530,006, 1년 전 같은 4주 11,322, 46.81배",
+      "source": "16_guide_metrics.json values.head.fastest_term"
+    },
+    "time.review.first": {
+      "text": "113.9분",
+      "source": "timing.jsonl 리뷰 리포트 단계 모든 시도 합(사람 대기 빼고)"
+    },
+    "time.review.rerun": {
+      "text": "63.7분",
+      "source": "timing.jsonl 리뷰 리포트 단계 마지막 시도 합(고치기 단계 11_report_polish, 11b_polish_audit, 18b_guide_fix, 20_head_growth, 20b_head_text, 23c_specs_cleanup, 24_report_fix, 24b_report_en_fix, 25_guide_g5, 25b_guide_consistency, 26_claim_strength, 26b_source_drop, 27_rejudge, 27b_rejudge_audit, 27c_rejudge_guide 빼고)"
+    },
+    "time.review.human": {
+      "text": "206.7분",
+      "source": "timing.jsonl 리뷰 리포트 사람 대기(⏸) 단계"
+    },
+    "time.guide.first": {
+      "text": "81.3분",
+      "source": "timing.jsonl 개발 가이드 단계 모든 시도 합(사람 대기 빼고)"
+    },
+    "time.guide.rerun": {
+      "text": "74.9분",
+      "source": "timing.jsonl 개발 가이드 단계 마지막 시도 합(고치기 단계 11_report_polish, 11b_polish_audit, 18b_guide_fix, 20_head_growth, 20b_head_text, 23c_specs_cleanup, 24_report_fix, 24b_report_en_fix, 25_guide_g5, 25b_guide_consistency, 26_claim_strength, 26b_source_drop, 27_rejudge, 27b_rejudge_audit, 27c_rejudge_guide 빼고)"
+    },
+    "time.guide.human": {
+      "text": "21.4분",
+      "source": "timing.jsonl 개발 가이드 사람 대기(⏸) 단계"
+    },
+    "time.en.first": {
+      "text": "173.5분",
+      "source": "timing.jsonl 영어판과 보강(G3 이후) 단계 모든 시도 합(사람 대기 빼고)"
+    },
+    "time.en.rerun": {
+      "text": "63.6분",
+      "source": "timing.jsonl 영어판과 보강(G3 이후) 단계 마지막 시도 합(고치기 단계 11_report_polish, 11b_polish_audit, 18b_guide_fix, 20_head_growth, 20b_head_text, 23c_specs_cleanup, 24_report_fix, 24b_report_en_fix, 25_guide_g5, 25b_guide_consistency, 26_claim_strength, 26b_source_drop, 27_rejudge, 27b_rejudge_audit, 27c_rejudge_guide 빼고)"
+    },
+    "time.en.human": {
+      "text": "0.0분",
+      "source": "timing.jsonl 영어판과 보강(G3 이후) 사람 대기(⏸) 단계"
+    },
+    "time.total.first": {
+      "text": "368.7분",
+      "source": "time.<영역>.first 세 영역 합"
+    },
+    "time.total.rerun": {
+      "text": "202.2분",
+      "source": "time.<영역>.rerun 세 영역 합"
+    },
+    "time.total.human": {
+      "text": "228.1분",
+      "source": "time.<영역>.human 세 영역 합"
+    },
+    "html.report_chapters": {
+      "text": "13개 장",
+      "source": "scripts/render_html.py CHAPTERS"
+    },
+    "topics.common": {
+      "text": "11개",
+      "source": "config/topics_common.yaml topics"
+    },
+    "step.01_inputs": {
+      "text": "0.1분",
+      "source": "timing.jsonl 01_inputs 마지막 시도"
+    },
+    "step.02_schema_draft": {
+      "text": "7.0분",
+      "source": "timing.jsonl 02_schema_draft 마지막 시도"
+    },
+    "step.03_schema_approval": {
+      "text": "5.5분",
+      "source": "timing.jsonl 03_schema_approval 마지막 시도"
+    },
+    "step.04_gold_tagging": {
+      "text": "178.5분",
+      "source": "timing.jsonl 04_gold_tagging 마지막 시도"
+    },
+    "step.05a_pilot": {
+      "text": "9.5분",
+      "source": "timing.jsonl 05a_pilot 마지막 시도"
+    },
+    "step.05_tagging": {
+      "text": "22.0분",
+      "source": "timing.jsonl 05_tagging 마지막 시도"
+    },
+    "step.06_tag_check": {
+      "text": "3.2분",
+      "source": "timing.jsonl 06_tag_check 마지막 시도"
+    },
+    "step.07_weight": {
+      "text": "0.0분",
+      "source": "timing.jsonl 07_weight 마지막 시도"
+    },
+    "step.08_report": {
+      "text": "8.8분",
+      "source": "timing.jsonl 08_report 마지막 시도"
+    },
+    "step.09_report_check": {
+      "text": "11.9분",
+      "source": "timing.jsonl 09_report_check 마지막 시도"
+    },
+    "step.10_timing": {
+      "text": "0.0분",
+      "source": "timing.jsonl 10_timing 마지막 시도"
+    },
+    "step.07a_issue_draft": {
+      "text": "2.9분",
+      "source": "timing.jsonl 07a_issue_draft 마지막 시도"
+    },
+    "step.07a_issue_approval": {
+      "text": "13.3분",
+      "source": "timing.jsonl 07a_issue_approval 마지막 시도"
+    },
+    "step.07b_issue_labeling": {
+      "text": "2.4분",
+      "source": "timing.jsonl 07b_issue_labeling 마지막 시도"
+    },
+    "step.07c_issue_check": {
+      "text": "2.4분",
+      "source": "timing.jsonl 07c_issue_check 마지막 시도"
+    },
+    "step.11_report_polish": {
+      "text": "7.5분",
+      "source": "timing.jsonl 11_report_polish 마지막 시도"
+    },
+    "step.11b_polish_audit": {
+      "text": "2.6분",
+      "source": "timing.jsonl 11b_polish_audit 마지막 시도"
+    },
+    "step.11_html": {
+      "text": "3.0분",
+      "source": "timing.jsonl 11_html 마지막 시도"
+    },
+    "step.12_market": {
+      "text": "13.1분",
+      "source": "timing.jsonl 12_market 마지막 시도"
+    },
+    "step.13_detail_schema_draft": {
+      "text": "13.8분",
+      "source": "timing.jsonl 13_detail_schema_draft 마지막 시도"
+    },
+    "step.13a_detail_schema_approval": {
+      "text": "21.4분",
+      "source": "timing.jsonl 13a_detail_schema_approval 마지막 시도"
+    },
+    "step.14_detail_extract": {
+      "text": "5.2분",
+      "source": "timing.jsonl 14_detail_extract 마지막 시도"
+    },
+    "step.14b_detail_check": {
+      "text": "4.5분",
+      "source": "timing.jsonl 14b_detail_check 마지막 시도"
+    },
+    "step.16_guide_metrics": {
+      "text": "0.3분",
+      "source": "timing.jsonl 16_guide_metrics 마지막 시도"
+    },
+    "step.15_research": {
+      "text": "16.8분",
+      "source": "timing.jsonl 15_research 마지막 시도"
+    },
+    "step.17_guide_write": {
+      "text": "13.4분",
+      "source": "timing.jsonl 17_guide_write 마지막 시도"
+    },
+    "step.18_guide_check": {
+      "text": "6.6분",
+      "source": "timing.jsonl 18_guide_check 마지막 시도"
+    },
+    "step.18b_guide_fix": {
+      "text": "6.4분",
+      "source": "timing.jsonl 18b_guide_fix 마지막 시도"
+    },
+    "step.19_guide_html": {
+      "text": "1.1분",
+      "source": "timing.jsonl 19_guide_html 마지막 시도"
+    },
+    "step.20_head_growth": {
+      "text": "8.2분",
+      "source": "timing.jsonl 20_head_growth 마지막 시도"
+    },
+    "step.20b_head_text": {
+      "text": "10.7분",
+      "source": "timing.jsonl 20b_head_text 마지막 시도"
+    },
+    "step.21_report_en_translate": {
+      "text": "16.8분",
+      "source": "timing.jsonl 21_report_en_translate 마지막 시도"
+    },
+    "step.21b_report_en_audit": {
+      "text": "0.0분",
+      "source": "timing.jsonl 21b_report_en_audit 마지막 시도"
+    },
+    "step.22_robustness": {
+      "text": "2.5분",
+      "source": "timing.jsonl 22_robustness 마지막 시도"
+    },
+    "step.24_report_fix": {
+      "text": "15.4분",
+      "source": "timing.jsonl 24_report_fix 마지막 시도"
+    },
+    "step.23_specs": {
+      "text": "19.3분",
+      "source": "timing.jsonl 23_specs 마지막 시도"
+    },
+    "step.23c_specs_cleanup": {
+      "text": "1.9분",
+      "source": "timing.jsonl 23c_specs_cleanup 마지막 시도"
+    },
+    "step.24b_report_en_fix": {
+      "text": "2.7분",
+      "source": "timing.jsonl 24b_report_en_fix 마지막 시도"
+    },
+    "step.23b_research_add": {
+      "text": "12.8분",
+      "source": "timing.jsonl 23b_research_add 마지막 시도"
+    },
+    "step.25_guide_g5": {
+      "text": "15.4분",
+      "source": "timing.jsonl 25_guide_g5 마지막 시도"
+    },
+    "step.25b_guide_consistency": {
+      "text": "7.0분",
+      "source": "timing.jsonl 25b_guide_consistency 마지막 시도"
+    },
+    "step.26_claim_strength": {
+      "text": "25.1분",
+      "source": "timing.jsonl 26_claim_strength 마지막 시도"
+    },
+    "step.26b_source_drop": {
+      "text": "4.9분",
+      "source": "timing.jsonl 26b_source_drop 마지막 시도"
+    },
+    "step.27_rejudge": {
+      "text": "6.9분",
+      "source": "timing.jsonl 27_rejudge 마지막 시도"
+    },
+    "step.27b_rejudge_audit": {
+      "text": "7.1분",
+      "source": "timing.jsonl 27b_rejudge_audit 마지막 시도"
+    },
+    "step.27c_rejudge_guide": {
+      "text": "4.5분",
+      "source": "timing.jsonl 27c_rejudge_guide 마지막 시도"
+    },
+    "step.28_note_fix": {
+      "text": "8.2분",
+      "source": "timing.jsonl 28_note_fix 마지막 시도"
+    },
+    "step.29_concl_write": {
+      "text": "0.8분",
+      "source": "timing.jsonl 29_concl_write 마지막 시도"
+    },
+    "step.29b_concl_audit": {
+      "text": "1.5분",
+      "source": "timing.jsonl 29b_concl_audit 마지막 시도"
+    },
+    "step.29c_concl_fix": {
+      "text": "1.6분",
+      "source": "timing.jsonl 29c_concl_fix 마지막 시도"
+    },
+    "cost.review": {
+      "text": "$70.42",
+      "source": "costs.jsonl 리뷰 리포트 실행 14번 합"
+    },
+    "cost.review.runs": {
+      "text": "14번",
+      "source": "costs.jsonl"
+    },
+    "cost.guide": {
+      "text": "$28.31",
+      "source": "costs.jsonl 개발 가이드 실행 5번 합"
+    },
+    "cost.guide.runs": {
+      "text": "5번",
+      "source": "costs.jsonl"
+    },
+    "cost.en": {
+      "text": "$46.90",
+      "source": "costs.jsonl 영어판과 보강(G3 이후) 실행 14번 합"
+    },
+    "cost.en.runs": {
+      "text": "14번",
+      "source": "costs.jsonl"
+    },
+    "cost.total": {
+      "text": "$145.63",
+      "source": "costs.jsonl 전체 합"
+    },
+    "cost.runs": {
+      "text": "33번",
+      "source": "costs.jsonl 줄 수"
+    },
+    "tests": {
+      "text": "335개",
+      "source": "tests/test_scripts.py 실행 결과의 확인 개수"
+    },
+    "ref.report.reviews": {
+      "text": "3,488개, ASIN 10개",
+      "source": "정답지 review_analysis_report_en.html 머리 문장"
+    },
+    "ref.report.tags": {
+      "text": "10,066개",
+      "source": "정답지 review_analysis_report_en.html 머리 문장"
+    },
+    "ref.guide.reviews": {
+      "text": "12,380개, 리스팅 37개, 카테고리 9개",
+      "source": "정답지 Coolmate_Scrubs_Product_Dev_Guide_v1.html 머리 문장"
+    },
+    "ref.guide.specs": {
+      "text": "리스팅 사양 37개, 사이즈표 31개",
+      "source": "정답지 Coolmate_Scrubs_Product_Dev_Guide_v1.html 머리 문장"
+    },
+    "ref.guide.terms": {
+      "text": "7,346개",
+      "source": "정답지 Coolmate_Scrubs_Product_Dev_Guide_v1.html 머리 문장"
+    }
+  }
+}

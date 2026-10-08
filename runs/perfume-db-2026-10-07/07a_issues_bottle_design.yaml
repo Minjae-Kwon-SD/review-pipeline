@@ -1,0 +1,91 @@
+topic: bottle_design
+directions:
+  negative:
+    labels:
+      - id: bottle_too_small
+        name_ko: 병이 작음
+        name_en: Bottle too small
+        include: 병이나 용량이 작다, 생각보다(사진보다, 다른 것보다) 작다, 미니 크기라는 말(es "pequeño", "tamaño mini" 포함)
+        exclude: 분사 불만은 sprayer_problem, 새는 병은 bottle_leaks. 값 대비 양이 적다는 말은 price_value 주제
+        examples:
+          - {review_id: R2M38B7M76GHVM, quote: "It was a tiny little bottle of perfume."}
+          - {review_id: RZIM7LW20AGAT, quote: "MUCH, MUCH smaller than depicted."}
+        approx_count: 27
+      - id: sprayer_problem
+        name_ko: 분사기 불만
+        name_en: Poor sprayer
+        include: 분사 방식이나 분사구 설계가 나쁘다(물줄기처럼 나간다, 누를 때 머리가 돈다, 노즐이 형편없다)
+        exclude: 쓰다가 고장 난 분사기나 받았을 때 작동하지 않는 분사기는 quality 주제. 병이 새는 것은 bottle_leaks
+        examples:
+          - {review_id: R2C8OYSB7YQ5WR, quote: "The spray nozzle absolutely SUCKS."}
+          - {review_id: R20IVONJMW9MXU, quote: "The sprayer on the bottle (at least on mine) is a straight stream line which I stronger dislike"}
+        approx_count: 3
+      - id: bottle_leaks
+        name_ko: 병이 샘
+        name_en: Bottle leaks
+        include: 쓰거나 들고 다닐 때 뚜껑 주변이나 병에서 향수가 샌다는 말
+        exclude: 받았을 때 이미 새서 온 것은 shipping 주제. 분사 방식 불만은 sprayer_problem
+        examples:
+          - {review_id: RJX4Z0KAFKUZW, quote: "High leakage around cap on some bottles near diamond accents."}
+          - {review_id: RSKN6VFI7IWZF, quote: "Bottle leaks all over"}
+        approx_count: 2
+    other_approx_count: 3
+    notes: 부정 표본의 대부분(약 27/35)이 '작다'라서 '생각보다 작음'(기대 불일치, 약 5개)과 '그냥 작음'을 나누지 않고 하나로 합쳤음. 기타는 디자인 총평(Terrible bottle design), 얇은 유리, 리필 불가 각 1개. R8Z2XMV0DR9CI("Way too small for $80")는 값 이야기가 섞여 price_value에 더 가까움.
+  positive:
+    labels:
+      - id: pretty_bottle
+        name_ko: 병이 예쁨
+        name_en: Attractive bottle
+        include: 병 모양, 외관, 디자인이 예쁘다, 귀엽다, 멋지다, 미니멀하다, 겉모양 인상이 좋다(presentación, presencia 포함). 평가 대상이 병인 "Nice bottle"도 여기
+        exclude: 재질, 만듦새, 견고함을 칭찬하면 build_quality. 자석 뚜껑 칭찬이 중심이면 magnetic_cap
+        examples:
+          - {review_id: R2F8LJRFIL2S2K, quote: "the bottle is gorgeous"}
+          - {review_id: R2T839DONCWG3M, quote: "Pretty bottle"}
+        approx_count: 27
+      - id: good_size
+        name_ko: 용량이 알맞거나 넉넉함
+        name_en: Good size
+        include: 크기가 딱 좋다, 생각보다 크다, 넉넉한 크기다, 작은 크기라 향을 바꿔 쓰기 좋다
+        exclude: 핸드백이나 여행에 들고 다니기 좋다는 말은 purse_portable. 양이 오래 간다(몇 년 쓴다)는 말은 기타
+        examples:
+          - {review_id: R22KP4UHOX1JCN, quote: "the size is larger than expected"}
+          - {review_id: R297F9WD8P3TY9, quote: "It's the perfect size"}
+        approx_count: 14
+      - id: purse_portable
+        name_ko: 휴대하기 좋음
+        name_en: Portable for purse or travel
+        include: 핸드백, 가방, 책상, 여행에 넣어 다니기 좋다, 작고 가볍다, 들고 다녀도 새지 않는다
+        exclude: 휴대 언급 없이 크기만 좋다면 good_size
+        examples:
+          - {review_id: R1BDJCZSNXV4KX, quote: "Perfect to carry in your purse!"}
+          - {review_id: R2P1Y45BWYDE9B, quote: "I like having the smaller 0.34-ounce atomizer for travel"}
+        approx_count: 11
+      - id: magnetic_cap
+        name_ko: 자석 뚜껑이 좋음
+        name_en: Magnetic cap
+        include: 자석 뚜껑(magnetic cap, top, lid)이 좋다, 편하다, 닫는 느낌이 좋다
+        exclude: 분사 칭찬은 sprayer_good. 뚜껑 언급 없이 병 외관만 칭찬하면 pretty_bottle
+        examples:
+          - {review_id: R27ZKX1A9GF3UM, quote: "I do like the magnetic top"}
+          - {review_id: R21IFXQ51DU8CY, quote: "The lid is magnetic, which is oddly satisfying to close."}
+        approx_count: 10
+      - id: sprayer_good
+        name_ko: 분사가 잘 됨
+        name_en: Sprays well
+        include: 분사기, 아토마이저가 좋다, 잘 뿌려진다, 쓰기 쉽다, 분사에 문제없다
+        exclude: 뚜껑 칭찬은 magnetic_cap
+        examples:
+          - {review_id: R1A6XJF2CHWETX, quote: "Sprays well."}
+          - {review_id: R2BG8L01VQAU1S, quote: "I also really like the way it sprays."}
+        approx_count: 8
+      - id: build_quality
+        name_ko: 병 만듦새가 좋음
+        name_en: Well-made bottle
+        include: 병의 품질, 구조, 무게감, 견고함을 칭찬(quality of the bottle, well constructed, construction)
+        exclude: 모양이나 외관만 칭찬하면 pretty_bottle. 크기 칭찬은 good_size
+        examples:
+          - {review_id: RR8UK6F5H31KU, quote: "the quality of the bottle is great"}
+          - {review_id: R3LV4MM4947LDI, quote: "Bottle construction is nice though"}
+        approx_count: 6
+    other_approx_count: 3
+    notes: 병 외관, 자석 뚜껑, 분사를 한 문장에 함께 칭찬한 인용이 많아(예 "nice sprayer and magnetic top") 라벨이 여러 개 걸칠 수 있음. '작은 병을 오래 쓴다'(2개)는 5% 미만이라 기타. RCVEIIQRM7XWQ(mixed, "the bottle size is a little small")는 칭찬 부분이 인용에 없어 기타.

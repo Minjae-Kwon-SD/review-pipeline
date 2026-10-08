@@ -1,0 +1,10 @@
+{
+  "checked_at": "2026-10-08T11:43:07+09:00",
+  "status": "PASS",
+  "sample": 11,
+  "fail": 0,
+  "fail_rate": 0.0,
+  "max_fail_rate": 0.05,
+  "by_item": {},
+  "warnings": []
+}

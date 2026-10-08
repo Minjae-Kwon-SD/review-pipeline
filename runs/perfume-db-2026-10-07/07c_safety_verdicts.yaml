@@ -1,0 +1,27 @@
+# symptom_type은 2026-10-07 브리프(민재님 카드 "다듬고 HTML 설계", 09:59 UTC)의 증상 분류를 메인 세션이 옮겨 적은 것. 판정(verdict)과 이유는 evidence-auditor 그대로.
+audit:
+  stage: safety
+  run: perfume-db-2026-10-07
+  verdicts:
+    - {review_id: R29AJ7AM4NWRLK, verdict: symptom, symptom_type: 알레르기 언급, reason: "향수에 심한 알레르기가 있다고 하고, 바뀐 제형은 못 쓴다고 함. 이 제품에서 나온 반응을 직접 묘사하지는 않고 함의만 있음"}
+    - {review_id: R2EZN6I42B0NZ7, verdict: symptom, symptom_type: 메스꺼움, reason: "몇 분 뿌린 뒤 메스꺼워졌고, 샤워하고 나서야 나아졌다고 함"}
+    - {review_id: RITE6TUC3TTUA, verdict: symptom, symptom_type: 두통, reason: "뿌리고 얼마 뒤 두통이 시작됐다고 함"}
+    - {review_id: R1HAE7MDOFXXVC, verdict: symptom, symptom_type: 어지럼, reason: "'Me marea'(어지럽다)라고 함. 향이 세다는 말과 함께 어지럼을 말함"}
+    - {review_id: R22JII6PVDJEEJ, verdict: symptom, symptom_type: 메스꺼움, reason: "향이 강해 심하게 메스꺼웠고 바로 사용을 멈췄다고 함"}
+    - {review_id: R38DSJZ6K6T6K8, verdict: symptom, symptom_type: 두통, reason: "손목에 한 번 뿌리자 바로 두통이 났다고 함"}
+    - {review_id: R3ALH7349JTWM8, verdict: symptom, symptom_type: 두통, reason: "두통이 나서 뿌리고 2분 만에 씻었다고 함"}
+    - {review_id: R3HTG089Q8UVI8, verdict: symptom, symptom_type: 호흡, reason: "천식이 도졌다고 함(호흡기 반응)"}
+    - {review_id: R1TMGMYR2XPEY9, verdict: symptom, symptom_type: 두통, reason: "두통이 난다고 함"}
+    - {review_id: R2MJO4BBCWGL72, verdict: symptom, symptom_type: 두통, reason: "1분 안에 두통이 생긴다고 함"}
+    - {review_id: R1C30YF7Q89DX3, verdict: symptom, symptom_type: 메스꺼움, reason: "무언가 때문에 몸이 안 좋아졌다(feel sick)고 하고, 씻어 내야 했다고 함"}
+    - {review_id: R31PCZVW0SWTU, verdict: symptom, symptom_type: 호흡, reason: "뿌리면 기침이 나고 숨을 쉬려면 방을 나가야 한다고 함(호흡 반응). 별점은 5점이지만 증상은 분명함"}
+    - {review_id: R3NA18D20L8NY1, verdict: symptom, symptom_type: 두통, reason: "편두통이 났다고 함"}
+    - {review_id: RS6YN8769GZE5, verdict: symptom, symptom_type: 알레르기 언급, reason: "심한 알레르기 반응을 일으킬 수 있다고 경고하고 제목도 '향수 알레르기'. 본인이 겪은 반응을 1인칭으로 묘사하지는 않음"}
+    - {review_id: R1OUIOCM3K04RQ, verdict: symptom, symptom_type: 두통, reason: "바로 두통이 났다고 함(제목과 본문 모두)"}
+    - {review_id: R2EUPWDAZT3HXS, verdict: symptom, symptom_type: 두통, reason: "두통을 일으킨다(headache inducing)고 함"}
+    - {review_id: R3MC6PXIFNVNU, verdict: symptom, symptom_type: 메스꺼움, reason: "몸이 안 좋아져서(made me sick) 두 번 쓰고 못 썼다고 함"}
+    - {review_id: R3S6WAVPRQ97PP, verdict: symptom, symptom_type: 메스꺼움, reason: "향이 너무 강해 가족 모두 메스꺼웠다고 함"}
+    - {review_id: R17ESPEMEUHTVP, verdict: none, reason: "가려움과 발진이 없었다는 말이라 몸 반응이 생기지 않음"}
+    - {review_id: R2987HKSLHIOML, verdict: none, reason: "알레르기가 생기지 않았다고 함. 재채기와 두통은 다른 향수 이야기"}
+    - {review_id: R3SY7CRYQGRIJR, verdict: none, reason: "부작용이 없었다고 함"}
+    - {review_id: R1ZD5J2BF3RTMC, verdict: none, reason: "피부에 반응이나 문제가 없었다고 함"}

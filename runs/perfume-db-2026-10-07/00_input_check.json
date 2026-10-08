@@ -1,0 +1,225 @@
+{
+  "checked_at": "2026-10-07T12:50:14+09:00",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [
+    "B08FBQWRYC: neutral 묶음(3★)에 표본이 없습니다(실제 비율 3.0%). 이 비율은 가중 결과에서 빠집니다.",
+    "B09X5BQ969: neutral 묶음(3★)에 표본이 없습니다(실제 비율 8.0%). 이 비율은 가중 결과에서 빠집니다.",
+    "B0GFGL26JD: neutral 묶음(3★)에 표본이 없습니다(실제 비율 5.0%). 이 비율은 가중 결과에서 빠집니다."
+  ],
+  "asins": 6,
+  "reviews": 1212,
+  "sample_counts": {
+    "B00021AJ5I": {
+      "1": 80,
+      "2": 80,
+      "3": 80,
+      "4": 79,
+      "5": 80
+    },
+    "B0009OAI8Q": {
+      "1": 40,
+      "2": 0,
+      "3": 89,
+      "4": 30,
+      "5": 0
+    },
+    "B08FBQWRYC": {
+      "1": 60,
+      "2": 0,
+      "3": 0,
+      "4": 70,
+      "5": 0
+    },
+    "B09X5BQ969": {
+      "1": 0,
+      "2": 60,
+      "3": 0,
+      "4": 0,
+      "5": 80
+    },
+    "B0BZDZJDTG": {
+      "1": 60,
+      "2": 70,
+      "3": 70,
+      "4": 0,
+      "5": 70
+    },
+    "B0GFGL26JD": {
+      "1": 27,
+      "2": 6,
+      "3": 0,
+      "4": 11,
+      "5": 70
+    }
+  },
+  "groups": {
+    "negative": [
+      1,
+      2
+    ],
+    "neutral": [
+      3
+    ],
+    "positive": [
+      4,
+      5
+    ]
+  },
+  "group_coverage": {
+    "B00021AJ5I": {
+      "negative": {
+        "sample": 160,
+        "real_pct": 9.0,
+        "mode": "per_star"
+      },
+      "neutral": {
+        "sample": 80,
+        "real_pct": 4.0,
+        "mode": "per_star"
+      },
+      "positive": {
+        "sample": 159,
+        "real_pct": 87.0,
+        "mode": "per_star"
+      }
+    },
+    "B0009OAI8Q": {
+      "negative": {
+        "sample": 40,
+        "real_pct": 5.0,
+        "mode": "group"
+      },
+      "neutral": {
+        "sample": 89,
+        "real_pct": 4.0,
+        "mode": "per_star"
+      },
+      "positive": {
+        "sample": 30,
+        "real_pct": 91.0,
+        "mode": "group"
+      }
+    },
+    "B08FBQWRYC": {
+      "negative": {
+        "sample": 60,
+        "real_pct": 4.0,
+        "mode": "group"
+      },
+      "neutral": {
+        "sample": 0,
+        "real_pct": 3.0,
+        "mode": "empty"
+      },
+      "positive": {
+        "sample": 70,
+        "real_pct": 93.0,
+        "mode": "group"
+      }
+    },
+    "B09X5BQ969": {
+      "negative": {
+        "sample": 60,
+        "real_pct": 23.0,
+        "mode": "group"
+      },
+      "neutral": {
+        "sample": 0,
+        "real_pct": 8.0,
+        "mode": "empty"
+      },
+      "positive": {
+        "sample": 80,
+        "real_pct": 69.0,
+        "mode": "group"
+      }
+    },
+    "B0BZDZJDTG": {
+      "negative": {
+        "sample": 130,
+        "real_pct": 9.0,
+        "mode": "per_star"
+      },
+      "neutral": {
+        "sample": 70,
+        "real_pct": 8.0,
+        "mode": "per_star"
+      },
+      "positive": {
+        "sample": 70,
+        "real_pct": 83.0,
+        "mode": "group"
+      }
+    },
+    "B0GFGL26JD": {
+      "negative": {
+        "sample": 33,
+        "real_pct": 8.0,
+        "mode": "per_star"
+      },
+      "neutral": {
+        "sample": 0,
+        "real_pct": 5.0,
+        "mode": "empty"
+      },
+      "positive": {
+        "sample": 81,
+        "real_pct": 87.0,
+        "mode": "per_star"
+      }
+    }
+  },
+  "missing_real_pct": {
+    "B00021AJ5I": 0,
+    "B0009OAI8Q": 0,
+    "B08FBQWRYC": 3.0,
+    "B09X5BQ969": 8.0,
+    "B0BZDZJDTG": 0,
+    "B0GFGL26JD": 5.0
+  },
+  "languages": {
+    "B00021AJ5I": {
+      "blank": 243,
+      "es": 74,
+      "pt": 41,
+      "ja": 15,
+      "de": 10,
+      "it": 8,
+      "ar": 4,
+      "fr": 4
+    },
+    "B0009OAI8Q": {
+      "blank": 142,
+      "es": 17
+    },
+    "B08FBQWRYC": {
+      "blank": 105,
+      "es": 22,
+      "pt": 2,
+      "de": 1
+    },
+    "B09X5BQ969": {
+      "blank": 136,
+      "es": 4
+    },
+    "B0BZDZJDTG": {
+      "blank": 263,
+      "es": 7
+    },
+    "B0GFGL26JD": {
+      "blank": 113,
+      "es": 1
+    }
+  },
+  "languages_total": {
+    "blank": 1002,
+    "es": 125,
+    "pt": 43,
+    "ja": 15,
+    "de": 11,
+    "it": 8,
+    "ar": 4,
+    "fr": 4
+  }
+}

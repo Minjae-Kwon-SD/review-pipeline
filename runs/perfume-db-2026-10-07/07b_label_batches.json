@@ -1,0 +1,184 @@
+{
+  "made_at": "2026-10-07T18:13:09+09:00",
+  "size": 180,
+  "units": 2333,
+  "auto_other": 52,
+  "batches": [
+    {
+      "batch_id": "bottle_design_negative_01",
+      "topic": "bottle_design",
+      "direction": "negative",
+      "items": 35,
+      "input": "07b_label_input/bottle_design_negative_01.jsonl",
+      "output": "07b_labels_bottle_design_negative_01.jsonl"
+    },
+    {
+      "batch_id": "bottle_design_positive_01",
+      "topic": "bottle_design",
+      "direction": "positive",
+      "items": 78,
+      "input": "07b_label_input/bottle_design_positive_01.jsonl",
+      "output": "07b_labels_bottle_design_positive_01.jsonl"
+    },
+    {
+      "batch_id": "brand_experience_negative_01",
+      "topic": "brand_experience",
+      "direction": "negative",
+      "items": 83,
+      "input": "07b_label_input/brand_experience_negative_01.jsonl",
+      "output": "07b_labels_brand_experience_negative_01.jsonl"
+    },
+    {
+      "batch_id": "brand_experience_positive_01",
+      "topic": "brand_experience",
+      "direction": "positive",
+      "items": 159,
+      "input": "07b_label_input/brand_experience_positive_01.jsonl",
+      "output": "07b_labels_brand_experience_positive_01.jsonl"
+    },
+    {
+      "batch_id": "customer_service_negative_01",
+      "topic": "customer_service",
+      "direction": "negative",
+      "items": 85,
+      "input": "07b_label_input/customer_service_negative_01.jsonl",
+      "output": "07b_labels_customer_service_negative_01.jsonl"
+    },
+    {
+      "batch_id": "longevity_projection_negative_01",
+      "topic": "longevity_projection",
+      "direction": "negative",
+      "items": 180,
+      "input": "07b_label_input/longevity_projection_negative_01.jsonl",
+      "output": "07b_labels_longevity_projection_negative_01.jsonl"
+    },
+    {
+      "batch_id": "longevity_projection_negative_02",
+      "topic": "longevity_projection",
+      "direction": "negative",
+      "items": 180,
+      "input": "07b_label_input/longevity_projection_negative_02.jsonl",
+      "output": "07b_labels_longevity_projection_negative_02.jsonl"
+    },
+    {
+      "batch_id": "longevity_projection_negative_03",
+      "topic": "longevity_projection",
+      "direction": "negative",
+      "items": 4,
+      "input": "07b_label_input/longevity_projection_negative_03.jsonl",
+      "output": "07b_labels_longevity_projection_negative_03.jsonl"
+    },
+    {
+      "batch_id": "longevity_projection_positive_01",
+      "topic": "longevity_projection",
+      "direction": "positive",
+      "items": 144,
+      "input": "07b_label_input/longevity_projection_positive_01.jsonl",
+      "output": "07b_labels_longevity_projection_positive_01.jsonl"
+    },
+    {
+      "batch_id": "packaging_positive_01",
+      "topic": "packaging",
+      "direction": "positive",
+      "items": 23,
+      "input": "07b_label_input/packaging_positive_01.jsonl",
+      "output": "07b_labels_packaging_positive_01.jsonl"
+    },
+    {
+      "batch_id": "price_value_negative_01",
+      "topic": "price_value",
+      "direction": "negative",
+      "items": 71,
+      "input": "07b_label_input/price_value_negative_01.jsonl",
+      "output": "07b_labels_price_value_negative_01.jsonl"
+    },
+    {
+      "batch_id": "price_value_positive_01",
+      "topic": "price_value",
+      "direction": "positive",
+      "items": 83,
+      "input": "07b_label_input/price_value_positive_01.jsonl",
+      "output": "07b_labels_price_value_positive_01.jsonl"
+    },
+    {
+      "batch_id": "quality_negative_01",
+      "topic": "quality",
+      "direction": "negative",
+      "items": 64,
+      "input": "07b_label_input/quality_negative_01.jsonl",
+      "output": "07b_labels_quality_negative_01.jsonl"
+    },
+    {
+      "batch_id": "scent_negative_01",
+      "topic": "scent",
+      "direction": "negative",
+      "items": 180,
+      "input": "07b_label_input/scent_negative_01.jsonl",
+      "output": "07b_labels_scent_negative_01.jsonl"
+    },
+    {
+      "batch_id": "scent_negative_02",
+      "topic": "scent",
+      "direction": "negative",
+      "items": 138,
+      "input": "07b_label_input/scent_negative_02.jsonl",
+      "output": "07b_labels_scent_negative_02.jsonl"
+    },
+    {
+      "batch_id": "scent_positive_01",
+      "topic": "scent",
+      "direction": "positive",
+      "items": 180,
+      "input": "07b_label_input/scent_positive_01.jsonl",
+      "output": "07b_labels_scent_positive_01.jsonl"
+    },
+    {
+      "batch_id": "scent_positive_02",
+      "topic": "scent",
+      "direction": "positive",
+      "items": 180,
+      "input": "07b_label_input/scent_positive_02.jsonl",
+      "output": "07b_labels_scent_positive_02.jsonl"
+    },
+    {
+      "batch_id": "scent_positive_03",
+      "topic": "scent",
+      "direction": "positive",
+      "items": 128,
+      "input": "07b_label_input/scent_positive_03.jsonl",
+      "output": "07b_labels_scent_positive_03.jsonl"
+    },
+    {
+      "batch_id": "shipping_negative_01",
+      "topic": "shipping",
+      "direction": "negative",
+      "items": 65,
+      "input": "07b_label_input/shipping_negative_01.jsonl",
+      "output": "07b_labels_shipping_negative_01.jsonl"
+    },
+    {
+      "batch_id": "shipping_positive_01",
+      "topic": "shipping",
+      "direction": "positive",
+      "items": 26,
+      "input": "07b_label_input/shipping_positive_01.jsonl",
+      "output": "07b_labels_shipping_positive_01.jsonl"
+    },
+    {
+      "batch_id": "trust_negative_01",
+      "topic": "trust",
+      "direction": "negative",
+      "items": 172,
+      "input": "07b_label_input/trust_negative_01.jsonl",
+      "output": "07b_labels_trust_negative_01.jsonl"
+    },
+    {
+      "batch_id": "trust_positive_01",
+      "topic": "trust",
+      "direction": "positive",
+      "items": 23,
+      "input": "07b_label_input/trust_positive_01.jsonl",
+      "output": "07b_labels_trust_positive_01.jsonl"
+    }
+  ]
+}

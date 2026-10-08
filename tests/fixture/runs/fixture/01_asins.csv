@@ -1,0 +1,4 @@
+asin,title,brand,price_usd,price_band,amazon_rating,status,reason
+B0TESTAAA1,Test Floral Eau de Parfum 50ml,BrandA,89.00,디자이너,4.3,selected,시험용 디자이너 제품
+B0TESTBBB2,Test Vanilla Eau de Toilette 100ml,BrandB,19.99,저가,3.5,selected,시험용 저가 제품
+B0TESTCCC3,Test Body Mist,BrandC,9.99,저가,4.0,excluded,바디 미스트라 제외

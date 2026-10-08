@@ -1,0 +1,305 @@
+specs:
+  run: perfume-db-2026-10-07
+  products:
+    - asin: B00021AJ5I
+      amazon_title: "Calvin Klein Eternity For Women Eau de Parfum 3.3 fl oz"
+      match: 일치 확인
+      match_reason: "Ulta 상품 페이지의 상품명 'Calvin Klein Eternity Eau de Parfum'이 브랜드, 향 이름, 농도(Eau de Parfum)가 같고, 용량 3.3 oz도 같음. 노트(freesia, muguet, white lily)가 여성용 Eternity의 것임"
+      values:
+        - item: concentration
+          value: "Eau de Parfum"
+          url: https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350
+          source_type: retailer
+          quote: "Calvin Klein Eternity Eau de Parfum was inspired by the ideal of lasting love and intimacy."
+        - item: notes_top
+          value: [freesia, mandarin, sage]
+          url: https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350
+          source_type: retailer
+          quote: "Top - freesia, mandarin, sage"
+        - item: notes_middle
+          value: [muguet, white lily, marigold, narcissus]
+          url: https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350
+          source_type: retailer
+          quote: "Middle - muguet, white lily, marigold, narcissus"
+        - item: notes_base
+          value: [sandalwood, patchouli, amber]
+          url: https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350
+          source_type: retailer
+          quote: "Base - sandalwood, patchouli, amber"
+        - item: size_price
+          value: ["3.3 oz"]
+          url: https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350
+          source_type: retailer
+          quote: "Size:3.3 oz"
+        - item: size_price
+          value: ["$123.00"]
+          url: https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350
+          source_type: retailer
+          quote: "$123.00"
+        - item: ingredients
+          value: "Alcohol Denat., Parfum/Fragrance, Aqua/Water/Eau, Benzyl Salicylate, Butylphenyl Methylpropional, Citronellol, Eugenol, Linalool, Ethylhexyl Methoxycinnamate, Hydroxycitronellal, Benzophenone-3, Ethylhexyl Salicylate, Butylmethoxydibenzoylmethane,"
+          url: https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350
+          source_type: retailer
+          quote: "Alcohol Denat., Parfum/Fragrance, Aqua/Water/Eau, Benzyl Salicylate, Butylphenyl Methylpropional, Citronellol, Eugenol, Linalool, Ethylhexyl Methoxycinnamate, Hydroxycitronellal, Benzophenone-3, Ethylhexyl Salicylate, Butylmethoxydibenzoylmethane,"
+        - item: ingredients
+          value: "Hydroxyisohexyl 3-Cyclohexene Carboxaldehyde, Geraniol, Isoeugenol, Cinnamyl Alcohol, Limonene, Bht, Propylene Glycol, Benzyl Alcohol, Benzyl Benzoate, Acrylates/Octylacrylamide Copolymer, Hydrolyzed Jojoba Esters, Fd&C Yellow No. 5 (Ci 19140), Fd&C Red, No. 4 (Cl 14700)."
+          url: https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350
+          source_type: retailer
+          quote: "Hydroxyisohexyl 3-Cyclohexene Carboxaldehyde, Geraniol, Isoeugenol, Cinnamyl Alcohol, Limonene, Bht, Propylene Glycol, Benzyl Alcohol, Benzyl Benzoate, Acrylates/Octylacrylamide Copolymer, Hydrolyzed Jojoba Esters, Fd&C Yellow No. 5 (Ci 19140), Fd&C Red, No. 4 (Cl 14700)."
+        - item: allergens
+          value: [Benzyl Salicylate, Butylphenyl Methylpropional, Citronellol, Eugenol, Linalool, Hydroxycitronellal]
+          url: https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350
+          source_type: retailer
+          quote: "Alcohol Denat., Parfum/Fragrance, Aqua/Water/Eau, Benzyl Salicylate, Butylphenyl Methylpropional, Citronellol, Eugenol, Linalool, Ethylhexyl Methoxycinnamate, Hydroxycitronellal, Benzophenone-3, Ethylhexyl Salicylate, Butylmethoxydibenzoylmethane,"
+        - item: allergens
+          value: [Hydroxyisohexyl 3-Cyclohexene Carboxaldehyde, Geraniol, Isoeugenol, Cinnamyl Alcohol, Limonene, Benzyl Alcohol, Benzyl Benzoate]
+          url: https://www.ulta.com/p/eternity-eau-de-parfum-2505?sku=2011350
+          source_type: retailer
+          quote: "Hydroxyisohexyl 3-Cyclohexene Carboxaldehyde, Geraniol, Isoeugenol, Cinnamyl Alcohol, Limonene, Bht, Propylene Glycol, Benzyl Alcohol, Benzyl Benzoate, Acrylates/Octylacrylamide Copolymer, Hydrolyzed Jojoba Esters, Fd&C Yellow No. 5 (Ci 19140), Fd&C Red, No. 4 (Cl 14700)."
+      missing: [notes_all, sprayer_bottle, sample_mini_refill]
+      notes: "공식 사이트(calvinklein.us)와 Macy's, JCPenney, Boots는 403 또는 봇 차단으로 열리지 않아 Ulta 페이지만 썼다. Ulta 페이지에는 3.3 oz 한 용량만 있다. 소매점마다 노트 구성이 다르게 적혀 있다(예: John Lewis는 white lily, bergamot / white rose, violet / sandalwood, amber이고 같은 EDP 페이지 설명에 Eau de Toilette라고 적혀 있음). 그래서 John Lewis 값은 옮기지 않고 Ulta 값만 적었다. 전 성분은 300자가 넘어 이어지는 두 조각으로 나누어 적었다. allergens는 전 성분 가운데 EU 표시 대상 향료 알레르기 성분 26종에 드는 이름만 골랐다. 전 성분과 노트는 Ulta의 Details와 Ingredients 접이식 칸에 있지만 페이지 글자로는 들어 있다."
+    - asin: B0BZDZJDTG
+      amazon_title: "Dossier - Ambery Vanilla - Inspired by Black Opium - Women EDP"
+      match: 일치 확인
+      match_reason: "공식 페이지(dossier.co) 상품명 Ambery Vanilla, Eau de Parfum, 'Inspired by YSL's Black Opium', 여성용(Gender: Feminine)이 같고, 50ml / 1.7oz 용량이 있음"
+      values:
+        - item: concentration
+          value: "Eau de Parfum"
+          url: https://dossier.co/products/ambery-vanilla
+          source_type: official
+          quote: "Ambery Vanilla is an Eau de Parfum, available in a 50ml / 1.7oz bottle."
+        - item: concentration
+          value: "15%"
+          url: https://dossier.co/products/ambery-vanilla
+          source_type: official
+          quote: "With a 15% fragrance-oil concentration, Ambery Vanilla is formulated to be long-lasting — in many cases as long as, or longer than, designer fragrances, depending on your skin and how you apply it."
+        - item: notes_top
+          value: [Mandarin, Pear, Pink Pepper, Liquorice]
+          url: https://dossier.co/products/ambery-vanilla
+          source_type: official
+          quote: "Mandarin, Pear, Pink Pepper, Liquorice"
+        - item: notes_middle
+          value: [Jasmine, Orange Blossom]
+          url: https://dossier.co/products/ambery-vanilla
+          source_type: official
+          quote: "Jasmine, Orange Blossom"
+        - item: notes_base
+          value: [Cedarwood, Patchouli, Vanilla, Coffee]
+          url: https://dossier.co/products/ambery-vanilla
+          source_type: official
+          quote: "Cedarwood, Patchouli, Vanilla, Coffee"
+        - item: size_price
+          value: ["50ml $29", "100ml $49"]
+          url: https://dossier.co/products/ambery-vanilla
+          source_type: official
+          quote: "50ml $29 Best Value 100ml $49"
+        - item: ingredients
+          value: "Alcohol Denat., Fragrance/Parfum, Water/Aqua/Eau, Tetramethyl Acetyloctahydronaphthalenes, Benzyl Salicylate, Hexamethylindanopyran, Vanillin, Hydroxycitronellal, Linalyl Acetate, Linalool, Hexyl Cinnamal, Limonene,"
+          url: https://dossier.co/products/ambery-vanilla
+          source_type: official
+          quote: "Alcohol Denat., Fragrance/Parfum, Water/Aqua/Eau, Tetramethyl Acetyloctahydronaphthalenes, Benzyl Salicylate, Hexamethylindanopyran, Vanillin, Hydroxycitronellal, Linalyl Acetate, Linalool, Hexyl Cinnamal, Limonene,"
+        - item: ingredients
+          value: "Dimethyl Phenethyl Acetate, Geranyl Acetate, Juniperus Virginiana Oil, Geraniol, Citrus Limon (Lemon) Peel Oil, Pogostemon Cablin Oil, Citronellol, Cinnamyl Alcohol, Citrus Aurantium Peel Oil, Rose Ketones,"
+          url: https://dossier.co/products/ambery-vanilla
+          source_type: official
+          quote: "Dimethyl Phenethyl Acetate, Geranyl Acetate, Juniperus Virginiana Oil, Geraniol, Citrus Limon (Lemon) Peel Oil, Pogostemon Cablin Oil, Citronellol, Cinnamyl Alcohol, Citrus Aurantium Peel Oil, Rose Ketones,"
+        - item: ingredients
+          value: "Amyl Cinnamal, Pinene, Benzyl Alcohol, Hexadecanol Acetone, Beta-Caryophyllene, Citral, Coumarin, Benzyl Benzoate."
+          url: https://dossier.co/products/ambery-vanilla
+          source_type: official
+          quote: "Amyl Cinnamal, Pinene, Benzyl Alcohol, Hexadecanol Acetone, Beta-Caryophyllene, Citral, Coumarin, Benzyl Benzoate."
+        - item: allergens
+          value: [Benzyl Salicylate, Hydroxycitronellal, Linalool, Hexyl Cinnamal, Limonene]
+          url: https://dossier.co/products/ambery-vanilla
+          source_type: official
+          quote: "Alcohol Denat., Fragrance/Parfum, Water/Aqua/Eau, Tetramethyl Acetyloctahydronaphthalenes, Benzyl Salicylate, Hexamethylindanopyran, Vanillin, Hydroxycitronellal, Linalyl Acetate, Linalool, Hexyl Cinnamal, Limonene,"
+        - item: allergens
+          value: [Geraniol, Citronellol, Cinnamyl Alcohol]
+          url: https://dossier.co/products/ambery-vanilla
+          source_type: official
+          quote: "Dimethyl Phenethyl Acetate, Geranyl Acetate, Juniperus Virginiana Oil, Geraniol, Citrus Limon (Lemon) Peel Oil, Pogostemon Cablin Oil, Citronellol, Cinnamyl Alcohol, Citrus Aurantium Peel Oil, Rose Ketones,"
+        - item: allergens
+          value: [Amyl Cinnamal, Benzyl Alcohol, Citral, Coumarin, Benzyl Benzoate]
+          url: https://dossier.co/products/ambery-vanilla
+          source_type: official
+          quote: "Amyl Cinnamal, Pinene, Benzyl Alcohol, Hexadecanol Acetone, Beta-Caryophyllene, Citral, Coumarin, Benzyl Benzoate."
+      missing: [notes_all, sprayer_bottle, sample_mini_refill]
+      notes: "노트 세 줄은 페이지에서 top(The first notes you smell), middle(The heart of the perfume), base(The notes that linger all day) 제목 바로 아래 줄이다. 가격은 비회원(Guest) 가격이고, 회원가 $44.10(100ml)은 적지 않았다. 페이지에 'Free 3ml samples with Dossier+'라는 회원 혜택 문구와 'Shop the Ambery Vanilla Set' 링크가 있지만, 이 향의 샘플인지와 세트 구성은 확인하지 못해 sample_mini_refill은 비웠다. 병과 분사기 설명은 없다. 전 성분은 300자가 넘어 이어지는 세 조각으로 나누어 적었다. allergens는 전 성분 가운데 EU 표시 대상 향료 알레르기 성분 26종에 드는 이름만 골랐다."
+    - asin: B0009OAI8Q
+      amazon_title: "Elizabeth Taylor White Diamonds Eau de Toilette for Women, 3.3 fl oz"
+      match: 일치 확인
+      match_reason: "Healthylife 상품 페이지 상품명 'Elizabeth Taylor White Diamonds Eau de Toilette 100ml'이 브랜드, 향 이름, 농도(Eau de Toilette)가 같고 용량 100ml가 3.3 fl oz에 해당함"
+      values:
+        - item: concentration
+          value: "Eau de Toilette"
+          url: https://www.healthylife.com.au/products/elizabeth-taylor-white-diamonds-eau-de-toilette100ml
+          source_type: retailer
+          quote: "Elizabeth Taylor White Diamonds Eau de Toilette 100ml"
+        - item: notes_all
+          value: [Italian neroli, Amazon lily, Egyptian tuberose, Turkish rose, Italian orris, narcissus, jasmine, Italian sandalwood]
+          url: https://www.healthylife.com.au/products/elizabeth-taylor-white-diamonds-eau-de-toilette100ml
+          source_type: retailer
+          quote: "Italian neroli, Amazon lily, Egyptian tuberose, Turkish rose, Italian orris, narcissus, jasmine, Italian sandalwood."
+        - item: size_price
+          value: ["100ml"]
+          url: https://www.healthylife.com.au/products/elizabeth-taylor-white-diamonds-eau-de-toilette100ml
+          source_type: retailer
+          quote: "Elizabeth Taylor White Diamonds Eau de Toilette 100ml"
+      missing: [notes_top, notes_middle, notes_base, sprayer_bottle, ingredients, allergens, sample_mini_refill]
+      notes: "브랜드 공식 사이트에 상품 페이지가 없다(elizabethtaylor.com의 'Shop White Diamonds'는 아마존 스토어로만 연결되어 열지 않음). 미국 소매점(Macy's, Walgreens, CVS, Target, Walmart)과 Superdrug, Boots, The Perfume Shop, Notino, Chemist Warehouse, FragranceNet, Perfume.com은 403, 429, 봇 확인으로 열리지 않았고, Escentual은 상품 글자가 페이지에 없었다. 그래서 호주 Woolworths 계열 소매점 Healthylife 페이지만 썼다. 이 페이지는 노트를 층 구분 없이 적어 notes_all에 넣었다. $39.99는 호주 달러로 보이며 페이지에 '현재 판매하지 않음(Currently unavailable)'으로 나온다. 병, 전 성분, 미니 정보는 이 페이지에 없다. 버려진 가격 값 지움(확인 못 함)."
+    - asin: B09X5BQ969
+      amazon_title: "Bellavita Luxury Honey Oud Eau de Parfum | 100 ml (3.4 fl.oz.) | Perfume for Men and Women | Sweet Honey, Bergamot, Oud, and Amber Notes"
+      match: 일치 확인
+      match_reason: "공식 페이지(bellavitaorganic.com) 상품명 'HONEY Oud Unisex Perfume - 100ml'과 'Eau De Parfum for All' 표기가 브랜드, 향 이름, 농도, 남녀 공용, 100ml 용량과 같음"
+      values:
+        - item: concentration
+          value: "Eau De Parfum"
+          url: https://bellavitaorganic.com/products/honey-oud-unisex-perfume
+          source_type: official
+          quote: "Eau De Parfum for All"
+        - item: notes_top
+          value: [honey, bergamot]
+          url: https://bellavitaorganic.com/products/honey-oud-unisex-perfume
+          source_type: official
+          quote: "The Bella Vita Luxury Honey Oud Luxury Perfume smells like honey 🍯and bergamot at the top with delightful notes of Rose 🌹 and Oud at its Heart and Vanilla at its base."
+        - item: notes_middle
+          value: [Rose, Oud]
+          url: https://bellavitaorganic.com/products/honey-oud-unisex-perfume
+          source_type: official
+          quote: "The Bella Vita Luxury Honey Oud Luxury Perfume smells like honey 🍯and bergamot at the top with delightful notes of Rose 🌹 and Oud at its Heart and Vanilla at its base."
+        - item: notes_base
+          value: [Vanilla]
+          url: https://bellavitaorganic.com/products/honey-oud-unisex-perfume
+          source_type: official
+          quote: "The Bella Vita Luxury Honey Oud Luxury Perfume smells like honey 🍯and bergamot at the top with delightful notes of Rose 🌹 and Oud at its Heart and Vanilla at its base."
+        - item: size_price
+          value: ["100ml"]
+          url: https://bellavitaorganic.com/products/honey-oud-unisex-perfume
+          source_type: official
+          quote: "HONEY Oud Unisex Perfume - 100ml"
+        - item: size_price
+          value: ["₹525.00"]
+          url: https://bellavitaorganic.com/products/honey-oud-unisex-perfume
+          source_type: official
+          quote: "Sale price ₹525.00"
+        - item: size_price
+          value: ["₹999.00"]
+          url: https://bellavitaorganic.com/products/honey-oud-unisex-perfume
+          source_type: official
+          quote: "Regular price ₹999.00"
+        - item: size_price
+          value: ["20ml"]
+          url: https://bellavitaorganic.com/products/honey-oud-unisex-perfume-20ml
+          source_type: official
+          quote: "HONEY Oud Unisex Perfume - 20ml"
+        - item: size_price
+          value: ["₹149.00"]
+          url: https://bellavitaorganic.com/products/honey-oud-unisex-perfume-20ml
+          source_type: official
+          quote: "Sale price ₹149.00"
+        - item: size_price
+          value: ["₹449.00"]
+          url: https://bellavitaorganic.com/products/honey-oud-unisex-perfume-20ml
+          source_type: official
+          quote: "Regular price ₹449.00"
+        - item: ingredients
+          value: "Alcohol Denat, Fragrance (PARFUM), Aqua, BHT."
+          url: https://bellavitaorganic.com/products/honey-oud-unisex-perfume
+          source_type: official
+          quote: "Alcohol Denat, Fragrance (PARFUM), Aqua, BHT."
+        - item: sample_mini_refill
+          value: "20 ml"
+          url: https://bellavitaorganic.com/products/honey-oud-unisex-perfume-20ml
+          source_type: official
+          quote: "The perfume comes in a size of 20 ml which makes it easy to carry wherever you go and travel friendly."
+      missing: [notes_all, sprayer_bottle, allergens]
+      notes: "공식 사이트는 인도 사이트라 가격이 루피(₹)이고, 판매가(Sale price)는 할인 중인 가격이다. 아마존 판의 배합이 인도 판과 같은지는 페이지로 확인할 수 없다. 노트는 한 문장 안에 top, Heart, base로 나뉘어 있어 그 문장 하나를 세 항목에 썼다. 페이지에 Ambergris, Honey, Oud를 따로 소개하는 칸도 있지만 층 구분이 없는 소개라 적지 않았다. 전 성분(Alcohol Denat, Fragrance (PARFUM), Aqua, BHT.)에 알레르기 성분 이름이 따로 표시되어 있지 않아 allergens는 비웠다. 병과 분사기 설명은 없다. 20ml는 같은 향의 휴대용(Pocket perfume) 별도 상품 페이지다."
+    - asin: B08FBQWRYC
+      amazon_title: "Jean Paul Gaultier Le Male Le Parfum for Men - 4.2 oz"
+      match: 일치 확인
+      match_reason: "공식 페이지(jeanpaulgaultier.com) 상품명 'Le Male Le Parfum Eau de Parfum Intense'의 4.2 oz 판 주소 번호 65156533이 아마존 상품 정보의 partNumber 65156533과 같고, 아마존 상품 정보도 Eau de Parfum Intense라고 적음. 값을 옮긴 Ulta 페이지 'Le Male Le Parfum'도 이 향을 intense eau de parfum이라 적고, 노트(cardamom / lavender, iris / vanilla)와 전 성분이 공식 페이지와 같으며 4.2 oz 용량이 있음"
+      values:
+        - item: concentration
+          value: "intense eau de parfum"
+          url: https://www.ulta.com/p/le-male-le-parfum-pimprod2023265
+          source_type: retailer
+          quote: "In a black and gold officer's jacket, this intense eau de parfum takes the helm of the Le Male fragrance line with style and intensity and elegance, with a wooded warm & spicy trail in its wake."
+        - item: notes_top
+          value: [cardamom]
+          url: https://www.ulta.com/p/le-male-le-parfum-pimprod2023265
+          source_type: retailer
+          quote: "Top - cardamom"
+        - item: notes_middle
+          value: [lavender, iris]
+          url: https://www.ulta.com/p/le-male-le-parfum-pimprod2023265
+          source_type: retailer
+          quote: "Middle - lavender, iris"
+        - item: notes_base
+          value: [vanilla]
+          url: https://www.ulta.com/p/le-male-le-parfum-pimprod2023265
+          source_type: retailer
+          quote: "Base - vanilla"
+        - item: size_price
+          value: ["$160.00"]
+          url: https://www.ulta.com/p/le-male-le-parfum-pimprod2023265
+          source_type: retailer
+          quote: "$160.00"
+        - item: ingredients
+          value: "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Coumarin, Linalool, Alpha-Isomethyl Ionone, Butyl Methoxydibenzoylmethane, Limonene, Cinnamal, Geraniol."
+          url: https://www.ulta.com/p/le-male-le-parfum-pimprod2023265
+          source_type: retailer
+          quote: "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Coumarin, Linalool, Alpha-Isomethyl Ionone, Butyl Methoxydibenzoylmethane, Limonene, Cinnamal, Geraniol."
+        - item: allergens
+          value: [Coumarin, Linalool, Alpha-Isomethyl Ionone, Limonene, Cinnamal, Geraniol]
+          url: https://www.ulta.com/p/le-male-le-parfum-pimprod2023265
+          source_type: retailer
+          quote: "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Coumarin, Linalool, Alpha-Isomethyl Ionone, Butyl Methoxydibenzoylmethane, Limonene, Cinnamal, Geraniol."
+      missing: [notes_all, sprayer_bottle, sample_mini_refill]
+      notes: "공식 페이지(jeanpaulgaultier.com)는 검사 스크립트가 받으면 원문이 없어 값이 모두 버려졌다. 그래서 같은 값을 Ulta 상품 페이지(Le Male Le Parfum)에서 다시 찾아 옮겼다. 이 페이지는 Eternity 값을 확인한 Ulta 페이지와 같은 틀이다. Ulta 페이지 용량 선택에는 0.34 oz, 2.5 oz, 4.2 oz가 있고 기본 선택은 4.2 oz이며, $160.00은 4.2 oz가 선택된 상태의 가격이다. 다른 용량의 가격과 용량 선택 줄의 글자는 글자 그대로 확인하지 못해 적지 않았다(조회 도구 사용 한도로 더 열지 못함). 0.34 oz가 미니인지는 페이지로 확인하지 못해 sample_mini_refill은 비웠다. 병 설명(검정과 금색 제복)은 Ulta 페이지에서 글자 그대로 확인하지 못해 sprayer_bottle을 missing으로 옮겼다. allergens는 전 성분 가운데 EU 표시 대상 향료 알레르기 성분 26종에 드는 이름만 골랐다(Butyl Methoxydibenzoylmethane은 자외선 차단 성분이라 뺌)."
+    - asin: B0GFGL26JD
+      amazon_title: "Glossier You Eau de Parfum, Unisex Skin-Scent Enhancer, 50 ml"
+      match: 일치 확인
+      match_reason: "공식 페이지(glossier.com) 상품명 Glossier You, 유형 'Eau de parfum', skin-scent enhancing 설명이 같고, 50 ml 용량이 있음"
+      values:
+        - item: concentration
+          value: "Eau de parfum"
+          url: https://www.glossier.com/products/glossier-you
+          source_type: official
+          quote: "Eau de parfum"
+        - item: notes_top
+          value: [Pink Pepper]
+          url: https://www.glossier.com/products/glossier-you
+          source_type: official
+          quote: "TOP NOTES Pink Pepper"
+        - item: notes_middle
+          value: [Iris]
+          url: https://www.glossier.com/products/glossier-you
+          source_type: official
+          quote: "HEART NOTES Iris"
+        - item: notes_base
+          value: [Ambrette, Ambrox]
+          url: https://www.glossier.com/products/glossier-you
+          source_type: official
+          quote: "BASE NOTES Ambrette + Ambrox"
+        - item: size_price
+          value: ["8 ml", "50 ml", "100 ml"]
+          url: https://www.glossier.com/products/glossier-you
+          source_type: official
+          quote: "8 ml, 50 ml, 100 ml"
+        - item: ingredients
+          value: "Alcohol Denat., Fragrance/Parfum, Water/Aqua/Eau, Hydroxycitronellal, Farnesol, Limonene."
+          url: https://www.glossier.com/products/glossier-you
+          source_type: official
+          quote: "Alcohol Denat., Fragrance/Parfum, Water/Aqua/Eau, Hydroxycitronellal, Farnesol, Limonene."
+        - item: allergens
+          value: [Hydroxycitronellal, Farnesol, Limonene]
+          url: https://www.glossier.com/products/glossier-you
+          source_type: official
+          quote: "Alcohol Denat., Fragrance/Parfum, Water/Aqua/Eau, Hydroxycitronellal, Farnesol, Limonene."
+        - item: sample_mini_refill
+          value: "8 ml"
+          url: https://www.glossier.com/products/glossier-you
+          source_type: official
+          quote: "8 ml, 50 ml, 100 ml"
+      missing: [notes_all, sprayer_bottle]
+      notes: "노트 인용은 페이지에서 제목 줄(TOP NOTES 등)과 바로 아래 노트 줄을 이어 적은 것이다. $116은 기본 선택인 100 ml(Out of stock 100 ml)일 때 페이지에 보이는 가격이다. 50 ml와 8 ml 가격은 페이지 글자에 용량과 함께 나오지 않아 적지 않았다. 8 ml는 같은 페이지의 'Travel Spray + Balm' 세트에도 들어 있다. 전 성분은 'Full ingredients list'를 눌러 여는 창(Close 버튼이 있는 접이식 창) 안에 있지만 페이지 글자로는 들어 있다. 이 규칙을 엄격히 적용하면 ingredients와 allergens는 빼야 한다. allergens는 전 성분 가운데 EU 표시 대상 향료 알레르기 성분 26종에 드는 이름만 골랐다. 병과 분사기, 리필 설명은 페이지에 없다. 같은 향의 고체 향수(Glossier You Solid)는 형태가 달라 적지 않았다. 버려진 가격 값 지움(확인 못 함)."

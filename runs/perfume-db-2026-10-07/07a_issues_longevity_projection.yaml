@@ -1,0 +1,118 @@
+topic: longevity_projection
+directions:
+  negative:
+    labels:
+      - id: fades_fast
+        name_ko: 금방 날아감
+        name_en: Fades quickly
+        include: >-
+          향이 오래 가지 않는다고 잘라 말함. 몇 분이나 한두 시간 만에 사라진다, 전혀 안 간다, 시간 없이 "doesn't last (long)",
+          fijación/fixação가 약하거나 없다, dura poco 같은 말
+        exclude: >-
+          일정 시간은 간다고 인정하면서 하루 종일이나 기대만큼은 못 간다는 완곡한 아쉬움은 shorter_than_hoped.
+          처음부터 향이 약하거나 거의 안 난다는 말은 weak_scent(둘 다 말하면 둘 다)
+        examples:
+          - {review_id: R38FLXFQ85RK5L, quote: "the scent only lasts about 10 minutes on the skin, hair and clothing"}
+          - {review_id: RM6MQCJ7NWE7B, quote: "No dura ni tres hora!!"}
+        approx_count: 78
+      - id: shorter_than_hoped
+        name_ko: 기대보다 짧음
+        name_en: Shorter than hoped
+        include: >-
+          어느 정도는 가지만 하루 종일, 8시간, 가격이나 EDP에 기대한 만큼은 못 간다는 말. 지속력이 보통이다, 그저 그렇다,
+          아주 오래가지는 않는다처럼 완곡한 아쉬움("not super long lasting", "Longevity is moderate", "doesn't last all day")
+        exclude: >-
+          시간 없이 단정하는 "doesn't last (long)", "no longevity"나 몇 분에서 두 시간 이하라는 말은 fades_fast.
+          세기나 확산이 아쉽다는 말은 weak_scent
+        examples:
+          - {review_id: RRAOPUZKGKPVN, quote: "it lasts a decent time but obviously not extremely long"}
+          - {review_id: RSDJ5EOJJ774J, quote: "it doesn't last whole day"}
+        approx_count: 15
+      - id: weak_scent
+        name_ko: 처음부터 약함
+        name_en: Weak or barely there
+        include: >-
+          뿌렸을 때부터 향이 약하다, 희미하다, 거의 또는 전혀 안 난다("very very faint", "No smell", "nada de olor", "no se siente"),
+          충분히 세지 않다, 주변으로 퍼지지 않는다, 피부 가까이만 난다, 남이 못 맡는다
+        exclude: >-
+          처음엔 나다가 금방 사라진다는 시간 이야기는 fades_fast 또는 shorter_than_hoped.
+          향이 너무 세다는 반대 불만은 too_strong
+        examples:
+          - {review_id: R1AIGEESVTE4DR, quote: "very very faint smell"}
+          - {review_id: R3T9W3N67O0TFQ, quote: "The scent does last, but like I said it never projects like I think a scent this expensive would."}
+        approx_count: 33
+      - id: too_strong
+        name_ko: 너무 셈
+        name_en: Too strong
+        include: >-
+          향이 너무 세다, 과하다, 압도한다, 코를 찌른다("Too Strong.", "over powering", "so overwhelming", "it burns my nose",
+          "demasiado fuerte"), 더 은은하길 바랐다
+        exclude: >-
+          세다는 말을 칭찬으로 쓰면 positive 방향 strong_presence. 향의 성격이 싫다(달다, 독한 꽃향 등)는 말은 scent 주제.
+          실제 두통이나 메스꺼움 같은 몸 증상은 safety 주제
+        examples:
+          - {review_id: R1YXB7CP917VN9, quote: "It is strong, over powering"}
+          - {review_id: R3CWIRDF2SHU59, quote: "the smell is too strong for my liking"}
+        approx_count: 20
+    other_approx_count: 4
+    notes: >-
+      정품이나 예전 제품, 다른 매장 병보다 약하다 또는 짧다는 비교 인용이 8개 정도 있다(Sephora, Macy's, dept store, "now seems weak" 등).
+      스키마상 trust와 겹치는 내용이라 따로 라벨로 만들지 않고 약함과 짧음 라벨로 셌다. 확산 불만(안 퍼짐, 피부 가까이만)은 6개쯤으로 5%에 못 미쳐 weak_scent에 넣었다.
+      피부보다 옷에 오래 남는다는 혼합 인용 2개와 칭찬인데 부정 쪽에 들어온 인용 1개(R2XHXVVZ19TC9J "has staying power")는 기타로 셌다.
+      한 인용이 약함과 짧음을 함께 말하면 두 라벨 모두에 센다.
+  positive:
+    labels:
+      - id: long_lasting
+        name_ko: 오래감
+        name_en: Long-lasting
+        include: >-
+          하루 종일, 몇 시간, 다음 날까지 간다, 덧뿌릴 필요가 없다, 적당히 오래 간다, 옷에 오래 남는다
+          ("lasts all day", "Long lasting", "dura muchísimo", "boa fixação", "sticks to clothes well")
+        exclude: >-
+          한두 번만 뿌려도 충분하다는 사용량 칭찬은 little_goes_far(같이 말하면 둘 다).
+          세게 퍼진다는 칭찬은 strong_presence
+        examples:
+          - {review_id: R1BPS6WJ0CYY8J, quote: "I sprayed it about 11 in the morning and could smell it at 8 at night."}
+          - {review_id: RFKZ7EJ1U4UYQ, quote: "Scent lasts all day and sticks to clothes well"}
+        approx_count: 105
+      - id: not_overpowering
+        name_ko: 과하지 않은 세기
+        name_en: Not overpowering
+        include: >-
+          향이 독하지 않다, 과하지 않다, 은은하게 적당히 난다는 세기 칭찬("not too strong", "Not overbearing",
+          "noticeable without being obnoxiously loud", "No es tan fuerte")
+        exclude: >-
+          세다는 것을 칭찬하면 strong_presence. 약해서 아쉽다는 말은 negative 방향 weak_scent.
+          soft, light가 향의 분위기 묘사로만 쓰이면 scent 주제
+        examples:
+          - {review_id: R2LP5UYPZD2M8N, quote: "Long-lasting without being overpowering."}
+          - {review_id: R1E12UKLVMMO4A, quote: "noticeable without being obnoxiously loud"}
+        approx_count: 16
+      - id: strong_presence
+        name_ko: 진하고 잘 퍼짐
+        name_en: Strong presence
+        include: >-
+          향이 세다, 진하다, 주변에서 알아챌 만큼 퍼진다는 것을 좋게 말함("Its really strong", "big aura",
+          "se hace notar a donde sea que llegas", "Strong Perfume but not a bad thing")
+        exclude: >-
+          세서 싫다는 말은 negative 방향 too_strong. 독하지 않아 좋다는 말은 not_overpowering
+        examples:
+          - {review_id: R3W3FAYLHBYMFC, quote: "Its really strong"}
+          - {review_id: RAVH5AMZTCM20, quote: "me gusta lo q es muy fuerte el perfume"}
+        approx_count: 13
+      - id: little_goes_far
+        name_ko: 조금만 써도 충분
+        name_en: A little goes a long way
+        include: >-
+          한두 번만 뿌려도, 한 방울만 발라도 충분하다, 아껴 쓰게 된다("a little goes a long way", "Takes very little",
+          "only need a drop on wrists", "All you need is 1 spray")
+        exclude: >-
+          사용량 언급 없이 오래간다는 말만 있으면 long_lasting. 병 용량을 오래 쓴다는 말은 bottle_design 주제
+        examples:
+          - {review_id: R17HE9MOSZI23R, quote: "All you need is 1 spray, it lasts all day"}
+          - {review_id: R3LMWPBKHW9JSQ, quote: "a little goes a long way"}
+        approx_count: 9
+    other_approx_count: 3
+    notes: >-
+      혼합 인용 중 칭찬 부분이 없는 것(R1VOECBP3FKNSC 확산 아쉬움, R3GLZVNE1IAC47 세서 부담)은 기타로 셌다.
+      옷에 오래 남는다는 칭찬은 4개쯤이라 long_lasting에 넣었다. 한 인용이 오래감과 세기 칭찬을 함께 말하면 두 라벨 모두에 센다.

@@ -1,0 +1,114 @@
+topic: scent
+directions:
+  negative:
+    labels:
+      - id: dislike_general
+        name_ko: 향이 싫음(이유 없음)
+        name_en: Dislikes the scent (no specifics)
+        include: 노트나 비유 없이 향이 싫다, 별로다, 끔찍하다, 내 취향이 아니다는 말("Not a fan", "smells terrible", "not my preference")
+        exclude: 싫은 이유로 노트나 성격을 말하면 disliked_note_profile, 나이 이미지는 old_lady_mature, 알코올은 alcohol_smell, 다른 물건에 빗대면 unpleasant_likeness
+        examples:
+          - {review_id: R2T839DONCWG3M, quote: "Do not like the scent!"}
+          - {review_id: R1EYTLO94WC366, quote: "Smells awful"}
+        approx_count: 44
+      - id: differs_from_original
+        name_ko: 원래 알던 향과 다름
+        name_en: Smells different from the original
+        include: 예전에 쓰던 같은 제품, 원래 향과 다르다, 냄새가 이상하다(not right, off, 알아볼 수 없다)
+        exclude: 상품 설명이나 이름의 노트가 안 난다는 말은 missing_described_notes
+        examples:
+          - {review_id: R9ZEWAM020WG9, quote: "it doesn't smell like Eternity of the past"}
+          - {review_id: R1KW75H6XHEF5N, quote: "My recent order of white diamonds has a different smell"}
+        approx_count: 21
+      - id: missing_described_notes
+        name_ko: 설명한 노트가 안 남
+        name_en: Advertised notes missing
+        include: 상품 이름이나 설명, 광고의 노트(주로 바닐라, 앰버, 꿀)가 안 나거나 약하다, 설명과 실제 향이 다르다
+        exclude: 예전 제품이나 정품과 비교해 다르다는 말은 differs_from_original
+        examples:
+          - {review_id: RR8UK6F5H31KU, quote: "Doesn’t smell like vanilla at all"}
+          - {review_id: R2FZEJT891KVQW, quote: "I don’t think the description fits the actual scent."}
+        approx_count: 17
+      - id: old_lady_mature
+        name_ko: 나이 든 사람 향
+        name_en: Old-lady or mature scent
+        include: 할머니, 노부인, 나이 든 사람 향이다, 너무 성숙하다, 젊지 않다("old lady", "grandma", "too mature", "no es juvenil")
+        exclude: 나이 이미지 없이 꽃향, 파우더리가 싫다는 말은 disliked_note_profile
+        examples:
+          - {review_id: R29XSCHHMVVP4B, quote: "Smells old Ladyish"}
+          - {review_id: RC8UZZ9TT4LH8, quote: "I think it's a scent for an elderly woman"}
+        approx_count: 17
+      - id: alcohol_smell
+        name_ko: 알코올 냄새
+        name_en: Smells of alcohol
+        include: 알코올 냄새만 난다, 소독용 알코올 같다, 뿌린 직후 알코올 냄새("puro alcohol", "rubbing alcohol")
+        exclude: 화학약품, 인공적, 플라스틱 냄새는 cheap_artificial
+        examples:
+          - {review_id: R1T8ST53B96R3E, quote: "Just smells like rubbing alcohol"}
+          - {review_id: R269IL84GKMM0N, quote: "This perfume smells like straight alcohol."}
+        approx_count: 12
+      - id: disliked_note_profile
+        name_ko: 특정 노트나 성격이 싫음
+        name_en: Dislikes a specific note or character
+        include: 특정 노트나 성격 때문에 싫다(너무 꽃향, 파우더리, 머스크, 우디, 후추, 너무 달다, 남성적이다)
+        exclude: 나이 이미지는 old_lady_mature, 설명한 노트가 없다는 말은 missing_described_notes, 향수가 아닌 물건에 빗대면 unpleasant_likeness
+        examples:
+          - {review_id: R2987HKSLHIOML, quote: "A little too floral for my tastes"}
+          - {review_id: RPOLF839J7L2Q, quote: "This has a powder smell that I hate."}
+        approx_count: 12
+      - id: unpleasant_likeness
+        name_ko: 불쾌한 물건 냄새
+        name_en: Smells like an unpleasant non-perfume thing
+        include: 향수가 아닌 물건에 빗댄 불쾌한 냄새(엔진오일, 벌레 퇴치제, 쓰레기, 담배, 약, 양념, 헤어 제품, 비누, 선탠오일, 연필깎은 냄새)
+        exclude: 알코올은 alcohol_smell, 화학약품, 인공적, 플라스틱은 cheap_artificial
+        examples:
+          - {review_id: R2C8YTC48CJE33, quote: "smells like bug spray"}
+          - {review_id: R3SC6U5UDFIGM5, quote: "smells like garbage"}
+        approx_count: 11
+      - id: cheap_artificial
+        name_ko: 싸구려, 인공적인 냄새
+        name_en: Cheap or artificial smell
+        include: 싸구려 냄새, 값싼 향수 같다, 화학약품, 인공적, 플라스틱 같은 냄새("Smells cheap", "chemical", "künstlich")
+        exclude: 알코올 냄새는 alcohol_smell, 가격 이야기는 이 주제가 아님
+        examples:
+          - {review_id: R1AG3QA8RNZUOA, quote: "Smells cheap"}
+          - {review_id: R2WLZEYU4QJSNX, quote: "very chemical and artificial"}
+        approx_count: 8
+    other_approx_count: 9
+    notes: >-
+      differs_from_original 인용은 스키마상 trust에도 함께 태깅되는 내용이라 리포트에서 trust와 겹쳐 읽힐 수 있음.
+      "does not smell right", "Scent was definitely off"처럼 비교 대상이 없는 이상함도 differs_from_original에 넣었는데 경계가 애매함.
+      기타는 첫 향과 잔향이 다르다(처음엔 별로였다가 괜찮아짐, 처음엔 좋다가 아님), 내 체취와 안 맞음, 칭찬을 못 받음, 불만 없는 혼합 인용 등.
+  positive:
+    labels:
+      - id: smells_good_general
+        name_ko: 향이 좋음(이유 없음)
+        name_en: Smells good (no specifics)
+        include: 노트나 성격 묘사 없이 향이 좋다, 사랑한다("Smells good", "Love the scent", "Great fragrance", "Huele bien"). 혼합 인용의 좋다는 부분도 여기
+        exclude: 노트, 분위기, 인상을 말하면 appealing_character, 남의 반응은 compliments
+        examples:
+          - {review_id: R2JL60OKVAL8YM, quote: "Smells amazing!!"}
+          - {review_id: R4HVFOK3EB74D, quote: "It's a gorgeous, wonderful scent"}
+        approx_count: 115
+      - id: appealing_character
+        name_ko: 노트나 분위기가 좋음
+        name_en: Likes the notes or character
+        include: 좋아하는 노트, 분위기, 인상을 말함(따뜻하다, 달다, 크리미하다, 깨끗하다, 상쾌하다, 가볍다, 무겁지 않다, 꽃향, 바닐라, 남성적이다, 여성스럽다, 섹시하다, 비싸 보인다, 싸 보이지 않는다)
+        exclude: 묘사 없는 칭찬은 smells_good_general, 지속력이나 세기 평가는 이 주제가 아님
+        examples:
+          - {review_id: R1OKZ4D3AZRATQ, quote: "warm, sweet and creamy"}
+          - {review_id: R1E12UKLVMMO4A, quote: "The scent is warm, smooth, and distinctly masculine"}
+        approx_count: 21
+      - id: compliments
+        name_ko: 남에게 칭찬받음
+        name_en: Gets compliments
+        include: 주변 사람이 향을 칭찬했다, 제품 이름을 물었다, 배우자나 받은 사람이 향을 좋아했다("Head turner")
+        exclude: 본인만 좋다고 하면 smells_good_general
+        examples:
+          - {review_id: R3HUTCGBNSP6M7, quote: "Have received the most amount of compliments I’ve ever received for a perfume."}
+          - {review_id: R2QZ85R9X7DX6F, quote: "I get compliments every time I wear it!"}
+        approx_count: 9
+    other_approx_count: 5
+    notes: >-
+      긍정 인용의 대부분(어림 77%)이 묘사 없는 "Smells good"류라 더 나눌 근거가 표본에 없음.
+      기타는 원래 알던 향과 같다, 거의 완벽한 듀프(3개, trust 쪽 내용), 칭찬 부분이 없는 혼합 인용(2개).

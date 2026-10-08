@@ -1,0 +1,29 @@
+audit:
+  stage: report
+  run: perfume-db-2026-10-07
+  overall_status: PASS
+  summary: "07_changed_sentences.md의 새 문장 7개와 8장 안전 부정 칸의 숫자는 모두 07c_safety_summary.json, 07b_issue_counts.json, 05_metrics.json의 값과 같다. 07c_safety_check.md의 부정 18줄은 두통 8, 메스꺼움 5, 호흡 2, 어지럼 1, 알레르기 언급 2로 by_symptom과 맞고, 줄마다 인용과 증상이 맞는다. R1T7FSK04S0DMQ 문장은 02_reviews.csv 원문(collar 충전 불량), ASIN B00021AJ5I의 브랜드 Calvin Klein, 04_tags.jsonl에 남은 태그 2줄로 확인된다."
+  checked: 104
+  findings: []
+  notes:
+    - where: "8장 세부 이슈 표 아래 각주(표 블록 안, scripts/sections.py가 만듦)"
+      observation: "각주는 '주제와 방향마다 리뷰 수 상위 3개(기타 제외)'와 '가중 비율은 그 라벨이 붙은 리뷰의 가중치 합'이라고 하는데, 안전 부정 칸은 라벨이 아니라 증상 5개를 모두 보여 준다. 칸의 숫자는 맞고, 바로 위 문장(07c_safety_check.md 출처)과 부록 새 문장이 이 차이를 설명하므로 판정에는 넣지 않았다."
+      suggested_owner_action: "필요하면 sections.py 각주에 '안전 부정은 증상별 분류 전부(07c)'를 넣는다. 리포트를 고칠 일은 아니다."
+  verified:
+    - where: "2장 데이터 읽기(새 문장)"
+      basis: "05_metrics.json topics 값: overall 1212, scent 773과 neg_pct 35.7, longevity_projection 504와 69.0, customer_service 92.4, quality 90.1, trust 88.1, safety 22와 81.8. safety_check.negative_text를 그대로 옮김"
+    - where: "8장 인사이트 3 고객 응대(새 문장)"
+      basis: "05_metrics.json: customer_service weighted_neg_pct 83.0, neg_reviewer_pct 1.8. impact 1위(1.28, 4.54, -3.27). cooccurrence.negative 4번째 customer_service + scent 44. 07b_issue_counts.json customer_service.negative: not_returnable 58, refund_request 11, seller_unhelpful 10. 라벨 이름은 name_ko와 같음"
+    - where: "10장 Bella Vita Luxury 데이터 읽기(새 문장)"
+      basis: "05_metrics.json brand_deep[Bella Vita Luxury]: reviews 140. scent 119, pos_reviewer 70.7, neg_reviewer 13.4, neg_pct 26.1, weighted_neg_pct 15.2. longevity_projection 긍정 34, 부정 29, 43.9, 29.2. price_value 19개 중 긍정 18. customer_service 5, quality 5, safety 4(부정 4). asins[B09X5BQ969].sample_counts 2★ 60, 5★ 80. '전체로는' 뒤 문장은 safety_check.negative_text 그대로"
+    - where: "12장 권고 4(새 문장)"
+      basis: "07b_issue_counts.json customer_service.negative 1위 not_returnable 58. cooccurrence.negative customer_service + scent 44"
+    - where: "부록 세부 이슈(새 문장)"
+      basis: "07b_issue_counts.json의 safety.negative와 packaging.negative 모두 other_pct 100.0. 증상 종류 5개는 07c_safety_summary.json by_symptom 이름과 같고 8장 표에 들어 있음"
+    - where: "부록 향수와 무관한 리뷰(새 문장, R1T7FSK04S0DMQ)"
+      basis: "02_reviews.csv 206행: asin B00021AJ5I, 1★, 제목 \"Collar wouldn't charge 2 months after purchasing\", 본문 \"Tried to recharge and the collar wouldn't hold a charge.\" 01_asins.csv에서 B00021AJ5I의 brand는 Calvin Klein. 04_tags.jsonl 576~577행에 overall과 quality 부정 태그가 있어 이번 집계에 들어감. 05_metrics.json notes에 off_category 문구 없음. off_category 규칙은 CLAUDE.md, review-tagger.md, weight.py에 있음"
+    - where: "8장 세부 이슈 표, 안전 부정 이슈 칸"
+      basis: "두통 8(0.2%), 메스꺼움 5(0.1%), 호흡 2(0.1%), 어지럼 1(0.0%), 알레르기 언급 2(0.1%). 07c_safety_summary.json by_symptom, 05_metrics.json safety_check와 같고 05_tables.md 272행과 같은 글자. 증상 합 18은 07b safety.negative units 18과 같음. ASIN별 부정 수 3/5/2/4/4도 07c 표와 맞음"
+    - where: "07c_safety_check.md 부정 18줄 증상 분류"
+      basis: "두통 8(RITE6TUC3TTUA, R38DSJZ6K6T6K8, R3ALH7349JTWM8, R1TMGMYR2XPEY9, R2MJO4BBCWGL72, R3NA18D20L8NY1 편두통, R1OUIOCM3K04RQ, R2EUPWDAZT3HXS). 메스꺼움 5(R2EZN6I42B0NZ7, R22JII6PVDJEEJ, R1C30YF7Q89DX3, R3MC6PXIFNVNU, R3S6WAVPRQ97PP). 호흡 2(R3HTG089Q8UVI8 천식, R31PCZVW0SWTU 기침). 어지럼 1(R1HAE7MDOFXXVC 'Me marea'). 알레르기 언급 2(R29AJ7AM4NWRLK, RS6YN8769GZE5, 둘 다 본인 반응을 직접 묘사하지 않음). 줄마다 인용 원문과 증상이 맞음"
+  next_action: PROCEED

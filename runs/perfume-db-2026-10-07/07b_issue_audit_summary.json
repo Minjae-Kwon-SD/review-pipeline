@@ -1,0 +1,9 @@
+{
+  "checked_at": "2026-10-07T18:18:28+09:00",
+  "status": "PASS",
+  "sample": 150,
+  "fail": 1,
+  "fail_rate": 0.007,
+  "max_fail_rate": 0.05,
+  "warnings": []
+}

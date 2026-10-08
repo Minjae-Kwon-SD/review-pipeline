@@ -1,0 +1,30 @@
+{
+  "collected_at": "2026-10-07T12:37:23+09:00",
+  "mode": "db",
+  "offline": true,
+  "asins": [
+    "B00021AJ5I",
+    "B0BZDZJDTG",
+    "B0009OAI8Q",
+    "B09X5BQ969",
+    "B08FBQWRYC",
+    "B0GFGL26JD"
+  ],
+  "kept_reviews": 1212,
+  "dropped_count": 2,
+  "dropped": [
+    {
+      "review_id": "R13YOU8LDDD2BQ",
+      "asin": "B00021AJ5I",
+      "star": 4,
+      "reason": "본문 없음"
+    },
+    {
+      "review_id": "R384VBDGGGFQBA",
+      "asin": "B0009OAI8Q",
+      "star": 3,
+      "reason": "본문 없음"
+    }
+  ],
+  "notes": []
+}

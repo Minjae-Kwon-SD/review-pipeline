@@ -1,0 +1,3997 @@
+{
+  "made_at": "2026-10-08T12:22:27+09:00",
+  "run": "perfume-db-2026-10-07",
+  "marketplace": "US",
+  "tables": {
+    "subcategories": [
+      {
+        "id": 11056591,
+        "subcategoryName": "Fragrance",
+        "subcategoryContextName": "Perfumes & Fragrances",
+        "parentId": 3760911,
+        "level": 2,
+        "totalMonthlyRevenue": 131836119.65,
+        "totalNumberUnitsSold": 3585065,
+        "totalBrands": 3067,
+        "totalAsins": 60147,
+        "avgPrice": 38.05,
+        "avgRating": 4.25,
+        "avgReviews": 1060.44,
+        "momGrowth": 0.0,
+        "momGrowth12": 0.13,
+        "azRevenuePct": 0.273,
+        "sellerRevenuePct": 0.727,
+        "source": "market/raw/subcategories_search_all.json"
+      },
+      {
+        "id": 11056931,
+        "subcategoryName": "Women's",
+        "subcategoryContextName": "Women's Fragrances",
+        "parentId": 11056591,
+        "level": 3,
+        "totalMonthlyRevenue": 72057467.46,
+        "totalNumberUnitsSold": 2110645,
+        "totalBrands": 2184,
+        "totalAsins": 33815,
+        "avgPrice": 43.22,
+        "avgRating": 4.22,
+        "avgReviews": 794.85,
+        "momGrowth": -0.03,
+        "momGrowth12": 0.08,
+        "azRevenuePct": 0.2777,
+        "sellerRevenuePct": 0.7223,
+        "source": "market/raw/subcategories_search_all.json"
+      },
+      {
+        "id": 11056761,
+        "subcategoryName": "Men's",
+        "subcategoryContextName": "Men's Fragrances",
+        "parentId": 11056591,
+        "level": 3,
+        "totalMonthlyRevenue": 57053611.94,
+        "totalNumberUnitsSold": 1375949,
+        "totalBrands": 1770,
+        "totalAsins": 25202,
+        "avgPrice": 40.23,
+        "avgRating": 4.3,
+        "avgReviews": 2277.55,
+        "momGrowth": 0.03,
+        "momGrowth12": 0.22,
+        "azRevenuePct": 0.2669,
+        "sellerRevenuePct": 0.7331,
+        "source": "market/raw/subcategories_search_all.json"
+      },
+      {
+        "id": 11057071,
+        "subcategoryName": "Eau de Parfum",
+        "subcategoryContextName": "Women's Eau de Parfum",
+        "parentId": 11056931,
+        "level": 4,
+        "totalMonthlyRevenue": 45658866.03,
+        "totalNumberUnitsSold": 1104683,
+        "totalBrands": 1440,
+        "totalAsins": 20564,
+        "avgPrice": 51.43,
+        "avgRating": 4.15,
+        "avgReviews": 1198.78,
+        "momGrowth": 0.0,
+        "momGrowth12": 0.14,
+        "azRevenuePct": 0.2645,
+        "sellerRevenuePct": 0.7355,
+        "source": "market/raw/subcategories_search_all.json"
+      },
+      {
+        "id": 3783161,
+        "subcategoryName": "Body Sprays",
+        "subcategoryContextName": "Women's Body Sprays Fragrance",
+        "parentId": 11056931,
+        "level": 4,
+        "totalMonthlyRevenue": 10834874.9,
+        "totalNumberUnitsSold": 536494,
+        "totalBrands": 409,
+        "totalAsins": 3333,
+        "avgPrice": 25.42,
+        "avgRating": 4.3,
+        "avgReviews": 1249.2,
+        "momGrowth": -0.14,
+        "momGrowth12": -0.16,
+        "azRevenuePct": 0.2543,
+        "sellerRevenuePct": 0.7457,
+        "source": "market/raw/subcategories_search_all.json"
+      },
+      {
+        "id": 11057081,
+        "subcategoryName": "Eau de Toilette",
+        "subcategoryContextName": "Women's Eau de Toilette",
+        "parentId": 11056931,
+        "level": 4,
+        "totalMonthlyRevenue": 8174929.82,
+        "totalNumberUnitsSold": 188786,
+        "totalBrands": 635,
+        "totalAsins": 4231,
+        "avgPrice": 58.14,
+        "avgRating": 4.36,
+        "avgReviews": 867.56,
+        "momGrowth": -0.04,
+        "momGrowth12": 0.03,
+        "azRevenuePct": 0.4511,
+        "sellerRevenuePct": 0.5489,
+        "source": "market/raw/subcategories_search_all.json"
+      },
+      {
+        "id": 11057111,
+        "subcategoryName": "Sets",
+        "subcategoryContextName": "Women's Fragrance Sets",
+        "parentId": 11056931,
+        "level": 4,
+        "totalMonthlyRevenue": 3411821.69,
+        "totalNumberUnitsSold": 102492,
+        "totalBrands": 321,
+        "totalAsins": 1616,
+        "avgPrice": 47.98,
+        "avgRating": 4.31,
+        "avgReviews": 584.75,
+        "momGrowth": -0.15,
+        "momGrowth12": 0.38,
+        "azRevenuePct": 0.2415,
+        "sellerRevenuePct": 0.7585,
+        "source": "market/raw/subcategories_search_all.json"
+      },
+      {
+        "id": 11057051,
+        "subcategoryName": "Cologne",
+        "subcategoryContextName": "Women's Cologne",
+        "parentId": 11056931,
+        "level": 4,
+        "totalMonthlyRevenue": 1969740.28,
+        "totalNumberUnitsSold": 80361,
+        "totalBrands": 438,
+        "totalAsins": 3515,
+        "avgPrice": 40.24,
+        "avgRating": 4.05,
+        "avgReviews": 273.22,
+        "momGrowth": 0.07,
+        "momGrowth12": -0.1,
+        "azRevenuePct": 0.2663,
+        "sellerRevenuePct": 0.7337,
+        "source": "market/raw/subcategories_search_all.json"
+      },
+      {
+        "id": 16262036011,
+        "subcategoryName": "Eau Fraiche",
+        "subcategoryContextName": "Women's Eau Fraiche",
+        "parentId": 11056931,
+        "level": 4,
+        "totalMonthlyRevenue": 58871.07,
+        "totalNumberUnitsSold": 4419,
+        "totalBrands": 8,
+        "totalAsins": 16,
+        "avgPrice": 54.12,
+        "avgRating": 4.22,
+        "avgReviews": 741.19,
+        "momGrowth": -0.2,
+        "momGrowth12": 2.02,
+        "azRevenuePct": 0.1484,
+        "sellerRevenuePct": 0.8516,
+        "source": "market/raw/subcategories_search_all.json"
+      }
+    ],
+    "brands_EDP": [
+      {
+        "brandName": "Lattafa",
+        "revenue": 3657142.850000001,
+        "marketshare": 0.08009710200855816,
+        "moMMktShareChange": -0.0093,
+        "numberASINs": 342,
+        "totalNumberUnitsSold": 139188,
+        "avgPrice": 32.34777448071213,
+        "reviewRating": 4.305029585798814,
+        "totalReviews": 984447,
+        "avgReviews": 2878.5,
+        "adSpendShare": 0.002,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Bella Vita Luxury",
+        "revenue": 1666120.4399999997,
+        "marketshare": 0.03649062241066786,
+        "moMMktShareChange": 0.0081,
+        "numberASINs": 21,
+        "totalNumberUnitsSold": 83685,
+        "avgPrice": 21.60714285714286,
+        "reviewRating": 4.076190476190476,
+        "totalReviews": 83117,
+        "avgReviews": 3957.9523809523807,
+        "adSpendShare": 0.092,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Yves Saint Laurent",
+        "revenue": 1647605.5299999998,
+        "marketshare": 0.036085117158131924,
+        "moMMktShareChange": -0.0021,
+        "numberASINs": 118,
+        "totalNumberUnitsSold": 19947,
+        "avgPrice": 84.58796460176995,
+        "reviewRating": 4.422222222222221,
+        "totalReviews": 62026,
+        "avgReviews": 525.6440677966102,
+        "adSpendShare": null,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Lancôme",
+        "revenue": 1513856.2200000002,
+        "marketshare": 0.03315579977403132,
+        "moMMktShareChange": 0.0047,
+        "numberASINs": 57,
+        "totalNumberUnitsSold": 17418,
+        "avgPrice": 113.91947368421053,
+        "reviewRating": 4.548214285714286,
+        "totalReviews": 300150,
+        "avgReviews": 5265.789473684211,
+        "adSpendShare": 0.033,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Victoria's Secret",
+        "revenue": 1080439.930000001,
+        "marketshare": 0.023663310632596565,
+        "moMMktShareChange": -0.0005,
+        "numberASINs": 194,
+        "totalNumberUnitsSold": 22958,
+        "avgPrice": 58.58558510638294,
+        "reviewRating": 4.577604166666672,
+        "totalReviews": 171410,
+        "avgReviews": 883.5567010309278,
+        "adSpendShare": 0.044,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Estée lauder",
+        "revenue": 1043179.36,
+        "marketshare": 0.022847246344545276,
+        "moMMktShareChange": 0.0021,
+        "numberASINs": 93,
+        "totalNumberUnitsSold": 14223,
+        "avgPrice": 81.17807228915662,
+        "reviewRating": 4.5293478260869575,
+        "totalReviews": 209504,
+        "avgReviews": 2252.7311827956987,
+        "adSpendShare": 0.032,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Dossier",
+        "revenue": 966949.8199999998,
+        "marketshare": 0.021177701158076698,
+        "moMMktShareChange": 0.0039,
+        "numberASINs": 49,
+        "totalNumberUnitsSold": 26567,
+        "avgPrice": 41.04877551020408,
+        "reviewRating": 4.191836734693877,
+        "totalReviews": 64294,
+        "avgReviews": 1312.1224489795918,
+        "adSpendShare": 0.039,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Gucci",
+        "revenue": 921946.6300000001,
+        "marketshare": 0.020192061480331952,
+        "moMMktShareChange": 0.0004,
+        "numberASINs": 106,
+        "totalNumberUnitsSold": 16597,
+        "avgPrice": 63.057619047619006,
+        "reviewRating": 4.480188679245283,
+        "totalReviews": 108528,
+        "avgReviews": 1023.8490566037735,
+        "adSpendShare": null,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "ARMANI Beauty",
+        "revenue": 906679.2000000001,
+        "marketshare": 0.019857681077849583,
+        "moMMktShareChange": 0.005,
+        "numberASINs": 86,
+        "totalNumberUnitsSold": 10409,
+        "avgPrice": 97.46811764705879,
+        "reviewRating": 4.554117647058824,
+        "totalReviews": 150452,
+        "avgReviews": 1749.4418604651162,
+        "adSpendShare": 0.018,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Prada",
+        "revenue": 814271.5899999997,
+        "marketshare": 0.0178338110601561,
+        "moMMktShareChange": 0.0007,
+        "numberASINs": 70,
+        "totalNumberUnitsSold": 9766,
+        "avgPrice": 96.08676470588233,
+        "reviewRating": 4.478260869565218,
+        "totalReviews": 67268,
+        "avgReviews": 960.9714285714285,
+        "adSpendShare": null,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Ariana Grande",
+        "revenue": 755689.28,
+        "marketshare": 0.016550767588127943,
+        "moMMktShareChange": -0.0018,
+        "numberASINs": 42,
+        "totalNumberUnitsSold": 12683,
+        "avgPrice": 56.06119047619047,
+        "reviewRating": 4.619047619047618,
+        "totalReviews": 330997,
+        "avgReviews": 7880.880952380952,
+        "adSpendShare": null,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Valentino",
+        "revenue": 722535.75,
+        "marketshare": 0.01582465384762864,
+        "moMMktShareChange": -0.0036,
+        "numberASINs": 67,
+        "totalNumberUnitsSold": 9106,
+        "avgPrice": 80.88373134328356,
+        "reviewRating": 4.45373134328358,
+        "totalReviews": 54969,
+        "avgReviews": 820.4328358208955,
+        "adSpendShare": 0.001,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Carolina Herrera",
+        "revenue": 717560.4199999999,
+        "marketshare": 0.015715686402034804,
+        "moMMktShareChange": 0.0004,
+        "numberASINs": 115,
+        "totalNumberUnitsSold": 7838,
+        "avgPrice": 105.37929203539822,
+        "reviewRating": 4.5452173913043445,
+        "totalReviews": 181060,
+        "avgReviews": 1574.4347826086957,
+        "adSpendShare": 0.014,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "ARMAF",
+        "revenue": 708988.38,
+        "marketshare": 0.015527945427601325,
+        "moMMktShareChange": -0.0006,
+        "numberASINs": 113,
+        "totalNumberUnitsSold": 23332,
+        "avgPrice": 34.3095575221239,
+        "reviewRating": 4.242727272727274,
+        "totalReviews": 83635,
+        "avgReviews": 740.1327433628319,
+        "adSpendShare": null,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Tom Ford",
+        "revenue": 684468.2799999998,
+        "marketshare": 0.0149909171977743,
+        "moMMktShareChange": 0.0007,
+        "numberASINs": 114,
+        "totalNumberUnitsSold": 7588,
+        "avgPrice": 164.0764035087719,
+        "reviewRating": 4.3132743362831825,
+        "totalReviews": 44733,
+        "avgReviews": 392.39473684210526,
+        "adSpendShare": null,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Glossier",
+        "revenue": 639980.88,
+        "marketshare": 0.014016574121212357,
+        "moMMktShareChange": 0.0017,
+        "numberASINs": 20,
+        "totalNumberUnitsSold": 10964,
+        "avgPrice": 72.083,
+        "reviewRating": 4.45,
+        "totalReviews": 4148,
+        "avgReviews": 207.4,
+        "adSpendShare": 0.025,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Versace",
+        "revenue": 632065.5299999999,
+        "marketshare": 0.013843215676550167,
+        "moMMktShareChange": 0.0004,
+        "numberASINs": 64,
+        "totalNumberUnitsSold": 11367,
+        "avgPrice": 56.21703125,
+        "reviewRating": 4.44375,
+        "totalReviews": 136938,
+        "avgReviews": 2139.65625,
+        "adSpendShare": null,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Clinique",
+        "revenue": 606538.2499999999,
+        "marketshare": 0.013284128642211044,
+        "moMMktShareChange": 0.0027,
+        "numberASINs": 18,
+        "totalNumberUnitsSold": 8696,
+        "avgPrice": 62.33777777777779,
+        "reviewRating": 4.588888888888889,
+        "totalReviews": 144503,
+        "avgReviews": 8027.944444444444,
+        "adSpendShare": 0.027,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Calvin Klein",
+        "revenue": 562320.7,
+        "marketshare": 0.012315695699287168,
+        "moMMktShareChange": 0.0024,
+        "numberASINs": 48,
+        "totalNumberUnitsSold": 5872,
+        "avgPrice": 89.11625,
+        "reviewRating": 4.48723404255319,
+        "totalReviews": 159264,
+        "avgReviews": 3318.0,
+        "adSpendShare": 0.019,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "brandName": "Mugler",
+        "revenue": 551339.7800000001,
+        "marketshare": 0.012075196515781716,
+        "moMMktShareChange": 0.0008,
+        "numberASINs": 80,
+        "totalNumberUnitsSold": 6869,
+        "avgPrice": 114.216125,
+        "reviewRating": 4.5397435897435905,
+        "totalReviews": 188719,
+        "avgReviews": 2358.9875,
+        "adSpendShare": 0.017,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      }
+    ],
+    "brands_EDT": [
+      {
+        "brandName": "Versace",
+        "revenue": 737228.7799999999,
+        "marketshare": 0.09018166470326955,
+        "moMMktShareChange": 0.0027,
+        "numberASINs": 115,
+        "totalNumberUnitsSold": 16478,
+        "avgPrice": 54.301171171171184,
+        "reviewRating": 4.584821428571429,
+        "totalReviews": 390164,
+        "avgReviews": 3392.730434782609,
+        "adSpendShare": 0.006,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "Dolce&Gabbana",
+        "revenue": 706291.31,
+        "marketshare": 0.0863972322150161,
+        "moMMktShareChange": 0.0029,
+        "numberASINs": 82,
+        "totalNumberUnitsSold": 8135,
+        "avgPrice": 93.27714285714282,
+        "reviewRating": 4.5354430379746855,
+        "totalReviews": 165380,
+        "avgReviews": 2016.8292682926829,
+        "adSpendShare": 0.028,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "Marc Jacobs",
+        "revenue": 417711.3300000001,
+        "marketshare": 0.051096625805651254,
+        "moMMktShareChange": 0.0023,
+        "numberASINs": 87,
+        "totalNumberUnitsSold": 4767,
+        "avgPrice": 81.88645569620252,
+        "reviewRating": 4.5964705882352925,
+        "totalReviews": 149191,
+        "avgReviews": 1714.83908045977,
+        "adSpendShare": 0.066,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "Dior",
+        "revenue": 307530.3799999999,
+        "marketshare": 0.037618718052799115,
+        "moMMktShareChange": 0.0043,
+        "numberASINs": 105,
+        "totalNumberUnitsSold": 3567,
+        "avgPrice": 114.08313725490196,
+        "reviewRating": 4.392233009708738,
+        "totalReviews": 92790,
+        "avgReviews": 883.7142857142857,
+        "adSpendShare": 0.003,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "philosophy",
+        "revenue": 305564.04000000004,
+        "marketshare": 0.03737818510104347,
+        "moMMktShareChange": -0.0058,
+        "numberASINs": 34,
+        "totalNumberUnitsSold": 5823,
+        "avgPrice": 57.57029411764705,
+        "reviewRating": 4.5058823529411764,
+        "totalReviews": 50659,
+        "avgReviews": 1489.9705882352941,
+        "adSpendShare": 0.059,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "Dime",
+        "revenue": 270568.29000000004,
+        "marketshare": 0.03309732266300972,
+        "moMMktShareChange": -0.0058,
+        "numberASINs": 25,
+        "totalNumberUnitsSold": 6637,
+        "avgPrice": 47.514399999999995,
+        "reviewRating": 4.308000000000001,
+        "totalReviews": 22742,
+        "avgReviews": 909.68,
+        "adSpendShare": 0.23,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "CHANEL",
+        "revenue": 268597.77999999997,
+        "marketshare": 0.0328562796151319,
+        "moMMktShareChange": 0.001,
+        "numberASINs": 74,
+        "totalNumberUnitsSold": 2360,
+        "avgPrice": 162.84514285714292,
+        "reviewRating": 4.409589041095889,
+        "totalReviews": 21689,
+        "avgReviews": 293.0945945945946,
+        "adSpendShare": 0.001,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "Maison Margiela",
+        "revenue": 226371.68,
+        "marketshare": 0.02769096310113644,
+        "moMMktShareChange": -0.0002,
+        "numberASINs": 61,
+        "totalNumberUnitsSold": 2209,
+        "avgPrice": 98.53563636363637,
+        "reviewRating": 4.298305084745763,
+        "totalReviews": 10854,
+        "avgReviews": 177.9344262295082,
+        "adSpendShare": 0.061,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "Vera Wang",
+        "revenue": 209678.32,
+        "marketshare": 0.025648944347757097,
+        "moMMktShareChange": -0.001,
+        "numberASINs": 34,
+        "totalNumberUnitsSold": 11370,
+        "avgPrice": 35.175000000000004,
+        "reviewRating": 4.5,
+        "totalReviews": 189177,
+        "avgReviews": 5564.029411764706,
+        "adSpendShare": null,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "Calvin Klein",
+        "revenue": 206985.55,
+        "marketshare": 0.0253195506943202,
+        "moMMktShareChange": -0.0051,
+        "numberASINs": 27,
+        "totalNumberUnitsSold": 2330,
+        "avgPrice": 79.0192,
+        "reviewRating": 4.42962962962963,
+        "totalReviews": 168718,
+        "avgReviews": 6248.814814814815,
+        "adSpendShare": 0.066,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "Givenchy",
+        "revenue": 193519.25,
+        "marketshare": 0.02367228273037333,
+        "moMMktShareChange": -0.0004,
+        "numberASINs": 39,
+        "totalNumberUnitsSold": 3272,
+        "avgPrice": 76.48473684210525,
+        "reviewRating": 4.428205128205128,
+        "totalReviews": 31978,
+        "avgReviews": 819.9487179487179,
+        "adSpendShare": 0.004,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "Yves Saint Laurent",
+        "revenue": 191982.37,
+        "marketshare": 0.023484283562938274,
+        "moMMktShareChange": 0.0042,
+        "numberASINs": 47,
+        "totalNumberUnitsSold": 1681,
+        "avgPrice": 102.85511111111113,
+        "reviewRating": 4.5266666666666655,
+        "totalReviews": 20267,
+        "avgReviews": 431.21276595744683,
+        "adSpendShare": null,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "GUESS",
+        "revenue": 183024.30000000008,
+        "marketshare": 0.022388485776627748,
+        "moMMktShareChange": 0.0005,
+        "numberASINs": 66,
+        "totalNumberUnitsSold": 10275,
+        "avgPrice": 25.698484848484842,
+        "reviewRating": 4.393103448275862,
+        "totalReviews": 148956,
+        "avgReviews": 2256.909090909091,
+        "adSpendShare": 0.045,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "Tommy Hilfiger",
+        "revenue": 165951.52000000002,
+        "marketshare": 0.020300054392393546,
+        "moMMktShareChange": 0.0029,
+        "numberASINs": 28,
+        "totalNumberUnitsSold": 3526,
+        "avgPrice": 51.38791666666666,
+        "reviewRating": 4.562962962962962,
+        "totalReviews": 40623,
+        "avgReviews": 1450.8214285714287,
+        "adSpendShare": 0.015,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "RALPH LAUREN FRAGRANCES",
+        "revenue": 160404.34,
+        "marketshare": 0.019621494438713107,
+        "moMMktShareChange": 0.0049,
+        "numberASINs": 10,
+        "totalNumberUnitsSold": 1803,
+        "avgPrice": 91.69200000000001,
+        "reviewRating": 4.48,
+        "totalReviews": 22223,
+        "avgReviews": 2222.3,
+        "adSpendShare": 0.006,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "BVLGARI",
+        "revenue": 148785.5,
+        "marketshare": 0.018200217405658407,
+        "moMMktShareChange": -0.002,
+        "numberASINs": 60,
+        "totalNumberUnitsSold": 1764,
+        "avgPrice": 86.97864406779662,
+        "reviewRating": 4.485964912280701,
+        "totalReviews": 50371,
+        "avgReviews": 839.5166666666667,
+        "adSpendShare": null,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "Guerlain",
+        "revenue": 128653.49999999996,
+        "marketshare": 0.01573756629509511,
+        "moMMktShareChange": -0.0014,
+        "numberASINs": 62,
+        "totalNumberUnitsSold": 1347,
+        "avgPrice": 88.10383333333331,
+        "reviewRating": 4.340322580645159,
+        "totalReviews": 23600,
+        "avgReviews": 380.64516129032256,
+        "adSpendShare": 0.001,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "Elizabeth Taylor",
+        "revenue": 125948.51000000002,
+        "marketshare": 0.015406677827602439,
+        "moMMktShareChange": -0.0014,
+        "numberASINs": 63,
+        "totalNumberUnitsSold": 6106,
+        "avgPrice": 25.41639344262295,
+        "reviewRating": 4.554838709677417,
+        "totalReviews": 125156,
+        "avgReviews": 1986.6031746031747,
+        "adSpendShare": 0.01,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "Gucci",
+        "revenue": 115057.04999999996,
+        "marketshare": 0.014074377705177648,
+        "moMMktShareChange": 0.0012,
+        "numberASINs": 74,
+        "totalNumberUnitsSold": 2550,
+        "avgPrice": 65.29927536231884,
+        "reviewRating": 4.446575342465754,
+        "totalReviews": 36735,
+        "avgReviews": 496.4189189189189,
+        "adSpendShare": 0.001,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "brandName": "REVLON",
+        "revenue": 114776.86999999998,
+        "marketshare": 0.014040104628078623,
+        "moMMktShareChange": 0.0034,
+        "numberASINs": 19,
+        "totalNumberUnitsSold": 8276,
+        "avgPrice": 15.763684210526318,
+        "reviewRating": 4.4111111111111105,
+        "totalReviews": 55831,
+        "avgReviews": 2938.4736842105262,
+        "adSpendShare": null,
+        "source": "market/raw/subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      }
+    ],
+    "terms_EDP": [
+      {
+        "searchTermValue": "hair perfume",
+        "volume30Day": 330109,
+        "current4WkVolume": 210700,
+        "priorYear4WkVolume": 62970,
+        "yoYChange": 147730,
+        "yoYChangePct": 2.346,
+        "relevancy": 66,
+        "numRelatedProducts": 2,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "perfumes for women",
+        "volume30Day": 270398,
+        "current4WkVolume": 266044,
+        "priorYear4WkVolume": 244656,
+        "yoYChange": 21388,
+        "yoYChangePct": 0.0874,
+        "relevancy": 82,
+        "numRelatedProducts": 161,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "cologne for men",
+        "volume30Day": 206595,
+        "current4WkVolume": 200007,
+        "priorYear4WkVolume": 198781,
+        "yoYChange": 1226,
+        "yoYChangePct": 0.0062,
+        "relevancy": 56,
+        "numRelatedProducts": 9,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "mens cologne",
+        "volume30Day": 194526,
+        "current4WkVolume": 188669,
+        "priorYear4WkVolume": 191533,
+        "yoYChange": -2864,
+        "yoYChangePct": -0.015,
+        "relevancy": 56,
+        "numRelatedProducts": 6,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "perfume",
+        "volume30Day": 177366,
+        "current4WkVolume": 172199,
+        "priorYear4WkVolume": 215420,
+        "yoYChange": -43221,
+        "yoYChangePct": -0.2006,
+        "relevancy": 74,
+        "numRelatedProducts": 113,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "lattafa",
+        "volume30Day": 133200,
+        "current4WkVolume": 129660,
+        "priorYear4WkVolume": 138622,
+        "yoYChange": -8962,
+        "yoYChangePct": -0.0647,
+        "relevancy": 74,
+        "numRelatedProducts": 44,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "valentino",
+        "volume30Day": 127181,
+        "current4WkVolume": 121069,
+        "priorYear4WkVolume": 59709,
+        "yoYChange": 61360,
+        "yoYChangePct": 1.0277,
+        "relevancy": 74,
+        "numRelatedProducts": 47,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "perfume for men",
+        "volume30Day": 123522,
+        "current4WkVolume": 125623,
+        "priorYear4WkVolume": 120818,
+        "yoYChange": 4805,
+        "yoYChangePct": 0.0398,
+        "relevancy": 56,
+        "numRelatedProducts": 11,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "cologne",
+        "volume30Day": 113368,
+        "current4WkVolume": 106884,
+        "priorYear4WkVolume": 130111,
+        "yoYChange": -23227,
+        "yoYChangePct": -0.1785,
+        "relevancy": 56,
+        "numRelatedProducts": 9,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "yara perfume",
+        "volume30Day": 108641,
+        "current4WkVolume": 107411,
+        "priorYear4WkVolume": 59806,
+        "yoYChange": 47605,
+        "yoYChangePct": 0.796,
+        "relevancy": 77,
+        "numRelatedProducts": 44,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "versace eros",
+        "volume30Day": 107083,
+        "current4WkVolume": 105038,
+        "priorYear4WkVolume": 102046,
+        "yoYChange": 2992,
+        "yoYChangePct": 0.0293,
+        "relevancy": 56,
+        "numRelatedProducts": 5,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "voyage nova perfume",
+        "volume30Day": 106861,
+        "current4WkVolume": 88531,
+        "priorYear4WkVolume": null,
+        "yoYChange": null,
+        "yoYChangePct": null,
+        "relevancy": 75,
+        "numRelatedProducts": 54,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "fragrances",
+        "volume30Day": 104622,
+        "current4WkVolume": 84353,
+        "priorYear4WkVolume": 50737,
+        "yoYChange": 33616,
+        "yoYChangePct": 0.6626,
+        "relevancy": 68,
+        "numRelatedProducts": 64,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "goda perfume for women",
+        "volume30Day": 101571,
+        "current4WkVolume": 106493,
+        "priorYear4WkVolume": 106121,
+        "yoYChange": 372,
+        "yoYChangePct": 0.0035,
+        "relevancy": 71,
+        "numRelatedProducts": 46,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "victoria secret perfume",
+        "volume30Day": 98128,
+        "current4WkVolume": 90881,
+        "priorYear4WkVolume": 117944,
+        "yoYChange": -27063,
+        "yoYChangePct": -0.2295,
+        "relevancy": 71,
+        "numRelatedProducts": 58,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "vanilla perfume",
+        "volume30Day": 94475,
+        "current4WkVolume": 95925,
+        "priorYear4WkVolume": 130502,
+        "yoYChange": -34577,
+        "yoYChangePct": -0.265,
+        "relevancy": 69,
+        "numRelatedProducts": 53,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "bella vita perfume",
+        "volume30Day": 91817,
+        "current4WkVolume": 95277,
+        "priorYear4WkVolume": 13067,
+        "yoYChange": 82210,
+        "yoYChangePct": 6.2914,
+        "relevancy": 73,
+        "numRelatedProducts": 35,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "lattafa perfumes for women",
+        "volume30Day": 87313,
+        "current4WkVolume": 81448,
+        "priorYear4WkVolume": 141605,
+        "yoYChange": -60157,
+        "yoYChangePct": -0.4248,
+        "relevancy": 75,
+        "numRelatedProducts": 52,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "billie eilish perfume",
+        "volume30Day": 76748,
+        "current4WkVolume": 73363,
+        "priorYear4WkVolume": 105031,
+        "yoYChange": -31668,
+        "yoYChangePct": -0.3015,
+        "relevancy": 75,
+        "numRelatedProducts": 50,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "lattafa khamrah",
+        "volume30Day": 69926,
+        "current4WkVolume": 64930,
+        "priorYear4WkVolume": 73959,
+        "yoYChange": -9029,
+        "yoYChangePct": -0.1221,
+        "relevancy": 61,
+        "numRelatedProducts": 29,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "jean paul gaultier",
+        "volume30Day": 69664,
+        "current4WkVolume": 67699,
+        "priorYear4WkVolume": 102956,
+        "yoYChange": -35257,
+        "yoYChangePct": -0.3424,
+        "relevancy": 42,
+        "numRelatedProducts": 13,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "valentino cologne for men",
+        "volume30Day": 66876,
+        "current4WkVolume": 65322,
+        "priorYear4WkVolume": 82702,
+        "yoYChange": -17380,
+        "yoYChangePct": -0.2102,
+        "relevancy": 42,
+        "numRelatedProducts": 1,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "ariana grande perfume",
+        "volume30Day": 64624,
+        "current4WkVolume": 64577,
+        "priorYear4WkVolume": 84901,
+        "yoYChange": -20324,
+        "yoYChangePct": -0.2394,
+        "relevancy": 74,
+        "numRelatedProducts": 53,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "sand and fog perfume oil",
+        "volume30Day": 64234,
+        "current4WkVolume": 59484,
+        "priorYear4WkVolume": 56972,
+        "yoYChange": 2512,
+        "yoYChangePct": 0.0441,
+        "relevancy": 73,
+        "numRelatedProducts": 53,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "calvin klein",
+        "volume30Day": 61733,
+        "current4WkVolume": 59328,
+        "priorYear4WkVolume": 63255,
+        "yoYChange": -3927,
+        "yoYChangePct": -0.0621,
+        "relevancy": 33,
+        "numRelatedProducts": 3,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "9pm cologne for men",
+        "volume30Day": 61636,
+        "current4WkVolume": 58802,
+        "priorYear4WkVolume": 41645,
+        "yoYChange": 17157,
+        "yoYChangePct": 0.412,
+        "relevancy": 62,
+        "numRelatedProducts": 11,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "armaf",
+        "volume30Day": 61427,
+        "current4WkVolume": 60404,
+        "priorYear4WkVolume": 53474,
+        "yoYChange": 6930,
+        "yoYChangePct": 0.1296,
+        "relevancy": 60,
+        "numRelatedProducts": 17,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "men cologne",
+        "volume30Day": 60534,
+        "current4WkVolume": 62996,
+        "priorYear4WkVolume": 66041,
+        "yoYChange": -3045,
+        "yoYChangePct": -0.0461,
+        "relevancy": 40,
+        "numRelatedProducts": 7,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "ysl cologne for men",
+        "volume30Day": 60056,
+        "current4WkVolume": 62981,
+        "priorYear4WkVolume": 62449,
+        "yoYChange": 532,
+        "yoYChangePct": 0.0085,
+        "relevancy": 62,
+        "numRelatedProducts": 6,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "haiku perfume for women",
+        "volume30Day": 58776,
+        "current4WkVolume": 20971,
+        "priorYear4WkVolume": 10227,
+        "yoYChange": 10744,
+        "yoYChangePct": 1.0506,
+        "relevancy": 67,
+        "numRelatedProducts": 49,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "valentino perfume for women",
+        "volume30Day": 58386,
+        "current4WkVolume": 58750,
+        "priorYear4WkVolume": 104229,
+        "yoYChange": -45479,
+        "yoYChangePct": -0.4363,
+        "relevancy": 74,
+        "numRelatedProducts": 60,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "guess",
+        "volume30Day": 57680,
+        "current4WkVolume": 56057,
+        "priorYear4WkVolume": 58610,
+        "yoYChange": -2553,
+        "yoYChangePct": -0.0436,
+        "relevancy": 56,
+        "numRelatedProducts": 6,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "pheromones perfumes for women",
+        "volume30Day": 56890,
+        "current4WkVolume": 57542,
+        "priorYear4WkVolume": 91570,
+        "yoYChange": -34028,
+        "yoYChangePct": -0.3716,
+        "relevancy": 68,
+        "numRelatedProducts": 45,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "versace bright crystal",
+        "volume30Day": 56628,
+        "current4WkVolume": 56860,
+        "priorYear4WkVolume": 11200,
+        "yoYChange": 45660,
+        "yoYChangePct": 4.0768,
+        "relevancy": 62,
+        "numRelatedProducts": 17,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "dior",
+        "volume30Day": 55621,
+        "current4WkVolume": 55904,
+        "priorYear4WkVolume": 51012,
+        "yoYChange": 4892,
+        "yoYChangePct": 0.0959,
+        "relevancy": 64,
+        "numRelatedProducts": 20,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "kayali perfume",
+        "volume30Day": 55482,
+        "current4WkVolume": 51306,
+        "priorYear4WkVolume": 51801,
+        "yoYChange": -495,
+        "yoYChangePct": -0.0096,
+        "relevancy": 74,
+        "numRelatedProducts": 50,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "carolina herrera perfume for women",
+        "volume30Day": 54428,
+        "current4WkVolume": 56653,
+        "priorYear4WkVolume": 57383,
+        "yoYChange": -730,
+        "yoYChangePct": -0.0127,
+        "relevancy": 72,
+        "numRelatedProducts": 54,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "perfumes",
+        "volume30Day": 51189,
+        "current4WkVolume": 48729,
+        "priorYear4WkVolume": 41739,
+        "yoYChange": 6990,
+        "yoYChangePct": 0.1675,
+        "relevancy": 65,
+        "numRelatedProducts": 104,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "ycz cologne for men",
+        "volume30Day": 49061,
+        "current4WkVolume": 48737,
+        "priorYear4WkVolume": 59209,
+        "yoYChange": -10472,
+        "yoYChangePct": -0.1769,
+        "relevancy": 34,
+        "numRelatedProducts": 5,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "versace cologne for men",
+        "volume30Day": 46518,
+        "current4WkVolume": 47028,
+        "priorYear4WkVolume": 106458,
+        "yoYChange": -59430,
+        "yoYChangePct": -0.5582,
+        "relevancy": 35,
+        "numRelatedProducts": 1,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "goda pheromone perfume for women",
+        "volume30Day": 43884,
+        "current4WkVolume": 39345,
+        "priorYear4WkVolume": null,
+        "yoYChange": null,
+        "yoYChangePct": null,
+        "relevancy": 66,
+        "numRelatedProducts": 45,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "sauvage dior for men",
+        "volume30Day": 43806,
+        "current4WkVolume": 46165,
+        "priorYear4WkVolume": 58397,
+        "yoYChange": -12232,
+        "yoYChangePct": -0.2095,
+        "relevancy": 30,
+        "numRelatedProducts": 1,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "perfume oil",
+        "volume30Day": 43653,
+        "current4WkVolume": 43071,
+        "priorYear4WkVolume": 43198,
+        "yoYChange": -127,
+        "yoYChangePct": -0.0029,
+        "relevancy": 64,
+        "numRelatedProducts": 36,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "perfumes for men",
+        "volume30Day": 43641,
+        "current4WkVolume": 43439,
+        "priorYear4WkVolume": 43461,
+        "yoYChange": -22,
+        "yoYChangePct": -0.0005,
+        "relevancy": 49,
+        "numRelatedProducts": 10,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "womens perfume",
+        "volume30Day": 43577,
+        "current4WkVolume": 45798,
+        "priorYear4WkVolume": 52400,
+        "yoYChange": -6602,
+        "yoYChangePct": -0.126,
+        "relevancy": 66,
+        "numRelatedProducts": 57,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "men's cologne",
+        "volume30Day": 43510,
+        "current4WkVolume": 46351,
+        "priorYear4WkVolume": 46880,
+        "yoYChange": -529,
+        "yoYChangePct": -0.0113,
+        "relevancy": 35,
+        "numRelatedProducts": 5,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "armaf club de nuit intense man",
+        "volume30Day": 43299,
+        "current4WkVolume": 43038,
+        "priorYear4WkVolume": 36290,
+        "yoYChange": 6748,
+        "yoYChangePct": 0.1859,
+        "relevancy": 37,
+        "numRelatedProducts": 8,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "aqua di gio parfum for men",
+        "volume30Day": 43064,
+        "current4WkVolume": 41796,
+        "priorYear4WkVolume": 34167,
+        "yoYChange": 7629,
+        "yoYChangePct": 0.2233,
+        "relevancy": 27,
+        "numRelatedProducts": 2,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "body mist",
+        "volume30Day": 43007,
+        "current4WkVolume": 42065,
+        "priorYear4WkVolume": 36792,
+        "yoYChange": 5273,
+        "yoYChangePct": 0.1433,
+        "relevancy": 29,
+        "numRelatedProducts": 1,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "searchTermValue": "dossier perfume",
+        "volume30Day": 42894,
+        "current4WkVolume": 41901,
+        "priorYear4WkVolume": 53561,
+        "yoYChange": -11660,
+        "yoYChangePct": -0.2177,
+        "relevancy": 71,
+        "numRelatedProducts": 42,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      }
+    ],
+    "terms_EDT": [
+      {
+        "searchTermValue": "perfumes for women",
+        "volume30Day": 270398,
+        "current4WkVolume": 266044,
+        "priorYear4WkVolume": 244656,
+        "yoYChange": 21388,
+        "yoYChangePct": 0.0874,
+        "relevancy": 73,
+        "numRelatedProducts": 40,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "perfume",
+        "volume30Day": 177366,
+        "current4WkVolume": 172199,
+        "priorYear4WkVolume": 215420,
+        "yoYChange": -43221,
+        "yoYChangePct": -0.2006,
+        "relevancy": 66,
+        "numRelatedProducts": 22,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "versace eros",
+        "volume30Day": 107083,
+        "current4WkVolume": 105038,
+        "priorYear4WkVolume": 102046,
+        "yoYChange": 2992,
+        "yoYChangePct": 0.0293,
+        "relevancy": 27,
+        "numRelatedProducts": 3,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "voyage nova perfume",
+        "volume30Day": 106861,
+        "current4WkVolume": 88531,
+        "priorYear4WkVolume": null,
+        "yoYChange": null,
+        "yoYChangePct": null,
+        "relevancy": 49,
+        "numRelatedProducts": 2,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "fragrances",
+        "volume30Day": 104622,
+        "current4WkVolume": 84353,
+        "priorYear4WkVolume": 50737,
+        "yoYChange": 33616,
+        "yoYChangePct": 0.6626,
+        "relevancy": 58,
+        "numRelatedProducts": 11,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "goda perfume for women",
+        "volume30Day": 101571,
+        "current4WkVolume": 106493,
+        "priorYear4WkVolume": 106121,
+        "yoYChange": 372,
+        "yoYChangePct": 0.0035,
+        "relevancy": 35,
+        "numRelatedProducts": 15,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "vanilla perfume",
+        "volume30Day": 94475,
+        "current4WkVolume": 95925,
+        "priorYear4WkVolume": 130502,
+        "yoYChange": -34577,
+        "yoYChangePct": -0.265,
+        "relevancy": 50,
+        "numRelatedProducts": 2,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "bella vita perfume",
+        "volume30Day": 91817,
+        "current4WkVolume": 95277,
+        "priorYear4WkVolume": 13067,
+        "yoYChange": 82210,
+        "yoYChangePct": 6.2914,
+        "relevancy": 37,
+        "numRelatedProducts": 4,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "ariana grande perfume",
+        "volume30Day": 64624,
+        "current4WkVolume": 64577,
+        "priorYear4WkVolume": 84901,
+        "yoYChange": -20324,
+        "yoYChangePct": -0.2394,
+        "relevancy": 23,
+        "numRelatedProducts": 2,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "haiku perfume for women",
+        "volume30Day": 58776,
+        "current4WkVolume": 20971,
+        "priorYear4WkVolume": 10227,
+        "yoYChange": 10744,
+        "yoYChangePct": 1.0506,
+        "relevancy": 47,
+        "numRelatedProducts": 10,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "guess",
+        "volume30Day": 57680,
+        "current4WkVolume": 56057,
+        "priorYear4WkVolume": 58610,
+        "yoYChange": -2553,
+        "yoYChangePct": -0.0436,
+        "relevancy": 58,
+        "numRelatedProducts": 15,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "hair perfume spray",
+        "volume30Day": 57388,
+        "current4WkVolume": 132502,
+        "priorYear4WkVolume": 2831,
+        "yoYChange": 129671,
+        "yoYChangePct": 45.804,
+        "relevancy": 42,
+        "numRelatedProducts": 1,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "versace bright crystal",
+        "volume30Day": 56628,
+        "current4WkVolume": 56860,
+        "priorYear4WkVolume": 11200,
+        "yoYChange": 45660,
+        "yoYChangePct": 4.0768,
+        "relevancy": 71,
+        "numRelatedProducts": 30,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "dior",
+        "volume30Day": 55621,
+        "current4WkVolume": 55904,
+        "priorYear4WkVolume": 51012,
+        "yoYChange": 4892,
+        "yoYChangePct": 0.0959,
+        "relevancy": 57,
+        "numRelatedProducts": 11,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "carolina herrera perfume for women",
+        "volume30Day": 54428,
+        "current4WkVolume": 56653,
+        "priorYear4WkVolume": 57383,
+        "yoYChange": -730,
+        "yoYChangePct": -0.0127,
+        "relevancy": 52,
+        "numRelatedProducts": 6,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "perfumes",
+        "volume30Day": 51189,
+        "current4WkVolume": 48729,
+        "priorYear4WkVolume": 41739,
+        "yoYChange": 6990,
+        "yoYChangePct": 0.1675,
+        "relevancy": 55,
+        "numRelatedProducts": 17,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "goda pheromone perfume for women",
+        "volume30Day": 43884,
+        "current4WkVolume": 39345,
+        "priorYear4WkVolume": null,
+        "yoYChange": null,
+        "yoYChangePct": null,
+        "relevancy": 47,
+        "numRelatedProducts": 2,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "womens perfume",
+        "volume30Day": 43577,
+        "current4WkVolume": 45798,
+        "priorYear4WkVolume": 52400,
+        "yoYChange": -6602,
+        "yoYChangePct": -0.126,
+        "relevancy": 60,
+        "numRelatedProducts": 15,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "aqua di gio parfum for men",
+        "volume30Day": 43064,
+        "current4WkVolume": 41796,
+        "priorYear4WkVolume": 34167,
+        "yoYChange": 7629,
+        "yoYChangePct": 0.2233,
+        "relevancy": 35,
+        "numRelatedProducts": 2,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "body mist",
+        "volume30Day": 43007,
+        "current4WkVolume": 42065,
+        "priorYear4WkVolume": 36792,
+        "yoYChange": 5273,
+        "yoYChangePct": 0.1433,
+        "relevancy": 38,
+        "numRelatedProducts": 2,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "soft perfume",
+        "volume30Day": 42798,
+        "current4WkVolume": 16214,
+        "priorYear4WkVolume": 10216,
+        "yoYChange": 5998,
+        "yoYChangePct": 0.5871,
+        "relevancy": 33,
+        "numRelatedProducts": 3,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "women perfume",
+        "volume30Day": 42507,
+        "current4WkVolume": 41994,
+        "priorYear4WkVolume": 42831,
+        "yoYChange": -837,
+        "yoYChangePct": -0.0195,
+        "relevancy": 61,
+        "numRelatedProducts": 13,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "burberry perfume for women",
+        "volume30Day": 42481,
+        "current4WkVolume": 42002,
+        "priorYear4WkVolume": 39638,
+        "yoYChange": 2364,
+        "yoYChangePct": 0.0596,
+        "relevancy": 56,
+        "numRelatedProducts": 10,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "jimmy choo perfume for women",
+        "volume30Day": 42359,
+        "current4WkVolume": 42463,
+        "priorYear4WkVolume": 44222,
+        "yoYChange": -1759,
+        "yoYChangePct": -0.0398,
+        "relevancy": 53,
+        "numRelatedProducts": 13,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "gucci guilty for men",
+        "volume30Day": 42232,
+        "current4WkVolume": 42720,
+        "priorYear4WkVolume": 42185,
+        "yoYChange": 535,
+        "yoYChangePct": 0.0127,
+        "relevancy": 49,
+        "numRelatedProducts": 3,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "dime perfume",
+        "volume30Day": 41533,
+        "current4WkVolume": 39003,
+        "priorYear4WkVolume": 33765,
+        "yoYChange": 5238,
+        "yoYChangePct": 0.1551,
+        "relevancy": 65,
+        "numRelatedProducts": 19,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "ysl perfume for women",
+        "volume30Day": 41425,
+        "current4WkVolume": 40838,
+        "priorYear4WkVolume": 40670,
+        "yoYChange": 168,
+        "yoYChangePct": 0.0041,
+        "relevancy": 50,
+        "numRelatedProducts": 8,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "gucci flora perfume",
+        "volume30Day": 41232,
+        "current4WkVolume": 39005,
+        "priorYear4WkVolume": 46431,
+        "yoYChange": -7426,
+        "yoYChangePct": -0.1599,
+        "relevancy": 42,
+        "numRelatedProducts": 4,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "perfume for women",
+        "volume30Day": 41067,
+        "current4WkVolume": 41332,
+        "priorYear4WkVolume": 51965,
+        "yoYChange": -10633,
+        "yoYChangePct": -0.2046,
+        "relevancy": 61,
+        "numRelatedProducts": 21,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "glossier you",
+        "volume30Day": 39969,
+        "current4WkVolume": 39799,
+        "priorYear4WkVolume": 21739,
+        "yoYChange": 18060,
+        "yoYChangePct": 0.8308,
+        "relevancy": 48,
+        "numRelatedProducts": 3,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "salt and stone perfume",
+        "volume30Day": 39735,
+        "current4WkVolume": 38974,
+        "priorYear4WkVolume": 23782,
+        "yoYChange": 15192,
+        "yoYChangePct": 0.6388,
+        "relevancy": 34,
+        "numRelatedProducts": 7,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "miss dior",
+        "volume30Day": 38637,
+        "current4WkVolume": 39692,
+        "priorYear4WkVolume": 28643,
+        "yoYChange": 11049,
+        "yoYChangePct": 0.3857,
+        "relevancy": 61,
+        "numRelatedProducts": 28,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "good girl perfume",
+        "volume30Day": 38566,
+        "current4WkVolume": 38042,
+        "priorYear4WkVolume": 40648,
+        "yoYChange": -2606,
+        "yoYChangePct": -0.0641,
+        "relevancy": 31,
+        "numRelatedProducts": 4,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "venom scents pheromones for women",
+        "volume30Day": 37713,
+        "current4WkVolume": 38413,
+        "priorYear4WkVolume": 36095,
+        "yoYChange": 2318,
+        "yoYChangePct": 0.0642,
+        "relevancy": 29,
+        "numRelatedProducts": 2,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "mini perfume",
+        "volume30Day": 37436,
+        "current4WkVolume": 38226,
+        "priorYear4WkVolume": 38877,
+        "yoYChange": -651,
+        "yoYChangePct": -0.0167,
+        "relevancy": 52,
+        "numRelatedProducts": 14,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "gucci",
+        "volume30Day": 36453,
+        "current4WkVolume": 37976,
+        "priorYear4WkVolume": 44355,
+        "yoYChange": -6379,
+        "yoYChangePct": -0.1438,
+        "relevancy": 55,
+        "numRelatedProducts": 5,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "marc jacobs perfume",
+        "volume30Day": 36344,
+        "current4WkVolume": 37282,
+        "priorYear4WkVolume": 33585,
+        "yoYChange": 3697,
+        "yoYChangePct": 0.1101,
+        "relevancy": 66,
+        "numRelatedProducts": 22,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "salt and stone body mist",
+        "volume30Day": 36187,
+        "current4WkVolume": 38307,
+        "priorYear4WkVolume": 40093,
+        "yoYChange": -1786,
+        "yoYChangePct": -0.0445,
+        "relevancy": 42,
+        "numRelatedProducts": 4,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "hawas cologne for men",
+        "volume30Day": 35764,
+        "current4WkVolume": 34430,
+        "priorYear4WkVolume": 36726,
+        "yoYChange": -2296,
+        "yoYChangePct": -0.0625,
+        "relevancy": 39,
+        "numRelatedProducts": 1,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "travel perfume",
+        "volume30Day": 34634,
+        "current4WkVolume": 33286,
+        "priorYear4WkVolume": 30401,
+        "yoYChange": 2885,
+        "yoYChangePct": 0.0949,
+        "relevancy": 49,
+        "numRelatedProducts": 12,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "chanel",
+        "volume30Day": 34203,
+        "current4WkVolume": 38103,
+        "priorYear4WkVolume": 43031,
+        "yoYChange": -4928,
+        "yoYChangePct": -0.1145,
+        "relevancy": 54,
+        "numRelatedProducts": 20,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "paris hilton perfume",
+        "volume30Day": 33649,
+        "current4WkVolume": 33803,
+        "priorYear4WkVolume": 36503,
+        "yoYChange": -2700,
+        "yoYChangePct": -0.074,
+        "relevancy": 51,
+        "numRelatedProducts": 8,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "pink blush perfume",
+        "volume30Day": 33356,
+        "current4WkVolume": 35200,
+        "priorYear4WkVolume": 57592,
+        "yoYChange": -22392,
+        "yoYChangePct": -0.3888,
+        "relevancy": 36,
+        "numRelatedProducts": 3,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "yves saint laurent",
+        "volume30Day": 33045,
+        "current4WkVolume": 38076,
+        "priorYear4WkVolume": 19315,
+        "yoYChange": 18761,
+        "yoYChangePct": 0.9713,
+        "relevancy": 37,
+        "numRelatedProducts": 5,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "finery perfume",
+        "volume30Day": 32884,
+        "current4WkVolume": 31363,
+        "priorYear4WkVolume": 15114,
+        "yoYChange": 16249,
+        "yoYChangePct": 1.0751,
+        "relevancy": 33,
+        "numRelatedProducts": 3,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "juliette has a gun not a perfume",
+        "volume30Day": 32309,
+        "current4WkVolume": 31929,
+        "priorYear4WkVolume": 31862,
+        "yoYChange": 67,
+        "yoYChangePct": 0.0021,
+        "relevancy": 24,
+        "numRelatedProducts": 1,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "tom ford",
+        "volume30Day": 32018,
+        "current4WkVolume": 29991,
+        "priorYear4WkVolume": 29648,
+        "yoYChange": 343,
+        "yoYChangePct": 0.0116,
+        "relevancy": 22,
+        "numRelatedProducts": 1,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "ariana grande cloud perfume",
+        "volume30Day": 31989,
+        "current4WkVolume": 30884,
+        "priorYear4WkVolume": 37410,
+        "yoYChange": -6526,
+        "yoYChangePct": -0.1744,
+        "relevancy": 29,
+        "numRelatedProducts": 7,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "coach perfume",
+        "volume30Day": 31540,
+        "current4WkVolume": 28077,
+        "priorYear4WkVolume": 14946,
+        "yoYChange": 13131,
+        "yoYChangePct": 0.8786,
+        "relevancy": 46,
+        "numRelatedProducts": 8,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "searchTermValue": "bleu de chanel for men",
+        "volume30Day": 30913,
+        "current4WkVolume": 32121,
+        "priorYear4WkVolume": 39550,
+        "yoYChange": -7429,
+        "yoYChangePct": -0.1878,
+        "relevancy": 43,
+        "numRelatedProducts": 2,
+        "source": "market/raw/subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      }
+    ],
+    "trends": [
+      {
+        "keyword": "perfume for women",
+        "found": true,
+        "fragrance_term": true,
+        "estimateSearches": 41067,
+        "growth1m": 2151,
+        "growth3m": 1353,
+        "growth6m": 4322,
+        "growth12m": -9978,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 51045,
+        "last_week": 41067,
+        "source": "market/raw/search_terms_trends_perfume_for_women.json"
+      },
+      {
+        "keyword": "now",
+        "found": true,
+        "fragrance_term": false,
+        "estimateSearches": 374117,
+        "growth1m": 286568,
+        "growth3m": 312378,
+        "growth6m": 315447,
+        "growth12m": 353085,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 21032,
+        "last_week": 374117,
+        "source": "market/raw/search_terms_trends_now.json"
+      },
+      {
+        "keyword": "hair perfume",
+        "found": true,
+        "fragrance_term": true,
+        "estimateSearches": 330109,
+        "growth1m": 180948,
+        "growth3m": 259109,
+        "growth6m": -124816,
+        "growth12m": 267193,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 62916,
+        "last_week": 330109,
+        "source": "market/raw/search_terms_trends_hair_perfume.json"
+      },
+      {
+        "keyword": "perfumes for women",
+        "found": true,
+        "fragrance_term": true,
+        "estimateSearches": 270398,
+        "growth1m": 16805,
+        "growth3m": 62436,
+        "growth6m": 52095,
+        "growth12m": 29638,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 240760,
+        "last_week": 270398,
+        "source": "market/raw/search_terms_trends_perfumes_for_women.json"
+      },
+      {
+        "keyword": "gifts for women",
+        "found": true,
+        "fragrance_term": false,
+        "estimateSearches": 242441,
+        "growth1m": 68517,
+        "growth3m": 91795,
+        "growth6m": 16041,
+        "growth12m": 10694,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 231747,
+        "last_week": 242441,
+        "source": "market/raw/search_terms_trends_gifts_for_women.json"
+      },
+      {
+        "keyword": "yellowstone",
+        "found": true,
+        "fragrance_term": false,
+        "estimateSearches": 233733,
+        "growth1m": -21082,
+        "growth3m": -66999,
+        "growth6m": -38499,
+        "growth12m": 26384,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 207349,
+        "last_week": 233733,
+        "source": "market/raw/search_terms_trends_yellowstone.json"
+      },
+      {
+        "keyword": "the summer i turned pretty",
+        "found": true,
+        "fragrance_term": false,
+        "estimateSearches": 222428,
+        "growth1m": -91454,
+        "growth3m": -117193,
+        "growth6m": -160912,
+        "growth12m": -590412,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 812840,
+        "last_week": 222428,
+        "source": "market/raw/search_terms_trends_the_summer_i_turned_pretty.json"
+      },
+      {
+        "keyword": "sol de janeiro",
+        "found": true,
+        "fragrance_term": false,
+        "estimateSearches": 219219,
+        "growth1m": 9607,
+        "growth3m": -247902,
+        "growth6m": -123480,
+        "growth12m": -92984,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 312203,
+        "last_week": 219219,
+        "source": "market/raw/search_terms_trends_sol_de_janeiro.json"
+      },
+      {
+        "keyword": "blue",
+        "found": true,
+        "fragrance_term": false,
+        "estimateSearches": 214178,
+        "growth1m": 21491,
+        "growth3m": 133306,
+        "growth6m": 158702,
+        "growth12m": 160340,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 53838,
+        "last_week": 214178,
+        "source": "market/raw/search_terms_trends_blue.json"
+      },
+      {
+        "keyword": "cologne for men",
+        "found": true,
+        "fragrance_term": true,
+        "estimateSearches": 206595,
+        "growth1m": 6129,
+        "growth3m": -2357,
+        "growth6m": -36151,
+        "growth12m": 6506,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 200089,
+        "last_week": 206595,
+        "source": "market/raw/search_terms_trends_cologne_for_men.json"
+      },
+      {
+        "keyword": "am",
+        "found": true,
+        "fragrance_term": false,
+        "estimateSearches": 204285,
+        "growth1m": 83998,
+        "growth3m": 146725,
+        "growth6m": 164363,
+        "growth12m": 151972,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 52313,
+        "last_week": 204285,
+        "source": "market/raw/search_terms_trends_am.json"
+      },
+      {
+        "keyword": "mens cologne",
+        "found": true,
+        "fragrance_term": true,
+        "estimateSearches": 194526,
+        "growth1m": 17585,
+        "growth3m": 28236,
+        "growth6m": 22346,
+        "growth12m": 3017,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 191509,
+        "last_week": 194526,
+        "source": "market/raw/search_terms_trends_mens_cologne.json"
+      },
+      {
+        "keyword": "perfume",
+        "found": true,
+        "fragrance_term": true,
+        "estimateSearches": 177366,
+        "growth1m": 16856,
+        "growth3m": -32199,
+        "growth6m": -27155,
+        "growth12m": -43076,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 220442,
+        "last_week": 177366,
+        "source": "market/raw/search_terms_trends_perfume.json"
+      },
+      {
+        "keyword": "lattafa",
+        "found": true,
+        "fragrance_term": true,
+        "estimateSearches": 133200,
+        "growth1m": 19924,
+        "growth3m": 24022,
+        "growth6m": 6655,
+        "growth12m": -5462,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 138662,
+        "last_week": 133200,
+        "source": "market/raw/search_terms_trends_lattafa.json"
+      },
+      {
+        "keyword": "valentino",
+        "found": true,
+        "fragrance_term": true,
+        "estimateSearches": 127181,
+        "growth1m": 26474,
+        "growth3m": 68491,
+        "growth6m": 48103,
+        "growth12m": 67306,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 59875,
+        "last_week": 127181,
+        "source": "market/raw/search_terms_trends_valentino.json"
+      },
+      {
+        "keyword": "perfume for men",
+        "found": true,
+        "fragrance_term": true,
+        "estimateSearches": 123522,
+        "growth1m": -79,
+        "growth3m": 20654,
+        "growth6m": 12367,
+        "growth12m": 1220,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 122302,
+        "last_week": 123522,
+        "source": "market/raw/search_terms_trends_perfume_for_men.json"
+      },
+      {
+        "keyword": "cologne",
+        "found": true,
+        "fragrance_term": true,
+        "estimateSearches": 113368,
+        "growth1m": 19587,
+        "growth3m": 13551,
+        "growth6m": -14927,
+        "growth12m": -16729,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 130097,
+        "last_week": 113368,
+        "source": "market/raw/search_terms_trends_cologne.json"
+      },
+      {
+        "keyword": "yara perfume",
+        "found": true,
+        "fragrance_term": true,
+        "estimateSearches": 108641,
+        "growth1m": -7563,
+        "growth3m": 41045,
+        "growth6m": -9525,
+        "growth12m": 46838,
+        "history_from": "2025-09-21",
+        "history_to": "2026-09-27",
+        "history_weeks": 54,
+        "first_week": 61803,
+        "last_week": 108641,
+        "source": "market/raw/search_terms_trends_yara_perfume.json"
+      },
+      {
+        "keyword": "versace",
+        "found": false,
+        "fragrance_term": true,
+        "source": null
+      },
+      {
+        "keyword": "dior",
+        "found": false,
+        "fragrance_term": true,
+        "source": null
+      },
+      {
+        "keyword": "fragrances",
+        "found": false,
+        "fragrance_term": true,
+        "source": null
+      },
+      {
+        "keyword": "body mist",
+        "found": false,
+        "fragrance_term": true,
+        "source": null
+      },
+      {
+        "keyword": "glossier",
+        "found": false,
+        "fragrance_term": true,
+        "source": null
+      },
+      {
+        "keyword": "chanel",
+        "found": false,
+        "fragrance_term": true,
+        "source": null
+      },
+      {
+        "keyword": "tom ford",
+        "found": false,
+        "fragrance_term": true,
+        "source": null
+      },
+      {
+        "keyword": "armaf",
+        "found": false,
+        "fragrance_term": true,
+        "source": null
+      },
+      {
+        "keyword": "gucci",
+        "found": false,
+        "fragrance_term": true,
+        "source": null
+      }
+    ],
+    "our_products": [
+      {
+        "asin": "B00021AJ5I",
+        "brandName": "Calvin Klein",
+        "title": "Calvin Klein Eternity For Women Eau de Parfum 3.3 fl oz",
+        "size": "3.3 Fl Oz (Pack of 1)",
+        "unitValue": 3.3,
+        "unitType": "Fl Oz",
+        "buyBoxPrice": 115.54,
+        "averageBuyBoxPrice": 115.54,
+        "monthlyRevenueEstimate": 274060.88,
+        "monthlyUnitsSold": 2372,
+        "amzMonthlySold": 2000,
+        "reviewRating": 4.5,
+        "reviewCount": 11648,
+        "rank": 14192,
+        "subcategoryRank": 126,
+        "subcategoryId": 11057071,
+        "numberOfSellers": 1,
+        "listedSince": "2015-03-19T00:00:00",
+        "hasAPlus": false,
+        "itemHighlights": null,
+        "subcategory": "Women's Eau de Parfum",
+        "source": "market/raw/products_byasin_B00021AJ5I.json",
+        "hist_amazon": {
+          "points": 773,
+          "from": "2016-10-24",
+          "to": "2026-10-07",
+          "first": 86.0,
+          "last": 123.0,
+          "min": 35.98,
+          "max": 123.0
+        },
+        "hist_buyBoxShipping": {
+          "points": 843,
+          "from": "2017-03-31",
+          "to": "2026-10-07",
+          "first": 86.0,
+          "last": 123.0,
+          "min": 36.0,
+          "max": 123.0
+        },
+        "hist_salesRank": {
+          "points": 26450,
+          "from": "2016-10-24",
+          "to": "2026-10-07",
+          "first": 26099.0,
+          "last": 13076.0,
+          "min": 1262.0,
+          "max": 94179.0
+        },
+        "hist_reviewCount": {
+          "points": 5352,
+          "from": "2017-01-26",
+          "to": "2026-10-07",
+          "first": 192.0,
+          "last": 11781.0,
+          "min": 1.0,
+          "max": 11781.0
+        },
+        "history_source": "market/raw/products_history_B00021AJ5I.json"
+      },
+      {
+        "asin": "B0BZDZJDTG",
+        "brandName": "Dossier",
+        "title": "Dossier - Ambery Vanilla - Inspired by Black Opium - Women EDP",
+        "size": "1.7 Fl Oz (Pack of 1)",
+        "unitValue": 1.7,
+        "unitType": "Fl Oz",
+        "buyBoxPrice": 26.12,
+        "averageBuyBoxPrice": 26.12,
+        "monthlyRevenueEstimate": 133865.0,
+        "monthlyUnitsSold": 5125,
+        "amzMonthlySold": 4000,
+        "reviewRating": 4.4,
+        "reviewCount": 4196,
+        "rank": 1588,
+        "subcategoryRank": 4,
+        "subcategoryId": 11057071,
+        "numberOfSellers": 4,
+        "listedSince": "2023-04-04T00:00:00",
+        "hasAPlus": true,
+        "itemHighlights": "1.7 fl oz (50ml) - Vanilla Perfume - Ambery Vanilla Eau de Parfum for Women - Vanilla Body Spray, Long-Lasting, Vegan",
+        "subcategory": "Women's Eau de Parfum",
+        "source": "market/raw/products_byasin_B0BZDZJDTG.json",
+        "hist_amazon": {
+          "points": 8,
+          "from": "2026-01-11",
+          "to": "2026-06-01",
+          "first": 25.97,
+          "last": 28.94,
+          "min": 22.62,
+          "max": 29.0
+        },
+        "hist_buyBoxShipping": {
+          "points": 501,
+          "from": "2023-04-26",
+          "to": "2026-10-06",
+          "first": 39.0,
+          "last": 20.0,
+          "min": 20.0,
+          "max": 48.0
+        },
+        "hist_salesRank": {
+          "points": 7713,
+          "from": "2023-04-26",
+          "to": "2026-10-07",
+          "first": 55622.0,
+          "last": 1295.0,
+          "min": 169.0,
+          "max": 109542.0
+        },
+        "hist_reviewCount": {
+          "points": 3556,
+          "from": "2023-04-28",
+          "to": "2026-10-07",
+          "first": 1.0,
+          "last": 4296.0,
+          "min": 1.0,
+          "max": 8800.0
+        },
+        "history_source": "market/raw/products_history_B0BZDZJDTG.json"
+      },
+      {
+        "asin": "B0009OAI8Q",
+        "brandName": "Elizabeth Taylor",
+        "title": "Elizabeth Taylor White Diamonds Eau de Toilette for Women, 3.3 fl oz",
+        "size": "3.3 Fl Oz (Pack of 1)",
+        "unitValue": 3.3,
+        "unitType": "Fl Oz",
+        "buyBoxPrice": 25.73,
+        "averageBuyBoxPrice": 25.73,
+        "monthlyRevenueEstimate": 213893.49,
+        "monthlyUnitsSold": 8313,
+        "amzMonthlySold": 7000,
+        "reviewRating": 4.6,
+        "reviewCount": 30049,
+        "rank": 2378,
+        "subcategoryRank": 1,
+        "subcategoryId": 11057111,
+        "numberOfSellers": 74,
+        "listedSince": "2020-01-01T00:00:00",
+        "hasAPlus": true,
+        "itemHighlights": "Women's floral chypre eau de toilette. Perfume with notes of lily, neroli, warm amber, and sandalwood.",
+        "subcategory": "Women's Fragrance Sets",
+        "source": "market/raw/products_byasin_B0009OAI8Q.json",
+        "hist_amazon": {
+          "points": 4928,
+          "from": "2012-05-19",
+          "to": "2026-10-07",
+          "first": 31.81,
+          "last": 19.94,
+          "min": 9.17,
+          "max": 38.99
+        },
+        "hist_buyBoxShipping": {
+          "points": 6414,
+          "from": "2017-03-05",
+          "to": "2026-10-07",
+          "first": 24.0,
+          "last": 20.0,
+          "min": 9.0,
+          "max": 70.0
+        },
+        "hist_salesRank": {
+          "points": 34117,
+          "from": "2015-02-01",
+          "to": "2026-10-07",
+          "first": 2404.0,
+          "last": 2126.0,
+          "min": 116.0,
+          "max": 29427.0
+        },
+        "hist_reviewCount": {
+          "points": 14825,
+          "from": "2017-01-21",
+          "to": "2026-10-07",
+          "first": 1252.0,
+          "last": 30094.0,
+          "min": 1.0,
+          "max": 30868.0
+        },
+        "history_source": "market/raw/products_history_B0009OAI8Q.json"
+      },
+      {
+        "asin": "B09X5BQ969",
+        "brandName": "Bella Vita Luxury",
+        "title": "Bellavita Luxury Honey Oud Eau de Parfum | 100 ml (3.4 fl.oz.) | Perfume for Men and Women | Sweet Honey, Bergamot, Oud, and Amber Notes",
+        "size": "3.38 Fl Oz (Pack of 1)",
+        "unitValue": 3.38,
+        "unitType": "Fl Oz",
+        "buyBoxPrice": 20.99,
+        "averageBuyBoxPrice": 20.99,
+        "monthlyRevenueEstimate": 1133418.02,
+        "monthlyUnitsSold": 53998,
+        "amzMonthlySold": 50000,
+        "reviewRating": 3.8,
+        "reviewCount": 18370,
+        "rank": 8330,
+        "subcategoryRank": 39,
+        "subcategoryId": 11057071,
+        "numberOfSellers": 2,
+        "listedSince": "2022-07-29T00:00:00",
+        "hasAPlus": true,
+        "itemHighlights": null,
+        "subcategory": "Women's Eau de Parfum",
+        "source": "market/raw/products_byasin_B09X5BQ969.json",
+        "hist_amazon": {
+          "points": 100,
+          "from": "2025-04-23",
+          "to": "2026-10-06",
+          "first": 22.7,
+          "last": 20.99,
+          "min": 18.0,
+          "max": 26.99
+        },
+        "hist_buyBoxShipping": {
+          "points": 203,
+          "from": "2023-10-06",
+          "to": "2026-10-07",
+          "first": 25.0,
+          "last": 21.0,
+          "min": 17.0,
+          "max": 30.0
+        },
+        "hist_salesRank": {
+          "points": 5912,
+          "from": "2023-10-31",
+          "to": "2026-10-07",
+          "first": 291417.0,
+          "last": 250.0,
+          "min": 108.0,
+          "max": 473254.0
+        },
+        "hist_reviewCount": {
+          "points": 8451,
+          "from": "2022-08-23",
+          "to": "2026-10-07",
+          "first": 8.0,
+          "last": 18435.0,
+          "min": 8.0,
+          "max": 44603.0
+        },
+        "history_source": "market/raw/products_history_B09X5BQ969.json"
+      },
+      {
+        "asin": "B08FBQWRYC",
+        "brandName": "Jean Paul Gaultier",
+        "title": "Jean Paul Gaultier Le Male Le Parfum for Men - 4.2 oz",
+        "size": "4.2 Fl Oz (Pack of 1)",
+        "unitValue": 4.2,
+        "unitType": "Fl Oz",
+        "buyBoxPrice": 153.1,
+        "averageBuyBoxPrice": 153.1,
+        "monthlyRevenueEstimate": 153865.5,
+        "monthlyUnitsSold": 1005,
+        "amzMonthlySold": 900,
+        "reviewRating": 4.7,
+        "reviewCount": 8356,
+        "rank": 10576,
+        "subcategoryRank": 38,
+        "subcategoryId": 363235011,
+        "numberOfSellers": 1,
+        "listedSince": "2020-08-06T00:00:00",
+        "hasAPlus": true,
+        "itemHighlights": "Amber Woody Eau de Parfum Intense for Men Fragrance - Cardamom, Lavender & Iris, Vanilla - Men's Perfume Spray",
+        "subcategory": "Men's Eau de Parfum",
+        "source": "market/raw/products_byasin_B08FBQWRYC.json",
+        "hist_amazon": {
+          "points": 827,
+          "from": "2022-05-17",
+          "to": "2026-08-08",
+          "first": 79.99,
+          "last": 160.0,
+          "min": 79.99,
+          "max": 160.0
+        },
+        "hist_buyBoxShipping": {
+          "points": 14252,
+          "from": "2020-11-09",
+          "to": "2026-10-07",
+          "first": 99.0,
+          "last": 160.0,
+          "min": 55.0,
+          "max": 215.0
+        },
+        "hist_salesRank": {
+          "points": 15337,
+          "from": "2020-11-10",
+          "to": "2026-10-07",
+          "first": 160597.0,
+          "last": 9892.0,
+          "min": 1184.0,
+          "max": 372111.0
+        },
+        "hist_reviewCount": {
+          "points": 5835,
+          "from": "2020-11-10",
+          "to": "2026-10-07",
+          "first": 20.0,
+          "last": 8365.0,
+          "min": 20.0,
+          "max": 8365.0
+        },
+        "history_source": "market/raw/products_history_B08FBQWRYC.json"
+      },
+      {
+        "asin": "B0GFGL26JD",
+        "brandName": "Glossier",
+        "title": "Glossier You Eau de Parfum, Unisex Skin-Scent Enhancer, 50 ml",
+        "size": "1.7 Fl Oz (Pack of 1)",
+        "unitValue": 1.7,
+        "unitType": "Fl Oz",
+        "buyBoxPrice": 82.0,
+        "averageBuyBoxPrice": 82.0,
+        "monthlyRevenueEstimate": 221646.0,
+        "monthlyUnitsSold": 2703,
+        "amzMonthlySold": 2000,
+        "reviewRating": 4.5,
+        "reviewCount": 572,
+        "rank": 4725,
+        "subcategoryRank": 13,
+        "subcategoryId": 11057071,
+        "numberOfSellers": 1,
+        "listedSince": "2026-01-07T00:00:00",
+        "hasAPlus": true,
+        "itemHighlights": "Warm, Musky & Spicy, Pink Pepper, Iris & Ambrox Base Notes, Smells Different on Everyone, Layer & Mix to Match Your Mood",
+        "subcategory": "Women's Eau de Parfum",
+        "source": "market/raw/products_byasin_B0GFGL26JD.json",
+        "hist_buyBoxShipping": {
+          "points": 3,
+          "from": "2026-02-23",
+          "to": "2026-10-07",
+          "first": 82.0,
+          "last": 82.0,
+          "min": 82.0,
+          "max": 82.0
+        },
+        "hist_salesRank": {
+          "points": 924,
+          "from": "2026-02-23",
+          "to": "2026-10-07",
+          "first": 314115.0,
+          "last": 4039.0,
+          "min": 1345.0,
+          "max": 314115.0
+        },
+        "hist_reviewCount": {
+          "points": 416,
+          "from": "2026-02-23",
+          "to": "2026-10-07",
+          "first": 8.0,
+          "last": 600.0,
+          "min": 8.0,
+          "max": 600.0
+        },
+        "history_source": "market/raw/products_history_B0GFGL26JD.json"
+      }
+    ],
+    "advertised_brands": [
+      {
+        "name": "Clinique",
+        "sponsoredProducts": 11,
+        "sponsoredBrandWinRate": 0.367,
+        "topGroupWinRate": 0.033,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "Maison Margiela",
+        "sponsoredProducts": 2,
+        "sponsoredBrandWinRate": 0.167,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "Cacharel",
+        "sponsoredProducts": 5,
+        "sponsoredBrandWinRate": 0.133,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "NovoGlow",
+        "sponsoredProducts": 8,
+        "sponsoredBrandWinRate": 0.133,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "",
+        "sponsoredProducts": 9,
+        "sponsoredBrandWinRate": 0.133,
+        "topGroupWinRate": 0.133,
+        "topSpotWinRate": 0.033,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "Calvin Klein",
+        "sponsoredProducts": 10,
+        "sponsoredBrandWinRate": 0.1,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "Victoria's Secret",
+        "sponsoredProducts": 24,
+        "sponsoredBrandWinRate": 0.1,
+        "topGroupWinRate": 0.3,
+        "topSpotWinRate": 0.1,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "Nest New York",
+        "sponsoredProducts": 11,
+        "sponsoredBrandWinRate": 0.067,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "Urban Collection",
+        "sponsoredProducts": 10,
+        "sponsoredBrandWinRate": 0.067,
+        "topGroupWinRate": 0.067,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "Ajmal",
+        "sponsoredProducts": 7,
+        "sponsoredBrandWinRate": 0.033,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.033,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "Elizabeth Arden",
+        "sponsoredProducts": 1,
+        "sponsoredBrandWinRate": 0.033,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "GUESS",
+        "sponsoredProducts": 8,
+        "sponsoredBrandWinRate": 0.033,
+        "topGroupWinRate": 0.067,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "Viktor&Rolf",
+        "sponsoredProducts": 3,
+        "sponsoredBrandWinRate": 0.033,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "ALT. FRAGRANCES",
+        "sponsoredProducts": 3,
+        "sponsoredBrandWinRate": 0.033,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "HOUSE OF TWIST",
+        "sponsoredProducts": 10,
+        "sponsoredBrandWinRate": 0.033,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "DKNY",
+        "sponsoredProducts": 1,
+        "sponsoredBrandWinRate": 0.0,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.033,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "Elizabeth Taylor",
+        "sponsoredProducts": 3,
+        "sponsoredBrandWinRate": 0.0,
+        "topGroupWinRate": 0.067,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "Estée lauder",
+        "sponsoredProducts": 15,
+        "sponsoredBrandWinRate": 0.0,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.033,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "Generic",
+        "sponsoredProducts": 2,
+        "sponsoredBrandWinRate": 0.0,
+        "topGroupWinRate": 0.033,
+        "topSpotWinRate": 0.033,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "name": "Glossier",
+        "sponsoredProducts": 2,
+        "sponsoredBrandWinRate": 0.0,
+        "topGroupWinRate": 0.033,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_advertised_brands_perfume_for_women.json"
+      }
+    ],
+    "ad_spy": [
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "obsession",
+        "estimateSearches": 313042,
+        "estimatedCpc": 1.37,
+        "totalAdSpend": 44446.84,
+        "sponsoredProducts": 10,
+        "topGroupWinRate": 0.576,
+        "topSpotWinRate": 0.037,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "calvin klein",
+        "estimateSearches": 61733,
+        "estimatedCpc": 1.52,
+        "totalAdSpend": 28056.36,
+        "sponsoredProducts": 87,
+        "topGroupWinRate": 0.667,
+        "topSpotWinRate": 0.6,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "perfume",
+        "estimateSearches": 177366,
+        "estimatedCpc": 1.23,
+        "totalAdSpend": 13089.6,
+        "sponsoredProducts": 13,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "fragrances",
+        "estimateSearches": 104622,
+        "estimatedCpc": 1.62,
+        "totalAdSpend": 11605.06,
+        "sponsoredProducts": 19,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "calvin klein underwear for men",
+        "estimateSearches": 143646,
+        "estimatedCpc": 1.86,
+        "totalAdSpend": 11488.74,
+        "sponsoredProducts": 16,
+        "topGroupWinRate": 0.133,
+        "topSpotWinRate": 0.133,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "cologne",
+        "estimateSearches": 113368,
+        "estimatedCpc": 1.24,
+        "totalAdSpend": 9752.46,
+        "sponsoredProducts": 14,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "mens underwear",
+        "estimateSearches": 325073,
+        "estimatedCpc": 2.88,
+        "totalAdSpend": 9206.1,
+        "sponsoredProducts": 65,
+        "topGroupWinRate": 0.098,
+        "topSpotWinRate": 0.033,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "eternity",
+        "estimateSearches": 46357,
+        "estimatedCpc": 1.69,
+        "totalAdSpend": 8696.1,
+        "sponsoredProducts": 15,
+        "topGroupWinRate": 0.033,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "calvin klein boxer briefs",
+        "estimateSearches": 29832,
+        "estimatedCpc": 1.99,
+        "totalAdSpend": 8489.35,
+        "sponsoredProducts": 44,
+        "topGroupWinRate": 0.333,
+        "topSpotWinRate": 0.367,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "boxers for men",
+        "estimateSearches": 169304,
+        "estimatedCpc": 2.36,
+        "totalAdSpend": 8390.7,
+        "sponsoredProducts": 3,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "calvin klein men",
+        "estimateSearches": 26863,
+        "estimatedCpc": 1.31,
+        "totalAdSpend": 7530.71,
+        "sponsoredProducts": 68,
+        "topGroupWinRate": 0.367,
+        "topSpotWinRate": 0.333,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "euphoria",
+        "estimateSearches": 58484,
+        "estimatedCpc": 1.75,
+        "totalAdSpend": 7368.97,
+        "sponsoredProducts": 12,
+        "topGroupWinRate": 0.133,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "ck one",
+        "estimateSearches": 13677,
+        "estimatedCpc": 5.11,
+        "totalAdSpend": 6900.43,
+        "sponsoredProducts": 13,
+        "topGroupWinRate": 0.033,
+        "topSpotWinRate": 0.033,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "ariana grande perfume",
+        "estimateSearches": 64624,
+        "estimatedCpc": 1.81,
+        "totalAdSpend": 5789.99,
+        "sponsoredProducts": 14,
+        "topGroupWinRate": 0.1,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "calvin klein bra",
+        "estimateSearches": 40227,
+        "estimatedCpc": 1.54,
+        "totalAdSpend": 5761.31,
+        "sponsoredProducts": 12,
+        "topGroupWinRate": 0.033,
+        "topSpotWinRate": 0.1,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "polo calvin klein para hombre",
+        "estimateSearches": 3933,
+        "estimatedCpc": 12.58,
+        "totalAdSpend": 5590.91,
+        "sponsoredProducts": 9,
+        "topGroupWinRate": 0.067,
+        "topSpotWinRate": 0.867,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "perfumes",
+        "estimateSearches": 51189,
+        "estimatedCpc": 1.23,
+        "totalAdSpend": 5288.87,
+        "sponsoredProducts": 13,
+        "topGroupWinRate": 0.0,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "juicy couture perfume",
+        "estimateSearches": 29119,
+        "estimatedCpc": 3.04,
+        "totalAdSpend": 5173.74,
+        "sponsoredProducts": 14,
+        "topGroupWinRate": 0.233,
+        "topSpotWinRate": 0.0,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "calvin klein underwear women",
+        "estimateSearches": 60918,
+        "estimatedCpc": 1.16,
+        "totalAdSpend": 5158.53,
+        "sponsoredProducts": 8,
+        "topGroupWinRate": 0.033,
+        "topSpotWinRate": 0.033,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "brand": "Calvin Klein",
+        "searchTermValue": "dress socks",
+        "estimateSearches": 45617,
+        "estimatedCpc": 2.18,
+        "totalAdSpend": 4872.77,
+        "sponsoredProducts": 18,
+        "topGroupWinRate": 0.333,
+        "topSpotWinRate": 0.133,
+        "source": "market/raw/search_terms_ad_spy_Calvin_Klein.json"
+      }
+    ],
+    "top_products": [
+      {
+        "brandName": "Elizabeth Taylor",
+        "asin": "B0009OAI8Q",
+        "title": "Elizabeth Taylor White Diamonds Eau de Toilette for Women, 3.3 fl oz",
+        "avgRank": 3.7,
+        "latestRank": 1,
+        "days": 595,
+        "source": "market/raw/search_terms_trends_top_products_perfume_for_women.json"
+      },
+      {
+        "brandName": "Vera Wang",
+        "asin": "B000JL7WQK",
+        "title": "Vera Wang Princess Eau de Toilette Spray, Women's Fragrance, 3.4 fl oz",
+        "avgRank": 3.0,
+        "latestRank": 2,
+        "days": 595,
+        "source": "market/raw/search_terms_trends_top_products_perfume_for_women.json"
+      },
+      {
+        "brandName": "Versace",
+        "asin": "B000IEQQCE",
+        "title": "Versace Bright Crystal by Versace for Women 1.7 oz Eau de Toilette Spray",
+        "avgRank": 12.2,
+        "latestRank": 3,
+        "days": 595,
+        "source": "market/raw/search_terms_trends_top_products_perfume_for_women.json"
+      },
+      {
+        "brandName": "Gucci",
+        "asin": "B00ZCIHYRM",
+        "title": "Gucci Bamboo by Gucci for Women 2.5 oz Eau de Parfum Spray",
+        "avgRank": 4.0,
+        "latestRank": 4,
+        "days": 595,
+        "source": "market/raw/search_terms_trends_top_products_perfume_for_women.json"
+      },
+      {
+        "brandName": "GODA",
+        "asin": "B0F1G3VSLZ",
+        "title": "GODA Pheromones Perfume for Women – The Original – Long-Lasting Women's Fragrances with Jasmine and Rose, Vegan & Cruelty-Free – 15ml/0.50 fl. oz",
+        "avgRank": 5.3,
+        "latestRank": 5,
+        "days": 595,
+        "source": "market/raw/search_terms_trends_top_products_perfume_for_women.json"
+      }
+    ],
+    "calls": [
+      {
+        "at": "2026-10-07T20:46:35+09:00",
+        "tool": "products_byasin",
+        "args": {
+          "asin": "B00021AJ5I"
+        },
+        "called": false,
+        "ok": true,
+        "reused_from": "raw\\product_B00021AJ5I.json",
+        "file": "market\\raw\\products_byasin_B00021AJ5I.json"
+      },
+      {
+        "at": "2026-10-07T20:46:35+09:00",
+        "tool": "products_variations",
+        "args": {
+          "asin": "B0H62MKNTJ"
+        },
+        "called": false,
+        "ok": true,
+        "reused_from": "raw\\variations_B0H62MKNTJ.json",
+        "file": "market\\raw\\products_variations_B0H62MKNTJ.json"
+      },
+      {
+        "at": "2026-10-07T20:46:35+09:00",
+        "tool": "products_byasin",
+        "args": {
+          "asin": "B0BZDZJDTG"
+        },
+        "called": false,
+        "ok": true,
+        "reused_from": "raw\\product_B0BZDZJDTG.json",
+        "file": "market\\raw\\products_byasin_B0BZDZJDTG.json"
+      },
+      {
+        "at": "2026-10-07T20:46:35+09:00",
+        "tool": "products_variations",
+        "args": {
+          "asin": "B0HDT27STG"
+        },
+        "called": false,
+        "ok": true,
+        "reused_from": "raw\\variations_B0HDT27STG.json",
+        "file": "market\\raw\\products_variations_B0HDT27STG.json"
+      },
+      {
+        "at": "2026-10-07T20:46:35+09:00",
+        "tool": "products_byasin",
+        "args": {
+          "asin": "B0009OAI8Q"
+        },
+        "called": false,
+        "ok": true,
+        "reused_from": "raw\\product_B0009OAI8Q.json",
+        "file": "market\\raw\\products_byasin_B0009OAI8Q.json"
+      },
+      {
+        "at": "2026-10-07T20:46:35+09:00",
+        "tool": "products_variations",
+        "args": {
+          "asin": "B0FFPC31YQ"
+        },
+        "called": false,
+        "ok": true,
+        "reused_from": "raw\\variations_B0FFPC31YQ.json",
+        "file": "market\\raw\\products_variations_B0FFPC31YQ.json"
+      },
+      {
+        "at": "2026-10-07T20:46:35+09:00",
+        "tool": "products_byasin",
+        "args": {
+          "asin": "B09X5BQ969"
+        },
+        "called": false,
+        "ok": true,
+        "reused_from": "raw\\product_B09X5BQ969.json",
+        "file": "market\\raw\\products_byasin_B09X5BQ969.json"
+      },
+      {
+        "at": "2026-10-07T20:46:35+09:00",
+        "tool": "products_variations",
+        "args": {
+          "asin": "B0GFFVH9DV"
+        },
+        "called": false,
+        "ok": true,
+        "reused_from": "raw\\variations_B0GFFVH9DV.json",
+        "file": "market\\raw\\products_variations_B0GFFVH9DV.json"
+      },
+      {
+        "at": "2026-10-07T20:46:35+09:00",
+        "tool": "products_byasin",
+        "args": {
+          "asin": "B08FBQWRYC"
+        },
+        "called": false,
+        "ok": true,
+        "reused_from": "raw\\product_B08FBQWRYC.json",
+        "file": "market\\raw\\products_byasin_B08FBQWRYC.json"
+      },
+      {
+        "at": "2026-10-07T20:46:35+09:00",
+        "tool": "products_variations",
+        "args": {
+          "asin": "B0BGZWM1H6"
+        },
+        "called": false,
+        "ok": true,
+        "reused_from": "raw\\variations_B0BGZWM1H6.json",
+        "file": "market\\raw\\products_variations_B0BGZWM1H6.json"
+      },
+      {
+        "at": "2026-10-07T20:46:35+09:00",
+        "tool": "products_byasin",
+        "args": {
+          "asin": "B0GFGL26JD"
+        },
+        "called": false,
+        "ok": true,
+        "reused_from": "raw\\product_B0GFGL26JD.json",
+        "file": "market\\raw\\products_byasin_B0GFGL26JD.json"
+      },
+      {
+        "at": "2026-10-07T20:46:35+09:00",
+        "tool": "products_variations",
+        "args": {
+          "asin": "B0GPH36XYP"
+        },
+        "called": false,
+        "ok": true,
+        "reused_from": "raw\\variations_B0GPH36XYP.json",
+        "file": "market\\raw\\products_variations_B0GPH36XYP.json"
+      },
+      {
+        "at": "2026-10-07T20:46:43+09:00",
+        "tool": "subcategories_search",
+        "args": {},
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 31479,
+        "file": "market\\raw\\subcategories_search_all.json"
+      },
+      {
+        "at": "2026-10-07T20:46:46+09:00",
+        "tool": "subcategories_category_competitors",
+        "args": {
+          "sub_category_name": "Eau de Parfum",
+          "start_row": 0,
+          "end_row": 20
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 20,
+        "file": "market\\raw\\subcategories_category_competitors_Eau_de_Parfum.json"
+      },
+      {
+        "at": "2026-10-07T20:46:48+09:00",
+        "tool": "subcategories_relevant_search_terms",
+        "args": {
+          "subcategory_name": "Eau de Parfum"
+        },
+        "called": true,
+        "ok": false,
+        "attempt": 1,
+        "error": "spd-amz-market tools/call: 500 Server Error: Internal Server Error for url: https://api-spd-amz-market.up.railway.app/api/subcategories/relevant-search-terms?subcategory_name=Eau+de+Parfum&marketplace=US"
+      },
+      {
+        "at": "2026-10-07T20:46:49+09:00",
+        "tool": "subcategories_relevant_search_terms",
+        "args": {
+          "subcategory_name": "Eau de Parfum"
+        },
+        "called": true,
+        "ok": false,
+        "attempt": 2,
+        "error": "spd-amz-market tools/call: 500 Server Error: Internal Server Error for url: https://api-spd-amz-market.up.railway.app/api/subcategories/relevant-search-terms?subcategory_name=Eau+de+Parfum&marketplace=US"
+      },
+      {
+        "at": "2026-10-07T20:46:52+09:00",
+        "tool": "subcategories_category_competitors",
+        "args": {
+          "sub_category_name": "Eau de Toilette",
+          "start_row": 0,
+          "end_row": 20
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 20,
+        "file": "market\\raw\\subcategories_category_competitors_Eau_de_Toilette.json"
+      },
+      {
+        "at": "2026-10-07T20:46:53+09:00",
+        "tool": "subcategories_relevant_search_terms",
+        "args": {
+          "subcategory_name": "Eau de Toilette"
+        },
+        "called": true,
+        "ok": false,
+        "attempt": 1,
+        "error": "spd-amz-market tools/call: 500 Server Error: Internal Server Error for url: https://api-spd-amz-market.up.railway.app/api/subcategories/relevant-search-terms?subcategory_name=Eau+de+Toilette&marketplace=US"
+      },
+      {
+        "at": "2026-10-07T20:46:55+09:00",
+        "tool": "subcategories_relevant_search_terms",
+        "args": {
+          "subcategory_name": "Eau de Toilette"
+        },
+        "called": true,
+        "ok": false,
+        "attempt": 2,
+        "error": "spd-amz-market tools/call: 500 Server Error: Internal Server Error for url: https://api-spd-amz-market.up.railway.app/api/subcategories/relevant-search-terms?subcategory_name=Eau+de+Toilette&marketplace=US"
+      },
+      {
+        "at": "2026-10-07T20:46:59+09:00",
+        "tool": "products_history",
+        "args": {
+          "asin": "B00021AJ5I"
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 26450,
+        "file": "market\\raw\\products_history_B00021AJ5I.json"
+      },
+      {
+        "at": "2026-10-07T20:47:02+09:00",
+        "tool": "products_history",
+        "args": {
+          "asin": "B0BZDZJDTG"
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 7713,
+        "file": "market\\raw\\products_history_B0BZDZJDTG.json"
+      },
+      {
+        "at": "2026-10-07T20:47:06+09:00",
+        "tool": "products_history",
+        "args": {
+          "asin": "B0009OAI8Q"
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 34117,
+        "file": "market\\raw\\products_history_B0009OAI8Q.json"
+      },
+      {
+        "at": "2026-10-07T20:47:09+09:00",
+        "tool": "products_history",
+        "args": {
+          "asin": "B09X5BQ969"
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 8451,
+        "file": "market\\raw\\products_history_B09X5BQ969.json"
+      },
+      {
+        "at": "2026-10-07T20:47:13+09:00",
+        "tool": "products_history",
+        "args": {
+          "asin": "B08FBQWRYC"
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 15337,
+        "file": "market\\raw\\products_history_B08FBQWRYC.json"
+      },
+      {
+        "at": "2026-10-07T20:47:15+09:00",
+        "tool": "products_history",
+        "args": {
+          "asin": "B0GFGL26JD"
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 924,
+        "file": "market\\raw\\products_history_B0GFGL26JD.json"
+      },
+      {
+        "at": "2026-10-07T20:47:28+09:00",
+        "tool": "search_terms_advertised_brands",
+        "args": {
+          "search_term": "perfume for women",
+          "start_row": 0,
+          "end_row": 20
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 20,
+        "file": "market\\raw\\search_terms_advertised_brands_perfume_for_women.json"
+      },
+      {
+        "at": "2026-10-07T20:47:33+09:00",
+        "tool": "search_terms_trends_top_products",
+        "args": {
+          "search_term": "perfume for women"
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 5,
+        "file": "market\\raw\\search_terms_trends_top_products_perfume_for_women.json"
+      },
+      {
+        "at": "2026-10-07T20:47:35+09:00",
+        "tool": "search_terms_ad_spy",
+        "args": {
+          "brand_name": "Calvin Klein",
+          "start_row": 0,
+          "end_row": 20
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 20,
+        "file": "market\\raw\\search_terms_ad_spy_Calvin_Klein.json"
+      },
+      {
+        "at": "2026-10-07T20:48:03+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "perfume for women",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_perfume_for_women.json"
+      },
+      {
+        "at": "2026-10-07T20:48:38+09:00",
+        "tool": "subcategories_category_competitors",
+        "args": {
+          "sub_category_name": "Women's Eau de Parfum",
+          "start_row": 0,
+          "end_row": 20
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 20,
+        "file": "market\\raw\\subcategories_category_competitors_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "at": "2026-10-07T20:49:10+09:00",
+        "tool": "subcategories_relevant_search_terms",
+        "args": {
+          "subcategory_name": "Women's Eau de Parfum"
+        },
+        "called": true,
+        "ok": false,
+        "attempt": 1,
+        "error": "spd-amz-market tools/call: 500 Server Error: Internal Server Error for url: https://api-spd-amz-market.up.railway.app/api/subcategories/relevant-search-terms?subcategory_name=Women%27s+Eau+de+Parfum&marketplace=US"
+      },
+      {
+        "at": "2026-10-07T20:49:46+09:00",
+        "tool": "subcategories_relevant_search_terms",
+        "args": {
+          "subcategory_name": "Women's Eau de Parfum"
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 2,
+        "rows": 37624,
+        "file": "market\\raw\\subcategories_relevant_search_terms_Women_s_Eau_de_Parfum.json"
+      },
+      {
+        "at": "2026-10-07T20:49:47+09:00",
+        "tool": "subcategories_category_competitors",
+        "args": {
+          "sub_category_name": "Women's Eau de Toilette",
+          "start_row": 0,
+          "end_row": 20
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 20,
+        "file": "market\\raw\\subcategories_category_competitors_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "at": "2026-10-07T20:49:56+09:00",
+        "tool": "subcategories_relevant_search_terms",
+        "args": {
+          "subcategory_name": "Women's Eau de Toilette"
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 15736,
+        "file": "market\\raw\\subcategories_relevant_search_terms_Women_s_Eau_de_Toilette.json"
+      },
+      {
+        "at": "2026-10-07T20:50:34+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "now",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_now.json"
+      },
+      {
+        "at": "2026-10-07T20:51:05+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "hair perfume",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_hair_perfume.json"
+      },
+      {
+        "at": "2026-10-07T20:51:34+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "perfumes for women",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_perfumes_for_women.json"
+      },
+      {
+        "at": "2026-10-07T20:52:03+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "gifts for women",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_gifts_for_women.json"
+      },
+      {
+        "at": "2026-10-07T20:52:31+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "yellowstone",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_yellowstone.json"
+      },
+      {
+        "at": "2026-10-07T20:53:00+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "the summer i turned pretty",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_the_summer_i_turned_pretty.json"
+      },
+      {
+        "at": "2026-10-07T20:53:29+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "sol de janeiro",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_sol_de_janeiro.json"
+      },
+      {
+        "at": "2026-10-07T20:53:48+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "blue",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_blue.json"
+      },
+      {
+        "at": "2026-10-07T20:54:16+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "cologne for men",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_cologne_for_men.json"
+      },
+      {
+        "at": "2026-10-07T20:54:35+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "am",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_am.json"
+      },
+      {
+        "at": "2026-10-07T20:56:37+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "mens cologne",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_mens_cologne.json"
+      },
+      {
+        "at": "2026-10-07T20:57:10+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "perfume",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_perfume.json"
+      },
+      {
+        "at": "2026-10-07T20:57:39+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "lattafa",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_lattafa.json"
+      },
+      {
+        "at": "2026-10-07T20:58:07+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "valentino",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_valentino.json"
+      },
+      {
+        "at": "2026-10-07T20:58:36+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "perfume for men",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_perfume_for_men.json"
+      },
+      {
+        "at": "2026-10-07T20:59:04+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "cologne",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_cologne.json"
+      },
+      {
+        "at": "2026-10-07T20:59:32+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "yara perfume",
+          "months": 12
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 75,
+        "file": "market\\raw\\search_terms_trends_yara_perfume.json"
+      },
+      {
+        "at": "2026-10-07T22:23:49+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "perfume",
+          "months": 24
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_perfume_m24.json"
+      },
+      {
+        "at": "2026-10-07T22:24:44+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "cologne",
+          "months": 24
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_cologne_m24.json"
+      },
+      {
+        "at": "2026-10-07T22:25:13+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "lattafa",
+          "months": 24
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_lattafa_m24.json"
+      },
+      {
+        "at": "2026-10-07T22:25:41+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "versace",
+          "months": 24
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_versace_m24.json"
+      },
+      {
+        "at": "2026-10-07T22:26:01+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "dior",
+          "months": 24
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_dior_m24.json"
+      },
+      {
+        "at": "2026-10-07T22:26:29+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "fragrances",
+          "months": 24
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_fragrances_m24.json"
+      },
+      {
+        "at": "2026-10-07T22:26:57+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "body mist",
+          "months": 24
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_body_mist_m24.json"
+      },
+      {
+        "at": "2026-10-07T22:27:25+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "glossier",
+          "months": 24
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_glossier_m24.json"
+      },
+      {
+        "at": "2026-10-07T22:27:55+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "chanel",
+          "months": 24
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_chanel_m24.json"
+      },
+      {
+        "at": "2026-10-07T22:28:23+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "valentino",
+          "months": 24
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_valentino_m24.json"
+      },
+      {
+        "at": "2026-10-07T22:28:52+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "tom ford",
+          "months": 24
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_tom_ford_m24.json"
+      },
+      {
+        "at": "2026-10-07T22:29:27+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "armaf",
+          "months": 24
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_armaf_m24.json"
+      },
+      {
+        "at": "2026-10-07T22:30:19+09:00",
+        "tool": "search_terms_trends",
+        "args": {
+          "keyword": "gucci",
+          "months": 24
+        },
+        "called": true,
+        "ok": true,
+        "attempt": 1,
+        "rows": 100,
+        "file": "market\\raw\\search_terms_trends_gucci_m24.json"
+      }
+    ]
+  },
+  "fields": {
+    "subcategories_search": [
+      "momGrowth",
+      "momGrowth12",
+      "parentId",
+      "id",
+      "subcategoryName",
+      "totalMonthlyRevenue",
+      "totalBrands",
+      "totalAsins",
+      "avgPrice",
+      "avgReviews",
+      "avgRating",
+      "avgNumberSellers",
+      "avgPageScore",
+      "avgVolume",
+      "totalNumberUnitsSold",
+      "totalReviews",
+      "subcategoryContextName",
+      "sellerRevenuePct",
+      "azRevenuePct",
+      "avgListedSinceDays",
+      "ttm",
+      "isParent",
+      "level"
+    ],
+    "subcategories_category_competitors": [
+      "numberASINs",
+      "revenue",
+      "totalReviews",
+      "reviewRating",
+      "avgPrice",
+      "avgNumberSellers",
+      "avgPageScore",
+      "avgVolume",
+      "avgReviews",
+      "totalNumberUnitsSold",
+      "brandName",
+      "brandId",
+      "marketshare",
+      "moMMktShareChange",
+      "adSpendShare"
+    ],
+    "subcategories_relevant_search_terms": [
+      "searchTermId",
+      "searchTermValue",
+      "volume30Day",
+      "numRelatedProducts",
+      "relevancy",
+      "current4WkVolume",
+      "priorYear4WkVolume",
+      "yoYChange",
+      "yoYChangePct"
+    ],
+    "search_terms_trends": [
+      "searchTerm",
+      "estimateSearches",
+      "estimateSearchesGrowth12Months",
+      "estimateSearchesGrowth6Months",
+      "estimateSearchesGrowth3Months",
+      "estimateSearchesGrowth1Month",
+      "history"
+    ],
+    "products_byasin": [
+      "note",
+      "category",
+      "brand",
+      "subcategory",
+      "dominantSeller",
+      "marketplaceId",
+      "variationDimensions",
+      "productHistories",
+      "trafficSourceCount",
+      "trafficLast30Days",
+      "variationCount",
+      "collectionExcluded",
+      "periodRevenue",
+      "periodUnitSales",
+      "previousPeriodRevenue",
+      "previousPeriodUnitSales",
+      "periodGrowth",
+      "ttmStartDate",
+      "ttmEndDate",
+      "storefrontUrl",
+      "productSummary",
+      "productScrapingStat",
+      "isSolicitationEnabled",
+      "sendAfterDays",
+      "amazonAccountTtm",
+      "amazonAccountMonthlyRevenue",
+      "comparisonPeriodRevenue",
+      "amazonAccountComparisonRevenue",
+      "id",
+      "brandName",
+      "categoryId",
+      "brandId",
+      "dateSeen",
+      "ttm",
+      "ttmPrev",
+      "ttmUnits",
+      "momGrowth",
+      "momGrowth12",
+      "rankScore",
+      "rankScoreGrowth",
+      "smartScore",
+      "smartScoreGrowth",
+      "opportunityScore",
+      "salesRankDrops30Day",
+      "outOfStockRate30Day",
+      "priceDrops30Day",
+      "businessDiscount",
+      "returnRate",
+      "inStockRate90Day",
+      "buyBoxSuppression45Day",
+      "hasVideo",
+      "hasAPlus",
+      "ttmChange",
+      "isParentAsin",
+      "amzMonthlySold",
+      "competitivePriceThreshold",
+      "isSns",
+      "unitValue",
+      "unitType",
+      "eachUnitCount",
+      "itemHighlights",
+      "hiddenReasonId",
+      "subcategoryId",
+      "asin",
+      "rank",
+      "subcategoryRank",
+      "numberOfSellers",
+      "buyBoxPrice",
+      "averageBuyBoxPrice",
+      "reviewCount",
+      "reviewRating",
+      "numberFbaSellers",
+      "amazonIsr",
+      "monthlyRevenueEstimate",
+      "monthlyUnitsSold",
+      "outOfStockNow",
+      "productPageScore",
+      "isVariation",
+      "parentAsin",
+      "imageCount",
+      "imageUrl",
+      "title",
+      "buyBoxEquity",
+      "revenueEquity",
+      "marginEquity",
+      "partNumber",
+      "model",
+      "upc",
+      "manufacturer",
+      "numberOfItems",
+      "totalRatings",
+      "packageQuantity",
+      "size",
+      "color",
+      "length",
+      "height",
+      "width",
+      "weight",
+      "listedSince"
+    ],
+    "products_history": [
+      "newFbmShipping",
+      "newFba",
+      "salesRank",
+      "buyBoxShipping",
+      "reviewCount",
+      "newOfferCount",
+      "amazon",
+      "firstScrapingDate"
+    ],
+    "search_terms_advertised_brands": [
+      "name",
+      "sponsoredProducts",
+      "sponsoredBrandWinRate",
+      "topGroupWinRate",
+      "topSpotWinRate"
+    ],
+    "search_terms_ad_spy": [
+      "searchTermValue",
+      "estimateSearches",
+      "estimatedCpc",
+      "sponsoredProducts",
+      "sponsoredBrandWinRate",
+      "sponsoredVideoWinRate",
+      "topGroupWinRate",
+      "topSpotWinRate",
+      "sponsoredBrandSpend",
+      "sponsoredVideoSpend",
+      "topSpotSpend",
+      "topGroupSpend",
+      "totalAdSpend"
+    ],
+    "search_terms_trends_top_products": [
+      "searchTermValue",
+      "brandName",
+      "asin",
+      "parentAsin",
+      "imageUrl",
+      "title",
+      "avgRank",
+      "latestRank",
+      "searchTermProductRanksDailies"
+    ]
+  },
+  "not_obtained": [
+    "검색어별 CPC: 카테고리 검색어에는 없음. search_terms_ad_spy(브랜드 하나의 광고 검색어)에만 estimatedCpc가 있어, 이번에는 Calvin Klein 광고 검색어 20개만 받음(단위 미확인).",
+    "광고비 비중(검색 결과 중 스폰서 비율): 없음. 브랜드별 adSpendShare(경쟁 브랜드 표)와 검색어별 광고 승률만 있음(뜻과 단위 미확인).",
+    "전체 시장 규모: 아마존 US 노드 월매출(totalMonthlyRevenue)만 있음. 아마존 밖 시장이나 연간 공식 수치는 없음(웹 조사 단계).",
+    "아마존 직판(1P) 비중: azRevenuePct, sellerRevenuePct 칸은 있으나 뜻을 설명한 문서가 없음(단위 미확인).",
+    "상품 bullet 전체와 성분표: 칸이 없음. itemHighlights(한 줄 요약)만 6개 중 4개에 있고, 비어 있는 것은 B00021AJ5I, B09X5BQ969.",
+    "subcategories_relevant_search_terms: 첫 시도들이 서버 오류(500), 이름만으로 부른 2번은 두 번 다 실패, 맥락 이름으로 다시 불러 받음."
+  ],
+  "notes": [
+    "subcategories_category_competitors를 노드 이름만(\"Eau de Parfum\", \"Eau de Toilette\")으로 부르면 두 결과가 같고 1위가 Apple(평균 가격 1,364)라 향수 카테고리가 아님. 버리고 subcategoryContextName(\"Women's Eau de Parfum\")으로 다시 부른 결과만 씀.",
+    "Women's Eau de Parfum 관련 검색어 37,624개 중 카테고리 낱말(perfume, parfum, fragrance, cologne, scent, eau de, body mist, mist, edp, edt, toilette)이나 브랜드 이름(상위 20 브랜드와 우리 6개)이 든 것 27,495개를 30일 검색량 순으로 50개. 응답의 relevancy만으로는 \"now\", \"yellowstone\" 같은 검색어가 남아 이 규칙을 씀.",
+    "Women's Eau de Toilette 관련 검색어 15,736개 중 카테고리 낱말(perfume, parfum, fragrance, cologne, scent, eau de, body mist, mist, edp, edt, toilette)이나 브랜드 이름(상위 20 브랜드와 우리 6개)이 든 것 12,334개를 30일 검색량 순으로 50개. 응답의 relevancy만으로는 \"now\", \"yellowstone\" 같은 검색어가 남아 이 규칙을 씀."
+  ]
+}

@@ -1,0 +1,14 @@
+audit:
+  stage: report
+  run: perfume-db-2026-10-07
+  overall_status: PASS
+  summary: 고친 결론 5줄의 숫자 12개가 모두 05_metrics.json의 같은 주제, 같은 지표 값과 일치하고, 각 문장이 06_report_concl_packet.md의 해당 장 표와 데이터 읽기 문단을 넘어서는 주장을 하지 않음.
+  checked: 12
+  lines:
+    - {where: "47행 (2장 결론)", status: PASS, reason: "69.0 = topics.longevity_projection.neg_pct, 35.7 = topics.scent.neg_pct로 둘 다 원본 부정 비율. '향, 그리고 지속력과 향의 세기'로 고쳐 '둘 가운데'가 가리키는 두 속성이 분명해졌고, 패킷 2장 데이터 읽기(향 773, 지속력과 향의 세기 504, 69.0% 대 35.7%)와 맞음"}
+    - {where: "70행 (3장 결론)", status: PASS, reason: "10.0 = topics.longevity_projection.neg_reviewer_pct(전체 만족도 10.7을 빼면 가장 높음, 다음은 향 6.5), 83.0 = topics.customer_service.weighted_neg_pct, 새로 넣은 1.8 = topics.customer_service.neg_reviewer_pct. 지표 이름 '부정 언급 리뷰어(가중)'도 같은 키를 가리켜 패킷 3장 문단과 일치"}
+    - {where: "93행 (4장 결론)", status: PASS, reason: "-3.27 = impact[customer_service].gap(표에서 절댓값이 가장 큼), -1.62 = impact[longevity_projection].gap, '부정 언급이 가장 많은'은 neg_reviews 348이 impact에서 가장 큰 값이라 맞음. 주어를 '그 주제를 부정으로 언급한 리뷰'로 고친 것은 표 정의(부정 언급 리뷰 대 나머지 리뷰)와 같음. 연관이며 원인이 아니라는 단서도 남아 있음"}
+    - {where: "175행 (7장 결론)", status: PASS, reason: "40 = trust_signals.unverified.reviews, 20 = trust_signals.vine.reviews. '잠정적입니다'를 '크게 기댑니다'로 바꿨지만 패킷 7장 데이터 읽기의 '이 순위는 소수 리뷰가 받은 표에 크게 기댑니다'와 같은 표현이고, 순위를 단정하는 말을 더하지도 않아 단서가 약해지지 않음"}
+    - {where: "264행 (9장 결론)", status: PASS, reason: "새로 넣은 '이런 ASIN은 3~5개'는 robustness.texts.weakest('6개 중 5개(리뷰를 다시 뽑아 보면 3~5개)')와 robustness.bootstrap.weakest_range [3, 5]와 일치. 114~399는 ASIN별 sample_reviews의 최솟값 114와 최댓값 399. 6개 모두 강점이 향이고 Jean Paul Gaultier만 약점이 배송인 것은 패킷 9장 표와 맞음"}
+  findings: []
+  next_action: PROCEED

@@ -1,0 +1,80 @@
+topic: brand_experience
+directions:
+  negative:
+    labels:
+      - id: no_repurchase
+        name_ko: 다시 사지 않겠다
+        name_en: Will not repurchase
+        include: 리뷰어 본인이 이 제품을 다시 사지 않겠다, 다시 살지 망설인다는 말(이 향은 다시 안 산다 포함). "won't buy again", "Não compraria novamente", "dudo mucho volverlo adquirir", "次は買わない"
+        exclude: 남에게 사지 말라, 추천하지 않는다고 권하는 말은 advise_against(본인 재구매 거부와 비추천이 한 인용에 같이 있으면 advise_against). 브랜드 전체나 회사와 거래를 끊겠다는 말은 기타
+        examples:
+          - {review_id: R1GC4SWKII954O, quote: "will not purchase again"}
+          - {review_id: RD7OK6GNPNWWW, quote: "Would not purchase again"}
+        approx_count: 26
+      - id: advise_against
+        name_ko: 비추천, 사지 말라
+        name_en: Advises others against buying
+        include: 다른 사람에게 추천하지 않는다, 사지 말라고 권하는 말. "Don't recommend", "Do not buy", "no lo compren", "Não recomendo", "keine Kaufempfehlung", 대신 다른 향이나 다른 제품을 사라는 권유("get a different scent", "buy the YSL version instead")
+        exclude: 본인만 다시 사지 않겠다는 말은 no_repurchase. 이 판매자에게서 사지 말라는 말은 주제 밖(trust)
+        examples:
+          - {review_id: R2ZQPSM4V7AB2P, quote: "Don't recommend"}
+          - {review_id: RU1F1TZKEIBMI, quote: "Do not buy"}
+        approx_count: 50
+    other_approx_count: 7
+    notes: >-
+      기타 7개는 브랜드나 회사 전체와 끊겠다는 말 5개(R3SY7CRYQGRIJR, RE2KNU3LPS61F, R3DSZM9BOJ9YFF, R3OJWNUWQ3ZJOB, R1TQHZSI3LSOPN)와 브랜드의 다른 향을 써 보고 싶지만 망설인다는 혼합 2개.
+      브랜드 이탈은 확실한 것이 3개(약 4%)로 5%에 못 미쳐 라벨로 만들지 않았다. "their products", "this particular company"는 판매자를 가리킬 수도 있어(그러면 trust) 원문 확인이 필요하고, "I hate them"은 무엇을 가리키는지 인용만으로는 알 수 없다.
+      "Dudo en volverlo a comprar por aquí"(RYM1IVFLQVFSK)는 '여기서' 다시 사기를 망설인다는 말이라 판매자 이야기에 가깝지만 재구매 표현이라 no_repurchase로 셌다.
+      advise_against는 "추천 안 함"과 "사지 마라"를 합친 것이다. 표현만 다르고 내용이 같아서 합쳤고, 나눠 보고 싶으면 각각 어림 25개 정도.
+  positive:
+    labels:
+      - id: recommends
+        name_ko: 추천, 사라고 권함
+        name_en: Recommends to others
+        include: 남에게 추천한다, 사 보라고 권하는 말. "highly recommend", "lo recomiendo", "Buy it!!", "Must buy", "give this one a try", "recommended it to several friends"
+        exclude: 본인이 다시 사겠다는 말은 will_repurchase(추천과 재구매가 한 인용에 같이 있으면 recommends). 브랜드 제품 전반을 추천하는 말은 brand_affinity
+        examples:
+          - {review_id: R1M2HDZ8ML591D, quote: "would definitely recommend"}
+          - {review_id: R2DR2FD2ZM7NB3, quote: "Buy it"}
+        approx_count: 35
+      - id: will_repurchase
+        name_ko: 다시 사겠다
+        name_en: Will repurchase
+        include: 앞으로 다시 사겠다, 곧 또 산다, 예비로 하나 더 주문했다, 늘 갖춰 두겠다, 계속 쓰겠다는 미래 의향. "Will repurchase again.", "I have already ordered a back up.", "Will always have on hand", "I'll continue to wear it"
+        exclude: 이미 여러 병 샀다, 수년째 쓴다는 과거 행동은 repeat_long_time_user(과거와 미래가 같이 있으면 repeat_long_time_user). 같은 브랜드의 다른 향을 사겠다는 말은 brand_affinity
+        examples:
+          - {review_id: R251EFH6XL865Y, quote: "would definitely buy it again"}
+          - {review_id: R3KIT5CR5UKBES, quote: "I have already ordered a back up."}
+        approx_count: 23
+      - id: repeat_long_time_user
+        name_ko: 여러 병째, 수년째 애용
+        name_en: Repeat or long-time user
+        include: 이미 여러 번 샀다, 두 번째 병이다, 늘 산다, 몇 년째(수십 년째) 써 왔다는 과거 행동. 가족이 오래 써 왔다는 말 포함. "On My second bottle.", "Lo he comprado varias veces", "Eu uso esse perfume há muitos anos ja", "My wife has used this for 50 years"
+        exclude: 기간이나 횟수 없이 최애, 시그니처, 매일 쓴다는 말만 있으면 favorite_signature. 앞으로 사겠다는 말만 있으면 will_repurchase
+        examples:
+          - {review_id: RYCJDMO5YJZ3F, quote: "I have went through many bottles"}
+          - {review_id: R543VC5C5UZ9M, quote: "On My second bottle."}
+        approx_count: 25
+      - id: favorite_signature
+        name_ko: 최애, 시그니처 향
+        name_en: Favorite or signature scent
+        include: 내(가족의) 최애 향수다, 시그니처 향이다, 매일이나 자주 쓰는 주력 향이다(go-to, every day, only perfume I will wear, staple in my purse). "My favorite perfume!", "Es mi perfume favorito", "Its my signature scent"
+        exclude: 몇 년째, 여러 병째처럼 기간이나 구매 횟수가 같이 있으면 repeat_long_time_user. 브랜드를 좋아한다는 말은 brand_affinity
+        examples:
+          - {review_id: R2IZYYF40BLYCN, quote: "This is my favorite perfume"}
+          - {review_id: R1CW6KMXZ5DMK7, quote: "Its my signature scent"}
+        approx_count: 49
+      - id: brand_affinity
+        name_ko: 브랜드 호감, 다른 향도 좋다
+        name_en: Brand affinity
+        include: 브랜드 자체를 좋아한다, 브랜드의 다른 향도 좋다, 다른 향도 써 보겠다, 이 브랜드에서 또 사겠다는 말(이 향은 별로라는 혼합 포함). "Love this brand so much!!!", "Love Dossier fragrances.", "Will try other blends from this maker", "Dossier has themselves a new fan!"
+        exclude: 이 제품을 두고 한 추천, 재구매, 애용은 recommends, will_repurchase, repeat_long_time_user, favorite_signature(브랜드명이 있어도 이 제품을 가리키면 그쪽). 브랜드와 이 제품을 함께 칭찬하면 brand_affinity
+        examples:
+          - {review_id: RC124KI4VXNEV, quote: "Love this brand so much!!!"}
+          - {review_id: R51AHLN091QG2, quote: "All my other fragrances from Dossier are amazing"}
+        approx_count: 17
+    other_approx_count: 1
+    notes: >-
+      기타 1개는 "I wear this in memory of my husband."(R250YQNVQ4FP3G, 추억 때문에 쓴다는 정서적 애착).
+      favorite_signature와 repeat_long_time_user는 기간이나 횟수를 말했는지로 가른다("an old favorite"처럼 오래됐음을 암시만 하면 favorite_signature, "My favorite, have been using it for years"는 repeat_long_time_user).
+      brand_affinity에는 같은 브랜드의 다른 향을 좋아한다는 말이 들어 있다(스키마 공통 규칙상 brand_experience). 망설임이 섞인 혼합 2개(R3HKWF5VN6K5KG, R3TKPOTESXG4F8)도 칭찬 부분으로 여기 셌다.

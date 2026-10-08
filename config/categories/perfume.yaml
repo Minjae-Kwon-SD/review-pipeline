@@ -1,0 +1,204 @@
+# 향수 카테고리. collect.py candidates와 asin-selector가 읽는다.
+category: perfume
+name_ko: 향수
+
+# 공유 DB의 search_reviews keyword(리뷰 제목과 본문 부분일치)
+keywords: [perfume, fragrance, parfum, cologne, scent]
+
+# 상품 제목(대소문자 무시)에 하나라도 있으면 후보, title_exclude가 하나라도 있으면 뺀다
+title_include: [Eau de Parfum, Eau de Toilette, Parfum, Perfume, Cologne, Body Mist, Fragrance Mist]
+title_exclude: [Body Wash, Lotion, Shampoo, Conditioner, Candle, Soap, Deodorant, Scrub, Shower Gel,
+                Body Cream, Butter, Detergent, Diffuser, Wax Melt, Air Freshener]
+
+# kind_hint 규칙: 먼저 맞는 것
+kind_rules:
+  body_mist: [Body Mist, Fragrance Mist, Perfume Mist, Hair & Body, Hair and Body]
+  EDP_EDT: [Eau de Parfum, Eau de Toilette, Parfum, Perfume, Cologne, EDP, EDT]
+
+# 시장 데이터(market.py, market_build.py, guide_metrics.py가 읽음). spd-amz-market 하위 카테고리 노드와 검색어 규칙
+market:
+  seed: "perfume for women"            # 광고, 상위 상품, 추이의 첫 검색어
+  parent_node: 11056931                # 이 노드의 자식 노드가 하위 카테고리 표(Beauty > Fragrance > Women)
+  context_nodes: [11056591, 11056931, 11056761]   # 표 맨 위에 함께 보일 노드(Fragrance, Women, Men)
+  max_nodes: 15
+  nodes:                               # 경쟁 브랜드와 관련 검색어를 받을 노드(표 이름 키: subcategoryContextName)
+    EDP: "Women's Eau de Parfum"
+    EDT: "Women's Eau de Toilette"
+  # 관련 검색어 가운데 카테고리 검색어로 칠 낱말(소문자 부분 일치). 브랜드 이름이 든 검색어도 친다.
+  term_words: [perfume, parfum, fragrance, cologne, scent, "eau de", "body mist", mist, edp, edt, toilette]
+
+# 리뷰 리포트(render_html.py, issues.py가 읽음)
+report:
+  title: {ko: "아마존 리뷰 분석: 향수(EDP/EDT)", en: "Amazon Review Analysis: Perfume (EDP/EDT)"}
+  # 도움돼요 순위: 표를 1개 이상 받은 리뷰가 이 수보다 적으면 순위는 보여 주되 (잠정)을 달고 해석하지 않는다
+  helpful_min_voted_reviews: 30
+issues:
+  # 같은 리뷰에 함께 붙는지 셀 두 라벨(주제, 라벨 id). 없으면 겹침을 세지 않는다.
+  overlap: [[scent, differs_from_original], [trust, differs_from_genuine]]
+
+# 제품 개발 가이드(guide_metrics.py가 읽음). 카테고리마다 다른 것은 여기에만 적는다.
+guide:
+  title: 아마존 미국 향수(EDP, EDT) 제품 개발 가이드
+  market_node_head: "11056931"          # 머리 숫자의 시장 노드(Women's Fragrances)
+  market_nodes_brand_share: ["Women's Eau de Parfum", "Women's Eau de Toilette"]
+  head_topic: longevity_projection      # 머리 숫자: 이 주제의 부정 리뷰 비율(가중), 가장 큰 약점이 이 주제인 상품 수
+  direction_index:                      # 방향 지수 = (high - low) / (high + low), 언급 min_reviews개 이상인 상품만
+    topic: longevity_projection
+    high: {name: 너무 셈, labels: [too_strong]}
+    low: {name: 약함, labels: [fades_fast, weak_scent, shorter_than_hoped]}
+    min_reviews: 25
+  duration_item: longevity_hours        # 말한 지속 시간(숫자 항목), 상품별 중앙값은 값 min_values개 이상일 때
+  duration_min_values: 5
+  gender_words:
+    male: ["men", "mens", "men's", "cologne", "for him", "homme"]
+    female: ["women", "womens", "women's", "for her", "femme"]
+  fastest_term_min_volume: 30000       # 가장 빨리 크는 검색어는 30일 검색량이 이 값 이상인 것 중에서
+  growth:                               # 머리 숫자 5번: 성장 배수 = 최근 window_weeks주 검색량 합 / 52주 전 같은 주들의 합
+    window_weeks: 4
+    min_volume: 30000                   # 30일 검색량이 이 값 이상인 카테고리 검색어만 후보
+    exclude_words: [bag, underwear, boxer, bra, socks, shoes, organizer, clearance]   # 브랜드 이름 규칙을 통과하지만 이 카테고리 상품이 아닌 검색어
+  duration_bins: [1, 3, 6, 12]          # 말한 지속 시간 구간(시간)
+  price_bands: 3                        # 시장 데이터 브랜드 표의 평균 가격으로 나눌 구간 수
+  focus:                                # 03장 집중 분석 4개
+    - id: longevity
+      title: 지속력과 세기
+      topics: [longevity_projection]
+      items: [longevity_hours, application_site, application_amount, fake_suspicion_basis]
+      split_label: fades_fast           # 뿌린 곳, 뿌린 양별로 이 라벨 비율
+    - id: scent_accuracy
+      title: 향 정확도
+      topics: [scent]
+      items: [scent_note, note_direction, comparison_reference, comparison_named]
+      pair_items: [scent_note, note_direction]   # 같은 인용의 두 항목을 짝지어 센다(한쪽이 하나뿐일 때만)
+    - id: bottle_sprayer
+      title: 병과 분사기
+      topics: [bottle_design, quality]
+      items: [part_failure]
+    - id: trust_arrival
+      title: 정품 신뢰와 도착
+      topics: [trust, shipping, packaging]
+      items: [fake_suspicion_basis]
+      labels: [arrived_broken, leaked_in_transit, arrived_underfilled, wrong_or_opened_item]
+  # 05장 제품 해부도(방향 잡기용 그림). 없으면 그림을 넣지 않는다.
+  anatomy:
+    viewbox: "0 0 340 380"
+    shapes:
+      - {x: 110, y: 40, w: 120, h: 40, rx: 8, fill: line2}
+      - {x: 135, y: 80, w: 70, h: 30, rx: 4, fill: line2}
+      - {x: 80, y: 110, w: 180, h: 230, rx: 26, fill: soft, width: 2}
+    points: [[170, 40], [250, 70], [290, 150], [290, 250], [250, 330], [90, 330], [50, 250], [50, 150]]
+  # 이 회차에만 해당하는 주의 사항(A장 끝 목록에 덧붙임)
+  caveats_extra:
+    - "Jean Paul Gaultier(B08FBQWRYC)는 Men's Eau de Parfum, Elizabeth Taylor(B0009OAI8Q)는 Women's Fragrance Sets 노드로 잡혀 있다."
+    - "향수와 무관한 리뷰 1개(R1T7FSK04S0DMQ)가 숫자에 들어 있다."
+  caveat_subcategory: "Women's Eau de Parfum"   # "상품이 대부분 한 하위 카테고리"라는 주의 사항에 넣을 이름
+  standards:                            # 04장 소비자 기준표 후보 7개
+    - id: longevity_strength
+      title: 지속력과 세기
+      neg_labels: [fades_fast, weak_scent, shorter_than_hoped, too_strong, weaker_than_genuine, not_lasting_for_price]
+      pos_labels: [long_lasting, not_overpowering, strong_presence, little_goes_far]
+      items: [longevity_hours]
+      search_words: ["long lasting", "lasting", "strong"]
+    - id: scent_accuracy
+      title: 향 정확도와 일관성
+      neg_labels: [differs_from_original, missing_described_notes, differs_from_genuine, formula_changed, cheap_artificial, alcohol_smell]
+      pos_labels: [appealing_character, same_as_original]
+      items: [note_direction, comparison_reference]
+      search_words: ["dupe", "vanilla", "inspired"]
+    - id: authenticity
+      title: 정품 신뢰
+      neg_labels: [fake_asserted, authenticity_doubt, diluted_or_tampered]
+      pos_labels: [authentic_confirmed]
+      items: [fake_suspicion_basis]
+      search_words: ["original", "authentic"]
+    - id: bottle_sprayer
+      title: 병과 분사기
+      neg_labels: [sprayer_stopped_working, sprayer_defective, sprayer_problem, bottle_leaks, missing_parts]
+      pos_labels: [sprayer_good, build_quality, magnetic_cap, pretty_bottle]
+      items: [part_failure]
+      search_words: ["spray", "travel", "mini"]
+    - id: arrival_packaging
+      title: 도착 상태와 포장
+      neg_labels: [arrived_broken, leaked_in_transit, arrived_underfilled, wrong_or_opened_item]
+      pos_labels: [arrived_intact, well_protected, pretty_presentation]
+      items: []
+      search_words: ["gift set", "gift"]
+    - id: skin_body
+      title: 피부와 몸 반응
+      neg_labels: []
+      pos_labels: []
+      safety: true                      # 07c 몸 증상 판정을 쓴다
+      items: []
+      search_words: ["hypoallergenic", "sensitive", "clean"]
+    - id: sampling_returns
+      title: 시향과 반품
+      neg_labels: [not_returnable, return_window_missed, refund_request]
+      pos_labels: []
+      items: [purchase_context, purchase_trigger]
+      item_values: {purchase_context: [blind_buy, first_purchase], purchase_trigger: [smelled_in_person]}
+      search_words: ["sample", "travel size", "mini"]
+
+# 상품 사양 수집(specs.py, product-spec-collector가 읽음). 항목 이름과 뜻은 카테고리마다 여기에만 적는다.
+specs:
+  items:
+    - id: concentration
+      name_ko: 농도
+      ask: "제품 유형과 농도(Eau de Toilette, Eau de Parfum, Parfum, Extrait, Body Mist 등). 향료 비율(%)이 적혀 있으면 그 비율"
+      format: text
+    - id: notes_top
+      name_ko: 탑 노트
+      ask: "공식 노트 구성 가운데 탑(top, head) 노트 목록"
+      format: list
+    - id: notes_middle
+      name_ko: 미들 노트
+      ask: "공식 노트 구성 가운데 미들(middle, heart) 노트 목록"
+      format: list
+    - id: notes_base
+      name_ko: 베이스 노트
+      ask: "공식 노트 구성 가운데 베이스(base, dry down) 노트 목록. 탑, 미들, 베이스로 나누지 않고 노트만 적었으면 여기 말고 notes_all"
+      format: list
+    - id: notes_all
+      name_ko: 노트(층 구분 없음)
+      ask: "탑, 미들, 베이스로 나누지 않고 적은 노트 목록"
+      format: list
+    - id: size_price
+      name_ko: 용량과 가격
+      ask: "출처 사이트에 적힌 용량과 그 가격(통화 포함). 여러 용량이면 모두"
+      format: list
+    - id: sprayer_bottle
+      name_ko: 분사기와 병
+      ask: "분사기 종류(펌프 스프레이, 롤온 등), 병 재질, 뚜껑(자석 등), 리필 가능 여부 같은 병과 분사기 설명"
+      format: text
+    - id: ingredients
+      name_ko: 전 성분
+      ask: "전 성분 목록(INCI). 있는 그대로"
+      format: text
+    - id: allergens
+      name_ko: 표시된 알레르기 성분
+      ask: "전 성분이나 표시에 나온 향료 알레르기 성분(예: Limonene, Linalool, Citronellol, Geraniol, Coumarin 같은 표시 성분) 목록"
+      format: list
+    - id: sample_mini_refill
+      name_ko: 샘플, 미니, 리필
+      ask: "같은 향의 샘플, 미니(여행용), 리필을 파는지와 그 용량"
+      format: text
+  # 기준표와 사양을 잇는 방법(기준 id). 없는 줄은 그 표를 만들지 않는다.
+  links:
+    duration: longevity_strength      # 농도와 말한 지속 시간(guide.duration_item)
+    notes: scent_accuracy             # 공식 노트와 리뷰가 말한 노트(note_item)
+    parts: bottle_sprayer             # 병과 분사기 사양과 망가진 부품(part_item)
+    body: skin_body                   # 몸 증상 리뷰와 표시 알레르기 성분
+  note_item: scent_note
+  part_item: part_failure
+  # 리뷰 설계 정보 scent_note 값과 공식 노트 낱말을 맞대는 규칙(소문자 부분 일치). other는 note_word를 공식 노트와 직접 맞댄다.
+  note_map:
+    vanilla: [vanilla, tonka]
+    honey: [honey]
+    amber_warm: [amber, ambery, labdanum, benzoin]
+    musk: [musk]
+    floral: [jasmine, rose, lily, orange blossom, tuberose, freesia, gardenia, violet, iris, peony, magnolia, carnation, narcissus,
+             honeysuckle, lilac, neroli, ylang, osmanthus, floral, flower, marigold, orchid, lavender, geranium, heliotrope, muguet]
+    powdery_aldehydic: [aldehyde, powder, orris, iris]
+    sweet_gourmand: [praline, caramel, sugar, chocolate, coffee, almond, gourmand, candy, cotton candy, honey, vanilla, tonka]
+    spicy: [pepper, cinnamon, cardamom, clove, nutmeg, saffron, ginger, spice]
+    coconut: [coconut]
+    fresh_clean: [bergamot, lemon, mandarin, citrus, grapefruit, orange, aquatic, mint, green, ozonic, marine, fresh]

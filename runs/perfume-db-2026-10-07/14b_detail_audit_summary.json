@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-10-07T21:39:26+09:00",
+  "status": "PASS",
+  "sample": 150,
+  "fail": 4,
+  "fail_rate": 0.027,
+  "max_fail_rate": 0.05,
+  "by_item": {
+    "desired_state": 2,
+    "usage_occasion": 1,
+    "application_site": 1
+  },
+  "warnings": []
+}

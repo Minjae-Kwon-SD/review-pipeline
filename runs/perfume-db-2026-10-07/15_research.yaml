@@ -1,0 +1,1189 @@
+researched_on: 2026-10-07
+category: perfume
+notes:
+  - "quote는 WebFetch 요약 모델이 페이지에서 옮긴 문장이다. 리포트에 쓰기 전 url을 열어 한 번 더 대조할 것."
+  - "ind_ 중 '\"title\":...\"price\":...' 형태의 quote는 브랜드 공식 Shopify 상품 JSON(<상품 URL>.json)의 변형 이름과 가격 필드 원문이다(문장이 아니라 필드 값)."
+  - "amazon.com 페이지는 열지 않았다."
+claims:
+  # ---------------- 시장(market) ----------------
+  - id: mkt_01
+    area: market
+    claim_ko: 2025년 미국 프레스티지 뷰티 매출은 전년보다 4% 늘어 360억 달러였다
+    subject: Circana
+    value: $36 billion, +4%
+    year: 2025
+    url: https://www.circana.com/post/us-prestige-and-mass-beauty-retail-deliver-a-positive-performance-in-2025-circana-reports
+    source_name: Circana 보도자료 (US Prestige and Mass Beauty Retail Deliver a Positive Performance in 2025)
+    quote: "prestige beauty retail dollar sales grew by +4%, year over year, to reach $36 billion in 2025"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: mkt_02
+    area: market
+    claim_ko: 2025년 미국 프레스티지 향수 매출은 5% 늘었고 프레스티지 유통에서 두 번째로 큰 부문이다
+    subject: Circana
+    value: +5%
+    year: 2025
+    url: https://www.circana.com/post/us-prestige-and-mass-beauty-retail-deliver-a-positive-performance-in-2025-circana-reports
+    source_name: Circana 보도자료 (2025 연간)
+    quote: "Prestige fragrance grew +5% in dollars and closed the year as the second-largest segment in prestige retail."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: mkt_03
+    area: market
+    claim_ko: 2025년 대중 유통(매스)에서 향수는 가장 작은 부문이지만 매출이 15% 늘어 가장 빨리 컸다
+    subject: Circana
+    value: +15%
+    year: 2025
+    url: https://www.circana.com/post/us-prestige-and-mass-beauty-retail-deliver-a-positive-performance-in-2025-circana-reports
+    source_name: Circana 보도자료 (2025 연간)
+    quote: "Though the smallest category in the mass market, fragrance was the fastest-growing, rising +15% in dollars and units grew at nearly the same rate."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: mkt_04
+    area: market
+    claim_ko: 2025년 프레스티지 향수 성장은 정상화 국면이며, 고농도(퍼퓸)와 미니 사이즈 인기가 계속 영향을 줬다
+    subject: Circana
+    value: null
+    year: 2025
+    url: https://www.circana.com/post/us-prestige-and-mass-beauty-retail-deliver-a-positive-performance-in-2025-circana-reports
+    source_name: Circana 보도자료 (2025 연간)
+    quote: "Innovation and premiumization trends stemming from luxury brands, higher concentrations such as perfume, and the popularity of mini sizes remained influential."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: mkt_05
+    area: market
+    claim_ko: 2024년 향수는 매출(12% 증가)과 판매 수량 모두에서 미국 프레스티지 뷰티 중 가장 빨리 큰 부문이었다
+    subject: Circana
+    value: +12%
+    year: 2024
+    url: https://www.circana.com/post/us-beauty-industry-sales-grow-for-the-fourth-consecutive-year-circana-reports
+    source_name: Circana 보도자료 (2025-02-11)
+    quote: "Fragrance was the fastest-growing category in 2024 based on both dollar sales, up 12%, and units sold"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: mkt_06
+    area: market
+    claim_ko: 2024년 향수는 미국 프레스티지 뷰티 매출(339억 달러)의 28%를 차지했다
+    subject: Circana
+    value: 28%
+    year: 2024
+    url: https://www.circana.com/post/us-beauty-industry-sales-grow-for-the-fourth-consecutive-year-circana-reports
+    source_name: Circana 보도자료 (2025-02-11)
+    quote: "fragrance now accounts for 28% of total prestige beauty sales, solidifying its position as the second-largest category"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: mkt_07
+    area: market
+    claim_ko: 2024년 농도별로 퍼퓸은 매출 43%, 오드퍼퓸은 14% 늘었다
+    subject: Circana
+    value: parfum +43%, EDP +14%
+    year: 2024
+    url: https://www.circana.com/post/us-beauty-industry-sales-grow-for-the-fourth-consecutive-year-circana-reports
+    source_name: Circana 보도자료 (2025-02-11)
+    quote: "Higher concentrations such as parfums and eau de parfums – which also carry higher price points – grew sales by 43% and 14%, respectively"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: mkt_08
+    area: market
+    claim_ko: 2024년 바디 스프레이 매출은 94%, 헤어 프래그런스는 32% 늘었다
+    subject: Circana
+    value: body sprays +94%, hair fragrance +32%
+    year: 2024
+    url: https://www.circana.com/post/us-beauty-industry-sales-grow-for-the-fourth-consecutive-year-circana-reports
+    source_name: Circana 보도자료 (2025-02-11)
+    quote: "value-based and layering-type products such as body sprays jumped by 94% and hair fragrances increased 32%"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: mkt_09
+    area: market
+    claim_ko: 2025년 1~9월 미국 프레스티지 향수 매출은 6% 늘어 59억 달러였다
+    subject: Circana
+    value: $5.9 billion, +6%
+    year: 2025
+    url: https://www.circana.com/post/us-beauty-industry-sales-accelerate-in-q3-circana-reports
+    source_name: Circana 보도자료 (2025-11-18)
+    quote: "Prestige fragrance sales increased by +6% to $5.9 billion."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: mkt_10
+    area: market
+    claim_ko: 2025년 1~9월 미니와 트래블 사이즈는 수량 12%, 미니와 디스커버리 세트는 41% 늘었다
+    subject: Circana
+    value: mini/travel units +12%, mini/discovery sets +41%
+    year: 2025
+    url: https://www.circana.com/post/us-beauty-industry-sales-accelerate-in-q3-circana-reports
+    source_name: Circana 보도자료 (2025-11-18)
+    quote: "Consumers continue to drive sales on both the higher and lower sides of the pricing spectrum: luxury fragrance brand sales rose by double-digits, while mini/travel size juices grew by +12% in units and mini/discovery fragrance sets were up +41%."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: mkt_11
+    area: market
+    claim_ko: 2025년 상반기 미니와 트래블 사이즈 판매 수량은 15% 늘어 다른 크기의 약 4배 속도였다
+    subject: Circana
+    value: +15% units
+    year: 2025
+    url: https://www.circana.com/post/us-beauty-industry-grows-in-the-first-half-of-2025-circana-reports
+    source_name: Circana 보도자료 (2025-08-19)
+    quote: "mini/travel size juices growing by 15% in units sold – nearly four-times the rate of other sizes"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: mkt_12
+    area: market
+    claim_ko: IMARC는 미국 향수 시장을 2025년 100.4억 달러, 2034년 195.5억 달러(연평균 7.68%)로 본다
+    subject: IMARC Group
+    value: USD 10.04 Billion (2025), USD 19.55 Billion (2034), CAGR 7.68%
+    year: 2025
+    url: https://www.imarcgroup.com/united-states-perfume-market
+    source_name: IMARC Group 보고서 요약 페이지
+    quote: "The United States perfume market size was valued at USD 10.04 Billion in 2025 and is projected to reach USD 19.55 Billion by 2034, growing at a compound annual growth rate of 7.68% from 2026-2034."
+    checked_on: 2026-10-07
+    conflict_with: [mkt_13, mkt_14]
+  - id: mkt_13
+    area: market
+    claim_ko: MarketLine은 미국 향수 시장 매출을 2024년 139.3억 달러, 2019~2024년 연평균 8.2% 성장으로 본다
+    subject: MarketLine
+    value: $13,931.4 million, CAGR 8.2%
+    year: 2024
+    url: https://store.marketline.com/report/usa-fragrances-market-analysis/
+    source_name: MarketLine 보고서 요약 페이지
+    quote: "The US fragrances market recorded revenues of $13,931.4 million in 2024, representing a compound annual growth rate (CAGR) of 8.2% between 2019–24."
+    checked_on: 2026-10-07
+    conflict_with: [mkt_12, mkt_14]
+  - id: mkt_14
+    area: market
+    claim_ko: Ken Research는 미국 향수 시장을 2025년 135.5억 달러에서 2031년 196.5억 달러로 본다(예측 연평균 6.4%)
+    subject: Ken Research
+    value: USD 13,550 Mn (2025), USD 19,650 Mn (2031)
+    year: 2025
+    url: https://www.kenresearch.com/industry-reports/usa-fragrance-market.md
+    source_name: Ken Research 보고서 요약 페이지
+    quote: "The USA Fragrance Market is projected to expand from USD 13,550 Mn in 2025 to USD 19,650 Mn in 2031."
+    checked_on: 2026-10-07
+    conflict_with: [mkt_12, mkt_13]
+
+  # ---------------- 업계 구조(industry) ----------------
+  - id: ind_01
+    area: industry
+    claim_ko: Dossier는 향료 농도(Aromatic Star Anise 12%)를 상세페이지에 적고 오래감의 근거로 쓴다
+    subject: Dossier
+    value: 12% fragrance-oil concentration
+    year: 2026
+    url: https://dossier.co/products/aromatic-star-anise
+    source_name: Dossier 공식 상품 페이지
+    quote: "With a 12% fragrance-oil concentration, Aromatic Star Anise is formulated to be long-lasting"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: ind_02
+    area: industry
+    claim_ko: Dossier는 명품 향의 영감 제품(듀프)임을 밝히고 원 브랜드와 무관하다고 고지한다
+    subject: Dossier
+    value: null
+    year: 2026
+    url: https://dossier.co/products/aromatic-star-anise
+    source_name: Dossier 공식 상품 페이지
+    quote: "Aromatic Star Anise is Dossier's affordable interpretation inspired by Dior's Sauvage. We recreate the scent experience at a fraction of the price. Dossier is not affiliated with Dior."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: ind_03
+    area: industry
+    claim_ko: Dossier는 유료 회원(Dossier+)에게 3ml 샘플을 무료로 준다
+    subject: Dossier
+    value: 3ml
+    year: 2026
+    url: https://dossier.co/pages/faq
+    source_name: Dossier 공식 FAQ
+    quote: "Free 3ml samples with Dossier+"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: ind_04
+    area: industry
+    claim_ko: Lattafa 북미 공식 온라인몰은 Yara를 10ml 롤온 14.99달러부터 100ml 44.99달러까지 롤온, 12ml 트래블 스프레이, 20ml 퍼퓸 오일, 50ml, 100ml로 판다
+    subject: Lattafa
+    value: 10ml $14.99, 12ml $16.99, 20ml oil $29.99, 50ml $19.99, 100ml $44.99
+    year: 2026
+    url: https://www.lattafa-usa.com/products/yara.json
+    source_name: Lattafa 북미 공식 온라인몰 상품 데이터
+    quote: '"title":"10ML ROLL ON","price":"14.99" "title":"12ML TRAVEL SPRAY","price":"16.99" "title":"20ML PURE CONCENTRATED PERFUME OIL","price":"29.99" "title":"50ML","price":"19.99" "title":"100ML","price":"44.99"'
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: ind_05
+    area: industry
+    claim_ko: Lattafa 북미 공식 온라인몰은 자기 사이트 판매분이 100% 정품이라고 내세운다(공식몰 직판을 정품 신뢰의 근거로 씀)
+    subject: Lattafa
+    value: null
+    year: 2026
+    url: https://www.lattafa-usa.com/pages/about-us
+    source_name: Lattafa 북미 공식 온라인몰 소개 페이지
+    quote: "Every product sold here is 100% authentic and manufactured in world-class facilities, ensuring a premium experience from the source."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: ind_06
+    area: industry
+    claim_ko: Glossier You 오드퍼퓸은 8ml 32달러, 50ml 82달러, 100ml 116달러 세 단계로 판다
+    subject: Glossier
+    value: 8 ml $32, 50 ml $82, 100 ml $116
+    year: 2026
+    url: https://www.glossier.com/products/glossier-you.json
+    source_name: Glossier 공식 상품 데이터
+    quote: '"title":"100 ml","price":"116.00" "title":"50 ml","price":"82.00" "title":"8 ml","price":"32.00"'
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: ind_07
+    area: industry
+    claim_ko: Glossier You는 피부 가까이 남는 스킨 센트로 소개되고 사람마다 다르게 난다고 미리 알린다
+    subject: Glossier
+    value: null
+    year: 2026
+    url: https://www.glossier.com/products/glossier-you
+    source_name: Glossier 공식 상품 페이지
+    quote: "Sparkling Pink Pepper opens into earthy Iris, settling into a strong, slightly-sweet base of Ambrette and Ambrox that wears close to skin–so it smells a little different on everyone!"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: ind_08
+    area: industry
+    claim_ko: Ariana Grande Cloud 오드퍼퓸은 9ml 30달러, 30ml 54달러, 50ml 64달러, 100ml 75달러 네 단계다
+    subject: Ariana Grande
+    value: 9 ML $30, 30 ML $54, 50 ML $64, 100 ML $75
+    year: 2026
+    url: https://arianagrandefragrances.com/products/cloud.json
+    source_name: Ariana Grande Fragrances 공식 상품 데이터
+    quote: '"title":"3.4 OZ \/ 100 ML","price":"75.00" "title":"1.7 OZ \/ 50 ML","price":"64.00" "title":"1 OZ \/ 30 ML","price":"54.00" "title":"0.3 OZ \/ 9 ML","price":"30.00"'
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: ind_09
+    area: industry
+    claim_ko: DIME Stay Awhile 향수는 한 가지 크기 62달러이고 EWG 인증 성분을 내세운다
+    subject: DIME Beauty
+    value: $62.00
+    year: 2026
+    url: https://dimebeautyco.com/products/stay-awhile-perfume.json
+    source_name: DIME Beauty 공식 상품 데이터
+    quote: "Formulated with skin-safe EWG verified ingredients."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: ind_10
+    area: industry
+    claim_ko: philosophy pure grace 오드투왈렛은 2oz 68달러, 4oz 89달러 두 단계다
+    subject: philosophy
+    value: 2oz $68, 4oz $89
+    year: 2026
+    url: https://philosophy.com/products/pure-grace-eau-de-toilette.json
+    source_name: philosophy 공식 상품 데이터
+    quote: '"title":"2oz","price":"68.00" "title":"4oz","price":"89.00"'
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: ind_11
+    area: industry
+    claim_ko: philosophy는 같은 향을 0.33oz 펜 스프레이(29달러)로 따로 판다
+    subject: philosophy
+    value: 0.33oz $29
+    year: 2026
+    url: https://philosophy.com/products/pure-grace-eau-de-toilette-pen-spray.json
+    source_name: philosophy 공식 상품 데이터
+    quote: '"title":"0.33oz","price":"29.00"'
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: ind_12
+    area: industry
+    claim_ko: Perfumania는 Versace Bright Crystal 오드투왈렛을 1.0oz부터 6.7oz까지 팔고 3.0oz 테스터를 정품보다 싸게(72.95달러) 따로 판다
+    subject: Versace
+    value: 1.0 oz $64.95, 1.7 oz $91.95, 3.0 oz $106.95, 3.0 oz Tester $72.95, 6.7 oz $148.95
+    year: 2026
+    url: https://perfumania.com/products/versace-bright-crystal-perfume-eau-de-toilette-for-women.json
+    source_name: Perfumania 상품 데이터(판매처)
+    quote: '"title":"1.0 oz.","price":"64.95" "title":"1.7 oz.","price":"91.95" "title":"3.0 oz.","price":"106.95" "title":"3.0 oz. Tester","price":"72.95" "title":"6.7 oz.","price":"148.95"'
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: ind_13
+    area: industry
+    claim_ko: Coty는 Marc Jacobs Daisy 인기 향 다섯 가지를 20ml 미니 병 컬렉션(Daisy Petals)으로 냈다
+    subject: Marc Jacobs (Coty)
+    value: 20ml
+    year: null
+    url: https://www.moodiedavittreport.com/compact-and-collectible-coty-unveils-daisy-petals-marc-jacobs/
+    source_name: The Moodie Davitt Report
+    quote: "The collection includes Daisy Petals Marc Jacobs, a collection of miniature 20ml fragrances featuring five of Marc Jacob's most popular Daisy fragrances."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: ind_14
+    area: industry
+    claim_ko: Mugler는 1992년부터 매장 리필 스테이션을 운영해 왔고 2019년 기사 당시 Angel, Alien, Aura 세 향을 리필했다
+    subject: Mugler
+    value: 1992
+    year: 1992
+    url: https://www.cosmeticsbusiness.com/mugler-revamps-refillable-station-for-signature-scents-157642
+    source_name: Cosmetics Business
+    quote: "Originally developed in 1992, the same year it was acquired by Clarins, the station was designed as a modern take on 18th century perfume fountains"
+    checked_on: 2026-10-07
+    conflict_with: []
+
+  # ---------------- 규제와 표시 의무(regulation) ----------------
+  - id: reg_01
+    area: regulation
+    claim_ko: 미국 화장품 라벨에서 향료 성분은 개별 이름 없이 'Fragrance'로 한 번에 적을 수 있다
+    subject: FDA
+    value: null
+    year: 2026
+    url: https://www.fda.gov/cosmetics/cosmetic-ingredients/fragrances-cosmetics
+    source_name: FDA, Fragrances in Cosmetics
+    quote: "Fragrance and flavor ingredients can be listed simply as 'Fragrance' or 'Flavor.'"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_02
+    area: regulation
+    claim_ko: FDA는 화장품 알레르기 표시를 식품처럼 강제할 법적 권한이 없다고 밝힌다
+    subject: FDA
+    value: null
+    year: 2026
+    url: https://www.fda.gov/cosmetics/cosmetic-ingredients/fragrances-cosmetics
+    source_name: FDA, Fragrances in Cosmetics
+    quote: "FDA does not have the same legal authority to require allergen labeling for cosmetics as for food."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_03
+    area: regulation
+    claim_ko: 21 CFR 701.3(a)는 성분을 많은 순서로 적되 향료는 fragrance로 적을 수 있게 한다
+    subject: FDA (21 CFR 701.3)
+    value: null
+    year: null
+    url: https://www.law.cornell.edu/cfr/text/21/701.3
+    source_name: Cornell LII, 21 CFR 701.3
+    quote: "The label on each package of a cosmetic shall bear a declaration of the name of each ingredient in descending order of predominance, except that fragrance or flavor may be listed as fragrance or flavor."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_04
+    area: regulation
+    claim_ko: 액체 화장품의 내용량은 미국 액량 단위(fluid ounce 등)로 적어야 한다(21 CFR 701.13)
+    subject: FDA (21 CFR 701.13)
+    value: null
+    year: null
+    url: https://www.law.cornell.edu/cfr/text/21/701.13
+    source_name: Cornell LII, 21 CFR 701.13
+    quote: "Statements of fluid measure shall be in terms of the U.S. gallon of 231 cubic inches and quart, pint, and fluid-ounce subdivisions thereof."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_05
+    area: regulation
+    claim_ko: MoCRA에 따라 책임자는 판매하는 화장품마다 성분을 포함해 FDA에 등록하고 매년 갱신해야 한다
+    subject: FDA (MoCRA)
+    value: annually
+    year: 2022
+    url: https://www.fda.gov/cosmetics/cosmetics-laws-regulations/modernization-cosmetics-regulation-act-2022-mocra
+    source_name: FDA, MoCRA
+    quote: "A responsible person must list each marketed cosmetic product with FDA, including product ingredients, and provide any updates annually."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_06
+    area: regulation
+    claim_ko: MoCRA에 따라 중대한 이상 반응은 15영업일 안에 FDA에 보고해야 한다
+    subject: FDA (MoCRA)
+    value: 15 business days
+    year: 2022
+    url: https://www.fda.gov/cosmetics/cosmetics-laws-regulations/modernization-cosmetics-regulation-act-2022-mocra
+    source_name: FDA, MoCRA
+    quote: "A responsible person is required to report serious adverse events associated with the use of cosmetic products in the United States to FDA within 15 business days."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_07
+    area: regulation
+    claim_ko: MoCRA에 따라 책임자는 제품의 안전성 입증 기록을 갖추고 보관해야 한다
+    subject: FDA (MoCRA)
+    value: null
+    year: 2022
+    url: https://www.fda.gov/cosmetics/cosmetics-laws-regulations/modernization-cosmetics-regulation-act-2022-mocra
+    source_name: FDA, MoCRA
+    quote: "A responsible person is required to ensure and maintain records supporting adequate safety substantiation of their cosmetic products."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_08
+    area: regulation
+    claim_ko: MoCRA 향료 알레르겐 표시 규칙의 제안 목표 시점은 2026년 5월로 미뤄졌다(이전 목표 2025년 1월)
+    subject: Covington (FDA Unified Agenda 정리)
+    value: "NPRM: May 2026"
+    year: 2025
+    url: https://www.cov.com/en/news-and-insights/insights/2025/09/mocra-implementation-fda-spring-2025-unified-agenda-update
+    source_name: Covington & Burling, MoCRA Implementation (2025-09)
+    quote: "NPRM: May 2026 (updated from January 2025 in prior unified agenda)"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_09
+    area: regulation
+    claim_ko: 2026년 2월 기준 FDA는 향료 알레르겐 표시 규칙안을 아직 만들고 있다고 밝혔다(확정 규칙 없음)
+    subject: dicentra
+    value: null
+    year: 2026
+    url: https://dicentra.com/blog/cosmetic-regulations/mocra-in-2026-what-has-changed-and-what-does-fda-expect-from-the-cosmetics-industry
+    source_name: dicentra 블로그 (2026-10-05)
+    quote: "FDA stated in its February 2026 Grand Rounds presentation that it was still in the process of developing the proposed rule."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_10
+    area: regulation
+    claim_ko: 캘리포니아 SB 312는 EU 화장품 규정 부속서 III의 향료 알레르겐을 CAS 번호와 함께 주 정부에 보고하게 한다(2022년 1월 1일 시행)
+    subject: California SB 312
+    value: 1 January 2022
+    year: 2022
+    url: https://cosmeticsbusiness.com/california-passes-cosmetic-fragrance-and-flavor-right-to-know-act--170342
+    source_name: Cosmetics Business
+    quote: "a list of each fragrance allergen as per Annex III of the EU Cosmetics Regulation No 1223/2009 and subsequent updates, with the CAS number."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_11
+    area: regulation
+    claim_ko: SB 312의 향료 알레르겐 보고 기준은 씻어내는 제품 0.01%, 피부에 남는 제품(향수 포함) 0.001%다
+    subject: California SB 312
+    value: rinse-off 0.01% (100 ppm), leave-on 0.001% (10 ppm)
+    year: 2022
+    url: https://cosmeticsbusiness.com/california-passes-cosmetic-fragrance-and-flavor-right-to-know-act--170342
+    source_name: Cosmetics Business
+    quote: "0.01% (100 ppm) for rinse-off cosmetics and 0.001% (10 ppm) for leave-on cosmetics"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_12
+    area: regulation
+    claim_ko: 캘리포니아 대기자원국(CARB)은 향료 20% 이하 개인용 향수의 VOC 75% 한도를 넘긴 수입업체에 벌금을 물렸다
+    subject: California Air Resources Board
+    value: 75 percent VOC, $12,390
+    year: 2017
+    url: https://ww2.arb.ca.gov/excell-brands-llc-case-settlement
+    source_name: CARB, Excell Brands LLC Case Settlement
+    quote: "These products exceeded the 75 percent volatile organic compound (VOC) content limit for the Personal Fragrance: 20% or Less Fragrance category"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_13
+    area: regulation
+    claim_ko: 워싱턴주 독성물질 없는 화장품법은 주 안에서 만들고 팔고 들여오는 화장품의 특정 화학물질을 제한한다
+    subject: Washington State Department of Ecology
+    value: null
+    year: 2025
+    url: https://ecology.wa.gov/waste-toxics/reducing-toxic-chemicals/washingtons-toxics-in-products-laws/toxic-free-cosmetics-act
+    source_name: Washington State Department of Ecology, Toxic-Free Cosmetics Act
+    quote: "This law restricts certain toxic chemicals and chemical classes from use in cosmetic products manufactured, distributed, or sold in or into Washington state."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_14
+    area: regulation
+    claim_ko: 워싱턴주는 향료 조성물 속 화학물질(예 고정제)도 의도적 첨가로 보며, 오르토프탈레이트 제한은 2025년 1월 1일부터다
+    subject: Washington State Department of Ecology
+    value: ortho-phthalates Jan. 1, 2025
+    year: 2025
+    url: https://ecology.wa.gov/waste-toxics/reducing-toxic-chemicals/washingtons-toxics-in-products-laws/toxic-free-cosmetics-act
+    source_name: Washington State Department of Ecology, Toxic-Free Cosmetics Act
+    quote: "Chemicals in fragrance formulations (e.g., fragrance fixatives)"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_15
+    area: regulation
+    claim_ko: USPS로 향수는 국내 지상 운송만 되고(항공은 사전 승인 필요) 해외와 군 주소로는 보낼 수 없다
+    subject: USPS
+    value: null
+    year: 2025
+    url: https://news.usps.com/2025/12/03/when-it-comes-to-shipping-this-item-these-precautions-make-scents/
+    source_name: USPS Link (2025-12-03)
+    quote: "perfume may be shipped domestically via ground transportation, or by air if prior authorization has been obtained. It may not be shipped internationally or to military or diplomatic destinations."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_16
+    area: regulation
+    claim_ko: USPS는 한 소포에 향수를 모두 16온스까지 허용한다
+    subject: USPS
+    value: 16 ounces per package
+    year: 2025
+    url: https://news.usps.com/2025/12/03/when-it-comes-to-shipping-this-item-these-precautions-make-scents/
+    source_name: USPS Link (2025-12-03)
+    quote: "A total of 16 ounces of perfume is permitted per package."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_17
+    area: regulation
+    claim_ko: USPS는 향수 병을 밀봉 2차 포장(비닐 등)에 넣고 깨짐과 누수를 막는 흡수재를 쓰게 한다
+    subject: USPS
+    value: null
+    year: 2025
+    url: https://news.usps.com/2025/12/03/when-it-comes-to-shipping-this-item-these-precautions-make-scents/
+    source_name: USPS Link (2025-12-03)
+    quote: "Individual perfume containers must be securely sealed in secondary packaging, such as a sealable plastic bag, and absorbent materials must be used in packing to prevent breakage or to absorb potential leaks."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_18
+    area: regulation
+    claim_ko: 에탄올 함유 제품을 항공으로 보내려면 사전 서면 승인이 필요하다(USPS Publication 52)
+    subject: USPS Publication 52
+    value: null
+    year: null
+    url: https://pe.usps.com/text/pub52/pub52c3_022.htm
+    source_name: USPS Publication 52, 343 Flammable and Combustible Liquids
+    quote: "Flammable liquids or solids containing ethanol (ethyl alcohol) are mailable by domestic air only with prior written authorization."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_19
+    area: regulation
+    claim_ko: 미국 위험물 분류에서 향수는 UN1266 인화성 용제 향료 제품, 3급(인화성 액체)이다
+    subject: NOAA CAMEO Chemicals (DOT 위험물 표 자료)
+    value: UN1266, Class 3
+    year: null
+    url: https://cameochemicals.noaa.gov/unna/1266
+    source_name: NOAA CAMEO Chemicals, UN/NA 1266
+    quote: "Perfumery products with flammable solvents"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_20
+    area: regulation
+    claim_ko: IFRA 51차 개정은 RIFM 연구를 바탕으로 40개 넘는 새 기준을 넣었다(기존 제품 적용 기한 2025년 10월 30일)
+    subject: IFRA
+    value: more than 40 new Standards
+    year: 2023
+    url: https://ul.com/news/ifra-notifies-51st-amendment-ifra-standards
+    source_name: UL Solutions 뉴스 (2023-07-10)
+    quote: "more than 40 new Standards based on research done by the Research Institute for Fragrance Materials (RIFM)"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_21
+    area: regulation
+    claim_ko: IFRA는 2026년 8월 31일 52차 개정 의견 수렴 종료 서한을 냈다(피부 감작 관련 새 제한 기준 48개)
+    subject: IFRA
+    value: 48 new restriction Standards
+    year: 2026
+    url: https://client.cosmeticobs.com/en/articles/ifra-65/ifra-52-the-end-of-consultation-letter-9407?page=1
+    source_name: CosmeticOBS
+    quote: "On 31 August 2026, the IFRA (International Fragrance Association) issued its End-of-Consultation Letter on the 52nd Amendment"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_22
+    area: regulation
+    claim_ko: hypoallergenic 표시에는 연방 기준이나 정의가 없다
+    subject: FDA
+    value: null
+    year: 2026
+    url: https://www.fda.gov/cosmetics/cosmetics-labeling-claims/hypoallergenic-cosmetics
+    source_name: FDA, Hypoallergenic Cosmetics
+    quote: "There are no Federal standards or definitions that govern the use of the term 'hypoallergenic.'"
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: reg_23
+    area: regulation
+    claim_ko: 미국 세관(CBP)은 2026년 Gucci, Armani, Lancome 등 위조 향수 8,500개(정품가 약 101만 달러)를 압수했다
+    subject: U.S. Customs and Border Protection
+    value: 8,500 units, $1,010,940 MSRP
+    year: 2026
+    url: https://www.cbp.gov/newsroom/local-media-release/cbp-fort-lauderdale-seizes-over-8500-counterfeit-designer-brand
+    source_name: CBP 보도자료 (2026-04-20)
+    quote: "CBP officers initially inspected the shipment on Feb. 10 and discovered 8,500 units of designer brand name perfumes."
+    checked_on: 2026-10-07
+    conflict_with: []
+
+  # ---------------- 시험 기준(testing) ----------------
+  - id: tst_01
+    area: testing
+    claim_ko: ASTM E1958은 향 같은 감각 속성 주장(오래감, 비교 우위 등)을 소비자 감각 시험으로 입증하는 지침이다
+    subject: ASTM International (E1958)
+    value: ASTM E1958
+    year: 2022
+    url: https://store.astm.org/e1958-22.html
+    source_name: ASTM E1958-22 Standard Guide for Sensory Claim Substantiation
+    quote: "This guide covers reasonable practices for designing and implementing sensory tests that validate claims pertaining only to the sensory or perceptual attributes, or both, of a product."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: tst_02
+    area: testing
+    claim_ko: ASTM E544는 냄새 세기를 1-부탄올 기준 농도와 비교해 측정하는 방법이다(향의 세기 주장 근거)
+    subject: ASTM International (E544)
+    value: ASTM E544
+    year: 2024
+    url: https://store.astm.org/e0544-24.html
+    source_name: ASTM E544-24 Standard Practices for Referencing Suprathreshold Odor Intensity
+    quote: "This practice is designed to outline a means for referencing the odor intensities of a material in the suprathreshold region."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: tst_03
+    area: testing
+    claim_ko: ASTM D4991은 항공 운송 같은 압력 차 조건에서 빈 경질 용기의 누수 저항을 시험한다(누수 없음 주장 근거)
+    subject: ASTM International (D4991)
+    value: ASTM D4991
+    year: 2025
+    url: https://store.astm.org/d4991-25.html
+    source_name: ASTM D4991-25 Leakage Testing of Empty Rigid Containers by Vacuum Method
+    quote: "This test method covers the testing of empty containers for resistance to leakage under differential pressure conditions such as those which can occur during air transport."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: tst_04
+    area: testing
+    claim_ko: 항공으로 운송하는 위험물 액체 포장은 일정 내부 압력(3급 포장등급 III은 75kPa)을 새지 않고 견뎌야 한다(49 CFR 173.27)
+    subject: PHMSA (49 CFR 173.27)
+    value: 75 kPa (11 psig) / 95 kPa (14 psig)
+    year: null
+    url: https://www.law.cornell.edu/cfr/text/49/173.27
+    source_name: Cornell LII, 49 CFR 173.27
+    quote: "An internal pressure which produces a gauge pressure of not less than 75 kPa (11 psig) for liquids in Packing Group III of Class 3 or Division 6.1; or 95 kPa (14 psig) for other liquids."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: tst_05
+    area: testing
+    claim_ko: ISTA 3A는 택배로 가는 150lb 이하 개별 포장품의 운송 충격을 실험실에서 재현한다(파손 없이 도착 주장 근거)
+    subject: ISTA (3A)
+    value: ISTA 3A
+    year: null
+    url: https://ista.org/test_procedures.php
+    source_name: ISTA Test Procedures
+    quote: "ISTA 3-Series protocols are General Simulation Performance Tests that are designed to provide a laboratory simulation of the damage-producing motions, forces, conditions, and sequences of transport environments."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: tst_06
+    area: testing
+    claim_ko: ASTM D4169는 운송 단위가 유통 환경을 견디는지 실험실에서 평가하는 일관된 기준이다
+    subject: ASTM International (D4169)
+    value: ASTM D4169
+    year: 2023
+    url: https://store.astm.org/d4169-23e01.html
+    source_name: ASTM D4169-23e1 Performance Testing of Shipping Containers and Systems
+    quote: "This practice provides a uniform basis of evaluating, in a laboratory, the ability of shipping units to withstand the distribution environment."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: tst_07
+    area: testing
+    claim_ko: ISO 22716은 화장품의 생산, 관리, 보관, 출하에 대한 GMP 지침이다
+    subject: ISO (22716)
+    value: ISO 22716:2007
+    year: 2007
+    url: https://www.evs.ee/en/iso-22716-2007
+    source_name: EVS(에스토니아 표준원) ISO 22716:2007 페이지
+    quote: "ISO 22716:2007 gives guidelines for the production, control, storage and shipment of cosmetic products."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: tst_08
+    area: testing
+    claim_ko: ISO/TR 18811은 화장품 안정성 시험 지침이며 시험 조건과 기준은 제조사가 정하고 근거를 대야 한다고 본다
+    subject: ISO (TR 18811)
+    value: ISO/TR 18811:2018
+    year: 2018
+    url: https://www.evs.ee/en/iso-tr-18811-2018
+    source_name: EVS(에스토니아 표준원) ISO/TR 18811:2018 페이지
+    quote: "ISO/TR 18811:2018 gives guidelines for the stability testing of cosmetic products. It reviews readily available bibliographic references that provide a resource for the assessment of the stability of cosmetic products."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: tst_09
+    area: testing
+    claim_ko: FTC는 객관적 광고 주장(예 몇 시간 지속)에 합리적 근거가 있어야 한다고 본다
+    subject: FTC
+    value: null
+    year: 1984
+    url: https://www.ftc.gov/legal-library/browse/ftc-policy-statement-regarding-advertising-substantiation
+    source_name: FTC Policy Statement Regarding Advertising Substantiation
+    quote: "Objective claims for products or services represent explicitly or by implication that the advertiser has a reasonable basis supporting these claims."
+    checked_on: 2026-10-07
+    conflict_with: []
+  - id: tst_10
+    area: testing
+    claim_ko: '"시험으로 입증" 같은 표현을 쓰면 그 수준의 입증 자료를 갖고 있어야 한다'
+    subject: FTC
+    value: null
+    year: 1984
+    url: https://www.ftc.gov/legal-library/browse/ftc-policy-statement-regarding-advertising-substantiation
+    source_name: FTC Policy Statement Regarding Advertising Substantiation
+    quote: "When the substantiation claim is express (e.g.., 'tests prove', 'doctors recommend', and 'studies show'), the Commission expects the firm to have at least the advertised level of substantiation."
+    checked_on: 2026-10-07
+    conflict_with: []
+
+  # ================ 추가 조사 (2026-10-08): 피부 자극과 감작 시험, 향료 알레르겐 표시, 분사 펌프 시험 ================
+  # Europe PMC REST 주소(ebi.ac.uk/europepmc/webservices/rest/search?...&format=json)의 quote는 그 논문 초록(abstractText) 원문이다.
+  # PMC와 PubMed 본문은 캡차로 막혀 초록 JSON으로 확인했다.
+
+  # ---------------- 업계 구조(industry) 추가 ----------------
+  - id: ind_15
+    area: industry
+    claim_ko: 분사 펌프 업체 Aptar는 향수용 펌프 Precious Sensea의 1회 분사량을 70, 90, 100, 140 마이크로리터 중에서 고르게 한다
+    subject: Aptar (Precious Sensea)
+    value: 70 mcl, 90 mcl, 100 mcl, 140 mcl
+    year: 2026
+    url: https://aptar.com/en-us/products/precious-sensea-sensorial-prestige-fragrance-pump
+    source_name: Aptar 공식 제품 페이지 (Precious Sensea Fragrance Pump)
+    quote: "Dosage Options: 70 mcl, 90 mcl, 100 mcl, 140 mcl"
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: ind_16
+    area: industry
+    claim_ko: Aptar는 이 펌프의 분사 인서트가 미세 입자를 고르게 내보내 일반 스프레이보다 3배 오래 머문다고 내세운다(업체 주장)
+    subject: Aptar (Precious Sensea)
+    value: 3 times longer
+    year: 2026
+    url: https://aptar.com/en-us/products/precious-sensea-sensorial-prestige-fragrance-pump
+    source_name: Aptar 공식 제품 페이지 (Precious Sensea Fragrance Pump)
+    quote: "The insert dispenses fine particles in a homogeneous manner that lasts 3 times longer than a traditional spray."
+    checked_on: 2026-10-08
+    conflict_with: []
+
+  # ---------------- 규제와 표시 의무(regulation) 추가 ----------------
+  - id: reg_24
+    area: regulation
+    claim_ko: EU 규정 2023/1545 이전에는 화장품 규정 부속서 III에 개별 표시 대상 향료 알레르겐이 24개 있었다
+    subject: European Commission (Regulation (EU) 2023/1545)
+    value: 24
+    year: 2023
+    url: https://www.ul.com/news/eu-amends-cosmetics-regulation-regarding-fragrance-allergens
+    source_name: UL Solutions 뉴스 (EU Amends Cosmetics Regulation Regarding Fragrance Allergens)
+    quote: "Before amendment (EU) 2023/1545 was published, only 24 fragrance allergens requiring individual labelling were listed in Annex III."
+    checked_on: 2026-10-08
+    conflict_with: [reg_25]
+  - id: reg_25
+    area: regulation
+    claim_ko: 다른 자료는 2023/1545 이전 개별 표시 대상 알레르겐을 25개로 적는다
+    subject: European Commission (Regulation (EU) 2023/1545)
+    value: 25
+    year: 2023
+    url: https://coslaw.eu/more-allergens-to-be-individually-labelled-cosmetics/
+    source_name: Coslaw.eu (More allergens to be individually labelled)
+    quote: "Regulation (EU) 2023/1545 adds new substances to the existing list of 25 allergens to be individually mentioned when present in concentration that exceeds:"
+    checked_on: 2026-10-08
+    conflict_with: [reg_24]
+  - id: reg_26
+    area: regulation
+    claim_ko: EU 소비자안전과학위원회(SCCS)는 2012년 의견에서 사람에게 알레르기를 일으키지만 개별 표시 의무가 없던 물질 56개를 더 찾았다
+    subject: SCCS (SCCS/1459/11)
+    value: 56 additional substances
+    year: 2012
+    url: https://www.ul.com/news/eu-amends-cosmetics-regulation-regarding-fragrance-allergens
+    source_name: UL Solutions 뉴스 (EU Amends Cosmetics Regulation Regarding Fragrance Allergens)
+    quote: "The SCCS adopted opinion SCCS/1459/11 (of 26-27 June 2012), identifying 56 additional substances, which caused allergies to humans but had no individual labelling requirement yet."
+    checked_on: 2026-10-08
+    conflict_with: [reg_27]
+  - id: reg_27
+    area: regulation
+    claim_ko: 다른 자료는 SCCS가 찾은 추가 향료 알레르겐을 57개, 표시 대상 합계를 81개로 적는다
+    subject: SCCS, European Commission
+    value: 57 additional, total 81
+    year: 2023
+    url: https://ecomundo.eu/en/blog/fragrance-allergen-labelling
+    source_name: EcoMundo 블로그 (Fragrance Allergen Labelling Amendment (EU) 2023/1545)
+    quote: "the Scientific Committee on Consumer Safety (SCCS) identified an additional 57 fragrance allergens, expanding the list of substances subject to labelling to a total of 81."
+    checked_on: 2026-10-08
+    conflict_with: [reg_26]
+  - id: reg_28
+    area: regulation
+    claim_ko: EU에서 향료 알레르겐은 피부에 남는 제품(향수 포함)은 0.001%, 씻어내는 제품은 0.01%를 넘으면 하나하나 표시해야 한다
+    subject: European Commission (Regulation (EC) No 1223/2009 Annex III)
+    value: leave-on > 0.001%, rinse-off > 0.01%
+    year: 2023
+    url: https://www.ul.com/news/eu-amends-cosmetics-regulation-regarding-fragrance-allergens
+    source_name: UL Solutions 뉴스 (EU Amends Cosmetics Regulation Regarding Fragrance Allergens)
+    quote: "However, for substances deemed as fragrance allergens, individual labelling is required when these substances are present at concentrations greater than 0.001% in leave-on products and greater than 0.01% in rinse-off products."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: reg_29
+    area: regulation
+    claim_ko: 새 알레르겐 표시는 새로 내놓는 제품은 2026년 7월 31일까지, 이미 시장에 있는 제품은 2028년 7월 31일까지 맞춰야 한다
+    subject: European Commission (Regulation (EU) 2023/1545)
+    value: July 31, 2026 (new) / July 31, 2028 (existing)
+    year: 2026
+    url: https://www.ul.com/news/eu-amends-cosmetics-regulation-regarding-fragrance-allergens
+    source_name: UL Solutions 뉴스 (EU Amends Cosmetics Regulation Regarding Fragrance Allergens)
+    quote: "Due to the possibly significant changes arising, such as adjusting product formulations, containers, withdrawing non-compliant products, and issuing new labels, the transition period for compliance is until July 31, 2026, for new products and July 31, 2028, for existing products."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: reg_30
+    area: regulation
+    claim_ko: EU 규정 2023/1545는 2023년 8월 16일 발효됐고 모든 회원국에 바로 적용된다
+    subject: European Commission (Regulation (EU) 2023/1545)
+    value: Aug. 16, 2023
+    year: 2023
+    url: https://www.ul.com/news/eu-amends-cosmetics-regulation-regarding-fragrance-allergens
+    source_name: UL Solutions 뉴스 (EU Amends Cosmetics Regulation Regarding Fragrance Allergens)
+    quote: "Regulation (EU) 2023/1545 enters into force on Aug. 16, 2023, and is directly applicable to all Member States."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: reg_31
+    area: regulation
+    claim_ko: 2023/1545는 기존 알레르겐 이름을 최신 공통 성분 용어집에 맞추고 CAS와 EC 번호를 고치며 비슷한 물질을 한 항목으로 묶었다
+    subject: European Commission (Regulation (EU) 2023/1545)
+    value: null
+    year: 2023
+    url: https://coslaw.eu/more-allergens-to-be-individually-labelled-cosmetics/
+    source_name: Coslaw.eu (More allergens to be individually labelled)
+    quote: "Furthermore, the law aligns the names of existing allergens to those of the latest Common Ingredients Glossary, updates CAS and EC numbers, and groups similar substances in one entry."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: reg_32
+    area: regulation
+    claim_ko: 독일 화장품 업계 단체 IKW는 표시 대상이 80개 넘게 늘어 라벨에 필요한 공간이 커지는 것을 제조사 부담으로 꼽는다
+    subject: IKW (German Cosmetic, Toiletry, Perfumery and Detergent Association)
+    value: over 80 substances
+    year: 2025
+    url: https://www.ikw.org/en/annual-report/2024/2025/beauty-care/fragrances
+    source_name: IKW 연차 보고서 2024/2025 (Labelling of fragrances in cosmetics)
+    quote: "The expansion of the list of fragrances subject to mandatory labelling to over 80 substances can present manufacturers with new challenges, not least due to the increased space required on the labels."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: reg_33
+    area: regulation
+    claim_ko: MoCRA 조문(21 U.S.C. 364e)은 책임자가 화장품 라벨에 들어 있는 향료 알레르겐을 하나하나 적도록 한다
+    subject: MoCRA (21 U.S.C. 364e(b))
+    value: null
+    year: 2022
+    url: https://www.law.cornell.edu/uscode/text/21/364e
+    source_name: Cornell LII, 21 U.S. Code 364e
+    quote: "The responsible person shall identify on the label of a cosmetic product each fragrance allergen included in such cosmetic product."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: reg_34
+    area: regulation
+    claim_ko: 법은 FDA가 향료 알레르겐 표시 규칙안을 2022년 12월 29일부터 18개월 안에 내도록 정했다(2024년 6월 말까지)
+    subject: MoCRA (21 U.S.C. 364e(b))
+    value: 18 months after December 29, 2022
+    year: 2022
+    url: https://www.law.cornell.edu/uscode/text/21/364e
+    source_name: Cornell LII, 21 U.S. Code 364e
+    quote: "The Secretary shall issue a notice of proposed rulemaking promulgating the regulation implementing this requirement not later than 18 months after December 29, 2022"
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: reg_35
+    area: regulation
+    claim_ko: 법은 FDA가 규칙을 만들 때 EU 기준을 포함한 국제, 주, 지방 기준을 고려하고 표시 기준 농도를 정할 수 있게 했다
+    subject: MoCRA (21 U.S.C. 364e(b))
+    value: null
+    year: 2022
+    url: https://www.law.cornell.edu/uscode/text/21/364e
+    source_name: Cornell LII, 21 U.S. Code 364e
+    quote: "and may establish threshold levels of amounts of substances subject to disclosure pursuant to such regulations."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: reg_36
+    area: regulation
+    claim_ko: 2026년 7월 공개된 미국 연방 규제 일정에서 FDA 향료 알레르겐 표시 규칙안 목표 시점은 2026년 11월로 다시 미뤄졌다
+    subject: FDA (2026 Unified Agenda), ChemLinked
+    value: "NPRM: November 2026"
+    year: 2026
+    url: https://cosmetic.chemlinked.com/news/cosmetic-news/us-fda-sets-november-2026-timeline-for-formaldehyde-ban-and-fragrance-allergen-rule
+    source_name: ChemLinked (2026-07-09)
+    quote: "The FDA also expects to publish an NPRM in November 2026 for Disclosure of Fragrance Allergens in Cosmetic Labeling"
+    checked_on: 2026-10-08
+    conflict_with: [reg_08]
+  - id: reg_37
+    area: regulation
+    claim_ko: 이 일정은 2026년 7월 3일 백악관 정보규제국(OIRA)이 낸 2026년 규제 계획과 통합 규제 일정에 실렸다
+    subject: OIRA, ChemLinked
+    value: July 3, 2026
+    year: 2026
+    url: https://cosmetic.chemlinked.com/news/cosmetic-news/us-fda-sets-november-2026-timeline-for-formaldehyde-ban-and-fragrance-allergen-rule
+    source_name: ChemLinked (2026-07-09)
+    quote: "On July 3, 2026, the Office of Information and Regulatory Affairs (OIRA) released the 2026 Regulatory Plan"
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: reg_38
+    area: regulation
+    claim_ko: 캐나다 개정 규정(SOR/2024-63)도 피부에 남는 제품의 향료 알레르겐이 0.001%를 넘으면 표시하게 한다
+    subject: Health Canada (SOR/2024-63)
+    value: leave-on > 0.001%
+    year: 2024
+    url: https://gazette.gc.ca/rp-pr/p2/2024/2024-04-24/html/sor-dors63-eng.html
+    source_name: Canada Gazette Part II, SOR/2024-63
+    quote: "in the case of a leave-on product, the concentration of the fragrance allergen in the cosmetic is greater than 0.001%"
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: reg_39
+    area: regulation
+    claim_ko: 캐나다는 EU 부속서 III를 참조로 가져오며, 그 안에 표시 대상 향료 알레르겐 항목이 81개 있다고 적는다
+    subject: Health Canada (SOR/2024-63)
+    value: 81 entries
+    year: 2024
+    url: https://gazette.gc.ca/rp-pr/p2/2024/2024-04-24/html/sor-dors63-eng.html
+    source_name: Canada Gazette Part II, SOR/2024-63
+    quote: "There are now 81 entries in Annex III that identify fragrance allergens for disclosure on cosmetic labels when present above a defined concentration level."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: reg_40
+    area: regulation
+    claim_ko: 캐나다 규정의 알레르겐 표시 조항(6조)은 등록일(2024년 4월 12일)부터 2년 뒤에 시행된다
+    subject: Health Canada (SOR/2024-63)
+    value: second anniversary of registration
+    year: 2026
+    url: https://gazette.gc.ca/rp-pr/p2/2024/2024-04-24/html/sor-dors63-eng.html
+    source_name: Canada Gazette Part II, SOR/2024-63
+    quote: "(2) Section 6 comes into force on the second anniversary of the day on which these Regulations are registered."
+    checked_on: 2026-10-08
+    conflict_with: []
+
+  # ---------------- 시험 기준(testing) 추가 ----------------
+  - id: tst_11
+    area: testing
+    claim_ko: 향료 업계(IFRA와 RIFM)의 표준 사람 반복 첩포 시험(HRIPT)은 유도기와 유발기 두 단계로 이뤄진다
+    subject: RIFM (Politano and Api, Regul Toxicol Pharmacol 2008, PMID 18177987)
+    value: null
+    year: 2008
+    url: https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:18177987&format=json&resultType=core
+    source_name: Europe PMC 초록, The Research Institute for Fragrance Materials' human repeated insult patch test protocol
+    quote: "The study protocol consists of two phases--Induction and Challenge."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_12
+    area: testing
+    claim_ko: 유도기에는 향료를 75% 디에틸프탈레이트와 25% 에탄올에 녹여 묻힌 패치를 자원자 등에 24시간 붙인다
+    subject: RIFM (Politano and Api 2008)
+    value: 24h
+    year: 2008
+    url: https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:18177987&format=json&resultType=core
+    source_name: Europe PMC 초록, The Research Institute for Fragrance Materials' human repeated insult patch test protocol
+    quote: "In the Induction phase, patches treated with fragrance ingredients in 75% diethyl phthalate/25% ethanol are applied to backs of volunteers for 24h."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_13
+    area: testing
+    claim_ko: 같은 자리에 패치를 반복해 3주 동안 모두 9번 붙인다
+    subject: RIFM (Politano and Api 2008)
+    value: 9 applications over a 3-week period
+    year: 2008
+    url: https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:18177987&format=json&resultType=core
+    source_name: Europe PMC 초록, The Research Institute for Fragrance Materials' human repeated insult patch test protocol
+    quote: "This procedure is repeated to achieve 9 applications over a 3-week period."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_14
+    area: testing
+    claim_ko: 약 2주 쉰 뒤 처음 쓰는 등 부위에 24시간 패치를 한 번 붙여 감작 여부를 본다(유발기)
+    subject: RIFM (Politano and Api 2008)
+    value: approximate 2-week rest, single 24-h challenge patch
+    year: 2008
+    url: https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:18177987&format=json&resultType=core
+    source_name: Europe PMC 초록, The Research Institute for Fragrance Materials' human repeated insult patch test protocol
+    quote: "There is an approximate 2-week rest period followed by a Challenge phase of a single 24-h patch application of test article applied to a naïve site on the back."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_15
+    area: testing
+    claim_ko: 이 시험의 목적은 일반 성인 집단에서 피부 감작이 생기지 않는 농도(무영향 수준)를 확인하는 것이다
+    subject: RIFM (Politano and Api 2008)
+    value: null
+    year: 2008
+    url: https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:18177987&format=json&resultType=core
+    source_name: Europe PMC 초록, The Research Institute for Fragrance Materials' human repeated insult patch test protocol
+    quote: "This study is designed to confirm the No-Observed-Effect-Level for induction of dermal sensitization in a normal human population."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_16
+    area: testing
+    claim_ko: 향료 업계는 HRIPT를 정해진 농도에서 피부 감작이 없음을 확인하는 용도로만 써 왔다
+    subject: Na et al., Dermatitis 2021 (PMID 33093296)
+    value: null
+    year: 2021
+    url: https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:33093296&format=json&resultType=core
+    source_name: Europe PMC 초록, Fragrance Skin Sensitization Evaluation and Human Testing 30-Year Experience
+    quote: "The human repeated insult patch test (HRIPT) has a history of use in the fragrance industry as a component of safety evaluation, exclusively to confirm the absence of skin sensitization at a defined dose."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_17
+    area: testing
+    claim_ko: RIFM 30년 자료의 HRIPT는 같은 프로토콜로 했고 시험마다 자원자가 최소 100명이었다
+    subject: Na et al., Dermatitis 2021
+    value: minimum of 100 volunteers
+    year: 2021
+    url: https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:33093296&format=json&resultType=core
+    source_name: Europe PMC 초록, Fragrance Skin Sensitization Evaluation and Human Testing 30-Year Experience
+    quote: "A retrospective collation of HRIPT studies carried out to a consistent protocol was undertaken, with each study comprising a minimum of 100 volunteers."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_18
+    area: testing
+    claim_ko: 모은 자료는 향료 물질 134개에 대한 시험 154건, 자원자 16,512명이다
+    subject: Na et al., Dermatitis 2021
+    value: 154 studies, 134 substances, 16,512 volunteers
+    year: 2021
+    url: https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:33093296&format=json&resultType=core
+    source_name: Europe PMC 초록, Fragrance Skin Sensitization Evaluation and Human Testing 30-Year Experience
+    quote: "The HRIPT outcomes from 154 studies on 134 substances using 16,512 volunteers were obtained."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_19
+    area: testing
+    claim_ko: 전체 자원자 중 0.12%(20명)에게 시험으로 알레르기가 새로 생겼다
+    subject: Na et al., Dermatitis 2021
+    value: 0.12% (n = 20)
+    year: 2021
+    url: https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:33093296&format=json&resultType=core
+    source_name: Europe PMC 초록, Fragrance Skin Sensitization Evaluation and Human Testing 30-Year Experience
+    quote: "In 0.12% of subjects (n = 20), there was induction of allergy."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_20
+    area: testing
+    claim_ko: 최근 11년에는 9,854명 중 3명(0.03%)만 감작됐는데, 2008년 표준 프로토콜 공개 뒤 적용이 엄격해진 덕일 수 있다
+    subject: Na et al., Dermatitis 2021
+    value: 3 (0.03%) of 9854
+    year: 2021
+    url: https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:33093296&format=json&resultType=core
+    source_name: Europe PMC 초록, Fragrance Skin Sensitization Evaluation and Human Testing 30-Year Experience
+    quote: "However, in the last 11 years, only 3 (0.03%) of 9854 subjects became sensitized, perhaps because of improved definition of a safe HRIPT dose from the local lymph node assay and other skin sensitization methodologies, as well as more rigorous application of the standard protocol after publication in 2008."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_21
+    area: testing
+    claim_ko: 사람에게 감작을 일으킬 수 있어 HRIPT는 이득이 위험보다 훨씬 클 때만 드물게 해야 한다는 비판적 견해가 있다
+    subject: Basketter, Cutaneous and Ocular Toxicology 2009 (PMID 19514927)
+    value: null
+    year: 2009
+    url: https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:19514927&format=json&resultType=core
+    source_name: Europe PMC 초록, The human repeated insult patch test in the 21st century a commentary
+    quote: "The possibility that sensitization may be induced in volunteers dictates that HRIPTs should be conducted rarely and in cases where the benefits overwhelmingly outweigh the risk."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_22
+    area: testing
+    claim_ko: 화장품 완제품 HRIPT 예시에서는 반밀폐 패치를 주 3번씩 3주 동안 등에 붙이고 국제접촉피부염연구회(ICDRG) 기준으로 판정했다
+    subject: Journal of Cosmetic Dermatology 2019 (PMID 29656566)
+    value: three times per week for 3 consecutive weeks
+    year: 2019
+    url: https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:29656566&format=json&resultType=core
+    source_name: Europe PMC 초록, Absence of human skin irritation and allergenic potential after repeated patch applications of a lamellar moisturizer
+    quote: "During an initial induction phase, semi-occlusive multi-test patches were applied to the skin of participants' backs three times per week for 3 consecutive weeks; clinical assessments were performed per International Contact Dermatitis Research Group criteria."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_23
+    area: testing
+    claim_ko: 그 뒤 유발기에는 접촉한 적 없는 피부 부위에 새 패치를 붙여 감작을 확인했다
+    subject: Journal of Cosmetic Dermatology 2019
+    value: null
+    year: 2019
+    url: https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:29656566&format=json&resultType=core
+    source_name: Europe PMC 초록, Absence of human skin irritation and allergenic potential after repeated patch applications of a lamellar moisturizer
+    quote: "Participants subsequently underwent a challenge phase, where a new patch was applied to a contact-naïve area of the skin to assess sensitization to the moisturizer."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_24
+    area: testing
+    claim_ko: 시험 기관 설명으로 RIPT는 자극과 감작(알레르기)을 함께 보는 사람 대상 임상 시험이다
+    subject: CPT Labs (시험 기관)
+    value: null
+    year: null
+    url: https://cptclabs.com/ript-testing-essentials/
+    source_name: CPT Labs, RIPT Testing Essentials
+    quote: "RIPT is a clinical, in vivo test designed to assess both irritation (i.e., the degree of harshness or irritation caused by repeated exposure) and sensitization (whether repeated exposure can trigger an allergic response)."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_25
+    area: testing
+    claim_ko: 완제품 RIPT 패널은 보통 50~200명이다
+    subject: CPT Labs (시험 기관)
+    value: 50 to 200 participants
+    year: null
+    url: https://cptclabs.com/ript-testing-essentials/
+    source_name: CPT Labs, RIPT Testing Essentials
+    quote: "Panels typically include 50 to 200 participants, with inclusion and exclusion criteria set to protect participants' health while ensuring a range of demographics and skin types are represented."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_26
+    area: testing
+    claim_ko: RIPT와 HRIPT는 hypoallergenic, 피부과 테스트 완료, 민감 피부용, 무자극 같은 표시의 근거로 흔히 쓰인다
+    subject: CPT Labs (시험 기관)
+    value: null
+    year: null
+    url: https://cptclabs.com/ript-testing-essentials/
+    source_name: CPT Labs, RIPT Testing Essentials
+    quote: "RIPT/HRIPT are commonly used to support claims like 'hypoallergenic,' 'dermatologist tested,' 'suitable for sensitive skin,' and 'non-irritating.'"
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_27
+    area: testing
+    claim_ko: RIPT는 3~4주에 걸친 반복 노출 뒤 알레르기 반응을 재서 감작 가능성을 본다
+    subject: CPT Labs (시험 기관)
+    value: three to four weeks
+    year: null
+    url: https://cptclabs.com/sensitization-and-irritation/
+    source_name: CPT Labs, The Important Differences Between Sensitization and Irritation
+    quote: "Repeated Insult Patch Tests (RIPT's) assess sensitization potential by measuring subjects' allergic reactions following repeated exposure over three to four weeks."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_28
+    area: testing
+    claim_ko: 48시간 패치 시험 같은 1차 피부 자극 시험은 한 번 노출에 대한 반응만 본다(감작 시험과 구별)
+    subject: CPT Labs (시험 기관)
+    value: 48-hour
+    year: null
+    url: https://cptclabs.com/sensitization-and-irritation/
+    source_name: CPT Labs, The Important Differences Between Sensitization and Irritation
+    quote: "Primary skin irritation trials, such as 48-hour patch testing, assess subjects' responses to a single product exposure."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_29
+    area: testing
+    claim_ko: 누적 자극 시험은 패치를 주말을 빼고 매일 갈아 붙이며 보통 5일, 14일, 21일 동안 한다
+    subject: CPT Labs (시험 기관)
+    value: five, 14, or 21 days
+    year: null
+    url: https://cptclabs.com/patch-testing/
+    source_name: CPT Labs, Patch Testing RIPT, 48-Hour, or Cumulative
+    quote: "Patches of the product are applied to the skin and then are replaced daily (except weekend days) through the course of the trial, usually five, 14, or 21 days."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_30
+    area: testing
+    claim_ko: ASTM D3890은 소비자 제품용 펌프 분사기가 처음 나오기까지 눌러야 하는 횟수(프라이밍 횟수)를 재는 방법이다
+    subject: ASTM International (D3890)
+    value: ASTM D3890-18(2025)
+    year: 2025
+    url: https://store.astm.org/d3890-18r25.html
+    source_name: ASTM D3890-18(2025) Standard Practice for Number of Strokes to Prime a Mechanical Pump Dispenser
+    quote: "This practice covers the determination of the number of actuations required to prime a pump dispenser (spray and flow types) with a consumer-type product."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_31
+    area: testing
+    claim_ko: ASTM D4336은 펌프 분사기가 한 번 누를 때 나오는 양(무게 기준 평균)을 재는 방법이다
+    subject: ASTM International (D4336)
+    value: ASTM D4336-18(2025)
+    year: 2025
+    url: https://store.astm.org/d4336-18r25.html
+    source_name: ASTM D4336-18(2025) Standard Practice for Determination of the Output Per Stroke of a Mechanical Pump Dispenser
+    quote: "This practice covers the measurement of the mean quantity-by-weight of liquids dispensed from a mechanical pump dispenser (spray or flow type) with a consumer-type product on each actuation."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_32
+    area: testing
+    claim_ko: D4336은 펌프마다 1회 분사량을 비교해 사용량 안내를 정하고 펌프와 완제품 규격을 세우는 데 쓴다
+    subject: ASTM International (D4336)
+    value: null
+    year: 2025
+    url: https://store.astm.org/d4336-18r25.html
+    source_name: ASTM D4336-18(2025) Standard Practice for Determination of the Output Per Stroke of a Mechanical Pump Dispenser
+    quote: "This practice can be used to compare the output per stroke of different pump dispensers for the purpose of establishing dosage and use instructions for products of consumer usage."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_33
+    area: testing
+    claim_ko: ASTM D4041은 펌프 분사기의 분사 모양을 정하는 방법이다
+    subject: ASTM International (D4041/D4041M)
+    value: ASTM D4041/D4041M-05(2025)
+    year: 2025
+    url: https://store.astm.org/d4041_d4041m-05r25.html
+    source_name: ASTM D4041/D4041M-05(2025) Standard Practice for Determining Spray Patterns of Mechanical Pump Dispensers
+    quote: "This practice covers the determination of spray patterns from pump dispensers."
+    checked_on: 2026-10-08
+    conflict_with: []
+  - id: tst_34
+    area: testing
+    claim_ko: 분사 모양은 분사 버튼(액추에이터) 설계와 액체 성질에 따라 크게 달라진다
+    subject: ASTM International (D4041/D4041M)
+    value: null
+    year: 2025
+    url: https://store.astm.org/d4041_d4041m-05r25.html
+    source_name: ASTM D4041/D4041M-05(2025) Standard Practice for Determining Spray Patterns of Mechanical Pump Dispensers
+    quote: "Spray patterns from pump dispensers will vary greatly with the design of the actuator and the nature of the liquid."
+    checked_on: 2026-10-08
+    conflict_with: []
+
+not_found:
+  - {area: market, what: "Circana 2025년 연간 프레스티지 향수 매출 금액(성장률만 확인, 금액 문장 없음)", tried: ["circana.com 2025 연간 보도자료", "Circana prestige fragrance sales 2025"]}
+  - {area: market, what: "Grand View Research, Statista의 미국 향수 시장 규모 최신 수치(요약 페이지 원문 확보 실패)", tried: ["Grand View Research U.S. fragrance market size 2024 CAGR", "Statista fragrances United States"]}
+  - {area: industry, what: "YSL, Lancôme, Dior, Chanel, Estée Lauder, Versace, Victoria's Secret 공식 사이트의 크기, 가격, 리필 원문(모두 403 또는 로딩 실패)", tried: ["yslbeautyus.com Libre", "lancome-usa.com refills", "dior.com Miss Dior refills", "chanel.com N5 refill", "esteelauder.com Beautiful", "versace.com fragrances", "victoriassecret.com Bombshell travel spray", "sephora.com, ulta.com 상품 페이지"]}
+  - {area: industry, what: "Bella Vita Luxury 미국 공식 판매 페이지(검색 결과는 eBay, Walmart 같은 판매처뿐)", tried: ["Bella Vita Luxury perfume USA eau de parfum 100ml price official"]}
+  - {area: industry, what: "Dossier 50ml와 100ml 가격(페이지 요약에서 회원가, 비회원가, 크기별 가격이 서로 맞지 않아 뺌), FAQ 답변 본문(접힌 내용이라 읽지 못함)", tried: ["dossier.co/products/aromatic-star-anise", "dossier.co/pages/faq", "dossier.co/products/aromatic-star-anise.json(404)"]}
+  - {area: industry, what: "DIME 향수 크기(ml, oz) 원문 문장(이미지 대체 텍스트에만 있음), 트래블 사이즈 가격 원문", tried: ["dimebeautyco.com/products/stay-awhile-perfume", "dimebeautyco.com/collections/perfume-travel-spray-collection"]}
+  - {area: regulation, what: "FDA 향료 알레르겐 표시 규칙안(Federal Register 게재본). 2026년 2월 기준 작성 중이라는 자료만 있음", tried: ["FDA proposed rule fragrance allergens cosmetics labeling Federal Register 2026"]}
+  - {area: regulation, what: "CDPH SB 312 원문 페이지(인증서 오류), legiscan 법안 원문(403), IFRA 공식 사이트와 뉴스룸(403), PHMSA 해석 서한(403)", tried: ["cdph.ca.gov SB312.aspx", "legiscan.com/CA/text/SB312/2019", "ifrafragrance.org", "phmsa.dot.gov interpretation 130226"]}
+  - {area: testing, what: "향수 지속 시간(몇 시간 간다)을 재는 ISO나 ASTM 공식 표준. 업계 블로그의 자체 방법과 GC-MS 연구만 있고 표준 번호는 찾지 못함", tried: ["standard test method fragrance longevity on skin hours perfume tenacity ISO ASTM"]}
+  - {area: testing, what: "HRIPT(사람 반복 첩포 시험) 원문(PubMed, PMC가 캡차로 막힘, RIFM PDF는 텍스트 추출 실패)", tried: ["human repeat insult patch test HRIPT fragrance RIFM", "pubmed 19514927", "fragrancematerialsafetyresource.elsevier.com FA-1"]}
+  - {area: testing, what: "분사기 작동(분사량, 작동 횟수) 시험 표준", tried: ["직접 검색하지 못함(시간 배분)"]}
+  # ---- 추가 조사 (2026-10-08) ----
+  - {area: regulation, what: "EU 규정 2023/1545 EUR-Lex 원문(페이지가 빈 내용으로 읽힘). 수치는 UL, Coslaw, EcoMundo, IKW 정리 페이지로 대신함", tried: ["eur-lex.europa.eu/eli/reg/2023/1545/oj/eng", "eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32023R1545"]}
+  - {area: regulation, what: "2023/1545 이전 알레르겐 수(24 또는 25)와 추가 수(56 또는 57)가 자료마다 다름. 항목 수와 물질 수 세는 방식 차이로 보이나 원문으로 확인 못함", tried: ["Regulation (EU) 2023/1545 fragrance allergens labelling 0.001% leave-on 0.01% rinse-off"]}
+  - {area: regulation, what: "Cosmetics & Toiletries 7개 지역 향료 알레르겐 표시 정리 기사(403), Perkins Coie 통합 규제 일정 정리(접속 실패)", tried: ["cosmeticsandtoiletries.com fragrance allergen labeling requirements in 7 major regions", "legacy.perkinscoie.com fdas unified regulatory agenda"]}
+  - {area: regulation, what: "2026-10-08 기준 FDA 향료 알레르겐 표시 규칙안 Federal Register 게재본(목표 2026년 11월이라는 자료만 있음)", tried: ["FDA fragrance allergen labeling proposed rule MoCRA 2026 unified agenda status"]}
+  - {area: testing, what: "Eurofins CRL HRIPT 서비스 페이지(404), ClinicalTrials.gov HRIPT 시험 등록 페이지(스크립트로만 표시)", tried: ["eurofins.com/en-us/crlresearchlabs/services/safety-clinical-trials/human-repeated-insult-patch-test", "clinicaltrials.gov/study/NCT03175562"]}
+  - {area: testing, what: "향수 펌프 전용 분사 시험 표준. ASTM D3890, D4336, D4041은 소비자 제품 펌프 일반 기준이고, 공개 분사 모양 측정 사례는 비강 분무 의약품용이라 뺌. ASTM 소위원회 F02.30 표준 목록 페이지는 403", tried: ["spray pump test method spray pattern dose per actuation priming strokes fragrance pump test", "astm.org/jurisdiction-f0230", "manufacturingchemist.com automatic-actuation-36288"]}
+  - {area: testing, what: "에어로졸 분사율 시험 ASTM D3069(검색 요약상 2022년 폐지). 표준 페이지 원문으로 확인하지 않아 주장에서 뺌", tried: ["aerosol spray rate test method ASTM D3069"]}

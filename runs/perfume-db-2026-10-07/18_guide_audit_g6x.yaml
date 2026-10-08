@@ -1,0 +1,8 @@
+audit:
+  stage: guide
+  run: perfume-db-2026-10-07
+  overall_status: PASS
+  summary: "새로 넣은 괄호 단서는 근거와 맞다. 13_detail_schema_approved.yaml의 comparison_reference fill_rule에 '비교 대상이 여럿이면 모두'가 있어 한 리뷰가 값을 여럿 가질 수 있다. 14_details.jsonl에는 comparison_reference 줄이 190개 있지만 total 175(14_detail_counts.json reviews, detail.py가 review_id를 중복 없이 셈)는 중복을 뺀 리뷰 수이고, 값별 수(59, 40, 31, 26, 25)도 값마다 중복을 뺀 리뷰 수다. 그래서 다섯 값의 합이 175보다 크다는 말은 맞고, 그 이유가 한 리뷰가 여러 값을 가지는 데 있다는 설명도 맞다. 단서에 새 숫자는 없고, 옛 107행과 새 107행의 숫자 7개와 [m:] 키 7개는 같다."
+  checked: 8
+  findings: []
+  next_action: PROCEED

@@ -1,0 +1,31 @@
+audit:
+  stage: guide
+  run: perfume-db-2026-10-07
+  overall_status: FAIL
+  summary: "이전 지적 15건 가운데 14건과 '가장 먼저 풀 문제' 줄은 근거와 맞게 고쳐졌다. 남은 것은 04장 이기는 이유 넷째(153행) 1건이다. 새 문장 '향수를 열면 돌려보낼 수 없다'는 not_returnable 라벨 정의와 맞지 않는다. 정의에서 개봉해서 못 돌려보낸다는 말은 return_window_missed로 빠져 있다. 이 문장은 이전 감사의 required_action이 제안한 것이라 감사 쪽 잘못도 있다. Dossier/Glossier 표현은 근거와 맞다. 16_guide_metrics.json의 ev.label.not_lasting_for_price에 4개 전부가 브랜드와 함께 있고, Dossier 3개(R369IGP9SIK613, R26U67LD084EK3, R137AETPAXJ4IJ)와 Glossier 1개(RPK76O08CXYUS)라서 '대부분 Dossier, 나머지는 Glossier'가 맞다."
+  checked: 16
+  fail_count: 1
+  unverified_count: 0
+  rechecks:
+    - {where: "머리 숫자 5번째 항목 (9행)", prev: FAIL, verdict: PASS, reason: "'세 번째 출시 후보(헤어 퍼퓸)'로 고쳐 207행 '셋째', 224행 '세 번째 단계'와 맞음"}
+    - {where: "01장 검색 수요 첫째 항목 (28행)", prev: FAIL, verdict: PASS, reason: "'검색량 합만으로 제목 낱말 순서를 정할 수는 없다'로 고침. vanilla perfume 94,475와 mini perfume 37,436은 각각 std.scent_accuracy.term.vanilla perfume, std.bottle_sprayer.term.mini perfume 값과 같음"}
+    - {where: "01장 진입 조건 라벨과 주 법 (38행)", prev: FAIL, verdict: PASS, reason: "reg_13('restricts certain toxic chemicals')과 reg_14('Chemicals in fragrance formulations (e.g., fragrance fixatives)')를 나눠 인용해 출처 범위 안에서 씀. 둘 다 verified"}
+    - {where: "01장 진입 조건 향료 안전 기준 (39행)", prev: FAIL, verdict: PASS, reason: "'2026년 2월 기준 규칙안 작성 중, 확정 규칙 없음, 그 뒤 미확인'으로 고침. reg_09 원문('still in the process of developing the proposed rule')과 맞음"}
+    - {where: "02장 TL;DR 마지막 문장 (43행)", prev: FAIL, verdict: PASS, reason: "업계 의도로 일반화하던 문장을 사례 나열로 바꿈. ind_01, ind_02(Dossier 농도 12%, 듀프 고지), ind_03(Dossier 3ml 샘플), ind_11(philosophy 0.33oz 펜 스프레이), ind_05(Lattafa 100% 정품)와 맞음"}
+    - {where: "03장 불만 지도 읽는 법 (77행)", prev: FAIL, verdict: PASS, reason: "격차 값이 있는 고객 응대 -3.27(p.gap1)과 브랜드 경험 -3.02(p.gap2)로 범위를 줄임"}
+    - {where: "03장 집중 분석 1 마지막 문장 (94행)", prev: FAIL, verdict: PASS, reason: "새 브랜드 이야기를 '확인이 필요한 추정(이 표본은 기존 브랜드 상품뿐)'으로 밝힘"}
+    - {where: "04장 이기는 이유 넷째 (153행)", prev: FAIL, verdict: FAIL, reason: "제목은 고쳐졌고 블라인드 구매 단정도 빠짐. 그러나 새 문장이 not_returnable 정의와 어긋남(아래 findings)"}
+    - {where: "04장 기준 1 벌주는 선 (159행)", prev: FAIL, verdict: PASS, reason: "'신호다' 해석을 지우고 사실만 남김. '대부분 Dossier에서, 나머지는 Glossier에서'는 ev.label.not_lasting_for_price의 브랜드 3대 1과 맞음"}
+    - {where: "04장 가격 구조 둘째 항목 (214행)", prev: FAIL, verdict: PASS, reason: "제목을 '값을 올려도 지속력 불만은 사라지지 않는다'로 바꿈. Dossier가 대부분, Glossier가 나머지라는 내용은 ev 목록과 맞음. RPK76O08CXYUS 인용 'Very expensive for it not to last'가 '비싼데 오래가지 않는다'를 받침. 48.24달러는 s.B0GFGL26JD.price_per_oz 값"}
+    - {where: "04장 기준 6 벌주는 선 (189행)", prev: FAIL, verdict: PASS, reason: "'안전 부정 18개(알레르기 언급 2개 포함)'로 고치고 목록에 알레르기 언급 2개를 넣음. std.skin_body.neg=18, p.safety.알레르기 언급=2"}
+    - {where: "04장 기준 6 개발 기준 (191행)", prev: FAIL, verdict: PASS, reason: "MoCRA는 reg_09 범위(2026년 2월 기준 작성 중, 그 뒤 미확인)로, 워싱턴주는 reg_13과 reg_14 범위로 고침"}
+    - {where: "04장 메시지와 키워드 키워드 항목 (224행)", prev: FAIL, verdict: PASS, reason: "합 비교가 근거가 되지 않는다고 밝히고, 낱말 순서를 '확인이 필요한 권고'로 낮춤. long lasting perfume은 검색량 미확인이라 뺌(16_guide_metrics.json에 없음 확인). 새로 넣은 travel perfume 34,634는 std.bottle_sprayer.term.travel perfume 값과 같음"}
+    - {where: "03장 별점 격차 브랜드 경험 (81행)", prev: UNVERIFIED, verdict: PASS, reason: "빈도 주장을 '예를 들어 분사기 고장 뒤에 붙어 나온다'로 낮춤. R3DSZM9BOJ9YFF 원문 'Atomizer stopped working after a few months ... won't buy any of their products in the future'와 맞음"}
+    - {where: "04장 기준 2 만족 기준 (166행)", prev: UNVERIFIED, verdict: PASS, reason: "'칭찬의 중심'을 '예를 들어'로 낮추고 R1528CQ8SFSG5O('smells much more expensive than I expected') 한 건을 사례로만 둠"}
+    - {where: "머리 숫자 2번째 항목 (6행) '개발 1순위' -> '가장 먼저 풀 문제'", prev: none, verdict: PASS, reason: "head.topic_neg 10.0%는 불만 지도 11개 주제 가운데 가장 높음(75행). 03장의 '개발 순서는 위에서 아래로'(77행)와 같은 판단이고 새 숫자나 새 주장을 더하지 않음"}
+  findings:
+    - where: "04장 이기는 이유 넷째 '판매 설계로 줄일 수 있는 감점' 둘째 문장 (153행)"
+      status: FAIL
+      finding: "'반품 불가 불만 58개는 향수를 열면 돌려보낼 수 없다는 데서 나온다'라고 썼다. 07a_issues_approved.yaml의 not_returnable 정의는 '향수라서, 아마존 규정이나 위험물이라서, 반품 옵션이 없어서 반품이나 환불을 할 수 없다는 말'이고, exclude에 '이미 개봉해서 못 돌려보낸다는 말은 return_window_missed'가 있다. 그래서 58개를 '열면 못 돌려보냄'으로 설명하면 라벨 뜻과 어긋난다. 이 문장은 이전 감사(18_guide_audit.yaml)의 required_action이 그대로 제안한 것이라 감사 쪽 잘못이다."
+      required_action: "'반품이나 환불 불가 불만 58개 [m:std.sampling_returns.label.not_returnable]는 향수라서, 또는 아마존 규정이나 위험물이라서 돌려보낼 수 없다는 데서 나온다'로 고치거나, 원인 설명 없이 '반품이나 환불이 안 된다는 불만 58개'만 남긴다."
+  next_action: RETURN_TO_OWNER

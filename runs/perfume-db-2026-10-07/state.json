@@ -1,0 +1,305 @@
+{
+  "run": "perfume-db-2026-10-07",
+  "steps": {
+    "01_inputs": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-07T12:50:18+09:00",
+      "input_hash": "efe02c43520a0632",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "02_schema_draft": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T12:57:22+09:00",
+      "input_hash": "e5872a9fe57fa7db",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "03_schema_approval": {
+      "status": "done",
+      "kind": "human",
+      "updated": "2026-10-07T13:02:52+09:00",
+      "input_hash": "dad3397ed6cc7890",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "04_gold_tagging": {
+      "status": "done",
+      "kind": "human",
+      "updated": "2026-10-07T16:01:20+09:00"
+    },
+    "05_tagging": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T16:23:55+09:00",
+      "input_hash": "bca8f4a09ac5ff2d",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "05a_pilot": {
+      "status": "done",
+      "kind": "human",
+      "updated": "2026-10-07T16:14:38+09:00"
+    },
+    "06_tag_check": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T16:39:47+09:00",
+      "input_hash": "b56d6801a496e82c",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "07_weight": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-07T18:24:18+09:00",
+      "input_hash": "59736c632e1e77bb",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "08_report": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T18:33:12+09:00",
+      "input_hash": "be8a741623b3a13f",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "09_report_check": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T18:45:06+09:00",
+      "input_hash": "08319b5ebd9f0c62",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "10_timing": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-07T18:45:06+09:00"
+    },
+    "07a_issue_draft": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T18:00:29+09:00",
+      "input_hash": "11b380b4b3c1f6cb",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "07a_issue_approval": {
+      "status": "done",
+      "kind": "human",
+      "updated": "2026-10-07T18:13:48+09:00",
+      "input_hash": "ca0941d04916fde0",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "07b_issue_labeling": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T18:16:11+09:00",
+      "input_hash": "4193d495c5b76c87",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "07c_issue_check": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T18:18:35+09:00",
+      "input_hash": "a8d1aef01ddb014e",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "11_report_polish": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-07T19:08:17+09:00"
+    },
+    "11b_polish_audit": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T19:29:02+09:00"
+    },
+    "11_html": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-07T19:40:19+09:00",
+      "input_hash": "e303b43bda307644",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "12_market": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-07T20:59:40+09:00",
+      "input_hash": "b11870f05528dc89",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "13_detail_schema_draft": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T21:07:39+09:00",
+      "input_hash": "7e575beb27219afa",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "13a_detail_schema_approval": {
+      "status": "done",
+      "kind": "human",
+      "updated": "2026-10-07T21:29:01+09:00",
+      "input_hash": "70f2ada8125ce1e7",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "14_detail_extract": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T21:34:57+09:00",
+      "input_hash": "fe92daeb84d437a3",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "15_research": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T21:46:30+09:00",
+      "input_hash": "184fc048593d430b",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "14b_detail_check": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T21:39:31+09:00",
+      "input_hash": "ecb96ec134671e0c",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "16_guide_metrics": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-07T21:40:19+09:00",
+      "input_hash": "2b7e5fc838fa66e3",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "17_guide_write": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T22:00:35+09:00",
+      "input_hash": "11d75352805e7138",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "18_guide_check": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T22:07:12+09:00",
+      "input_hash": "c5cdae7d9881a4c1",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "18b_guide_fix": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T22:14:36+09:00"
+    },
+    "19_guide_html": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-07T22:16:20+09:00",
+      "input_hash": "bebd39678406d756",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "20_head_growth": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-07T22:31:33+09:00"
+    },
+    "20b_head_text": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T22:42:31+09:00"
+    },
+    "21_report_en_translate": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T22:58:38+09:00"
+    },
+    "21b_report_en_audit": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T22:58:38+09:00"
+    },
+    "22_robustness": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-07T23:19:07+09:00",
+      "input_hash": "3bf86ac24ea291ba",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "24_report_fix": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T23:38:22+09:00"
+    },
+    "23_specs": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-07T23:42:18+09:00",
+      "input_hash": "b8b5581a8e01a563",
+      "baseline_at": "2026-10-08T12:39:46+09:00"
+    },
+    "24b_report_en_fix": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T09:36:44+09:00"
+    },
+    "23c_specs_cleanup": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T09:35:56+09:00"
+    },
+    "23b_research_add": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T09:48:43+09:00"
+    },
+    "25_guide_g5": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T10:05:07+09:00"
+    },
+    "25b_guide_consistency": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T10:13:04+09:00"
+    },
+    "26_claim_strength": {
+      "status": "needs_human",
+      "kind": "agents",
+      "updated": "2026-10-08T11:08:28+09:00"
+    },
+    "26b_source_drop": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T11:21:53+09:00"
+    },
+    "27_rejudge": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T11:36:00+09:00"
+    },
+    "27b_rejudge_audit": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T11:43:07+09:00"
+    },
+    "27c_rejudge_guide": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T11:47:37+09:00"
+    },
+    "28_note_fix": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T12:21:50+09:00"
+    },
+    "29_concl_write": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T12:31:50+09:00"
+    },
+    "29b_concl_audit": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T12:34:30+09:00"
+    },
+    "29c_concl_fix": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T12:36:57+09:00"
+    }
+  }
+}

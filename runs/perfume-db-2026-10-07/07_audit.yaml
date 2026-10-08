@@ -1,0 +1,16 @@
+audit:
+  stage: report
+  run: perfume-db-2026-10-07
+  overall_status: PASS
+  summary: >-
+    12장 브랜딩 4의 인용을 R298AUEWZENXSP("I would not purchase it blindly because you cannot return." →
+    "반품이 안 되니 맡아 보지 않고 사지는 않겠어요", Bella Vita Luxury, 2★)로 바꿔, 향을 맡아 보지 못하고 반품도 막힌
+    상황이 샘플 권고를 직접 뒷받침한다. 근거 문장도 반품·환불 불가 58개(issues.customer_service.negative)와
+    고객 응대+향 공출현 44개(cooccurrence.negative)만 적어, 58개 전체가 향 때문이라는 일반화가 없어졌다.
+    리포트 전체를 다시 대조한 결과, 표 블록 밖 숫자는 모두 05_metrics.json의 같은 주제·같은 지표 값과 맞는다
+    (안전 18/0은 07c_safety_summary.json, 58/11/10은 07b_issue_counts.json과도 맞음). 인용 30개(리뷰 29개)의 번역,
+    별점, 브랜드는 04_tags.jsonl quote와 02_reviews.csv와 맞고, 부록 정확도(F1 0.96, 감성 93.0%, PASS)는 accuracy.sonnet과 같으며
+    정답 세트와 다르게 태깅한 예 3종은 04_gold_eval.json models.sonnet의 sentiment_diff와 extra에 있다.
+  checked: 410   # 표 블록 밖 숫자 약 380(머리말, 1~12장 데이터 읽기, 8장 강점과 약점, 10장 후보 bullet, 11~12장, 부록) + 인용 30
+  findings: []
+  next_action: PROCEED

@@ -1,0 +1,47 @@
+{
+  "made_at": "2026-10-08T10:45:58+09:00",
+  "items": [
+    "purchase_context",
+    "comparison_reference"
+  ],
+  "size": 50,
+  "reviews": 276,
+  "batches": [
+    {
+      "batch_id": "R01",
+      "reviews": 50,
+      "input": "14_rejudge_input/R01.jsonl",
+      "output": "14_rejudge_R01.jsonl"
+    },
+    {
+      "batch_id": "R02",
+      "reviews": 50,
+      "input": "14_rejudge_input/R02.jsonl",
+      "output": "14_rejudge_R02.jsonl"
+    },
+    {
+      "batch_id": "R03",
+      "reviews": 50,
+      "input": "14_rejudge_input/R03.jsonl",
+      "output": "14_rejudge_R03.jsonl"
+    },
+    {
+      "batch_id": "R04",
+      "reviews": 50,
+      "input": "14_rejudge_input/R04.jsonl",
+      "output": "14_rejudge_R04.jsonl"
+    },
+    {
+      "batch_id": "R05",
+      "reviews": 50,
+      "input": "14_rejudge_input/R05.jsonl",
+      "output": "14_rejudge_R05.jsonl"
+    },
+    {
+      "batch_id": "R06",
+      "reviews": 26,
+      "input": "14_rejudge_input/R06.jsonl",
+      "output": "14_rejudge_R06.jsonl"
+    }
+  ]
+}

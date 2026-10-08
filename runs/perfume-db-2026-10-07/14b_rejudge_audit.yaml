@@ -1,0 +1,7 @@
+audit:
+  stage: details
+  run: perfume-db-2026-10-07
+  checked: 11
+  findings:
+    - {review_id: R3A9OC9DUVF1M, item: comparison_reference, value: other_product, status: UNVERIFIED, finding: "원문은 'Me gusto el aroma es original, pero es mas suave que otro que tenía.'(향이 정품이다, 하지만 갖고 있던 다른 것보다 부드럽다). 'otro que tenía'는 '갖고 있던 다른 것'이라는 말뿐이다. 그것이 예전에 갖고 있던 같은 Eternity 병(same_product_before)인지 다른 향수(other_product)인지 원문으로 정할 수 없다. 바로 앞에서 '정품이다'라고 한 흐름을 보면 예전 병과 견준 말에 더 가깝다.", required_action: "사람이 원문을 보고 정하기. 예전 같은 병으로 읽으면 same_product_before로, 다른 향수로 읽으면 other_product를 그대로 둔다"}
+    - {review_id: R3NH52W9LLC2MR, item: comparison_reference, value: other_product, status: UNVERIFIED, finding: "원문은 'for the same price and the mall will got two bottles of the same brand'(같은 값이면 매장에서 같은 브랜드 두 병을 산다)이다. 비교 기준은 매장(mall)의 값인데 other_product에는 매장이라는 정보가 빠진다. 'two bottles of the same brand'가 같은 Eternity 제품이면 store_purchase(매장에서 산 같은 제품)에 가깝고, Calvin Klein의 다른 향이면 other_product가 맞다. 원문으로 둘 중 하나를 정할 수 없다.", required_action: "사람이 정하기. 같은 제품으로 읽으면 store_purchase로 바꾸고, 다른 향으로 읽으면 other_product를 두되 store_purchase를 함께 넣을지 검토"}

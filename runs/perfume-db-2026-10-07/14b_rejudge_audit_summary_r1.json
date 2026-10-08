@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-10-08T11:37:59+09:00",
+  "status": "FAIL",
+  "sample": 20,
+  "fail": 3,
+  "fail_rate": 0.15,
+  "max_fail_rate": 0.05,
+  "by_item": {
+    "purchase_context": 1,
+    "comparison_reference": 2
+  },
+  "warnings": []
+}

@@ -1,0 +1,75 @@
+# 단계마다 입력, 출력, 뒤 단계, 상한(docs/multi_agent_design_v2.md). scripts/stage_plan.py와 stage_packet.py가 읽는다.
+# 입력과 출력은 회차 폴더(runs/<회차>/) 기준 경로나 글롭이다. "config:"로 시작하면 저장소 맨 위 기준.
+# code는 그 단계 결과를 바꾸는 지시문, 코드, 설정(저장소 맨 위 기준). 바뀌면 stage_plan.py plan이 그 단계를 다시 할 단계로 고른다.
+# expect는 묶음 계획 파일. 계획의 묶음 출력이 하나라도 없으면 다시 할 단계로 고른다(output이 있으면 그 이름 틀로).
+# 상한은 민재님이 숫자를 직접 적어 지시할 때만 바꾼다("빨리"라는 말로 올리지 않는다).
+
+# 대량 작업 방식(method): v2 = 작업 파일과 작업자 배정(scripts/stage_packet.py), per_batch = 묶음마다 에이전트 하나.
+# v2는 설계 정보 추출(14_detail_extract)에만 쓴다. 2026-10-08 다시 판정 비교에서, 두 실행 가운데 하나라도 확정값과 다른 같은 52칸으로
+# 맞춰 세면 실제로 틀린 값이 우리 감사자 기준 A(지금 방식) 24 대 C3(v2) 19, GPT 독립 판정 기준 A 29 대 C3 23이었다(판정 일치 44/70).
+# 태깅(05_tagging)과 이슈 라벨(07b_issue_labeling)은 v2로 품질을 시험한 적이 없어 per_batch다. 작업 파일의 종류별 순서와
+# 스키마 공통 규칙 전달(GPT 검토 F10), 태그 입력 파일 나누기(F11)를 고치고 품질 시험을 한 뒤에만 v2로 바꾼다.
+# 근거와 한계: docs/compare_v2_result.md, docs/decisions_log.md.
+
+limits:
+  bulk_concurrency: 4          # 대량 작업자(sonnet) 동시 실행
+  worker_max_batches: 4        # 작업자 하나가 맡는 묶음
+  worker_max_reviews: 200      # 작업자 하나가 맡는 리뷰
+  retry_per_batch: 2           # 묶음마다 재시도
+  retry_per_stage: 4           # 단계 전체 재시도 호출
+  top_writers: 1               # 상위 모델 작성자
+  top_auditors: 1              # 상위 모델 감사자(작성이 끝난 뒤, 동시에 돌리지 않음)
+  review_lenses: 4             # 검토형(같은 큰 자료를 여럿이 봄) 읽기 전용 렌즈. 매번 민재님 허락
+
+stages:
+  - {id: 01_inputs, kind: script, inputs: [01_asins.csv, 02_reviews.csv, 02_star_distribution.csv],
+     outputs: [00_input_check.json, 03_schema_sample.csv, 03_schema_input.csv], after: [02_schema_draft]}
+  - {id: 02_schema_draft, kind: agents, inputs: [03_schema_sample.csv, "config:config/topics_common.yaml"],
+     code: [.claude/agents/schema-drafter.md], outputs: [03_schema_draft.yaml], after: [03_schema_approval]}
+  - {id: 03_schema_approval, kind: human, inputs: [03_schema_draft.yaml], outputs: [03_schema_approved.yaml], after: [05_tagging]}
+  - {id: 05_tagging, kind: agents, bulk: true, method: per_batch, inputs: [03_schema_approved.yaml, 02_reviews.csv, 04_batches.json],
+     code: [.claude/agents/review-tagger.md], expect: {batches: 04_batches.json, output: "04_tags_{model}_{batch_id}.jsonl"},
+     outputs: ["04_tags_sonnet_*.jsonl", "04_tags_top_*.jsonl"], after: [06_tag_check]}
+  - {id: 06_tag_check, kind: agents, inputs: ["04_tags_sonnet_*.jsonl", 04_audit_sample.jsonl], code: [.claude/agents/evidence-auditor.md],
+     outputs: [04_tags.jsonl, 04_quote_check_sonnet.json, 04_tag_audit.yaml, 04_tag_audit_summary.json], after: [07a_issue_draft, 22_robustness]}
+  - {id: 07a_issue_draft, kind: agents, inputs: [04_tags.jsonl], code: [.claude/agents/issue-labeler.md], outputs: [07a_issues_draft.yaml],
+     after: [07a_issue_approval]}
+  - {id: 07a_issue_approval, kind: human, inputs: [07a_issues_draft.yaml], outputs: [07a_issues_approved.yaml], after: [07b_issue_labeling]}
+  - {id: 07b_issue_labeling, kind: agents, bulk: true, method: per_batch, inputs: [07a_issues_approved.yaml, 04_tags.jsonl, 07b_label_batches.json],
+     code: [.claude/agents/issue-tagger.md], expect: {batches: 07b_label_batches.json},
+     outputs: ["07b_labels_*.jsonl"], after: [07c_issue_check]}
+  - {id: 07c_issue_check, kind: agents, inputs: ["07b_labels_*.jsonl", 07c_safety_input.jsonl], code: [.claude/agents/evidence-auditor.md],
+     outputs: [07b_issue_labels.jsonl, 07b_issue_counts.json, 07c_safety_verdicts.yaml, 07c_safety_summary.json], after: [22_robustness]}
+  - {id: 22_robustness, kind: script, inputs: [04_tags.jsonl, 07b_issue_labels.jsonl, 02_reviews.csv, 02_star_distribution.csv], code: [config/pipeline.yaml],
+     outputs: [05_robustness.json], after: [07_weight]}
+  - {id: 07_weight, kind: script, inputs: [04_tags.jsonl, 07b_issue_counts.json, 07c_safety_summary.json, 05_robustness.json, 01_prices.json],
+     code: [config/pipeline.yaml],
+     outputs: [05_metrics.json, 05_tables.md], after: [08_report, 16_guide_metrics]}
+  - {id: 08_report, kind: agents, inputs: [05_metrics.json, 05_tables.md], code: [.claude/agents/report-writer.md, config/report_template_ko.md],
+     outputs: [06_report.md], after: [09_report_check]}
+  - {id: 09_report_check, kind: agents, inputs: [06_report.md, 05_metrics.json], code: [.claude/agents/evidence-auditor.md],
+     outputs: [07_quote_check.json, 07_audit.yaml], after: [11_html]}
+  - {id: 11_html, kind: script, inputs: [06_report.md, 05_metrics.json, 07b_issue_counts.json],
+     outputs: [06_report.html, 06_report_html_numbers.json, 06_report_html_check.json], after: []}
+  - {id: 12_market, kind: script, inputs: ["market/raw/*.json"], outputs: [market/market.json, market/market_summary.md], after: [16_guide_metrics]}
+  - {id: 13_detail_schema_draft, kind: agents, inputs: [13_detail_sample.csv], code: [.claude/agents/detail-schema-drafter.md, config/detail_rules.yaml],
+     outputs: [13_detail_schema_draft.yaml], after: [13a_detail_schema_approval]}
+  - {id: 13a_detail_schema_approval, kind: human, inputs: [13_detail_schema_draft.yaml], outputs: [13_detail_schema_approved.yaml], after: [14_detail_extract]}
+  - {id: 14_detail_extract, kind: agents, bulk: true, method: v2, inputs: [13_detail_schema_approved.yaml, 14_detail_batches.json, "14_detail_input/*.jsonl"],
+     code: [.claude/agents/detail-extractor.md, scripts/stage_packet.py, config/detail_rules.yaml], expect: {batches: 14_detail_batches.json},
+     outputs: ["14_details_B*.jsonl"], after: [14b_detail_check]}
+  - {id: 14b_detail_check, kind: agents, inputs: ["14_details_B*.jsonl", 14b_detail_audit_sample.jsonl, 14_known_exceptions.yaml],
+     code: [.claude/agents/evidence-auditor.md, config/detail_rules.yaml],
+     outputs: [14_details.jsonl, 14_detail_counts.json, 14b_detail_audit.yaml, 14b_detail_audit_summary.json], after: [16_guide_metrics]}
+  - {id: 15_research, kind: agents, inputs: [16_guide_metrics.json], code: [.claude/agents/benchmark-researcher.md],
+     outputs: [15_research.yaml, 15_research_check.json], after: [17_guide_write]}
+  - {id: 23_specs, kind: agents, inputs: [23_spec_input.json], code: [.claude/agents/product-spec-collector.md],
+     outputs: [23_specs.yaml, 23_specs_check.json, 23_specs_verified.json], after: [16_guide_metrics]}
+  - {id: 16_guide_metrics, kind: script, inputs: [05_metrics.json, 14_details.jsonl, market/market.json, 23_specs_verified.json, 05_robustness.json],
+     outputs: [16_guide_metrics.json], after: [17_guide_write]}
+  - {id: 17_guide_write, kind: agents, inputs: [16_guide_metrics.json, 15_research_check.json], code: [.claude/agents/guide-writer.md],
+     outputs: [17_guide.md], after: [18_guide_check]}
+  - {id: 18_guide_check, kind: agents, inputs: [17_guide.md, 16_guide_metrics.json], code: [.claude/agents/evidence-auditor.md],
+     outputs: [18_guide_quote_check.json, 18_guide_audit.yaml], after: [19_guide_html]}
+  - {id: 19_guide_html, kind: script, inputs: [17_guide.md, 16_guide_metrics.json, 15_research_check.json],
+     outputs: [07_guide.html, 07_guide_html_numbers.json, 07_guide_html_check.json], after: []}

@@ -1,0 +1,382 @@
+category: perfume
+version: draft
+sample_reviews: 150
+# 표본: 13_detail_sample.csv(ASIN 6개 x 별점 묶음, 영어 아닌 리뷰 es, pt, ja, de 포함)
+# 공통 규칙
+# - 리뷰에 그 말이 없으면 비운다. 짐작해서 채우지 않는다.
+# - 값마다 그 값을 뒷받침하는 원문 인용(quote)을 함께 뽑는다. 제목에만 있으면 제목 원문.
+# - choice 항목은 한 리뷰에 값이 여럿일 수 있다(값마다 인용 하나).
+# - 이 제품(받은 병)이 아닌 다른 제품이나 예전 병의 사실은, 비교 항목(comparison_reference, comparison_named)을 빼고는 채우지 않는다.
+items:
+  - id: longevity_hours
+    name_ko: 리뷰어가 말한 지속 시간
+    kind: 2
+    format: number
+    unit: 시간(hour)
+    allowed_values: null
+    definition: 받은 제품의 향이 몇 시간 남았는지 리뷰어가 적은 숫자. 사라진 시점이든 아직 맡히던 시점이든 리뷰어가 말한 시간
+    fill_rule: >-
+      이 제품에 대해 시간이나 시각을 적었을 때만 채운다. 분은 시간으로 바꾼다(30분 = 0.5, 15분 = 0.25).
+      범위("4 to 5 hours", "an hour or two")와 "less than", "at most", "not even"은 큰 값.
+      시작과 끝 시각을 적으면 그 차이("11 in the morning ... 8 at night" = 9).
+      "all day", "todo el día", "throughout the day"처럼 숫자가 없으면 비운다.
+      예전 병이나 다른 제품의 시간은 넣지 않는다(RFHY4OWPBGN66은 예전 1시간이 아니라 이번 15분).
+    quote_required: true
+    sample_count: 18
+    overlap: [longevity_projection, fades_fast, shorter_than_hoped, long_lasting]
+    new_info: 라벨은 짧다, 오래간다만 센다. 실제 몇 시간인지(분포, 중앙값, ASIN별 비교)는 이 숫자로만 얻는다
+    examples:
+      - {review_id: R1JRO4XSW92BAC, quote: "only lasts for about 20 minutes"}
+      - {review_id: R3P5BEA6U907NJ, quote: "I apply at 630a and can smell myself at 630p."}
+    guide_use: [경쟁사 점수표, 소비자 기준표, 집중 분석]
+
+  - id: application_amount
+    name_ko: 뿌린 양과 덧뿌림
+    kind: 7
+    format: choice
+    unit: null
+    allowed_values:
+      - {value: heavy, ko: "많이 뿌림(여러 번, 듬뿍)"}
+      - {value: light, ko: "조금 뿌림(한두 번, 살짝)"}
+      - {value: reapplied, ko: "하루 중 덧뿌려야 함"}
+      - {value: no_reapply_needed, ko: "덧뿌릴 필요 없음"}
+    definition: 지속력이나 세기를 말할 때 리뷰어가 얼마나 뿌렸는지, 덧뿌렸는지
+    fill_rule: >-
+      뿌린 양("spray heavily", "multiple sprays", "A couple of sprays", "BARELY spray", "took a bath in it")이나
+      덧뿌림("carry the bottle around ... to refresh", "didn't even have to spray more")을 말할 때만 채운다.
+      "Little goes a long way"처럼 조금으로 충분하다는 말은 light. 양 말이 없으면 비운다.
+    quote_required: true
+    sample_count: 7
+    overlap: [longevity_projection, little_goes_far]
+    new_info: 지속력 불만이 많이 뿌리고도 나온 것인지(제품 문제), 조금 뿌려서인지 가를 수 있는 사용량 맥락. 덧뿌림 여부
+    examples:
+      - {review_id: R4HVFOK3EB74D, quote: "The scent completely dissolved after 30 minutes, and I spray heavily each time."}
+      - {review_id: RI6ECRUKWAGQU, quote: "A couple of sprays in the morning"}
+    guide_use: [집중 분석, 상세페이지 문구]
+
+  - id: application_site
+    name_ko: 뿌린 곳
+    kind: 7
+    format: choice
+    unit: null
+    allowed_values:
+      - {value: skin, ko: "피부"}
+      - {value: clothing, ko: "옷"}
+      - {value: wrist_pulse_points, ko: "손목, 맥박 부위"}
+      - {value: air_mist, ko: "공중에 뿌리고 지나감"}
+      - {value: layered_over_body_product, ko: "바디오일 등 다른 제품 위에 겹침"}
+    definition: 리뷰어가 향수를 어디에 뿌렸는지, 어디에서 오래가거나 금방 사라졌는지
+    fill_rule: >-
+      리뷰어 본인이 이 제품을 뿌린 곳을 말할 때만 채운다(pele, roupa, clothing, wrist, pulse points 포함).
+      "on me", "em mim"처럼 부위가 없으면 비운다. 정품 일반론("Genuine perfumes ... linger on clothes or skin")과
+      예전 병 이야기(R2VLFI2XBEZH6I의 "LAS PRENDAS")는 넣지 않는다. 여러 값 가능.
+    quote_required: true
+    sample_count: 9
+    overlap: [longevity_projection, long_lasting]
+    new_info: 피부에서는 금방 사라지고 옷에서는 남는다처럼 부위별 지속 차이와 겹쳐 쓰기 같은 사용법. 라벨은 부위를 구분하지 않음
+    examples:
+      - {review_id: R9CKJCV80UEOG, quote: "Ainda dura um pouco mais se você passar na roupa."}
+      - {review_id: R396AGCSVBNLZN, quote: "I opened it up and sprayed on my wrist."}
+    guide_use: [집중 분석, 상세페이지 문구]
+
+  - id: scent_note
+    name_ko: 언급한 향 노트와 성격
+    kind: 4
+    format: choice
+    unit: null
+    allowed_values:
+      - {value: vanilla, ko: "바닐라"}
+      - {value: honey, ko: "꿀"}
+      - {value: amber_warm, ko: "앰버, 따뜻함"}
+      - {value: musk, ko: "머스크"}
+      - {value: floral, ko: "꽃향(화이트 플로럴, 인동 포함)"}
+      - {value: powdery_aldehydic, ko: "파우더리, 알데하이드(비누 같은)"}
+      - {value: sweet_gourmand, ko: "단 향, 구르망"}
+      - {value: spicy, ko: "스파이시"}
+      - {value: coconut, ko: "코코넛"}
+      - {value: alcohol, ko: "알코올"}
+      - {value: fresh_clean, ko: "상쾌함, 깨끗함"}
+      - {value: other, ko: "그 밖의 노트"}
+    definition: 리뷰어가 이름을 대며 말한 향의 구성 요소(노트)나 성격. 방향은 note_direction에 짝지어 적는다
+    fill_rule: >-
+      노트나 성격 낱말(vanilla, honey, amber, musky, floral, powder, sweet, spicy, coconut, alcohol, fresh, clean, warm, gourmand)이 있을 때만 채운다.
+      노트가 없다는 말("No vanilla scent at all", "not a floral or sweet smell")도 그 노트로 채운다.
+      헤어스프레이, 양념, 선탠오일 같은 물건 비유는 노트가 아니므로 비운다(라벨 unpleasant_likeness가 셈).
+      "Smells good"처럼 노트 없는 평가는 비운다. 노트마다 값 하나.
+    quote_required: true
+    sample_count: 22
+    overlap: [scent, missing_described_notes, disliked_note_profile, appealing_character, alcohol_smell]
+    new_info: 라벨은 노트가 없다, 특정 노트가 싫다, 좋다만 센다. 어느 노트인지(바닐라, 꿀, 머스크, 꽃향 등)는 이 항목으로만 셀 수 있다
+    examples:
+      - {review_id: R4HVFOK3EB74D, quote: "notes of white floral, powder, and aldehydes (vintage soapy smell)"}
+      - {review_id: RFKZ7EJ1U4UYQ, quote: "Perfect soft balance of amber and vanilla."}
+    guide_use: [소비자 기준표, 상세페이지 문구, 집중 분석]
+
+  - id: note_direction
+    name_ko: 노트별 방향(과함, 없음, 좋음)
+    kind: 1
+    format: choice
+    unit: null
+    allowed_values:
+      - {value: too_much, ko: "과함, 그 노트만 남, 기대보다 많음"}
+      - {value: missing_or_weak, ko: "없거나 약함, 설명이나 기대와 다름"}
+      - {value: liked, ko: "좋음, 알맞음"}
+      - {value: described_only, ko: "평가 없이 묘사만"}
+    definition: scent_note에 적은 노트 하나마다 그 노트가 어느 쪽으로 문제이거나 좋은지
+    fill_rule: >-
+      scent_note 값마다 하나씩, 같은 인용에서 짝지어 채운다(scent_note가 비면 비운다).
+      "Too musky", "All I could smell was alcohol and musk", "more floral than expected"는 too_much.
+      "No vanilla scent at all", "There is no honey or sweetness", "I like a softer sweeter smell"(단맛이 모자람)은 missing_or_weak.
+      "sweet but not sickly sweet", "Perfect soft balance"는 liked. 평가 낱말이 없으면 described_only.
+    quote_required: true
+    sample_count: 22
+    overlap: [scent, missing_described_notes, disliked_note_profile, appealing_character]
+    new_info: 같은 리뷰 안에서 노트마다 방향이 갈리는 경우(꿀은 없고 코코넛은 과함)를 노트 단위로 나눔. 라벨은 인용 단위로 한 방향만 셈
+    examples:
+      - {review_id: R2IRH10VMEO7Z4, quote: "Too musky"}
+      - {review_id: R2CANTTXRR9QS9, quote: "No vanilla scent at all."}
+    guide_use: [집중 분석, 소비자 기준표]
+
+  - id: part_failure
+    name_ko: 망가진 부품과 문제 종류
+    kind: 5
+    format: choice
+    unit: null
+    allowed_values:
+      - {value: sprayer_no_spray, ko: "분사기가 안 뿜어짐"}
+      - {value: sprayer_stuck, ko: "노즐이 눌린 채 걸리거나 안 눌림"}
+      - {value: sprayer_stream, ko: "안개 대신 물줄기로 나감"}
+      - {value: sprayer_broken, ko: "분사기가 부서짐"}
+      - {value: cap_missing, ko: "뚜껑이 없음"}
+      - {value: decoration_broken, ko: "장식 고리 등 장식이 부서짐"}
+      - {value: bottle_cracked, ko: "병에 금이 가거나 깨짐"}
+      - {value: bottle_leak, ko: "병에서 새거나 흘림"}
+      - {value: outer_case_damaged, ko: "겉상자나 금속 케이스가 찌그러지거나 훼손"}
+    definition: 어느 부품이 어떤 모양으로 고장났거나 망가졌는지
+    fill_rule: >-
+      분사기, 노즐, 뚜껑, 장식, 병, 겉상자나 케이스의 고장이나 파손을 말할 때만 채운다. 받았을 때든 쓰다가든 모두 채운다(시점은 라벨이 가른다).
+      한 리뷰에 여러 모양이 있으면 모두("At first it would only spray a jet like stream, but now it will not spray at all" = sprayer_stream, sprayer_no_spray).
+      "Damaged package"처럼 겉상자 훼손만 있으면 outer_case_damaged. 향이나 지속력 문제는 넣지 않는다.
+    quote_required: true
+    sample_count: 11
+    overlap: [quality, shipping, packaging, sprayer_stopped_working, sprayer_defective, missing_parts, arrived_broken, leaked_in_transit]
+    new_info: 라벨은 분사기 고장, 깨져 옴, 새서 옴까지만 센다. 고장 모양(눌린 채 걸림, 물줄기)과 부품(장식 고리, 겉 케이스)은 새 정보. 포장 부정은 라벨이 없음(only_other)
+    examples:
+      - {review_id: R1WVLWI1BHKZE5, quote: "The nozzle is depressed and will not spring/pop back up to spray again."}
+      - {review_id: R3IY6PHSEQCN23, quote: "o enfeite de argola que fica junto ao borrifador veio quebrado"}
+    guide_use: [시장 진입 조건, 집중 분석]
+
+  - id: comparison_reference
+    name_ko: 비교 기준의 종류
+    kind: 8
+    format: choice
+    unit: null
+    allowed_values:
+      - {value: same_product_before, ko: "예전에 산 같은 제품, 갖고 있는 병, 예전 제조법"}
+      - {value: store_purchase, ko: "매장(정규 매장, 백화점)에서 산 같은 제품"}
+      - {value: original_unspecified, ko: "무엇인지 밝히지 않은 원래 것, 정품"}
+      - {value: dupe_target, ko: "듀프의 원조 향수"}
+      - {value: other_product, ko: "다른 브랜드나 같은 브랜드 다른 향"}
+      - {value: other_size, ko: "같은 제품의 다른 용량"}
+    definition: 리뷰어가 이 제품을 무엇과 견주는지
+    fill_rule: >-
+      다른 것과 비교하는 말("not like original", "como los anteriores", "Macy's", "dupe for", "compare to others like Lataffa", "I bought the bigger one")이 있을 때만 채운다.
+      비교 대상이 여럿이면 모두. 단순한 기대("Not what I expected")는 비교가 아니므로 비운다.
+      정품 의심이 함께 있어도 채운다.
+    quote_required: true
+    sample_count: 27
+    overlap: [trust, scent, price_value, differs_from_genuine, weaker_than_genuine, formula_changed, same_as_original, differs_from_original, cheaper_than_alternatives]
+    new_info: 라벨은 다르다, 약하다, 같다의 결과를 센다. 비교 기준이 예전 병인지 매장 제품인지 듀프 원조인지 다른 브랜드인지는 새 정보(듀프 원조와 다른 브랜드는 라벨에 없음)
+    examples:
+      - {review_id: RFHY4OWPBGN66, quote: "以前、正規の店頭で買ったものより香りの飛びが早い"}
+      - {review_id: R3E3IWV1CXIFEY, quote: "A prior bottle of the same fragrance performed exceptionally, lasting for days."}
+    guide_use: [경쟁사 점수표, 집중 분석]
+
+  - id: comparison_named
+    name_ko: 이름을 댄 비교 상품이나 매장
+    kind: 8
+    format: text
+    unit: null
+    allowed_values: null
+    definition: 비교에 쓴 상품, 브랜드, 매장의 고유 이름(30자 안팎, 원문 표기 그대로)
+    fill_rule: >-
+      상품명, 브랜드명, 매장명이 적혀 있을 때만 채운다(예 "YSL black opium", "Macy's 4oz", "Lataffa", "kohls", "target", "Sol De Janeiro #62").
+      "the original", "designer fragrances", "other stores"처럼 이름이 없으면 비운다. 이름이 여럿이면 모두.
+      냄새 비유로만 쓴 상품(선탠오일 등)과 남의 말을 옮긴 매장(RC8UZZ9TT4LH8의 Glossier store)은 비운다.
+    quote_required: true
+    sample_count: 7
+    overlap: [cheaper_than_alternatives, weaker_than_genuine, price_value, trust]
+    new_info: 경쟁 상품과 가격 비교 매장의 실제 이름. 라벨은 이름을 담지 않음
+    examples:
+      - {review_id: R1JD1V1KTLFJEK, quote: "but I don’t think it’s a potent as The Macy’s 4oz bottle"}
+      - {review_id: R4I7WXJYN9X5Q, quote: "This product is supposedly a dupe for the YSL black opium, which I love."}
+    guide_use: [경쟁사 점수표]
+
+  - id: purchase_context
+    name_ko: 구매 맥락
+    kind: 9
+    format: choice
+    unit: null
+    allowed_values:
+      - {value: gift_for_other, ko: "남에게 선물하려고 삼"}
+      - {value: received_as_gift, ko: "선물로 받음"}
+      - {value: repurchase, ko: "예전에 산 적 있음, 오래 써 온 제품"}
+      - {value: first_or_blind_buy, ko: "처음 삼, 맡아 보지 않고 삼"}
+    definition: 누구를 위해, 몇 번째로, 맡아 보고 샀는지
+    fill_rule: >-
+      선물("for my sweetie", "se la regalé a mi esposa", "Christmas present", "for my mom"), 선물 받음("I was gifted"),
+      재구매나 오래 씀("have bought it several times", "TENGO AÑOS USANDOLO", "old favorite"), 처음이나 블라인드 구매("blind buy", "Primeira e última compra")를 말할 때만 채운다.
+      "would make a great gift"처럼 앞으로의 추천은 비운다. 제목의 "Great gift"만 있으면 비운다.
+      선물이면 받는 사람(아내, 엄마 등)이 인용에 드러나게 뽑는다.
+    quote_required: true
+    sample_count: 27
+    overlap: [brand_experience, overall, repeat_long_time_user]
+    new_info: 선물 구매와 블라인드 구매는 어떤 주제나 라벨에도 없음. 재구매는 repeat_long_time_user와 겹치지만 정품 의심(trust)과 엮어 보려고 함께 둠
+    examples:
+      - {review_id: R1US49YQFABCRH, quote: "I recently purchased this as a birthday present for a family member."}
+      - {review_id: R187EZAUQ8D32T, quote: "I adore this perfume and have bought it several times"}
+    guide_use: [상세페이지 문구, 소비자 기준표]
+
+  - id: purchase_trigger
+    name_ko: 구매 계기
+    kind: 9
+    format: choice
+    unit: null
+    allowed_values:
+      - {value: hype_reviews, ko: "입소문, 리뷰, 판매 순위, 평판"}
+      - {value: smelled_in_person, ko: "남에게서나 매장에서 맡아 봄"}
+      - {value: dupe_seeking, ko: "원조 향수의 싼 대체품을 찾음"}
+      - {value: cheaper_price, ko: "싸서, 작은 용량이라 부담이 적어서"}
+      - {value: store_unavailable, ko: "늘 사던 매장에서 안 팖"}
+      - {value: product_claim, ko: "상품 이름이나 설명(유니섹스, 꿀 노트 등)"}
+    definition: 무엇 때문에 이 제품을 사게 됐는지
+    fill_rule: >-
+      산 이유나 계기를 말할 때만 채운다("Everyone raved so I caved", "in the first of the most sellers", "after hearing so much about it",
+      "worth the hype", "I was looking for a good dupe", "por comprar el mas barato", "They stopped selling eternity at my local kohls").
+      기대에 못 미쳤다는 말만 있고 계기가 없으면 비운다.
+    quote_required: true
+    sample_count: 16
+    overlap: [overall, price_value]
+    new_info: overall은 입소문 대비 만족만 센다. 구매를 이끈 경로(입소문, 듀프, 값, 매장 단종)는 새 정보
+    examples:
+      - {review_id: RC8UZZ9TT4LH8, quote: "Everyone raved so I caved."}
+      - {review_id: RFQMG2ZET742V, quote: "They stopped selling eternity at my local kohls so I figured I would try this."}
+    guide_use: [시장 진입 조건, 상세페이지 문구]
+
+  - id: desired_state
+    name_ko: 리뷰어가 바라는 것
+    kind: 3
+    format: text
+    unit: null
+    allowed_values: null
+    definition: 리뷰어가 바라거나 기대한 상태나 기능을 짧게(30자 안팎, 한국어 요약)
+    fill_rule: >-
+      wish, want, I like a ..., was expecting, hoping, IF I knew, QUE SEA처럼 바람이나 기대를 직접 말할 때만 채운다
+      (예 "더 부드럽고 단 향", "더 싼 가격", "계속 작동하는 노즐", "결제 때 반품 불가 경고", "바닐라 향", "작은 용량").
+      남에게 하는 조언("try it on first", "verify authenticity")만 있으면 비운다. 불만에서 바람을 짐작해 채우지 않는다.
+    quote_required: true
+    sample_count: 9
+    overlap: [price_value, scent, quality, customer_service, missing_described_notes, too_expensive]
+    new_info: 불만의 반대말이 아니라 리뷰어가 직접 말한 원하는 상태(부드럽고 달게, 작은 용량, 결제 전 반품 불가 표시 등)
+    examples:
+      - {review_id: R396AGCSVBNLZN, quote: "I like a softer sweeter smell."}
+      - {review_id: R3HUTCGBNSP6M7, quote: "Definitely wish it was cheaper"}
+    guide_use: [소비자 기준표, 상세페이지 문구]
+
+  - id: wearer_image
+    name_ko: 향이 떠올리게 하는 나이와 성별
+    kind: 7
+    format: choice
+    unit: null
+    allowed_values:
+      - {value: elderly, ko: "노년(할머니, 나이 든 여성)"}
+      - {value: mature_adult, ko: "중장년, 어른스러움"}
+      - {value: youthful_or_childish, ko: "어림, 아이 같음"}
+      - {value: masculine, ko: "남성적"}
+      - {value: unisex, ko: "남녀 공용"}
+    definition: 리뷰어가 이 향이 어떤 나이나 성별의 사람에게 맞는다고 보는지
+    fill_rule: >-
+      나이("old lady", "women in their 90's", "older woman (55+)", "minha vó", "child's one", "doesn't read as ... juvenile")나
+      성별("man's fragrance", "tira más a masculino", "could be unisex")을 향과 연결해 말할 때만 채운다.
+      "Perfume for the girls" 같은 제목 구호만 있으면 비운다. 리뷰어 본인 나이가 같이 있으면 그 문장까지 인용한다.
+    quote_required: true
+    sample_count: 14
+    overlap: [scent, old_lady_mature, appealing_character, disliked_note_profile]
+    new_info: old_lady_mature는 노년 이미지 불만만 센다. 성별 인상(남성적, 공용), 아이 같음, 적힌 나이(55+, 90대, 리뷰어 30대)는 새 정보
+    examples:
+      - {review_id: R349GHMWMP16X5, quote: "this is something an older woman (55+) would wear"}
+      - {review_id: R15PA3ET4OY89J, quote: "it's definitely a man's fragrance (I am a woman)"}
+    guide_use: [소비자 기준표, 상세페이지 문구]
+
+  - id: usage_occasion
+    name_ko: 쓰는 때와 곳
+    kind: 7
+    format: choice
+    unit: null
+    allowed_values:
+      - {value: daily, ko: "매일, 평소, 집에서도"}
+      - {value: occasional_or_special, ko: "가끔, 특별한 날"}
+      - {value: work, ko: "출근, 직장"}
+      - {value: cold_season, ko: "가을, 겨울"}
+      - {value: hot_humid, ko: "더운 날씨, 땀"}
+      - {value: carry_travel, ko: "가방에 넣고 다님, 여행, 덧뿌리려고 들고 다님"}
+      - {value: layering, ko: "다른 제품과 겹쳐 씀"}
+      - {value: room_spray, ko: "방향제로 씀"}
+    definition: 리뷰어가 언제, 어디서, 어떤 환경에서 이 향수를 쓰는지
+    fill_rule: >-
+      때와 곳을 말할 때만 채운다("every day scent", "everyday wear or special occasions", "when I got to work", "会社に行くまで",
+      "fall/winter", "I live in Florida and sweat a lot", "carry in purse", "layer this under my body oil", "room spray").
+      병 크기 칭찬만 있고 들고 다닌다는 말이 없으면 비운다. 여러 값 가능.
+    quote_required: true
+    sample_count: 14
+    overlap: [scent, favorite_signature, purse_portable]
+    new_info: scent의 계절, 상황 적합성과 favorite_signature(매일)는 상황을 따로 세지 않음. 출근, 더운 기후, 겹쳐 쓰기, 방향제 전용 같은 구체 상황은 새 정보
+    examples:
+      - {review_id: R2LP5UYPZD2M8N, quote: "Perfect for everyday wear or special occasions."}
+      - {review_id: RC50Q4FVCXSL0, quote: "Great fall/winter perfume."}
+    guide_use: [상세페이지 문구, 소비자 기준표]
+
+  - id: fake_suspicion_basis
+    name_ko: 정품 의심의 근거
+    kind: 5
+    format: choice
+    unit: null
+    allowed_values:
+      - {value: weak_or_short, ko: "약하거나 금방 날아감"}
+      - {value: smell_differs, ko: "향이 다르거나 이상함"}
+      - {value: packaging_label, ko: "상자, 라벨, 글씨가 다르거나 이상함"}
+      - {value: liquid_color, ko: "내용물 색이 다름"}
+      - {value: opened_or_moved, ko: "열린 흔적, 병이 제자리에 없음"}
+      - {value: cheap_price, ko: "값이 너무 쌈"}
+    definition: 가짜, 정품 아님, 희석을 의심하거나 단정할 때 리뷰어가 댄 근거
+    fill_rule: >-
+      리뷰에 정품 의심이나 가짜 단정(fake, falso, no es original, 薄めている, tampered, "did someone open this")이 있고
+      그 근거를 함께 말할 때만 채운다. 근거 없이 "Fake"만 있으면 비운다. 근거가 여럿이면 모두.
+      의심 없이 약하다, 향이 다르다고만 하면 비운다(그건 longevity_projection, comparison_reference가 담음).
+    quote_required: true
+    sample_count: 13
+    overlap: [trust, fake_asserted, authenticity_doubt, differs_from_genuine, weaker_than_genuine, diluted_or_tampered]
+    new_info: 라벨은 의심의 강도와 비교 대상만 가른다. 근거가 지속력인지 겉모양(상자, 라벨, 색, 개봉 흔적)인지는 새 정보이고, 표본에서는 지속력 근거가 13개 중 9개
+    examples:
+      - {review_id: R29L2DLQMAJE18, quote: "The packaging and text doesn’t match the original package"}
+      - {review_id: R73VEQ6CWTVXJ, quote: "Sospecho que no es original, no estoy seguro pero el aroma no dura."}
+    guide_use: [시장 진입 조건, 집중 분석]
+
+discarded:
+  - {name_ko: "낸 가격(달러)", sample_count: 4, reason: "5개 미만(R98NF186B6WVR, R26U67LD084EK3, R1BPS6WJ0CYY8J, RE2KNU3LPS61F)"}
+  - {name_ko: "병 용량 숫자(oz)", sample_count: 2, reason: "5개 미만(R1JD1V1KTLFJEK, RI6ECRUKWAGQU). 크기 평가는 라벨 bottle_too_small, good_size와 같음"}
+  - {name_ko: "써 온 햇수", sample_count: 1, reason: "숫자가 있는 것은 RFQMG2ZET742V(20 years) 하나. 숫자 없는 애용은 purchase_context repurchase와 라벨 repeat_long_time_user가 담음"}
+  - {name_ko: "리뷰어 본인 나이", sample_count: 1, reason: "5개 미만(RC8UZZ9TT4LH8 30대). 향이 떠올리게 하는 나이는 wearer_image 인용에 남김"}
+  - {name_ko: "선물 받는 사람", sample_count: 5, reason: "경계 수준이고 purchase_context gift_for_other 인용에 받는 사람(애인, 아내, 엄마, 가족)이 드러나 따로 두지 않음"}
+  - {name_ko: "향의 세기 방향(너무 셈, 약함, 알맞음)", sample_count: 25, reason: "라벨과 같음(too_strong, weak_scent, not_overpowering, strong_presence)"}
+  - {name_ko: "비교 결과 방향(더 약함, 다름, 같음, 더 쌈)", sample_count: 24, reason: "라벨과 같음(weaker_than_genuine, differs_from_genuine, same_as_original, formula_changed, cheaper_than_alternatives)"}
+  - {name_ko: "반품 불가", sample_count: 10, reason: "라벨과 같음(not_returnable)"}
+  - {name_ko: "싫은 제품의 처리(버림, 기부, 남에게 줌, 방향제)", sample_count: 4, reason: "5개 미만(R3N8OT6YT5Y8T4, RMCCSGC3MUTS2, RLQAR9U3S3TYB, RE2KNU3LPS61F). 방향제는 usage_occasion room_spray로 남김"}
+  - {name_ko: "뿌린 뒤 향의 변화(첫 향과 잔향)", sample_count: 3, reason: "5개 미만(R3P5BEA6U907NJ, R3E3IWV1CXIFEY, RDDEYJ06PGGFS)"}
+  - {name_ko: "내용물 변색, 오래된 재고", sample_count: 3, reason: "5개 미만(R1RNTEOLXRUEEJ, R3LHM29XXXIQ1R, R11KMNJ6A9K4HR)이고 라벨 old_or_spoiled와 겹침. 가짜 의심 근거인 색은 fake_suspicion_basis liquid_color로 남김"}
+  - {name_ko: "쓰다가 고장 난 시점(얼마나 썼을 때)", sample_count: 2, reason: "5개 미만(R1WVLWI1BHKZE5 half a bottle, R3VHNJ5132HT9A at first ... now)"}
+  - {name_ko: "피부 체질, 땀 같은 몸 조건", sample_count: 4, reason: "분명한 말은 5개 미만(RPFE3PQXLGNJA, R3HUTCGBNSP6M7, R3A9R3RZ8V4MPU, RC8UZZ9TT4LH8). on me, em mim까지 넣으면 뜻이 모호함"}
+  - {name_ko: "남의 반응, 칭찬", sample_count: 11, reason: "라벨과 같음(compliments). 칭찬한 사람(자매, 데이트 상대)을 밝힌 것은 2개뿐"}
+  - {name_ko: "불쾌한 물건 비유(헤어스프레이, 양념, 선탠오일)", sample_count: 4, reason: "5개 미만이고 라벨 unpleasant_likeness와 같음"}
+  - {name_ko: "배송 걸린 날짜", sample_count: 2, reason: "5개 미만(RQET2LHM8E4JH, R3IY6PHSEQCN23)이고 라벨 fast_delivery, slow_delivery와 같음"}
+  - {name_ko: "점수 매기기(8.1-10, 10/10)", sample_count: 3, reason: "5개 미만(RWR04SZ6V3HXE, R2SQZU7D4PAVAD, R3A9R3RZ8V4MPU)이고 overall이 담음"}

@@ -1,0 +1,6 @@
+audit:
+  stage: translation
+  checked: 91
+  findings:
+    - {line: 151, status: FAIL, finding: "Korean '충전식 목줄' means a rechargeable collar or leash, but the English says 'retractable leash'. The review R1T7FSK04S0DMQ says 'Tried to recharge and the collar wouldn't hold a charge.', so the product type is wrong", required_action: "Change 'a retractable leash' to 'a rechargeable collar'"}
+    - {line: 49, status: FAIL, finding: "Korean '오래 써 온 애용' means having used it for a long time, but 'keep using for years' reads as a future intention. The sub-issue (Repeat or long-time user) and the line 50 quote ('I have been wearing this fragrance for over 20 years') both describe past use", required_action: "Change the heading to 'Intent to repurchase or recommend, and long-time loyal use, far outnumber advice against buying.'"}

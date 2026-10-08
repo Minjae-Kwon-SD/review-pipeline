@@ -1,0 +1,16 @@
+audit:
+  stage: report
+  run: perfume-db-2026-10-07
+  overall_status: PASS
+  summary: >-
+    489행 괄호가 '(금방 날아감, 처음부터 약함, 기대보다 짧음)'으로 바뀌어 config/categories/perfume.yaml
+    direction_index.low.labels [fades_fast, weak_scent, shorter_than_hoped]의 승인된 이름 세 개와 맞는다.
+    지난번 확인 뒤 바뀐 것은 이 괄호뿐이고, 06_report.md 489행에도 같은 문장이 들어가 있다.
+    나머지 숫자와 설명은 그대로이고 지난번처럼 05_metrics.json robustness 및 robustness.py와 맞는다.
+    숫자: 2000=bootstrap.n, 100.0%=head_first_pct, 8.2%~11.9%=head_neg_ci, 분포=texts.weakest_dist,
+    6번 중 0번=texts.loo_flips, 9.5%~10.6%=leave_one_out_head_neg_text.
+    설명: 뒤집힘 기준 세 가지, ASIN마다 복원 추출, 가중치 고정 근사.
+    원인처럼 쓰거나 과장한 문장은 없다.
+  checked: 11
+  findings: []
+  next_action: PROCEED

@@ -1,0 +1,26 @@
+audit:
+  stage: report
+  run: perfume-db-2026-10-07
+  overall_status: FAIL
+  summary: >-
+    고친 489행의 숫자 6개와 방법 설명 2개는 05_metrics.json robustness 및 robustness.py와 같다.
+    지난번 FAIL(무엇이 결론인지 없음)은 뒤집힘 기준 세 가지를 문장에 적어 풀렸다.
+    그런데 약한 쪽 라벨을 '(금방 날아감, 처음부터 약함)'으로 적어 실제 계산의 세 라벨 중 하나(기대보다 짧음)가 빠졌다.
+    지표 정의가 계산과 달라 FAIL로 적는다. 이 누락은 지난번 감사의 required_action 문구에서 나온 것이다.
+  checked: 11
+  findings:
+    - where: "부록 견고성 점검 (489행) 셋째 문장"
+      status: FAIL
+      finding: >-
+        괄호 '약한 쪽(금방 날아감, 처음부터 약함)'이 계산과 다르다.
+        config/categories/perfume.yaml guide.direction_index.low.labels는 [fades_fast, weak_scent, shorter_than_hoped]이고,
+        robustness.py는 이 세 라벨 중 하나라도 붙은 리뷰를 약한 쪽으로 센다.
+        07a_issues_approved.yaml에서 shorter_than_hoped의 이름은 '기대보다 짧음'이다.
+        지금 문장은 두 라벨만으로 과반을 확인한 것처럼 읽힌다.
+        나머지는 맞다: 2000=bootstrap.n, 100.0%=head_first_pct, 8.2%~11.9%=head_neg_ci, 분포=texts.weakest_dist,
+        6번 중 0번=texts.loo_flips, 9.5%~10.6%=leave_one_out_head_neg_text.
+        뒤집힘 기준 세 가지(불만 1위, 약한 쪽 비율 low/(low+high) > 50%, 최대 약점 ASIN 과반)도 robustness.py의 정의와 같다.
+        05_robustness.json에서 6번 모두 flips가 비어 있다.
+      required_action: >-
+        괄호를 '(금방 날아감, 처음부터 약함, 기대보다 짧음)'으로 바꾸기. 나머지 문장과 숫자는 그대로 둔다.
+  next_action: RETURN_TO_OWNER

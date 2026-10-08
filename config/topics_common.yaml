@@ -1,0 +1,71 @@
+# 모든 카테고리에 남기는 공통 주제 11개. schema-drafter의 출발점이다.
+# 정답지(스크럽 리포트)의 주제 틀과 같은 틀로 비교하기 위해 언급이 없어도 빼지 않는다.
+# 브랜드 쪽(side B) 6개는 그대로 쓰고, 제품 쪽(side P) 5개는 카테고리에 맞게 id, name_ko, definition을 다시 쓸 수 있다
+# (다시 쓰면 그 주제의 common_id에 아래 원래 id를 적는다). 카테고리 전용 주제는 schema-drafter가 리뷰 표본에서 찾는다.
+topics:
+  - id: price_value
+    name_ko: 가격 대비 가치
+    side: B
+    redefine: false
+    definition: 가격, 용량 대비 값어치, 할인
+    source: Price & Value
+  - id: brand_experience
+    name_ko: 브랜드 경험
+    side: B
+    redefine: false
+    definition: 브랜드 호감, 재구매, 추천 의향
+    source: Brand Experience
+  - id: trust
+    name_ko: 신뢰
+    side: B
+    redefine: false
+    definition: 리스팅과 실물 차이, 정품 여부 의심
+    source: Reputation & Trust
+  - id: shipping
+    name_ko: 배송
+    side: B
+    redefine: false
+    definition: 배송 속도, 파손, 누락
+    source: Shipping & Delivery
+  - id: customer_service
+    name_ko: 고객 응대
+    side: B
+    redefine: false
+    definition: 반품, 환불, 판매자 응대
+    source: Customer Service
+  - id: packaging
+    name_ko: 포장
+    side: B
+    redefine: false
+    definition: 상자, 선물 포장 상태
+    source: Package Design
+  - id: overall
+    name_ko: 전체 만족도
+    side: P
+    redefine: true
+    definition: 특정 속성 없이 제품이 좋다, 나쁘다
+    source: Overall Satisfaction
+  - id: quality
+    name_ko: 품질
+    side: P
+    redefine: true
+    definition: 만듦새, 내구성, 불량, 변질
+    source: Durability & Quality
+  - id: performance
+    name_ko: 기능과 성능
+    side: P
+    redefine: true
+    definition: 제품이 하기로 한 일을 얼마나 잘 하는지
+    source: Functionality & Performance
+  - id: safety
+    name_ko: 안전
+    side: P
+    redefine: true
+    definition: 피부나 몸의 반응, 자극, 알레르기, 안전 우려
+    source: Safety
+  - id: design
+    name_ko: 디자인과 형태
+    side: P
+    redefine: true
+    definition: 모양, 색, 크기, 휴대성
+    source: Design & Style

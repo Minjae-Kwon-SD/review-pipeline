@@ -1,0 +1,14 @@
+# 13_detail_schema_draft.yaml에서 고칠 곳(승인 카드 "두 곳 고쳐 승인"). detail.py approve가 적용한다.
+split_values:
+  - item: purchase_context
+    value: first_or_blind_buy
+    into:
+      - {value: first_purchase, ko: 처음 삼}
+      - {value: blind_buy, ko: 맡아 보거나 시험해 보지 않고 삼}
+    rule: 처음 산다는 말은 first_purchase, 맡아 보거나 시험해 보지 않고 샀다는 말은 blind_buy. 둘 다 말하면 둘 다 채운다.
+extra:
+  - item: scent_note
+    field: note_word
+    when_value: other
+    format: text
+    rule: 값이 other이면 extra.note_word에 원문 낱말을 그대로(짧게) 적는다.

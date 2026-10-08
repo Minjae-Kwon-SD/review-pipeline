@@ -1,0 +1,974 @@
+made_at: '2026-10-07T18:00:23+09:00'
+status: PASS
+version: draft
+topics:
+- topic: price_value
+  name_ko: 가격 대비 가치
+  directions:
+    negative:
+      quotes: 71
+      sampled: 71
+      only_other: false
+      labels:
+      - id: too_expensive
+        name_ko: 그냥 비쌈
+        name_en: Too expensive
+        include: 용량이나 성능 같은 비교 대상 없이 가격 수준 자체가 비싸다, 조금 비싸다, 더 쌌으면 좋겠다는 말("Overpriced", "Pricey", "tan caro")
+        exclude: 병 크기나 용량에 비해 비싸다는 말은 small_for_price, 받은 제품이 값만큼 못하다는 말은 not_worth_price, 지속력에 비해 비싸다는 말은 not_lasting_for_price
+        examples:
+        - review_id: R3OG30U20R3UNI
+          quote: Overpriced
+        - review_id: R1WLKECRSCRWPW
+          quote: very expensive though
+        approx_count: 24
+      - id: small_for_price
+        name_ko: 용량에 비해 비쌈
+        name_en: Too small for the price
+        include: 병이 작다, 몇 ml밖에 안 된다는 말과 함께 그 값이 비싸다고 하는 말("tiny bottle for the price", "30 ml por este precio")
+        exclude: 가격 말 없이 병이 작다는 말은 bottle_design(이 주제 아님), 용량 언급 없이 비싸다는 말은 too_expensive
+        examples:
+        - review_id: R2M38B7M76GHVM
+          quote: Was way too expensive for the tiny bottle.
+        - review_id: R2RKARC8NRGUCQ
+          quote: Demasiado caro, 30 ml por este precio
+        approx_count: 18
+      - id: not_worth_price
+        name_ko: 값만큼 못함
+        name_en: Not worth the price
+        include: 받은 제품(품질, 기대, 전반)이 낸 값에 못 미친다, 가격 대비 별로다, 할인해야 살 만하다는 말("Not worth the cost", "Preis-Leistung geht so", "$116.00 for NOTHING")
+        exclude: 못 미치는 이유가 지속력이면 not_lasting_for_price, 용량이면 small_for_price, 가격 수준만 말하면 too_expensive
+        examples:
+        - review_id: R9ZEWAM020WG9
+          quote: Not worth the cost
+        - review_id: R28CUG81AXYYHI
+          quote: a little basic in my opinion considering the price
+        approx_count: 17
+      - id: not_lasting_for_price
+        name_ko: 지속력에 비해 비쌈
+        name_en: Too expensive for how short it lasts
+        include: 이 값이면 더 오래가야 한다, 비싼데 금방 날아간다처럼 가격과 지속력을 함께 묶어 말하는 부분
+        exclude: 가격 말 없이 금방 날아간다는 말은 longevity_projection(이 주제 아님), 이유 없는 값어치 불만은 not_worth_price
+        examples:
+        - review_id: RPK76O08CXYUS
+          quote: Very expensive for it not to last
+        - review_id: R26U67LD084EK3
+          quote: you spend $50 and you only smell good for an hour or two
+        approx_count: 4
+      other_approx_count: 8
+      notes: 기타에는 가격 인상("The price was almost doubled", 같은 값에 양이 줄었다, 3개), 다른 매장이나 다른 제품이 더 싸다(Walmart, 정규 매장, Lattafa, 3개), "price was too good to be true"(가짜 의심 성격, trust 쪽), "$37 for 2 uses"(용량인지 분사 문제인지 불분명)가 있음. 가격 인상은 5% 미만이라 라벨로 만들지 않았지만 다음 회차에 늘면 따로 볼 만함.
+    positive:
+      quotes: 83
+      sampled: 83
+      only_other: false
+      labels:
+      - id: good_price
+        name_ko: 가격이 좋음
+        name_en: Good or affordable price
+        include: 가격 자체가 싸다, 적당하다, 좋은 가격이다, 좋은 딜이다는 말("Great price", "Very affordable", "Buen precio", "only $30")
+        exclude: 가격에 비해 제품이 좋다, 값어치를 한다는 말은 good_value, 용량 대비 값은 size_for_price, 원조 향수나 다른 매장보다 싸다는 비교는 cheaper_than_alternatives
+        examples:
+        - review_id: R553UQ8LUZP0O
+          quote: Very affordable
+        - review_id: RZL9EL6VC8P7Y
+          quote: Great price.
+        approx_count: 42
+      - id: good_value
+        name_ko: 값어치를 함
+        name_en: Worth the money
+        include: 낸 값에 비해 제품(품질, 향, 세기, 전반)이 좋다, 돈값을 한다는 말("Good value for the money", "worth my money", "for the price it's a decent product", "Bom custo benefício")
+        exclude: 가격 수준만 칭찬하면 good_price, 용량 대비 값이면 size_for_price
+        examples:
+        - review_id: R22KP4UHOX1JCN
+          quote: Good value for the money
+        - review_id: RI6ECRUKWAGQU
+          quote: For the price point, that's genuinely impressive.
+        approx_count: 23
+      - id: cheaper_than_alternatives
+        name_ko: 원조나 다른 곳보다 쌈
+        name_en: Cheaper than the original or other stores
+        include: 원조 향수(듀프 대상)나 다른 매장(Macy's 등)보다 훨씬 싸다는 비교("at a fraction of the cost", "under $40 vs $100 plus")
+        exclude: 비교 대상 없이 싸다는 말은 good_price
+        examples:
+        - review_id: R1ZD5J2BF3RTMC
+          quote: the under $40 vs $100 plus was to tempting
+        - review_id: R3T4C0OHINQFYF
+          quote: looks real.. not sure why Macy's is more expensive
+        approx_count: 7
+      - id: size_for_price
+        name_ko: 용량 대비 값이 좋음
+        name_en: Good size for the price
+        include: 병 크기나 용량에 비해 값이 좋다는 말("Great size for the price", "Big size for an affordable price")
+        exclude: 가격 말 없이 병 크기가 좋다는 말은 bottle_design(이 주제 아님), 용량 언급 없는 가격 칭찬은 good_price
+        examples:
+        - review_id: R297F9WD8P3TY9
+          quote: it was a great price for the size
+        - review_id: R3R6ZPYXB9A5CA
+          quote: Big size for an affordable price
+        approx_count: 5
+      - id: pricey_but_acceptable
+        name_ko: 비싸지만 감수할 만함
+        name_en: Pricey but acceptable
+        include: 비싸다고 인정하면서 조금 비싼 정도다, 어디서나 그 값이다, 가끔은 써도 된다처럼 받아들이는 말(주로 mixed 인용의 받아들이는 부분)
+        exclude: 받아들인다는 말 없이 비싸다고만 하면 부정 방향 too_expensive, 비싸지만 제품이 값을 한다고 하면 good_value
+        examples:
+        - review_id: R3RMC5DQ1R25C9
+          quote: Pricey, but not terribly!
+        - review_id: R27AB5RGDGPQDQ
+          quote: Price for this item is high but it's high in every store.
+        approx_count: 5
+      other_approx_count: 1
+      notes: good_price와 good_value 경계는 가격 수준 자체를 칭찬하는지("Great Price for this product!"는 good_price), 제품이 값을 한다고 하는지("Great product for the price"는 good_value)로 나눔. 기타 1개는 "I can't exactly say they're worth the price"(mixed지만 칭찬 부분이 드러나지 않음). 부정 표본과 긍정 표본에 같은 mixed 인용 9개가 함께 들어 있음.
+- topic: brand_experience
+  name_ko: 브랜드 경험
+  directions:
+    negative:
+      quotes: 83
+      sampled: 83
+      only_other: false
+      labels:
+      - id: no_repurchase
+        name_ko: 다시 사지 않겠다
+        name_en: Will not repurchase
+        include: 리뷰어 본인이 이 제품을 다시 사지 않겠다, 다시 살지 망설인다는 말(이 향은 다시 안 산다 포함). "won't buy again", "Não compraria novamente", "dudo mucho volverlo adquirir", "次は買わない"
+        exclude: 남에게 사지 말라, 추천하지 않는다고 권하는 말은 advise_against(본인 재구매 거부와 비추천이 한 인용에 같이 있으면 advise_against). 브랜드 전체나 회사와 거래를 끊겠다는 말은 기타
+        examples:
+        - review_id: R1GC4SWKII954O
+          quote: will not purchase again
+        - review_id: RD7OK6GNPNWWW
+          quote: Would not purchase again
+        approx_count: 26
+      - id: advise_against
+        name_ko: 비추천, 사지 말라
+        name_en: Advises others against buying
+        include: 다른 사람에게 추천하지 않는다, 사지 말라고 권하는 말. "Don't recommend", "Do not buy", "no lo compren", "Não recomendo", "keine Kaufempfehlung", 대신 다른 향이나 다른 제품을 사라는 권유("get a different scent", "buy the YSL version instead")
+        exclude: 본인만 다시 사지 않겠다는 말은 no_repurchase. 이 판매자에게서 사지 말라는 말은 주제 밖(trust)
+        examples:
+        - review_id: R2ZQPSM4V7AB2P
+          quote: Don't recommend
+        - review_id: RU1F1TZKEIBMI
+          quote: Do not buy
+        approx_count: 50
+      other_approx_count: 7
+      notes: 기타 7개는 브랜드나 회사 전체와 끊겠다는 말 5개(R3SY7CRYQGRIJR, RE2KNU3LPS61F, R3DSZM9BOJ9YFF, R3OJWNUWQ3ZJOB, R1TQHZSI3LSOPN)와 브랜드의 다른 향을 써 보고 싶지만 망설인다는 혼합 2개. 브랜드 이탈은 확실한 것이 3개(약 4%)로 5%에 못 미쳐 라벨로 만들지 않았다. "their products", "this particular company"는 판매자를 가리킬 수도 있어(그러면 trust) 원문 확인이 필요하고, "I hate them"은 무엇을 가리키는지 인용만으로는 알 수 없다. "Dudo en volverlo a comprar por aquí"(RYM1IVFLQVFSK)는 '여기서' 다시 사기를 망설인다는 말이라 판매자 이야기에 가깝지만 재구매 표현이라 no_repurchase로 셌다. advise_against는 "추천 안 함"과 "사지 마라"를 합친 것이다. 표현만 다르고 내용이 같아서 합쳤고, 나눠 보고 싶으면 각각 어림 25개 정도.
+    positive:
+      quotes: 159
+      sampled: 150
+      only_other: false
+      labels:
+      - id: recommends
+        name_ko: 추천, 사라고 권함
+        name_en: Recommends to others
+        include: 남에게 추천한다, 사 보라고 권하는 말. "highly recommend", "lo recomiendo", "Buy it!!", "Must buy", "give this one a try", "recommended it to several friends"
+        exclude: 본인이 다시 사겠다는 말은 will_repurchase(추천과 재구매가 한 인용에 같이 있으면 recommends). 브랜드 제품 전반을 추천하는 말은 brand_affinity
+        examples:
+        - review_id: R1M2HDZ8ML591D
+          quote: would definitely recommend
+        - review_id: R2DR2FD2ZM7NB3
+          quote: Buy it
+        approx_count: 35
+      - id: will_repurchase
+        name_ko: 다시 사겠다
+        name_en: Will repurchase
+        include: 앞으로 다시 사겠다, 곧 또 산다, 예비로 하나 더 주문했다, 늘 갖춰 두겠다, 계속 쓰겠다는 미래 의향. "Will repurchase again.", "I have already ordered a back up.", "Will always have on hand", "I'll continue to wear it"
+        exclude: 이미 여러 병 샀다, 수년째 쓴다는 과거 행동은 repeat_long_time_user(과거와 미래가 같이 있으면 repeat_long_time_user). 같은 브랜드의 다른 향을 사겠다는 말은 brand_affinity
+        examples:
+        - review_id: R251EFH6XL865Y
+          quote: would definitely buy it again
+        - review_id: R3KIT5CR5UKBES
+          quote: I have already ordered a back up.
+        approx_count: 23
+      - id: repeat_long_time_user
+        name_ko: 여러 병째, 수년째 애용
+        name_en: Repeat or long-time user
+        include: 이미 여러 번 샀다, 두 번째 병이다, 늘 산다, 몇 년째(수십 년째) 써 왔다는 과거 행동. 가족이 오래 써 왔다는 말 포함. "On My second bottle.", "Lo he comprado varias veces", "Eu uso esse perfume há muitos anos ja", "My wife has used this for 50 years"
+        exclude: 기간이나 횟수 없이 최애, 시그니처, 매일 쓴다는 말만 있으면 favorite_signature. 앞으로 사겠다는 말만 있으면 will_repurchase
+        examples:
+        - review_id: RYCJDMO5YJZ3F
+          quote: I have went through many bottles
+        - review_id: R543VC5C5UZ9M
+          quote: On My second bottle.
+        approx_count: 25
+      - id: favorite_signature
+        name_ko: 최애, 시그니처 향
+        name_en: Favorite or signature scent
+        include: 내(가족의) 최애 향수다, 시그니처 향이다, 매일이나 자주 쓰는 주력 향이다(go-to, every day, only perfume I will wear, staple in my purse). "My favorite perfume!", "Es mi perfume favorito", "Its my signature scent"
+        exclude: 몇 년째, 여러 병째처럼 기간이나 구매 횟수가 같이 있으면 repeat_long_time_user. 브랜드를 좋아한다는 말은 brand_affinity
+        examples:
+        - review_id: R2IZYYF40BLYCN
+          quote: This is my favorite perfume
+        - review_id: R1CW6KMXZ5DMK7
+          quote: Its my signature scent
+        approx_count: 49
+      - id: brand_affinity
+        name_ko: 브랜드 호감, 다른 향도 좋다
+        name_en: Brand affinity
+        include: 브랜드 자체를 좋아한다, 브랜드의 다른 향도 좋다, 다른 향도 써 보겠다, 이 브랜드에서 또 사겠다는 말(이 향은 별로라는 혼합 포함). "Love this brand so much!!!", "Love Dossier fragrances.", "Will try other blends from this maker", "Dossier has themselves a new fan!"
+        exclude: 이 제품을 두고 한 추천, 재구매, 애용은 recommends, will_repurchase, repeat_long_time_user, favorite_signature(브랜드명이 있어도 이 제품을 가리키면 그쪽). 브랜드와 이 제품을 함께 칭찬하면 brand_affinity
+        examples:
+        - review_id: RC124KI4VXNEV
+          quote: Love this brand so much!!!
+        - review_id: R51AHLN091QG2
+          quote: All my other fragrances from Dossier are amazing
+        approx_count: 17
+      other_approx_count: 1
+      notes: 기타 1개는 "I wear this in memory of my husband."(R250YQNVQ4FP3G, 추억 때문에 쓴다는 정서적 애착). favorite_signature와 repeat_long_time_user는 기간이나 횟수를 말했는지로 가른다("an old favorite"처럼 오래됐음을 암시만 하면 favorite_signature, "My favorite, have been using it for years"는 repeat_long_time_user). brand_affinity에는 같은 브랜드의 다른 향을 좋아한다는 말이 들어 있다(스키마 공통 규칙상 brand_experience). 망설임이 섞인 혼합 2개(R3HKWF5VN6K5KG, R3TKPOTESXG4F8)도 칭찬 부분으로 여기 셌다.
+- topic: trust
+  name_ko: 신뢰
+  directions:
+    negative:
+      quotes: 172
+      sampled: 150
+      only_other: false
+      labels:
+      - id: fake_asserted
+        name_ko: 가짜라고 단정
+        name_en: Asserted fake
+        include: 근거나 망설임 없이 가짜, 정품 아님, 사기, 복제품이라고 잘라 말함("Fake", "No es original", "Scam", "knock off", "Not Eternity")
+        exclude: maybe, not sure, creo, sospecho, dúvida처럼 망설이며 말하면 authenticity_doubt. 향(smell, scent, fragrance, olor, cheiro, Duft)이 다르다고 비교하면 differs_from_genuine. 물 탔다, 손댔다는 말은 diluted_or_tampered
+        examples:
+        - review_id: R15HIDYPL5720F
+          quote: knew instantly this was a fake
+        - review_id: RRQTBBAMWACKD
+          quote: No es original
+        approx_count: 35
+      - id: authenticity_doubt
+        name_ko: 정품인지 의심
+        name_en: Doubts authenticity
+        include: 정품인지 확신하지 못하고 의심함(maybe, may not, not sure, I think, I don't believe, seems, creo, sospecho, parece, dúvida, Suspicious)
+        exclude: 망설임 없이 가짜라고 단정하면 fake_asserted. 의심의 근거로 향이나 세기 비교, 희석을 말하면 그 라벨(differs_from_genuine, weaker_than_genuine, diluted_or_tampered)
+        examples:
+        - review_id: R1YDXT5P13GTSC
+          quote: May not be the real thing
+        - review_id: R2XAQXLR0QWVH5
+          quote: I'm questioning the authenticity of the product.
+        approx_count: 31
+      - id: differs_from_genuine
+        name_ko: 정품이나 늘 쓰던 것과 향이 다름
+        name_en: Smells different from genuine
+        include: 정품, 매장에서 맡거나 산 것, 갖고 있는 병, 늘 사던 같은 제품과 향이나 제품이 다르다(무엇이 다른지 말이 없는 "IT IS NOT THE SAME."도 포함)
+        exclude: 세기나 지속력이 다르다는 비교는 weaker_than_genuine. 예전보다 바뀌었다, 제조법이 바뀌었다처럼 시간에 따른 변화는 formula_changed. 향 언급 없이 정품이 아니라고만 하면 fake_asserted
+        examples:
+        - review_id: R18BLPFIGWE423
+          quote: It is not the same as what I smelled in the store.
+        - review_id: R1FNK1M1D36AK9
+          quote: I have the big bottle and this one smells nothing like it
+        approx_count: 29
+      - id: formula_changed
+        name_ko: 예전과 달라짐(제조법 변경 의심)
+        name_en: Changed from before (reformulation)
+        include: 제품이 예전과 달라졌다, 제조사가 제조법이나 성분을 바꾼 것 같다(formula, ingredients, used to be, anymore, now, of the past, 20 yrs ago, hace unos años)
+        exclude: 세기나 지속력이 예전보다 약해졌다는 말은 weaker_than_genuine. 시간 비교 없이 정품, 매장 것, 갖고 있는 병과 다르다는 말은 differs_from_genuine
+        examples:
+        - review_id: R29AJ7AM4NWRLK
+          quote: they've changed the formula
+        - review_id: R1ISNSZNBCFYTZ
+          quote: Not as it used to be.
+        approx_count: 16
+      - id: diluted_or_tampered
+        name_ko: 희석되거나 손댄 것 같음
+        name_en: Diluted or tampered
+        include: 물이나 알코올을 탔다, 희석됐다, 누가 열어서 손댔다, 변조됐다("watered down", "Mostly water", "tampered", "adulterado", "薄めている")
+        exclude: 희석 의심 없이 정품보다 약하다, 금방 날아간다는 비교는 weaker_than_genuine. 오래돼 변질된 것 같다는 말만 있으면 quality(이 주제 아님)
+        examples:
+        - review_id: R31TRJEEWBZVEB
+          quote: Watered down version
+        - review_id: R3U8G2B77HUP9O
+          quote: someone may have opened or tampered with the perfume before shipping
+        approx_count: 14
+      - id: weaker_than_genuine
+        name_ko: 정품이나 예전 것보다 약하고 짧음
+        name_en: Weaker than genuine or before
+        include: 매장(Walmart, Macy's, Sephora, Target) 제품, 예전에 산 같은 제품, 갖고 있는 같은 향보다 향이 약하거나 지속력이 짧다, 세기가 바뀌었다
+        exclude: 비교 대상 없이 약하다, 금방 날아간다는 말은 longevity_projection(이 주제 아님). 물이나 알코올을 탔다는 말은 diluted_or_tampered
+        examples:
+        - review_id: R24ZECLLTT3C7B
+          quote: Walmart perfume is way more stronger then Amazon
+        - review_id: R1EOXLERGBKDOC
+          quote: The smell is so faint compared to the exact bottle I bought at Sephora.
+        approx_count: 13
+      other_approx_count: 12
+      notes: 기타 12개 중 이 판매자에게서 사지 마라(어림 5개), 병 색이나 겉모양이 다르다(어림 3개), 원산지 표기 불만(어림 2개)은 5% 미만이라 라벨로 만들지 않음. "fake, don't buy from here"처럼 판매자 비추천에 가짜 단정이 붙으면 fake_asserted로 셈. R1HVR0C5JIW50O("seem like the real stuff")는 negative로 태깅됐지만 내용은 정품 같다는 말이라 태그 감성 확인이 필요하고, R2JMS6R5PPXRO6("the scent is off")은 변질(quality)일 수도 있어 기타로 둠.
+    positive:
+      quotes: 23
+      sampled: 23
+      only_other: false
+      labels:
+      - id: authentic_confirmed
+        name_ko: 정품이다, 정품 같다
+        name_en: Authentic
+        include: 정품이다, 진짜다, 가짜가 아니다, 정품 같아 보인다("It is the real deal.", "es original", "no knock off", "looks real", "Authentic looking bottle")
+        exclude: 원래 제품, 매장 제품, 기억하는 향과 같다고 비교하면 same_as_original
+        examples:
+        - review_id: R3GH6I54IBDV3J
+          quote: It is the real deal.
+        - review_id: R3UD73SOIQ7BG2
+          quote: this is definitely not fake
+        approx_count: 17
+      - id: same_as_original
+        name_ko: 원래 것, 매장 것과 같음
+        name_en: Same as original or store
+        include: 원래 제품, 매장(소매점, 미국 매장) 제품, 예전에 쓰던 것과 향이나 제품이 같다("Same as original", "smells as I remember", "Same as retail stores")
+        exclude: 비교 없이 정품이다, 정품 같다고만 하면 authentic_confirmed
+        examples:
+        - review_id: R1U2ZZ3REP6M9Q
+          quote: Same as original
+        - review_id: R1C9LFWKV03B2T
+          quote: Same as retail stores
+        approx_count: 6
+      other_approx_count: 0
+      notes: 혼합 인용 R18H8U3BEZGOZA("todo parece ser original, solo la duración es lo que me extraño")는 칭찬 부분으로 authentic_confirmed, 불만 부분(지속력이 이상함)으로 부정 쪽 weaker_than_genuine에 셈.
+- topic: shipping
+  name_ko: 배송
+  directions:
+    negative:
+      quotes: 65
+      sampled: 65
+      only_other: false
+      labels:
+      - id: arrived_broken
+        name_ko: 깨지거나 부서져 도착
+        name_en: Arrived broken or damaged
+        include: 받았을 때 병, 뚜껑, 분사구가 깨지거나 금 가거나 부러져 있었다, 상품이나 소포가 손상돼 왔다는 말("Broken", "Came damaged", "Llegó roto"). 시점 없는 "Broken"도 여기
+        exclude: 새거나 흘렀다는 말이 함께 있으면 leaked_in_transit. 겉 부서짐 없이 분사기가 작동하지 않는 것은 quality(이 주제 아님). 겉상자만 찌그러진 것은 packaging
+        examples:
+        - review_id: RYXW6V35RZ6TV
+          quote: The bottle was delivered cracked.
+        - review_id: R3OF64V1YOE64B
+          quote: Llegó roto
+        approx_count: 23
+      - id: leaked_in_transit
+        name_ko: 새거나 흘러서 도착
+        name_en: Leaked or spilled in transit
+        include: 받았을 때 향수가 새고 있었다, 상자나 소포가 향수에 젖었다, 상자 안에 쏟아졌다는 말. 시점 없는 "Leaking"도 여기. 새서 양이 줄었다는 말, 깨져서 샌다는 말도 여기
+        exclude: 샌 이야기 없이 양만 덜 들어 있으면 arrived_underfilled. 새는 말 없이 깨짐만 있으면 arrived_broken. 여행이나 들고 다닐 때 샌다는 말은 bottle_design(이 주제 아님)
+        examples:
+        - review_id: R3AOLDFQH1SQI9
+          quote: was leaking when I received it
+        - review_id: R2JKQ4KZTJS527
+          quote: Casi la mitad del perfume se derramó en la caja.
+        approx_count: 21
+      - id: arrived_underfilled
+        name_ko: 내용물이 덜 든 채 도착
+        name_en: Arrived partly empty
+        include: 받았을 때 병이 반쯤 비었다, 거의 비었다, 일부(1/5, 1/4)가 없었다는 말
+        exclude: 샜다, 흘렀다는 말이 함께 있으면 leaked_in_transit. 주문한 것보다 작은 용량의 병이 온 것은 wrong_or_opened_item
+        examples:
+        - review_id: R95G0ZJBYOR7O
+          quote: bottle was half empty
+        - review_id: R19Q1I5RT9RW9D
+          quote: my spray arrived with 1/5th of the product gone
+        approx_count: 6
+      - id: wrong_or_opened_item
+        name_ko: 주문과 다른 상품이나 개봉된 상품
+        name_en: Wrong item or opened/used item
+        include: 주문하지 않은 상품이나 다른 용량의 병이 왔다, 이미 열렸거나 쓰던 상품이 왔다는 말
+        exclude: 가짜나 정품 의심이 근거로 붙으면 trust(이 주제 아님). 같은 제품인데 내용물만 덜 들었으면 arrived_underfilled
+        examples:
+        - review_id: R29H861VW9PEE1
+          quote: Diesen Artikel habe ich nicht bestellt.
+        - review_id: R2K27HLM5BUOS7
+          quote: I received an opened and used bottle
+        approx_count: 6
+      - id: slow_delivery
+        name_ko: 배송이 느림
+        name_en: Slow or late delivery
+        include: 배송이 늦었다, 느렸다, 한참 만에 겨우 왔다는 말
+        exclude: 배달 위치나 기사 처리 불만은 기타. 도착 상태 불만은 위 라벨들
+        examples:
+        - review_id: R2O45DJB4MICJI
+          quote: Delivery was very slow.
+        - review_id: R35P17YBF43WOE
+          quote: llego tarde
+        approx_count: 6
+      other_approx_count: 3
+      notes: 깨짐과 누출이 같이 나오면 누출(leaked_in_transit)로 센다. 기타는 배달 위치와 기사 처리(문 밖 나무 뒤, 우편함에 쑤셔 넣음, 2개, 5% 미만이라 라벨 안 만듦)와 뜻이 애매한 "delivered without the product, being broken"(R1CAOA6U7EFP8O) 1개. 다른 상품과 개봉 상품은 각각 3개(5% 미만)라 한 라벨로 합침. 인용 41개가 B08FBQWRYC에서 나와 파손과 누출이 이 ASIN에 몰려 있음
+    positive:
+      quotes: 26
+      sampled: 26
+      only_other: false
+      labels:
+      - id: fast_delivery
+        name_ko: 빠르거나 제때 배송
+        name_en: Fast or on-time delivery
+        include: 배송이 빨랐다, 제때 왔다, 예정보다 일찍 왔다는 말
+        exclude: 도착 상태(멀쩡하다, 제대로 왔다)만 말하면 arrived_intact
+        examples:
+        - review_id: R2LQGD37514J9F
+          quote: fast shipping
+        - review_id: R18H8U3BEZGOZA
+          quote: llegó un día antes de lo esperado
+        approx_count: 15
+      - id: arrived_intact
+        name_ko: 멀쩡하고 제대로 도착
+        name_en: Arrived intact and as ordered
+        include: 깨지거나 새지 않고 좋은 상태로 왔다, 빠진 것 없이 주문대로 제대로 왔다, 판매자가 잘 보내 줬다는 말
+        exclude: 속도만 말하면 fast_delivery. 정품 같다는 말은 trust(이 주제 아님). 상자 디자인이나 보호력 칭찬은 packaging(이 주제 아님)
+        examples:
+        - review_id: R2BTMJDX2GACW6
+          quote: It arrived in great condition
+        - review_id: R3BCD96QKPFUIE
+          quote: Todo llegó perfecto sin falta de producto
+        approx_count: 12
+      other_approx_count: 1
+      notes: '"Package came on time with no damage."(RFKZ7EJ1U4UYQ)와 "El producto llego bien y la mensajería entrego bien en la fecha acordada."(R14YS8XFVTOZTS)는 속도와 상태를 함께 칭찬해 두 라벨에 모두 셌다(approx_count 합이 표본 수보다 2 많음). 기타는 무엇이 좋았는지 없는 "Good delivery" 1개'
+- topic: customer_service
+  name_ko: 고객 응대
+  directions:
+    negative:
+      quotes: 85
+      sampled: 85
+      only_other: false
+      labels:
+      - id: not_returnable
+        name_ko: 반품·환불 불가
+        name_en: Not returnable
+        include: 향수라서, 아마존 규정이나 위험물이라서, 반품 옵션이 없어서 반품이나 환불을 할 수 없다는 말. "they won't let me return", "If I could return it, I would"처럼 반품을 못 해 아쉽다는 말, 반품이 안 돼 남에게 줬다는 말도 포함
+        exclude: 반품 기간이 지났거나 이미 개봉해서 못 돌려보낸다는 말은 return_window_missed. 판매자 태도, 연락 불가, 처리 과정이 어렵다, 교체를 거절했다는 말은 seller_unhelpful. 반품, 환불, 교체를 해 달라는 요청만 있으면 refund_request
+        examples:
+        - review_id: R2AJYI0V67WG2L
+          quote: this type of purchase cannot be returned because it is a perfume
+        - review_id: R1YXB7CP917VN9
+          quote: It is not returnable
+        approx_count: 57
+      - id: refund_request
+        name_ko: 환불·교체 요청
+        name_en: Requests refund or replacement
+        include: 리뷰 안에서 환불, 반품, 교체, 주문 취소를 해 달라고 요청하는 말("I want a TOTAL Refund", "Can you send a replacement?", "want my money back")
+        exclude: 반품이 안 된다는 사실을 말하면 not_returnable. 요청했는데 판매자가 거절하거나 응대가 나빴다는 말은 seller_unhelpful
+        examples:
+        - review_id: R36SSTLD7LC0WN
+          quote: I want a TOTAL Refund
+        - review_id: RUMISBOJKGJG5
+          quote: Can you send a replacement?
+        approx_count: 11
+      - id: seller_unhelpful
+        name_ko: 판매자 응대 불만
+        name_en: Unhelpful seller support
+        include: 판매자나 회사의 불친절, 무성의한 답변, 연락할 길이 없음, 반품·교환 처리 과정이 어렵다, 문제를 말했는데 교체나 조치를 해 주지 않았다("would not replace", "seller has been impossible to deal with")
+        exclude: 상품 규정상 반품이 안 된다는 말만 있으면 not_returnable. 기간이 지나 조치를 못 받았다는 말은 return_window_missed
+        examples:
+        - review_id: R1IGZ4P4BM2BRJ
+          quote: seller has been impossible to deal with
+        - review_id: R1TDEV9S3R58C2
+          quote: there is absolutely no support or way to contact the seller
+        approx_count: 10
+      - id: return_window_missed
+        name_ko: 반품 기간 놓침
+        name_en: Missed return window
+        include: 반품 기한이 지나서(또는 이미 개봉해서) 돌려보낼 수 없게 됐다는 말("my return window closed", "past 30 days since purchase")
+        exclude: 기간과 상관없이 향수라서, 규정상 반품이 안 된다는 말은 not_returnable
+        examples:
+        - review_id: R2WS73M76T1F87
+          quote: my return window closed about 10 days ago
+        - review_id: R1LAZX7YC5SB5V
+          quote: Just missed the return deadline by 2 days
+        approx_count: 5
+      other_approx_count: 2
+      notes: 반품 불가가 표본의 약 3분의 2라 대부분이 not_returnable에 몰림. "they won't allow me to return"처럼 판매자 거절인지 상품 규정인지 알 수 없는 말은 not_returnable로 셈. return_window_missed는 기간 경과 4개에 개봉해서 못 돌려보낸 1개(R2I1J1CTT4XFQV)를 더해 5% 경계를 겨우 넘김. 구매 전에 반품 불가를 몰랐다는 말(R22BUJ1Q76GCH8, R3NNE65IW8H752 등 어림 3개)은 따로 나누기에 적어 not_returnable에 넣음. 기타는 "返品しました"(반품함), "A REFUND WAS GIVEN"(환불받았는데 부정으로 태깅됨).
+    positive:
+      quotes: 6
+      sampled: 0
+      only_other: true
+      labels: []
+      other_approx_count: 6
+      notes: only_other(인용 6개, 표본 없음)
+- topic: packaging
+  name_ko: 포장
+  directions:
+    negative:
+      quotes: 17
+      sampled: 0
+      only_other: true
+      labels: []
+      other_approx_count: 17
+      notes: 07a_issue_plan.json에서 only_other가 true(인용 17개, 표본 없음)라 라벨을 만들지 않음
+    positive:
+      quotes: 23
+      sampled: 23
+      only_other: false
+      labels:
+      - id: pretty_presentation
+        name_ko: 상자와 포장이 예쁨
+        name_en: Attractive box and presentation
+        include: 상자나 포장의 겉모양을 칭찬하는 말(cute, pretty, elegant, classy, clean, beautifully packaged, presentation, 설명 카드가 예쁨, Linda presentación)
+        exclude: 병 자체의 모양이나 색은 bottle_design. 병을 잘 지켜 준다, 안전하게 왔다는 well_protected. 원래 것과 같다는 matches_original. 무엇이 좋은지 없이 nice, good만 있으면 기타
+        examples:
+        - review_id: R2MWXQTV4OA6W8
+          quote: The packaging is so cute.
+        - review_id: R1CX3R6UQLOFAJ
+          quote: The packaging is cute too and looks elegant
+        approx_count: 12
+      - id: well_protected
+        name_ko: 꼼꼼하게 포장되어 병을 잘 보호함
+        name_en: Well packed and protective
+        include: 포장이 꼼꼼하다, 상자가 병을 잘 보호한다, 상자 상태가 멀쩡하게 왔다, 여행할 때도 상자가 병을 지켜 준다(packed well, packaged nicely, gut verpackt, keeps it secure for travel)
+        exclude: 배송 속도나 병이 깨지지 않고 왔다는 말 자체는 shipping. 상자의 겉모양 칭찬은 pretty_presentation
+        examples:
+        - review_id: R1VKEB92N0AEHH
+          quote: packed well
+        - review_id: R22HEPSREDBHOA
+          quote: box that comes with keeps it secure for travel
+        approx_count: 6
+      - id: matches_original
+        name_ko: 포장이 원래 것과 같음
+        name_en: Packaging matches the original
+        include: 상자나 포장이 정품, 예전에 받던 것과 같다는 말
+        exclude: 포장을 가짜나 정품 의심의 근거로만 쓰면 trust(스키마 기준). 포장이 예쁘다는 말만 있으면 pretty_presentation
+        examples:
+        - review_id: R3QMZJEPSF4PJW
+          quote: embalagem tava perfeito como original
+        - review_id: R3E3IWV1CXIFEY
+          quote: the packaging appears consistent with the original
+        approx_count: 2
+      other_approx_count: 4
+      notes: 기타 4개는 무엇이 좋은지 없는 포장 칭찬(Nice packaging though, 5 stars for their packaging 등)이라 겉모양과 보호 중 어느 쪽인지 정하지 못함. R2BG8L01VQAU1S는 예쁨과 보호를 함께 말해 두 라벨에 모두 셈. Linda presentación은 상자인지 병인지 불분명하지만 packaging으로 태깅되어 있어 pretty_presentation에 셈
+- topic: quality
+  name_ko: 품질
+  directions:
+    negative:
+      quotes: 64
+      sampled: 64
+      only_other: false
+      labels:
+      - id: old_or_spoiled
+        name_ko: 오래됐거나 변질됨
+        name_en: Old, expired or spoiled
+        include: 내용물이 오래됐다, 유통기한이 지난 것 같다, 상했다, 오래된 냄새가 난다, 색이 변했다는 말(old, old stock, expired, off, vencido, tainted, changed colors)
+        exclude: 가짜라는 의심만 있으면 이 라벨이 아님(trust 주제). 알코올이나 화학약품 냄새 묘사만 있으면 이 라벨이 아님(scent 주제)
+        examples:
+        - review_id: R3X87B0BDVYAE
+          quote: Old stock
+        - review_id: RSXO66KNMLOM3
+          quote: it smelled expired
+        approx_count: 18
+      - id: sprayer_stopped_working
+        name_ko: 쓰다가 분사기 고장
+        name_en: Sprayer stopped working after use
+        include: 처음에는 됐는데 쓰다가 분사기, 펌프, 노즐이 멈추거나 고장 났다는 말. stopped, now, after a month, after 5 uses, half a bottle remaining처럼 쓴 뒤라는 신호가 있을 때
+        exclude: 쓴 뒤라는 신호 없이 분사가 안 된다, 고장 났다는 말만 있으면 sprayer_defective. 분사기가 아예 없으면 missing_parts
+        examples:
+        - review_id: R2FOFANNV4XRG2
+          quote: The spray nozzle stopped working after a month.
+        - review_id: R2WNX9YRXPE699
+          quote: I literally got 2 sprays before it stopped working
+        approx_count: 12
+      - id: sprayer_defective
+        name_ko: 분사기 불량
+        name_en: Defective sprayer
+        include: 분사기, 펌프, 노즐이 처음부터 또는 시점 말 없이 작동하지 않거나 제대로 뿜지 않는다는 말(안 눌린다, 걸린다, 분사하면 흘러내린다, 새어 나온다 포함)
+        exclude: 쓰다가 멈췄다는 신호가 있으면 sprayer_stopped_working. 분사기나 튜브가 빠져 있으면 missing_parts. 여행이나 들고 다닐 때 병이 샌다는 말은 이 라벨이 아님(bottle_design 주제)
+        examples:
+        - review_id: R1TDEV9S3R58C2
+          quote: had a defective spray pump
+        - review_id: R2XPLAM5OFOU16
+          quote: the nozzle won't even press down
+        approx_count: 13
+      - id: missing_parts
+        name_ko: 부품 빠짐
+        name_en: Missing parts
+        include: 받았을 때 튜브(빨대), 뚜껑, 캡, 분사기 같은 부품이 처음부터 빠져 있었다는 말
+        exclude: 부품이 있는데 작동하지 않으면 sprayer_defective 또는 sprayer_stopped_working. 상품 자체가 빠진 채 배달된 것은 이 라벨이 아님(shipping 주제)
+        examples:
+        - review_id: R3NB2WLRZ7KIF5
+          quote: the bottle came without the tube/straw
+        - review_id: R1YNRPFUOKI9PC
+          quote: The bottles did not come with lids
+        approx_count: 9
+      - id: poor_quality_general
+        name_ko: 품질이 나쁨(구체 없음)
+        name_en: Poor quality in general
+        include: 무엇인지 밝히지 않고 품질이 나쁘다, 싸게 만들었다는 말(poor quality, not good quality, cheap made, 3rd class quality)
+        exclude: 변질, 분사기, 부품처럼 구체적인 불량을 말하면 그 라벨. calidad 뒤에 지속력 설명이 이어지면 이 라벨이 아님(longevity_projection 주제)
+        examples:
+        - review_id: R1IGZ4P4BM2BRJ
+          quote: Poor product quality
+        - review_id: R2062UHONDUTUM
+          quote: Cheap made
+        approx_count: 7
+      other_approx_count: 5
+      notes: 기타 5개는 분사기 아닌 장식, 뚜껑 파손(Clip broke, top broke off, 장식 고리 veio quebrado) 3개와 두꺼운 유리 1개, 향수와 무관해 보이는 R1T7FSK04S0DMQ(collar wouldn't hold a charge) 1개. R3IY6PHSEQCN23(veio quebrado)은 받았을 때 깨져 온 것이라 shipping일 수도 있음. R1KW75H6XHEF5N(authenticity or age)은 old_or_spoiled로 셌고 trust와 함께 붙는 경우
+    positive:
+      quotes: 7
+      sampled: 0
+      only_other: true
+      labels: []
+      other_approx_count: 7
+      notes: 'only_other: 인용 7개, 표본 없음'
+- topic: longevity_projection
+  name_ko: 지속력과 향의 세기
+  directions:
+    negative:
+      quotes: 364
+      sampled: 150
+      only_other: false
+      labels:
+      - id: fades_fast
+        name_ko: 금방 날아감
+        name_en: Fades quickly
+        include: 향이 오래 가지 않는다고 잘라 말함. 몇 분이나 한두 시간 만에 사라진다, 전혀 안 간다, 시간 없이 "doesn't last (long)", fijación/fixação가 약하거나 없다, dura poco 같은 말
+        exclude: 일정 시간은 간다고 인정하면서 하루 종일이나 기대만큼은 못 간다는 완곡한 아쉬움은 shorter_than_hoped. 처음부터 향이 약하거나 거의 안 난다는 말은 weak_scent(둘 다 말하면 둘 다)
+        examples:
+        - review_id: R38FLXFQ85RK5L
+          quote: the scent only lasts about 10 minutes on the skin, hair and clothing
+        - review_id: RM6MQCJ7NWE7B
+          quote: No dura ni tres hora!!
+        approx_count: 78
+      - id: shorter_than_hoped
+        name_ko: 기대보다 짧음
+        name_en: Shorter than hoped
+        include: 어느 정도는 가지만 하루 종일, 8시간, 가격이나 EDP에 기대한 만큼은 못 간다는 말. 지속력이 보통이다, 그저 그렇다, 아주 오래가지는 않는다처럼 완곡한 아쉬움("not super long lasting", "Longevity is moderate", "doesn't last all day")
+        exclude: 시간 없이 단정하는 "doesn't last (long)", "no longevity"나 몇 분에서 두 시간 이하라는 말은 fades_fast. 세기나 확산이 아쉽다는 말은 weak_scent
+        examples:
+        - review_id: RRAOPUZKGKPVN
+          quote: it lasts a decent time but obviously not extremely long
+        - review_id: RSDJ5EOJJ774J
+          quote: it doesn't last whole day
+        approx_count: 15
+      - id: weak_scent
+        name_ko: 처음부터 약함
+        name_en: Weak or barely there
+        include: 뿌렸을 때부터 향이 약하다, 희미하다, 거의 또는 전혀 안 난다("very very faint", "No smell", "nada de olor", "no se siente"), 충분히 세지 않다, 주변으로 퍼지지 않는다, 피부 가까이만 난다, 남이 못 맡는다
+        exclude: 처음엔 나다가 금방 사라진다는 시간 이야기는 fades_fast 또는 shorter_than_hoped. 향이 너무 세다는 반대 불만은 too_strong
+        examples:
+        - review_id: R1AIGEESVTE4DR
+          quote: very very faint smell
+        - review_id: R3T9W3N67O0TFQ
+          quote: The scent does last, but like I said it never projects like I think a scent this expensive would.
+        approx_count: 33
+      - id: too_strong
+        name_ko: 너무 셈
+        name_en: Too strong
+        include: 향이 너무 세다, 과하다, 압도한다, 코를 찌른다("Too Strong.", "over powering", "so overwhelming", "it burns my nose", "demasiado fuerte"), 더 은은하길 바랐다
+        exclude: 세다는 말을 칭찬으로 쓰면 positive 방향 strong_presence. 향의 성격이 싫다(달다, 독한 꽃향 등)는 말은 scent 주제. 실제 두통이나 메스꺼움 같은 몸 증상은 safety 주제
+        examples:
+        - review_id: R1YXB7CP917VN9
+          quote: It is strong, over powering
+        - review_id: R3CWIRDF2SHU59
+          quote: the smell is too strong for my liking
+        approx_count: 20
+      other_approx_count: 4
+      notes: 정품이나 예전 제품, 다른 매장 병보다 약하다 또는 짧다는 비교 인용이 8개 정도 있다(Sephora, Macy's, dept store, "now seems weak" 등). 스키마상 trust와 겹치는 내용이라 따로 라벨로 만들지 않고 약함과 짧음 라벨로 셌다. 확산 불만(안 퍼짐, 피부 가까이만)은 6개쯤으로 5%에 못 미쳐 weak_scent에 넣었다. 피부보다 옷에 오래 남는다는 혼합 인용 2개와 칭찬인데 부정 쪽에 들어온 인용 1개(R2XHXVVZ19TC9J "has staying power")는 기타로 셌다. 한 인용이 약함과 짧음을 함께 말하면 두 라벨 모두에 센다.
+    positive:
+      quotes: 144
+      sampled: 144
+      only_other: false
+      labels:
+      - id: long_lasting
+        name_ko: 오래감
+        name_en: Long-lasting
+        include: 하루 종일, 몇 시간, 다음 날까지 간다, 덧뿌릴 필요가 없다, 적당히 오래 간다, 옷에 오래 남는다 ("lasts all day", "Long lasting", "dura muchísimo", "boa fixação", "sticks to clothes well")
+        exclude: 한두 번만 뿌려도 충분하다는 사용량 칭찬은 little_goes_far(같이 말하면 둘 다). 세게 퍼진다는 칭찬은 strong_presence
+        examples:
+        - review_id: R1BPS6WJ0CYY8J
+          quote: I sprayed it about 11 in the morning and could smell it at 8 at night.
+        - review_id: RFKZ7EJ1U4UYQ
+          quote: Scent lasts all day and sticks to clothes well
+        approx_count: 105
+      - id: not_overpowering
+        name_ko: 과하지 않은 세기
+        name_en: Not overpowering
+        include: 향이 독하지 않다, 과하지 않다, 은은하게 적당히 난다는 세기 칭찬("not too strong", "Not overbearing", "noticeable without being obnoxiously loud", "No es tan fuerte")
+        exclude: 세다는 것을 칭찬하면 strong_presence. 약해서 아쉽다는 말은 negative 방향 weak_scent. soft, light가 향의 분위기 묘사로만 쓰이면 scent 주제
+        examples:
+        - review_id: R2LP5UYPZD2M8N
+          quote: Long-lasting without being overpowering.
+        - review_id: R1E12UKLVMMO4A
+          quote: noticeable without being obnoxiously loud
+        approx_count: 16
+      - id: strong_presence
+        name_ko: 진하고 잘 퍼짐
+        name_en: Strong presence
+        include: 향이 세다, 진하다, 주변에서 알아챌 만큼 퍼진다는 것을 좋게 말함("Its really strong", "big aura", "se hace notar a donde sea que llegas", "Strong Perfume but not a bad thing")
+        exclude: 세서 싫다는 말은 negative 방향 too_strong. 독하지 않아 좋다는 말은 not_overpowering
+        examples:
+        - review_id: R3W3FAYLHBYMFC
+          quote: Its really strong
+        - review_id: RAVH5AMZTCM20
+          quote: me gusta lo q es muy fuerte el perfume
+        approx_count: 13
+      - id: little_goes_far
+        name_ko: 조금만 써도 충분
+        name_en: A little goes a long way
+        include: 한두 번만 뿌려도, 한 방울만 발라도 충분하다, 아껴 쓰게 된다("a little goes a long way", "Takes very little", "only need a drop on wrists", "All you need is 1 spray")
+        exclude: 사용량 언급 없이 오래간다는 말만 있으면 long_lasting. 병 용량을 오래 쓴다는 말은 bottle_design 주제
+        examples:
+        - review_id: R17HE9MOSZI23R
+          quote: All you need is 1 spray, it lasts all day
+        - review_id: R3LMWPBKHW9JSQ
+          quote: a little goes a long way
+        approx_count: 9
+      other_approx_count: 3
+      notes: 혼합 인용 중 칭찬 부분이 없는 것(R1VOECBP3FKNSC 확산 아쉬움, R3GLZVNE1IAC47 세서 부담)은 기타로 셌다. 옷에 오래 남는다는 칭찬은 4개쯤이라 long_lasting에 넣었다. 한 인용이 오래감과 세기 칭찬을 함께 말하면 두 라벨 모두에 센다.
+- topic: safety
+  name_ko: 안전
+  directions:
+    negative:
+      quotes: 18
+      sampled: 0
+      only_other: true
+      labels: []
+      other_approx_count: 18
+      notes: only_other 방향(인용 18개, 표본 0개)이라 라벨을 만들지 않았고, 07a_issue_plan.json의 인용 수를 그대로 기타로 적음. 표본이 없어 실제 몸 증상인지, exclude 대상(코를 찌른다 같은 세기 과장)이 섞였는지는 확인하지 못함
+    positive:
+      quotes: 4
+      sampled: 0
+      only_other: true
+      labels: []
+      other_approx_count: 4
+      notes: only_other 방향(인용 4개, 표본 0개)이라 라벨을 만들지 않았고, 07a_issue_plan.json의 인용 수를 그대로 기타로 적음
+- topic: bottle_design
+  name_ko: 병 디자인과 용량
+  directions:
+    negative:
+      quotes: 35
+      sampled: 35
+      only_other: false
+      labels:
+      - id: bottle_too_small
+        name_ko: 병이 작음
+        name_en: Bottle too small
+        include: 병이나 용량이 작다, 생각보다(사진보다, 다른 것보다) 작다, 미니 크기라는 말(es "pequeño", "tamaño mini" 포함)
+        exclude: 분사 불만은 sprayer_problem, 새는 병은 bottle_leaks. 값 대비 양이 적다는 말은 price_value 주제
+        examples:
+        - review_id: R2M38B7M76GHVM
+          quote: It was a tiny little bottle of perfume.
+        - review_id: RZIM7LW20AGAT
+          quote: MUCH, MUCH smaller than depicted.
+        approx_count: 27
+      - id: sprayer_problem
+        name_ko: 분사기 불만
+        name_en: Poor sprayer
+        include: 분사 방식이나 분사구 설계가 나쁘다(물줄기처럼 나간다, 누를 때 머리가 돈다, 노즐이 형편없다)
+        exclude: 쓰다가 고장 난 분사기나 받았을 때 작동하지 않는 분사기는 quality 주제. 병이 새는 것은 bottle_leaks
+        examples:
+        - review_id: R2C8OYSB7YQ5WR
+          quote: The spray nozzle absolutely SUCKS.
+        - review_id: R20IVONJMW9MXU
+          quote: The sprayer on the bottle (at least on mine) is a straight stream line which I stronger dislike
+        approx_count: 3
+      - id: bottle_leaks
+        name_ko: 병이 샘
+        name_en: Bottle leaks
+        include: 쓰거나 들고 다닐 때 뚜껑 주변이나 병에서 향수가 샌다는 말
+        exclude: 받았을 때 이미 새서 온 것은 shipping 주제. 분사 방식 불만은 sprayer_problem
+        examples:
+        - review_id: RJX4Z0KAFKUZW
+          quote: High leakage around cap on some bottles near diamond accents.
+        - review_id: RSKN6VFI7IWZF
+          quote: Bottle leaks all over
+        approx_count: 2
+      other_approx_count: 3
+      notes: 부정 표본의 대부분(약 27/35)이 '작다'라서 '생각보다 작음'(기대 불일치, 약 5개)과 '그냥 작음'을 나누지 않고 하나로 합쳤음. 기타는 디자인 총평(Terrible bottle design), 얇은 유리, 리필 불가 각 1개. R8Z2XMV0DR9CI("Way too small for $80")는 값 이야기가 섞여 price_value에 더 가까움.
+    positive:
+      quotes: 78
+      sampled: 78
+      only_other: false
+      labels:
+      - id: pretty_bottle
+        name_ko: 병이 예쁨
+        name_en: Attractive bottle
+        include: 병 모양, 외관, 디자인이 예쁘다, 귀엽다, 멋지다, 미니멀하다, 겉모양 인상이 좋다(presentación, presencia 포함). 평가 대상이 병인 "Nice bottle"도 여기
+        exclude: 재질, 만듦새, 견고함을 칭찬하면 build_quality. 자석 뚜껑 칭찬이 중심이면 magnetic_cap
+        examples:
+        - review_id: R2F8LJRFIL2S2K
+          quote: the bottle is gorgeous
+        - review_id: R2T839DONCWG3M
+          quote: Pretty bottle
+        approx_count: 27
+      - id: good_size
+        name_ko: 용량이 알맞거나 넉넉함
+        name_en: Good size
+        include: 크기가 딱 좋다, 생각보다 크다, 넉넉한 크기다, 작은 크기라 향을 바꿔 쓰기 좋다
+        exclude: 핸드백이나 여행에 들고 다니기 좋다는 말은 purse_portable. 양이 오래 간다(몇 년 쓴다)는 말은 기타
+        examples:
+        - review_id: R22KP4UHOX1JCN
+          quote: the size is larger than expected
+        - review_id: R297F9WD8P3TY9
+          quote: It's the perfect size
+        approx_count: 14
+      - id: purse_portable
+        name_ko: 휴대하기 좋음
+        name_en: Portable for purse or travel
+        include: 핸드백, 가방, 책상, 여행에 넣어 다니기 좋다, 작고 가볍다, 들고 다녀도 새지 않는다
+        exclude: 휴대 언급 없이 크기만 좋다면 good_size
+        examples:
+        - review_id: R1BDJCZSNXV4KX
+          quote: Perfect to carry in your purse!
+        - review_id: R2P1Y45BWYDE9B
+          quote: I like having the smaller 0.34-ounce atomizer for travel
+        approx_count: 11
+      - id: magnetic_cap
+        name_ko: 자석 뚜껑이 좋음
+        name_en: Magnetic cap
+        include: 자석 뚜껑(magnetic cap, top, lid)이 좋다, 편하다, 닫는 느낌이 좋다
+        exclude: 분사 칭찬은 sprayer_good. 뚜껑 언급 없이 병 외관만 칭찬하면 pretty_bottle
+        examples:
+        - review_id: R27ZKX1A9GF3UM
+          quote: I do like the magnetic top
+        - review_id: R21IFXQ51DU8CY
+          quote: The lid is magnetic, which is oddly satisfying to close.
+        approx_count: 10
+      - id: sprayer_good
+        name_ko: 분사가 잘 됨
+        name_en: Sprays well
+        include: 분사기, 아토마이저가 좋다, 잘 뿌려진다, 쓰기 쉽다, 분사에 문제없다
+        exclude: 뚜껑 칭찬은 magnetic_cap
+        examples:
+        - review_id: R1A6XJF2CHWETX
+          quote: Sprays well.
+        - review_id: R2BG8L01VQAU1S
+          quote: I also really like the way it sprays.
+        approx_count: 8
+      - id: build_quality
+        name_ko: 병 만듦새가 좋음
+        name_en: Well-made bottle
+        include: 병의 품질, 구조, 무게감, 견고함을 칭찬(quality of the bottle, well constructed, construction)
+        exclude: 모양이나 외관만 칭찬하면 pretty_bottle. 크기 칭찬은 good_size
+        examples:
+        - review_id: RR8UK6F5H31KU
+          quote: the quality of the bottle is great
+        - review_id: R3LV4MM4947LDI
+          quote: Bottle construction is nice though
+        approx_count: 6
+      other_approx_count: 3
+      notes: 병 외관, 자석 뚜껑, 분사를 한 문장에 함께 칭찬한 인용이 많아(예 "nice sprayer and magnetic top") 라벨이 여러 개 걸칠 수 있음. '작은 병을 오래 쓴다'(2개)는 5% 미만이라 기타. RCVEIIQRM7XWQ(mixed, "the bottle size is a little small")는 칭찬 부분이 인용에 없어 기타.
+- topic: scent
+  name_ko: 향
+  directions:
+    negative:
+      quotes: 318
+      sampled: 150
+      only_other: false
+      labels:
+      - id: dislike_general
+        name_ko: 향이 싫음(이유 없음)
+        name_en: Dislikes the scent (no specifics)
+        include: 노트나 비유 없이 향이 싫다, 별로다, 끔찍하다, 내 취향이 아니다는 말("Not a fan", "smells terrible", "not my preference")
+        exclude: 싫은 이유로 노트나 성격을 말하면 disliked_note_profile, 나이 이미지는 old_lady_mature, 알코올은 alcohol_smell, 다른 물건에 빗대면 unpleasant_likeness
+        examples:
+        - review_id: R2T839DONCWG3M
+          quote: Do not like the scent!
+        - review_id: R1EYTLO94WC366
+          quote: Smells awful
+        approx_count: 44
+      - id: differs_from_original
+        name_ko: 원래 알던 향과 다름
+        name_en: Smells different from the original
+        include: 예전에 쓰던 같은 제품, 원래 향과 다르다, 냄새가 이상하다(not right, off, 알아볼 수 없다)
+        exclude: 상품 설명이나 이름의 노트가 안 난다는 말은 missing_described_notes
+        examples:
+        - review_id: R9ZEWAM020WG9
+          quote: it doesn't smell like Eternity of the past
+        - review_id: R1KW75H6XHEF5N
+          quote: My recent order of white diamonds has a different smell
+        approx_count: 21
+      - id: missing_described_notes
+        name_ko: 설명한 노트가 안 남
+        name_en: Advertised notes missing
+        include: 상품 이름이나 설명, 광고의 노트(주로 바닐라, 앰버, 꿀)가 안 나거나 약하다, 설명과 실제 향이 다르다
+        exclude: 예전 제품이나 정품과 비교해 다르다는 말은 differs_from_original
+        examples:
+        - review_id: RR8UK6F5H31KU
+          quote: Doesn’t smell like vanilla at all
+        - review_id: R2FZEJT891KVQW
+          quote: I don’t think the description fits the actual scent.
+        approx_count: 17
+      - id: old_lady_mature
+        name_ko: 나이 든 사람 향
+        name_en: Old-lady or mature scent
+        include: 할머니, 노부인, 나이 든 사람 향이다, 너무 성숙하다, 젊지 않다("old lady", "grandma", "too mature", "no es juvenil")
+        exclude: 나이 이미지 없이 꽃향, 파우더리가 싫다는 말은 disliked_note_profile
+        examples:
+        - review_id: R29XSCHHMVVP4B
+          quote: Smells old Ladyish
+        - review_id: RC8UZZ9TT4LH8
+          quote: I think it's a scent for an elderly woman
+        approx_count: 17
+      - id: alcohol_smell
+        name_ko: 알코올 냄새
+        name_en: Smells of alcohol
+        include: 알코올 냄새만 난다, 소독용 알코올 같다, 뿌린 직후 알코올 냄새("puro alcohol", "rubbing alcohol")
+        exclude: 화학약품, 인공적, 플라스틱 냄새는 cheap_artificial
+        examples:
+        - review_id: R1T8ST53B96R3E
+          quote: Just smells like rubbing alcohol
+        - review_id: R269IL84GKMM0N
+          quote: This perfume smells like straight alcohol.
+        approx_count: 12
+      - id: disliked_note_profile
+        name_ko: 특정 노트나 성격이 싫음
+        name_en: Dislikes a specific note or character
+        include: 특정 노트나 성격 때문에 싫다(너무 꽃향, 파우더리, 머스크, 우디, 후추, 너무 달다, 남성적이다)
+        exclude: 나이 이미지는 old_lady_mature, 설명한 노트가 없다는 말은 missing_described_notes, 향수가 아닌 물건에 빗대면 unpleasant_likeness
+        examples:
+        - review_id: R2987HKSLHIOML
+          quote: A little too floral for my tastes
+        - review_id: RPOLF839J7L2Q
+          quote: This has a powder smell that I hate.
+        approx_count: 12
+      - id: unpleasant_likeness
+        name_ko: 불쾌한 물건 냄새
+        name_en: Smells like an unpleasant non-perfume thing
+        include: 향수가 아닌 물건에 빗댄 불쾌한 냄새(엔진오일, 벌레 퇴치제, 쓰레기, 담배, 약, 양념, 헤어 제품, 비누, 선탠오일, 연필깎은 냄새)
+        exclude: 알코올은 alcohol_smell, 화학약품, 인공적, 플라스틱은 cheap_artificial
+        examples:
+        - review_id: R2C8YTC48CJE33
+          quote: smells like bug spray
+        - review_id: R3SC6U5UDFIGM5
+          quote: smells like garbage
+        approx_count: 11
+      - id: cheap_artificial
+        name_ko: 싸구려, 인공적인 냄새
+        name_en: Cheap or artificial smell
+        include: 싸구려 냄새, 값싼 향수 같다, 화학약품, 인공적, 플라스틱 같은 냄새("Smells cheap", "chemical", "künstlich")
+        exclude: 알코올 냄새는 alcohol_smell, 가격 이야기는 이 주제가 아님
+        examples:
+        - review_id: R1AG3QA8RNZUOA
+          quote: Smells cheap
+        - review_id: R2WLZEYU4QJSNX
+          quote: very chemical and artificial
+        approx_count: 8
+      other_approx_count: 9
+      notes: differs_from_original 인용은 스키마상 trust에도 함께 태깅되는 내용이라 리포트에서 trust와 겹쳐 읽힐 수 있음. "does not smell right", "Scent was definitely off"처럼 비교 대상이 없는 이상함도 differs_from_original에 넣었는데 경계가 애매함. 기타는 첫 향과 잔향이 다르다(처음엔 별로였다가 괜찮아짐, 처음엔 좋다가 아님), 내 체취와 안 맞음, 칭찬을 못 받음, 불만 없는 혼합 인용 등.
+    positive:
+      quotes: 488
+      sampled: 150
+      only_other: false
+      labels:
+      - id: smells_good_general
+        name_ko: 향이 좋음(이유 없음)
+        name_en: Smells good (no specifics)
+        include: 노트나 성격 묘사 없이 향이 좋다, 사랑한다("Smells good", "Love the scent", "Great fragrance", "Huele bien"). 혼합 인용의 좋다는 부분도 여기
+        exclude: 노트, 분위기, 인상을 말하면 appealing_character, 남의 반응은 compliments
+        examples:
+        - review_id: R2JL60OKVAL8YM
+          quote: Smells amazing!!
+        - review_id: R4HVFOK3EB74D
+          quote: It's a gorgeous, wonderful scent
+        approx_count: 115
+      - id: appealing_character
+        name_ko: 노트나 분위기가 좋음
+        name_en: Likes the notes or character
+        include: 좋아하는 노트, 분위기, 인상을 말함(따뜻하다, 달다, 크리미하다, 깨끗하다, 상쾌하다, 가볍다, 무겁지 않다, 꽃향, 바닐라, 남성적이다, 여성스럽다, 섹시하다, 비싸 보인다, 싸 보이지 않는다)
+        exclude: 묘사 없는 칭찬은 smells_good_general, 지속력이나 세기 평가는 이 주제가 아님
+        examples:
+        - review_id: R1OKZ4D3AZRATQ
+          quote: warm, sweet and creamy
+        - review_id: R1E12UKLVMMO4A
+          quote: The scent is warm, smooth, and distinctly masculine
+        approx_count: 21
+      - id: compliments
+        name_ko: 남에게 칭찬받음
+        name_en: Gets compliments
+        include: 주변 사람이 향을 칭찬했다, 제품 이름을 물었다, 배우자나 받은 사람이 향을 좋아했다("Head turner")
+        exclude: 본인만 좋다고 하면 smells_good_general
+        examples:
+        - review_id: R3HUTCGBNSP6M7
+          quote: Have received the most amount of compliments I’ve ever received for a perfume.
+        - review_id: R2QZ85R9X7DX6F
+          quote: I get compliments every time I wear it!
+        approx_count: 9
+      other_approx_count: 5
+      notes: 긍정 인용의 대부분(어림 77%)이 묘사 없는 "Smells good"류라 더 나눌 근거가 표본에 없음. 기타는 원래 알던 향과 같다, 거의 완벽한 듀프(3개, trust 쪽 내용), 칭찬 부분이 없는 혼합 인용(2개).
+errors: []
+warnings: []

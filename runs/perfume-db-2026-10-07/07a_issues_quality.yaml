@@ -1,0 +1,55 @@
+topic: quality
+directions:
+  negative:
+    labels:
+      - id: old_or_spoiled
+        name_ko: 오래됐거나 변질됨
+        name_en: Old, expired or spoiled
+        include: 내용물이 오래됐다, 유통기한이 지난 것 같다, 상했다, 오래된 냄새가 난다, 색이 변했다는 말(old, old stock, expired, off, vencido, tainted, changed colors)
+        exclude: 가짜라는 의심만 있으면 이 라벨이 아님(trust 주제). 알코올이나 화학약품 냄새 묘사만 있으면 이 라벨이 아님(scent 주제)
+        examples:
+          - {review_id: R3X87B0BDVYAE, quote: "Old stock"}
+          - {review_id: RSXO66KNMLOM3, quote: "it smelled expired"}
+        approx_count: 18
+      - id: sprayer_stopped_working
+        name_ko: 쓰다가 분사기 고장
+        name_en: Sprayer stopped working after use
+        include: 처음에는 됐는데 쓰다가 분사기, 펌프, 노즐이 멈추거나 고장 났다는 말. stopped, now, after a month, after 5 uses, half a bottle remaining처럼 쓴 뒤라는 신호가 있을 때
+        exclude: 쓴 뒤라는 신호 없이 분사가 안 된다, 고장 났다는 말만 있으면 sprayer_defective. 분사기가 아예 없으면 missing_parts
+        examples:
+          - {review_id: R2FOFANNV4XRG2, quote: "The spray nozzle stopped working after a month."}
+          - {review_id: R2WNX9YRXPE699, quote: "I literally got 2 sprays before it stopped working"}
+        approx_count: 12
+      - id: sprayer_defective
+        name_ko: 분사기 불량
+        name_en: Defective sprayer
+        include: 분사기, 펌프, 노즐이 처음부터 또는 시점 말 없이 작동하지 않거나 제대로 뿜지 않는다는 말(안 눌린다, 걸린다, 분사하면 흘러내린다, 새어 나온다 포함)
+        exclude: 쓰다가 멈췄다는 신호가 있으면 sprayer_stopped_working. 분사기나 튜브가 빠져 있으면 missing_parts. 여행이나 들고 다닐 때 병이 샌다는 말은 이 라벨이 아님(bottle_design 주제)
+        examples:
+          - {review_id: R1TDEV9S3R58C2, quote: "had a defective spray pump"}
+          - {review_id: R2XPLAM5OFOU16, quote: "the nozzle won't even press down"}
+        approx_count: 13
+      - id: missing_parts
+        name_ko: 부품 빠짐
+        name_en: Missing parts
+        include: 받았을 때 튜브(빨대), 뚜껑, 캡, 분사기 같은 부품이 처음부터 빠져 있었다는 말
+        exclude: 부품이 있는데 작동하지 않으면 sprayer_defective 또는 sprayer_stopped_working. 상품 자체가 빠진 채 배달된 것은 이 라벨이 아님(shipping 주제)
+        examples:
+          - {review_id: R3NB2WLRZ7KIF5, quote: "the bottle came without the tube/straw"}
+          - {review_id: R1YNRPFUOKI9PC, quote: "The bottles did not come with lids"}
+        approx_count: 9
+      - id: poor_quality_general
+        name_ko: 품질이 나쁨(구체 없음)
+        name_en: Poor quality in general
+        include: 무엇인지 밝히지 않고 품질이 나쁘다, 싸게 만들었다는 말(poor quality, not good quality, cheap made, 3rd class quality)
+        exclude: 변질, 분사기, 부품처럼 구체적인 불량을 말하면 그 라벨. calidad 뒤에 지속력 설명이 이어지면 이 라벨이 아님(longevity_projection 주제)
+        examples:
+          - {review_id: R1IGZ4P4BM2BRJ, quote: "Poor product quality"}
+          - {review_id: R2062UHONDUTUM, quote: "Cheap made"}
+        approx_count: 7
+    other_approx_count: 5
+    notes: "기타 5개는 분사기 아닌 장식, 뚜껑 파손(Clip broke, top broke off, 장식 고리 veio quebrado) 3개와 두꺼운 유리 1개, 향수와 무관해 보이는 R1T7FSK04S0DMQ(collar wouldn't hold a charge) 1개. R3IY6PHSEQCN23(veio quebrado)은 받았을 때 깨져 온 것이라 shipping일 수도 있음. R1KW75H6XHEF5N(authenticity or age)은 old_or_spoiled로 셌고 trust와 함께 붙는 경우"
+  positive:
+    labels: []
+    other_approx_count: 7
+    notes: "only_other: 인용 7개, 표본 없음"

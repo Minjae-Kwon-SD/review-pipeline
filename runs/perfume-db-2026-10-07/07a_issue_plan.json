@@ -1,0 +1,424 @@
+{
+  "made_at": "2026-10-07T17:56:39+09:00",
+  "per": 150,
+  "min": 20,
+  "exclude": [
+    "overall"
+  ],
+  "items": [
+    {
+      "topic": "price_value",
+      "name_ko": "가격 대비 가치",
+      "direction": "negative",
+      "quotes": 71,
+      "sampled": 71,
+      "file": "07a_issue_samples/price_value_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 37,
+        "B0009OAI8Q": 6,
+        "B08FBQWRYC": 10,
+        "B09X5BQ969": 1,
+        "B0BZDZJDTG": 7,
+        "B0GFGL26JD": 10
+      },
+      "by_star_group": {
+        "neg": 41,
+        "neu": 15,
+        "pos": 15
+      }
+    },
+    {
+      "topic": "price_value",
+      "name_ko": "가격 대비 가치",
+      "direction": "positive",
+      "quotes": 83,
+      "sampled": 83,
+      "file": "07a_issue_samples/price_value_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 25,
+        "B0009OAI8Q": 13,
+        "B08FBQWRYC": 4,
+        "B09X5BQ969": 18,
+        "B0BZDZJDTG": 19,
+        "B0GFGL26JD": 4
+      },
+      "by_star_group": {
+        "neg": 6,
+        "neu": 24,
+        "pos": 53
+      }
+    },
+    {
+      "topic": "brand_experience",
+      "name_ko": "브랜드 경험",
+      "direction": "negative",
+      "quotes": 83,
+      "sampled": 83,
+      "file": "07a_issue_samples/brand_experience_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 26,
+        "B0009OAI8Q": 13,
+        "B08FBQWRYC": 7,
+        "B09X5BQ969": 5,
+        "B0BZDZJDTG": 26,
+        "B0GFGL26JD": 6
+      },
+      "by_star_group": {
+        "neg": 66,
+        "neu": 16,
+        "pos": 1
+      }
+    },
+    {
+      "topic": "brand_experience",
+      "name_ko": "브랜드 경험",
+      "direction": "positive",
+      "quotes": 159,
+      "sampled": 150,
+      "file": "07a_issue_samples/brand_experience_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 42,
+        "B0009OAI8Q": 10,
+        "B08FBQWRYC": 9,
+        "B09X5BQ969": 25,
+        "B0BZDZJDTG": 34,
+        "B0GFGL26JD": 30
+      },
+      "by_star_group": {
+        "neg": 9,
+        "neu": 10,
+        "pos": 131
+      }
+    },
+    {
+      "topic": "trust",
+      "name_ko": "신뢰",
+      "direction": "negative",
+      "quotes": 172,
+      "sampled": 150,
+      "file": "07a_issue_samples/trust_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 89,
+        "B0009OAI8Q": 22,
+        "B08FBQWRYC": 19,
+        "B09X5BQ969": 3,
+        "B0BZDZJDTG": 9,
+        "B0GFGL26JD": 8
+      },
+      "by_star_group": {
+        "neg": 102,
+        "neu": 35,
+        "pos": 13
+      }
+    },
+    {
+      "topic": "trust",
+      "name_ko": "신뢰",
+      "direction": "positive",
+      "quotes": 23,
+      "sampled": 23,
+      "file": "07a_issue_samples/trust_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 12,
+        "B0009OAI8Q": 4,
+        "B08FBQWRYC": 5,
+        "B0BZDZJDTG": 2
+      },
+      "by_star_group": {
+        "neu": 3,
+        "pos": 19,
+        "neg": 1
+      }
+    },
+    {
+      "topic": "shipping",
+      "name_ko": "배송",
+      "direction": "negative",
+      "quotes": 65,
+      "sampled": 65,
+      "file": "07a_issue_samples/shipping_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 16,
+        "B0009OAI8Q": 3,
+        "B08FBQWRYC": 41,
+        "B0BZDZJDTG": 2,
+        "B0GFGL26JD": 3
+      },
+      "by_star_group": {
+        "neg": 44,
+        "neu": 8,
+        "pos": 13
+      }
+    },
+    {
+      "topic": "shipping",
+      "name_ko": "배송",
+      "direction": "positive",
+      "quotes": 26,
+      "sampled": 26,
+      "file": "07a_issue_samples/shipping_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 11,
+        "B0009OAI8Q": 5,
+        "B08FBQWRYC": 5,
+        "B0BZDZJDTG": 2,
+        "B0GFGL26JD": 3
+      },
+      "by_star_group": {
+        "neg": 1,
+        "neu": 8,
+        "pos": 17
+      }
+    },
+    {
+      "topic": "customer_service",
+      "name_ko": "고객 응대",
+      "direction": "negative",
+      "quotes": 85,
+      "sampled": 85,
+      "file": "07a_issue_samples/customer_service_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 23,
+        "B0009OAI8Q": 11,
+        "B08FBQWRYC": 11,
+        "B09X5BQ969": 5,
+        "B0BZDZJDTG": 27,
+        "B0GFGL26JD": 8
+      },
+      "by_star_group": {
+        "neg": 76,
+        "neu": 8,
+        "pos": 1
+      }
+    },
+    {
+      "topic": "customer_service",
+      "name_ko": "고객 응대",
+      "direction": "positive",
+      "quotes": 6,
+      "sampled": 0,
+      "file": null,
+      "only_other": true
+    },
+    {
+      "topic": "packaging",
+      "name_ko": "포장",
+      "direction": "negative",
+      "quotes": 17,
+      "sampled": 0,
+      "file": null,
+      "only_other": true
+    },
+    {
+      "topic": "packaging",
+      "name_ko": "포장",
+      "direction": "positive",
+      "quotes": 23,
+      "sampled": 23,
+      "file": "07a_issue_samples/packaging_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 3,
+        "B0009OAI8Q": 5,
+        "B08FBQWRYC": 1,
+        "B09X5BQ969": 2,
+        "B0BZDZJDTG": 10,
+        "B0GFGL26JD": 2
+      },
+      "by_star_group": {
+        "neg": 6,
+        "pos": 10,
+        "neu": 7
+      }
+    },
+    {
+      "topic": "quality",
+      "name_ko": "품질",
+      "direction": "negative",
+      "quotes": 64,
+      "sampled": 64,
+      "file": "07a_issue_samples/quality_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 12,
+        "B0009OAI8Q": 21,
+        "B08FBQWRYC": 14,
+        "B09X5BQ969": 4,
+        "B0BZDZJDTG": 11,
+        "B0GFGL26JD": 2
+      },
+      "by_star_group": {
+        "neg": 44,
+        "neu": 15,
+        "pos": 5
+      }
+    },
+    {
+      "topic": "quality",
+      "name_ko": "품질",
+      "direction": "positive",
+      "quotes": 7,
+      "sampled": 0,
+      "file": null,
+      "only_other": true
+    },
+    {
+      "topic": "longevity_projection",
+      "name_ko": "지속력과 향의 세기",
+      "direction": "negative",
+      "quotes": 364,
+      "sampled": 150,
+      "file": "07a_issue_samples/longevity_projection_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 39,
+        "B0009OAI8Q": 28,
+        "B08FBQWRYC": 15,
+        "B09X5BQ969": 17,
+        "B0BZDZJDTG": 27,
+        "B0GFGL26JD": 24
+      },
+      "by_star_group": {
+        "neg": 71,
+        "neu": 38,
+        "pos": 41
+      }
+    },
+    {
+      "topic": "longevity_projection",
+      "name_ko": "지속력과 향의 세기",
+      "direction": "positive",
+      "quotes": 144,
+      "sampled": 144,
+      "file": "07a_issue_samples/longevity_projection_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 29,
+        "B0009OAI8Q": 13,
+        "B08FBQWRYC": 18,
+        "B09X5BQ969": 36,
+        "B0BZDZJDTG": 31,
+        "B0GFGL26JD": 17
+      },
+      "by_star_group": {
+        "neg": 8,
+        "neu": 17,
+        "pos": 119
+      }
+    },
+    {
+      "topic": "safety",
+      "name_ko": "안전",
+      "direction": "negative",
+      "quotes": 18,
+      "sampled": 0,
+      "file": null,
+      "only_other": true
+    },
+    {
+      "topic": "safety",
+      "name_ko": "안전",
+      "direction": "positive",
+      "quotes": 4,
+      "sampled": 0,
+      "file": null,
+      "only_other": true
+    },
+    {
+      "topic": "bottle_design",
+      "name_ko": "병 디자인과 용량",
+      "direction": "negative",
+      "quotes": 35,
+      "sampled": 35,
+      "file": "07a_issue_samples/bottle_design_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 18,
+        "B0009OAI8Q": 10,
+        "B08FBQWRYC": 1,
+        "B0BZDZJDTG": 3,
+        "B0GFGL26JD": 3
+      },
+      "by_star_group": {
+        "neg": 16,
+        "neu": 13,
+        "pos": 6
+      }
+    },
+    {
+      "topic": "bottle_design",
+      "name_ko": "병 디자인과 용량",
+      "direction": "positive",
+      "quotes": 78,
+      "sampled": 78,
+      "file": "07a_issue_samples/bottle_design_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 17,
+        "B0009OAI8Q": 10,
+        "B08FBQWRYC": 6,
+        "B09X5BQ969": 10,
+        "B0BZDZJDTG": 28,
+        "B0GFGL26JD": 7
+      },
+      "by_star_group": {
+        "neg": 16,
+        "neu": 17,
+        "pos": 45
+      }
+    },
+    {
+      "topic": "scent",
+      "name_ko": "향",
+      "direction": "negative",
+      "quotes": 318,
+      "sampled": 150,
+      "file": "07a_issue_samples/scent_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 40,
+        "B0009OAI8Q": 34,
+        "B08FBQWRYC": 13,
+        "B09X5BQ969": 18,
+        "B0BZDZJDTG": 31,
+        "B0GFGL26JD": 14
+      },
+      "by_star_group": {
+        "neg": 84,
+        "neu": 47,
+        "pos": 19
+      }
+    },
+    {
+      "topic": "scent",
+      "name_ko": "향",
+      "direction": "positive",
+      "quotes": 488,
+      "sampled": 150,
+      "file": "07a_issue_samples/scent_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B00021AJ5I": 31,
+        "B0009OAI8Q": 26,
+        "B08FBQWRYC": 18,
+        "B09X5BQ969": 24,
+        "B0BZDZJDTG": 33,
+        "B0GFGL26JD": 18
+      },
+      "by_star_group": {
+        "neg": 45,
+        "neu": 35,
+        "pos": 70
+      }
+    }
+  ]
+}

@@ -1,0 +1,5728 @@
+{
+  "generated_at": "2026-10-08T12:24:07+09:00",
+  "run": "perfume-db-2026-10-07",
+  "tags_file": "04_tags.jsonl",
+  "rules": {
+    "impact_min_neg_reviews": 20,
+    "strength_min_mentions": 10,
+    "compare_exclude_topics": [
+      "overall"
+    ],
+    "rounding": "비율은 소수 첫째 자리 %, 별점은 소수 둘째 자리"
+  },
+  "summary": {
+    "asins": 6,
+    "reviews": 1212,
+    "tags": 3497,
+    "brands": 6,
+    "tags_per_review": 2.89,
+    "sample_mean_star": 3.03,
+    "weighted_mean_star": 4.48,
+    "date_min": "2010-02-28",
+    "date_max": "2026-10-03"
+  },
+  "sentiment": {
+    "raw": {
+      "positive": 1405,
+      "negative": 1735,
+      "mixed": 303,
+      "neutral": 54
+    },
+    "raw_pct": {
+      "positive": 40.2,
+      "negative": 49.6,
+      "mixed": 8.7,
+      "neutral": 1.5
+    },
+    "weighted_pct": {
+      "positive": 77.5,
+      "negative": 15.8,
+      "mixed": 5.8,
+      "neutral": 0.9
+    }
+  },
+  "side": {
+    "raw": {
+      "P": 2695,
+      "B": 802
+    },
+    "raw_pct": {
+      "P": 77.1,
+      "B": 22.9
+    }
+  },
+  "stars": {
+    "sample_counts": {
+      "1": 267,
+      "2": 216,
+      "3": 239,
+      "4": 190,
+      "5": 300
+    },
+    "real_pct": {
+      "1": 7.3,
+      "2": 2.4,
+      "3": 3.6,
+      "4": 7.7,
+      "5": 78.9
+    },
+    "missing_real_pct": 1.7
+  },
+  "topics": [
+    {
+      "id": "overall",
+      "mentions": 1212,
+      "positive": 438,
+      "negative": 517,
+      "mixed": 229,
+      "neutral": 28,
+      "neg_pct": 42.7,
+      "weighted_neg_pct": 10.7,
+      "neg_reviewer_pct": 10.7,
+      "pos_reviewer_pct": 76.8,
+      "name_ko": "전체 만족도",
+      "side": "P"
+    },
+    {
+      "id": "scent",
+      "mentions": 773,
+      "positive": 446,
+      "negative": 276,
+      "mixed": 42,
+      "neutral": 9,
+      "neg_pct": 35.7,
+      "weighted_neg_pct": 9.4,
+      "neg_reviewer_pct": 6.5,
+      "pos_reviewer_pct": 59.8,
+      "name_ko": "향",
+      "side": "P"
+    },
+    {
+      "id": "longevity_projection",
+      "mentions": 504,
+      "positive": 128,
+      "negative": 348,
+      "mixed": 16,
+      "neutral": 12,
+      "neg_pct": 69.0,
+      "weighted_neg_pct": 30.6,
+      "neg_reviewer_pct": 10.0,
+      "pos_reviewer_pct": 20.9,
+      "name_ko": "지속력과 향의 세기",
+      "side": "P"
+    },
+    {
+      "id": "brand_experience",
+      "mentions": 238,
+      "positive": 155,
+      "negative": 79,
+      "mixed": 4,
+      "neutral": 0,
+      "neg_pct": 33.2,
+      "weighted_neg_pct": 5.2,
+      "neg_reviewer_pct": 1.5,
+      "pos_reviewer_pct": 27.7,
+      "name_ko": "브랜드 경험",
+      "side": "B"
+    },
+    {
+      "id": "trust",
+      "mentions": 194,
+      "positive": 22,
+      "negative": 171,
+      "mixed": 1,
+      "neutral": 0,
+      "neg_pct": 88.1,
+      "weighted_neg_pct": 48.1,
+      "neg_reviewer_pct": 4.1,
+      "pos_reviewer_pct": 4.4,
+      "name_ko": "신뢰",
+      "side": "B"
+    },
+    {
+      "id": "price_value",
+      "mentions": 148,
+      "positive": 74,
+      "negative": 62,
+      "mixed": 9,
+      "neutral": 3,
+      "neg_pct": 41.9,
+      "weighted_neg_pct": 18.0,
+      "neg_reviewer_pct": 2.1,
+      "pos_reviewer_pct": 8.2,
+      "name_ko": "가격 대비 가치",
+      "side": "B"
+    },
+    {
+      "id": "bottle_design",
+      "mentions": 113,
+      "positive": 77,
+      "negative": 34,
+      "mixed": 1,
+      "neutral": 1,
+      "neg_pct": 30.1,
+      "weighted_neg_pct": 13.6,
+      "neg_reviewer_pct": 1.4,
+      "pos_reviewer_pct": 8.9,
+      "name_ko": "병 디자인과 용량",
+      "side": "P"
+    },
+    {
+      "id": "customer_service",
+      "mentions": 92,
+      "positive": 6,
+      "negative": 85,
+      "mixed": 0,
+      "neutral": 1,
+      "neg_pct": 92.4,
+      "weighted_neg_pct": 83.0,
+      "neg_reviewer_pct": 1.8,
+      "pos_reviewer_pct": 0.4,
+      "name_ko": "고객 응대",
+      "side": "B"
+    },
+    {
+      "id": "shipping",
+      "mentions": 90,
+      "positive": 25,
+      "negative": 64,
+      "mixed": 1,
+      "neutral": 0,
+      "neg_pct": 71.1,
+      "weighted_neg_pct": 44.3,
+      "neg_reviewer_pct": 2.1,
+      "pos_reviewer_pct": 2.5,
+      "name_ko": "배송",
+      "side": "B"
+    },
+    {
+      "id": "quality",
+      "mentions": 71,
+      "positive": 7,
+      "negative": 64,
+      "mixed": 0,
+      "neutral": 0,
+      "neg_pct": 90.1,
+      "weighted_neg_pct": 44.7,
+      "neg_reviewer_pct": 1.7,
+      "pos_reviewer_pct": 2.1,
+      "name_ko": "품질",
+      "side": "P"
+    },
+    {
+      "id": "packaging",
+      "mentions": 40,
+      "positive": 23,
+      "negative": 17,
+      "mixed": 0,
+      "neutral": 0,
+      "neg_pct": 42.5,
+      "weighted_neg_pct": 35.7,
+      "neg_reviewer_pct": 1.3,
+      "pos_reviewer_pct": 2.3,
+      "name_ko": "포장",
+      "side": "B"
+    },
+    {
+      "id": "safety",
+      "mentions": 22,
+      "positive": 4,
+      "negative": 18,
+      "mixed": 0,
+      "neutral": 0,
+      "neg_pct": 81.8,
+      "weighted_neg_pct": 41.9,
+      "neg_reviewer_pct": 0.5,
+      "pos_reviewer_pct": 0.6,
+      "name_ko": "안전",
+      "side": "P"
+    }
+  ],
+  "impact": [
+    {
+      "id": "customer_service",
+      "name_ko": "고객 응대",
+      "neg_reviews": 85,
+      "neg_avg_star": 1.28,
+      "other_avg_star": 4.54,
+      "gap": -3.27
+    },
+    {
+      "id": "brand_experience",
+      "name_ko": "브랜드 경험",
+      "neg_reviews": 79,
+      "neg_avg_star": 1.51,
+      "other_avg_star": 4.53,
+      "gap": -3.02
+    },
+    {
+      "id": "scent",
+      "name_ko": "향",
+      "neg_reviews": 276,
+      "neg_avg_star": 2.15,
+      "other_avg_star": 4.65,
+      "gap": -2.49
+    },
+    {
+      "id": "trust",
+      "name_ko": "신뢰",
+      "neg_reviews": 171,
+      "neg_avg_star": 2.59,
+      "other_avg_star": 4.57,
+      "gap": -1.97
+    },
+    {
+      "id": "quality",
+      "name_ko": "품질",
+      "neg_reviews": 64,
+      "neg_avg_star": 2.78,
+      "other_avg_star": 4.51,
+      "gap": -1.73
+    },
+    {
+      "id": "longevity_projection",
+      "name_ko": "지속력과 향의 세기",
+      "neg_reviews": 348,
+      "neg_avg_star": 3.03,
+      "other_avg_star": 4.65,
+      "gap": -1.62
+    },
+    {
+      "id": "price_value",
+      "name_ko": "가격 대비 가치",
+      "neg_reviews": 62,
+      "neg_avg_star": 3.33,
+      "other_avg_star": 4.51,
+      "gap": -1.18
+    },
+    {
+      "id": "shipping",
+      "name_ko": "배송",
+      "neg_reviews": 64,
+      "neg_avg_star": 3.92,
+      "other_avg_star": 4.5,
+      "gap": -0.58
+    },
+    {
+      "id": "bottle_design",
+      "name_ko": "병 디자인과 용량",
+      "neg_reviews": 34,
+      "neg_avg_star": 3.93,
+      "other_avg_star": 4.49,
+      "gap": -0.56
+    }
+  ],
+  "asins": [
+    {
+      "asin": "B00021AJ5I",
+      "brand": "Calvin Klein",
+      "price_band": "36.00~115.54달러(0.33~3.3 fl oz)",
+      "amazon_rating": "4.5",
+      "tags": 1122,
+      "weighted_pos_pct": 80.7,
+      "weighted_neg_pct": 15.4,
+      "strength": {
+        "id": "scent",
+        "name_ko": "향",
+        "pos_reviewer_pct": 48.4
+      },
+      "weakness": {
+        "id": "longevity_projection",
+        "name_ko": "지속력과 향의 세기",
+        "neg_reviewer_pct": 8.8
+      },
+      "sample_reviews": 399,
+      "sample_counts": {
+        "1": 80,
+        "2": 80,
+        "3": 80,
+        "4": 79,
+        "5": 80
+      },
+      "real_pct": {
+        "1": 7.0,
+        "2": 2.0,
+        "3": 4.0,
+        "4": 6.0,
+        "5": 81.0
+      },
+      "weights": {
+        "1": 0.3491,
+        "2": 0.0997,
+        "3": 0.1995,
+        "4": 0.303,
+        "5": 4.0399
+      },
+      "sample_mean_star": 3.0,
+      "weighted_mean_star": 4.52,
+      "hist_mean_star": 4.52,
+      "covered_hist_mean_star": 4.52,
+      "missing_real_pct": 0
+    },
+    {
+      "asin": "B0009OAI8Q",
+      "brand": "Elizabeth Taylor",
+      "price_band": "16.97~35.55달러(0.5~10.4 fl oz)",
+      "amazon_rating": "4.6",
+      "tags": 455,
+      "weighted_pos_pct": 72.6,
+      "weighted_neg_pct": 16.3,
+      "strength": {
+        "id": "scent",
+        "name_ko": "향",
+        "pos_reviewer_pct": 40.0
+      },
+      "weakness": {
+        "id": "longevity_projection",
+        "name_ko": "지속력과 향의 세기",
+        "neg_reviewer_pct": 9.1
+      },
+      "sample_reviews": 159,
+      "sample_counts": {
+        "1": 40,
+        "2": 0,
+        "3": 89,
+        "4": 30,
+        "5": 0
+      },
+      "real_pct": {
+        "1": 3.0,
+        "2": 2.0,
+        "3": 4.0,
+        "4": 8.0,
+        "5": 83.0
+      },
+      "weights": {
+        "1": 0.1988,
+        "3": 0.0715,
+        "4": 4.823
+      },
+      "sample_mean_star": 2.69,
+      "weighted_mean_star": 4.66,
+      "hist_mean_star": 4.66,
+      "covered_hist_mean_star": 4.66,
+      "missing_real_pct": 0
+    },
+    {
+      "asin": "B08FBQWRYC",
+      "brand": "Jean Paul Gaultier",
+      "price_band": "37.00~208.00달러(0.34~6.8 fl oz)",
+      "amazon_rating": "4.7",
+      "tags": 369,
+      "weighted_pos_pct": 61.0,
+      "weighted_neg_pct": 23.8,
+      "strength": {
+        "id": "scent",
+        "name_ko": "향",
+        "pos_reviewer_pct": 59.3
+      },
+      "weakness": {
+        "id": "shipping",
+        "name_ko": "배송",
+        "neg_reviewer_pct": 14.5
+      },
+      "sample_reviews": 130,
+      "sample_counts": {
+        "1": 60,
+        "2": 0,
+        "3": 0,
+        "4": 70,
+        "5": 0
+      },
+      "real_pct": {
+        "1": 3.0,
+        "2": 1.0,
+        "3": 3.0,
+        "4": 8.0,
+        "5": 85.0
+      },
+      "weights": {
+        "1": 0.0893,
+        "4": 1.7806
+      },
+      "sample_mean_star": 2.62,
+      "weighted_mean_star": 4.76,
+      "hist_mean_star": 4.71,
+      "covered_hist_mean_star": 4.76,
+      "missing_real_pct": 3.0
+    },
+    {
+      "asin": "B09X5BQ969",
+      "brand": "Bella Vita Luxury",
+      "price_band": "20.99달러(3.34~3.4 fl oz)",
+      "amazon_rating": "3.8",
+      "tags": 403,
+      "weighted_pos_pct": 74.9,
+      "weighted_neg_pct": 19.3,
+      "strength": {
+        "id": "scent",
+        "name_ko": "향",
+        "pos_reviewer_pct": 70.7
+      },
+      "weakness": {
+        "id": "longevity_projection",
+        "name_ko": "지속력과 향의 세기",
+        "neg_reviewer_pct": 13.6
+      },
+      "sample_reviews": 140,
+      "sample_counts": {
+        "1": 0,
+        "2": 60,
+        "3": 0,
+        "4": 0,
+        "5": 80
+      },
+      "real_pct": {
+        "1": 18.0,
+        "2": 5.0,
+        "3": 8.0,
+        "4": 8.0,
+        "5": 61.0
+      },
+      "weights": {
+        "2": 0.5833,
+        "5": 1.3125
+      },
+      "sample_mean_star": 3.71,
+      "weighted_mean_star": 3.97,
+      "hist_mean_star": 3.89,
+      "covered_hist_mean_star": 3.97,
+      "missing_real_pct": 8.0
+    },
+    {
+      "asin": "B0BZDZJDTG",
+      "brand": "Dossier",
+      "price_band": "26.12~79.00달러(1.7~3.4 fl oz)",
+      "amazon_rating": "4.4",
+      "tags": 813,
+      "weighted_pos_pct": 83.7,
+      "weighted_neg_pct": 11.4,
+      "strength": {
+        "id": "scent",
+        "name_ko": "향",
+        "pos_reviewer_pct": 75.7
+      },
+      "weakness": {
+        "id": "longevity_projection",
+        "name_ko": "지속력과 향의 세기",
+        "neg_reviewer_pct": 10.8
+      },
+      "sample_reviews": 270,
+      "sample_counts": {
+        "1": 60,
+        "2": 70,
+        "3": 70,
+        "4": 0,
+        "5": 70
+      },
+      "real_pct": {
+        "1": 6.0,
+        "2": 3.0,
+        "3": 8.0,
+        "4": 10.0,
+        "5": 73.0
+      },
+      "weights": {
+        "1": 0.27,
+        "2": 0.1157,
+        "3": 0.3086,
+        "5": 3.2014
+      },
+      "sample_mean_star": 2.81,
+      "weighted_mean_star": 4.41,
+      "hist_mean_star": 4.41,
+      "covered_hist_mean_star": 4.41,
+      "missing_real_pct": 0
+    },
+    {
+      "asin": "B0GFGL26JD",
+      "brand": "Glossier",
+      "price_band": "32.00~116.00달러(0.27~3.4 fl oz)",
+      "amazon_rating": "4.5",
+      "tags": 335,
+      "weighted_pos_pct": 80.5,
+      "weighted_neg_pct": 13.3,
+      "strength": {
+        "id": "scent",
+        "name_ko": "향",
+        "pos_reviewer_pct": 77.2
+      },
+      "weakness": {
+        "id": "longevity_projection",
+        "name_ko": "지속력과 향의 세기",
+        "neg_reviewer_pct": 12.5
+      },
+      "sample_reviews": 114,
+      "sample_counts": {
+        "1": 27,
+        "2": 6,
+        "3": 0,
+        "4": 11,
+        "5": 70
+      },
+      "real_pct": {
+        "1": 7.0,
+        "2": 1.0,
+        "3": 5.0,
+        "4": 6.0,
+        "5": 81.0
+      },
+      "weights": {
+        "1": 0.3111,
+        "2": 0.2,
+        "4": 0.6545,
+        "5": 1.3886
+      },
+      "sample_mean_star": 3.8,
+      "weighted_mean_star": 4.61,
+      "hist_mean_star": 4.53,
+      "covered_hist_mean_star": 4.61,
+      "missing_real_pct": 5.0
+    }
+  ],
+  "cooccurrence_neg": [
+    {
+      "a": "longevity_projection",
+      "b": "trust",
+      "count": 83
+    },
+    {
+      "a": "longevity_projection",
+      "b": "scent",
+      "count": 73
+    },
+    {
+      "a": "scent",
+      "b": "trust",
+      "count": 64
+    },
+    {
+      "a": "customer_service",
+      "b": "scent",
+      "count": 44
+    },
+    {
+      "a": "brand_experience",
+      "b": "longevity_projection",
+      "count": 38
+    },
+    {
+      "a": "brand_experience",
+      "b": "scent",
+      "count": 30
+    },
+    {
+      "a": "longevity_projection",
+      "b": "price_value",
+      "count": 28
+    },
+    {
+      "a": "customer_service",
+      "b": "trust",
+      "count": 27
+    },
+    {
+      "a": "customer_service",
+      "b": "longevity_projection",
+      "count": 24
+    },
+    {
+      "a": "brand_experience",
+      "b": "trust",
+      "count": 22
+    },
+    {
+      "a": "brand_experience",
+      "b": "customer_service",
+      "count": 13
+    },
+    {
+      "a": "bottle_design",
+      "b": "price_value",
+      "count": 12
+    },
+    {
+      "a": "longevity_projection",
+      "b": "quality",
+      "count": 12
+    },
+    {
+      "a": "customer_service",
+      "b": "quality",
+      "count": 12
+    },
+    {
+      "a": "quality",
+      "b": "scent",
+      "count": 11
+    },
+    {
+      "a": "longevity_projection",
+      "b": "safety",
+      "count": 11
+    },
+    {
+      "a": "price_value",
+      "b": "trust",
+      "count": 9
+    },
+    {
+      "a": "quality",
+      "b": "trust",
+      "count": 9
+    },
+    {
+      "a": "safety",
+      "b": "scent",
+      "count": 9
+    },
+    {
+      "a": "customer_service",
+      "b": "shipping",
+      "count": 9
+    },
+    {
+      "a": "price_value",
+      "b": "scent",
+      "count": 8
+    },
+    {
+      "a": "brand_experience",
+      "b": "quality",
+      "count": 8
+    },
+    {
+      "a": "brand_experience",
+      "b": "price_value",
+      "count": 7
+    },
+    {
+      "a": "safety",
+      "b": "trust",
+      "count": 5
+    },
+    {
+      "a": "customer_service",
+      "b": "price_value",
+      "count": 5
+    },
+    {
+      "a": "price_value",
+      "b": "shipping",
+      "count": 5
+    },
+    {
+      "a": "price_value",
+      "b": "quality",
+      "count": 5
+    },
+    {
+      "a": "quality",
+      "b": "shipping",
+      "count": 4
+    },
+    {
+      "a": "bottle_design",
+      "b": "brand_experience",
+      "count": 4
+    },
+    {
+      "a": "bottle_design",
+      "b": "shipping",
+      "count": 3
+    },
+    {
+      "a": "bottle_design",
+      "b": "longevity_projection",
+      "count": 3
+    },
+    {
+      "a": "bottle_design",
+      "b": "quality",
+      "count": 3
+    },
+    {
+      "a": "customer_service",
+      "b": "safety",
+      "count": 3
+    },
+    {
+      "a": "packaging",
+      "b": "shipping",
+      "count": 3
+    },
+    {
+      "a": "longevity_projection",
+      "b": "shipping",
+      "count": 2
+    },
+    {
+      "a": "bottle_design",
+      "b": "trust",
+      "count": 2
+    },
+    {
+      "a": "bottle_design",
+      "b": "scent",
+      "count": 2
+    },
+    {
+      "a": "scent",
+      "b": "shipping",
+      "count": 2
+    },
+    {
+      "a": "shipping",
+      "b": "trust",
+      "count": 2
+    },
+    {
+      "a": "bottle_design",
+      "b": "customer_service",
+      "count": 1
+    },
+    {
+      "a": "brand_experience",
+      "b": "shipping",
+      "count": 1
+    },
+    {
+      "a": "longevity_projection",
+      "b": "packaging",
+      "count": 1
+    },
+    {
+      "a": "packaging",
+      "b": "trust",
+      "count": 1
+    },
+    {
+      "a": "brand_experience",
+      "b": "safety",
+      "count": 1
+    },
+    {
+      "a": "packaging",
+      "b": "quality",
+      "count": 1
+    }
+  ],
+  "weighting": {
+    "method": "star_groups",
+    "groups": {
+      "negative": [
+        1,
+        2
+      ],
+      "neutral": [
+        3
+      ],
+      "positive": [
+        4,
+        5
+      ]
+    },
+    "per_asin": {
+      "B00021AJ5I": {
+        "sample_reviews": 399,
+        "covered_real_pct": 100.0,
+        "missing_real_pct": 0,
+        "all_per_star": true,
+        "groups": {
+          "negative": {
+            "stars": [
+              1,
+              2
+            ],
+            "sample": 160,
+            "real_pct": 9.0,
+            "mode": "per_star",
+            "weights": {
+              "1": 0.349125,
+              "2": 0.09975
+            },
+            "effective_star": null,
+            "max_weight": 0.349125,
+            "max_review_share_pct": 0.09
+          },
+          "neutral": {
+            "stars": [
+              3
+            ],
+            "sample": 80,
+            "real_pct": 4.0,
+            "mode": "per_star",
+            "weights": {
+              "3": 0.1995
+            },
+            "effective_star": null,
+            "max_weight": 0.1995,
+            "max_review_share_pct": 0.05
+          },
+          "positive": {
+            "stars": [
+              4,
+              5
+            ],
+            "sample": 159,
+            "real_pct": 87.0,
+            "mode": "per_star",
+            "weights": {
+              "4": 0.303038,
+              "5": 4.039875
+            },
+            "effective_star": null,
+            "max_weight": 4.039875,
+            "max_review_share_pct": 1.01
+          }
+        }
+      },
+      "B0009OAI8Q": {
+        "sample_reviews": 159,
+        "covered_real_pct": 100.0,
+        "missing_real_pct": 0,
+        "all_per_star": false,
+        "groups": {
+          "negative": {
+            "stars": [
+              1,
+              2
+            ],
+            "sample": 40,
+            "real_pct": 5.0,
+            "mode": "group",
+            "weights": {
+              "1": 0.19875
+            },
+            "effective_star": 1.4,
+            "max_weight": 0.19875,
+            "max_review_share_pct": 0.13
+          },
+          "neutral": {
+            "stars": [
+              3
+            ],
+            "sample": 89,
+            "real_pct": 4.0,
+            "mode": "per_star",
+            "weights": {
+              "3": 0.071461
+            },
+            "effective_star": null,
+            "max_weight": 0.071461,
+            "max_review_share_pct": 0.04
+          },
+          "positive": {
+            "stars": [
+              4,
+              5
+            ],
+            "sample": 30,
+            "real_pct": 91.0,
+            "mode": "group",
+            "weights": {
+              "4": 4.823
+            },
+            "effective_star": 4.912088,
+            "max_weight": 4.823,
+            "max_review_share_pct": 3.03
+          }
+        }
+      },
+      "B08FBQWRYC": {
+        "sample_reviews": 130,
+        "covered_real_pct": 97.0,
+        "missing_real_pct": 3.0,
+        "all_per_star": false,
+        "groups": {
+          "negative": {
+            "stars": [
+              1,
+              2
+            ],
+            "sample": 60,
+            "real_pct": 4.0,
+            "mode": "group",
+            "weights": {
+              "1": 0.089347
+            },
+            "effective_star": 1.25,
+            "max_weight": 0.089347,
+            "max_review_share_pct": 0.07
+          },
+          "neutral": {
+            "stars": [
+              3
+            ],
+            "sample": 0,
+            "real_pct": 3.0,
+            "mode": "empty",
+            "weights": {},
+            "effective_star": null,
+            "max_weight": null,
+            "max_review_share_pct": null
+          },
+          "positive": {
+            "stars": [
+              4,
+              5
+            ],
+            "sample": 70,
+            "real_pct": 93.0,
+            "mode": "group",
+            "weights": {
+              "4": 1.78056
+            },
+            "effective_star": 4.913978,
+            "max_weight": 1.78056,
+            "max_review_share_pct": 1.37
+          }
+        }
+      },
+      "B09X5BQ969": {
+        "sample_reviews": 140,
+        "covered_real_pct": 92.0,
+        "missing_real_pct": 8.0,
+        "all_per_star": false,
+        "groups": {
+          "negative": {
+            "stars": [
+              1,
+              2
+            ],
+            "sample": 60,
+            "real_pct": 23.0,
+            "mode": "group",
+            "weights": {
+              "2": 0.583333
+            },
+            "effective_star": 1.217391,
+            "max_weight": 0.583333,
+            "max_review_share_pct": 0.42
+          },
+          "neutral": {
+            "stars": [
+              3
+            ],
+            "sample": 0,
+            "real_pct": 8.0,
+            "mode": "empty",
+            "weights": {},
+            "effective_star": null,
+            "max_weight": null,
+            "max_review_share_pct": null
+          },
+          "positive": {
+            "stars": [
+              4,
+              5
+            ],
+            "sample": 80,
+            "real_pct": 69.0,
+            "mode": "group",
+            "weights": {
+              "5": 1.3125
+            },
+            "effective_star": 4.884058,
+            "max_weight": 1.3125,
+            "max_review_share_pct": 0.94
+          }
+        }
+      },
+      "B0BZDZJDTG": {
+        "sample_reviews": 270,
+        "covered_real_pct": 100.0,
+        "missing_real_pct": 0,
+        "all_per_star": false,
+        "groups": {
+          "negative": {
+            "stars": [
+              1,
+              2
+            ],
+            "sample": 130,
+            "real_pct": 9.0,
+            "mode": "per_star",
+            "weights": {
+              "1": 0.27,
+              "2": 0.115714
+            },
+            "effective_star": null,
+            "max_weight": 0.27,
+            "max_review_share_pct": 0.1
+          },
+          "neutral": {
+            "stars": [
+              3
+            ],
+            "sample": 70,
+            "real_pct": 8.0,
+            "mode": "per_star",
+            "weights": {
+              "3": 0.308571
+            },
+            "effective_star": null,
+            "max_weight": 0.308571,
+            "max_review_share_pct": 0.11
+          },
+          "positive": {
+            "stars": [
+              4,
+              5
+            ],
+            "sample": 70,
+            "real_pct": 83.0,
+            "mode": "group",
+            "weights": {
+              "5": 3.201429
+            },
+            "effective_star": 4.879518,
+            "max_weight": 3.201429,
+            "max_review_share_pct": 1.19
+          }
+        }
+      },
+      "B0GFGL26JD": {
+        "sample_reviews": 114,
+        "covered_real_pct": 95.0,
+        "missing_real_pct": 5.0,
+        "all_per_star": false,
+        "groups": {
+          "negative": {
+            "stars": [
+              1,
+              2
+            ],
+            "sample": 33,
+            "real_pct": 8.0,
+            "mode": "per_star",
+            "weights": {
+              "1": 0.311111,
+              "2": 0.2
+            },
+            "effective_star": null,
+            "max_weight": 0.311111,
+            "max_review_share_pct": 0.27
+          },
+          "neutral": {
+            "stars": [
+              3
+            ],
+            "sample": 0,
+            "real_pct": 5.0,
+            "mode": "empty",
+            "weights": {},
+            "effective_star": null,
+            "max_weight": null,
+            "max_review_share_pct": null
+          },
+          "positive": {
+            "stars": [
+              4,
+              5
+            ],
+            "sample": 81,
+            "real_pct": 87.0,
+            "mode": "per_star",
+            "weights": {
+              "4": 0.654545,
+              "5": 1.388571
+            },
+            "effective_star": null,
+            "max_weight": 1.388571,
+            "max_review_share_pct": 1.22
+          }
+        }
+      }
+    },
+    "warnings": [
+      "B0009OAI8Q positive: 리뷰 한 개 비중 3.0%(가중치 4.823 / 표본 159개, 기준 2.0% 초과)"
+    ]
+  },
+  "time_trend": {
+    "as_of": "2026-10-07",
+    "rule": "최근 분기는 기준 날짜가 든 분기가 아니라 그 직전에 끝난 분기. 진행 중인 분기의 리뷰는 기간에서 뺌",
+    "in_progress_from": "2026-10-01",
+    "in_progress_reviews": 15,
+    "periods": [
+      {
+        "period": "~2024년",
+        "start": "1900-01-01",
+        "end": "2024-12-31",
+        "reviews": 318,
+        "star_counts": {
+          "1": 51,
+          "2": 73,
+          "3": 115,
+          "4": 79,
+          "5": 0
+        },
+        "sample_mean_star": 2.7,
+        "weighted_group_pct": {
+          "negative": 20.0,
+          "neutral": 15.4,
+          "positive": 64.6
+        },
+        "negative_tags": 402,
+        "neg_topic_share": {
+          "longevity_projection": 27.1,
+          "scent": 21.1,
+          "trust": 20.6,
+          "shipping": 6.7,
+          "customer_service": 5.0,
+          "price_value": 4.7,
+          "quality": 4.5,
+          "brand_experience": 4.2,
+          "bottle_design": 3.0,
+          "packaging": 2.0,
+          "safety": 1.0
+        }
+      },
+      {
+        "period": "2025년",
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "reviews": 248,
+        "star_counts": {
+          "1": 55,
+          "2": 36,
+          "3": 75,
+          "4": 44,
+          "5": 38
+        },
+        "sample_mean_star": 2.9,
+        "weighted_group_pct": {
+          "negative": 5.7,
+          "neutral": 6.2,
+          "positive": 88.1
+        },
+        "negative_tags": 266,
+        "neg_topic_share": {
+          "longevity_projection": 31.6,
+          "scent": 18.8,
+          "trust": 13.5,
+          "shipping": 7.9,
+          "customer_service": 7.5,
+          "brand_experience": 6.4,
+          "price_value": 4.5,
+          "quality": 4.5,
+          "bottle_design": 2.6,
+          "packaging": 1.9,
+          "safety": 0.8
+        }
+      },
+      {
+        "period": "2026년 1~6월",
+        "start": "2026-01-01",
+        "end": "2026-06-30",
+        "reviews": 253,
+        "star_counts": {
+          "1": 109,
+          "2": 28,
+          "3": 26,
+          "4": 36,
+          "5": 54
+        },
+        "sample_mean_star": 2.6,
+        "weighted_group_pct": {
+          "negative": 9.7,
+          "neutral": 1.8,
+          "positive": 88.5
+        },
+        "negative_tags": 279,
+        "neg_topic_share": {
+          "scent": 24.4,
+          "longevity_projection": 24.0,
+          "trust": 12.9,
+          "customer_service": 11.1,
+          "quality": 7.2,
+          "brand_experience": 5.7,
+          "shipping": 4.3,
+          "price_value": 4.3,
+          "bottle_design": 3.2,
+          "safety": 1.8,
+          "packaging": 1.1
+        }
+      },
+      {
+        "period": "2026년 7~9월",
+        "start": "2026-07-01",
+        "end": "2026-09-30",
+        "reviews": 378,
+        "star_counts": {
+          "1": 48,
+          "2": 78,
+          "3": 23,
+          "4": 31,
+          "5": 198
+        },
+        "sample_mean_star": 3.67,
+        "weighted_group_pct": {
+          "negative": 9.9,
+          "neutral": 1.0,
+          "positive": 89.2
+        },
+        "negative_tags": 259,
+        "neg_topic_share": {
+          "longevity_projection": 33.2,
+          "scent": 27.0,
+          "brand_experience": 10.4,
+          "price_value": 6.9,
+          "trust": 6.2,
+          "customer_service": 5.0,
+          "quality": 5.0,
+          "bottle_design": 2.3,
+          "safety": 1.9,
+          "shipping": 1.5,
+          "packaging": 0.4
+        }
+      }
+    ]
+  },
+  "cooccurrence": {
+    "negative": [
+      {
+        "a": "longevity_projection",
+        "b": "trust",
+        "reviews": 83
+      },
+      {
+        "a": "longevity_projection",
+        "b": "scent",
+        "reviews": 73
+      },
+      {
+        "a": "scent",
+        "b": "trust",
+        "reviews": 64
+      },
+      {
+        "a": "customer_service",
+        "b": "scent",
+        "reviews": 44
+      },
+      {
+        "a": "brand_experience",
+        "b": "longevity_projection",
+        "reviews": 38
+      },
+      {
+        "a": "brand_experience",
+        "b": "scent",
+        "reviews": 30
+      },
+      {
+        "a": "longevity_projection",
+        "b": "price_value",
+        "reviews": 28
+      },
+      {
+        "a": "customer_service",
+        "b": "trust",
+        "reviews": 27
+      }
+    ],
+    "positive": [
+      {
+        "a": "brand_experience",
+        "b": "scent",
+        "reviews": 101
+      },
+      {
+        "a": "longevity_projection",
+        "b": "scent",
+        "reviews": 99
+      },
+      {
+        "a": "brand_experience",
+        "b": "longevity_projection",
+        "reviews": 42
+      },
+      {
+        "a": "bottle_design",
+        "b": "scent",
+        "reviews": 41
+      },
+      {
+        "a": "price_value",
+        "b": "scent",
+        "reviews": 38
+      }
+    ]
+  },
+  "trust_signals": {
+    "verified": {
+      "reviews": 1172,
+      "mean_star": 3.04,
+      "negative_pct": 39.8
+    },
+    "unverified": {
+      "reviews": 40,
+      "mean_star": 2.95,
+      "negative_pct": 40.0
+    },
+    "vine": {
+      "reviews": 20,
+      "mean_star": 3.5,
+      "negative_pct": 10.0
+    },
+    "helpful_total": 1115,
+    "helpful_reviews": 357,
+    "helpful_min_voted": 30,
+    "helpful_provisional": false,
+    "helpful_negative_reviews": 446,
+    "helpful_positive_reviews": 450,
+    "helpful_negative_pct": 49.8,
+    "helpful_positive_pct": 50.2,
+    "helpful_weighted_complaints": [
+      {
+        "topic": "longevity_projection",
+        "votes": 368,
+        "share_pct": 28.2
+      },
+      {
+        "topic": "trust",
+        "votes": 340,
+        "share_pct": 26.1
+      },
+      {
+        "topic": "scent",
+        "votes": 230,
+        "share_pct": 17.6
+      },
+      {
+        "topic": "customer_service",
+        "votes": 101,
+        "share_pct": 7.7
+      },
+      {
+        "topic": "quality",
+        "votes": 59,
+        "share_pct": 4.5
+      },
+      {
+        "topic": "price_value",
+        "votes": 53,
+        "share_pct": 4.1
+      },
+      {
+        "topic": "brand_experience",
+        "votes": 48,
+        "share_pct": 3.7
+      },
+      {
+        "topic": "shipping",
+        "votes": 48,
+        "share_pct": 3.7
+      },
+      {
+        "topic": "safety",
+        "votes": 22,
+        "share_pct": 1.7
+      },
+      {
+        "topic": "packaging",
+        "votes": 21,
+        "share_pct": 1.6
+      },
+      {
+        "topic": "bottle_design",
+        "votes": 15,
+        "share_pct": 1.1
+      }
+    ],
+    "top_helpful": [
+      {
+        "review_id": "R1H05KY9W8NYMO",
+        "asin": "B0BZDZJDTG",
+        "star": 3,
+        "title": "Smells like A&F not YSL.",
+        "votes": 87
+      },
+      {
+        "review_id": "R2VB4M9Y2AWKO9",
+        "asin": "B00021AJ5I",
+        "star": 1,
+        "title": "Buyer Beware",
+        "votes": 80
+      },
+      {
+        "review_id": "R3TKPOTESXG4F8",
+        "asin": "B0BZDZJDTG",
+        "star": 3,
+        "title": "Not for my chemistry",
+        "votes": 33
+      },
+      {
+        "review_id": "R2L2RUMH85P11X",
+        "asin": "B00021AJ5I",
+        "star": 2,
+        "title": "I've been a Calvinklein ETERNITY user for over 30yrs.",
+        "votes": 22
+      },
+      {
+        "review_id": "R1YJHTWKIYH5YW",
+        "asin": "B0BZDZJDTG",
+        "star": 5,
+        "title": "Such an Amazing Scent. Buy it!",
+        "votes": 21
+      },
+      {
+        "review_id": "RI6ECRUKWAGQU",
+        "asin": "B0BZDZJDTG",
+        "star": 5,
+        "title": "A warm, cozy scent that gets compliments every time",
+        "votes": 19
+      },
+      {
+        "review_id": "RE6BXDD0FAGRD",
+        "asin": "B0BZDZJDTG",
+        "star": 1,
+        "title": "DO NOT PURCHASE ON AMAZON",
+        "votes": 18
+      },
+      {
+        "review_id": "R250YQNVQ4FP3G",
+        "asin": "B00021AJ5I",
+        "star": 5,
+        "title": "Thanks for the memories",
+        "votes": 16
+      }
+    ]
+  },
+  "brand_deep": [
+    {
+      "brand": "Bella Vita Luxury",
+      "asins": [
+        "B09X5BQ969"
+      ],
+      "reviews": 140,
+      "top_topics": [
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 119,
+          "positive": 81,
+          "negative": 31,
+          "mixed": 4,
+          "neutral": 3,
+          "neg_pct": 26.1,
+          "weighted_neg_pct": 15.2,
+          "pos_reviewer_pct": 70.7,
+          "neg_reviewer_pct": 13.4
+        },
+        {
+          "id": "longevity_projection",
+          "name_ko": "지속력과 향의 세기",
+          "mentions": 66,
+          "positive": 34,
+          "negative": 29,
+          "mixed": 2,
+          "neutral": 1,
+          "neg_pct": 43.9,
+          "weighted_neg_pct": 29.2,
+          "pos_reviewer_pct": 30.8,
+          "neg_reviewer_pct": 13.6
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 30,
+          "positive": 25,
+          "negative": 5,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 16.7,
+          "weighted_neg_pct": 8.2,
+          "pos_reviewer_pct": 23.4,
+          "neg_reviewer_pct": 2.1
+        },
+        {
+          "id": "price_value",
+          "name_ko": "가격 대비 가치",
+          "mentions": 19,
+          "positive": 18,
+          "negative": 1,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 5.3,
+          "weighted_neg_pct": 2.5,
+          "pos_reviewer_pct": 16.4,
+          "neg_reviewer_pct": 0.4
+        },
+        {
+          "id": "bottle_design",
+          "name_ko": "병 디자인과 용량",
+          "mentions": 10,
+          "positive": 10,
+          "negative": 0,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 0.0,
+          "weighted_neg_pct": 0.0,
+          "pos_reviewer_pct": 7.3,
+          "neg_reviewer_pct": 0.0
+        },
+        {
+          "id": "customer_service",
+          "name_ko": "고객 응대",
+          "mentions": 5,
+          "positive": 0,
+          "negative": 5,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 100.0,
+          "weighted_neg_pct": 100.0,
+          "pos_reviewer_pct": 0.0,
+          "neg_reviewer_pct": 2.1
+        },
+        {
+          "id": "quality",
+          "name_ko": "품질",
+          "mentions": 5,
+          "positive": 1,
+          "negative": 4,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 80.0,
+          "weighted_neg_pct": 64.0,
+          "pos_reviewer_pct": 0.9,
+          "neg_reviewer_pct": 1.7
+        },
+        {
+          "id": "safety",
+          "name_ko": "안전",
+          "mentions": 4,
+          "positive": 0,
+          "negative": 4,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 100.0,
+          "weighted_neg_pct": 100.0,
+          "pos_reviewer_pct": 0.0,
+          "neg_reviewer_pct": 2.2
+        }
+      ],
+      "strengths": [
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 119,
+          "pos_reviewer_pct": 70.7,
+          "quote_candidates": [
+            {
+              "review_id": "R1528CQ8SFSG5O",
+              "star": 5,
+              "quote": "smells much more expensive than I expected",
+              "helpful_votes": 7
+            },
+            {
+              "review_id": "R592MF5L4QC3Z",
+              "star": 5,
+              "quote": "It does not smell cheap at all.",
+              "helpful_votes": 5
+            },
+            {
+              "review_id": "R2IMKO1CLXZH7E",
+              "star": 5,
+              "quote": "Musky vanilla smell with sweet honey.",
+              "helpful_votes": 3
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "smells_good_general",
+              "name_ko": "향이 좋음(이유 없음)",
+              "reviews": 63
+            },
+            {
+              "id": "appealing_character",
+              "name_ko": "노트나 분위기가 좋음",
+              "reviews": 14
+            },
+            {
+              "id": "compliments",
+              "name_ko": "남에게 칭찬받음",
+              "reviews": 9
+            }
+          ]
+        },
+        {
+          "id": "longevity_projection",
+          "name_ko": "지속력과 향의 세기",
+          "mentions": 66,
+          "pos_reviewer_pct": 30.8,
+          "quote_candidates": [
+            {
+              "review_id": "R1528CQ8SFSG5O",
+              "star": 5,
+              "quote": "It lasts well throughout the day, and a few sprays are all I need.",
+              "helpful_votes": 7
+            },
+            {
+              "review_id": "R592MF5L4QC3Z",
+              "star": 5,
+              "quote": "it does last all day",
+              "helpful_votes": 5
+            },
+            {
+              "review_id": "R2IMKO1CLXZH7E",
+              "star": 5,
+              "quote": "VERY VERY long lasting",
+              "helpful_votes": 3
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "long_lasting",
+              "name_ko": "오래감",
+              "reviews": 31
+            },
+            {
+              "id": "little_goes_far",
+              "name_ko": "조금만 써도 충분",
+              "reviews": 4
+            },
+            {
+              "id": "not_overpowering",
+              "name_ko": "과하지 않은 세기",
+              "reviews": 4
+            }
+          ]
+        }
+      ],
+      "weaknesses": [
+        {
+          "id": "longevity_projection",
+          "name_ko": "지속력과 향의 세기",
+          "mentions": 66,
+          "neg_reviewer_pct": 13.6,
+          "quote_candidates": [
+            {
+              "review_id": "R1LEPX34SICQ8B",
+              "star": 2,
+              "quote": "It’s VERY strong and not in a pleasant way",
+              "helpful_votes": 1
+            },
+            {
+              "review_id": "R31PCZVW0SWTU",
+              "star": 5,
+              "quote": "the smell doesn't last a long time like perfume does",
+              "helpful_votes": 1
+            },
+            {
+              "review_id": "R3EQPMY67MEHQT",
+              "star": 2,
+              "quote": "no dura nada",
+              "helpful_votes": 1
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "fades_fast",
+              "name_ko": "금방 날아감",
+              "reviews": 15
+            },
+            {
+              "id": "too_strong",
+              "name_ko": "너무 셈",
+              "reviews": 13
+            },
+            {
+              "id": "weak_scent",
+              "name_ko": "처음부터 약함",
+              "reviews": 3
+            }
+          ]
+        },
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 119,
+          "neg_reviewer_pct": 13.4,
+          "quote_candidates": [
+            {
+              "review_id": "R1LEPX34SICQ8B",
+              "star": 2,
+              "quote": "VERY Masculine",
+              "helpful_votes": 1
+            },
+            {
+              "review_id": "RYPYPX8NXLAO6",
+              "star": 2,
+              "quote": "smells identical to Hawaiian Tropic tanning oil from the 90s",
+              "helpful_votes": 1
+            },
+            {
+              "review_id": "R119ZEC687SHW0",
+              "star": 2,
+              "quote": "I dont like the smell on me at all.",
+              "helpful_votes": 0
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "dislike_general",
+              "name_ko": "향이 싫음(이유 없음)",
+              "reviews": 13
+            },
+            {
+              "id": "cheap_artificial",
+              "name_ko": "싸구려, 인공적인 냄새",
+              "reviews": 6
+            },
+            {
+              "id": "disliked_note_profile",
+              "name_ko": "특정 노트나 성격이 싫음",
+              "reviews": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Calvin Klein",
+      "asins": [
+        "B00021AJ5I"
+      ],
+      "reviews": 399,
+      "top_topics": [
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 188,
+          "positive": 104,
+          "negative": 73,
+          "mixed": 9,
+          "neutral": 2,
+          "neg_pct": 38.8,
+          "weighted_neg_pct": 7.6,
+          "pos_reviewer_pct": 48.4,
+          "neg_reviewer_pct": 4.1
+        },
+        {
+          "id": "longevity_projection",
+          "name_ko": "지속력과 향의 세기",
+          "mentions": 162,
+          "positive": 27,
+          "negative": 130,
+          "mixed": 2,
+          "neutral": 3,
+          "neg_pct": 80.2,
+          "weighted_neg_pct": 30.4,
+          "pos_reviewer_pct": 18.8,
+          "neg_reviewer_pct": 8.8
+        },
+        {
+          "id": "trust",
+          "name_ko": "신뢰",
+          "mentions": 122,
+          "positive": 11,
+          "negative": 110,
+          "mixed": 1,
+          "neutral": 0,
+          "neg_pct": 90.2,
+          "weighted_neg_pct": 49.8,
+          "pos_reviewer_pct": 6.4,
+          "neg_reviewer_pct": 6.4
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 77,
+          "positive": 51,
+          "negative": 26,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 33.8,
+          "weighted_neg_pct": 4.5,
+          "pos_reviewer_pct": 34.7,
+          "neg_reviewer_pct": 1.6
+        },
+        {
+          "id": "price_value",
+          "name_ko": "가격 대비 가치",
+          "mentions": 61,
+          "positive": 23,
+          "negative": 35,
+          "mixed": 2,
+          "neutral": 1,
+          "neg_pct": 57.4,
+          "weighted_neg_pct": 29.5,
+          "pos_reviewer_pct": 6.1,
+          "neg_reviewer_pct": 3.0
+        },
+        {
+          "id": "bottle_design",
+          "name_ko": "병 디자인과 용량",
+          "mentions": 35,
+          "positive": 17,
+          "negative": 18,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 51.4,
+          "weighted_neg_pct": 19.1,
+          "pos_reviewer_pct": 8.7,
+          "neg_reviewer_pct": 2.1
+        },
+        {
+          "id": "shipping",
+          "name_ko": "배송",
+          "mentions": 27,
+          "positive": 11,
+          "negative": 16,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 59.3,
+          "weighted_neg_pct": 27.5,
+          "pos_reviewer_pct": 2.6,
+          "neg_reviewer_pct": 1.0
+        },
+        {
+          "id": "customer_service",
+          "name_ko": "고객 응대",
+          "mentions": 25,
+          "positive": 2,
+          "negative": 23,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 92.0,
+          "weighted_neg_pct": 92.0,
+          "pos_reviewer_pct": 0.2,
+          "neg_reviewer_pct": 1.7
+        }
+      ],
+      "strengths": [
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 188,
+          "pos_reviewer_pct": 48.4,
+          "quote_candidates": [
+            {
+              "review_id": "R3REJQDLEML9QP",
+              "star": 5,
+              "quote": "soft gentle floral fragrance and yet clean and refreshing",
+              "helpful_votes": 10
+            },
+            {
+              "review_id": "R19AOTWWUGL4QO",
+              "star": 4,
+              "quote": "the perfume smelled really nice",
+              "helpful_votes": 9
+            },
+            {
+              "review_id": "R3RPB78RLOPANB",
+              "star": 5,
+              "quote": "This is my favorite scent",
+              "helpful_votes": 9
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "smells_good_general",
+              "name_ko": "향이 좋음(이유 없음)",
+              "reviews": 84
+            },
+            {
+              "id": "appealing_character",
+              "name_ko": "노트나 분위기가 좋음",
+              "reviews": 20
+            },
+            {
+              "id": "compliments",
+              "name_ko": "남에게 칭찬받음",
+              "reviews": 5
+            }
+          ]
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 77,
+          "pos_reviewer_pct": 34.7,
+          "quote_candidates": [
+            {
+              "review_id": "R250YQNVQ4FP3G",
+              "star": 5,
+              "quote": "I wear this in memory of my husband.",
+              "helpful_votes": 16
+            },
+            {
+              "review_id": "R2GVQ8DVF092TY",
+              "star": 5,
+              "quote": "My wife has used this for 50 years",
+              "helpful_votes": 10
+            },
+            {
+              "review_id": "R3REJQDLEML9QP",
+              "star": 5,
+              "quote": "I will never be without it.",
+              "helpful_votes": 10
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "favorite_signature",
+              "name_ko": "최애, 시그니처 향",
+              "reviews": 23
+            },
+            {
+              "id": "recommends",
+              "name_ko": "추천, 사라고 권함",
+              "reviews": 11
+            },
+            {
+              "id": "repeat_long_time_user",
+              "name_ko": "여러 병째, 수년째 애용",
+              "reviews": 10
+            }
+          ]
+        }
+      ],
+      "weaknesses": [
+        {
+          "id": "longevity_projection",
+          "name_ko": "지속력과 향의 세기",
+          "mentions": 162,
+          "neg_reviewer_pct": 8.8,
+          "quote_candidates": [
+            {
+              "review_id": "R2L2RUMH85P11X",
+              "star": 2,
+              "quote": "just a few hours later the smell was gone",
+              "helpful_votes": 22
+            },
+            {
+              "review_id": "RITE6TUC3TTUA",
+              "star": 1,
+              "quote": "The perfume I sprayed around noon was completely gone.",
+              "helpful_votes": 13
+            },
+            {
+              "review_id": "R2WS73M76T1F87",
+              "star": 1,
+              "quote": "virtually no scent",
+              "helpful_votes": 8
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "fades_fast",
+              "name_ko": "금방 날아감",
+              "reviews": 98
+            },
+            {
+              "id": "weak_scent",
+              "name_ko": "처음부터 약함",
+              "reviews": 28
+            },
+            {
+              "id": "shorter_than_hoped",
+              "name_ko": "기대보다 짧음",
+              "reviews": 7
+            }
+          ]
+        },
+        {
+          "id": "trust",
+          "name_ko": "신뢰",
+          "mentions": 122,
+          "neg_reviewer_pct": 6.4,
+          "quote_candidates": [
+            {
+              "review_id": "R2VB4M9Y2AWKO9",
+              "star": 1,
+              "quote": "the scent is NOT Calvin Klein's ETERNITY",
+              "helpful_votes": 80
+            },
+            {
+              "review_id": "R2L2RUMH85P11X",
+              "star": 2,
+              "quote": "The cynic in me says I got a generic brand",
+              "helpful_votes": 22
+            },
+            {
+              "review_id": "RITE6TUC3TTUA",
+              "star": 1,
+              "quote": "this does not smell like the original one I had before",
+              "helpful_votes": 13
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "fake_asserted",
+              "name_ko": "가짜라고 단정",
+              "reviews": 31
+            },
+            {
+              "id": "authenticity_doubt",
+              "name_ko": "정품인지 의심",
+              "reviews": 28
+            },
+            {
+              "id": "differs_from_genuine",
+              "name_ko": "정품이나 늘 쓰던 것과 향이 다름",
+              "reviews": 26
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Dossier",
+      "asins": [
+        "B0BZDZJDTG"
+      ],
+      "reviews": 270,
+      "top_topics": [
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 224,
+          "positive": 116,
+          "negative": 88,
+          "mixed": 17,
+          "neutral": 3,
+          "neg_pct": 39.3,
+          "weighted_neg_pct": 8.5,
+          "pos_reviewer_pct": 75.7,
+          "neg_reviewer_pct": 7.2
+        },
+        {
+          "id": "longevity_projection",
+          "name_ko": "지속력과 향의 세기",
+          "mentions": 138,
+          "positive": 29,
+          "negative": 104,
+          "mixed": 2,
+          "neutral": 3,
+          "neg_pct": 75.4,
+          "weighted_neg_pct": 29.1,
+          "pos_reviewer_pct": 25.7,
+          "neg_reviewer_pct": 10.8
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 56,
+          "positive": 30,
+          "negative": 22,
+          "mixed": 4,
+          "neutral": 0,
+          "neg_pct": 39.3,
+          "weighted_neg_pct": 5.0,
+          "pos_reviewer_pct": 30.0,
+          "neg_reviewer_pct": 1.6
+        },
+        {
+          "id": "bottle_design",
+          "name_ko": "병 디자인과 용량",
+          "mentions": 30,
+          "positive": 27,
+          "negative": 2,
+          "mixed": 1,
+          "neutral": 0,
+          "neg_pct": 6.7,
+          "weighted_neg_pct": 1.2,
+          "pos_reviewer_pct": 12.3,
+          "neg_reviewer_pct": 0.2
+        },
+        {
+          "id": "customer_service",
+          "name_ko": "고객 응대",
+          "mentions": 27,
+          "positive": 0,
+          "negative": 27,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 100.0,
+          "weighted_neg_pct": 100.0,
+          "pos_reviewer_pct": 0.0,
+          "neg_reviewer_pct": 2.4
+        },
+        {
+          "id": "price_value",
+          "name_ko": "가격 대비 가치",
+          "mentions": 25,
+          "positive": 17,
+          "negative": 5,
+          "mixed": 2,
+          "neutral": 1,
+          "neg_pct": 20.0,
+          "weighted_neg_pct": 3.4,
+          "pos_reviewer_pct": 11.4,
+          "neg_reviewer_pct": 0.4
+        },
+        {
+          "id": "packaging",
+          "name_ko": "포장",
+          "mentions": 12,
+          "positive": 10,
+          "negative": 2,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 16.7,
+          "weighted_neg_pct": 2.4,
+          "pos_reviewer_pct": 6.5,
+          "neg_reviewer_pct": 0.2
+        },
+        {
+          "id": "quality",
+          "name_ko": "품질",
+          "mentions": 11,
+          "positive": 0,
+          "negative": 11,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 100.0,
+          "weighted_neg_pct": 100.0,
+          "pos_reviewer_pct": 0.0,
+          "neg_reviewer_pct": 0.9
+        }
+      ],
+      "strengths": [
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 224,
+          "pos_reviewer_pct": 75.7,
+          "quote_candidates": [
+            {
+              "review_id": "R1YJHTWKIYH5YW",
+              "star": 5,
+              "quote": "I absolutely love the scent, it’s warm and romantic",
+              "helpful_votes": 21
+            },
+            {
+              "review_id": "RI6ECRUKWAGQU",
+              "star": 5,
+              "quote": "The scent is warm, soft, and just sophisticated enough",
+              "helpful_votes": 19
+            },
+            {
+              "review_id": "RE6BXDD0FAGRD",
+              "star": 1,
+              "quote": "The scent was perfect",
+              "helpful_votes": 18
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "smells_good_general",
+              "name_ko": "향이 좋음(이유 없음)",
+              "reviews": 101
+            },
+            {
+              "id": "appealing_character",
+              "name_ko": "노트나 분위기가 좋음",
+              "reviews": 21
+            },
+            {
+              "id": "compliments",
+              "name_ko": "남에게 칭찬받음",
+              "reviews": 3
+            }
+          ]
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 56,
+          "pos_reviewer_pct": 30.0,
+          "quote_candidates": [
+            {
+              "review_id": "R1YJHTWKIYH5YW",
+              "star": 5,
+              "quote": "I recommend!!!",
+              "helpful_votes": 21
+            },
+            {
+              "review_id": "RI6ECRUKWAGQU",
+              "star": 5,
+              "quote": "I've since recommended it to several friends",
+              "helpful_votes": 19
+            },
+            {
+              "review_id": "R1ZD5J2BF3RTMC",
+              "star": 5,
+              "quote": "I will definitely buy this scent many more times",
+              "helpful_votes": 8
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "brand_affinity",
+              "name_ko": "브랜드 호감, 다른 향도 좋다",
+              "reviews": 12
+            },
+            {
+              "id": "recommends",
+              "name_ko": "추천, 사라고 권함",
+              "reviews": 10
+            },
+            {
+              "id": "favorite_signature",
+              "name_ko": "최애, 시그니처 향",
+              "reviews": 6
+            }
+          ]
+        }
+      ],
+      "weaknesses": [
+        {
+          "id": "longevity_projection",
+          "name_ko": "지속력과 향의 세기",
+          "mentions": 138,
+          "neg_reviewer_pct": 10.8,
+          "quote_candidates": [
+            {
+              "review_id": "R1H05KY9W8NYMO",
+              "star": 3,
+              "quote": "Longevity isn’t great.",
+              "helpful_votes": 87
+            },
+            {
+              "review_id": "RE6BXDD0FAGRD",
+              "star": 1,
+              "quote": "I was disappointed by how short-lived it was",
+              "helpful_votes": 18
+            },
+            {
+              "review_id": "R369IGP9SIK613",
+              "star": 3,
+              "quote": "The longevity on the other hand is not great.",
+              "helpful_votes": 8
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "fades_fast",
+              "name_ko": "금방 날아감",
+              "reviews": 75
+            },
+            {
+              "id": "weak_scent",
+              "name_ko": "처음부터 약함",
+              "reviews": 15
+            },
+            {
+              "id": "too_strong",
+              "name_ko": "너무 셈",
+              "reviews": 13
+            }
+          ]
+        },
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 224,
+          "neg_reviewer_pct": 7.2,
+          "quote_candidates": [
+            {
+              "review_id": "R11ZUG0KJFP5C0",
+              "star": 3,
+              "quote": "overwhelmingly powdery and soapy",
+              "helpful_votes": 3
+            },
+            {
+              "review_id": "R18BLPFIGWE423",
+              "star": 2,
+              "quote": "it smells different",
+              "helpful_votes": 1
+            },
+            {
+              "review_id": "R1DBZDH41OMOAB",
+              "star": 1,
+              "quote": "Smells awful.",
+              "helpful_votes": 1
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "missing_described_notes",
+              "name_ko": "설명한 노트가 안 남",
+              "reviews": 32
+            },
+            {
+              "id": "dislike_general",
+              "name_ko": "향이 싫음(이유 없음)",
+              "reviews": 26
+            },
+            {
+              "id": "old_lady_mature",
+              "name_ko": "나이 든 사람 향",
+              "reviews": 17
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Elizabeth Taylor",
+      "asins": [
+        "B0009OAI8Q"
+      ],
+      "reviews": 159,
+      "top_topics": [
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 93,
+          "positive": 23,
+          "negative": 61,
+          "mixed": 8,
+          "neutral": 1,
+          "neg_pct": 65.6,
+          "weighted_neg_pct": 15.0,
+          "pos_reviewer_pct": 40.0,
+          "neg_reviewer_pct": 7.7
+        },
+        {
+          "id": "longevity_projection",
+          "name_ko": "지속력과 향의 세기",
+          "mentions": 59,
+          "positive": 8,
+          "negative": 44,
+          "mixed": 5,
+          "neutral": 2,
+          "neg_pct": 74.6,
+          "weighted_neg_pct": 41.7,
+          "pos_reviewer_pct": 12.3,
+          "neg_reviewer_pct": 9.1
+        },
+        {
+          "id": "trust",
+          "name_ko": "신뢰",
+          "mentions": 26,
+          "positive": 4,
+          "negative": 22,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 84.6,
+          "weighted_neg_pct": 33.2,
+          "pos_reviewer_pct": 9.1,
+          "neg_reviewer_pct": 4.5
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 23,
+          "positive": 10,
+          "negative": 13,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 56.5,
+          "weighted_neg_pct": 5.9,
+          "pos_reviewer_pct": 18.4,
+          "neg_reviewer_pct": 1.1
+        },
+        {
+          "id": "quality",
+          "name_ko": "품질",
+          "mentions": 23,
+          "positive": 2,
+          "negative": 21,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 91.3,
+          "weighted_neg_pct": 22.3,
+          "pos_reviewer_pct": 6.1,
+          "neg_reviewer_pct": 1.7
+        },
+        {
+          "id": "bottle_design",
+          "name_ko": "병 디자인과 용량",
+          "mentions": 21,
+          "positive": 10,
+          "negative": 10,
+          "mixed": 0,
+          "neutral": 1,
+          "neg_pct": 47.6,
+          "weighted_neg_pct": 35.2,
+          "pos_reviewer_pct": 6.6,
+          "neg_reviewer_pct": 3.6
+        },
+        {
+          "id": "price_value",
+          "name_ko": "가격 대비 가치",
+          "mentions": 18,
+          "positive": 12,
+          "negative": 5,
+          "mixed": 1,
+          "neutral": 0,
+          "neg_pct": 27.8,
+          "weighted_neg_pct": 3.0,
+          "pos_reviewer_pct": 9.5,
+          "neg_reviewer_pct": 0.4
+        },
+        {
+          "id": "customer_service",
+          "name_ko": "고객 응대",
+          "mentions": 14,
+          "positive": 2,
+          "negative": 11,
+          "mixed": 0,
+          "neutral": 1,
+          "neg_pct": 78.6,
+          "weighted_neg_pct": 88.7,
+          "pos_reviewer_pct": 0.1,
+          "neg_reviewer_pct": 1.1
+        }
+      ],
+      "strengths": [
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 93,
+          "pos_reviewer_pct": 40.0,
+          "quote_candidates": [
+            {
+              "review_id": "R4HVFOK3EB74D",
+              "star": 4,
+              "quote": "It's a gorgeous, wonderful scent",
+              "helpful_votes": 7
+            },
+            {
+              "review_id": "R19EQ9SYD8AQ6U",
+              "star": 4,
+              "quote": "My wife and I both enjoy the fragrance of this perfume.",
+              "helpful_votes": 4
+            },
+            {
+              "review_id": "R3R6ZPYXB9A5CA",
+              "star": 3,
+              "quote": "Smells good",
+              "helpful_votes": 4
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "smells_good_general",
+              "name_ko": "향이 좋음(이유 없음)",
+              "reviews": 26
+            },
+            {
+              "id": "appealing_character",
+              "name_ko": "노트나 분위기가 좋음",
+              "reviews": 2
+            }
+          ]
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 23,
+          "pos_reviewer_pct": 18.4,
+          "quote_candidates": [
+            {
+              "review_id": "R35BQ1BTF2Q094",
+              "star": 4,
+              "quote": "One of my signature perfume.",
+              "helpful_votes": 3
+            },
+            {
+              "review_id": "R3JEWCYN954Z46",
+              "star": 4,
+              "quote": "from the time I’ve been buying it as a gift",
+              "helpful_votes": 3
+            },
+            {
+              "review_id": "R22VUBS3RAHPCD",
+              "star": 3,
+              "quote": "I always buy this perfume, I love it",
+              "helpful_votes": 2
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "favorite_signature",
+              "name_ko": "최애, 시그니처 향",
+              "reviews": 5
+            },
+            {
+              "id": "repeat_long_time_user",
+              "name_ko": "여러 병째, 수년째 애용",
+              "reviews": 3
+            },
+            {
+              "id": "brand_affinity",
+              "name_ko": "브랜드 호감, 다른 향도 좋다",
+              "reviews": 1
+            }
+          ]
+        }
+      ],
+      "weaknesses": [
+        {
+          "id": "longevity_projection",
+          "name_ko": "지속력과 향의 세기",
+          "mentions": 59,
+          "neg_reviewer_pct": 9.1,
+          "quote_candidates": [
+            {
+              "review_id": "R4HVFOK3EB74D",
+              "star": 4,
+              "quote": "there is no longevity!",
+              "helpful_votes": 7
+            },
+            {
+              "review_id": "R3R6ZPYXB9A5CA",
+              "star": 3,
+              "quote": "only last for 2hrs",
+              "helpful_votes": 4
+            },
+            {
+              "review_id": "R17P0BA3UA82A6",
+              "star": 1,
+              "quote": "fragrance lasted only minutes at best",
+              "helpful_votes": 3
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "too_strong",
+              "name_ko": "너무 셈",
+              "reviews": 20
+            },
+            {
+              "id": "fades_fast",
+              "name_ko": "금방 날아감",
+              "reviews": 17
+            },
+            {
+              "id": "weak_scent",
+              "name_ko": "처음부터 약함",
+              "reviews": 6
+            }
+          ]
+        },
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 93,
+          "neg_reviewer_pct": 7.7,
+          "quote_candidates": [
+            {
+              "review_id": "RCS1EXNM71HF",
+              "star": 3,
+              "quote": "it smells like your great grandmother",
+              "helpful_votes": 3
+            },
+            {
+              "review_id": "R172WXNSN0NRNX",
+              "star": 1,
+              "quote": "No longer has same scent",
+              "helpful_votes": 2
+            },
+            {
+              "review_id": "R1CX3R6UQLOFAJ",
+              "star": 3,
+              "quote": "it is definitely an older women smell",
+              "helpful_votes": 2
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "dislike_general",
+              "name_ko": "향이 싫음(이유 없음)",
+              "reviews": 24
+            },
+            {
+              "id": "old_lady_mature",
+              "name_ko": "나이 든 사람 향",
+              "reviews": 16
+            },
+            {
+              "id": "differs_from_original",
+              "name_ko": "원래 알던 향과 다름",
+              "reviews": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Glossier",
+      "asins": [
+        "B0GFGL26JD"
+      ],
+      "reviews": 114,
+      "top_topics": [
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 87,
+          "positive": 73,
+          "negative": 12,
+          "mixed": 2,
+          "neutral": 0,
+          "neg_pct": 13.8,
+          "weighted_neg_pct": 3.9,
+          "pos_reviewer_pct": 77.2,
+          "neg_reviewer_pct": 3.2
+        },
+        {
+          "id": "longevity_projection",
+          "name_ko": "지속력과 향의 세기",
+          "mentions": 48,
+          "positive": 15,
+          "negative": 29,
+          "mixed": 2,
+          "neutral": 2,
+          "neg_pct": 60.4,
+          "weighted_neg_pct": 36.3,
+          "pos_reviewer_pct": 18.3,
+          "neg_reviewer_pct": 12.5
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 36,
+          "positive": 30,
+          "negative": 6,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 16.7,
+          "weighted_neg_pct": 5.5,
+          "pos_reviewer_pct": 33.6,
+          "neg_reviewer_pct": 1.9
+        },
+        {
+          "id": "price_value",
+          "name_ko": "가격 대비 가치",
+          "mentions": 14,
+          "positive": 3,
+          "negative": 9,
+          "mixed": 1,
+          "neutral": 1,
+          "neg_pct": 64.3,
+          "weighted_neg_pct": 36.5,
+          "pos_reviewer_pct": 3.7,
+          "neg_reviewer_pct": 3.5
+        },
+        {
+          "id": "bottle_design",
+          "name_ko": "병 디자인과 용량",
+          "mentions": 10,
+          "positive": 7,
+          "negative": 3,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 30.0,
+          "weighted_neg_pct": 25.6,
+          "pos_reviewer_pct": 7.9,
+          "neg_reviewer_pct": 2.7
+        },
+        {
+          "id": "customer_service",
+          "name_ko": "고객 응대",
+          "mentions": 8,
+          "positive": 0,
+          "negative": 8,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 100.0,
+          "weighted_neg_pct": 100.0,
+          "pos_reviewer_pct": 0.0,
+          "neg_reviewer_pct": 2.2
+        },
+        {
+          "id": "trust",
+          "name_ko": "신뢰",
+          "mentions": 8,
+          "positive": 0,
+          "negative": 8,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 100.0,
+          "weighted_neg_pct": 100.0,
+          "pos_reviewer_pct": 0.0,
+          "neg_reviewer_pct": 2.2
+        },
+        {
+          "id": "shipping",
+          "name_ko": "배송",
+          "mentions": 6,
+          "positive": 3,
+          "negative": 3,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 50.0,
+          "weighted_neg_pct": 31.3,
+          "pos_reviewer_pct": 3.7,
+          "neg_reviewer_pct": 1.7
+        }
+      ],
+      "strengths": [
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 87,
+          "pos_reviewer_pct": 77.2,
+          "quote_candidates": [
+            {
+              "review_id": "R2MM4NAPNXXVKJ",
+              "star": 5,
+              "quote": "This is a perfume I ALWAYS get compliments on.",
+              "helpful_votes": 8
+            },
+            {
+              "review_id": "R2KW50446AUSFC",
+              "star": 5,
+              "quote": "I always get compliments about how good I smell",
+              "helpful_votes": 6
+            },
+            {
+              "review_id": "R3HUTCGBNSP6M7",
+              "star": 5,
+              "quote": "Have received the most amount of compliments I’ve ever received for a perfume.",
+              "helpful_votes": 5
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "smells_good_general",
+              "name_ko": "향이 좋음(이유 없음)",
+              "reviews": 41
+            },
+            {
+              "id": "appealing_character",
+              "name_ko": "노트나 분위기가 좋음",
+              "reviews": 23
+            },
+            {
+              "id": "compliments",
+              "name_ko": "남에게 칭찬받음",
+              "reviews": 15
+            }
+          ]
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 36,
+          "pos_reviewer_pct": 33.6,
+          "quote_candidates": [
+            {
+              "review_id": "R2MM4NAPNXXVKJ",
+              "star": 5,
+              "quote": "It is my every day",
+              "helpful_votes": 8
+            },
+            {
+              "review_id": "R2KW50446AUSFC",
+              "star": 5,
+              "quote": "One of my favorite fragrances!",
+              "helpful_votes": 6
+            },
+            {
+              "review_id": "R1J20OGWFH3S",
+              "star": 5,
+              "quote": "Will definitely get again",
+              "helpful_votes": 2
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "favorite_signature",
+              "name_ko": "최애, 시그니처 향",
+              "reviews": 12
+            },
+            {
+              "id": "repeat_long_time_user",
+              "name_ko": "여러 병째, 수년째 애용",
+              "reviews": 6
+            },
+            {
+              "id": "recommends",
+              "name_ko": "추천, 사라고 권함",
+              "reviews": 5
+            }
+          ]
+        }
+      ],
+      "weaknesses": [
+        {
+          "id": "longevity_projection",
+          "name_ko": "지속력과 향의 세기",
+          "mentions": 48,
+          "neg_reviewer_pct": 12.5,
+          "quote_candidates": [
+            {
+              "review_id": "R2WLZEYU4QJSNX",
+              "star": 1,
+              "quote": "It also didn’t last on me",
+              "helpful_votes": 10
+            },
+            {
+              "review_id": "R3APZ96YWECB15",
+              "star": 1,
+              "quote": "It doesn’t stay on you long",
+              "helpful_votes": 3
+            },
+            {
+              "review_id": "R3IYVVJV43EN5",
+              "star": 1,
+              "quote": "The perfume had no scent",
+              "helpful_votes": 3
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "fades_fast",
+              "name_ko": "금방 날아감",
+              "reviews": 19
+            },
+            {
+              "id": "weak_scent",
+              "name_ko": "처음부터 약함",
+              "reviews": 9
+            },
+            {
+              "id": "shorter_than_hoped",
+              "name_ko": "기대보다 짧음",
+              "reviews": 5
+            }
+          ]
+        },
+        {
+          "id": "price_value",
+          "name_ko": "가격 대비 가치",
+          "mentions": 14,
+          "neg_reviewer_pct": 3.5,
+          "quote_candidates": [
+            {
+              "review_id": "R3HUTCGBNSP6M7",
+              "star": 5,
+              "quote": "Definitely wish it was cheaper",
+              "helpful_votes": 5
+            },
+            {
+              "review_id": "R3IYVVJV43EN5",
+              "star": 1,
+              "quote": "high price for a small spray",
+              "helpful_votes": 3
+            },
+            {
+              "review_id": "R18OBAYHELKYH5",
+              "star": 4,
+              "quote": "Pricey",
+              "helpful_votes": 2
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "not_worth_price",
+              "name_ko": "값만큼 못함",
+              "reviews": 3
+            },
+            {
+              "id": "too_expensive",
+              "name_ko": "그냥 비쌈",
+              "reviews": 3
+            },
+            {
+              "id": "not_lasting_for_price",
+              "name_ko": "지속력에 비해 비쌈",
+              "reviews": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Jean Paul Gaultier",
+      "asins": [
+        "B08FBQWRYC"
+      ],
+      "reviews": 130,
+      "top_topics": [
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 62,
+          "positive": 49,
+          "negative": 11,
+          "mixed": 2,
+          "neutral": 0,
+          "neg_pct": 17.7,
+          "weighted_neg_pct": 8.8,
+          "pos_reviewer_pct": 59.3,
+          "neg_reviewer_pct": 6.0
+        },
+        {
+          "id": "shipping",
+          "name_ko": "배송",
+          "mentions": 45,
+          "positive": 4,
+          "negative": 40,
+          "mixed": 1,
+          "neutral": 0,
+          "neg_pct": 88.9,
+          "weighted_neg_pct": 67.9,
+          "pos_reviewer_pct": 5.5,
+          "neg_reviewer_pct": 14.5
+        },
+        {
+          "id": "longevity_projection",
+          "name_ko": "지속력과 향의 세기",
+          "mentions": 31,
+          "positive": 15,
+          "negative": 12,
+          "mixed": 3,
+          "neutral": 1,
+          "neg_pct": 38.7,
+          "weighted_neg_pct": 22.9,
+          "pos_reviewer_pct": 19.2,
+          "neg_reviewer_pct": 7.3
+        },
+        {
+          "id": "trust",
+          "name_ko": "신뢰",
+          "mentions": 24,
+          "positive": 5,
+          "negative": 19,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 79.2,
+          "weighted_neg_pct": 58.5,
+          "pos_reviewer_pct": 5.5,
+          "neg_reviewer_pct": 7.8
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 16,
+          "positive": 9,
+          "negative": 7,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 43.8,
+          "weighted_neg_pct": 3.8,
+          "pos_reviewer_pct": 12.3,
+          "neg_reviewer_pct": 0.5
+        },
+        {
+          "id": "quality",
+          "name_ko": "품질",
+          "mentions": 15,
+          "positive": 1,
+          "negative": 14,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 93.3,
+          "weighted_neg_pct": 81.8,
+          "pos_reviewer_pct": 1.4,
+          "neg_reviewer_pct": 6.2
+        },
+        {
+          "id": "customer_service",
+          "name_ko": "고객 응대",
+          "mentions": 13,
+          "positive": 2,
+          "negative": 11,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 84.6,
+          "weighted_neg_pct": 21.6,
+          "pos_reviewer_pct": 2.7,
+          "neg_reviewer_pct": 0.8
+        },
+        {
+          "id": "packaging",
+          "name_ko": "포장",
+          "mentions": 13,
+          "positive": 1,
+          "negative": 12,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 92.3,
+          "weighted_neg_pct": 89.1,
+          "pos_reviewer_pct": 1.4,
+          "neg_reviewer_pct": 11.2
+        }
+      ],
+      "strengths": [
+        {
+          "id": "scent",
+          "name_ko": "향",
+          "mentions": 62,
+          "pos_reviewer_pct": 59.3,
+          "quote_candidates": [
+            {
+              "review_id": "R2K5IJ2KE33XT7",
+              "star": 4,
+              "quote": "He loves the scent",
+              "helpful_votes": 8
+            },
+            {
+              "review_id": "R3SW3QNSYA0ROA",
+              "star": 4,
+              "quote": "todos mis compañeros del trabajo me dicen hueles bien",
+              "helpful_votes": 7
+            },
+            {
+              "review_id": "R29HBQQI41Y5XP",
+              "star": 4,
+              "quote": "I really like the smell",
+              "helpful_votes": 6
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "smells_good_general",
+              "name_ko": "향이 좋음(이유 없음)",
+              "reviews": 40
+            },
+            {
+              "id": "appealing_character",
+              "name_ko": "노트나 분위기가 좋음",
+              "reviews": 9
+            },
+            {
+              "id": "compliments",
+              "name_ko": "남에게 칭찬받음",
+              "reviews": 3
+            }
+          ]
+        },
+        {
+          "id": "longevity_projection",
+          "name_ko": "지속력과 향의 세기",
+          "mentions": 31,
+          "pos_reviewer_pct": 19.2,
+          "quote_candidates": [
+            {
+              "review_id": "R29HBQQI41Y5XP",
+              "star": 4,
+              "quote": "strongness, and longevity",
+              "helpful_votes": 6
+            },
+            {
+              "review_id": "R3AOLDFQH1SQI9",
+              "star": 4,
+              "quote": "lasts long",
+              "helpful_votes": 6
+            },
+            {
+              "review_id": "RSXO66KNMLOM3",
+              "star": 4,
+              "quote": "It last a long time, over a day I’ll say",
+              "helpful_votes": 4
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "long_lasting",
+              "name_ko": "오래감",
+              "reviews": 16
+            },
+            {
+              "id": "not_overpowering",
+              "name_ko": "과하지 않은 세기",
+              "reviews": 2
+            },
+            {
+              "id": "strong_presence",
+              "name_ko": "진하고 잘 퍼짐",
+              "reviews": 2
+            }
+          ]
+        }
+      ],
+      "weaknesses": [
+        {
+          "id": "shipping",
+          "name_ko": "배송",
+          "mentions": 45,
+          "neg_reviewer_pct": 14.5,
+          "quote_candidates": [
+            {
+              "review_id": "R29HBQQI41Y5XP",
+              "star": 4,
+              "quote": "the atomizer was broken off",
+              "helpful_votes": 6
+            },
+            {
+              "review_id": "R3AOLDFQH1SQI9",
+              "star": 4,
+              "quote": "was leaking when I received it",
+              "helpful_votes": 6
+            },
+            {
+              "review_id": "R2KG7CQGRVCI6S",
+              "star": 4,
+              "quote": "Found two broken pieces.",
+              "helpful_votes": 3
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "arrived_broken",
+              "name_ko": "깨지거나 부서져 도착",
+              "reviews": 21
+            },
+            {
+              "id": "leaked_in_transit",
+              "name_ko": "새거나 흘러서 도착",
+              "reviews": 14
+            },
+            {
+              "id": "wrong_or_opened_item",
+              "name_ko": "주문과 다른 상품이나 개봉된 상품",
+              "reviews": 3
+            }
+          ]
+        },
+        {
+          "id": "packaging",
+          "name_ko": "포장",
+          "mentions": 13,
+          "neg_reviewer_pct": 11.2,
+          "quote_candidates": [
+            {
+              "review_id": "R29HBQQI41Y5XP",
+              "star": 4,
+              "quote": "the bottom of the holder was cut in half",
+              "helpful_votes": 6
+            },
+            {
+              "review_id": "R2KG7CQGRVCI6S",
+              "star": 4,
+              "quote": "The can is dented",
+              "helpful_votes": 3
+            },
+            {
+              "review_id": "R1688LKF56GMYH",
+              "star": 1,
+              "quote": "el estuche de metal muy golpeado",
+              "helpful_votes": 2
+            }
+          ],
+          "top_issues": []
+        }
+      ]
+    }
+  ],
+  "notes": {
+    "data_source": "공유 리뷰 DB에서 받음, 본문 없는 리뷰 2개 제외",
+    "sample_notice": "표본에는 낮은 별점이 실제보다 많습니다(표본 평균 3.03★, 실제 분포로 되돌린 가중 평균 4.48★). ASIN 3개는 표본이 없는 별점 묶음이 있어, 그 묶음의 실제 비율은 가중 결과에서 빠졌습니다(ASIN별 비율은 1장 분포 표).",
+    "asin_sample_text": "ASIN당 표본 리뷰 114~399개"
+  },
+  "prices": {
+    "checked_on": "2026-10-07",
+    "source": "spd-amz-market products_variations (marketplace US)",
+    "asins": {
+      "B00021AJ5I": {
+        "parent_asin": "B0H62MKNTJ",
+        "price_band": "36.00~115.54달러(0.33~3.3 fl oz)",
+        "price_usd": "115.54",
+        "variants": [
+          {
+            "asin": "B0CN7QQNZ3",
+            "size": "0.33 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 36.0
+          },
+          {
+            "asin": "B00021AJ5I",
+            "size": "3.3 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 115.54
+          },
+          {
+            "asin": "B000C1UBQU",
+            "size": "1 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 75.0
+          },
+          {
+            "asin": "B0009OAGQU",
+            "size": "1.6 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 100.0
+          }
+        ]
+      },
+      "B0BZDZJDTG": {
+        "parent_asin": "B0HDT27STG",
+        "price_band": "26.12~79.00달러(1.7~3.4 fl oz)",
+        "price_usd": "26.12",
+        "variants": [
+          {
+            "asin": "B0BZDZJDTG",
+            "size": "1.7 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 26.12
+          },
+          {
+            "asin": "B0BZD3PQVZ",
+            "size": "1.7 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 44.52
+          },
+          {
+            "asin": "B0BZF8P4D1",
+            "size": "1.7 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 34.97
+          },
+          {
+            "asin": "B0C1C2QY5K",
+            "size": "1.7 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 40.29
+          },
+          {
+            "asin": "B0D7D6R7YY",
+            "size": "3.4 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 61.29
+          },
+          {
+            "asin": "B0DGSP737B",
+            "size": "3.4 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 79.0
+          },
+          {
+            "asin": "B0DGT8FY7V",
+            "size": "3.4 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 47.75
+          },
+          {
+            "asin": "B0DGSQ2ZMD",
+            "size": "3.4 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 59.0
+          },
+          {
+            "asin": "B0H34CCFFL",
+            "size": "1.7 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 49.0
+          },
+          {
+            "asin": "B0H348KCK4",
+            "size": "1.7 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 49.0
+          },
+          {
+            "asin": "B0H34G2CVQ",
+            "size": "1.7 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 49.09
+          },
+          {
+            "asin": "B0H345XMSD",
+            "size": "1.7 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 49.0
+          }
+        ]
+      },
+      "B0009OAI8Q": {
+        "parent_asin": "B0FFPC31YQ",
+        "price_band": "16.97~35.55달러(0.5~10.4 fl oz)",
+        "price_usd": "25.73",
+        "variants": [
+          {
+            "asin": "B0009OAI8Q",
+            "size": "3.3 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 25.73
+          },
+          {
+            "asin": "B000BC1FBK",
+            "size": "0.5 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 16.97
+          },
+          {
+            "asin": "B0009OAI8G",
+            "size": "1.7 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 29.68
+          },
+          {
+            "asin": "B0FLFBBPZB",
+            "size": "10.4 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 35.55
+          }
+        ]
+      },
+      "B09X5BQ969": {
+        "parent_asin": "B0GFFVH9DV",
+        "price_band": "20.99달러(3.34~3.4 fl oz)",
+        "price_usd": "20.99",
+        "variants": [
+          {
+            "asin": "B09X5BQ969",
+            "size": "3.38 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 20.99
+          },
+          {
+            "asin": "B08XBVLF8B",
+            "size": "3.34 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 20.99
+          },
+          {
+            "asin": "B0BMLRHC6T",
+            "size": "3.4 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 20.99
+          },
+          {
+            "asin": "B09X9XPKX5",
+            "size": "3.4 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 20.99
+          }
+        ]
+      },
+      "B08FBQWRYC": {
+        "parent_asin": "B0BGZWM1H6",
+        "price_band": "37.00~208.00달러(0.34~6.8 fl oz)",
+        "price_usd": "153.10",
+        "variants": [
+          {
+            "asin": "B08FBQHY35",
+            "size": "2.5 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 120.7
+          },
+          {
+            "asin": "B0H8RD95FN",
+            "size": "0.34 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 37.0
+          },
+          {
+            "asin": "B08FBQWRYC",
+            "size": "4.2 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 153.1
+          },
+          {
+            "asin": "B08GBY9QXX",
+            "size": "6.8 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 208.0
+          }
+        ]
+      },
+      "B0GFGL26JD": {
+        "parent_asin": "B0GPH36XYP",
+        "price_band": "32.00~116.00달러(0.27~3.4 fl oz)",
+        "price_usd": "82.00",
+        "variants": [
+          {
+            "asin": "B0DNCMDLSY",
+            "size": "0.27 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 32.0
+          },
+          {
+            "asin": "B0GFGL26JD",
+            "size": "1.7 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 82.0
+          },
+          {
+            "asin": "B0CQPMGQHZ",
+            "size": "3.4 Fl Oz (Pack of 1)",
+            "buyBoxPrice": 116.0
+          }
+        ]
+      }
+    }
+  },
+  "variant_signal": {
+    "key": "Size",
+    "key_scores": {
+      "Size": 5,
+      "Scent": 0
+    },
+    "rules": {
+      "min_reviews": 15,
+      "min_tags": 12,
+      "topic_min": 10
+    },
+    "checked_on": "2026-10-07",
+    "asins": [
+      {
+        "asin": "B00021AJ5I",
+        "variants_total": 4,
+        "variants_shown": 4,
+        "hidden_low_tags": [],
+        "topics": [
+          "scent",
+          "longevity_projection",
+          "trust",
+          "brand_experience",
+          "price_value",
+          "bottle_design",
+          "shipping",
+          "customer_service",
+          "quality"
+        ],
+        "rows": [
+          {
+            "variant": "0.33 fl oz",
+            "variant_asin": "B0CN7QQNZ3",
+            "oz": 0.33,
+            "pack": 1,
+            "reviews": 42,
+            "tags": 119,
+            "price": 36.0,
+            "price_per_oz": 109.09,
+            "neg_reviewer_pct": {
+              "scent": 1.9,
+              "longevity_projection": 5.5,
+              "trust": 1.7,
+              "brand_experience": 0.4,
+              "price_value": 0.6,
+              "bottle_design": 4.2,
+              "shipping": 0.1,
+              "customer_service": 0.4,
+              "quality": 0.8
+            }
+          },
+          {
+            "variant": "1 fl oz",
+            "variant_asin": "B000C1UBQU",
+            "oz": 1.0,
+            "pack": 1,
+            "reviews": 82,
+            "tags": 223,
+            "price": 75.0,
+            "price_per_oz": 75.0,
+            "neg_reviewer_pct": {
+              "scent": 4.6,
+              "longevity_projection": 6.2,
+              "trust": 4.1,
+              "brand_experience": 2.2,
+              "price_value": 5.1,
+              "bottle_design": 4.0,
+              "shipping": 0.2,
+              "customer_service": 1.3,
+              "quality": 0.5
+            }
+          },
+          {
+            "variant": "1.6 fl oz",
+            "variant_asin": "B0009OAGQU",
+            "oz": 1.6,
+            "pack": 1,
+            "reviews": 45,
+            "tags": 129,
+            "price": 100.0,
+            "price_per_oz": 62.5,
+            "neg_reviewer_pct": {
+              "scent": 3.4,
+              "longevity_projection": 4.9,
+              "trust": 6.0,
+              "brand_experience": 2.7,
+              "price_value": 4.3,
+              "bottle_design": 3.1,
+              "shipping": 1.3,
+              "customer_service": 1.8,
+              "quality": 2.5
+            }
+          },
+          {
+            "variant": "3.3 fl oz",
+            "variant_asin": "B00021AJ5I",
+            "oz": 3.3,
+            "pack": 1,
+            "reviews": 230,
+            "tags": 651,
+            "price": 115.54,
+            "price_per_oz": 35.01,
+            "neg_reviewer_pct": {
+              "scent": 5.2,
+              "longevity_projection": 12.0,
+              "trust": 9.5,
+              "brand_experience": 1.9,
+              "price_value": 3.3,
+              "bottle_design": 0.2,
+              "shipping": 1.6,
+              "customer_service": 2.5,
+              "quality": 0.7
+            }
+          }
+        ]
+      },
+      {
+        "asin": "B0009OAI8Q",
+        "variants_total": 4,
+        "variants_shown": 2,
+        "hidden_low_tags": [],
+        "topics": [
+          "scent",
+          "longevity_projection",
+          "trust",
+          "brand_experience",
+          "quality",
+          "bottle_design",
+          "price_value",
+          "customer_service"
+        ],
+        "rows": [
+          {
+            "variant": "0.5 fl oz",
+            "variant_asin": "B000BC1FBK",
+            "oz": 0.5,
+            "pack": 1,
+            "reviews": 26,
+            "tags": 73,
+            "price": 16.97,
+            "price_per_oz": 33.94,
+            "neg_reviewer_pct": {
+              "scent": 7.5,
+              "longevity_projection": 32.4,
+              "trust": 2.4,
+              "brand_experience": 0.4,
+              "quality": 0.4,
+              "bottle_design": 31.6,
+              "price_value": 2.8,
+              "customer_service": 2.3
+            }
+          },
+          {
+            "variant": "3.3 fl oz",
+            "variant_asin": "B0009OAI8Q",
+            "oz": 3.3,
+            "pack": 1,
+            "reviews": 125,
+            "tags": 359,
+            "price": 25.73,
+            "price_per_oz": 7.8,
+            "neg_reviewer_pct": {
+              "scent": 8.2,
+              "longevity_projection": 3.0,
+              "trust": 5.2,
+              "brand_experience": 1.3,
+              "quality": 1.8,
+              "bottle_design": 0.2,
+              "price_value": 0.1,
+              "customer_service": 0.8
+            }
+          }
+        ]
+      },
+      {
+        "asin": "B08FBQWRYC",
+        "variants_total": 4,
+        "variants_shown": 3,
+        "hidden_low_tags": [],
+        "topics": [
+          "scent",
+          "shipping",
+          "longevity_projection",
+          "trust",
+          "brand_experience",
+          "quality",
+          "customer_service",
+          "packaging",
+          "price_value"
+        ],
+        "rows": [
+          {
+            "variant": "2.5 fl oz",
+            "variant_asin": "B08FBQHY35",
+            "oz": 2.5,
+            "pack": 1,
+            "reviews": 24,
+            "tags": 66,
+            "price": 120.7,
+            "price_per_oz": 48.28,
+            "neg_reviewer_pct": {
+              "scent": 5.8,
+              "shipping": 6.1,
+              "longevity_projection": 0.6,
+              "trust": 1.2,
+              "brand_experience": 0.3,
+              "quality": 6.3,
+              "customer_service": 0.0,
+              "packaging": 17.3,
+              "price_value": 11.8
+            }
+          },
+          {
+            "variant": "4.2 fl oz",
+            "variant_asin": "B08FBQWRYC",
+            "oz": 4.2,
+            "pack": 1,
+            "reviews": 65,
+            "tags": 180,
+            "price": 153.1,
+            "price_per_oz": 36.45,
+            "neg_reviewer_pct": {
+              "scent": 3.5,
+              "shipping": 9.5,
+              "longevity_projection": 8.5,
+              "trust": 8.8,
+              "brand_experience": 0.5,
+              "quality": 0.9,
+              "customer_service": 1.3,
+              "packaging": 10.9,
+              "price_value": 2.8
+            }
+          },
+          {
+            "variant": "6.8 fl oz",
+            "variant_asin": "B08GBY9QXX",
+            "oz": 6.8,
+            "pack": 1,
+            "reviews": 37,
+            "tags": 104,
+            "price": 208.0,
+            "price_per_oz": 30.59,
+            "neg_reviewer_pct": {
+              "scent": 7.4,
+              "shipping": 41.9,
+              "longevity_projection": 7.4,
+              "trust": 15.5,
+              "brand_experience": 0.7,
+              "quality": 21.5,
+              "customer_service": 0.4,
+              "packaging": 7.7,
+              "price_value": 0.4
+            }
+          }
+        ]
+      },
+      {
+        "asin": "B0BZDZJDTG",
+        "variants_total": 2,
+        "variants_shown": 2,
+        "hidden_low_tags": [],
+        "topics": [
+          "scent",
+          "longevity_projection",
+          "brand_experience",
+          "bottle_design",
+          "customer_service",
+          "price_value",
+          "packaging",
+          "quality",
+          "trust"
+        ],
+        "rows": [
+          {
+            "variant": "1.7 fl oz",
+            "variant_asin": "B0BZDZJDTG",
+            "oz": 1.7,
+            "pack": 1,
+            "reviews": 247,
+            "tags": 747,
+            "price": 26.12,
+            "price_per_oz": 15.36,
+            "neg_reviewer_pct": {
+              "scent": 7.5,
+              "longevity_projection": 11.5,
+              "brand_experience": 1.7,
+              "bottle_design": 0.2,
+              "customer_service": 2.4,
+              "price_value": 0.4,
+              "packaging": 0.1,
+              "quality": 0.9,
+              "trust": 0.8
+            }
+          },
+          {
+            "variant": "3.4 fl oz",
+            "variant_asin": "B0DGT8FY7V",
+            "oz": 3.4,
+            "pack": 1,
+            "reviews": 23,
+            "tags": 66,
+            "price": 47.75,
+            "price_per_oz": 14.04,
+            "neg_reviewer_pct": {
+              "scent": 4.4,
+              "longevity_projection": 5.1,
+              "brand_experience": 0.9,
+              "bottle_design": 0.0,
+              "customer_service": 1.9,
+              "price_value": 0.4,
+              "packaging": 0.4,
+              "quality": 0.9,
+              "trust": 0.0
+            }
+          }
+        ]
+      },
+      {
+        "asin": "B0GFGL26JD",
+        "variants_total": 3,
+        "variants_shown": 3,
+        "hidden_low_tags": [],
+        "topics": [
+          "scent",
+          "longevity_projection",
+          "brand_experience",
+          "price_value",
+          "bottle_design"
+        ],
+        "rows": [
+          {
+            "variant": "0.27 fl oz",
+            "variant_asin": "B0DNCMDLSY",
+            "oz": 0.27,
+            "pack": 1,
+            "reviews": 55,
+            "tags": 159,
+            "price": 32.0,
+            "price_per_oz": 118.52,
+            "neg_reviewer_pct": {
+              "scent": 3.1,
+              "longevity_projection": 9.2,
+              "brand_experience": 2.3,
+              "price_value": 2.6,
+              "bottle_design": 5.5
+            }
+          },
+          {
+            "variant": "1.7 fl oz",
+            "variant_asin": "B0GFGL26JD",
+            "oz": 1.7,
+            "pack": 1,
+            "reviews": 39,
+            "tags": 119,
+            "price": 82.0,
+            "price_per_oz": 48.24,
+            "neg_reviewer_pct": {
+              "scent": 5.1,
+              "longevity_projection": 18.9,
+              "brand_experience": 1.7,
+              "price_value": 6.1,
+              "bottle_design": 0.0
+            }
+          },
+          {
+            "variant": "3.4 fl oz",
+            "variant_asin": "B0CQPMGQHZ",
+            "oz": 3.4,
+            "pack": 1,
+            "reviews": 20,
+            "tags": 57,
+            "price": 116.0,
+            "price_per_oz": 34.12,
+            "neg_reviewer_pct": {
+              "scent": 0.0,
+              "longevity_projection": 10.2,
+              "brand_experience": 1.4,
+              "price_value": 1.4,
+              "bottle_design": 0.0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "brand_of_asin": {
+    "B00021AJ5I": "Calvin Klein",
+    "B0009OAI8Q": "Elizabeth Taylor",
+    "B08FBQWRYC": "Jean Paul Gaultier",
+    "B09X5BQ969": "Bella Vita Luxury",
+    "B0BZDZJDTG": "Dossier",
+    "B0GFGL26JD": "Glossier"
+  },
+  "issues": {
+    "bottle_design.negative": {
+      "topic": "bottle_design",
+      "direction": "negative",
+      "units": 35,
+      "other_pct": 8.6,
+      "top": [
+        {
+          "id": "bottle_too_small",
+          "name_ko": "병이 작음",
+          "reviews": 27,
+          "weighted_pct": 1.2
+        },
+        {
+          "id": "sprayer_problem",
+          "name_ko": "분사기 불만",
+          "reviews": 3,
+          "weighted_pct": 0.0
+        },
+        {
+          "id": "bottle_leaks",
+          "name_ko": "병이 샘",
+          "reviews": 2,
+          "weighted_pct": 0.0
+        }
+      ],
+      "labels": [
+        {
+          "id": "bottle_too_small",
+          "name_ko": "병이 작음",
+          "reviews": 27,
+          "weighted_pct": 1.2,
+          "quote_candidates": [
+            {
+              "review_id": "R35BQ1BTF2Q094",
+              "star": 4,
+              "quote": "I thought it would be bigger"
+            },
+            {
+              "review_id": "R17KDDY9IM9TOJ",
+              "star": 1,
+              "quote": "a smaller bottle"
+            }
+          ]
+        },
+        {
+          "id": "sprayer_problem",
+          "name_ko": "분사기 불만",
+          "reviews": 3,
+          "weighted_pct": 0.0,
+          "quote_candidates": [
+            {
+              "review_id": "R20IVONJMW9MXU",
+              "star": 3,
+              "quote": "The sprayer on the bottle (at least on mine) is a straight stream line which I stronger dislike"
+            },
+            {
+              "review_id": "R27B3YFQ8Y2ODK",
+              "star": 2,
+              "quote": "Der Kopf dreht sich immer beim drücken"
+            }
+          ]
+        },
+        {
+          "id": "bottle_leaks",
+          "name_ko": "병이 샘",
+          "reviews": 2,
+          "weighted_pct": 0.0,
+          "quote_candidates": [
+            {
+              "review_id": "RJX4Z0KAFKUZW",
+              "star": 3,
+              "quote": "High leakage around cap on some bottles near diamond accents."
+            },
+            {
+              "review_id": "RSKN6VFI7IWZF",
+              "star": 1,
+              "quote": "Bottle leaks all over"
+            }
+          ]
+        }
+      ]
+    },
+    "bottle_design.positive": {
+      "topic": "bottle_design",
+      "direction": "positive",
+      "units": 78,
+      "other_pct": 3.8,
+      "top": [
+        {
+          "id": "pretty_bottle",
+          "name_ko": "병이 예쁨",
+          "reviews": 35,
+          "weighted_pct": 3.8
+        },
+        {
+          "id": "good_size",
+          "name_ko": "용량이 알맞거나 넉넉함",
+          "reviews": 16,
+          "weighted_pct": 1.8
+        },
+        {
+          "id": "purse_portable",
+          "name_ko": "휴대하기 좋음",
+          "reviews": 11,
+          "weighted_pct": 1.7
+        }
+      ],
+      "labels": [
+        {
+          "id": "pretty_bottle",
+          "name_ko": "병이 예쁨",
+          "reviews": 35,
+          "weighted_pct": 3.8,
+          "quote_candidates": [
+            {
+              "review_id": "R1H05KY9W8NYMO",
+              "star": 3,
+              "quote": "Bottle is cute and simple."
+            },
+            {
+              "review_id": "R3TKPOTESXG4F8",
+              "star": 3,
+              "quote": "5 stars for the simplicity of the bottle and magnetic cap"
+            }
+          ]
+        },
+        {
+          "id": "good_size",
+          "name_ko": "용량이 알맞거나 넉넉함",
+          "reviews": 16,
+          "weighted_pct": 1.8,
+          "quote_candidates": [
+            {
+              "review_id": "R3RPB78RLOPANB",
+              "star": 5,
+              "quote": "The bottle size is so big"
+            },
+            {
+              "review_id": "R1ZD5J2BF3RTMC",
+              "star": 5,
+              "quote": "The bottle OMG way bigger than expected & well constructed"
+            }
+          ]
+        },
+        {
+          "id": "purse_portable",
+          "name_ko": "휴대하기 좋음",
+          "reviews": 11,
+          "weighted_pct": 1.7,
+          "quote_candidates": [
+            {
+              "review_id": "R2MM4NAPNXXVKJ",
+              "star": 5,
+              "quote": "It never leaks and js easy and light weight enough to transport."
+            },
+            {
+              "review_id": "R1J20OGWFH3S",
+              "star": 5,
+              "quote": "Perfect size to throw in your purse!"
+            }
+          ]
+        },
+        {
+          "id": "magnetic_cap",
+          "name_ko": "자석 뚜껑이 좋음",
+          "reviews": 10,
+          "weighted_pct": 0.9,
+          "quote_candidates": [
+            {
+              "review_id": "R3TKPOTESXG4F8",
+              "star": 3,
+              "quote": "5 stars for the simplicity of the bottle and magnetic cap"
+            },
+            {
+              "review_id": "R369IGP9SIK613",
+              "star": 3,
+              "quote": "I do like the magnetic lid that’s pretty cool"
+            }
+          ]
+        },
+        {
+          "id": "sprayer_good",
+          "name_ko": "분사가 잘 됨",
+          "reviews": 8,
+          "weighted_pct": 0.7,
+          "quote_candidates": [
+            {
+              "review_id": "R2BG8L01VQAU1S",
+              "star": 5,
+              "quote": "I also really like the way it sprays."
+            },
+            {
+              "review_id": "R2YISBRL41I8GR",
+              "star": 3,
+              "quote": "No problem with the sprayer."
+            }
+          ]
+        },
+        {
+          "id": "build_quality",
+          "name_ko": "병 만듦새가 좋음",
+          "reviews": 7,
+          "weighted_pct": 0.7,
+          "quote_candidates": [
+            {
+              "review_id": "R1YJHTWKIYH5YW",
+              "star": 5,
+              "quote": "the quality of the bottle was really nice"
+            },
+            {
+              "review_id": "R1ZD5J2BF3RTMC",
+              "star": 5,
+              "quote": "The bottle OMG way bigger than expected & well constructed"
+            }
+          ]
+        }
+      ]
+    },
+    "brand_experience.negative": {
+      "topic": "brand_experience",
+      "direction": "negative",
+      "units": 83,
+      "other_pct": 8.4,
+      "top": [
+        {
+          "id": "advise_against",
+          "name_ko": "비추천, 사지 말라",
+          "reviews": 50,
+          "weighted_pct": 0.9
+        },
+        {
+          "id": "no_repurchase",
+          "name_ko": "다시 사지 않겠다",
+          "reviews": 26,
+          "weighted_pct": 0.5
+        }
+      ],
+      "labels": [
+        {
+          "id": "advise_against",
+          "name_ko": "비추천, 사지 말라",
+          "reviews": 50,
+          "weighted_pct": 0.9,
+          "quote_candidates": [
+            {
+              "review_id": "R2LGA8RT457IIQ",
+              "star": 1,
+              "quote": "Do not buy this product."
+            },
+            {
+              "review_id": "R11PXJQ5MHMYUY",
+              "star": 1,
+              "quote": "no lo compren"
+            }
+          ]
+        },
+        {
+          "id": "no_repurchase",
+          "name_ko": "다시 사지 않겠다",
+          "reviews": 26,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "R25UEA1JU4OAPI",
+              "star": 1,
+              "quote": "I will not purchase it again"
+            },
+            {
+              "review_id": "R18OBAYHELKYH5",
+              "star": 4,
+              "quote": "I probably won’t get it again"
+            }
+          ]
+        }
+      ]
+    },
+    "brand_experience.positive": {
+      "topic": "brand_experience",
+      "direction": "positive",
+      "units": 159,
+      "other_pct": 1.9,
+      "top": [
+        {
+          "id": "favorite_signature",
+          "name_ko": "최애, 시그니처 향",
+          "reviews": 56,
+          "weighted_pct": 11.5
+        },
+        {
+          "id": "recommends",
+          "name_ko": "추천, 사라고 권함",
+          "reviews": 38,
+          "weighted_pct": 6.6
+        },
+        {
+          "id": "will_repurchase",
+          "name_ko": "다시 사겠다",
+          "reviews": 23,
+          "weighted_pct": 4.0
+        }
+      ],
+      "labels": [
+        {
+          "id": "favorite_signature",
+          "name_ko": "최애, 시그니처 향",
+          "reviews": 56,
+          "weighted_pct": 11.5,
+          "quote_candidates": [
+            {
+              "review_id": "R19AOTWWUGL4QO",
+              "star": 4,
+              "quote": "she now wears just about every day"
+            },
+            {
+              "review_id": "R2MM4NAPNXXVKJ",
+              "star": 5,
+              "quote": "It is my every day"
+            }
+          ]
+        },
+        {
+          "id": "recommends",
+          "name_ko": "추천, 사라고 권함",
+          "reviews": 38,
+          "weighted_pct": 6.6,
+          "quote_candidates": [
+            {
+              "review_id": "R1YJHTWKIYH5YW",
+              "star": 5,
+              "quote": "I recommend!!!"
+            },
+            {
+              "review_id": "RI6ECRUKWAGQU",
+              "star": 5,
+              "quote": "I've since recommended it to several friends"
+            }
+          ]
+        },
+        {
+          "id": "will_repurchase",
+          "name_ko": "다시 사겠다",
+          "reviews": 23,
+          "weighted_pct": 4.0,
+          "quote_candidates": [
+            {
+              "review_id": "R3REJQDLEML9QP",
+              "star": 5,
+              "quote": "I will never be without it."
+            },
+            {
+              "review_id": "R1ZD5J2BF3RTMC",
+              "star": 5,
+              "quote": "I will definitely buy this scent many more times"
+            }
+          ]
+        },
+        {
+          "id": "repeat_long_time_user",
+          "name_ko": "여러 병째, 수년째 애용",
+          "reviews": 22,
+          "weighted_pct": 3.2,
+          "quote_candidates": [
+            {
+              "review_id": "R2GVQ8DVF092TY",
+              "star": 5,
+              "quote": "My wife has used this for 50 years"
+            },
+            {
+              "review_id": "RYCJDMO5YJZ3F",
+              "star": 1,
+              "quote": "I have went through many bottles"
+            }
+          ]
+        },
+        {
+          "id": "brand_affinity",
+          "name_ko": "브랜드 호감, 다른 향도 좋다",
+          "reviews": 17,
+          "weighted_pct": 2.1,
+          "quote_candidates": [
+            {
+              "review_id": "R3TKPOTESXG4F8",
+              "star": 3,
+              "quote": "Perhaps I will try another one, but I am hesitant"
+            },
+            {
+              "review_id": "R4HIEA8AQ8G98",
+              "star": 5,
+              "quote": "I wish I could own all of glossier's perfumes and for this one I wish I owned hundreds of bottles"
+            }
+          ]
+        }
+      ]
+    },
+    "customer_service.negative": {
+      "topic": "customer_service",
+      "direction": "negative",
+      "units": 85,
+      "other_pct": 2.4,
+      "top": [
+        {
+          "id": "not_returnable",
+          "name_ko": "반품이나 환불 불가",
+          "reviews": 58,
+          "weighted_pct": 1.4
+        },
+        {
+          "id": "refund_request",
+          "name_ko": "환불이나 교체 요청",
+          "reviews": 11,
+          "weighted_pct": 0.2
+        },
+        {
+          "id": "seller_unhelpful",
+          "name_ko": "판매자 응대 불만",
+          "reviews": 10,
+          "weighted_pct": 0.1
+        }
+      ],
+      "labels": [
+        {
+          "id": "not_returnable",
+          "name_ko": "반품이나 환불 불가",
+          "reviews": 58,
+          "weighted_pct": 1.4,
+          "quote_candidates": [
+            {
+              "review_id": "R2A1Z3FMZ4GM7O",
+              "star": 1,
+              "quote": "I can’t return"
+            },
+            {
+              "review_id": "R2LGA8RT457IIQ",
+              "star": 1,
+              "quote": "I cannot return it"
+            }
+          ]
+        },
+        {
+          "id": "refund_request",
+          "name_ko": "환불이나 교체 요청",
+          "reviews": 11,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "R36SSTLD7LC0WN",
+              "star": 4,
+              "quote": "I want a TOTAL Refund"
+            },
+            {
+              "review_id": "R4I2BOQZ0168N",
+              "star": 1,
+              "quote": "we wish to return"
+            }
+          ]
+        },
+        {
+          "id": "seller_unhelpful",
+          "name_ko": "판매자 응대 불만",
+          "reviews": 10,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "R1TDEV9S3R58C2",
+              "star": 1,
+              "quote": "there is absolutely no support or way to contact the seller"
+            },
+            {
+              "review_id": "R3DSZM9BOJ9YFF",
+              "star": 1,
+              "quote": "The company would do nothing about it since I purchased on Amazon."
+            }
+          ]
+        },
+        {
+          "id": "return_window_missed",
+          "name_ko": "반품 기간 놓침",
+          "reviews": 5,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "R2WS73M76T1F87",
+              "star": 1,
+              "quote": "my return window closed about 10 days ago"
+            },
+            {
+              "review_id": "R2FOFANNV4XRG2",
+              "star": 1,
+              "quote": "The seller would not do anything because it was past 30 days since purchase."
+            }
+          ]
+        }
+      ]
+    },
+    "customer_service.positive": {
+      "topic": "customer_service",
+      "direction": "positive",
+      "units": 6,
+      "other_pct": 100.0,
+      "top": [],
+      "labels": []
+    },
+    "longevity_projection.negative": {
+      "topic": "longevity_projection",
+      "direction": "negative",
+      "units": 364,
+      "other_pct": 1.9,
+      "top": [
+        {
+          "id": "fades_fast",
+          "name_ko": "금방 날아감",
+          "reviews": 231,
+          "weighted_pct": 5.9
+        },
+        {
+          "id": "weak_scent",
+          "name_ko": "처음부터 약함",
+          "reviews": 67,
+          "weighted_pct": 1.8
+        },
+        {
+          "id": "too_strong",
+          "name_ko": "너무 셈",
+          "reviews": 50,
+          "weighted_pct": 1.2
+        }
+      ],
+      "labels": [
+        {
+          "id": "fades_fast",
+          "name_ko": "금방 날아감",
+          "reviews": 231,
+          "weighted_pct": 5.9,
+          "quote_candidates": [
+            {
+              "review_id": "R2L2RUMH85P11X",
+              "star": 2,
+              "quote": "just a few hours later the smell was gone"
+            },
+            {
+              "review_id": "RE6BXDD0FAGRD",
+              "star": 1,
+              "quote": "I was disappointed by how short-lived it was"
+            }
+          ]
+        },
+        {
+          "id": "weak_scent",
+          "name_ko": "처음부터 약함",
+          "reviews": 67,
+          "weighted_pct": 1.8,
+          "quote_candidates": [
+            {
+              "review_id": "R2WS73M76T1F87",
+              "star": 1,
+              "quote": "virtually no scent"
+            },
+            {
+              "review_id": "R1AIGEESVTE4DR",
+              "star": 3,
+              "quote": "very very faint smell"
+            }
+          ]
+        },
+        {
+          "id": "too_strong",
+          "name_ko": "너무 셈",
+          "reviews": 50,
+          "weighted_pct": 1.2,
+          "quote_candidates": [
+            {
+              "review_id": "R1PYYRVUR8GWQZ",
+              "star": 1,
+              "quote": "It is over powering"
+            },
+            {
+              "review_id": "R1YXB7CP917VN9",
+              "star": 1,
+              "quote": "It is strong, over powering"
+            }
+          ]
+        },
+        {
+          "id": "shorter_than_hoped",
+          "name_ko": "기대보다 짧음",
+          "reviews": 28,
+          "weighted_pct": 2.4,
+          "quote_candidates": [
+            {
+              "review_id": "R1H05KY9W8NYMO",
+              "star": 3,
+              "quote": "Longevity isn’t great."
+            },
+            {
+              "review_id": "R369IGP9SIK613",
+              "star": 3,
+              "quote": "The longevity on the other hand is not great."
+            }
+          ]
+        }
+      ]
+    },
+    "longevity_projection.positive": {
+      "topic": "longevity_projection",
+      "direction": "positive",
+      "units": 144,
+      "other_pct": 2.8,
+      "top": [
+        {
+          "id": "long_lasting",
+          "name_ko": "오래감",
+          "reviews": 117,
+          "weighted_pct": 18.0
+        },
+        {
+          "id": "not_overpowering",
+          "name_ko": "과하지 않은 세기",
+          "reviews": 16,
+          "weighted_pct": 2.4
+        },
+        {
+          "id": "strong_presence",
+          "name_ko": "진하고 잘 퍼짐",
+          "reviews": 11,
+          "weighted_pct": 2.1
+        }
+      ],
+      "labels": [
+        {
+          "id": "long_lasting",
+          "name_ko": "오래감",
+          "reviews": 117,
+          "weighted_pct": 18.0,
+          "quote_candidates": [
+            {
+              "review_id": "R3TKPOTESXG4F8",
+              "star": 3,
+              "quote": "the longevity was incredible"
+            },
+            {
+              "review_id": "R1YJHTWKIYH5YW",
+              "star": 5,
+              "quote": "Lasted the whole night of prom"
+            }
+          ]
+        },
+        {
+          "id": "not_overpowering",
+          "name_ko": "과하지 않은 세기",
+          "reviews": 16,
+          "weighted_pct": 2.4,
+          "quote_candidates": [
+            {
+              "review_id": "R3HUTCGBNSP6M7",
+              "star": 5,
+              "quote": "The scent intensity is not overpowering but soft."
+            },
+            {
+              "review_id": "R2LP5UYPZD2M8N",
+              "star": 5,
+              "quote": "Long-lasting without being overpowering."
+            }
+          ]
+        },
+        {
+          "id": "strong_presence",
+          "name_ko": "진하고 잘 퍼짐",
+          "reviews": 11,
+          "weighted_pct": 2.1,
+          "quote_candidates": [
+            {
+              "review_id": "R2E6S0IJEDMPJZ",
+              "star": 5,
+              "quote": "Strong and longlasting"
+            },
+            {
+              "review_id": "R29HBQQI41Y5XP",
+              "star": 4,
+              "quote": "strongness, and longevity"
+            }
+          ]
+        },
+        {
+          "id": "little_goes_far",
+          "name_ko": "조금만 써도 충분",
+          "reviews": 10,
+          "weighted_pct": 0.9,
+          "quote_candidates": [
+            {
+              "review_id": "R1528CQ8SFSG5O",
+              "star": 5,
+              "quote": "It lasts well throughout the day, and a few sprays are all I need."
+            },
+            {
+              "review_id": "RCS1EXNM71HF",
+              "star": 3,
+              "quote": "That one-and-only squirt lasted for a whole day in our living room"
+            }
+          ]
+        }
+      ]
+    },
+    "packaging.negative": {
+      "topic": "packaging",
+      "direction": "negative",
+      "units": 17,
+      "other_pct": 100.0,
+      "top": [],
+      "labels": []
+    },
+    "packaging.positive": {
+      "topic": "packaging",
+      "direction": "positive",
+      "units": 23,
+      "other_pct": 17.4,
+      "top": [
+        {
+          "id": "pretty_presentation",
+          "name_ko": "상자와 포장이 예쁨",
+          "reviews": 12,
+          "weighted_pct": 1.5
+        },
+        {
+          "id": "well_protected",
+          "name_ko": "꼼꼼하게 포장되어 병을 잘 보호함",
+          "reviews": 6,
+          "weighted_pct": 0.8
+        },
+        {
+          "id": "matches_original",
+          "name_ko": "포장이 원래 것과 같음",
+          "reviews": 2,
+          "weighted_pct": 0.0
+        }
+      ],
+      "labels": [
+        {
+          "id": "pretty_presentation",
+          "name_ko": "상자와 포장이 예쁨",
+          "reviews": 12,
+          "weighted_pct": 1.5,
+          "quote_candidates": [
+            {
+              "review_id": "R1ZD5J2BF3RTMC",
+              "star": 5,
+              "quote": "First the presentation & box is simple but in a classy way"
+            },
+            {
+              "review_id": "R2BG8L01VQAU1S",
+              "star": 5,
+              "quote": "The packaging is also pretty and does a good job protecting the bottle"
+            }
+          ]
+        },
+        {
+          "id": "well_protected",
+          "name_ko": "꼼꼼하게 포장되어 병을 잘 보호함",
+          "reviews": 6,
+          "weighted_pct": 0.8,
+          "quote_candidates": [
+            {
+              "review_id": "R2BG8L01VQAU1S",
+              "star": 5,
+              "quote": "The packaging is also pretty and does a good job protecting the bottle"
+            },
+            {
+              "review_id": "R1VKEB92N0AEHH",
+              "star": 5,
+              "quote": "packed well"
+            }
+          ]
+        },
+        {
+          "id": "matches_original",
+          "name_ko": "포장이 원래 것과 같음",
+          "reviews": 2,
+          "weighted_pct": 0.0,
+          "quote_candidates": [
+            {
+              "review_id": "R3E3IWV1CXIFEY",
+              "star": 3,
+              "quote": "the packaging appears consistent with the original"
+            },
+            {
+              "review_id": "R3QMZJEPSF4PJW",
+              "star": 4,
+              "quote": "embalagem tava perfeito como original"
+            }
+          ]
+        }
+      ]
+    },
+    "price_value.negative": {
+      "topic": "price_value",
+      "direction": "negative",
+      "units": 71,
+      "other_pct": 11.3,
+      "top": [
+        {
+          "id": "too_expensive",
+          "name_ko": "그냥 비쌈",
+          "reviews": 26,
+          "weighted_pct": 1.9
+        },
+        {
+          "id": "not_worth_price",
+          "name_ko": "값만큼 못함",
+          "reviews": 17,
+          "weighted_pct": 0.8
+        },
+        {
+          "id": "small_for_price",
+          "name_ko": "용량에 비해 비쌈",
+          "reviews": 16,
+          "weighted_pct": 0.4
+        }
+      ],
+      "labels": [
+        {
+          "id": "too_expensive",
+          "name_ko": "그냥 비쌈",
+          "reviews": 26,
+          "weighted_pct": 1.9,
+          "quote_candidates": [
+            {
+              "review_id": "R3HUTCGBNSP6M7",
+              "star": 5,
+              "quote": "Definitely wish it was cheaper"
+            },
+            {
+              "review_id": "R17KDDY9IM9TOJ",
+              "star": 1,
+              "quote": "at a expensive price"
+            }
+          ]
+        },
+        {
+          "id": "not_worth_price",
+          "name_ko": "값만큼 못함",
+          "reviews": 17,
+          "weighted_pct": 0.8,
+          "quote_candidates": [
+            {
+              "review_id": "R28CUG81AXYYHI",
+              "star": 4,
+              "quote": "a little basic in my opinion considering the price"
+            },
+            {
+              "review_id": "R2LQGD37514J9F",
+              "star": 4,
+              "quote": "just not worth the price in my opinion"
+            }
+          ]
+        },
+        {
+          "id": "small_for_price",
+          "name_ko": "용량에 비해 비쌈",
+          "reviews": 16,
+          "weighted_pct": 0.4,
+          "quote_candidates": [
+            {
+              "review_id": "RDFNBWP3J8QJO",
+              "star": 4,
+              "quote": "a 100ml bottle for the 200ml price"
+            },
+            {
+              "review_id": "R3IYVVJV43EN5",
+              "star": 1,
+              "quote": "high price for a small spray"
+            }
+          ]
+        },
+        {
+          "id": "not_lasting_for_price",
+          "name_ko": "지속력에 비해 비쌈",
+          "reviews": 4,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "R369IGP9SIK613",
+              "star": 3,
+              "quote": "to spend that kind of money, I want my fragrances to last a little longer"
+            },
+            {
+              "review_id": "R137AETPAXJ4IJ",
+              "star": 2,
+              "quote": "Definitely cheaper than the original scent but given that it doesn’t last probably not worth it."
+            }
+          ]
+        }
+      ]
+    },
+    "price_value.positive": {
+      "topic": "price_value",
+      "direction": "positive",
+      "units": 83,
+      "other_pct": 1.2,
+      "top": [
+        {
+          "id": "good_price",
+          "name_ko": "가격이 좋음",
+          "reviews": 43,
+          "weighted_pct": 4.0
+        },
+        {
+          "id": "good_value",
+          "name_ko": "값어치를 함",
+          "reviews": 23,
+          "weighted_pct": 2.7
+        },
+        {
+          "id": "cheaper_than_alternatives",
+          "name_ko": "원조나 다른 곳보다 쌈",
+          "reviews": 6,
+          "weighted_pct": 1.5
+        }
+      ],
+      "labels": [
+        {
+          "id": "good_price",
+          "name_ko": "가격이 좋음",
+          "reviews": 43,
+          "weighted_pct": 4.0,
+          "quote_candidates": [
+            {
+              "review_id": "R20R1JXAU4TUND",
+              "star": 4,
+              "quote": "the price is good"
+            },
+            {
+              "review_id": "R1BPS6WJ0CYY8J",
+              "star": 5,
+              "quote": "it’s only 28 dollars love it"
+            }
+          ]
+        },
+        {
+          "id": "good_value",
+          "name_ko": "값어치를 함",
+          "reviews": 23,
+          "weighted_pct": 2.7,
+          "quote_candidates": [
+            {
+              "review_id": "R3TKPOTESXG4F8",
+              "star": 3,
+              "quote": "5 stars for the price"
+            },
+            {
+              "review_id": "RI6ECRUKWAGQU",
+              "star": 5,
+              "quote": "For the price point, that's genuinely impressive."
+            }
+          ]
+        },
+        {
+          "id": "cheaper_than_alternatives",
+          "name_ko": "원조나 다른 곳보다 쌈",
+          "reviews": 6,
+          "weighted_pct": 1.5,
+          "quote_candidates": [
+            {
+              "review_id": "R1ZD5J2BF3RTMC",
+              "star": 5,
+              "quote": "the under $40 vs $100 plus was to tempting"
+            },
+            {
+              "review_id": "R137AETPAXJ4IJ",
+              "star": 2,
+              "quote": "Definitely cheaper than the original scent but given that it doesn’t last probably not worth it."
+            }
+          ]
+        },
+        {
+          "id": "pricey_but_acceptable",
+          "name_ko": "비싸지만 감수할 만함",
+          "reviews": 6,
+          "weighted_pct": 1.1,
+          "quote_candidates": [
+            {
+              "review_id": "R27AB5RGDGPQDQ",
+              "star": 3,
+              "quote": "Price for this item is high but it's high in every store."
+            },
+            {
+              "review_id": "R2KQHPSE90CGY1",
+              "star": 5,
+              "quote": "It’s not inexpensive but sometimes you just have to treat yourself!"
+            }
+          ]
+        },
+        {
+          "id": "size_for_price",
+          "name_ko": "용량 대비 값이 좋음",
+          "reviews": 4,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "R1528CQ8SFSG5O",
+              "star": 5,
+              "quote": "a great size for the price"
+            },
+            {
+              "review_id": "R3R6ZPYXB9A5CA",
+              "star": 3,
+              "quote": "Big size for an affordable price"
+            }
+          ]
+        }
+      ]
+    },
+    "quality.negative": {
+      "topic": "quality",
+      "direction": "negative",
+      "units": 64,
+      "other_pct": 7.8,
+      "top": [
+        {
+          "id": "old_or_spoiled",
+          "name_ko": "오래됐거나 변질됨",
+          "reviews": 18,
+          "weighted_pct": 0.4
+        },
+        {
+          "id": "sprayer_defective",
+          "name_ko": "분사기 불량",
+          "reviews": 13,
+          "weighted_pct": 0.3
+        },
+        {
+          "id": "sprayer_stopped_working",
+          "name_ko": "쓰다가 분사기 고장",
+          "reviews": 12,
+          "weighted_pct": 0.4
+        }
+      ],
+      "labels": [
+        {
+          "id": "old_or_spoiled",
+          "name_ko": "오래됐거나 변질됨",
+          "reviews": 18,
+          "weighted_pct": 0.4,
+          "quote_candidates": [
+            {
+              "review_id": "RSXO66KNMLOM3",
+              "star": 4,
+              "quote": "it smelled expired"
+            },
+            {
+              "review_id": "R17P0BA3UA82A6",
+              "star": 1,
+              "quote": "this one may have been old"
+            }
+          ]
+        },
+        {
+          "id": "sprayer_defective",
+          "name_ko": "분사기 불량",
+          "reviews": 13,
+          "weighted_pct": 0.3,
+          "quote_candidates": [
+            {
+              "review_id": "R1TDEV9S3R58C2",
+              "star": 1,
+              "quote": "had a defective spray pump"
+            },
+            {
+              "review_id": "R29RSOSSZEWD6G",
+              "star": 1,
+              "quote": "The spray mechanism is broken"
+            }
+          ]
+        },
+        {
+          "id": "sprayer_stopped_working",
+          "name_ko": "쓰다가 분사기 고장",
+          "reviews": 12,
+          "weighted_pct": 0.4,
+          "quote_candidates": [
+            {
+              "review_id": "RXM5J8METQDQN",
+              "star": 4,
+              "quote": "it stopped spraying good and now it barely sprays"
+            },
+            {
+              "review_id": "R1HKC4UY12S4QK",
+              "star": 1,
+              "quote": "the spray just stopped working right"
+            }
+          ]
+        },
+        {
+          "id": "missing_parts",
+          "name_ko": "부품 빠짐",
+          "reviews": 9,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "R3NW5SPHMZ6KU7",
+              "star": 3,
+              "quote": "it came defective with no straw inside"
+            },
+            {
+              "review_id": "R2F8LJRFIL2S2K",
+              "star": 3,
+              "quote": "it came without the tiny spray tube"
+            }
+          ]
+        },
+        {
+          "id": "poor_quality_general",
+          "name_ko": "품질이 나쁨(구체 없음)",
+          "reviews": 7,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "R2KW946AURYPKM",
+              "star": 1,
+              "quote": "It is not good quality"
+            },
+            {
+              "review_id": "R12H6GXYOTNILP",
+              "star": 1,
+              "quote": "3rd class quality"
+            }
+          ]
+        }
+      ]
+    },
+    "quality.positive": {
+      "topic": "quality",
+      "direction": "positive",
+      "units": 7,
+      "other_pct": 100.0,
+      "top": [],
+      "labels": []
+    },
+    "safety.negative": {
+      "topic": "safety",
+      "direction": "negative",
+      "units": 18,
+      "other_pct": 100.0,
+      "top": [],
+      "labels": []
+    },
+    "safety.positive": {
+      "topic": "safety",
+      "direction": "positive",
+      "units": 4,
+      "other_pct": 100.0,
+      "top": [],
+      "labels": []
+    },
+    "scent.negative": {
+      "topic": "scent",
+      "direction": "negative",
+      "units": 318,
+      "other_pct": 6.6,
+      "top": [
+        {
+          "id": "dislike_general",
+          "name_ko": "향이 싫음(이유 없음)",
+          "reviews": 99,
+          "weighted_pct": 2.4
+        },
+        {
+          "id": "differs_from_original",
+          "name_ko": "원래 알던 향과 다름",
+          "reviews": 52,
+          "weighted_pct": 1.4
+        },
+        {
+          "id": "old_lady_mature",
+          "name_ko": "나이 든 사람 향",
+          "reviews": 41,
+          "weighted_pct": 1.1
+        }
+      ],
+      "labels": [
+        {
+          "id": "dislike_general",
+          "name_ko": "향이 싫음(이유 없음)",
+          "reviews": 99,
+          "weighted_pct": 2.4,
+          "quote_candidates": [
+            {
+              "review_id": "R3TKPOTESXG4F8",
+              "star": 3,
+              "quote": "It smelled terrible on me"
+            },
+            {
+              "review_id": "R2A1Z3FMZ4GM7O",
+              "star": 1,
+              "quote": "It smells terrible"
+            }
+          ]
+        },
+        {
+          "id": "differs_from_original",
+          "name_ko": "원래 알던 향과 다름",
+          "reviews": 52,
+          "weighted_pct": 1.4,
+          "quote_candidates": [
+            {
+              "review_id": "R1H05KY9W8NYMO",
+              "star": 3,
+              "quote": "This is not a great dupe for black opium. However, it’s not terrible either."
+            },
+            {
+              "review_id": "R2VB4M9Y2AWKO9",
+              "star": 1,
+              "quote": "the scent is NOT Calvin Klein's ETERNITY"
+            }
+          ]
+        },
+        {
+          "id": "old_lady_mature",
+          "name_ko": "나이 든 사람 향",
+          "reviews": 41,
+          "weighted_pct": 1.1,
+          "quote_candidates": [
+            {
+              "review_id": "R349GHMWMP16X5",
+              "star": 4,
+              "quote": "It’s a nice perfume but this is something an older woman (55+) would wear."
+            },
+            {
+              "review_id": "RCS1EXNM71HF",
+              "star": 3,
+              "quote": "it smells like your great grandmother"
+            }
+          ]
+        },
+        {
+          "id": "missing_described_notes",
+          "name_ko": "설명한 노트가 안 남",
+          "reviews": 34,
+          "weighted_pct": 0.7,
+          "quote_candidates": [
+            {
+              "review_id": "R2WZW7EGMN0YRX",
+              "star": 3,
+              "quote": "Nice scent, no vanilla though"
+            },
+            {
+              "review_id": "R1OUIOCM3K04RQ",
+              "star": 2,
+              "quote": "It does not smell like vanilla"
+            }
+          ]
+        },
+        {
+          "id": "disliked_note_profile",
+          "name_ko": "특정 노트나 성격이 싫음",
+          "reviews": 25,
+          "weighted_pct": 1.1,
+          "quote_candidates": [
+            {
+              "review_id": "R2E6S0IJEDMPJZ",
+              "star": 5,
+              "quote": "the scent itself has a very clean, almost floral undertone, which isn’t my personal favorite"
+            },
+            {
+              "review_id": "RDDEYJ06PGGFS",
+              "star": 3,
+              "quote": "The perfume smells good it is more floral than expected."
+            }
+          ]
+        },
+        {
+          "id": "cheap_artificial",
+          "name_ko": "싸구려, 인공적인 냄새",
+          "reviews": 19,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "R2WLZEYU4QJSNX",
+              "star": 1,
+              "quote": "very chemical and artificial"
+            },
+            {
+              "review_id": "R38DSJZ6K6T6K8",
+              "star": 1,
+              "quote": "This perfume smells cheap, dusty"
+            }
+          ]
+        },
+        {
+          "id": "unpleasant_likeness",
+          "name_ko": "불쾌한 물건 냄새",
+          "reviews": 17,
+          "weighted_pct": 0.4,
+          "quote_candidates": [
+            {
+              "review_id": "RPBVG77BOM609",
+              "star": 1,
+              "quote": "it smelled like turpentine"
+            },
+            {
+              "review_id": "R1M4C26CJAIBE5",
+              "star": 3,
+              "quote": "It’s smells like walking into a massage place lol"
+            }
+          ]
+        },
+        {
+          "id": "alcohol_smell",
+          "name_ko": "알코올 냄새",
+          "reviews": 16,
+          "weighted_pct": 0.4,
+          "quote_candidates": [
+            {
+              "review_id": "R1T8ST53B96R3E",
+              "star": 1,
+              "quote": "Just smells like rubbing alcohol"
+            },
+            {
+              "review_id": "R1XLSV63CR5GSO",
+              "star": 1,
+              "quote": "smells just like pure alcohol"
+            }
+          ]
+        }
+      ]
+    },
+    "scent.positive": {
+      "topic": "scent",
+      "direction": "positive",
+      "units": 488,
+      "other_pct": 4.3,
+      "top": [
+        {
+          "id": "smells_good_general",
+          "name_ko": "향이 좋음(이유 없음)",
+          "reviews": 355,
+          "weighted_pct": 42.1
+        },
+        {
+          "id": "appealing_character",
+          "name_ko": "노트나 분위기가 좋음",
+          "reviews": 89,
+          "weighted_pct": 13.7
+        },
+        {
+          "id": "compliments",
+          "name_ko": "남에게 칭찬받음",
+          "reviews": 35,
+          "weighted_pct": 5.0
+        }
+      ],
+      "labels": [
+        {
+          "id": "smells_good_general",
+          "name_ko": "향이 좋음(이유 없음)",
+          "reviews": 355,
+          "weighted_pct": 42.1,
+          "quote_candidates": [
+            {
+              "review_id": "R1YJHTWKIYH5YW",
+              "star": 5,
+              "quote": "I absolutely love the scent, it’s warm and romantic"
+            },
+            {
+              "review_id": "RE6BXDD0FAGRD",
+              "star": 1,
+              "quote": "The scent was perfect"
+            }
+          ]
+        },
+        {
+          "id": "appealing_character",
+          "name_ko": "노트나 분위기가 좋음",
+          "reviews": 89,
+          "weighted_pct": 13.7,
+          "quote_candidates": [
+            {
+              "review_id": "R1YJHTWKIYH5YW",
+              "star": 5,
+              "quote": "I absolutely love the scent, it’s warm and romantic"
+            },
+            {
+              "review_id": "RI6ECRUKWAGQU",
+              "star": 5,
+              "quote": "The scent is warm, soft, and just sophisticated enough"
+            }
+          ]
+        },
+        {
+          "id": "compliments",
+          "name_ko": "남에게 칭찬받음",
+          "reviews": 35,
+          "weighted_pct": 5.0,
+          "quote_candidates": [
+            {
+              "review_id": "R20R1JXAU4TUND",
+              "star": 4,
+              "quote": "My mom loves this fragrance."
+            },
+            {
+              "review_id": "R2K5IJ2KE33XT7",
+              "star": 4,
+              "quote": "He loves the scent"
+            }
+          ]
+        }
+      ]
+    },
+    "shipping.negative": {
+      "topic": "shipping",
+      "direction": "negative",
+      "units": 65,
+      "other_pct": 4.6,
+      "top": [
+        {
+          "id": "arrived_broken",
+          "name_ko": "깨지거나 부서져 도착",
+          "reviews": 24,
+          "weighted_pct": 0.9
+        },
+        {
+          "id": "leaked_in_transit",
+          "name_ko": "새거나 흘러서 도착",
+          "reviews": 21,
+          "weighted_pct": 0.6
+        },
+        {
+          "id": "arrived_underfilled",
+          "name_ko": "내용물이 덜 든 채 도착",
+          "reviews": 6,
+          "weighted_pct": 0.1
+        }
+      ],
+      "labels": [
+        {
+          "id": "arrived_broken",
+          "name_ko": "깨지거나 부서져 도착",
+          "reviews": 24,
+          "weighted_pct": 0.9,
+          "quote_candidates": [
+            {
+              "review_id": "R29HBQQI41Y5XP",
+              "star": 4,
+              "quote": "the atomizer was broken off"
+            },
+            {
+              "review_id": "R2KG7CQGRVCI6S",
+              "star": 4,
+              "quote": "Found two broken pieces."
+            }
+          ]
+        },
+        {
+          "id": "leaked_in_transit",
+          "name_ko": "새거나 흘러서 도착",
+          "reviews": 21,
+          "weighted_pct": 0.6,
+          "quote_candidates": [
+            {
+              "review_id": "R3AOLDFQH1SQI9",
+              "star": 4,
+              "quote": "was leaking when I received it"
+            },
+            {
+              "review_id": "R30FEJIT09E153",
+              "star": 1,
+              "quote": "Bottle leaked all over"
+            }
+          ]
+        },
+        {
+          "id": "arrived_underfilled",
+          "name_ko": "내용물이 덜 든 채 도착",
+          "reviews": 6,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "R95G0ZJBYOR7O",
+              "star": 1,
+              "quote": "bottle was half empty"
+            },
+            {
+              "review_id": "R1688LKF56GMYH",
+              "star": 1,
+              "quote": "El frasco del perfume casi vacío."
+            }
+          ]
+        },
+        {
+          "id": "slow_delivery",
+          "name_ko": "배송이 느림",
+          "reviews": 6,
+          "weighted_pct": 0.3,
+          "quote_candidates": [
+            {
+              "review_id": "R25K69JUV9O34C",
+              "star": 3,
+              "quote": "I received this late"
+            },
+            {
+              "review_id": "R2O45DJB4MICJI",
+              "star": 3,
+              "quote": "Delivery was very slow."
+            }
+          ]
+        },
+        {
+          "id": "wrong_or_opened_item",
+          "name_ko": "주문과 다른 상품이나 개봉된 상품",
+          "reviews": 6,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "RDFNBWP3J8QJO",
+              "star": 4,
+              "quote": "I received a 100ml bottle"
+            },
+            {
+              "review_id": "R2GRQD8HVHNRJ2",
+              "star": 1,
+              "quote": "The bottle received was 1.6 oz"
+            }
+          ]
+        }
+      ]
+    },
+    "shipping.positive": {
+      "topic": "shipping",
+      "direction": "positive",
+      "units": 26,
+      "other_pct": 11.5,
+      "top": [
+        {
+          "id": "fast_delivery",
+          "name_ko": "빠르거나 제때 배송",
+          "reviews": 15,
+          "weighted_pct": 1.5
+        },
+        {
+          "id": "arrived_intact",
+          "name_ko": "멀쩡하고 제대로 도착",
+          "reviews": 10,
+          "weighted_pct": 1.4
+        }
+      ],
+      "labels": [
+        {
+          "id": "fast_delivery",
+          "name_ko": "빠르거나 제때 배송",
+          "reviews": 15,
+          "weighted_pct": 1.5,
+          "quote_candidates": [
+            {
+              "review_id": "R3R6ZPYXB9A5CA",
+              "star": 3,
+              "quote": "quick shipping"
+            },
+            {
+              "review_id": "R2LQGD37514J9F",
+              "star": 4,
+              "quote": "fast shipping"
+            }
+          ]
+        },
+        {
+          "id": "arrived_intact",
+          "name_ko": "멀쩡하고 제대로 도착",
+          "reviews": 10,
+          "weighted_pct": 1.4,
+          "quote_candidates": [
+            {
+              "review_id": "R362ORLCO9ID3S",
+              "star": 5,
+              "quote": "This seller has done well."
+            },
+            {
+              "review_id": "RFKZ7EJ1U4UYQ",
+              "star": 5,
+              "quote": "Package came on time with no damage."
+            }
+          ]
+        }
+      ]
+    },
+    "trust.negative": {
+      "topic": "trust",
+      "direction": "negative",
+      "units": 172,
+      "other_pct": 7.0,
+      "top": [
+        {
+          "id": "fake_asserted",
+          "name_ko": "가짜라고 단정",
+          "reviews": 43,
+          "weighted_pct": 0.8
+        },
+        {
+          "id": "authenticity_doubt",
+          "name_ko": "정품인지 의심",
+          "reviews": 36,
+          "weighted_pct": 1.1
+        },
+        {
+          "id": "differs_from_genuine",
+          "name_ko": "정품이나 늘 쓰던 것과 향이 다름",
+          "reviews": 35,
+          "weighted_pct": 0.6
+        }
+      ],
+      "labels": [
+        {
+          "id": "fake_asserted",
+          "name_ko": "가짜라고 단정",
+          "reviews": 43,
+          "weighted_pct": 0.8,
+          "quote_candidates": [
+            {
+              "review_id": "R36SSTLD7LC0WN",
+              "star": 4,
+              "quote": "This is NOT Calvin Klein Eternity!!!!!"
+            },
+            {
+              "review_id": "RWPG7VT4U6LFN",
+              "star": 2,
+              "quote": "this is not the original Eternity that I’ve worn for years"
+            }
+          ]
+        },
+        {
+          "id": "authenticity_doubt",
+          "name_ko": "정품인지 의심",
+          "reviews": 36,
+          "weighted_pct": 1.1,
+          "quote_candidates": [
+            {
+              "review_id": "R2L2RUMH85P11X",
+              "star": 2,
+              "quote": "The cynic in me says I got a generic brand"
+            },
+            {
+              "review_id": "R2WS73M76T1F87",
+              "star": 1,
+              "quote": "This seems to have been counterfeit"
+            }
+          ]
+        },
+        {
+          "id": "differs_from_genuine",
+          "name_ko": "정품이나 늘 쓰던 것과 향이 다름",
+          "reviews": 35,
+          "weighted_pct": 0.6,
+          "quote_candidates": [
+            {
+              "review_id": "R2VB4M9Y2AWKO9",
+              "star": 1,
+              "quote": "the scent is NOT Calvin Klein's ETERNITY"
+            },
+            {
+              "review_id": "RITE6TUC3TTUA",
+              "star": 1,
+              "quote": "this does not smell like the original one I had before"
+            }
+          ]
+        },
+        {
+          "id": "formula_changed",
+          "name_ko": "예전과 달라짐(제조법 변경 의심)",
+          "reviews": 18,
+          "weighted_pct": 0.7,
+          "quote_candidates": [
+            {
+              "review_id": "R172WXNSN0NRNX",
+              "star": 1,
+              "quote": "they have to have changed the formula or something"
+            },
+            {
+              "review_id": "R9ZEWAM020WG9",
+              "star": 1,
+              "quote": "it doesn't smell like Eternity of the past"
+            }
+          ]
+        },
+        {
+          "id": "diluted_or_tampered",
+          "name_ko": "희석되거나 손댄 것 같음",
+          "reviews": 16,
+          "weighted_pct": 0.3,
+          "quote_candidates": [
+            {
+              "review_id": "RE6BXDD0FAGRD",
+              "star": 1,
+              "quote": "odds are it’s probably watered down or messed with"
+            },
+            {
+              "review_id": "R31TRJEEWBZVEB",
+              "star": 1,
+              "quote": "Watered down version"
+            }
+          ]
+        },
+        {
+          "id": "weaker_than_genuine",
+          "name_ko": "정품이나 예전 것보다 약하고 짧음",
+          "reviews": 13,
+          "weighted_pct": 0.4,
+          "quote_candidates": [
+            {
+              "review_id": "R3UC52NZ4JUATT",
+              "star": 1,
+              "quote": "It doesn’t have the same strength that the retail brand has"
+            },
+            {
+              "review_id": "R176Y9Y69QGND9",
+              "star": 3,
+              "quote": "No perdura su aroma como en otras ocasiones q lo e tenido"
+            }
+          ]
+        }
+      ]
+    },
+    "trust.positive": {
+      "topic": "trust",
+      "direction": "positive",
+      "units": 23,
+      "other_pct": 0.0,
+      "top": [
+        {
+          "id": "authentic_confirmed",
+          "name_ko": "정품이다, 정품 같다",
+          "reviews": 17,
+          "weighted_pct": 2.5
+        },
+        {
+          "id": "same_as_original",
+          "name_ko": "원래 것, 매장 것과 같음",
+          "reviews": 6,
+          "weighted_pct": 1.9
+        }
+      ],
+      "labels": [
+        {
+          "id": "authentic_confirmed",
+          "name_ko": "정품이다, 정품 같다",
+          "reviews": 17,
+          "weighted_pct": 2.5,
+          "quote_candidates": [
+            {
+              "review_id": "R3RPB78RLOPANB",
+              "star": 5,
+              "quote": "I can tell this is Authentically made"
+            },
+            {
+              "review_id": "R3W3FAYLHBYMFC",
+              "star": 4,
+              "quote": "no knock off"
+            }
+          ]
+        },
+        {
+          "id": "same_as_original",
+          "name_ko": "원래 것, 매장 것과 같음",
+          "reviews": 6,
+          "weighted_pct": 1.9,
+          "quote_candidates": [
+            {
+              "review_id": "R1MBL7JR3CDLHN",
+              "star": 5,
+              "quote": "it's the same lovely smell I remember!"
+            },
+            {
+              "review_id": "R1C9LFWKV03B2T",
+              "star": 5,
+              "quote": "Same as retail stores"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "issue_overlap": {
+    "labels": [
+      "scent.negative.differs_from_original",
+      "trust.negative.differs_from_genuine"
+    ],
+    "names": [
+      "원래 알던 향과 다름",
+      "정품이나 늘 쓰던 것과 향이 다름"
+    ],
+    "reviews": 21,
+    "weighted_pct": 0.4,
+    "review_ids": [
+      "R18BLPFIGWE423",
+      "R1NB8BUWMF8QEQ",
+      "R1R4KIBKJSBU2S",
+      "R1TTWUE04LOARC",
+      "R28QRZCFOJH8QG",
+      "R297F9WD8P3TY9",
+      "R2B26WRA6MRX37",
+      "R2NKW7XTDK219O",
+      "R2PF4J8H8VLA1",
+      "R2VB4M9Y2AWKO9",
+      "R34VA7OGPLLCMC",
+      "R386HROHZR98N9",
+      "R3AJB6FYM381NQ",
+      "R3CNT8RBRINXDS",
+      "R3QZEQQD21EIWP",
+      "R3UOR9KJ2XOX1M",
+      "RFCR1X0F0C532",
+      "RFGNKRJZIRUKU",
+      "RITE6TUC3TTUA",
+      "RPIT72KK8P43P",
+      "RY81CPM5RECR"
+    ]
+  },
+  "safety_check": {
+    "negative_symptom": 18,
+    "negative_no_symptom": 0,
+    "positive_symptom": 0,
+    "positive_no_symptom": 4,
+    "other_sentiment": 0,
+    "by_symptom": [
+      {
+        "name": "두통",
+        "reviews": 8,
+        "weighted_pct": 0.2
+      },
+      {
+        "name": "메스꺼움",
+        "reviews": 5,
+        "weighted_pct": 0.1
+      },
+      {
+        "name": "호흡",
+        "reviews": 2,
+        "weighted_pct": 0.1
+      },
+      {
+        "name": "어지럼",
+        "reviews": 1,
+        "weighted_pct": 0.0
+      },
+      {
+        "name": "알레르기 언급",
+        "reviews": 2,
+        "weighted_pct": 0.1
+      }
+    ],
+    "negative_text": "안전 부정 리뷰 18개: 두통 8개(가중 0.2%), 메스꺼움 5개(가중 0.1%), 호흡 2개(가중 0.1%), 어지럼 1개(가중 0.0%), 알레르기 언급 2개(가중 0.1%)"
+  },
+  "accuracy": {
+    "gold_reviews": 30,
+    "status": "PASS",
+    "sonnet": {
+      "topic_f1": 0.96,
+      "sentiment_pct": 93.0,
+      "topic_f1_text": "0.96",
+      "sentiment_text": "93.0%"
+    },
+    "top": {
+      "topic_f1": 0.96,
+      "sentiment_pct": 90.1,
+      "topic_f1_text": "0.96",
+      "sentiment_text": "90.1%"
+    }
+  },
+  "robustness": {
+    "texts": {
+      "weakest": "6개 중 5개(리뷰를 다시 뽑아 보면 3~5개)",
+      "head_first": "100.0%",
+      "head_neg_ci": "8.2%~11.9%",
+      "weakest_dist": "1개 0.1%, 2개 1.1%, 3개 22.1%, 4개 48.0%, 5개 27.4%, 6개 1.4%",
+      "loo_flips": "6번 중 0번"
+    },
+    "bootstrap": {
+      "n": 2000,
+      "seed": 7,
+      "head_first_pct": 100.0,
+      "head_neg_ci": [
+        8.2,
+        11.9
+      ],
+      "weakest_dist": {
+        "1": 0.1,
+        "2": 1.1,
+        "3": 22.1,
+        "4": 48.0,
+        "5": 27.4,
+        "6": 1.4
+      },
+      "weakest_range": [
+        3,
+        5
+      ],
+      "weakest_range_cover": 97.5
+    },
+    "base": {
+      "head_neg": 10.0,
+      "weakest": 5,
+      "asins": 6,
+      "weakest_by_asin": {
+        "B00021AJ5I": "longevity_projection",
+        "B0BZDZJDTG": "longevity_projection",
+        "B0009OAI8Q": "longevity_projection",
+        "B09X5BQ969": "longevity_projection",
+        "B08FBQWRYC": "shipping",
+        "B0GFGL26JD": "longevity_projection"
+      }
+    },
+    "leave_one_out_flips": 0,
+    "leave_one_out_runs": 6,
+    "leave_one_out_head_neg": [
+      10.6,
+      10.2,
+      10.3,
+      9.5,
+      9.8,
+      9.8
+    ],
+    "leave_one_out_head_neg_text": "9.5%~10.6%"
+  }
+}

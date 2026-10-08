@@ -1,0 +1,86 @@
+# v0 손 시험용. v1 흐름에서는 읽지 않음(공통 주제는 config/topics_common.yaml, 향수 전용 주제는 리뷰 표본에서 찾음).
+# 향수 스키마의 출발점: 주제 후보 16개.
+# 공통 뼈대 10개는 스크럽 정답지 16개 주제에서 왔고(그대로 또는 재정의), 향수 전용 6개는 추정이라 실제 리뷰로 확인한다.
+# schema-drafter가 리뷰를 읽고 언급 수와 예시를 붙여, 합치거나 더할 주제를 제안한다. 전체는 16개 이내.
+# side: P = 제품, B = 브랜드
+topics:
+  - id: price_value
+    name_ko: 가격 대비 가치
+    side: B
+    definition: 가격, 용량 대비 값어치, 할인
+    source: 공통 그대로 (Price & Value)
+  - id: brand_experience
+    name_ko: 브랜드 경험
+    side: B
+    definition: 브랜드 호감, 재구매, 추천 의향
+    source: 공통 그대로 (Brand Experience)
+  - id: trust
+    name_ko: 신뢰
+    side: B
+    definition: 리스팅과 실물 차이, 정품 여부 의심
+    source: 공통 그대로 (Reputation & Trust), 정품 여부를 정의에 추가
+  - id: shipping
+    name_ko: 배송
+    side: B
+    definition: 배송 속도, 파손, 누락
+    source: 공통 그대로 (Shipping & Delivery)
+  - id: customer_service
+    name_ko: 고객 응대
+    side: B
+    definition: 반품, 환불, 판매자 응대
+    source: 공통 그대로 (Customer Service)
+  - id: packaging
+    name_ko: 포장
+    side: B
+    definition: 상자, 선물 포장 상태
+    source: 공통 그대로 (Package Design)
+  - id: overall
+    name_ko: 전체 만족도
+    side: P
+    definition: 특정 속성 없이 좋다, 나쁘다
+    source: 공통 그대로 (Overall Satisfaction)
+  - id: quality
+    name_ko: 품질
+    side: P
+    definition: 분사구 불량, 누액, 변질, 병 파손
+    source: 공통 재정의 (Durability & Quality)
+  - id: longevity_projection
+    name_ko: 지속력과 확산력
+    side: P
+    definition: 향이 몇 시간 가는지, 주변에 얼마나 퍼지는지
+    source: 공통 재정의 (Functionality & Performance). 향수 리뷰에서는 흔히 performance라고 부름
+  - id: skin_reaction
+    name_ko: 피부 반응
+    side: P
+    definition: 자극, 알레르기, 두통
+    source: 공통 재정의 (Safety)
+  - id: scent
+    name_ko: 향
+    side: P
+    definition: 향 자체의 호불호와 향 계열(플로럴, 시트러스 등)
+    source: 향수 전용 후보
+  - id: dupe_comparison
+    name_ko: 원본과의 비교
+    side: P
+    definition: 유명 향수와 비슷한지(듀프)
+    source: 향수 전용 후보
+  - id: dry_down
+    name_ko: 향의 변화
+    side: P
+    definition: 첫 향과 잔향이 어떻게 바뀌는지
+    source: 향수 전용 후보
+  - id: bottle_design
+    name_ko: 병과 디자인
+    side: P
+    definition: 병 모양, 색, 휴대성
+    source: 향수 전용 후보 (의류의 Design & Style 자리)
+  - id: occasion_season
+    name_ko: 상황과 계절
+    side: P
+    definition: 데일리, 오피스, 데이트, 계절에 맞는지
+    source: 향수 전용 후보
+  - id: compliments
+    name_ko: 칭찬 받음
+    side: P
+    definition: 주변에서 향을 칭찬받았는지
+    source: 향수 전용 후보

@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정답 세트 태깅</title>
+<style>
+  :root { --bg: #f7f7f5; --card: #ffffff; --text: #1f1f1f; --muted: #6b6b6b; --line: #dedede;
+          --accent: #2f5fd0; --done: #2e7d4f; --warn: #b5541c; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #17181a; --card: #222326; --text: #ececec; --muted: #a0a0a0; --line: #3a3b3f;
+            --accent: #8aa8ff; --done: #6fcf97; --warn: #f2994a; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 15px/1.55 -apple-system, "Segoe UI", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
+  header { position: sticky; top: 0; z-index: 2; background: var(--card); border-bottom: 1px solid var(--line);
+           padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  header h1 { font-size: 16px; margin: 0 12px 0 0; }
+  #progress { font-weight: 600; }
+  button { font: inherit; padding: 6px 12px; border: 1px solid var(--line); border-radius: 6px;
+           background: var(--bg); color: var(--text); cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  main { max-width: 980px; margin: 0 auto; padding: 16px; }
+  .help { color: var(--muted); font-size: 13px; margin: 0 0 14px; }
+  .review { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 16px; }
+  .review.is-done { border-left: 5px solid var(--done); }
+  .meta { color: var(--muted); font-size: 13px; margin-bottom: 4px; }
+  .rtitle { font-weight: 600; margin: 2px 0; }
+  .body { white-space: pre-wrap; margin: 4px 0 10px; }
+  .ko { border-left: 3px solid var(--line); padding: 2px 0 2px 10px; margin: 0 0 10px; color: var(--muted); }
+  .ko .rtitle, .ko .body { color: var(--muted); }
+  .kolabel { font-size: 12px; }
+  .gloss { color: var(--muted); font-size: 12px; margin: 1px 0 3px; }
+  .dlabel { font-weight: 600; margin-top: 6px; color: var(--text); }
+  details ul { margin: 2px 0 4px; padding-left: 18px; }
+  details li { color: var(--text); margin-bottom: 2px; }
+  .tname { font-size: 15px; }
+  .side { font-family: ui-monospace, Consolas, monospace; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  td { border-top: 1px solid var(--line); padding: 6px 4px; vertical-align: top; }
+  td.topic { width: 42%; }
+  .tname { font-weight: 600; }
+  .side { color: var(--muted); font-size: 12px; margin-left: 4px; }
+  .def { color: var(--muted); font-size: 13px; }
+  details { font-size: 12px; color: var(--muted); }
+  .opts label { display: inline-block; margin: 0 8px 4px 0; white-space: nowrap; cursor: pointer; }
+  .opts input:checked + span { font-weight: 700; color: var(--accent); }
+  .donebox { margin-top: 10px; font-weight: 600; }
+  .count { color: var(--muted); font-weight: 400; font-size: 13px; margin-left: 6px; }
+  #out { width: 100%; height: 120px; display: none; margin-top: 8px; }
+  @media (max-width: 640px) { td.topic { width: auto; display: block; } td { display: block; border-top: 0; } tr { border-top: 1px solid var(--line); display: block; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>정답 세트 태깅 (__RUN__)</h1>
+  <span id="progress">0/0 완료</span>
+  <button class="primary" id="export">gold_tags.jsonl 내보내기</button>
+  <button id="copy">복사</button>
+  <span id="msg" class="count"></span>
+</header>
+<main>
+  <p class="help">리뷰마다 주제별로 없음, 긍정, 부정, 혼합, 중립 중 하나를 고릅니다(기본값 없음). 감성은 그 주제에 대한 말로만 정하고 별점으로 짐작하지 않습니다.
+    다 보면 "다 봤음"을 체크합니다. 고른 값은 이 브라우저에 자동 저장됩니다. 끝나면 내보낸 파일을 runs/__RUN__/gold/gold_tags.jsonl로 저장해 주세요.</p>
+  <div id="list"></div>
+  <textarea id="out" readonly></textarea>
+</main>
+<script type="application/json" id="data">__DATA__</script>
+<script>
+const DATA = JSON.parse(document.getElementById("data").textContent);
+const KEY = "gold_tagging:" + DATA.run;
+const OPTS = [["", "없음"], ["positive", "긍정"], ["negative", "부정"], ["mixed", "혼합"], ["neutral", "중립"]];
+
+// toJsonl:start
+function toJsonl(sel, reviews, topics) {
+  const lines = [];
+  for (const r of reviews) {
+    const s = sel[r.review_id] || {};
+    for (const t of topics) {
+      const v = s[t.id];
+      if (v) lines.push(JSON.stringify({ review_id: r.review_id, topic: t.id, sentiment: v }));
+    }
+  }
+  return lines.length ? lines.join("\n") + "\n" : "";
+}
+// toJsonl:end
+
+let state = { sel: {}, done: {} };
+try { const saved = JSON.parse(localStorage.getItem(KEY) || "null"); if (saved) state = saved; } catch (e) {}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+function el(tag, attrs, text) {
+  const e = document.createElement(tag);
+  for (const k in (attrs || {})) e.setAttribute(k, attrs[k]);
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+// 글 안의 영어, 외국어 표현을 찾아 한국어 번역을 회색 줄로 붙인다(긴 표현부터, 겹치면 긴 쪽만)
+const GLOSS = DATA.gloss || { terms: {}, topics: {} };
+const TOPIC_NAMES = {};
+DATA.topics.forEach(t => { TOPIC_NAMES[t.id] = t.name_ko + " 주제"; });
+function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+function findGloss(text, topicId) {
+  const dict = Object.assign({}, TOPIC_NAMES, GLOSS.terms || {}, (GLOSS.topics || {})[topicId] || {});
+  const keys = Object.keys(dict).sort((a, b) => b.length - a.length);
+  const taken = [], hits = [];
+  for (const k of keys) {
+    const pre = /^[A-Za-z0-9]/.test(k) ? "(?<![A-Za-z0-9_À-ÿ])" : "";
+    const post = /[A-Za-z0-9]$/.test(k) ? "(?![A-Za-z0-9_À-ÿ])" : "";
+    const re = new RegExp(pre + escapeRe(k) + post, "g");
+    let m;
+    while ((m = re.exec(text)) !== null) {
+      const a = m.index, b = a + k.length;
+      if (taken.some(([x, y]) => a < y && b > x)) continue;
+      taken.push([a, b]);
+      if (!hits.some(h => h[1] === k)) hits.push([a, k, dict[k]]);
+    }
+  }
+  return hits.sort((p, q) => p[0] - q[0]).map(h => [h[1], h[2]]);
+}
+function glossLine(parent, text, topicId) {
+  const hits = findGloss(text || "", topicId);
+  if (!hits.length) return;
+  parent.appendChild(el("div", { class: "gloss" }, hits.map(([k, v]) => k + " = " + v).join(" / ")));
+}
+
+function progress() {
+  const n = DATA.reviews.filter(r => state.done[r.review_id]).length;
+  document.getElementById("progress").textContent = n + "/" + DATA.reviews.length + " 완료";
+  return n;
+}
+
+function render() {
+  const list = document.getElementById("list");
+  DATA.reviews.forEach((r, i) => {
+    const card = el("section", { class: "review" + (state.done[r.review_id] ? " is-done" : ""), id: "r-" + r.review_id });
+    card.appendChild(el("div", { class: "meta" }, (i + 1) + ". " + r.review_id + " | " + r.asin + " | " + (r.brand || "-") + " | " + r.star + "★" + (r.date ? " | " + r.date : "")));
+    card.appendChild(el("div", { class: "rtitle" }, r.title));
+    card.appendChild(el("div", { class: "body" }, r.body));
+    if (r.title_ko || r.body_ko) {
+      const ko = el("div", { class: "ko" });
+      ko.appendChild(el("div", { class: "kolabel" }, "한국어 번역(참고용, 태깅은 위 원문 기준)"));
+      if (r.title_ko) ko.appendChild(el("div", { class: "rtitle" }, r.title_ko));
+      if (r.body_ko) ko.appendChild(el("div", { class: "body" }, r.body_ko));
+      card.appendChild(ko);
+    }
+    const table = el("table");
+    DATA.topics.forEach(t => {
+      const tr = el("tr");
+      const td1 = el("td", { class: "topic" });
+      const name = el("span", { class: "tname" }, t.name_ko);
+      td1.appendChild(name);
+      td1.appendChild(el("span", { class: "side" }, (t.side === "B" ? "브랜드" : "제품") + " | " + t.id));
+      td1.appendChild(el("div", { class: "def" }, t.definition));
+      glossLine(td1, t.definition, t.id);
+      const d = el("details");
+      d.appendChild(el("summary", {}, "포함과 제외, 헷갈릴 때, 감성 기준, 예시"));
+      const block = (label, items) => {
+        if (!items || !items.length) return;
+        d.appendChild(el("div", { class: "dlabel" }, label));
+        const ul = el("ul");
+        items.forEach(x => { const li = el("li", {}, x); glossLine(li, x, t.id); ul.appendChild(li); });
+        d.appendChild(ul);
+      };
+      block("포함", t.include);
+      block("제외", t.exclude);
+      block("헷갈릴 때", t.confusions ? [t.confusions] : []);
+      block("감성 기준", t.sentiment_notes ? [t.sentiment_notes] : []);
+      block("예시(리뷰 원문)", (t.examples || []).map(x => "“" + x + "”"));
+      td1.appendChild(d);
+      const td2 = el("td", { class: "opts" });
+      const cur = (state.sel[r.review_id] || {})[t.id] || "";
+      OPTS.forEach(([v, label]) => {
+        const lab = el("label");
+        const inp = el("input", { type: "radio", name: r.review_id + "|" + t.id, value: v });
+        if (v === cur) inp.checked = true;
+        inp.addEventListener("change", () => {
+          state.sel[r.review_id] = state.sel[r.review_id] || {};
+          if (v) state.sel[r.review_id][t.id] = v; else delete state.sel[r.review_id][t.id];
+          save(); count(r.review_id);
+        });
+        lab.appendChild(inp);
+        lab.appendChild(el("span", {}, label));
+        td2.appendChild(lab);
+      });
+      tr.appendChild(td1); tr.appendChild(td2); table.appendChild(tr);
+    });
+    card.appendChild(table);
+    const box = el("label", { class: "donebox" });
+    const cb = el("input", { type: "checkbox" });
+    cb.checked = !!state.done[r.review_id];
+    cb.addEventListener("change", () => {
+      state.done[r.review_id] = cb.checked;
+      card.classList.toggle("is-done", cb.checked);
+      save(); progress();
+    });
+    box.appendChild(cb);
+    box.appendChild(document.createTextNode(" 다 봤음"));
+    box.appendChild(el("span", { class: "count", id: "c-" + r.review_id }));
+    card.appendChild(box);
+    list.appendChild(card);
+    count(r.review_id);
+  });
+  progress();
+}
+
+function count(rid) {
+  const n = Object.keys(state.sel[rid] || {}).length;
+  const c = document.getElementById("c-" + rid);
+  if (c) c.textContent = "태그 " + n + "개";
+}
+
+function exportText() {
+  const done = progress();
+  if (done < DATA.reviews.length &&
+      !confirm("아직 " + (DATA.reviews.length - done) + "개 리뷰를 '다 봤음'으로 체크하지 않았습니다. 그래도 내보낼까요?")) return null;
+  return toJsonl(state.sel, DATA.reviews, DATA.topics);
+}
+
+document.getElementById("export").addEventListener("click", () => {
+  const text = exportText();
+  if (text === null) return;
+  const a = el("a", { href: URL.createObjectURL(new Blob([text], { type: "application/x-ndjson" })), download: "gold_tags.jsonl" });
+  document.body.appendChild(a); a.click(); a.remove();
+  document.getElementById("msg").textContent = "내려받았습니다. runs/" + DATA.run + "/gold/gold_tags.jsonl로 저장해 주세요.";
+});
+
+document.getElementById("copy").addEventListener("click", () => {
+  const text = exportText();
+  if (text === null) return;
+  const out = document.getElementById("out");
+  const done = () => { document.getElementById("msg").textContent = "복사했습니다(" + text.split("\n").filter(Boolean).length + "줄)."; };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done, () => { out.style.display = "block"; out.value = text; out.select(); document.execCommand("copy"); done(); });
+  } else { out.style.display = "block"; out.value = text; out.select(); document.execCommand("copy"); done(); }
+});
+
+render();
+</script>
+</body>
+</html>

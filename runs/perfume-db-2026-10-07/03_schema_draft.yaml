@@ -1,0 +1,351 @@
+category: perfume
+version: draft
+sample_reviews: 150
+# 공통 규칙(모든 주제)
+# - 리뷰 하나에 여러 측면이 있으면 측면마다 해당 주제를 각각 붙인다(같은 주제는 하나만).
+# - 리뷰어가 이 제품이 아닌 다른 제품(같은 브랜드의 다른 향, 예전에 쓰던 다른 향수)을 평가한 말은 그 주제로 태깅하지 않는다.
+#   단 "같은 브랜드 다른 향도 좋아한다"는 brand_experience로 간다.
+# - 영어가 아닌 리뷰(es, pt)도 같은 기준으로 태깅한다. fijación/fixação/duración/dura = 지속력, olor/aroma/huele/cheiro = 향.
+# - 제목에만 있는 내용도 태깅한다(인용은 제목 원문).
+topics:
+  # ---------------- 브랜드 쪽(B): id와 정의는 공통 그대로 ----------------
+  - id: price_value
+    name_ko: 가격 대비 가치
+    side: B
+    common_id: price_value
+    definition: 가격, 용량 대비 값어치, 할인
+    include:
+      - 비싸다, 싸다, 가격이 적당하다
+      - 다른 매장(Macy's, Sephora, Ulta, Walmart)과 가격 비교
+      - 용량 대비 값("이 작은 병에 이 값")
+      - 값어치 평가("not worth it", "waste of money", "Wasted my money", "$30 wasted")
+      - 할인, 1+1, 덤으로 하나 더 받음
+      - 이 값이면 더 오래가야 한다는 말("Very expensive for it not to last")
+    exclude:
+      - 금액이 다른 불만을 강조하려고만 나온 경우("$100 넘게 썼는데 깨져 왔다")는 그 불만 주제만(여기서는 shipping)
+      - 병 크기 자체(작다, 휴대하기 좋다)는 bottle_design
+    examples:
+      - {review_id: R297F9WD8P3TY9, quote: "it was a great price for the size"}
+      - {review_id: R1OFXRB2DU9W20, quote: "this one is overpriced"}
+    confusions: >-
+      "Very expensive for it not to last"처럼 값과 지속력을 함께 평가하면 price_value와 longevity_projection 둘 다.
+      "too expensive for the tiny bottle"은 price_value(값 대비 양), "Very small"만 있으면 bottle_design.
+      "waste of money", "not worth it"은 무엇 때문이든 price_value로 보내고, 이유(향, 지속력 등)는 그 주제에 따로 붙인다.
+      "Considering cost, great quality"는 price_value(positive)와 quality(positive) 둘 다.
+    sentiment_notes: >-
+      싸다, 적당하다, 다른 곳보다 싸다는 positive. 비싸다, 값어치 없다, 돈 낭비는 negative.
+      "Pricey, but not terribly", "Price is slightly high"처럼 비싸지만 받아들인다는 말은 mixed.
+      금액만 말하고 평가가 없으면 neutral.
+    evidence_count: 30
+
+  - id: brand_experience
+    name_ko: 브랜드 경험
+    side: B
+    common_id: brand_experience
+    definition: 브랜드 호감, 재구매, 추천 의향
+    include:
+      - 재구매 의사, 이미 여러 병째 산다("2nd Bottle", "bought like five bottles", "Will repurchase")
+      - 남에게 추천한다, 추천하지 않는다("highly recommend", "Recomendo", "Não recomendo")
+      - 브랜드 자체에 대한 호감("Love this brand", "always recommend Elizabeth Taylor's products")
+      - 같은 브랜드의 다른 향을 좋아한다, 다른 향도 써 보고 싶다
+      - 오래 써 온 애용 향수라는 말이 호감으로 쓰일 때("my favorite perfume", "One of my favorite fragrances")
+    exclude:
+      - 특정 속성 없는 "좋다/별로다"만 있으면 overall
+      - 오래 써 왔다는 말이 가짜 의심의 근거로만 쓰이면("20년 썼는데 이건 아니다") trust
+    examples:
+      - {review_id: RC124KI4VXNEV, quote: "Love this brand so much!!!"}
+      - {review_id: R1VCPTPZQPGX88, quote: "Não recomendo."}
+    confusions: >-
+      "Love this perfume highly recommend"는 Love this perfume → overall, highly recommend → brand_experience로 둘 다.
+      "my favorite perfume"은 애용 의사이므로 brand_experience, 같은 문장에 다른 평가가 없으면 overall은 붙이지 않는다.
+      "I wouldn't repurchase"는 brand_experience negative.
+    sentiment_notes: >-
+      재구매, 추천, 브랜드 호감은 positive. 재구매 안 함, 비추천은 negative.
+      "다른 향도 써 보고 싶지만 반품 정책 때문에 망설인다"처럼 호감과 주저가 같이 있으면 mixed.
+    evidence_count: 25
+
+  - id: trust
+    name_ko: 신뢰
+    side: B
+    common_id: trust
+    definition: 리스팅과 실물 차이, 정품 여부 의심
+    include:
+      - 가짜다, 정품이 아닌 것 같다("fake", "counterfeit", "Scam", "no es original")
+      - 예전에 쓰던 같은 제품, 매장(Sephora, Walmart, 매장 테스터)에서 산 같은 제품과 향이나 세기가 다르다
+      - 희석된 것 같다("watered down")는 정품 의심
+      - 이 판매자에게서 사지 말라, 공식 사이트에서 사라
+      - 정품 같다, 원래 것과 같다("Same as original", "looks real") 같은 긍정
+      - 받은 병이나 상자가 평소 것과 다르다("not the familiar smell or bottle")
+    exclude:
+      - 정품 비교 없이 향이 싫다는 말은 scent
+      - 정품 비교 없이 향이 약하다, 금방 날아간다는 말은 longevity_projection
+      - 향 노트가 상품 설명과 다르다(바닐라가 안 난다 등)는 scent(questions 1번 참고)
+      - 반품, 환불이 안 된다는 말은 customer_service
+    examples:
+      - {review_id: R1U2ZZ3REP6M9Q, quote: "Same as original"}
+      - {review_id: R15HIDYPL5720F, quote: "knew instantly this was a fake"}
+    confusions: >-
+      "원래 것과 냄새가 다르다", "Sephora에서 산 것보다 약하다"처럼 정품이나 예전 제품과 비교하는 말은 trust만 붙이고 scent나 longevity_projection은 붙이지 않는다.
+      같은 리뷰가 비교 없이 따로 "향이 거의 안 난다", "한 시간 뒤 아무 냄새도 없다"고 말하면 longevity_projection도, "냄새가 지독하다", "알코올 냄새만 난다"고 말하면 scent도 붙인다.
+      오래돼서 변한 것 같다(유통기한, 상한 냄새)는 quality, 가짜 같다는 trust. 둘 다 의심하면("authenticity or age") 둘 다.
+    sentiment_notes: >-
+      가짜 의심, 원래 것과 다르다는 negative. 정품 같다, 원래 것과 같다는 positive.
+      "looks real.. not sure why Macy's is more expensive"처럼 의심 끝에 정품 같다고 하면 positive.
+    evidence_count: 26
+
+  - id: shipping
+    name_ko: 배송
+    side: B
+    common_id: shipping
+    definition: 배송 속도, 파손, 누락
+    include:
+      - 빠른, 늦은 배송
+      - 받았을 때 병이 깨졌다, 뚜껑이 부러졌다, 샜다, 상자에 향수가 흘렀다
+      - 시점 설명 없이 "Broken", "Top is broken"만 있는 경우
+      - 받았을 때 내용물이 덜 들어 있었다(1/5이 비어 있음)
+      - 배달 위치, 기사 처리(우편함에 쑤셔 넣음, 문 밖 나무 뒤에 둠)
+      - 상품이 빠진 채 배달됨
+    exclude:
+      - 상자 디자인이나 상자 자체가 찌그러진 상태는 packaging
+      - 파손 뒤 교환, 환불을 해 줬는지는 customer_service
+      - 쓰다가 생긴 분사기, 뚜껑 고장은 quality
+    examples:
+      - {review_id: R3R6ZPYXB9A5CA, quote: "quick shipping"}
+      - {review_id: R2QNHGK3X8PSUN, quote: "do not except it to come leaking all over!!!"}
+    confusions: >-
+      "Sent broken bottle and would not replace"는 broken bottle → shipping, would not replace → customer_service로 둘 다.
+      향수가 새서 상자가 젖었다는 말은 원인(누출)이 배송 중 파손이므로 shipping이고 packaging은 붙이지 않는다.
+      병이 깨져 왔는데 반품이 안 된다는 리뷰는 shipping과 customer_service 둘 다.
+    sentiment_notes: >-
+      빠르다, 잘 왔다는 positive. 파손, 누출, 누락, 배달 위치 불만은 negative.
+      "Product always come correct ... Only one disappointment, the package was left by my gate"처럼 배송 불만이 있으면 negative.
+    evidence_count: 14
+
+  - id: customer_service
+    name_ko: 고객 응대
+    side: B
+    common_id: customer_service
+    definition: 반품, 환불, 판매자 응대
+    include:
+      - 향수는 반품이 안 된다, 반품 옵션이 없다, 미리 몰랐다("Not returnable", "No refunds are available on perfumes")
+      - 반품 기간이 지나 버렸다
+      - 환불이나 교환을 해 줬다, 안 해 줬다
+      - 환불해 달라는 요청
+      - 판매자의 친절, 불친절
+    exclude:
+      - 파손 사실 자체는 shipping
+      - 이 판매자 것이 가짜 같다는 말은 trust
+    examples:
+      - {review_id: R3LNPXE58OL6AE, quote: "fueron muy amables conmigo"}
+      - {review_id: R22BUJ1Q76GCH8, quote: "This item cannot be returned, which was not clear before purchasing."}
+    confusions: >-
+      "반품이 안 돼서 그냥 버렸다/남에게 줬다"는 customer_service. 같은 리뷰의 향 불만은 scent에 따로.
+      "If I could return it, I would"처럼 반품 불가를 아쉬워하는 말도 customer_service.
+      "매장에서 먼저 맡아 보고 사라"는 조언만 있으면 태깅하지 않는다. 반품 불가가 이유로 붙어 있으면 customer_service.
+    sentiment_notes: >-
+      반품 불가, 환불 거절, 반품 기간 놓침은 negative. 친절하게 환불해 줬다는 positive.
+      평가 없이 "환불해 달라"는 요청만 있으면 negative(불만으로 인한 요청이므로).
+    evidence_count: 18
+
+  - id: packaging
+    name_ko: 포장
+    side: B
+    common_id: packaging
+    definition: 상자, 선물 포장 상태
+    include:
+      - 제품 상자가 예쁘다, 병을 잘 보호한다
+      - 상자가 원래 것과 같다, 설명 카드가 좋다
+      - 겉상자나 금속 케이스(틴)가 찌그러졌다
+      - 여행용으로 상자가 튼튼하다
+    exclude:
+      - 병 자체의 모양, 뚜껑, 분사기는 bottle_design
+      - 병이 깨지거나 새서 온 것은 shipping
+    examples:
+      - {review_id: R2BG8L01VQAU1S, quote: "The packaging is also pretty and does a good job protecting the bottle"}
+      - {review_id: RS1MO5HQ7J5E2, quote: "the metal cylinder it comes in was dented"}
+    confusions: >-
+      "bottle"이 나오면 bottle_design, "box/packaging/case/caja/embalagem"이 나오면 packaging.
+      "Same name and packaging"처럼 가짜 의심의 근거로 포장을 말하면 trust만 붙인다.
+      "Buena presencia ... es para regalar"처럼 겉모양 인상을 말하고 상자인지 병인지 불분명하면 bottle_design.
+    sentiment_notes: 예쁘다, 잘 보호한다, 원래 것과 같다는 positive. 찌그러짐, 훼손은 negative.
+    evidence_count: 5
+
+  # ---------------- 제품 쪽(P) ----------------
+  - id: overall
+    name_ko: 전체 만족도
+    side: P
+    common_id: overall
+    definition: 특정 속성 없이 제품이 좋다, 나쁘다
+    include:
+      - '"Nice", "Ok", "It''s the best", "Muy bueno", 하트 이모지 같은 총평'
+      - this perfume, product, it을 좋아한다, 싫다("Love this perfume", "Tacky and awful")
+      - 기대나 입소문(hype, 광고, SNS)에 못 미친다, 기대만큼이다("worth the hype", "didn't live up to the expectations")
+      - 선물로 좋았다, 받은 사람이 좋아했다(무엇이 좋았는지 말이 없을 때)
+      - 점수 매기기("8.1-10", "10/10")
+      - '"favorite fragrance", "love this fragrance"처럼 fragrance가 제품 자체를 가리킬 때의 호감'
+    exclude:
+      - smell, scent, aroma, olor, huele, cheiro가 들어간 평가는 scent
+      - 재구매, 추천 의향은 brand_experience
+      - 값어치 평가는 price_value
+    examples:
+      - {review_id: R1C33XMDMQ55LW, quote: "great JPG product"}
+      - {review_id: R1G2BI91BKD1BV, quote: "Tacky and awful"}
+    confusions: >-
+      "Smells good"은 scent이고 overall이 아니다. "I love this perfume"은 overall.
+      "fragrance"는 뒤에 향 묘사가 오면("Fragrance is wonderful!", "the fragrance is nice soft") scent, 제품을 부르는 말이면("my favorite fragrances") overall 또는 brand_experience.
+      리뷰가 구체적 속성(향, 지속력, 가격 등)만 말하고 총평이 따로 없으면 overall을 붙이지 않는다.
+      제목의 총평("Amazing", "Disappointed", "Not for me")도 다른 속성이 그 제목을 설명하지 않으면 overall.
+    sentiment_notes: >-
+      좋다는 positive, 실망·싫다는 negative, "ok", "It was an ok buy"는 neutral.
+      "having mixed feelings"처럼 스스로 섞였다고 하면 mixed.
+    evidence_count: 25
+
+  - id: quality
+    name_ko: 품질
+    side: P
+    common_id: quality
+    definition: 만듦새, 내구성, 불량, 변질
+    include:
+      - 내용물이 오래됐다, 상한 것 같다, 유통기한이 지난 것 같다("podría estar vencido")
+      - 쓰다가 분사기, 뚜껑이 고장 났다
+      - 병 안이 대부분 두꺼운 유리라 금방 바닥난다 같은 만듦새 불만
+      - 무엇인지 밝히지 않은 "quality" 평가("great quality", "Muy mala calidad")
+    exclude:
+      - 받았을 때 깨져 있던 병은 shipping
+      - 가짜 의심은 trust
+      - 냄새 묘사(알코올 냄새, 화학약품 냄새)는 scent
+      - 지속력이 나빠서 품질이 나쁘다는 말은 longevity_projection
+    examples:
+      - {review_id: R127DQHI2JF3MQ, quote: "Considering cost, great quality"}
+      - {review_id: R12411ZM5LP8M5, quote: "Siento que podría estar vencido"}
+    confusions: >-
+      "Muy mala calidad nada de duración no huele nada"처럼 calidad 바로 뒤에 지속력과 세기 이야기가 이어지면 calidad는 그 설명이므로 longevity_projection만 붙인다.
+      "No tiene calidad para su precio"(제목: 세 시간도 안 간다)는 price_value와 longevity_projection, quality는 붙이지 않는다.
+      "almost smells old"처럼 오래된 냄새를 가짜 의심과 함께 말하면 trust, 변질만 의심하면 quality.
+    sentiment_notes: 품질이 좋다는 positive. 변질 의심, 고장, 불량은 negative.
+    evidence_count: 4
+
+  - id: longevity_projection
+    name_ko: 지속력과 향의 세기
+    side: P
+    common_id: performance
+    definition: 향이 몇 시간 가는지, 얼마나 세게 나고 주변에 퍼지는지
+    include:
+      - 지속 시간("lasts all day", "Last five minutes", "only last for 2hrs", "no dura ni tres hora")
+      - 옷이나 피부에 남는지, 덧뿌려야 하는지
+      - 향이 약하다, 거의 안 난다, 너무 세다, 과하다("very weak", "no smell", "SUPER STRONG OVERPOWERING", "Very heavy")
+      - 확산력(주변 사람이 맡는지, 살 냄새처럼 피부 가까이만 남는지)
+      - 조금만 뿌려도 충분하다("Little goes a long way", "two small sprays")
+      - fijación, fixação, duración, intenso 같은 비영어 표현
+    exclude:
+      - 향의 성격이나 호불호(달다, 할머니 냄새, 좋다)는 scent
+      - 정품이나 예전 제품과 비교해서 약하다는 말은 trust
+      - 다른 제품(리뷰어가 가진 다른 향)의 지속력
+    examples:
+      - {review_id: R3P5BEA6U907NJ, quote: "I apply at 630a and can smell myself at 630p."}
+      - {review_id: RPK76O08CXYUS, quote: "Maybe lasts 2 hours at most."}
+    confusions: >-
+      "Smells good but doesn't last long"은 Smells good → scent(positive), doesn't last → longevity_projection(negative).
+      세기를 평가하는 말(약하다, 세다, 거의 안 난다, 코를 찌른다)은 여기, 향의 분위기를 그리는 형용사(soft, delicate, fresh, clean)는 scent.
+      "light", "subtle"은 세기 불만이나 칭찬이면("Very light, It's like I never used") 여기, 향 인상으로 쓰이면("Light scent. Great smell") scent.
+      "Very strong and unpleasant floral smell"은 Very strong → longevity_projection, unpleasant floral → scent로 둘 다.
+      남에게 칭찬받았다는 말은 scent(향이 좋다는 평가)로 보내고, 멀리서도 맡는다, 가까이 와야 맡는다는 말만 여기.
+    sentiment_notes: >-
+      오래간다, 적당히 퍼진다, 조금만 써도 된다는 positive. 금방 날아간다, 약하다, 너무 세다는 negative.
+      시간만 말하고 평가가 없으면("2시간 간다") neutral, 단 "only", "solo", "just"가 붙으면 negative.
+      "The lasting power is ehh. Not great not super light"처럼 중간이면 mixed.
+      피부 가까이만 남는 것을 좋아하면서 더 퍼졌으면 한다면 mixed.
+    evidence_count: 60
+
+  - id: safety
+    name_ko: 안전
+    side: P
+    common_id: safety
+    definition: 피부나 몸의 반응, 자극, 알레르기, 안전 우려
+    include:
+      - 두통, 메스꺼움, 재채기, 숨 막힘 같은 실제 몸 반응
+      - 피부 발진, 가려움, 따가움
+      - 성분 안전 우려
+    exclude:
+      - '"코를 찌른다", "decimating my nostrils", "burns my nose"처럼 향이 독하다는 과장은 longevity_projection'
+      - 냄새가 싫어서 씻어냈다는 말은 scent
+    examples: []
+    confusions: >-
+      실제 증상을 말할 때만 safety. 향이 세거나 싫다는 과장 표현은 safety가 아니다.
+      표본 150개에서 실제 증상 언급은 찾지 못했다.
+    sentiment_notes: 증상, 자극은 negative. "민감한 피부인데 괜찮았다"는 positive.
+    evidence_count: 0
+
+  - id: bottle_design
+    name_ko: 병 디자인과 용량
+    side: P
+    common_id: design
+    definition: 병 모양과 색, 뚜껑, 분사(아토마이저), 병 크기와 휴대성
+    include:
+      - 병이 예쁘다, 고급스럽다("Pretty bottle", "the bottle it comes in is beautiful")
+      - 자석 뚜껑, 분사 압력, 한 번 누를 때 나오는 양
+      - 병 크기가 작다, 생각보다 크다, 핸드백·여행용으로 좋다
+      - 받은 용량을 오래 쓴다(얼마나 오래 쓰는지)
+      - 겉모양 인상("Buena presencia")
+    exclude:
+      - 상자, 케이스는 packaging
+      - 쓰다가 생긴 분사기, 뚜껑 고장은 quality
+      - 값에 비해 양이 적다는 price_value
+    examples:
+      - {review_id: R3HKWF5VN6K5KG, quote: "I love the bottle and the atomizer"}
+      - {review_id: RCVEIIQRM7XWQ, quote: "the bottle size is a little small"}
+    confusions: >-
+      "Was way too expensive for the tiny bottle"은 price_value, 같은 리뷰의 "It was a tiny little bottle"은 bottle_design으로 둘 다.
+      "I gave it a two for the pretty bottle"은 bottle_design positive.
+      "the honey is mostly in the color of the bottle"처럼 병 색을 빌려 향을 비꼬면 scent만.
+    sentiment_notes: >-
+      예쁘다, 휴대하기 좋다, 분사가 좋다는 positive. 너무 작다, 금방 바닥난다는 negative.
+      "small, but perfect for carrying in my purse"처럼 작지만 좋다는 positive, 작아서 아쉽지만 받아들인다면 mixed.
+    evidence_count: 18
+
+  # ---------------- 카테고리 전용 ----------------
+  - id: scent
+    name_ko: 향
+    side: P
+    common_id: null
+    definition: 향 자체의 호불호와 향의 성격(노트, 분위기, 나이 이미지), 상품 설명의 노트와 맞는지
+    include:
+      - 냄새가 좋다, 싫다("Smells great", "Smells horrible", "Huele barato", "Olor Divino")
+      - 노트와 분위기 묘사(바닐라, 앰버, 꽃, 머스크, 파우더리, 후추, 달다, 상쾌하다, 깨끗하다, 부드럽다)
+      - 나이 이미지("old lady", "grandma's perfume", "older woman (55+)", "Smells mature")
+      - 광고나 이름의 노트가 안 느껴진다, 설명과 다르다("No vanilla scent at all", "Honey where?")
+      - 알코올, 화학약품, 좀약, 연필깎은 냄새 같은 불쾌한 냄새 묘사
+      - 남에게 칭찬받았다(향이 좋다는 근거), 상대가 냄새를 어떻게 느꼈는지
+      - 계절, 상황, 성별 적합성("Good for spring and Summer", "Could work for male and female")
+      - 섹시하다, 비싸 보이는 향이다 같은 인상
+    exclude:
+      - 지속 시간, 세기, 확산력은 longevity_projection
+      - 정품이나 예전 제품과 냄새가 다르다는 trust
+      - 향이 아닌 제품 전체 총평은 overall
+      - 변질 의심은 quality
+    examples:
+      - {review_id: R2BG8L01VQAU1S, quote: "The scent is really beautiful and delicate."}
+      - {review_id: RIM1X1QZP5FTV, quote: "Smells horrible - like moth balls."}
+    confusions: >-
+      "It doesn't smell like white diamonds! It stinks!"는 원래 제품과 다르다 → trust, It stinks → scent로 둘 다.
+      "Smells different from what I normally buy"처럼 비교만 있으면 trust만.
+      "No vanilla scent at all"처럼 상품 이름이나 설명의 노트가 없다는 말은 정품 의심이 없으면 scent(trust 아님).
+      "smells like rubbing alcohol"은 scent. 같은 리뷰에서 가짜라고 하면 trust도.
+      향이 좋다는 말과 세기·지속력 말이 같이 있으면 둘로 나눈다(longevity_projection 참고).
+    sentiment_notes: >-
+      좋다, 칭찬받았다는 positive. 싫다, 싸구려 냄새, 노트가 없다는 negative.
+      나이 이미지는 리뷰어가 싫어하는 맥락이면 negative, "It's a nice perfume but this is something an older woman (55+) would wear"처럼 좋다와 함께 설명하면 mixed.
+      "Pretty scent. A bit too much amber"처럼 좋지만 아쉬움이 있으면 mixed. 노트만 설명하고 평가가 없으면 neutral.
+    evidence_count: 90
+
+changes:
+  - {action: redefine, ids: [performance, longevity_projection], reason: "표본에서 성능 언급은 거의 모두 지속 시간과 향의 세기, 확산력 이야기(어림 60개). 비영어 리뷰도 fijación, fixação, duración으로 같은 내용"}
+  - {action: redefine, ids: [design, bottle_design], reason: "표본의 디자인 언급은 병 모양, 자석 뚜껑, 분사, 병 크기와 휴대성(어림 18개). 색이나 모양 일반보다 병과 용량 이야기라 이름과 정의를 좁힘"}
+  - {action: add, ids: [scent], reason: "향 자체의 호불호와 묘사(노트, 나이 이미지, 설명과 다른 노트)가 표본에서 가장 많은 내용(어림 90개)이고 공통 11개 어디에도 담기지 않음"}
+
+questions:
+  - "향 노트가 상품 설명이나 광고와 다르다(바닐라가 안 난다, 꿀이 안 느껴진다, 어림 9개)를 scent로 보냈습니다. 공통 trust 정의('리스팅과 실물 차이')로 보낼지 정해 주세요. 정답지 태깅과 같은 기준이어야 합니다."
+  - "'old lady', 'grandma' 같은 나이 이미지(어림 11개)를 scent 안에 두었습니다. 리포트에서 따로 보고 싶으면 별도 주제(예: age_image)로 나눌 수 있습니다."
+  - "입소문(hype), 광고 대비 실망이나 만족(어림 9개)을 overall에 두었습니다. 따로 볼지 정해 주세요."
+  - "'waste of money', 'not worth it' 같은 관용 표현을 이유와 상관없이 price_value로 보냈습니다(어림 8개). overall로 볼지 정답 세트 태깅 때 같은 기준을 써 주세요."
+  - "safety는 표본에서 실제 증상 언급이 0개입니다. 공통 틀 유지를 위해 남겨 두었습니다."

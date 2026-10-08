@@ -1,0 +1,37 @@
+topic: packaging
+directions:
+  negative:
+    labels: []
+    other_approx_count: 17
+    notes: "07a_issue_plan.json에서 only_other가 true(인용 17개, 표본 없음)라 라벨을 만들지 않음"
+  positive:
+    labels:
+      - id: pretty_presentation
+        name_ko: 상자와 포장이 예쁨
+        name_en: Attractive box and presentation
+        include: 상자나 포장의 겉모양을 칭찬하는 말(cute, pretty, elegant, classy, clean, beautifully packaged, presentation, 설명 카드가 예쁨, Linda presentación)
+        exclude: 병 자체의 모양이나 색은 bottle_design. 병을 잘 지켜 준다, 안전하게 왔다는 well_protected. 원래 것과 같다는 matches_original. 무엇이 좋은지 없이 nice, good만 있으면 기타
+        examples:
+          - {review_id: R2MWXQTV4OA6W8, quote: "The packaging is so cute."}
+          - {review_id: R1CX3R6UQLOFAJ, quote: "The packaging is cute too and looks elegant"}
+        approx_count: 12
+      - id: well_protected
+        name_ko: 꼼꼼하게 포장되어 병을 잘 보호함
+        name_en: Well packed and protective
+        include: 포장이 꼼꼼하다, 상자가 병을 잘 보호한다, 상자 상태가 멀쩡하게 왔다, 여행할 때도 상자가 병을 지켜 준다(packed well, packaged nicely, gut verpackt, keeps it secure for travel)
+        exclude: 배송 속도나 병이 깨지지 않고 왔다는 말 자체는 shipping. 상자의 겉모양 칭찬은 pretty_presentation
+        examples:
+          - {review_id: R1VKEB92N0AEHH, quote: "packed well"}
+          - {review_id: R22HEPSREDBHOA, quote: "box that comes with keeps it secure for travel"}
+        approx_count: 6
+      - id: matches_original
+        name_ko: 포장이 원래 것과 같음
+        name_en: Packaging matches the original
+        include: 상자나 포장이 정품, 예전에 받던 것과 같다는 말
+        exclude: 포장을 가짜나 정품 의심의 근거로만 쓰면 trust(스키마 기준). 포장이 예쁘다는 말만 있으면 pretty_presentation
+        examples:
+          - {review_id: R3QMZJEPSF4PJW, quote: "embalagem tava perfeito como original"}
+          - {review_id: R3E3IWV1CXIFEY, quote: "the packaging appears consistent with the original"}
+        approx_count: 2
+    other_approx_count: 4
+    notes: "기타 4개는 무엇이 좋은지 없는 포장 칭찬(Nice packaging though, 5 stars for their packaging 등)이라 겉모양과 보호 중 어느 쪽인지 정하지 못함. R2BG8L01VQAU1S는 예쁨과 보호를 함께 말해 두 라벨에 모두 셈. Linda presentación은 상자인지 병인지 불분명하지만 packaging으로 태깅되어 있어 pretty_presentation에 셈"

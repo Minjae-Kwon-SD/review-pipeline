@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-10-07T21:34:52+09:00",
+  "status": "PASS",
+  "failed_batches": [],
+  "errors": [],
+  "values": 1629,
+  "dropped_quotes": 2,
+  "dropped": [
+    {
+      "batch": "B00021AJ5I_08",
+      "review_id": "RLI9E523HGVOC",
+      "item": "desired_state",
+      "value": "더 큰 용량의 병",
+      "quote": "I thought it would be the larger bottle!"
+    },
+    {
+      "batch": "B00021AJ5I_08",
+      "review_id": "RW9B7F2AP5A3C",
+      "item": "comparison_reference",
+      "value": "original_unspecified",
+      "quote": "è arrivato un profumo dissimile dall'originale"
+    }
+  ],
+  "counts": {
+    "longevity_hours": 81,
+    "application_amount": 47,
+    "application_site": 43,
+    "scent_note": 210,
+    "note_direction": 210,
+    "part_failure": 84,
+    "comparison_reference": 182,
+    "comparison_named": 58,
+    "purchase_context": 148,
+    "purchase_trigger": 60,
+    "desired_state": 47,
+    "wearer_image": 83,
+    "usage_occasion": 61,
+    "fake_suspicion_basis": 58
+  }
+}

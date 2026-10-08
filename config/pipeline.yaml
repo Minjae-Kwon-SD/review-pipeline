@@ -1,0 +1,17 @@
+# 파이프라인 설정. 스크립트(collect.py, check_inputs.py, weight.py)가 읽는다.
+
+paid:
+  # 유료 수집(amz-review scrape_reviews, Apify 크레딧 소모). true이고 collect.py pull에 --confirm-paid가 있을 때만 부른다.
+  enabled: false
+  max_pages_per_star: 1     # ASIN과 별점 조합마다 받을 페이지 수(1~10)
+  max_scrape_calls: 10      # 한 번의 pull에서 부를 수 있는 scrape_reviews 최대 횟수
+
+weighting:
+  # 별점 묶음 보정. 묶음 안 별점이 모두 표본을 가지면 별점마다, 하나라도 비면 묶음 단위로 가중치를 만든다.
+  groups:
+    negative: [1, 2]
+    neutral: [3]
+    positive: [4, 5]
+  min_group_sample: 30       # 묶음 표본이 이보다 적으면 경고
+  max_review_share: 0.02     # 리뷰 한 개의 가중치가 그 ASIN 가중 합(= 표본 수)에서 차지하는 비중 w(s)/n이 이보다 크면 경고
+  dist_mean_tolerance: 0.15  # 실제 분포로 계산한 평균과 average_rating 차이가 이보다 크면 경고
