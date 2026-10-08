@@ -350,7 +350,7 @@ def render_issues(summary, schema, overlap, safety):
         if key == "safety.negative" and safety and safety.get("by_symptom"):   # 안전 부정은 라벨 대신 증상별(07c)
             top = ", ".join(f"{x['name']} 리뷰 {x['reviews']}개({fmt_pct(x['weighted_pct'])})" for x in safety["by_symptom"])
             if safety.get("negative_no_symptom"):
-                top += f", 몸 증상 없음 리뷰 {safety['negative_no_symptom']}개"
+                top += f", 이상 반응 없음 리뷰 {safety['negative_no_symptom']}개"
             other = "증상별 분류(07c)"
         lines.append(f"| {schema[s['topic']]['name_ko']} | {ko[s['direction']]} | {top} | {other} |")
     lines.append("")
@@ -361,7 +361,7 @@ def render_issues(summary, schema, overlap, safety):
     if safety and safety.get("negative_text"):
         lines.append(f"{safety['negative_text']}(07c_safety_check.md, 알레르기 언급은 본인 반응을 직접 묘사하지 않은 리뷰).")
     elif safety:
-        lines.append(f"안전 부정 인용 {safety['negative_symptom'] + safety['negative_no_symptom']}개 중 몸 증상 {safety['negative_symptom']}개, "
+        lines.append(f"안전 부정 인용 {safety['negative_symptom'] + safety['negative_no_symptom']}개 중 이상 반응 {safety['negative_symptom']}개, "
                      f"나머지 {safety['negative_no_symptom']}개(07c_safety_check.md).")
     lines.append("주제와 방향마다 리뷰 수 상위 3개(기타 제외). 리뷰 하나는 라벨마다 한 번 셉니다. 가중 비율은 그 라벨이 붙은 리뷰의 가중치 합 ÷ 전체 리뷰 "
                  "가중치 합. 기타 비율은 그 주제와 방향의 인용 중 승인 라벨에 들지 않은 비율. 전체 만족도는 나누지 않습니다. "

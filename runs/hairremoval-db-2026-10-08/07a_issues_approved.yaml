@@ -1,0 +1,1627 @@
+made_at: '2026-10-08T22:52:55+09:00'
+status: PASS
+version: approved
+topics:
+- topic: price_value
+  name_ko: 가격 대비 가치
+  directions:
+    negative:
+      quotes: 125
+      sampled: 125
+      only_other: false
+      labels:
+      - id: not_worth_money
+        name_ko: 돈 낭비, 값어치 없음
+        name_en: Waste of money
+        include: 돈 낭비다, 돈을 버렸다, 돈 아껴라, 값어치가 없다, 돈값을 못 한다는 판정만 있고 인용 안에 이유(효과, 고장)가 없는 말
+        exclude: 인용 안에 효과가 없다는 이유가 붙으면 disappointing_for_price, 고장이나 짧은 수명이 붙으면 expensive_for_lifespan, 가격이 높다는 말만 있으면 too_expensive
+        examples:
+        - review_id: R1WTL5624OGXU
+          quote: Waste of money.
+        - review_id: RI2SISRQKM0M2
+          quote: Not worth the money
+        approx_count: 59
+      - id: disappointing_for_price
+        name_ko: 가격에 비해 효과나 성능이 실망스러움
+        name_en: Disappointing results for the price
+        include: 가격을 들며 효과, 결과, 성능이 기대에 못 미친다, 이 값이면 더 나아야 한다, 이만큼 썼는데 실망이다는 말(효과가 없어 돈을 버렸다 포함)
+        exclude: 가격에 비해 빨리 고장 나거나 수명이 짧다는 말은 expensive_for_lifespan, 이유 없는 돈 낭비 판정은 not_worth_money
+        examples:
+        - review_id: R18UY4HW9LQGON
+          quote: For the price.. and zero results.
+        - review_id: R28HE7BFJAEMNS
+          quote: Given the price of this device, it was disappointing.
+        approx_count: 28
+      - id: expensive_for_lifespan
+        name_ko: 비싼 값에 비해 빨리 고장 남
+        name_en: Too costly for its short lifespan
+        include: 이 가격이면 더 오래 가야 한다, 몇 주나 몇 달 만에 고장 났다, 몇 번 못 쓰고 멈췄다처럼 가격과 고장, 내구성, 수명을 함께 말하는 것
+        exclude: 가격과 함께 효과가 없다는 말은 disappointing_for_price, 가격 없이 고장만 말하는 것은 이 주제가 아님(quality)
+        examples:
+        - review_id: RTZ6KQ6T15U3J
+          quote: I would think for $350 this product would last longer than 4 months.
+        - review_id: R2JM1I6ZLDWZ00
+          quote: Way too expensive for its useful life
+        approx_count: 17
+      - id: too_expensive
+        name_ko: 가격 자체가 비쌈
+        name_en: Too expensive
+        include: 비싸다, 너무 비싸다, 가격이 과하다, 다른 제품보다 몇 배 비싸다처럼 가격 수준 자체를 말하는 것(할인 없이는 실망했을 것이라는 말 포함)
+        exclude: 비싼데 효과가 없다는 말은 disappointing_for_price, 비싼데 고장 났다는 말은 expensive_for_lifespan, 비싸지만 값어치가 있다는 말은 positive 방향
+        examples:
+        - review_id: R1F3PPA88YT8QQ
+          quote: Too expensive.
+        - review_id: R1BW5S0JJO319S
+          quote: Very expensive and found others at less than 1/2 the price
+        approx_count: 14
+      other_approx_count: 7
+      notes: 기타는 산 뒤 가격 인하 2, 교체 헤드나 충전기 추가 비용 2, 그 돈으로 면도기나 전기 제모, 전문 시술을 했어야 한다 3. "waste of time and money"의 시간 부분은 이 주제 밖. R2OEZ28614WRBE는 성능과 내구성을 함께 말해 disappointing_for_price와 expensive_for_lifespan 둘 다 될 수 있음
+    positive:
+      quotes: 111
+      sampled: 111
+      only_other: false
+      labels:
+      - id: worth_the_money
+        name_ko: 값어치가 있음
+        name_en: Worth the money
+        include: worth it, worth every penny, 좋은 투자다, vale la pena처럼 쓴 돈만큼 값어치가 있다는 판정(비싸지만 값어치가 있다 포함)
+        exclude: 가격이 싸다, 가성비가 좋다, 할인으로 샀다는 말은 good_price, 살롱이나 전문 시술과 비교하면 saves_vs_salon
+        examples:
+        - review_id: R13MHEVNHMPLOI
+          quote: Worth every penny!!
+        - review_id: R2WQNV39LKPB5G
+          quote: Yes, it’s on the expensive side, but for me it’s been completely worth it
+        approx_count: 45
+      - id: saves_vs_salon
+        name_ko: 살롱이나 전문 레이저 시술보다 쌈
+        name_en: Cheaper than salon treatments
+        include: 살롱, 클리닉, 전문 레이저 시술, estéticas에 드는 돈과 비교해 싸다, 돈을 아낀다(면도기와 함께 비교해도 여기)
+        exclude: 살롱 비교 없이 돈을 아낀다는 말은 saves_money_overall, 살롱에 안 가도 되는 편리함만 말하면 이 주제가 아님(ease_of_use)
+        examples:
+        - review_id: R3V0MABRCY0HJC
+          quote: the cost is a lot lower compare to the salon
+        - review_id: R2KLY3J5B81QZS
+          quote: Definitely more cost effective them salon treatments
+        approx_count: 28
+      - id: saves_money_overall
+        name_ko: 길게 보면 돈을 아낌
+        name_en: Saves money over time
+        include: 살롱 언급 없이 돈을 아낀다, 길게 보면 절약이다, 면도기나 면도 크림 같은 용품을 안 사도 된다
+        exclude: 살롱이나 전문 시술과 비교하면 saves_vs_salon, 시간을 아낀다는 부분은 이 주제가 아님(treatment_time)
+        examples:
+        - review_id: R3GMJKYQ9OQT80
+          quote: it saves both time and money on razors and shaving cream
+        - review_id: R2WJT0O7RZ6EXV
+          quote: save a lot of money in the long run
+        approx_count: 13
+      - id: good_price
+        name_ko: 가격이 착하고 가성비가 좋음
+        name_en: Good value for the price
+        include: 저렴하다, affordable, 가격에 비해 좋다(for the price), great value, bang for your buck, 할인이나 프라임데이에 잘 샀다
+        exclude: 가격 수준 언급 없이 값어치가 있다는 판정(worth it, 투자)은 worth_the_money, 살롱보다 싸다는 비교는 saves_vs_salon
+        examples:
+        - review_id: R35JKDWHP2PZZ7
+          quote: Great value for the price!
+        - review_id: R2VNEBLNFNGTZ1
+          quote: Got on prime day, and what a deal
+        approx_count: 24
+      other_approx_count: 1
+      notes: worth_the_money와 good_price의 경계는 표현으로 가름(worth, investment는 값어치, value, affordable, for the price, deal은 가성비). 기타 1개는 R2527CST84MMJT(비용이 문제가 아니면 기능이 좋다는 혼합 인용)
+- topic: brand_experience
+  name_ko: 브랜드 경험
+  directions:
+    negative:
+      quotes: 64
+      sampled: 64
+      only_other: false
+      labels:
+      - id: not_recommend
+        name_ko: 비추천이나 사지 말라는 경고
+        name_en: Does not recommend or warns not to buy
+        include: 추천하지 않는다, 사지 마라, 돈 낭비하지 마라, Buyer beware처럼 다른 사람에게 이 제품을 권하지 않거나 사지 말라고 하는 말(이유가 같이 붙어도 포함)
+        exclude: 자기가 다시 사지 않겠다는 말만 있으면 no_repurchase, 대신 다른 브랜드나 제품을 사라는 말은 switch_brand, 대신 전문 시술을 받으라는 말은 go_professional
+        examples:
+        - review_id: R3FLHL10LKK79F
+          quote: I can not in good faith recommend this product to anyone
+        - review_id: R1JUHDD7LBTKAK
+          quote: Save your money, don't buy.
+        approx_count: 37
+      - id: no_repurchase
+        name_ko: 다시 사지 않음
+        name_en: Would not buy again
+        include: 자기가 이 제품이나 모델을 다시 사지 않겠다, 같은 돈을 다시 쓰지 않겠다, 다시 사기 망설여진다는 말
+        exclude: 다른 사람에게 사지 말라고 하면 not_recommend, 브랜드 전체를 다시 안 사겠다거나 회사에 실망했다는 말은 brand_disappointment
+        examples:
+        - review_id: R1NZEC16D5FOP4
+          quote: I probably won’t rebuy this model when I run out of flashes
+        - review_id: R20SYP9R1KMKDR
+          quote: Will not buy again.
+        approx_count: 7
+      - id: switch_brand
+        name_ko: 다른 브랜드나 제품이 나음
+        name_en: Another brand or product is better
+        include: 다른 브랜드(Ulike, INIA, Braun 등)나 다른 제품을 사라, 그쪽을 살 걸 그랬다, 이전에 쓴 다른 브랜드가 더 나았다, 경쟁 제품과 비슷한 수준이라는 비교
+        exclude: 대신 전문 시술이나 살롱을 권하면 go_professional, 대안 없이 사지 말라는 말만 있으면 not_recommend
+        examples:
+        - review_id: RH6TJCI4IIG0W
+          quote: Get Ulike instead for better comfort.
+        - review_id: R3R5LESPOYWCJZ
+          quote: Go with a different brand.
+        approx_count: 7
+      - id: go_professional
+        name_ko: 전문 시술을 권함
+        name_en: Recommends professional treatment instead
+        include: 집에서 쓰는 기기보다 전문 레이저나 살롱 시술을 받으라, 전문 시술만큼 세지 않다, 집에서 스스로 하는 시술을 권하지 않는다는 말
+        exclude: 다른 가정용 브랜드나 제품을 권하면 switch_brand, 살롱 비용과의 돈 비교는 price_value(이 주제가 아님)
+        examples:
+        - review_id: RR06PKULANNQ7
+          quote: I would recommend just going to a professional
+        - review_id: R3EGHJ3KA8QM68
+          quote: don’t buy, go a professional places
+        approx_count: 5
+      - id: brand_disappointment
+        name_ko: 브랜드나 광고에 실망
+        name_en: Disappointed in the brand or its marketing
+        include: 브랜드 제품 전체를 사지 마라, 그 브랜드에서 사는 것은 이번이 마지막, 회사가 부끄럽다, 광고나 인플루언서에 끌려 샀다는 브랜드 자체에 대한 불만
+        exclude: 이 모델 하나를 다시 안 사겠다는 말은 no_repurchase, 광고 내용과 실물이 다르다는 말은 trust(이 주제가 아님)
+        examples:
+        - review_id: R2W6NAVMEMCRIR
+          quote: Don’t buy ulike products.
+        - review_id: R26RQQHSAX8XYF
+          quote: I have purchased several items from Braun in the past but sadly this might be my last
+        approx_count: 4
+      other_approx_count: 4
+      notes: 추천을 미루거나 망설이는 말(R2ZKCTG5R8L6PV, R27D9PZ4ENRQ81, R2MBCDJ6VJPRMQ, 어림 3개)은 5% 미만이라 기타로 두었다. "don't buy, go a professional places"처럼 비추천과 대안이 한 문장이면 대안 라벨을 우선하고, 라벨 단계에서 1~2개를 함께 달 수 있다.
+    positive:
+      quotes: 118
+      sampled: 118
+      only_other: false
+      labels:
+      - id: recommend
+        name_ko: 추천이나 사라는 권유
+        name_en: Recommends or urges others to buy
+        include: 추천한다, 강력 추천, Lo recomiendo, Just buy it, Get it, 주변에 이미 추천했다, 모두에게 필요하다처럼 조건 없이 다른 사람에게 권하는 말
+        exclude: 피부 유형, 꾸준함, 기대치 같은 조건을 붙인 추천은 conditional_recommend, 후회하지 않을 것이다는 no_regret, 다시 사겠다는 buy_again_or_upgrade
+        examples:
+        - review_id: R15CPIXT574AA3
+          quote: I highly recommend it
+        - review_id: R3CVPCV0EQPFAQ
+          quote: do yourself a favour and buy it
+        approx_count: 73
+      - id: buy_again_or_upgrade
+        name_ko: 재구매나 상위 모델로 바꿈
+        name_en: Would buy again or upgraded
+        include: 다시 사겠다, 두 번째로 샀다, 가족 몫으로 하나 더 사겠다, 같은 브랜드 상위 모델로 바꿨다
+        exclude: 산 뒤 오래 계속 쓴다는 말은 keeps_using, 이전 모델보다 낫다는 비교만 있으면 favorable_comparison
+        examples:
+        - review_id: R3F4KBJINTRL7F
+          quote: I had the U3 and it solved 70% of my problem, so I decided to upgrade and bought the U10.
+        - review_id: R1MIIGBSIUFT00
+          quote: I would defiantly buy it again.
+        approx_count: 9
+      - id: no_regret
+        name_ko: 후회 없는 구매
+        name_en: No regrets about buying
+        include: 후회하지 않는다, 후회하지 않을 것이다, 돈 쓴 것이 아깝지 않다, 최고의 구매 중 하나라는 말
+        exclude: 직접 사라고 권하는 말은 recommend, 다시 사겠다는 말은 buy_again_or_upgrade, 가격 대비 값어치 평가는 price_value(이 주제가 아님)
+        examples:
+        - review_id: R7IHM2Z8MJOFL
+          quote: I do not regret this purchase!
+        - review_id: R22D42ASN75CAQ
+          quote: no te vas arrepentir
+        approx_count: 8
+      - id: keeps_using
+        name_ko: 오래 계속 씀
+        name_en: Keeps using it long term
+        include: 몇 달, 1년, 3년째 쓰고 있다, 앞으로도 계속 쓸 것이다, 그만 쓸 수 없다, 써 보고 돌아보지 않았다는 말
+        exclude: 오래 써도 고장이 없다는 내구성 평가는 quality(이 주제가 아님), 다시 샀다는 말은 buy_again_or_upgrade
+        examples:
+        - review_id: R2LZPF2047BAEK
+          quote: I’ve used it on and off for 3 years
+        - review_id: R2TNKBB9DW6MXY
+          quote: Impossible to stop using it.
+        approx_count: 8
+      - id: favorable_comparison
+        name_ko: 이전 기기나 다른 브랜드보다 만족
+        name_en: Better than previous devices or other brands
+        include: 이전 모델이나 예전에 쓴 다른 브랜드, 무명 기기보다 낫다, 시장의 다른 제품보다 이것을 권한다, 경쟁 브랜드에 견줄 만하다, 같은 브랜드 이전 제품도 좋았다
+        exclude: 그 기기로 상위 모델을 다시 샀다는 말은 buy_again_or_upgrade, 브랜드 이름만 믿을 만하다는 말은 기타
+        examples:
+        - review_id: R13FFPKEUHQJ4V
+          quote: So much better compared to my old no-brand laser hair remover
+        - review_id: R27C7U0ZYUMOEM
+          quote: I’ve used Ulike products before and had a great experience
+        approx_count: 8
+      - id: conditional_recommend
+        name_ko: 조건을 붙인 추천
+        name_en: Recommends with conditions
+        include: 꾸준히 할 각오가 있으면, 밝은 피부라면, 일주일에 한 번 면도해도 괜찮다면, 전문 시술만큼 세지 않다는 것을 알면 추천한다처럼 조건을 걸고 권하는 말
+        exclude: 조건 없는 추천은 recommend, 조건 때문에 결국 전문 시술을 받으라는 불만 부분은 부정 방향 go_professional
+        examples:
+        - review_id: R3I65RNL68LQ79
+          quote: I definitely recommend getting the product as long as you are ready to commit
+        - review_id: RXBX1IOM03910
+          quote: Recomendable si eres cumplido con los días de depilación
+        approx_count: 7
+      other_approx_count: 5
+      notes: 브랜드 이름 자체에 대한 신뢰(R2YRR62H3ARYRY "A Trusted Brand", R2527CST84MMJT Philips, R32K12744AFVIO "German engineering", 어림 3개)는 5% 미만이라 기타로 두었다. R33AU9CUYNIANU의 칭찬 부분("happy for the most part")은 이유 없는 전체 평에 가까워 기타로 셌다.
+- topic: trust
+  name_ko: 신뢰
+  directions:
+    negative:
+      quotes: 40
+      sampled: 40
+      only_other: false
+      labels:
+      - id: misleading_claims
+        name_ko: 과장 광고나 거짓 설명
+        name_en: Misleading or false claims
+        include: 광고, 설명, 사진이 실제와 다르다, 과장이다, 오해하게 만든다, 거짓이다, 사기다라는 말(효과, 시간, 출력, 안전 주장 포함)
+        exclude: 피부색이나 털 색에 맞는다는 안내가 틀렸거나 없었다는 말은 suitability_misinformed, 설명에 적힌 구성품이 빠진 것은 missing_listed_items
+        examples:
+        - review_id: R253Q5MQJEFCR1
+          quote: “full body in 10 mins” advertising is also misleading
+        - review_id: R1Q2O18BTENX2M
+          quote: Product is advertised as safe but this is the opposite!
+        approx_count: 14
+      - id: arrived_used
+        name_ko: 중고나 개봉 흔적
+        name_en: Arrived used or opened
+        include: 새 제품으로 샀는데 쓴 흔적, 남의 털, 더러운 헤드, 열린 상자로 왔다, 반품된 것을 다시 판다는 말
+        exclude: 설명에 적힌 구성품이 빠진 것만 말하면 missing_listed_items, 기기 고장이나 불량 자체는 quality(주제 밖)
+        examples:
+        - review_id: R1B2B516LQUZCQ
+          quote: Arrived used
+        - review_id: R374GN9CX6ILYP
+          quote: llego la caja abierta y se ve usado y los cabezales sucios
+        approx_count: 12
+      - id: missing_listed_items
+        name_ko: 설명과 다른 구성품
+        name_en: Listed items missing
+        include: 설명이나 설명서에 들어 있다고 한 헤드, 면도기, 보안경, 수건이 받은 상자에 없었다는 말
+        exclude: 원래 구성에 없는 것을 아쉬워하는 말은 accessories(주제 밖), 중고 흔적과 함께 말하면 중고 흔적을 arrived_used로
+        examples:
+        - review_id: R1EGVNMV7X8WQX
+          quote: The description says it comes with 2 heads and a razor but I only received 1 head and the razor was missing
+        - review_id: RZH0ENS9J3SL
+          quote: El manual indica que incluye razor y goggles, pero no vinieron en la caja.
+        approx_count: 5
+      - id: suitability_misinformed
+        name_ko: 피부색 적합성 안내 부족이나 잘못된 안내
+        name_en: Skin tone suitability not disclosed or misstated
+        include: 어두운 피부에는 안 된다는 것을 알리지 않았다, 포장이나 협찬 홍보가 맞는다고 했는데 아니었다는 말
+        exclude: 피부색 때문에 효과가 없거나 센서가 막는다는 경험 자체는 skin_hair_suitability(주제 밖), 피부색과 관계없는 과장 광고는 misleading_claims
+        examples:
+        - review_id: RL4CIP8VWPLYA
+          quote: they never said it’s not for Black people or dark colored people
+        - review_id: R3DXQ4VVNARZ78
+          quote: You should make it clear that it is not for brown skin girls.
+        approx_count: 4
+      - id: doubted_before_purchase
+        name_ko: 협찬 리뷰나 반품 표시로 생긴 의심
+        name_en: Doubt from paid reviews or return warnings
+        include: 반품이 잦은 상품 표시, 협찬과 유료 홍보, 평판 때문에 사기 전이나 쓰면서 의심했다는 말(혼합 인용의 의심 부분 포함)
+        exclude: 광고 내용이 실제와 다르다고 판단한 말은 misleading_claims
+        examples:
+        - review_id: R2KLY3J5B81QZS
+          quote: It says this is a frequently returned item so I was hesitant to buy. This product honestly works great
+        - review_id: RKEMYTS0L15RN
+          quote: I think there is a lot of paid promotion with this product.
+        approx_count: 3
+      other_approx_count: 2
+      notes: R2LT3QNM94WMEI(사기라는 말이지만 이유가 배송 안 됨, shipping 쪽)와 R1LCIDY8581R4J(설명에 무엇이 없었는지 인용만으로 알 수 없음)는 기타로 셈. 안전하다는 광고가 거짓이라는 말(어림 2개)은 따로 두기엔 적어 misleading_claims에 합침.
+    positive:
+      quotes: 8
+      sampled: 0
+      only_other: true
+      labels: []
+      other_approx_count: 8
+      notes: ''
+- topic: shipping
+  name_ko: 배송
+  directions:
+    negative:
+      quotes: 4
+      sampled: 0
+      only_other: true
+      labels: []
+      other_approx_count: 4
+      notes: 07a_issue_plan.json에서 only_other가 true(인용 4개, 표본 없음). 라벨 없이 전부 기타로 둠
+    positive:
+      quotes: 15
+      sampled: 0
+      only_other: true
+      labels: []
+      other_approx_count: 15
+      notes: 07a_issue_plan.json에서 only_other가 true(인용 15개, 표본 없음). 라벨 없이 전부 기타로 둠
+- topic: customer_service
+  name_ko: 고객 응대
+  directions:
+    negative:
+      quotes: 52
+      sampled: 52
+      only_other: false
+      labels:
+      - id: missed_return_window
+        name_ko: 반품 기한이 지나 반품이나 환불 불가
+        name_en: Past the return window
+        include: 반품 기한이나 환불 보장 기간(30일, 100일 등)이 지나 반품, 환불을 못 한다, 기한을 놓쳐 떠안았다는 말
+        exclude: 효과가 나오기 전에 기한이 끝난다고 기한과 효과 시점을 비교하면 window_ends_before_results. 기한 안인데 거절당하면 refund_replace_refused
+        examples:
+        - review_id: R3SYQQVFXZOBU4
+          quote: I missed the window to return it so now I’m stuck with it.
+        - review_id: R2UV6FE2VGLK51
+          quote: Outside of the 100 day guarantee so I cannot get a refund.
+        approx_count: 17
+      - id: window_ends_before_results
+        name_ko: 효과 확인 전에 반품 기한이 끝남
+        name_en: Return window ends before results show
+        include: 효과를 알기까지 걸리는 기간보다 반품 기한이 짧아 판단하기 전에 반품할 수 없게 된다는 정책 불만
+        exclude: 기한을 놓쳤다는 말만 있고 효과 시점과 비교하지 않으면 missed_return_window. 효과가 늦다는 말 자체는 hair_reduction
+        examples:
+        - review_id: R3I8VU9TXZJ1N2
+          quote: You only have 4 weeks to return but yet it says you won’t see results till 4 weeks
+        - review_id: R1ZM15KT6ZURLE
+          quote: I cannot return this because it takes so long to really find out if it works
+        approx_count: 4
+      - id: no_response
+        name_ko: 고객센터 연락 불가나 무응답
+        name_en: Unreachable or no response
+        include: 고객센터, 판매자, 제조사에 전화, 메시지, 채팅을 했는데 답이 없다, 사람과 연결이 안 된다, 여러 번 연락해야 했다는 말
+        exclude: 연락은 닿았지만 환불, 교체를 거절당하면 refund_replace_refused. 답은 왔지만 성의 없거나 도움이 안 되면 unhelpful_service
+        examples:
+        - review_id: R29LTEY2ULGDKX
+          quote: their customer service won’t answer the phone
+        - review_id: R3AHPS52Z6NIVG
+          quote: The seller has refused to acknowledge any of my 5 messages.
+        approx_count: 13
+      - id: refund_replace_refused
+        name_ko: 환불이나 교체, 수리 거절
+        name_en: Refund or replacement refused
+        include: 환불, 교체, 수리, 반품을 거절당했다, 사용자 과실로 돌렸다, 가격 차액이나 스토어 크레딧처럼 일부만 보상받았다는 말
+        exclude: 거절 이유가 기한 경과뿐이면 missed_return_window. 답 자체가 없으면 no_response
+        examples:
+        - review_id: R1BT7Y43OAYIN7
+          quote: they declined to repair or replace it
+        - review_id: R2OHNX29MJBII3
+          quote: Best amazon could do after contacting them three times was a $50 store credit
+        approx_count: 7
+      - id: unhelpful_service
+        name_ko: 응대가 성의 없거나 도움이 안 됨
+        name_en: Unhelpful or poor service
+        include: 고객센터가 형편없다, 도와줄 수 있는 게 없다고 했다, 제품을 책임지지 않는다, 문제를 대수롭지 않게 넘겼다는 말
+        exclude: 연락이 안 되거나 답이 없으면 no_response. 구체적으로 환불, 교체를 거절했으면 refund_replace_refused
+        examples:
+        - review_id: R1BRBOP254558S
+          quote: I reached out to customer service and they told me to not worry about it
+        - review_id: R30SXDQSJ7QM37
+          quote: The customer service is also poor
+        approx_count: 4
+      - id: slow_return_process
+        name_ko: 반품이나 환불 절차가 느리고 번거로움
+        name_en: Slow or tedious return process
+        include: 반품 절차가 길고 번거롭다, 환불이 몇 달째 안 들어왔다, 여러 번 시도한 끝에 겨우 환불받았다는 말
+        exclude: 연락 자체가 안 되면 no_response. 결국 거절당했으면 refund_replace_refused
+        examples:
+        - review_id: R26NCNGHQU12WZ
+          quote: Months later, I still have not received my refund.
+        - review_id: R2JZND2LNQW1IF
+          quote: Amazon has changed their return process and makes that long and somewhat annoying
+        approx_count: 3
+      other_approx_count: 4
+      notes: 반품 기한 관련 인용이 절반 가까이 된다. R3LZWIQRKS8R3A처럼 "this also passes the return period"는 앞 문맥상 효과 확인 기간과 비교한 말로 보여 window_ends_before_results로 셌지만 인용만으로는 경계가 애매하다. 보증 기간이 1년뿐이다(R4I22WQC4FUKT), 돈을 돌려 달라(R97OX7XS8RVRJ)처럼 응대 경험 없는 말은 기타로 셌다.
+    positive:
+      quotes: 20
+      sampled: 20
+      only_other: false
+      labels:
+      - id: refund_granted
+        name_ko: 환불이나 반품을 받아 줌
+        name_en: Refund or return granted
+        include: 환불을 문제없이 받았다, 기한이 지났는데도 반품이나 전액 환불을 해 줬다, 판매자가 먼저 연락해 환불해 줬다는 말
+        exclude: 돈이 아니라 새 제품으로 바꿔 줬으면 free_replacement. 구체적 결과 없이 응대 태도만 칭찬하면 helpful_service
+        examples:
+        - review_id: R5A9JWD6G35F8
+          quote: refund issued no problem
+        - review_id: R1SDYJMPTO5X2D
+          quote: The company reached out and offered full refund even though it was beyond 100 days
+        approx_count: 7
+      - id: free_replacement
+        name_ko: 무상 교체나 새 제품 발송
+        name_en: Free replacement
+        include: 고장이나 문제가 생기자 새 제품으로 바꿔 줬다, 무상 교체를 제안했다, 새 기기를 보내 줬다는 말
+        exclude: 환불을 받았으면 refund_granted. 고장 자체는 quality
+        examples:
+        - review_id: R2TAW3BLI22CBT
+          quote: Braun is replacing it for free
+        - review_id: RDEHKQF7X6P2P
+          quote: the company responded quickly and replaced it with a brand-new product
+        approx_count: 5
+      - id: helpful_service
+        name_ko: 응대가 친절하고 빠름
+        name_en: Helpful and responsive service
+        include: 고객센터가 친절하다, 훌륭하다, 빨리 답했다, 해결 방법을 여러 가지 제시했다, 고객 만족에 힘쓴다는 말(환불, 교체 같은 구체적 결과 없이)
+        exclude: 환불이나 교체를 받았다는 결과가 있으면 refund_granted 또는 free_replacement
+        examples:
+        - review_id: R10EBCR0NL97P2
+          quote: Customer Service team was quick to respond and offered several options to rectify the issue.
+        - review_id: R18XD7IXMDFRMP
+          quote: They were very pleasant and helpful.
+        approx_count: 8
+      other_approx_count: 0
+      notes: 표본이 20개뿐이라 라벨마다 개수가 적다. 1,2★ 리뷰에서도 환불, 교체 칭찬이 나온다(R343EEURPQIXZ2, RGRI74CC8ENT0).
+- topic: packaging
+  name_ko: 포장
+  directions:
+    negative:
+      quotes: 3
+      sampled: 0
+      only_other: true
+      labels: []
+      other_approx_count: 3
+      notes: 07a_issue_plan.json에서 only_other(인용 3개)라 라벨을 두지 않음
+    positive:
+      quotes: 26
+      sampled: 26
+      only_other: false
+      labels:
+      - id: attractive_premium_box
+        name_ko: 예쁘고 고급스러운 포장
+        name_en: Attractive, premium-looking packaging
+        include: 상자나 포장이 예쁘다, 고급스럽다, 세련됐다, 보기 좋게 담겨 왔다, 선물하기 좋다는 말과 포장이 좋다, 마음에 든다는 전반적 호감
+        exclude: 꼼꼼히 잘 포장되어 왔다(well packaged, bien empaquetado)는 말은 well_packed, 상자를 보관이나 정리에 쓴다는 말은 practical_storage_box, 기기와 함께 오는 보관 케이스나 파우치는 accessories
+        examples:
+        - review_id: R2FH84S1LVI3LT
+          quote: The packaging is beautiful and feels very premium.
+        - review_id: R1E8UGOQ0TAQSW
+          quote: This came beautifully boxed and presented
+        approx_count: 18
+      - id: well_packed
+        name_ko: 꼼꼼하게 잘 포장되어 옴
+        name_en: Well packed
+        include: 잘 포장되어 왔다, 포장을 잘 했다(well packaged, well packed, bien empaquetado)처럼 포장 작업이나 보호 상태를 칭찬하는 말
+        exclude: 포장의 겉모습이나 고급스러움을 칭찬하면 attractive_premium_box, 제품이 멀쩡하게 도착했다는 말은 shipping
+        examples:
+        - review_id: R37BVWJW81QEP9
+          quote: it came very well packaged
+        - review_id: RQUQENL329XRW
+          quote: súper bien empaquetado
+        approx_count: 5
+      - id: practical_storage_box
+        name_ko: 보관에 쓰기 좋은 실용적인 상자
+        name_en: Practical box for storage
+        include: 제품 상자가 튼튼하거나 실용적이어서 계속 보관하거나 구성품을 정리해 두기 좋다는 말
+        exclude: 보기 좋다는 말만 있으면 attractive_premium_box, 기기와 함께 오는 보관 케이스, 파우치, 가방은 accessories
+        examples:
+        - review_id: R2EDE4DS2YX5SP
+          quote: I am keeping in the Ulike sturdy box for added care
+        - review_id: R17Z3G31WY4J6A
+          quote: It comes in a very nice clampshell type box that keeps everything organized while looking nice.
+        approx_count: 3
+      other_approx_count: 0
+      notes: '"El empaque muy bien", "The packaging was nice"처럼 이유 없이 포장이 좋다는 말은 attractive_premium_box로 셌음. well_packed와는 ''잘 포장해 보냈다''(동사형, 보호)인지 ''포장이 좋다, 예쁘다''(겉모습, 호감)인지로 나눔'
+- topic: quality
+  name_ko: 품질
+  directions:
+    negative:
+      quotes: 156
+      sampled: 150
+      only_other: false
+      labels:
+      - id: early_failure
+        name_ko: 받자마자 또는 한 달 안에 고장
+        name_en: Defective on arrival or failed within a month
+        include: 받았을 때부터 켜지지 않거나 불량, 손상된 채 왔다는 말, 또는 몇 번 쓰고, 몇 주에서 한 달 안에 기기 전체가 멈췄다는 말(충전기나 케이블 때문에 처음부터 못 쓴 경우 포함)
+        exclude: 한 달 넘게 쓴 뒤 고장은 failed_after_months, 시기를 말하지 않은 고장은 failure_unspecified, 특정 모드나 버튼, 센서만 안 되면 partial_failure
+        examples:
+        - review_id: RJLK2EL94UMYE
+          quote: Stopped working after 3 uses. Won’t even turn on.
+        - review_id: R3806RF3C4GFDU
+          quote: The machine I received is faulty
+        approx_count: 30
+      - id: failed_after_months
+        name_ko: 몇 달 쓴 뒤 고장이나 성능 저하
+        name_en: Failed or weakened after months of use
+        include: 한 달 넘게(몇 달에서 몇 년) 쓴 뒤 기기 전체가 멈췄다는 말, 수명이 짧다, 오래 못 쓴다, 발광 횟수를 다 쓰기 전에 끝났다는 평가, 쓸수록 발광이 약해지거나 예전만큼 안 된다는 말(시기와 무관)
+        exclude: 한 달 안의 고장은 early_failure, 시기를 말하지 않은 고장은 failure_unspecified, 털이 덜 줄었다는 효과 이야기는 이 주제가 아님(hair_reduction)
+        examples:
+        - review_id: RTZ6KQ6T15U3J
+          quote: Stopped working after 4 months.
+        - review_id: R2JM1I6ZLDWZ00
+          quote: Barely works after a few months of use.
+        approx_count: 36
+      - id: failure_unspecified
+        name_ko: 고장(시기 언급 없음)
+        name_en: Stopped working, timing not stated
+        include: 기기가 멈췄다, 켜지지 않는다, 발광이 안 된다, 오작동했다고만 하고 언제 그랬는지 말하지 않는 말
+        exclude: 시기를 말하면 early_failure 또는 failed_after_months, 가끔만 안 되면 intermittent_malfunction, 일부 기능만 안 되면 partial_failure
+        examples:
+        - review_id: R2SZIVAO4SCY8R
+          quote: it just stopped working
+        - review_id: RPRSBLD7AE510
+          quote: It turns on and cools, but the laser itself isn't working.
+        approx_count: 17
+      - id: partial_failure
+        name_ko: 특정 모드나 버튼, 센서만 고장
+        name_en: Specific mode, button, or sensor failed
+        include: 얼굴 모드, 자동 모드, SHR 모드, 세기 버튼, 전원 버튼, 피부 센서처럼 기기의 일부 기능만 계속 안 된다는 말(센서가 피부를 더는 읽지 못함 포함)
+        exclude: 가끔 되다 안 되다 하면 intermittent_malfunction, 기기 전체가 멈추면 시기에 따라 early_failure, failed_after_months, failure_unspecified, 피부색 때문에 센서가 막는 것은 이 주제가 아님(skin_hair_suitability)
+        examples:
+        - review_id: R11JTE4QJDAYQR
+          quote: Face mode stopped functioning the 2nd time I used it
+        - review_id: R97OX7XS8RVRJ
+          quote: the sensor has stopped reading skin after less than a month of use
+        approx_count: 11
+      - id: intermittent_malfunction
+        name_ko: 가끔 발광 안 함이나 저절로 꺼짐
+        name_en: Misfires, freezes, or shuts off randomly
+        include: 피부에 닿아도 가끔 발광하지 않는다, 헛발사, 멈춰서 다시 꽂아야 한다, 이유 없이 저절로 꺼지거나 재시작된다는 말
+        exclude: 열 때문에 꺼진다고 하면 overheating, 한 기능이 계속 안 되면 partial_failure, 피부에 딱 붙여야 발광하는 사용 방식의 불편은 이 주제가 아님(ease_of_use)
+        examples:
+        - review_id: R2C4TROJI0WAZI
+          quote: it misfires literally like 90% of the time
+        - review_id: RRJWFICVRDKH7
+          quote: it just turns off automatically by itself for no reason
+        approx_count: 20
+      - id: overheating
+        name_ko: 기기 과열
+        name_en: Device overheats
+        include: 기기 몸체나 헤드가 뜨거워진다, 과열로 꺼진다, 식을 때까지 쉬어야 한다, 뜨거워지면서 냉각이 안 된다는 말
+        exclude: 쏠 때 피부에 닿는 열감이나 탈 것 같은 감각은 이 주제가 아님(pain_comfort), 탄내나 연기는 scorch_marks_smell
+        examples:
+        - review_id: R3AHPS52Z6NIVG
+          quote: It gets super hot after a few minutes of use, and we're worried it's going to overheat.
+        - review_id: R2OYIIRT8H081A
+          quote: the unit gets hot and automatically powers off
+        approx_count: 16
+      - id: scorch_marks_smell
+        name_ko: 조사창 얼룩이나 탄내, 연기
+        name_en: Window scorch marks, burning smell, or smoke
+        include: 조사창이나 렌즈 안의 검은 얼룩과 그을음, 사파이어 창에 김이 서림, 탄내나 플라스틱 타는 냄새, 펑 소리와 불꽃, 연기가 났다는 말
+        exclude: 그 때문에 무섭다, 위험하다는 안전 우려는 이 주제가 아님(safety), 냄새나 연기 없이 그냥 멈춘 것은 고장 라벨
+        examples:
+        - review_id: R1KNHD542ODN3O
+          quote: The laser window has scorch marks on it
+        - review_id: R1O1Y1AMTALTUT
+          quote: weird, almost burning plastic like smell that comes from the top ventilation
+        approx_count: 14
+      - id: fragile_build
+        name_ko: 약한 만듦새나 부품 파손
+        name_en: Flimsy build or broken parts
+        include: 재질이 약하다, 깨지기 쉽다, 헤드나 캡이 깨지거나 부식됐다, 버튼 느낌이 싸다, 가격에 비해 만듦새가 못하다는 말
+        exclude: 작동이 멈춘 고장은 고장 라벨, 가격 대비 실망 자체는 이 주제가 아님(price_value), 무게나 모양은 design
+        examples:
+        - review_id: RW52SEIQ8TX0B
+          quote: it’s extremely fragile
+        - review_id: RTQY6V0DQNOTE
+          quote: Not even a year the big laser head shattered!!
+        approx_count: 9
+      other_approx_count: 3
+      notes: 완전 고장이 표본의 절반 넘게 차지해 시기(한 달 안, 한 달 넘게, 언급 없음)로 나눴다. 시기 언급 없는 고장이 어림 17개라 따로 두었고, 한 인용에 시기와 탄내가 함께 있으면 두 라벨을 단다.
+    positive:
+      quotes: 65
+      sampled: 65
+      only_other: false
+      labels:
+      - id: well_made
+        name_ko: 잘 만든 느낌, 고급스러움
+        name_en: Feels well made and premium
+        include: 품질이 좋다, 잘 만든 느낌이다, 고급스럽다, 비싸 보인다, 싸 보이지 않는다처럼 만듦새와 첫인상을 칭찬하는 말
+        exclude: 튼튼하다, 오래 간다, 아직 잘 작동한다, 과열이 없다는 durable, 모양이나 색이 예쁘다는 이 주제가 아님(design)
+        examples:
+        - review_id: R2JRF62JGQA1TY
+          quote: It feels well made
+        - review_id: R18D1G0XPQQ91Y
+          quote: The device feels very well made and has a much more premium feel
+        approx_count: 57
+      - id: durable
+        name_ko: 튼튼하고 오래 작동함
+        name_en: Sturdy and durable
+        include: 튼튼하다, 내구성이 좋다, 견고하다, 아직도 잘 작동한다, 남들이 말한 과열을 겪지 않았다는 말
+        exclude: 일반적인 품질 칭찬이나 고급스러운 느낌은 well_made
+        examples:
+        - review_id: R2PH76S40PV5X1
+          quote: very durable
+        - review_id: R2SC0RZYQYFC7C
+          quote: I have not experienced the overheating that some have reported
+        approx_count: 7
+      other_approx_count: 1
+      notes: 고급스러움(premium, looks expensive)은 어림 5개로 품질 칭찬과 경계가 흐려 well_made에 합쳤다. "build quality feels solid"처럼 solid는 느낌 칭찬이라 well_made, sturdy, durable, robustly built는 durable로 본다.
+- topic: hair_reduction
+  name_ko: 제모 효과
+  directions:
+    negative:
+      quotes: 286
+      sampled: 150
+      only_other: false
+      labels:
+      - id: no_effect
+        name_ko: 효과 없음
+        name_en: No visible effect
+        include: 써 봐도 털에 변화가 없거나 아주 적다는 말, 기대나 광고, 다른 리뷰만큼 효과가 없다는 말(줄었다는 인정 없이)
+        exclude: 줄거나 가늘어졌다고 인정하면 partial_reduction, 일부 부위만 안 되면 uneven_by_area, 아직 기다리는 중이라며 늦다고 하면 slow_results
+        examples:
+        - review_id: R2DXIC5NR8A970
+          quote: Absolutely zero results
+        - review_id: R1ZM15KT6ZURLE
+          quote: I have been using it for 4 months with no change
+        approx_count: 68
+      - id: partial_reduction
+        name_ko: 줄었지만 다 없어지지 않음
+        name_en: Reduced but not gone
+        include: 털이 줄거나 느리게, 가늘게 자란다고 인정하면서 다 없어지지 않았다, 여전히 면도나 뽑기를 해야 한다, 완전히 없애 주지는 못한다는 말
+        exclude: 사용을 멈춘 뒤 다시 자란다, 영구적이지 않다는 말은 not_lasting, 부위를 나눠 되고 안 되고를 말하면 uneven_by_area
+        examples:
+        - review_id: R2X5WAT77HEGQH
+          quote: my hair growth is less but certainly not gone
+        - review_id: R220YD40R0TEWH
+          quote: It's definitely slows the grow after consistent use. But I still shave couple times a week.
+        approx_count: 29
+      - id: uneven_by_area
+        name_ko: 부위마다 효과 차이
+        name_en: Uneven results across body areas
+        include: 어떤 부위(겨드랑이, 다리)는 되는데 다른 부위(얼굴, 비키니, 음모)는 안 되거나 덜 된다는 말, 특정 부위에서만 효과가 없다는 말
+        exclude: 피부색, 털 색 때문에 갈린다는 말은 이 주제 밖(skin_hair_suitability), 부위 구분 없이 전체가 덜 줄었다는 말은 partial_reduction
+        examples:
+        - review_id: R1UI82S8I64AUB
+          quote: It worked very well for my underarms. But hasn't done much for my bikini area.
+        - review_id: R1WAF4RFXZ6I6S
+          quote: Buena para el cuerpo pero no sirve en la cara
+        approx_count: 25
+      - id: slow_results
+        name_ko: 효과가 늦게 나타남
+        name_en: Results take too long
+        include: 효과가 아주 천천히 나온다, 광고보다 오래 걸린다, 생각보다 늦다, 아직 큰 변화가 없어 더 오래 써야 할 것 같다는 말
+        exclude: 충분히 썼는데 변화가 없다고 결론 내리면 no_effect, 일정을 지키는 시간 부담은 이 주제 밖(treatment_time)
+        examples:
+        - review_id: R1LS0E4XTPW5B3
+          quote: It works but it takes longer than advertised.
+        - review_id: RYNUARHCQ2I8S
+          quote: If you expect quick hair removal, you may be disappointed because the changes are very gradual
+        approx_count: 10
+      - id: not_lasting
+        name_ko: 멈추면 다시 나고 영구적이지 않음
+        name_en: Regrows after stopping, not permanent
+        include: 사용을 멈추면 털이 다시 자란다, 효과가 오래 가지 않는다, 영구 제모가 아니다, 계속 관리해야 유지된다는 말
+        exclude: 사용하는 동안에도 다 없어지지 않았다는 말은 partial_reduction
+        examples:
+        - review_id: R3P4S1IA50BL9G
+          quote: the hair still growing back after you stop using it for a month
+        - review_id: R1NX4O5T45E2TY
+          quote: Noticed difference but results are not permanent at all
+        approx_count: 10
+      other_approx_count: 8
+      notes: 오히려 털이 더 나거나 굵어졌다는 말(R7MKP02LZBEEJ, RPVH9XL7JMHEX, R3EGHJ3KA8QM68 등 4개)은 5% 미만이라 기타로 셈. 기타에는 단계(세기)에 따라 효과가 갈린다는 말, 놓친 곳(hot spots), 먼저 면도해야 한다는 말, 흰 피부라 안 된다는 유형 이야기(skin_hair_suitability에 가까움)도 있음.
+    positive:
+      quotes: 444
+      sampled: 150
+      only_other: false
+      labels:
+      - id: works_general
+        name_ko: 효과가 있음
+        name_en: It works
+        include: 털이 어떻게 변했는지 구체적으로 말하지 않고 효과가 있다, 잘 된다, 결과가 보인다는 말
+        exclude: 털이 줄거나 느리게 자란다고 구체적으로 말하면 reduced_regrowth, 부위를 들어 말하면 works_on_areas, 꾸준히 써야 한다는 조건이 붙으면 works_with_consistency
+        examples:
+        - review_id: R5A9JWD6G35F8
+          quote: really works well
+        - review_id: R2ZL2O4HNXMEWG
+          quote: it really works
+        approx_count: 56
+      - id: reduced_regrowth
+        name_ko: 털이 줄고 느리게 자람
+        name_en: Less and slower regrowth
+        include: 털의 양이 줄었다, 다시 자라는 속도가 느려졌다, 수염 자국이 늦게 올라온다는 말
+        exclude: 가늘고 옅어진 질감 변화가 중심이면 finer_lighter, 거의 없어졌거나 면도를 거의 안 한다면 nearly_gone_less_shaving
+        examples:
+        - review_id: R1NE4QCL8NG603
+          quote: it has significantly reduced the hair growth on my legs and underarms
+        - review_id: RZWG7C67I26NH
+          quote: I started noticing slower hair regrowth
+        approx_count: 25
+      - id: finer_lighter
+        name_ko: 털이 가늘고 옅어짐
+        name_en: Finer and lighter hair
+        include: 털이 가늘어졌다, 옅어졌다, 부드러워졌다, 성기게 났다는 말
+        exclude: 털의 양이나 속도만 말하면 reduced_regrowth
+        examples:
+        - review_id: R2VNEBLNFNGTZ1
+          quote: noticed my hair growing back way slower and in some areas thinner and lighter
+        - review_id: RDP6VFH1J365D
+          quote: it is much slower and much thinner
+        approx_count: 11
+      - id: nearly_gone_less_shaving
+        name_ko: 거의 없어지거나 면도가 줄어듦
+        name_en: Nearly hair-free, less shaving
+        include: 털이 거의 다 없어졌다, 어떤 부위는 아예 안 난다, 면도나 뽑기를 거의 안 하게 됐다, 며칠에서 몇 주씩 면도 없이 지낸다, 피부가 매끈해졌다는 말
+        exclude: 줄었다는 정도만 말하면 reduced_regrowth
+        examples:
+        - review_id: R1CW4J5AG5XQYJ
+          quote: My legs are much smoother and I can go 2 weeks without shaving them
+        - review_id: R3TZKM2YDQ6CJZ
+          quote: I didn't have to pluck my chin hairs or remove my mustache at all
+        approx_count: 16
+      - id: works_on_areas
+        name_ko: 특정 부위에 잘 됨
+        name_en: Works well on specific areas
+        include: 겨드랑이, 다리, 윗입술, 비키니 등 부위를 들어 그곳에 효과가 있다는 말(다른 부위는 안 된다는 혼합 인용의 칭찬 부분 포함)
+        exclude: 부위 언급 없이 효과가 있다는 말은 works_general
+        examples:
+        - review_id: R3EX80CEESZ3VQ
+          quote: It has worked really well on the under arm and the upper lip area.
+        - review_id: R25K2A8S4MLZQH
+          quote: It works well - like professional grade on the bikini line and underarms.
+        approx_count: 20
+      - id: quick_results
+        name_ko: 빨리 효과가 보임
+        name_en: Quick visible results
+        include: 몇 번, 몇 주 만에(이미, 벌써) 효과가 보였다는 말
+        exclude: 오래 걸렸지만 결국 됐다는 말은 works_general이나 해당 변화 라벨
+        examples:
+        - review_id: R135IHQ3F4GVSS
+          quote: super large reduction by just 3 treatments
+        - review_id: RW52SEIQ8TX0B
+          quote: We could see a difference after a couple of uses
+        approx_count: 12
+      - id: works_with_consistency
+        name_ko: 꾸준히 쓰면 효과가 남
+        name_en: Works with consistent use
+        include: 꾸준히, 규칙적으로, 참을성 있게 쓰면 효과가 있다는 조건을 붙인 칭찬
+        exclude: 일정을 지키는 시간 부담 평가는 이 주제 밖(treatment_time)
+        examples:
+        - review_id: R1J63SGER4AU6O
+          quote: This really works, but you have to be consistent.
+        - review_id: R21FD6E2B6LEB7
+          quote: IPL technology can greatly reduce hair growth with constant use
+        approx_count: 8
+      other_approx_count: 7
+      notes: 살롱 레이저 뒤 유지용으로 좋다는 말(R3RK6KXOETTEWH, R35BI1HBVKI1R, R1VFPBIS4Y1VID 3개)은 5% 미만이라 기타. 거의 없어짐과 면도 줄어듦은 따로 두면 각각 5% 미만이라 하나로 합침. reduced_regrowth와 quick_results는 "이미 줄었다"처럼 함께 달릴 수 있음.
+- topic: pain_comfort
+  name_ko: 통증과 시술 편안함
+  directions:
+    negative:
+      quotes: 64
+      sampled: 64
+      only_other: false
+      labels:
+      - id: strong_pain
+        name_ko: 심하게 아픔
+        name_en: Strong pain
+        include: 쏠 때 많이 아프다, 감전된 것 같다, 못 참겠다처럼 통증을 세게 말하는 말(부위, 단계, 열감 언급 없이)
+        exclude: 조금, 약간, 참을 만하다는 단서가 붙으면 mild_sting. 특정 부위를 말하면 sensitive_area_pain, 뜨겁다거나 타는 느낌이면 hot_burning_sensation
+        examples:
+        - review_id: R1MF4HYB0A1PZ4
+          quote: Hurts like crazy!!
+        - review_id: R2MTD56P6QYOUV
+          quote: it feels like you getting electrocuted
+        approx_count: 15
+      - id: mild_sting
+        name_ko: 약간 따끔함, 기대만큼 무통은 아님
+        name_en: Mild sting, not fully painless
+        include: 조금 아프다, 가끔 따끔하다, 고무줄 튕기는 느낌이다, 참을 만하지만 무통은 아니다, 광고나 기대만큼 무통은 아니다, 처음 몇 번 조금 아팠다
+        exclude: 통증을 세게 말하면 strong_pain. 특정 부위를 말하면 sensitive_area_pain, 높은 단계 때문이라고 하면 high_setting_too_strong
+        examples:
+        - review_id: R54TAWF3OMWUZ
+          quote: it hurts a bit, but I can tolerate it
+        - review_id: R71QMDUFW94NP
+          quote: It was not as painless as I expected.
+        approx_count: 17
+      - id: sensitive_area_pain
+        name_ko: 민감한 부위나 특정 지점에서 아픔
+        name_en: Pain on sensitive areas or spots
+        include: 비키니, 겨드랑이, 허벅지 안쪽, 은밀한 부위, 문신이나 주근깨 위, 몇몇 지점처럼 부위를 짚어 그곳이 아프다는 말
+        exclude: 부위 언급 없이 아프다는 말은 strong_pain이나 mild_sting. 그 부위 때문에 단계를 낮춰야 한다는 말이 함께 있으면 high_setting_too_strong을 두 번째로 단다
+        examples:
+        - review_id: RITH3PKTVCDLZ
+          quote: I tried the bikini line, but it was too painful
+        - review_id: RH6TJCI4IIG0W
+          quote: it hurt especially in the underarm area
+        approx_count: 13
+      - id: hot_burning_sensation
+        name_ko: 쏠 때 뜨겁거나 타는 느낌
+        name_en: Hot or burning sensation during flash
+        include: 발광할 때 뜨겁다, 타는 듯하다, 피부 온도가 오른다(quema, burn sensation)처럼 쏘는 순간의 열감
+        exclude: 오래 쓸수록 뜨거워진다는 말은 heats_up_with_use. 냉각이 소용없다는 말이 함께 있으면 cooling_insufficient. 화상 상처처럼 남는 피부 손상은 주제 밖(safety)
+        examples:
+        - review_id: R4FJL7WTJVD4I
+          quote: extremely hot during the flash
+        - review_id: RXVJQ54HKI82D
+          quote: quema al contacto con la piel
+        approx_count: 12
+      - id: heats_up_with_use
+        name_ko: 오래 쓸수록 뜨거워지고 더 아픔
+        name_en: Gets hotter and more painful during a session
+        include: 한 번 시술하는 도중 시간이 지나면 창이 뜨거워진다, 오래 대고 있을수록 더 아프다
+        exclude: 처음부터 쏠 때 뜨겁다는 말은 hot_burning_sensation. 기기 몸체가 과열돼 멈추는 고장은 주제 밖(quality)
+        examples:
+        - review_id: R7SOJ6E4622H6
+          quote: this gets so hot & hurts so bad after awhile
+        - review_id: R1S9BDFJ2QUC6U
+          quote: It doesn't hurt at all but can get hot if you're using it for a long time
+        approx_count: 4
+      - id: cooling_insufficient
+        name_ko: 냉각 기능이 약하거나 없음
+        name_en: Cooling ineffective or missing
+        include: 냉각 기능이 차이를 못 만든다, 기대보다 약하다, 높은 단계에서는 덜 듣는다, 냉각이 있는데도 뜨겁다, 냉각 기능이 없다
+        exclude: 냉각 언급 없이 뜨겁다는 말은 hot_burning_sensation
+        examples:
+        - review_id: R2WKT4WSARV4ZP
+          quote: I don't think the cooling makes a difference.
+        - review_id: RI2SISRQKM0M2
+          quote: The cooling function is also not as effective as I expected
+        approx_count: 6
+      - id: high_setting_too_strong
+        name_ko: 높은 단계가 세서 낮춰야 함
+        name_en: Higher settings too strong
+        include: 높은 단계(레벨 9, SHR 등)가 세다, 한 단계 낮춰야 편하다, 낮게 시작하라, 가장 낮은 단계에서도 아프다
+        exclude: 단계 언급 없이 아프다는 말은 strong_pain이나 mild_sting
+        examples:
+        - review_id: R2OFSAFX7C3B4C
+          quote: I use level 9 but have a high tolerance. However, sometimes the level 9 is strong so just be careful.
+        - review_id: R1ZBU72UNF0W78
+          quote: It isnt as painless as I had hoped, it always felt like it was one setting too high for my comfort.
+        approx_count: 6
+      other_approx_count: 2
+      notes: 부위, 단계, 냉각, 열감 언급이 세기 표현(심함, 약간)과 한 인용에 함께 나오는 일이 많아, 원인(부위, 단계, 냉각, 열감)을 먼저 달고 세기 라벨은 원인 언급이 없을 때만 다는 순서가 필요함. 털이 남아 따끔하다(R1E3UY1UREFRJ5)는 2개뿐이라 mild_sting에 넣음. 'it burned so bad'(RK36OGAJTBQZI, 문신 위)처럼 감각인지 피부 손상인지 애매한 인용이 있음.
+    positive:
+      quotes: 201
+      sampled: 150
+      only_other: false
+      labels:
+      - id: painless_comfortable
+        name_ko: 아프지 않고 편함
+        name_en: Painless and comfortable
+        include: 아프지 않다, 무통이다, 전혀 못 느끼겠다, 편하다, 부드럽다(no duele, sans douleur 포함)
+        exclude: 거의, 조금, 참을 만하다는 단서나 따뜻한 느낌이 붙으면 mild_tolerable. 냉각 덕분이라고 하면 cooling_comfort, 다른 제모 방법과 비교하면 less_painful_than_alternatives
+        examples:
+        - review_id: R2CS77XLUVIHJ1
+          quote: doesnt hurt at all
+        - review_id: R1R8M6N2N5OPF
+          quote: no duele para nada
+        approx_count: 65
+      - id: mild_tolerable
+        name_ko: 거의 무통이거나 참을 만함
+        name_en: Nearly painless or tolerable
+        include: 거의 아프지 않다, 통증이 적다, 그렇게 나쁘지 않다, 따끔하지만 참을 만하다, 따뜻한 느낌 정도다(gentle warmth, sensación leve de calor)
+        exclude: 단서 없이 아프지 않다는 말은 painless_comfortable. 높은 단계나 민감한 부위에서도 괜찮다는 말은 fine_on_high_setting_or_sensitive_area
+        examples:
+        - review_id: RKY1PUP3AY62W
+          quote: minimal pain
+        - review_id: R1P2GZ35WDN7RQ
+          quote: the mild stinging is tolerable
+        approx_count: 30
+      - id: cooling_comfort
+        name_ko: 냉각 기능 덕분에 편함
+        name_en: Cooling makes it comfortable
+        include: 냉각 기능, 차가운 느낌, 아이스 쿨링 덕분에 편하다, 덜 아프다, 냉각 기능이 좋다(se siente frío 포함)
+        exclude: 냉각 언급 없이 아프지 않다는 말은 painless_comfortable
+        examples:
+        - review_id: R21RTTZMPSBND7
+          quote: The cooling mechanisms are great, making the removal much less painful.
+        - review_id: R1YD46GOLUQL4B
+          quote: no duele, se siente frío
+        approx_count: 36
+      - id: less_painful_than_alternatives
+        name_ko: 왁싱이나 병원 레이저보다 덜 아픔
+        name_en: Less painful than waxing or salon laser
+        include: 왁싱, 피부과나 살롱 레이저, 전에 쓴 다른 제모기보다 덜 아프다, 걱정했던 것보다 아프지 않다며 다른 기기 경험과 비교
+        exclude: 비교 대상 없이 아프지 않다는 말은 painless_comfortable. 다른 기기와 비교하며 냉각 덕분이라고 하면 cooling_comfort를 함께 단다
+        examples:
+        - review_id: R8Y3GAPALYC2D
+          quote: waayyyyyy more comfortable than professional laser hair removal
+        - review_id: R25ARWS7R12PWW
+          quote: no duele para nada a comparación de la depilación con cera
+        approx_count: 10
+      - id: fine_on_high_setting_or_sensitive_area
+        name_ko: 높은 단계나 민감한 부위에서도 괜찮음
+        name_en: Fine even on high settings or sensitive areas
+        include: 가장 높은 단계에서도 아프지 않다, 비키니나 민감한 피부에도 참을 만하다, 다리와 팔은 최대 단계로 쓴다
+        exclude: 단계나 부위 언급 없이 아프지 않다는 말은 painless_comfortable이나 mild_tolerable
+        examples:
+        - review_id: R2SGB5RDA6XE9
+          quote: The pain is super minor on the highest setting (2/10)
+        - review_id: R9M2I2AM5KP6S
+          quote: the sting from the razor is very tolerable, even on bikini region
+        approx_count: 8
+      other_approx_count: 2
+      notes: fine_on_high_setting_or_sensitive_area는 표본의 5% 언저리(어림 8개)라 합칠지 판단이 필요함. painless_comfortable과 mild_tolerable은 '거의', '조금' 같은 단서 유무로만 갈려 경계가 얇음. 쓰다 보면 익숙해진다(R3TZKM2YDQ6CJZ, R1NJL66X5FEMYR)는 2개뿐이라 기타.
+- topic: safety
+  name_ko: 안전
+  directions:
+    negative:
+      quotes: 84
+      sampled: 84
+      only_other: false
+      labels:
+      - id: skin_burns
+        name_ko: 화상이나 물집
+        name_en: Burns or blisters
+        include: 기기 때문에 피부가 데었다, 화상, 화상 자국, 물집이 생겼다는 말(설명서대로 했는데도, 문신 위, 패치 테스트에서 등). 화상 뒤 남은 자국이나 반점도 화상을 함께 말하면 여기
+        exclude: 화상이라는 말 없이 검은 반점, 색이 빠짐, 흉터만 말하면 pigment_scars. 화상을 입을까 무섭다는 걱정만 있으면 safety_worry. 쏘는 순간 뜨겁다, 따갑다는 감각은 주제 밖(pain_comfort)
+        examples:
+        - review_id: R2XB776KKIF8N9
+          quote: I followed the instructions and this left blisters on my leg.
+        - review_id: RELGENLC93HHW
+          quote: by the next day it was clear my legs were covered in 1st degree burns
+        approx_count: 22
+      - id: irritation_redness
+        name_ko: 자극, 붉음, 가려움
+        name_en: Irritation, redness or itching
+        include: 시술 뒤 피부가 자극받았다, 붉어졌다, 가렵다, 건조해졌다, 민감한 피부에는 맞지 않는다는 말(눈에 띄는 돋음이나 발진 없이 느낌과 붉음만)
+        exclude: 발진, 뾰루지, 여드름 같은 돋음, 모낭염, 인그로운 헤어, 알레르기 반응을 말하면 rash_bumps_allergy. 데었다는 말은 skin_burns
+        examples:
+        - review_id: R1EO3673L9E28J
+          quote: the skin irritation is massive
+        - review_id: R2A2KTRD9JXJMV
+          quote: the skin became red
+        approx_count: 11
+      - id: rash_bumps_allergy
+        name_ko: 발진, 뾰루지, 알레르기 반응
+        name_en: Rash, bumps or allergic reaction
+        include: 시술 뒤 발진, 두드러기 같은 돋음, 여드름이나 뾰루지, 모낭염, 인그로운 헤어가 늘었다, 알레르기(히스타민) 반응이 났다는 말. 가려운 발진처럼 가려움과 함께 나와도 돋음이 있으면 여기
+        exclude: 돋음 없이 자극, 붉음, 가려움만이면 irritation_redness. 면도 트러블(인그로운 헤어)이 줄었다는 좋은 변화는 주제 밖(hair_reduction)
+        examples:
+        - review_id: R3FCCN4LLKDHW9
+          quote: Gave me horrible folliculitis.
+        - review_id: R395GW5N4JJ51A
+          quote: had an allergic reaction the second time
+        approx_count: 17
+      - id: pigment_scars
+        name_ko: 색소 변화나 흉터
+        name_en: Pigment change or scarring
+        include: 피부에 검은 반점이나 자국이 생겼다, 색이 빠지거나 하얗게 됐다, 변색, 흉터가 남았다, 이상한 점이 생겼다는 말(화상이라는 말 없이)
+        exclude: 데었다, 화상 자국이라고 말하면 skin_burns. 발진이나 뾰루지는 rash_bumps_allergy
+        examples:
+        - review_id: R1JRAFD7P6L9RA
+          quote: ended up with dark spots on my shins
+        - review_id: R7MKP02LZBEEJ
+          quote: it removed pigment from my skin
+        approx_count: 11
+      - id: eye_flash_glare
+        name_ko: 눈부심이나 눈 안전
+        name_en: Flash glare or eye safety
+        include: 섬광이 너무 밝다, 보안경을 써도 빛이 들어온다, 눈에 해롭다, 두통이나 편두통, 시야 이상이 생겼다, 광고에 보안경 없이 쓰는 모습이 나온다는 말
+        exclude: 보안경이 구성에 들어 있는지는 주제 밖(accessories). 빛이 창 가장자리나 피부 밖으로 새어 다른 곳에 닿는다는 말은 기타
+        examples:
+        - review_id: R30MIFDD6J1ZO9
+          quote: The flash is still bright even with glasses on and sometimes does cause me headaches after use
+        - review_id: R300NO6N06MI3R
+          quote: the light is so harmful for the eyes
+        approx_count: 11
+      - id: safety_worry
+        name_ko: 안전 불안이나 쓰기 무서움
+        name_en: Safety doubts or fear of use
+        include: 실제 피부 반응을 말하지 않고 안전한지 의심된다, 위험하다, 쓰기 무섭다, 데일까 겁났다, 민감한 부위에 안전하지 않다, 상자에 경고 문구가 없다는 말
+        exclude: 실제로 데었거나 반응이 났다는 말이 같은 인용에 있으면 그 반응 라벨(예 데고 나서 무섭다는 skin_burns). 눈에 대한 걱정은 eye_flash_glare
+        examples:
+        - review_id: RL9O9OQ9H76YI
+          quote: Is this safe? I have my doubts
+        - review_id: RUOAHQVG9XL2W
+          quote: me da miedo seguir usándola
+        approx_count: 9
+      other_approx_count: 3
+      notes: 기타는 빛이 창 가장자리나 피부 밖으로 새어 나감(R371G2D4TFMWP7, R1NZEC16D5FOP4, 2개로 5% 미만)과 뜻이 불분명한 인용(R2822A4GNWEGMX). "it burns", "my skin started to burn"처럼 쏘는 순간 감각(pain_comfort)인지 화상인지 애매한 인용이 몇 개 있어 skin_burns로 셌다.
+    positive:
+      quotes: 37
+      sampled: 37
+      only_other: false
+      labels:
+      - id: no_irritation
+        name_ko: 자극이나 피부 반응 없음
+        name_en: No irritation or skin reaction
+        include: 시술 뒤 자극, 붉음, 뾰루지, 건조함, 색소 침착 같은 피부 반응이 전혀 없었다, 피부에 순하다는 말
+        exclude: 민감한 피부인데도 괜찮다고 하면 sensitive_skin_ok. 반응이 조금 있었지만 가라앉았다, 심하지 않았다면 mild_transient. 통증이 없다는 부분은 주제 밖(pain_comfort)
+        examples:
+        - review_id: R3BL6AS4FEBLLB
+          quote: no skin irritation
+        - review_id: R1FJKJ53PU9AIM
+          quote: I had no discomfort, redness, or irritation at all after using it for the first time
+        approx_count: 20
+      - id: mild_transient
+        name_ko: 반응이 가볍거나 금방 가라앉음
+        name_en: Mild or short-lived reaction
+        include: 자극이나 돋음이 있었지만 가벼웠다, 하루 만에 또는 회차를 거듭하며 가라앉았다는 말(혼합 인용의 칭찬 부분)
+        exclude: 반응이 전혀 없었다는 말만 있으면 no_irritation. 가라앉았다는 말 없이 반응만 있으면 칭찬이 아니므로 기타
+        examples:
+        - review_id: R3AL97KPZJMJ8N
+          quote: I did get some stippling on the back of my legs where I used it, but it cleared up quickly
+        - review_id: R3OHPHFT97EWOM
+          quote: I had minor irritation when going over a specific area more than twice in one session, but nothing major.
+        approx_count: 4
+      - id: sensitive_skin_ok
+        name_ko: 민감한 피부에도 괜찮음
+        name_en: Fine for sensitive skin
+        include: 민감한 피부에 맞다, 민감한 피부인데도 문제없었다, 민감한 피부에도 안전하다는 말
+        exclude: 민감한 피부 언급 없이 반응이 없었다는 말은 no_irritation
+        examples:
+        - review_id: R1CKMAYZ81JWU
+          quote: perfect for sensitive skin
+        - review_id: R2VNEBLNFNGTZ1
+          quote: I have sensitive skin but have zero issues using on highest setting, 9.
+        approx_count: 3
+      - id: safety_feature
+        name_ko: 피부 센서 같은 안전 기능 덕에 안심
+        name_en: Reassured by safety features
+        include: 피부 센서, 피부에 완전히 닿아야 발광하는 기능 같은 기기 기능 덕분에 더 안전하다, 안심된다는 말. 무엇 덕분인지 인용 안에 다 나오지 않아도 어떤 것이 더 안전하게 만든다(makes it feel safer)는 말이면 여기
+        exclude: 이유 없이 안전하다고만 하면 feels_safe. 센서가 어두운 부위에서 발광을 막는 불만은 주제 밖(skin_hair_suitability)
+        examples:
+        - review_id: R3I3HAIAL07C08
+          quote: The built-in skin sensor adds peace of mind
+        - review_id: R2W8VLAJW7Q7LS
+          quote: only goes off when fully on skin so it’s safe to use
+        approx_count: 6
+      - id: feels_safe
+        name_ko: 쓰기에 안전하다는 느낌
+        name_en: Feels safe to use
+        include: 이유나 기능을 말하지 않고 안전하다, 안심하고 쓴다는 말
+        exclude: 기기 기능이 이유로 붙으면 safety_feature. 피부 반응이 없었다는 구체적인 말은 no_irritation
+        examples:
+        - review_id: R2JZ3KC3BU5VN8
+          quote: Safe and effective
+        - review_id: R3INSXQHFCICQI
+          quote: I feel safe using this as well
+        approx_count: 3
+      other_approx_count: 1
+      notes: 기타 1개는 칭찬 부분이 없는 혼합 인용(R2EAVV0BSKGP5V, 인그로운 헤어 흉터). R1CW4J5AG5XQYJ(반응 없었지만 비키니 부위만 하루 자극)는 mild_transient로 셌고 no_irritation과 경계가 가깝다.
+- topic: design
+  name_ko: 디자인과 형태
+  directions:
+    negative:
+      quotes: 47
+      sampled: 47
+      only_other: false
+      labels:
+      - id: bulky_heavy
+        name_ko: 크고 무거움
+        name_en: Bulky or heavy
+        include: 기기가 크다, 부피가 크다, 무겁다, 커서 다루기 힘들다, 오래 들고 있으면 지친다는 말(크기나 무게 단어가 있을 때)
+        exclude: 크기나 무게 말 없이 모양, 손잡이, 각도, 버튼 위치 때문에 쥐기 불편하다는 말은 awkward_grip. 조사창이 작다는 말은 small_window
+        examples:
+        - review_id: R6YW7XS4EI7QZ
+          quote: The design of this Ulike IPL is definitely on the bulky and heavy side
+        - review_id: RYFKQTK5JPNJS
+          quote: It is bulky and heavy to hold for extended sessions.
+        approx_count: 15
+      - id: awkward_grip
+        name_ko: 모양이 쥐기 불편함
+        name_en: Awkward shape or grip
+        include: 모양, 손잡이, 인체공학이 어색하다, 각도를 바꿀 때 불편하다, 쥐는 곳에 버튼이 있다, 디자인이 이상해 조작하기 어렵다는 말
+        exclude: 크거나 무거워서 다루기 힘들다는 말은 bulky_heavy(크기, 무게와 모양을 함께 말하면 둘 다). 조작 방법, 모드, 설명서는 ease_of_use라 이 주제가 아님
+        examples:
+        - review_id: R1W4CHDH2UJAL2
+          quote: the hairdryer-style hand grip design is awkward when you’re switching angles across different body parts
+        - review_id: R3O6K913ALP80R
+          quote: Awkward to hold, some buttons are where you hold.
+        approx_count: 11
+      - id: not_cordless
+        name_ko: 무선이 아니라 꽂아 써야 함
+        name_en: Not cordless
+        include: 무선인 줄 알았다, 충전식이었으면 좋겠다, 꽂아야만 켜진다, 들고 다닐 수 없다는 말
+        exclude: 코드가 짧다, 어댑터가 크다는 말은 cord_adapter. 배터리가 금방 닳는다는 말은 기타
+        examples:
+        - review_id: R2MI0HOHIKSDB6
+          quote: Must stay plugged in, not portable at all.
+        - review_id: R2R1PSHBBGVQA5
+          quote: was expecting cordless, unfortunately I could not find cordless
+        approx_count: 7
+      - id: cord_adapter
+        name_ko: 코드가 짧거나 어댑터가 큼
+        name_en: Short cord or bulky power adapter
+        include: 전원 코드가 짧다, 전원 어댑터가 크고 무겁다는 말
+        exclude: 무선이 아니라는 불만 자체는 not_cordless
+        examples:
+        - review_id: RMZHMMCWOCAS9
+          quote: I found the cable to be a bit short
+        - review_id: R2MBCDJ6VJPRMQ
+          quote: Its power supply is about as large as unit itself, and definitely heavier
+        approx_count: 3
+      - id: noisy
+        name_ko: 작동 소음이 큼
+        name_en: Loud operating noise
+        include: 팬 소리가 크다, 발광할 때 나는 소리가 거슬린다는 말
+        exclude: 발광이 느리다, 빠르다는 말은 treatment_time
+        examples:
+        - review_id: R2EDE4DS2YX5SP
+          quote: there is a loud fan noise so you can't really do while you watch TV at your normal level
+        - review_id: R1E8UGOQ0TAQSW
+          quote: a fan comes on and it is noticeably loud
+        approx_count: 5
+      - id: small_window
+        name_ko: 조사창이 작음
+        name_en: Treatment window too small
+        include: 조사창이나 헤드가 작다, 넓은 부위용으로 더 큰 헤드가 있었으면 한다는 말
+        exclude: 헤드가 작아 시간이 오래 걸린다는 시간 불만은 treatment_time. 작은 부위용으로 더 작은 헤드를 원하는 말은 기타. 기기 몸체가 크다는 말은 bulky_heavy
+        examples:
+        - review_id: R2SGB5RDA6XE9
+          quote: I wish it was bigger to treat large areas
+        - review_id: R35T6O9HV1N4EB
+          quote: I wish the laser head was a tad bit bigger
+        approx_count: 6
+      other_approx_count: 4
+      notes: 크기, 무게와 모양을 함께 말한 인용(heavy and awkward to hold 등 3개)은 bulky_heavy와 awkward_grip 둘 다 붙는다. 기타는 작은 부위용 더 작은 헤드 요구 2개, 조사면이 평평해 몸 곡선에 안 맞음 1개, 배터리가 중간에 닳음 1개.
+    positive:
+      quotes: 55
+      sampled: 55
+      only_other: false
+      labels:
+      - id: looks_good
+        name_ko: 예쁘고 고급스러운 외관
+        name_en: Attractive, premium look
+        include: 예쁘다, 세련됐다, 고급스러워 보인다, 색(보라색 등)이 예쁘다, 디자인이 좋다는 말
+        exclude: 손에 쥐는 느낌과 무게는 light_easy_grip. 만듦새, 튼튼함 자체는 quality라 이 주제가 아님
+        examples:
+        - review_id: R2IBA63SK8LQIJ
+          quote: The device itself is very sleek and beautiful.
+        - review_id: R2PNK8AF14NNHH
+          quote: the purple color is beautiful too
+        approx_count: 23
+      - id: light_easy_grip
+        name_ko: 가볍고 쥐기 편함
+        name_en: Lightweight and easy to hold
+        include: 가볍다, 무겁지 않다, 손에 잘 맞는다, 쥐기 편하다, 다루기 쉽다, 인체공학적이다는 말
+        exclude: 작아서 자리를 덜 차지하거나 들고 다니기 좋다는 말은 compact_portable. 조작 방법이 쉽다는 말은 ease_of_use라 이 주제가 아님
+        examples:
+        - review_id: RSUV6NFE2R8FB
+          quote: It is lightweight and easy to hold.
+        - review_id: R3NJ191QCXHU60
+          quote: The device is lightweight, comfortable to hold
+        approx_count: 18
+      - id: compact_portable
+        name_ko: 작고 휴대하기 좋음
+        name_en: Compact and portable
+        include: 작다, 자리를 덜 차지한다, 여행에 들고 가기 좋다, 휴대성이 좋다, 크기가 작아 겨드랑이나 얼굴 같은 부위에 좋다는 말
+        exclude: 무게와 쥐는 느낌은 light_easy_grip(작아서 쥐기 쉽다면 둘 다)
+        examples:
+        - review_id: RNCOGXWS6VCM2
+          quote: It’s compact and doesn’t take up much space, so I can easily take it with me if I travel.
+        - review_id: R1CY0LPVYGLF0R
+          quote: very portable
+        approx_count: 7
+      - id: long_cord
+        name_ko: 전원 코드가 넉넉함
+        name_en: Long enough power cord
+        include: 전원 코드가 길다, 충분히 길어 움직이기 편하다는 말
+        exclude: 무선이 아니라는 불만은 부정 방향
+        examples:
+        - review_id: R11D1ULS8PBPOD
+          quote: Plugs in and cord is long enough to use the tool with plenty of room.
+        - review_id: R17Z3G31WY4J6A
+          quote: The 6ft cord a nice length
+        approx_count: 4
+      - id: attachments_versatile
+        name_ko: 부위별 교체 헤드
+        name_en: Interchangeable heads for body areas
+        include: 부위별 교체 헤드가 여럿 들어 있어 여러 부위에 쓸 수 있다는 말
+        exclude: 보안경, 면도기, 케이스 같은 구성품은 accessories라 이 주제가 아님
+        examples:
+        - review_id: R2527CST84MMJT
+          quote: The multiple attachments make it versatile for different body areas
+        - review_id: R3AL97KPZJMJ8N
+          quote: I like that it has a broad area head and a smaller area head that you can change
+        approx_count: 4
+      other_approx_count: 2
+      notes: 기타는 생각보다 컸지만 괜찮다는 혼합 인용 1개와 커서 넓은 부위가 빨랐다는 인용 1개(시간 이야기에 가까움).
+- topic: ease_of_use
+  name_ko: 사용 편의
+  directions:
+    negative:
+      quotes: 44
+      sampled: 44
+      only_other: false
+      labels:
+      - id: hard_to_trigger_flash
+        name_ko: 피부에 붙여도 발광이 잘 안 됨
+        name_en: Hard to get it to flash on contact
+        include: 피부 접촉 센서가 접촉을 못 읽어 계속 옮기고 눌러야 발광한다, 턱, 무릎, 굴곡진 부위에서 발광이 안 된다, 처음 몇 번은 발광시키기 어려웠다는 말
+        exclude: 피부색이나 어두운 부위 때문에 센서가 막는 것은 skin_hair_suitability, 기기 고장으로 발광이 멈춘 것은 quality, 센서가 세기를 멋대로 낮추는 것은 sensor_auto_adjust
+        examples:
+        - review_id: R1NZEC16D5FOP4
+          quote: It can be REALLY hard to get the sensors to flash, even when the plate is flush against my skin.
+        - review_id: RLH6WCEL9CZ4C
+          quote: Has trouble activating around more uneven body parts, such as the knees.
+        approx_count: 14
+      - id: sensor_auto_adjust
+        name_ko: 센서 자동 조절이 거슬림
+        name_en: Annoying automatic sensor adjustment
+        include: 피부 센서가 세기를 자동으로 낮추거나 판정을 지나치게 조심스럽게 해서 짜증 난다, 자동 조절을 끌 수 없다는 말
+        exclude: 피부 접촉을 못 읽어 발광이 안 되는 것은 hard_to_trigger_flash, 피부색이 어두워 쓸 수 없다는 것은 skin_hair_suitability
+        examples:
+        - review_id: RRHU7A16IHWSW
+          quote: Air 10's overly cautious skin sensor frequently reduces intensity unnecessarily
+        - review_id: R2I474SRDNJLW9
+          quote: If it didn't auto adjust the sensitivity or I had the option to override it, that would be amazing!
+        approx_count: 5
+      - id: unclear_instructions
+        name_ko: 설명서가 부족하거나 불분명함
+        name_en: Unclear or lacking instructions
+        include: 설명서에 사용법, 설정, 자동 모드 켜는 법, 한 부위에 몇 번 쏘는지, 시술 뒤 관리 정보가 없다, 번역이 어색하다, 영상을 찾아봐야 했다는 말
+        exclude: 설명서 언급 없이 기기 조작 자체가 복잡하다는 말은 complicated_operation
+        examples:
+        - review_id: R1NE4QCL8NG603
+          quote: the directions to use the device were lacking much needed information
+        - review_id: RD0ZNS0BJ5RSM
+          quote: The instructions could be better on how to set it up.
+        approx_count: 9
+      - id: complicated_operation
+        name_ko: 조작이 복잡하고 어려움
+        name_en: Complicated to operate
+        include: 기기가 복잡하다, 기능을 어떻게 쓰는지 알기 어렵다, 생각보다 쉽지 않다, 사용자 친화적이지 않다는 전반적인 말
+        exclude: 설명서 탓을 말하면 unclear_instructions, 특정 모드나 버튼을 지목한 불만은 mode_button_gripes, 발광이 잘 안 되는 것은 hard_to_trigger_flash
+        examples:
+        - review_id: RWTBVMS6K6M9P
+          quote: This is a complicated device that requires a lot of patience.
+        - review_id: R39LEEA7D1DVP8
+          quote: It is difficult to figure out how to work the various features.
+        approx_count: 4
+      - id: mode_button_gripes
+        name_ko: 모드나 버튼 구성이 불편함
+        name_en: Inconvenient modes or buttons
+        include: 자동이나 연속 발광 모드가 없어 매번 버튼을 눌러야 한다, 연속 발광 설정이 싫다, 세기 버튼이 실수로 눌린다, 단계 선택지가 부족하다는 말
+        exclude: 센서가 세기를 자동으로 바꾸는 것은 sensor_auto_adjust, 발광 속도나 걸리는 시간은 treatment_time
+        examples:
+        - review_id: R30SXDQSJ7QM37
+          quote: does not have auto glide function thus you have constantly press the flash button every time which is a pain
+        - review_id: RJ70XYUA71OQC
+          quote: the power level button is so easy to hit accidentally
+        approx_count: 6
+      - id: shaving_prep
+        name_ko: 쓸 때마다 면도해야 하는 번거로움
+        name_en: Need to shave before each use
+        include: 사용 전에 매번, 자주 면도해야 해서 번거롭다는 말
+        exclude: 면도 횟수가 줄었다는 효과 이야기는 hair_reduction, 면도 안 한 털 때문에 아프다는 말은 pain_comfort
+        examples:
+        - review_id: R2MZ9ZWPKOLRZQ
+          quote: the fact that i have to shave before every use is a little annoying
+        - review_id: R1E37CQXV0TSOA
+          quote: You also have to shave a lot.
+        approx_count: 3
+      other_approx_count: 3
+      notes: 기타는 쏜 자리를 알기 어렵다(2개), 교체 부품 세척이 어렵다(1개). R3D6Y9OCRHDR0X "the skin sensor is too sensitive"와 R2HTPKGOEZ3WN7 "won't flash because it is reading red"는 접촉 센서인지 피부색 센서인지 애매해 sensor_auto_adjust로 셌다(피부색으로 막는 것이면 skin_hair_suitability 쪽). shaving_prep은 주제 정의에 직접 적혀 있지 않은 사전 준비 부담이라 treatment_time(관리 부담)으로 옮길지 정해 주세요.
+    positive:
+      quotes: 176
+      sampled: 150
+      only_other: false
+      labels:
+      - id: easy_to_use
+        name_ko: 쓰기 쉽고 간단함
+        name_en: Easy and simple to use
+        include: 쓰기 쉽다, 간단하다, 처음 써도 된다, 꽂고 켜서 바로 쓴다, 설정이 쉽다, 편하게 쓴다는 전반적인 말
+        exclude: 설명서를 칭찬하면 clear_instructions, 집에서 할 수 있다는 편리함은 home_convenience, 자동 모드나 단계 조절 기능을 지목하면 handy_modes
+        examples:
+        - review_id: RAUDHBMFX7194
+          quote: The device itself is also very easy to use, even as a beginner
+        - review_id: R25H686ZWIWEWC
+          quote: This device is very easy to use, plug, turn on and go.
+        approx_count: 115
+      - id: clear_instructions
+        name_ko: 설명서가 분명함
+        name_en: Clear instructions
+        include: 설명서가 분명하다, 간단하다, 알아보기 쉽다는 말
+        exclude: 설명서 언급 없이 쓰기 쉽다는 말은 easy_to_use
+        examples:
+        - review_id: R3EVC73JWUDCAY
+          quote: Instructions are clear and straightforward making the product easy to use.
+        - review_id: R18D1G0XPQQ91Y
+          quote: The instructions were straightforward
+        approx_count: 13
+      - id: home_convenience
+        name_ko: 집에서 할 수 있어 편함
+        name_en: Convenient to do at home
+        include: 살롱에 가지 않고 집에서, 혼자 편하게 할 수 있어 좋다는 말
+        exclude: 살롱보다 돈을 아낀다는 말은 price_value, 집 언급 없이 편하다는 말은 easy_to_use
+        examples:
+        - review_id: RDEHKQF7X6P2P
+          quote: It has been especially convenient to be able to use it at home rather than having to schedule regular salon or professional treatments
+        - review_id: R2SZDL813OQQ0C
+          quote: la comodidad de poder usarla en casa
+        approx_count: 10
+      - id: handy_modes
+        name_ko: 자동 모드와 단계 조절이 편함
+        name_en: Handy auto mode and settings
+        include: 자동 모드 덕에 버튼을 계속 누르지 않아도 된다, 세기를 원하는 대로 조절할 수 있다, 모드가 여러 개다, 화면이나 터치스크린으로 설정 바꾸기가 쉽다는 말
+        exclude: 자동 모드가 빨라서 시간이 준다는 말은 treatment_time, 피부 센서 칭찬은 기타
+        examples:
+        - review_id: RLK89470RDJIH
+          quote: It comes with different levels of intensity and auto so no need to keep button pressed all the time.
+        - review_id: R65FSNN1S9RE3
+          quote: It’s easy to use, and the touchscreen makes switching settings simple
+        approx_count: 11
+      other_approx_count: 9
+      notes: 표본 대부분이 "easy to use" 한마디라 easy_to_use가 4분의 3을 넘는다. 기타는 세척과 관리가 쉽다(3개), 피부 센서가 잘 된다(2개), 앱(2개), 가볍고 다루기 쉽다(R7SFT1B4QUIDU, 무게는 design 쪽), 교체 헤드 덕에 쉽다(RRCG4FZAZP9UC, 헤드는 design 쪽). "easy to use, instructions are clear"처럼 두 칭찬이 한 인용에 있으면 easy_to_use와 clear_instructions 둘 다 셌다.
+- topic: treatment_time
+  name_ko: 시술 시간과 관리 부담
+  directions:
+    negative:
+      quotes: 79
+      sampled: 79
+      only_other: false
+      labels:
+      - id: long_session
+        name_ko: 한 번 시술이 오래 걸림
+        name_en: Sessions take a long time
+        include: 시간이 많이 든다, 오래 걸린다, 몇 시간 걸린다는 말 중 부위, 원인, 비교 대상, 횟수를 말하지 않는 것(time consuming, takes forever, 시술 한 번에 30분)
+        exclude: 다리나 몸 전체 같은 넓은 부위를 말하면 large_area_slow, 발광 간격이 원인이면 slow_flash, 작은 조사창이나 반복 조사가 원인이면 small_window_passes, 광고나 기대, 면도와 비교하면 longer_than_expected, 자주 오래 해야 하는 일정이면 demanding_schedule
+        examples:
+        - review_id: R2T3HFTC3IYYEJ
+          quote: Time consuming treatments.
+        - review_id: R217CA2CSB1IWD
+          quote: This takes forever to do a treatment.
+        approx_count: 26
+      - id: large_area_slow
+        name_ko: 다리나 몸 전체 같은 넓은 부위가 오래 걸림
+        name_en: Large areas take too long
+        include: 다리, 몸 전체, 가슴과 등처럼 넓은 부위를 하는 데 오래 걸린다, 몇 시간 걸린다, 오래 걸려 다리는 포기했다는 말(원인은 말하지 않음)
+        exclude: 작은 조사창이나 여러 번 덧대야 해서라는 원인을 말하면 small_window_passes, 발광 간격 때문이라고 하면 slow_flash, 부위 언급 없이 오래 걸린다는 말은 long_session
+        examples:
+        - review_id: R16RHLDXFP7HCJ
+          quote: It took me an hour and a half to do both legs plus bikini line.
+        - review_id: RI2SISRQKM0M2
+          quote: the device takes quite a while to treat larger areas like the legs
+        approx_count: 14
+      - id: slow_flash
+        name_ko: 발광 간격이 길거나 기기가 느림
+        name_en: Slow flash rate or recharge wait
+        include: 발광 속도가 느리다, 쏘고 나서 다음 발광까지 몇 초 기다려야 한다, 다시 데워지거나 식기를 기다려야 한다, 자동 모드가 빠르지 않다, 기기 자체가 느리다(slow, lenta)
+        exclude: 조사창 크기나 반복 조사가 원인이면 small_window_passes, 원인 없이 시술이 오래 걸린다는 말은 long_session
+        examples:
+        - review_id: R2ZW83BMFS2C92
+          quote: the flashing speed is slow
+        - review_id: R3SYQQVFXZOBU4
+          quote: It takes forever to reheat in between each time push the button!
+        approx_count: 10
+      - id: small_window_passes
+        name_ko: 작은 조사창이나 반복 조사 때문에 오래 걸림
+        name_en: Small window or repeat passes slow it down
+        include: 헤드나 조사창, 기기가 작아 오래 걸린다, 한 곳을 두세 번 덧대야 한다, 굴곡진 부위는 천천히 조심스럽게 지나가야 한다
+        exclude: 발광 사이 대기 시간은 slow_flash(둘 다 말하면 두 라벨), 원인 없이 넓은 부위가 오래 걸린다는 말은 large_area_slow, 큰 헤드가 있어야 한다는 요구만 있으면 이 주제가 아님(design)
+        examples:
+        - review_id: RXBX1IOM03910
+          quote: el cabezal pequeño hace que la depilación de zonas grandes sea demorado
+        - review_id: RKY1PUP3AY62W
+          quote: time consuming especially on large areas like legs since you have to go over the area two to three times
+        approx_count: 6
+      - id: demanding_schedule
+        name_ko: 자주, 오래 지켜야 하는 일정이 부담
+        name_en: Demanding treatment schedule
+        include: 이틀마다, 주 2~3회, 매일, 몇 달에서 1년, 평생 매주 해야 한다는 부담, 일정을 따를 시간이 없다, 계속 챙기기 힘들다, 세션이 많이 필요하다
+        exclude: 한 번 시술 시간만 말하면 long_session이나 large_area_slow, 효과가 보이기까지의 기간 자체나 꾸준함을 효과 조건으로만 말하면 이 주제가 아님(hair_reduction)
+        examples:
+        - review_id: R2FA3ODX0DHYD8
+          quote: Having to do this 2 times a week for 5 months
+        - review_id: R2R2920RW4FYD8
+          quote: It's definitely a time investment to have to use this every other day.
+        approx_count: 19
+      - id: longer_than_expected
+        name_ko: 광고나 기대보다 오래 걸림
+        name_en: Takes longer than advertised or expected
+        include: 광고한 10분보다 오래 걸린다, 예상보다 오래 걸린다, 면도나 다른 기기보다 오래 걸리거나 시간이 줄지 않았다
+        exclude: 비교 대상 없이 오래 걸린다는 말은 long_session, 효과가 광고보다 늦게 나온다는 말은 이 주제가 아님(hair_reduction)
+        examples:
+        - review_id: R3DS39VF4SYRUU
+          quote: it takes way longer than 10 mins like advertised
+        - review_id: R3TBTATZWLRUQN
+          quote: much more time consuming than they advertise
+        approx_count: 6
+      other_approx_count: 2
+      notes: '"This increases the amount of time", "drag my session from minutes to hours"처럼 원인이 인용 밖(앞 문장)에 있어 보이는 말은 원인을 알 수 없어 long_session으로 셌다. "se necesitan muchas sesiones"는 일정 부담으로 셌지만 효과 기간(hair_reduction)과 경계가 가깝다.'
+    positive:
+      quotes: 47
+      sampled: 47
+      only_other: false
+      labels:
+      - id: quick_session
+        name_ko: 시술이 빠르고 오래 안 걸림
+        name_en: Quick sessions
+        include: 빠르다, 금방 끝난다, 오래 안 걸린다, 시간이 많이 들지 않는다, 한 번에 2분, 5분, 10분이면 된다(부위 언급 없거나 겨드랑이처럼 작은 부위)
+        exclude: 다리나 몸 전체를 짧게 끝낸다는 말은 large_area_quick, 발광 속도나 자동 모드, 이중 발광 덕분이라고 하면 fast_flash_mode, 주당 횟수나 주 단위 시간은 light_schedule
+        examples:
+        - review_id: R3I3HAIAL07C08
+          quote: a full session only takes about 10 minutes
+        - review_id: R6HJL2H1R3J9U
+          quote: the process is quick and convenient
+        approx_count: 28
+      - id: fast_flash_mode
+        name_ko: 발광이 빠르거나 자동 모드, 이중 발광으로 빨라짐
+        name_en: Fast flash or auto and double flash modes
+        include: 발광 주기가 빠르다, 자동 모드(Auto-Glide)가 빠르다, 이중 발광 덕에 빨리 끝난다
+        exclude: 원인 없이 빠르다는 말은 quick_session, 자동 모드의 조작 편리함(버튼을 안 눌러도 된다)은 이 주제가 아님(ease_of_use)
+        examples:
+        - review_id: R371G2D4TFMWP7
+          quote: The double flash of the Ulike makes the process pretty quick.
+        - review_id: R45A68G8D9H22
+          quote: Treatment sessions are super fast with the Auto-Glide mode
+        approx_count: 5
+      - id: large_area_quick
+        name_ko: 다리나 몸 전체도 짧게 끝남
+        name_en: Large areas done quickly
+        include: 다리, 종아리, 머리부터 발끝까지 같은 넓은 부위를 몇 분에서 30분 안에 끝낸다, 다리도 비교적 빨리 된다
+        exclude: 겨드랑이처럼 작은 부위나 부위 언급 없이 빠르다는 말은 quick_session
+        examples:
+        - review_id: R1UMNQC5X9R7VI
+          quote: It’s quick to use, and I can treat larger areas like my legs in about 10 minutes.
+        - review_id: R2IW5AKUW2LVDH
+          quote: it only takes me about 10 minutes total to do the lower section of both legs
+        approx_count: 4
+      - id: light_schedule
+        name_ko: 일정이 가볍고 생활에 맞추기 쉬움
+        name_en: Light, easy-to-keep schedule
+        include: 주 2회, 몇 주에 한 번만 하면 된다, 일주일에 20분 이하, 주간 루틴에 넣기 쉽다, 일정을 지키기 쉬웠다
+        exclude: 한 번 시술이 빠르다는 말만 있으면 quick_session, 효과가 몇 주 만에 보였다는 말은 이 주제가 아님(hair_reduction)
+        examples:
+        - review_id: R17Z3G31WY4J6A
+          quote: you only have to use it 2 times a week to start seeing results
+        - review_id: R2D5BIKVEMGFGD
+          quote: I also love that you only need to use it every couple of weeks
+        approx_count: 6
+      - id: time_worth_it
+        name_ko: 시간이 들지만 견딜 만하거나 그만한 가치가 있음
+        name_en: Time is acceptable or worth it
+        include: 시간이 좀 들고 지루하지만 나쁘지 않다, 효과가 있으니 발광 간격도 신경 쓰이지 않는다, 시간이 들어도 결과가 그만한 가치가 있다(혼합 인용의 칭찬 부분)
+        exclude: 시간이 오래 걸린다는 불만만 있으면 negative 쪽 라벨, 빠르다는 칭찬은 quick_session
+        examples:
+        - review_id: R380XCNEXZQ8JX
+          quote: It is a little time consuming for the results have been worth it for me.
+        - review_id: R1KWW1ZMRJ0A1O
+          quote: It will take a little time and feel tedious, but it isn't too bad.
+        approx_count: 3
+      other_approx_count: 2
+      notes: '"ahorra mucho tiempo y dinero", "It saves me time and salon trips"처럼 살롱이나 면도 대비 시간을 아낀다는 말은 2개(5% 미만)라 기타로 셌다.'
+- topic: skin_hair_suitability
+  name_ko: 피부색과 털 색 적합성
+  directions:
+    negative:
+      quotes: 65
+      sampled: 65
+      only_other: false
+      labels:
+      - id: dark_skin_tone
+        name_ko: 어두운 피부색에는 못 씀
+        name_en: Not for darker skin tones
+        include: 사람의 피부색 자체(태닝, 갈색, 올리브, 어두운 피부, 멜라닌)가 어둡거나 중간 톤이라 기기가 안 되거나, 센서가 피부색을 너무 어둡다고 읽어 못 쓴다는 말. 밝은 피부에만 맞는다는 말 포함
+        exclude: 피부색은 대상인데 비키니, 겨드랑이처럼 몸의 일부 어두운 부위에서만 막히거나 안 듣는다는 말은 dark_body_areas
+        examples:
+        - review_id: R29W8ON8A13KN7
+          quote: does not work on tanned or darker skin
+        - review_id: R1T9EUE1DCTJRE
+          quote: This item is not for dark skinned women.
+        approx_count: 20
+      - id: dark_body_areas
+        name_ko: 비키니나 겨드랑이처럼 어두운 부위에서 안 됨
+        name_en: Blocked or weak on darker body areas
+        include: 비키니, 겨드랑이, 은밀한 부위, 허벅지 안쪽처럼 몸에서 색이 더 짙은 부위에서 센서가 발광을 막거나, 효과가 없거나 더 오래 걸린다는 말
+        exclude: 사람의 피부색 전체가 어두워 못 쓴다는 말은 dark_skin_tone. 피부색 언급 없이 부위마다 효과가 다르다는 말은 이 주제가 아님(hair_reduction)
+        examples:
+        - review_id: RSE01I2TC1E64
+          quote: the sensor would never light up in my bikini area
+        - review_id: R3TZKM2YDQ6CJZ
+          quote: it doesn't work well on areas where my skin is too dark
+        approx_count: 11
+      - id: light_fine_hair
+        name_ko: 금발이나 옅은 털, 가는 솜털에는 안 들음
+        name_en: Weak on blonde, light or fine hair
+        include: 금발, 옅은 갈색, 붉은 갈색처럼 옅은 털이나 가는 솜털에는 효과가 없다, 진한 털이 아니면 사지 마라, 털이 가늘면 살 필요가 없다는 말
+        exclude: 흰 털, 회색 털은 gray_white_hair. 굵은 털에 안 듣는다는 말은 thick_coarse_hair
+        examples:
+        - review_id: R1BICTURUAEEBJ
+          quote: Does not work for blonde or light brown hair.
+        - review_id: R2W2I33M3721W2
+          quote: does not help with light colored hair
+        approx_count: 11
+      - id: gray_white_hair
+        name_ko: 흰 털이나 회색 털에는 안 들음
+        name_en: Does not work on gray or white hair
+        include: 흰 털, 회색 털, 나이 들며 생긴 흰 수염 같은 털에는 효과가 없다는 말
+        exclude: 금발이나 옅은 색 털만 말하면 light_fine_hair(금발과 회색을 함께 말하면 두 라벨 모두)
+        examples:
+        - review_id: REG0KPBJPIX8G
+          quote: Doesn’t work on white hair.
+        - review_id: R3NZXB8W5SMK1Z
+          quote: Does not work on gray whisker hairs of an aging woman.
+        approx_count: 6
+      - id: thick_coarse_hair
+        name_ko: 굵고 억센 털에는 덜 들음
+        name_en: Weak on thick or coarse hair
+        include: 굵은 털, 억센 털, 질긴 털에는 효과가 없거나 느리다, 굵은 털이면 다른 제품을 찾으라는 말
+        exclude: 가는 털이라 살 필요가 없다는 말은 light_fine_hair. 털 굵기 언급 없이 효과가 없다는 말은 이 주제가 아님(hair_reduction)
+        examples:
+        - review_id: R9TSKT8GTJAHE
+          quote: Doesn't work good on thicker hairs
+        - review_id: R18W4UM9JN0TUP
+          quote: Do not buy for coarser hair.
+        approx_count: 13
+      other_approx_count: 6
+      notes: 센서가 발광을 막는다는 말은 따로 라벨을 두지 않고 피부색 전체(dark_skin_tone)인지 몸의 어두운 부위(dark_body_areas)인지로 나눴습니다. 기타에는 맞는 유형인데도 안 됐다는 배경 언급(R2DVO9V4IS6M9K, R1FZ8Q4JKOG31O)처럼 스키마상 hair_reduction에 가까운 인용과, 무엇이 문제인지 불분명한 인용(R3VS4576GY70LY, R18UY4HW9LQGON, R1H1B6Y8QUCDUM, R2T2JDN7PVVK4G)이 들어 있습니다.
+    positive:
+      quotes: 14
+      sampled: 0
+      only_other: true
+      labels: []
+      other_approx_count: 14
+      notes: only_other(인용 14개, 표본 없음)
+- topic: accessories
+  name_ko: 구성품과 보관 케이스
+  directions:
+    negative:
+      quotes: 20
+      sampled: 20
+      only_other: false
+      labels:
+      - id: goggles_missing
+        name_ko: 보안경이 없거나 빠져 옴
+        name_en: Goggles not included or missing
+        include: 보안경(glasses, goggles, lentes, gafas)이 구성에 없거나 받은 상자에 빠져 있었다, 따로 사야 했다, 들어 있어야 한다는 말
+        exclude: 들어 있는 보안경이 잘 안 맞거나 빛을 못 막는다는 말은 goggles_poor_fit, 보관 케이스가 없다는 말은 case_lacking
+        examples:
+        - review_id: R300NO6N06MI3R
+          quote: You have to purchase your goggle separately.
+        - review_id: R5SZEZK6R7OAM
+          quote: faltaron los lentes
+        approx_count: 11
+      - id: goggles_poor_fit
+        name_ko: 보안경 착용감이나 품질 불만
+        name_en: Goggles fit poorly or protect poorly
+        include: 들어 있는 보안경이 안경 위에 안 맞는다, 허술하다, 빛을 잘 막지 못한다는 말
+        exclude: 보안경이 아예 없거나 빠져 왔다는 말은 goggles_missing, 섬광이 눈에 해롭다는 안전 우려 자체는 safety 주제
+        examples:
+        - review_id: R30ODGD4OXKWUU
+          quote: the safety glasses that come with this product are not well made ESPECIALLY if you wear glasses!
+        - review_id: R2V5RNF586IBAW
+          quote: Glasses didn’t offer much help against laser light
+        approx_count: 4
+      - id: case_lacking
+        name_ko: 보관 케이스가 없거나 아쉬움
+        name_en: Storage case missing or unappealing
+        include: 보관 케이스나 파우치가 없어 아쉽다, 있었으면 좋겠다, 케이스 색이나 모양이 마음에 들지 않는다는 말
+        exclude: 제품 상자(배송 온 상자)의 상태나 외관은 packaging 주제, 보안경이나 면도기가 빠진 것은 goggles_missing 또는 기타
+        examples:
+        - review_id: R1YD46GOLUQL4B
+          quote: Me encantó! Me ubuera gustado tener un estuche :D
+        - review_id: RJ70XYUA71OQC
+          quote: the case it came with is a pinkish/coral color, which is a little conspicuous to have around
+        approx_count: 3
+      other_approx_count: 2
+      notes: 면도기가 빠졌다는 말은 2개(R34MFAS0SGKRBD, R2LT3QNM94WMEI의 보안경과 함께 빠진 경우)뿐이라 라벨로 두지 않음. R3LDIX6PWLVIRZ("said was included")는 스키마상 설명과 다른 구성이라 trust에 가까움. 보안경이 원래 구성에 없는 것(B07WYY6KKC)과 받은 상자에서 빠진 것(B0CV3ZJ2PN)은 인용만으로 가르기 어려워 goggles_missing 하나로 합침. R2QV46JTGZRGAW, R2IBA63SK8LQIJ는 인용에 불만 내용이 거의 없거나 무엇이 문제인지 없어 기타.
+    positive:
+      quotes: 41
+      sampled: 41
+      only_other: false
+      labels:
+      - id: case_nice
+        name_ko: 보관 케이스나 파우치가 좋음
+        name_en: Nice storage case or pouch
+        include: 함께 오는 보관 케이스, 파우치, 가방이 예쁘다, 튼튼하다, 고급스럽다, 정리가 잘 된다는 말
+        exclude: 필요한 것이 다 들어 있다는 구성 전체 평은 complete_kit, 제품 상자의 포장 상태는 packaging 주제
+        examples:
+        - review_id: RDP6VFH1J365D
+          quote: It comes in a nice, heavy duty case with specific cavities for each item.
+        - review_id: R4BPUJN9EOB08
+          quote: the storage case is beautiful
+        approx_count: 22
+      - id: goggles_included
+        name_ko: 보안경이 들어 있음
+        name_en: Protective goggles included
+        include: 보안경이 함께 들어 있어 좋다, 안경 위에도 맞는다, 착용감이 편하다는 말
+        exclude: 보안경을 여러 구성품 중 하나로 나열하며 다 들어 있다고만 하면 complete_kit
+        examples:
+        - review_id: R3INSXQHFCICQI
+          quote: love that it comes with the sunglasses to protect your eyes
+        - review_id: RJ86SS9SV6XB0
+          quote: the glasses fit over my prescription ones so it’s easy to protect my eyes
+        approx_count: 9
+      - id: complete_kit
+        name_ko: 필요한 구성품이 다 들어 있음
+        name_en: Complete kit with everything needed
+        include: 필요한 것이 다 들어 있다, 완전한 구성이다, 빠진 것 없이 왔다(viene con todos sus artículos)는 말이나 구성품을 세 가지 이상 나열하며 갖춰졌다고 하는 말
+        exclude: 케이스 하나의 모양이나 튼튼함을 칭찬하면 case_nice, 보안경 하나를 짚어 칭찬하면 goggles_included
+        examples:
+        - review_id: R9H5CZX785L9U
+          quote: comes with everything you need to get started
+        - review_id: R2TNKBB9DW6MXY
+          quote: includes everything—charger, goggles, blades, manual
+        approx_count: 9
+      other_approx_count: 2
+      notes: 면도기 포함을 칭찬하는 말은 케이스나 보안경과 함께 나오는 경우가 대부분이라 따로 두지 않음. R2IBA63SK8LQIJ, R1YD46GOLUQL4B(혼합)는 인용에 구성품 칭찬이 없어 기타. B0G39WBP1S 인용이 18개로 표본의 절반 가까이를 차지함.
+errors: []
+warnings: []
+approved_at: 2026-10-08T13:58Z
+approved_by: Claude(민재님 위임 2026-10-08 21:54:40 KST '너가 판단가능한거는 일단해봐'). 초안 그대로, 열린 질문 5개는 모두 초안대로 둠

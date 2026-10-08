@@ -1,0 +1,55 @@
+topic: trust
+directions:
+  negative:
+    labels:
+      - id: misleading_claims
+        name_ko: 과장 광고나 거짓 설명
+        name_en: Misleading or false claims
+        include: 광고, 설명, 사진이 실제와 다르다, 과장이다, 오해하게 만든다, 거짓이다, 사기다라는 말(효과, 시간, 출력, 안전 주장 포함)
+        exclude: 피부색이나 털 색에 맞는다는 안내가 틀렸거나 없었다는 말은 suitability_misinformed, 설명에 적힌 구성품이 빠진 것은 missing_listed_items
+        examples:
+          - {review_id: R253Q5MQJEFCR1, quote: "“full body in 10 mins” advertising is also misleading"}
+          - {review_id: R1Q2O18BTENX2M, quote: "Product is advertised as safe but this is the opposite!"}
+        approx_count: 14
+      - id: arrived_used
+        name_ko: 중고나 개봉 흔적
+        name_en: Arrived used or opened
+        include: 새 제품으로 샀는데 쓴 흔적, 남의 털, 더러운 헤드, 열린 상자로 왔다, 반품된 것을 다시 판다는 말
+        exclude: 설명에 적힌 구성품이 빠진 것만 말하면 missing_listed_items, 기기 고장이나 불량 자체는 quality(주제 밖)
+        examples:
+          - {review_id: R1B2B516LQUZCQ, quote: "Arrived used"}
+          - {review_id: R374GN9CX6ILYP, quote: "llego la caja abierta y se ve usado y los cabezales sucios"}
+        approx_count: 12
+      - id: missing_listed_items
+        name_ko: 설명과 다른 구성품
+        name_en: Listed items missing
+        include: 설명이나 설명서에 들어 있다고 한 헤드, 면도기, 보안경, 수건이 받은 상자에 없었다는 말
+        exclude: 원래 구성에 없는 것을 아쉬워하는 말은 accessories(주제 밖), 중고 흔적과 함께 말하면 중고 흔적을 arrived_used로
+        examples:
+          - {review_id: R1EGVNMV7X8WQX, quote: "The description says it comes with 2 heads and a razor but I only received 1 head and the razor was missing"}
+          - {review_id: RZH0ENS9J3SL, quote: "El manual indica que incluye razor y goggles, pero no vinieron en la caja."}
+        approx_count: 5
+      - id: suitability_misinformed
+        name_ko: 피부색 적합성 안내 부족이나 잘못된 안내
+        name_en: Skin tone suitability not disclosed or misstated
+        include: 어두운 피부에는 안 된다는 것을 알리지 않았다, 포장이나 협찬 홍보가 맞는다고 했는데 아니었다는 말
+        exclude: 피부색 때문에 효과가 없거나 센서가 막는다는 경험 자체는 skin_hair_suitability(주제 밖), 피부색과 관계없는 과장 광고는 misleading_claims
+        examples:
+          - {review_id: RL4CIP8VWPLYA, quote: "they never said it’s not for Black people or dark colored people"}
+          - {review_id: R3DXQ4VVNARZ78, quote: "You should make it clear that it is not for brown skin girls."}
+        approx_count: 4
+      - id: doubted_before_purchase
+        name_ko: 협찬 리뷰나 반품 표시로 생긴 의심
+        name_en: Doubt from paid reviews or return warnings
+        include: 반품이 잦은 상품 표시, 협찬과 유료 홍보, 평판 때문에 사기 전이나 쓰면서 의심했다는 말(혼합 인용의 의심 부분 포함)
+        exclude: 광고 내용이 실제와 다르다고 판단한 말은 misleading_claims
+        examples:
+          - {review_id: R2KLY3J5B81QZS, quote: "It says this is a frequently returned item so I was hesitant to buy. This product honestly works great"}
+          - {review_id: RKEMYTS0L15RN, quote: "I think there is a lot of paid promotion with this product."}
+        approx_count: 3
+    other_approx_count: 2
+    notes: "R2LT3QNM94WMEI(사기라는 말이지만 이유가 배송 안 됨, shipping 쪽)와 R1LCIDY8581R4J(설명에 무엇이 없었는지 인용만으로 알 수 없음)는 기타로 셈. 안전하다는 광고가 거짓이라는 말(어림 2개)은 따로 두기엔 적어 misleading_claims에 합침."
+  positive:
+    labels: []
+    other_approx_count: 8
+    notes: ""

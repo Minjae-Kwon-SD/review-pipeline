@@ -1,0 +1,114 @@
+{
+  "made_at": "2026-10-08T21:25:09+09:00",
+  "run": "hairremoval-db-2026-10-08",
+  "products": [
+    {
+      "asin": "B07WYY6KKC",
+      "brand": "Braun",
+      "amazon_title": "Braun IPL, Silk·Expert Pro 5, IPL Hair Removal for Women and Men, Permanent Laser Hair Reduction At-Home, 2 Heads, Pouch, IPL5137",
+      "size": "1 Count (Pack of 1)",
+      "unit_value": 1.0,
+      "unit_type": "Count"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "brand": "Ulike",
+      "amazon_title": "Ulike Laser Hair Removal Device Air 10 Ipl Gift for Women and Men, Ice Cool and Permanent Hair Reduction for Nearly Painless, Dual Lights, Skin Sensor & USHR Mode Hair Removal in 10mins from Home",
+      "size": "Air 10",
+      "unit_value": 1.0,
+      "unit_type": "Count"
+    },
+    {
+      "asin": "B0CWL9S4L1",
+      "brand": "INNZA",
+      "amazon_title": "INNZA IPL Hair Removal with Ice Cooling Care Function for Women and men",
+      "size": null,
+      "unit_value": 1.0,
+      "unit_type": "Count"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "brand": "Ulike",
+      "amazon_title": "Ulike Laser Hair Removal Air 10 Deluxe Version IPL for for Women and Men with Ice-Cooling Technology, Nealy Painless and Permanent Hair Reduction, at Home Hair Removal in 10mins with Skin Sensor",
+      "size": null,
+      "unit_value": 1.0,
+      "unit_type": "Count"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "brand": "PHILIPS",
+      "amazon_title": "Philips Lumea 9000 IPL Hair Removal Device for Long-Lasting Smooth Skin",
+      "size": "Body+Face+Bikini+Underarm",
+      "unit_value": 1.0,
+      "unit_type": "Count"
+    }
+  ],
+  "items": [
+    {
+      "id": "light_type",
+      "name_ko": "광원 방식",
+      "ask": "광원 방식(IPL, 다이오드 레이저 등)과 파장 범위(nm)가 적혀 있으면 그 범위",
+      "format": "text"
+    },
+    {
+      "id": "energy_levels",
+      "name_ko": "출력 단계와 최대 에너지",
+      "ask": "출력(세기) 단계 수, 최대 에너지(J) 또는 에너지 밀도(J/cm²), 자동 출력(피부 센서로 단계 조절) 여부",
+      "format": "text"
+    },
+    {
+      "id": "flash_count",
+      "name_ko": "발광 횟수(수명)",
+      "ask": "기기 수명으로 적힌 총 발광 횟수(예: 400,000, 999,999, 무제한)",
+      "format": "text"
+    },
+    {
+      "id": "flash_speed_window",
+      "name_ko": "발광 간격과 창 크기",
+      "ask": "발광 간격(초)이나 연속 발광 모드, 창(헤드) 크기(cm²)와 부위별 헤드 수",
+      "format": "text"
+    },
+    {
+      "id": "cooling",
+      "name_ko": "냉각 기능",
+      "ask": "냉각 기능(사파이어 냉각, 아이스 쿨링 등) 여부와 설명",
+      "format": "text"
+    },
+    {
+      "id": "skin_tone_range",
+      "name_ko": "쓸 수 있는 피부색과 털 색",
+      "ask": "쓸 수 있는 피부색 범위(Fitzpatrick 유형 등), 피부색 센서 여부, 쓸 수 없는 털 색(흰털, 금발, 붉은 털 등)",
+      "format": "text"
+    },
+    {
+      "id": "treatment_schedule",
+      "name_ko": "권장 시술 일정과 시간",
+      "ask": "제조사가 적은 권장 시술 일정(처음 몇 주 동안 주 몇 번, 그 뒤 유지 주기)과 부위별 시술 시간, 효과가 보이기까지 걸린다는 기간",
+      "format": "text"
+    },
+    {
+      "id": "power_source",
+      "name_ko": "전원(유선, 무선)",
+      "ask": "유선인지 무선(배터리)인지, 배터리면 한 번 충전으로 쓰는 시간",
+      "format": "text"
+    },
+    {
+      "id": "in_box",
+      "name_ko": "구성품",
+      "ask": "상자에 든 구성품(보안경, 면도기, 파우치나 케이스, 부위별 헤드 등)",
+      "format": "list"
+    },
+    {
+      "id": "clearance_warranty",
+      "name_ko": "인증과 보증",
+      "ask": "FDA 510(k) 허가나 등록 같은 규제 표시, 임상 시험 표시, 보증 기간과 환불 보장 기간",
+      "format": "text"
+    },
+    {
+      "id": "list_price",
+      "name_ko": "정가",
+      "ask": "출처 사이트에 적힌 가격(통화 포함). 여러 구성이면 모두",
+      "format": "list"
+    }
+  ]
+}

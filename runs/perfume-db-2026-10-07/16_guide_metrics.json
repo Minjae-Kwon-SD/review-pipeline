@@ -1,5 +1,5 @@
 {
-  "made_at": "2026-10-08T12:23:07+09:00",
+  "made_at": "2026-10-09T02:38:08+09:00",
   "run": "perfume-db-2026-10-07",
   "title": "아마존 미국 향수(EDP, EDT) 제품 개발 가이드",
   "values": {
@@ -232,7 +232,7 @@
     },
     "s.B0009OAI8Q.duration_median": {
       "value": 0.292,
-      "text": "0.292시간",
+      "text": "약 18분",
       "ev": "ev.B0009OAI8Q.duration"
     },
     "s.B08FBQWRYC.price": {
@@ -1281,7 +1281,7 @@
     },
     "std.longevity_strength.best_women_median": {
       "value": 0.292,
-      "text": "0.292시간",
+      "text": "약 18분",
       "ev": null
     },
     "std.longevity_strength.best_sub": {
@@ -1317,7 +1317,7 @@
     },
     "std.spec.longevity_strength.B0009OAI8Q.duration": {
       "value": 0.292,
-      "text": "값 6개, 중앙값 0.292시간",
+      "text": "값 6개, 중앙값 약 18분",
       "ev": null
     },
     "std.spec.longevity_strength.B09X5BQ969.neg_pct": {
@@ -1517,6 +1517,16 @@
       "text": "2,000번",
       "ev": null,
       "note": "난수 씨앗 7"
+    },
+    "a.detail_audit": {
+      "value": 0.027,
+      "text": "표본 150개 중 FAIL 4개(2.7%)",
+      "ev": null
+    },
+    "a.research_verified": {
+      "value": 80,
+      "text": "104개 중 80개",
+      "ev": null
     },
     "a.robust.head_first": {
       "value": 100.0,
@@ -2132,49 +2142,49 @@
         "volume": 270398,
         "volume_text": "270,398",
         "yoy_pct": 0.0874,
-        "yoy_text": "0.0874"
+        "yoy_text": "+8.7%"
       },
       {
         "term": "goda perfume for women",
         "volume": 101571,
         "volume_text": "101,571",
         "yoy_pct": 0.0035,
-        "yoy_text": "0.0035"
+        "yoy_text": "+0.4%"
       },
       {
         "term": "lattafa perfumes for women",
         "volume": 87313,
         "volume_text": "87,313",
         "yoy_pct": -0.4248,
-        "yoy_text": "-0.4248"
+        "yoy_text": "-42.5%"
       },
       {
         "term": "haiku perfume for women",
         "volume": 58776,
         "volume_text": "58,776",
         "yoy_pct": 1.0506,
-        "yoy_text": "1.0506"
+        "yoy_text": "+105.1%"
       },
       {
         "term": "valentino perfume for women",
         "volume": 58386,
         "volume_text": "58,386",
         "yoy_pct": -0.4363,
-        "yoy_text": "-0.4363"
+        "yoy_text": "-43.6%"
       },
       {
         "term": "pheromones perfumes for women",
         "volume": 56890,
         "volume_text": "56,890",
         "yoy_pct": -0.3716,
-        "yoy_text": "-0.3716"
+        "yoy_text": "-37.2%"
       },
       {
         "term": "carolina herrera perfume for women",
         "volume": 54428,
         "volume_text": "54,428",
         "yoy_pct": -0.0127,
-        "yoy_text": "-0.0127"
+        "yoy_text": "-1.3%"
       },
       {
         "term": "goda pheromone perfume for women",
@@ -2188,14 +2198,14 @@
         "volume": 43577,
         "volume_text": "43,577",
         "yoy_pct": -0.126,
-        "yoy_text": "-0.1260"
+        "yoy_text": "-12.6%"
       },
       {
         "term": "women perfume",
         "volume": 42507,
         "volume_text": "42,507",
         "yoy_pct": -0.0195,
-        "yoy_text": "-0.0195"
+        "yoy_text": "-1.9%"
       }
     ],
     "m.terms_male": [
@@ -2204,70 +2214,70 @@
         "volume": 206595,
         "volume_text": "206,595",
         "yoy_pct": 0.0062,
-        "yoy_text": "0.0062"
+        "yoy_text": "+0.6%"
       },
       {
         "term": "mens cologne",
         "volume": 194526,
         "volume_text": "194,526",
         "yoy_pct": -0.015,
-        "yoy_text": "-0.0150"
+        "yoy_text": "-1.5%"
       },
       {
         "term": "perfume for men",
         "volume": 123522,
         "volume_text": "123,522",
         "yoy_pct": 0.0398,
-        "yoy_text": "0.0398"
+        "yoy_text": "+4.0%"
       },
       {
         "term": "cologne",
         "volume": 113368,
         "volume_text": "113,368",
         "yoy_pct": -0.1785,
-        "yoy_text": "-0.1785"
+        "yoy_text": "-17.8%"
       },
       {
         "term": "valentino cologne for men",
         "volume": 66876,
         "volume_text": "66,876",
         "yoy_pct": -0.2102,
-        "yoy_text": "-0.2102"
+        "yoy_text": "-21.0%"
       },
       {
         "term": "9pm cologne for men",
         "volume": 61636,
         "volume_text": "61,636",
         "yoy_pct": 0.412,
-        "yoy_text": "0.4120"
+        "yoy_text": "+41.2%"
       },
       {
         "term": "men cologne",
         "volume": 60534,
         "volume_text": "60,534",
         "yoy_pct": -0.0461,
-        "yoy_text": "-0.0461"
+        "yoy_text": "-4.6%"
       },
       {
         "term": "ysl cologne for men",
         "volume": 60056,
         "volume_text": "60,056",
         "yoy_pct": 0.0085,
-        "yoy_text": "0.0085"
+        "yoy_text": "+0.9%"
       },
       {
         "term": "ycz cologne for men",
         "volume": 49061,
         "volume_text": "49,061",
         "yoy_pct": -0.1769,
-        "yoy_text": "-0.1769"
+        "yoy_text": "-17.7%"
       },
       {
         "term": "versace cologne for men",
         "volume": 46518,
         "volume_text": "46,518",
         "yoy_pct": -0.5582,
-        "yoy_text": "-0.5582"
+        "yoy_text": "-55.8%"
       }
     ],
     "m.terms_common": [
@@ -2276,42 +2286,42 @@
         "volume": 330109,
         "volume_text": "330,109",
         "yoy_pct": 2.346,
-        "yoy_text": "2.3460"
+        "yoy_text": "+234.6%"
       },
       {
         "term": "perfume",
         "volume": 177366,
         "volume_text": "177,366",
         "yoy_pct": -0.2006,
-        "yoy_text": "-0.2006"
+        "yoy_text": "-20.1%"
       },
       {
         "term": "lattafa",
         "volume": 133200,
         "volume_text": "133,200",
         "yoy_pct": -0.0647,
-        "yoy_text": "-0.0647"
+        "yoy_text": "-6.5%"
       },
       {
         "term": "valentino",
         "volume": 127181,
         "volume_text": "127,181",
         "yoy_pct": 1.0277,
-        "yoy_text": "1.0277"
+        "yoy_text": "+102.8%"
       },
       {
         "term": "yara perfume",
         "volume": 108641,
         "volume_text": "108,641",
         "yoy_pct": 0.796,
-        "yoy_text": "0.7960"
+        "yoy_text": "+79.6%"
       },
       {
         "term": "versace eros",
         "volume": 107083,
         "volume_text": "107,083",
         "yoy_pct": 0.0293,
-        "yoy_text": "0.0293"
+        "yoy_text": "+2.9%"
       },
       {
         "term": "voyage nova perfume",
@@ -2325,21 +2335,21 @@
         "volume": 104622,
         "volume_text": "104,622",
         "yoy_pct": 0.6626,
-        "yoy_text": "0.6626"
+        "yoy_text": "+66.3%"
       },
       {
         "term": "victoria secret perfume",
         "volume": 98128,
         "volume_text": "98,128",
         "yoy_pct": -0.2295,
-        "yoy_text": "-0.2295"
+        "yoy_text": "-22.9%"
       },
       {
         "term": "vanilla perfume",
         "volume": 94475,
         "volume_text": "94,475",
         "yoy_pct": -0.265,
-        "yoy_text": "-0.2650"
+        "yoy_text": "-26.5%"
       }
     ],
     "m.price_bands": [
@@ -3093,19 +3103,11 @@
     ],
     "f.scent_accuracy.comparison_named": [
       {
-        "value": "black opium",
-        "reviews": 7
-      },
-      {
         "value": "Black Opium",
-        "reviews": 4
+        "reviews": 19
       },
       {
         "value": "YSL",
-        "reviews": 4
-      },
-      {
-        "value": "YSL Black Opium",
         "reviews": 4
       },
       {
@@ -3113,16 +3115,8 @@
         "reviews": 2
       },
       {
-        "value": "YSL black opium",
-        "reviews": 2
-      },
-      {
         "value": "Macy's",
         "reviews": 2
-      },
-      {
-        "value": "Black Opium YSL",
-        "reviews": 1
       },
       {
         "value": "First Instinct by A&F",
@@ -3133,7 +3127,7 @@
         "reviews": 1
       },
       {
-        "value": "Lataffa",
+        "value": "Lattafa",
         "reviews": 1
       },
       {
@@ -3150,6 +3144,22 @@
       },
       {
         "value": "Walmart",
+        "reviews": 1
+      },
+      {
+        "value": "Jessica Mcclintock",
+        "reviews": 1
+      },
+      {
+        "value": "Douglas",
+        "reviews": 1
+      },
+      {
+        "value": "Armani intensely you",
+        "reviews": 1
+      },
+      {
+        "value": "mix bar bourbon vanilla",
         "reviews": 1
       }
     ],
@@ -5017,6 +5027,144 @@
       "EDP",
       "EDT"
     ],
+    "meta.scoreboard": {
+      "topic_name": "지속력과 향의 세기",
+      "dir_high": "너무 셈",
+      "dir_low": "약함",
+      "dir_min": 25,
+      "duration_name": "말한 지속 시간",
+      "duration_unit": "시간",
+      "duration_min": 5
+    },
+    "meta.names": {
+      "items": {
+        "longevity_hours": "리뷰어가 말한 지속 시간",
+        "application_amount": "뿌린 양과 덧뿌림",
+        "application_site": "뿌린 곳",
+        "scent_note": "언급한 향 노트와 성격",
+        "note_direction": "노트별 방향(과함, 없음, 좋음)",
+        "part_failure": "망가진 부품과 문제 종류",
+        "comparison_reference": "비교 기준의 종류",
+        "comparison_named": "이름을 댄 비교 상품이나 매장",
+        "purchase_context": "구매 맥락",
+        "purchase_trigger": "구매 계기",
+        "desired_state": "리뷰어가 바라는 것",
+        "wearer_image": "향이 떠올리게 하는 나이와 성별",
+        "usage_occasion": "쓰는 때와 곳",
+        "fake_suspicion_basis": "정품 의심의 근거"
+      },
+      "values": {
+        "longevity_hours": {},
+        "application_amount": {
+          "heavy": "많이 뿌림(여러 번, 듬뿍)",
+          "light": "조금 뿌림(한두 번, 살짝)",
+          "reapplied": "하루 중 덧뿌려야 함",
+          "no_reapply_needed": "덧뿌릴 필요 없음"
+        },
+        "application_site": {
+          "skin": "피부",
+          "clothing": "옷",
+          "wrist_pulse_points": "손목, 맥박 부위",
+          "air_mist": "공중에 뿌리고 지나감",
+          "layered_over_body_product": "바디오일 등 다른 제품 위에 겹침"
+        },
+        "scent_note": {
+          "vanilla": "바닐라",
+          "honey": "꿀",
+          "amber_warm": "앰버, 따뜻함",
+          "musk": "머스크",
+          "floral": "꽃향(화이트 플로럴, 인동 포함)",
+          "powdery_aldehydic": "파우더리, 알데하이드(비누 같은)",
+          "sweet_gourmand": "단 향, 구르망",
+          "spicy": "스파이시",
+          "coconut": "코코넛",
+          "alcohol": "알코올",
+          "fresh_clean": "상쾌함, 깨끗함",
+          "other": "그 밖의 노트"
+        },
+        "note_direction": {
+          "too_much": "과함, 그 노트만 남, 기대보다 많음",
+          "missing_or_weak": "없거나 약함, 설명이나 기대와 다름",
+          "liked": "좋음, 알맞음",
+          "described_only": "평가 없이 묘사만"
+        },
+        "part_failure": {
+          "sprayer_no_spray": "분사기가 안 뿜어짐",
+          "sprayer_stuck": "노즐이 눌린 채 걸리거나 안 눌림",
+          "sprayer_stream": "안개 대신 물줄기로 나감",
+          "sprayer_broken": "분사기가 부서짐",
+          "cap_missing": "뚜껑이 없음",
+          "decoration_broken": "장식 고리 등 장식이 부서짐",
+          "bottle_cracked": "병에 금이 가거나 깨짐",
+          "bottle_leak": "병에서 새거나 흘림",
+          "outer_case_damaged": "겉상자나 금속 케이스가 찌그러지거나 훼손"
+        },
+        "comparison_reference": {
+          "same_product_before": "예전에 산 같은 제품, 갖고 있는 병, 예전 제조법",
+          "store_purchase": "매장(정규 매장, 백화점)에서 산 같은 제품",
+          "original_unspecified": "무엇인지 밝히지 않은 원래 것, 정품",
+          "dupe_target": "듀프의 원조 향수",
+          "other_product": "다른 브랜드나 같은 브랜드 다른 향",
+          "other_size": "같은 제품의 다른 용량"
+        },
+        "comparison_named": {},
+        "purchase_context": {
+          "gift_for_other": "남에게 선물하려고 삼",
+          "received_as_gift": "선물로 받음",
+          "repurchase": "예전에 산 적 있음, 오래 써 온 제품",
+          "first_purchase": "처음 삼",
+          "blind_buy": "맡아 보거나 시험해 보지 않고 삼"
+        },
+        "purchase_trigger": {
+          "hype_reviews": "입소문, 리뷰, 판매 순위, 평판",
+          "smelled_in_person": "남에게서나 매장에서 맡아 봄",
+          "dupe_seeking": "원조 향수의 싼 대체품을 찾음",
+          "cheaper_price": "싸서, 작은 용량이라 부담이 적어서",
+          "store_unavailable": "늘 사던 매장에서 안 팖",
+          "product_claim": "상품 이름이나 설명(유니섹스, 꿀 노트 등)"
+        },
+        "desired_state": {},
+        "wearer_image": {
+          "elderly": "노년(할머니, 나이 든 여성)",
+          "mature_adult": "중장년, 어른스러움",
+          "youthful_or_childish": "어림, 아이 같음",
+          "masculine": "남성적",
+          "unisex": "남녀 공용"
+        },
+        "usage_occasion": {
+          "daily": "매일, 평소, 집에서도",
+          "occasional_or_special": "가끔, 특별한 날",
+          "work": "출근, 직장",
+          "cold_season": "가을, 겨울",
+          "hot_humid": "더운 날씨, 땀",
+          "carry_travel": "가방에 넣고 다님, 여행, 덧뿌리려고 들고 다님",
+          "layering": "다른 제품과 겹쳐 씀",
+          "room_spray": "방향제로 씀"
+        },
+        "fake_suspicion_basis": {
+          "weak_or_short": "약하거나 금방 날아감",
+          "smell_differs": "향이 다르거나 이상함",
+          "packaging_label": "상자, 라벨, 글씨가 다르거나 이상함",
+          "liquid_color": "내용물 색이 다름",
+          "opened_or_moved": "열린 흔적, 병이 제자리에 없음",
+          "cheap_price": "값이 너무 쌈"
+        }
+      },
+      "topics": {
+        "price_value": "가격 대비 가치",
+        "brand_experience": "브랜드 경험",
+        "trust": "신뢰",
+        "shipping": "배송",
+        "customer_service": "고객 응대",
+        "packaging": "포장",
+        "overall": "전체 만족도",
+        "quality": "품질",
+        "longevity_projection": "지속력과 향의 세기",
+        "safety": "안전",
+        "bottle_design": "병 디자인과 용량",
+        "scent": "향"
+      }
+    },
     "meta.duration_name": "리뷰어가 말한 지속 시간",
     "meta.anatomy": {
       "viewbox": "0 0 340 380",
@@ -11642,7 +11790,7 @@
       }
     },
     "ev.std.longevity_strength.neg": {
-      "t": "지속력과 세기: 벌주는 리뷰",
+      "t": "지속력과 세기: 불만 리뷰",
       "s": "지속력과 세기 부정 라벨이 붙은 리뷰 357개 중 80개(도움돼요 많은 순)",
       "n": 357,
       "i": [
@@ -12518,7 +12666,7 @@
       }
     },
     "ev.std.scent_accuracy.neg": {
-      "t": "향 정확도와 일관성: 벌주는 리뷰",
+      "t": "향 정확도와 일관성: 불만 리뷰",
       "s": "향 정확도와 일관성 부정 라벨이 붙은 리뷰 141개 중 80개(도움돼요 많은 순)",
       "n": 141,
       "i": [
@@ -13258,7 +13406,7 @@
       }
     },
     "ev.std.authenticity.neg": {
-      "t": "정품 신뢰: 벌주는 리뷰",
+      "t": "정품 신뢰: 불만 리뷰",
       "s": "정품 신뢰 부정 라벨이 붙은 리뷰 94개 중 80개(도움돼요 많은 순)",
       "n": 94,
       "i": [
@@ -13687,7 +13835,7 @@
       }
     },
     "ev.std.bottle_sprayer.neg": {
-      "t": "병과 분사기: 벌주는 리뷰",
+      "t": "병과 분사기: 불만 리뷰",
       "s": "병과 분사기 부정 라벨이 붙은 리뷰 37개 중 37개(도움돼요 많은 순)",
       "n": 37,
       "i": [
@@ -14006,7 +14154,7 @@
       }
     },
     "ev.std.arrival_packaging.neg": {
-      "t": "도착 상태와 포장: 벌주는 리뷰",
+      "t": "도착 상태와 포장: 불만 리뷰",
       "s": "도착 상태와 포장 부정 라벨이 붙은 리뷰 56개 중 56개(도움돼요 많은 순)",
       "n": 56,
       "i": [
@@ -14186,7 +14334,7 @@
       }
     },
     "ev.std.skin_body.neg": {
-      "t": "피부와 몸 반응: 벌주는 리뷰",
+      "t": "피부와 몸 반응: 불만 리뷰",
       "s": "피부와 몸 반응 부정 라벨이 붙은 리뷰 18개 중 18개(도움돼요 많은 순)",
       "n": 18,
       "i": [
@@ -14238,7 +14386,7 @@
       "q": {}
     },
     "ev.std.sampling_returns.neg": {
-      "t": "시향과 반품: 벌주는 리뷰",
+      "t": "시향과 반품: 불만 리뷰",
       "s": "시향과 반품 부정 라벨이 붙은 리뷰 74개 중 74개(도움돼요 많은 순)",
       "n": 74,
       "i": [
@@ -19667,7 +19815,7 @@
     "개발 기준의 사양 숫자는 웹 조사 출처를 근거로 한 시작점이고 시험으로 확인해야 한다.",
     "상품 6개, 대부분 한 하위 카테고리(Women's Eau de Parfum)라 상품끼리, 하위 카테고리끼리의 비교가 약하다.",
     "시장 데이터(spd-amz-market)의 매출, 점유율, 증감, 승률 칸은 문서에 단위가 없어 단위 미확인으로 적었다.",
-    "ASIN은 매출 순위가 아니라 공유 DB에 리뷰가 많은 후보 10개 중 민재님이 고른 6개다.",
+    "ASIN은 매출 순위가 아니라 공유 DB에 리뷰가 많은 후보 가운데 고른 6개다(상품 확인 관문에서 사람이 확인).",
     "머리 숫자 5번(성장 배수)은 30일 검색량 30,000 이상 카테고리 검색어 116개 중 2년 주간 이력을 받은 102개에서 골랐다. 나머지는 이력이 없어 순위에서 빠졌다. 시장 데이터의 yoYChangePct 칸은 뜻과 단위가 확인되지 않아 머리 숫자에 쓰지 않는다.",
     "Jean Paul Gaultier(B08FBQWRYC)는 Men's Eau de Parfum, Elizabeth Taylor(B0009OAI8Q)는 Women's Fragrance Sets 노드로 잡혀 있다.",
     "향수와 무관한 리뷰 1개(R1T7FSK04S0DMQ)가 숫자에 들어 있다."

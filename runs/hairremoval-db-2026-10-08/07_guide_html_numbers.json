@@ -1,0 +1,1729 @@
+{
+  "made_at": "2026-10-09T02:37:48+09:00",
+  "lang": "ko",
+  "missing_strings": [],
+  "numbers": [
+    {
+      "k": "g0",
+      "key": "head.market_year",
+      "text": "98,353,608(월 매출을 달러로 읽을 때 연 환산)"
+    },
+    {
+      "k": "g1",
+      "key": "head.topic_neg",
+      "text": "7.2%"
+    },
+    {
+      "k": "g2",
+      "key": "head.topic_weakest",
+      "text": "5개 중 2개(리뷰를 다시 뽑아 보면 1~4개)"
+    },
+    {
+      "k": "g3",
+      "key": "head.dir_ratio",
+      "text": "편안함 180개 대 아픔 40개(4.50배)"
+    },
+    {
+      "k": "g4",
+      "key": "head.fastest_term",
+      "text": "\"philips hair removal\" 최근 4주 37,227, 1년 전 같은 4주 6,556, 5.68배"
+    },
+    {
+      "k": "g5",
+      "key": "m.top10_share_IPL",
+      "text": "96.2%"
+    },
+    {
+      "k": "g6",
+      "key": "head.market_month",
+      "text": "8,196,134(월 매출 칸, 단위 미확인)"
+    },
+    {
+      "k": "g7",
+      "key": "head.market_year",
+      "text": "98,353,608(월 매출을 달러로 읽을 때 연 환산)"
+    },
+    {
+      "k": "g8",
+      "key": "m.top1_IPL",
+      "text": "Braun 38.1%"
+    },
+    {
+      "k": "g9",
+      "key": "m.top10_share_IPL",
+      "text": "96.2%"
+    },
+    {
+      "k": "g10",
+      "key": "head.market_month",
+      "text": "8,196,134(월 매출 칸, 단위 미확인)"
+    },
+    {
+      "k": "g11",
+      "key": "m.top10_share_IPL",
+      "text": "96.2%"
+    },
+    {
+      "k": "g12",
+      "key": "m.top1_IPL",
+      "text": "Braun 38.1%"
+    },
+    {
+      "k": "g13",
+      "key": "head.growth_multiple",
+      "text": "5.68배"
+    },
+    {
+      "k": "g14",
+      "key": "head.topic_neg",
+      "text": "7.2%"
+    },
+    {
+      "k": "g15",
+      "key": "p.map.quality",
+      "text": "6.2%"
+    },
+    {
+      "k": "g16",
+      "key": "head.topic_weakest",
+      "text": "5개 중 2개(리뷰를 다시 뽑아 보면 1~4개)"
+    },
+    {
+      "k": "g17",
+      "key": "m.terms_common_n",
+      "text": "40개"
+    },
+    {
+      "k": "g18",
+      "key": "m.terms_common_volume",
+      "text": "1,051,188"
+    },
+    {
+      "k": "g19",
+      "key": "m.terms_female_n",
+      "text": "10개"
+    },
+    {
+      "k": "g20",
+      "key": "m.terms_female_volume",
+      "text": "355,407"
+    },
+    {
+      "k": "g21",
+      "key": "m.terms_male_n",
+      "text": "0개"
+    },
+    {
+      "k": "g22",
+      "key": "head.fastest_term",
+      "text": "\"philips hair removal\" 최근 4주 37,227, 1년 전 같은 4주 6,556, 5.68배"
+    },
+    {
+      "k": "g23",
+      "key": "head.growth_weeks",
+      "text": "2026-09-06 ~ 2026-09-27(1년 전 2025-09-07 ~ 2025-09-28)"
+    },
+    {
+      "k": "g24",
+      "key": "m.growth_candidates",
+      "text": "49개"
+    },
+    {
+      "k": "g25",
+      "key": "m.growth_ranked",
+      "text": "20개"
+    },
+    {
+      "k": "g26",
+      "key": "m.price_band3_range",
+      "text": "207.96~572.23"
+    },
+    {
+      "k": "g27",
+      "key": "m.price_band3_share",
+      "text": "76.5%"
+    },
+    {
+      "k": "g28",
+      "key": "m.price_band3_rating",
+      "text": "4.01★"
+    },
+    {
+      "k": "g29",
+      "key": "m.price_band2_range",
+      "text": "88.14~199.84"
+    },
+    {
+      "k": "g30",
+      "key": "m.price_band2_share",
+      "text": "22.4%"
+    },
+    {
+      "k": "g31",
+      "key": "m.price_band2_rating",
+      "text": "4.28★"
+    },
+    {
+      "k": "g32",
+      "key": "m.price_band1_range",
+      "text": "8.98~82.46"
+    },
+    {
+      "k": "g33",
+      "key": "m.price_band1_share",
+      "text": "1.1%"
+    },
+    {
+      "k": "g34",
+      "key": "m.price_band1_rating",
+      "text": "4.09★"
+    },
+    {
+      "k": "g35",
+      "key": "std.returns_service.label.missed_return_window",
+      "text": "17개"
+    },
+    {
+      "k": "g36",
+      "key": "std.returns_service.label.window_ends_before_results",
+      "text": "4개"
+    },
+    {
+      "k": "g37",
+      "key": "s.B0G39WBP1S.star",
+      "text": "4.57★"
+    },
+    {
+      "k": "g38",
+      "key": "s.B0CWL9S4L1.price",
+      "text": "90.42달러"
+    },
+    {
+      "k": "g39",
+      "key": "s.B0CWL9S4L1.star",
+      "text": "4.42★"
+    },
+    {
+      "k": "g40",
+      "key": "s.B07WYY6KKC.star",
+      "text": "4.20★"
+    },
+    {
+      "k": "g41",
+      "key": "s.B07WYY6KKC.price",
+      "text": "377.16달러"
+    },
+    {
+      "k": "g42",
+      "key": "s.B07WYY6KKC.star",
+      "text": "4.20★"
+    },
+    {
+      "k": "g43",
+      "key": "s.B07WYY6KKC.topic_neg",
+      "text": "8.3%"
+    },
+    {
+      "k": "g44",
+      "key": "s.B07WYY6KKC.dir_index",
+      "text": "-0.10"
+    },
+    {
+      "k": "g45",
+      "key": "s.B07WYY6KKC.duration_median",
+      "text": "30분"
+    },
+    {
+      "k": "g46",
+      "key": "s.B0CV3ZJ2PN.price",
+      "text": "349.00달러"
+    },
+    {
+      "k": "g47",
+      "key": "s.B0CV3ZJ2PN.star",
+      "text": "4.35★"
+    },
+    {
+      "k": "g48",
+      "key": "s.B0CV3ZJ2PN.topic_neg",
+      "text": "9.1%"
+    },
+    {
+      "k": "g49",
+      "key": "s.B0CV3ZJ2PN.dir_index",
+      "text": "-0.85"
+    },
+    {
+      "k": "g50",
+      "key": "s.B0CV3ZJ2PN.duration_median",
+      "text": "60분"
+    },
+    {
+      "k": "g51",
+      "key": "s.B0CWL9S4L1.price",
+      "text": "90.42달러"
+    },
+    {
+      "k": "g52",
+      "key": "s.B0CWL9S4L1.star",
+      "text": "4.42★"
+    },
+    {
+      "k": "g53",
+      "key": "s.B0CWL9S4L1.topic_neg",
+      "text": "5.1%"
+    },
+    {
+      "k": "g54",
+      "key": "s.B0CWL9S4L1.dir_index",
+      "text": "-0.36"
+    },
+    {
+      "k": "g55",
+      "key": "s.B0CWL9S4L1.duration_median",
+      "text": "10분"
+    },
+    {
+      "k": "g56",
+      "key": "s.B0FGB2NS3C.price",
+      "text": "579.97달러"
+    },
+    {
+      "k": "g57",
+      "key": "s.B0FGB2NS3C.topic_neg",
+      "text": "2.1%"
+    },
+    {
+      "k": "g58",
+      "key": "s.B0G39WBP1S.price",
+      "text": "347.08달러"
+    },
+    {
+      "k": "g59",
+      "key": "s.B0G39WBP1S.star",
+      "text": "4.57★"
+    },
+    {
+      "k": "g60",
+      "key": "s.B0G39WBP1S.dir_index",
+      "text": "-1.00"
+    },
+    {
+      "k": "g61",
+      "key": "s.B0G39WBP1S.topic_neg",
+      "text": "8.2%"
+    },
+    {
+      "k": "g62",
+      "key": "s.B0CV3ZJ2PN.duration_median",
+      "text": "60분"
+    },
+    {
+      "k": "g63",
+      "key": "s.B0G39WBP1S.duration_median",
+      "text": "10분"
+    },
+    {
+      "k": "g64",
+      "key": "m.top10_share_IPL",
+      "text": "96.2%"
+    },
+    {
+      "k": "g65",
+      "key": "m.top1_LLE",
+      "text": "Braun 97.4%"
+    },
+    {
+      "k": "g66",
+      "key": "m.top10_share_LLE",
+      "text": "100.0%"
+    },
+    {
+      "k": "g67",
+      "key": "s.B0FGB2NS3C.price",
+      "text": "579.97달러"
+    },
+    {
+      "k": "g68",
+      "key": "p.map.hair_reduction",
+      "text": "7.2%"
+    },
+    {
+      "k": "g69",
+      "key": "p.map.quality",
+      "text": "6.2%"
+    },
+    {
+      "k": "g70",
+      "key": "p.map.price_value",
+      "text": "5.3%"
+    },
+    {
+      "k": "g71",
+      "key": "f.durability.failure_time.median",
+      "text": "6.5개월"
+    },
+    {
+      "k": "g72",
+      "key": "p.map.hair_reduction",
+      "text": "7.2%"
+    },
+    {
+      "k": "g73",
+      "key": "p.map.quality",
+      "text": "6.2%"
+    },
+    {
+      "k": "g74",
+      "key": "p.map.price_value",
+      "text": "5.3%"
+    },
+    {
+      "k": "g75",
+      "key": "p.map.safety",
+      "text": "3.1%"
+    },
+    {
+      "k": "g76",
+      "key": "p.map.treatment_time",
+      "text": "2.7%"
+    },
+    {
+      "k": "g77",
+      "key": "p.map.skin_hair_suitability",
+      "text": "2.5%"
+    },
+    {
+      "k": "g78",
+      "key": "p.map.design",
+      "text": "2.1%"
+    },
+    {
+      "k": "g79",
+      "key": "p.map.ease_of_use",
+      "text": "2.0%"
+    },
+    {
+      "k": "g80",
+      "key": "p.map.brand_experience",
+      "text": "2.0%"
+    },
+    {
+      "k": "g81",
+      "key": "p.map.customer_service",
+      "text": "1.7%"
+    },
+    {
+      "k": "g82",
+      "key": "p.map.pain_comfort",
+      "text": "1.4%"
+    },
+    {
+      "k": "g83",
+      "key": "p.map.trust",
+      "text": "1.3%"
+    },
+    {
+      "k": "g84",
+      "key": "p.map.accessories",
+      "text": "0.6%"
+    },
+    {
+      "k": "g85",
+      "key": "p.map.pain_comfort",
+      "text": "1.4%"
+    },
+    {
+      "k": "g86",
+      "key": "a.robust.head_first",
+      "text": "81.7%"
+    },
+    {
+      "k": "g87",
+      "key": "p.gap1_neg",
+      "text": "1.48★"
+    },
+    {
+      "k": "g88",
+      "key": "p.gap1_other",
+      "text": "4.40★"
+    },
+    {
+      "k": "g89",
+      "key": "p.gap1",
+      "text": "-2.92"
+    },
+    {
+      "k": "g90",
+      "key": "p.gap2_neg",
+      "text": "1.55★"
+    },
+    {
+      "k": "g91",
+      "key": "p.gap2_other",
+      "text": "4.38★"
+    },
+    {
+      "k": "g92",
+      "key": "p.gap2",
+      "text": "-2.83"
+    },
+    {
+      "k": "g93",
+      "key": "p.gap3_neg",
+      "text": "1.68★"
+    },
+    {
+      "k": "g94",
+      "key": "p.gap3_other",
+      "text": "4.49★"
+    },
+    {
+      "k": "g95",
+      "key": "p.gap3",
+      "text": "-2.82"
+    },
+    {
+      "k": "g96",
+      "key": "f.efficacy.area_result.face_weak",
+      "text": "35개"
+    },
+    {
+      "k": "g97",
+      "key": "f.efficacy.area_result.face_works",
+      "text": "31개"
+    },
+    {
+      "k": "g98",
+      "key": "f.efficacy.area_result.legs_works",
+      "text": "68개"
+    },
+    {
+      "k": "g99",
+      "key": "f.efficacy.area_result.legs_weak",
+      "text": "17개"
+    },
+    {
+      "k": "g100",
+      "key": "f.efficacy.area_result.underarm_works",
+      "text": "65개"
+    },
+    {
+      "k": "g101",
+      "key": "f.efficacy.area_result.underarm_weak",
+      "text": "23개"
+    },
+    {
+      "k": "g102",
+      "key": "f.efficacy.area_result.bikini_intimate_works",
+      "text": "25개"
+    },
+    {
+      "k": "g103",
+      "key": "f.efficacy.area_result.bikini_intimate_weak",
+      "text": "25개"
+    },
+    {
+      "k": "g104",
+      "key": "f.efficacy.time_to_results.total",
+      "text": "55개"
+    },
+    {
+      "k": "g105",
+      "key": "f.efficacy.time_to_results.sessions_1_to_3",
+      "text": "24개"
+    },
+    {
+      "k": "g106",
+      "key": "f.efficacy.time_to_results.weeks_under_4",
+      "text": "14개"
+    },
+    {
+      "k": "g107",
+      "key": "f.efficacy.time_to_results.months_3_plus",
+      "text": "2개"
+    },
+    {
+      "k": "g108",
+      "key": "f.efficacy.reviewer_hair_type.dark.no_effect",
+      "text": "106개 중 33개(31.1%)"
+    },
+    {
+      "k": "g109",
+      "key": "f.efficacy.reviewer_hair_type.light_or_blonde.no_effect",
+      "text": "20개 중 6개(30.0%)"
+    },
+    {
+      "k": "g110",
+      "key": "f.efficacy.reviewer_skin_tone.fair_light.no_effect",
+      "text": "85개 중 30개(35.3%)"
+    },
+    {
+      "k": "g111",
+      "key": "f.efficacy.reviewer_skin_tone.medium.no_effect",
+      "text": "17개 중 1개(5.9%)"
+    },
+    {
+      "k": "g112",
+      "key": "f.efficacy.usage_frequency.every_2_3_days.no_effect",
+      "text": "70개 중 25개(35.7%)"
+    },
+    {
+      "k": "g113",
+      "key": "f.efficacy.usage_frequency.weekly.no_effect",
+      "text": "52개 중 10개(19.2%)"
+    },
+    {
+      "k": "g114",
+      "key": "f.efficacy.intensity_setting.highest.no_effect",
+      "text": "34개 중 9개(26.5%)"
+    },
+    {
+      "k": "g115",
+      "key": "f.efficacy.intensity_setting.raised_over_time.no_effect",
+      "text": "8개 중 0개(0.0%)"
+    },
+    {
+      "k": "g116",
+      "key": "std.efficacy.label.no_effect",
+      "text": "161개"
+    },
+    {
+      "k": "g117",
+      "key": "head.dir_ratio",
+      "text": "편안함 180개 대 아픔 40개(4.50배)"
+    },
+    {
+      "k": "g118",
+      "key": "std.pain_comfort.neg",
+      "text": "64개"
+    },
+    {
+      "k": "g119",
+      "key": "std.pain_comfort.label.mild_sting",
+      "text": "15개"
+    },
+    {
+      "k": "g120",
+      "key": "std.pain_comfort.label.sensitive_area_pain",
+      "text": "14개"
+    },
+    {
+      "k": "g121",
+      "key": "std.pain_comfort.label.strong_pain",
+      "text": "13개"
+    },
+    {
+      "k": "g122",
+      "key": "f.pain_skin.discomfort_area.total",
+      "text": "47개"
+    },
+    {
+      "k": "g123",
+      "key": "f.pain_skin.discomfort_area.legs_reaction",
+      "text": "19개"
+    },
+    {
+      "k": "g124",
+      "key": "f.pain_skin.discomfort_area.underarm_pain",
+      "text": "7개"
+    },
+    {
+      "k": "g125",
+      "key": "f.pain_skin.discomfort_area.bikini_intimate_pain",
+      "text": "7개"
+    },
+    {
+      "k": "g126",
+      "key": "std.pain_comfort.label.heats_up_with_use",
+      "text": "4개"
+    },
+    {
+      "k": "g127",
+      "key": "f.pain_skin.discomfort_area.tattoo_or_spot_reaction",
+      "text": "5개"
+    },
+    {
+      "k": "g128",
+      "key": "f.pain_skin.discomfort_area.tattoo_or_spot_pain",
+      "text": "4개"
+    },
+    {
+      "k": "g129",
+      "key": "f.pain_skin.shaving_prep.total",
+      "text": "20개"
+    },
+    {
+      "k": "g130",
+      "key": "f.pain_skin.shaving_prep.shaved_right_before",
+      "text": "4개"
+    },
+    {
+      "k": "g131",
+      "key": "f.pain_skin.shaving_prep.shaved_day_before",
+      "text": "4개"
+    },
+    {
+      "k": "g132",
+      "key": "f.pain_skin.shaving_prep.stubble_left",
+      "text": "3개"
+    },
+    {
+      "k": "g133",
+      "key": "f.pain_skin.user_condition.total",
+      "text": "44개"
+    },
+    {
+      "k": "g134",
+      "key": "f.pain_skin.user_condition.hormonal",
+      "text": "21개"
+    },
+    {
+      "k": "g135",
+      "key": "f.pain_skin.user_condition.ingrown_or_razor_bumps",
+      "text": "17개"
+    },
+    {
+      "k": "g136",
+      "key": "std.pain_comfort.label.high_setting_too_strong",
+      "text": "7개"
+    },
+    {
+      "k": "g137",
+      "key": "f.durability.failed_component.total",
+      "text": "78개"
+    },
+    {
+      "k": "g138",
+      "key": "f.durability.failed_component.no_flash",
+      "text": "29개"
+    },
+    {
+      "k": "g139",
+      "key": "f.durability.failed_component.skin_sensor",
+      "text": "18개"
+    },
+    {
+      "k": "g140",
+      "key": "f.durability.failed_component.no_power",
+      "text": "9개"
+    },
+    {
+      "k": "g141",
+      "key": "f.durability.failed_component.power_supply",
+      "text": "7개"
+    },
+    {
+      "k": "g142",
+      "key": "f.durability.failure_time.n",
+      "text": "46개"
+    },
+    {
+      "k": "g143",
+      "key": "f.durability.failure_time.median",
+      "text": "6.5개월"
+    },
+    {
+      "k": "g144",
+      "key": "f.durability.failure_time.bin0",
+      "text": "22개"
+    },
+    {
+      "k": "g145",
+      "key": "f.durability.failure_time.bin1",
+      "text": "17개"
+    },
+    {
+      "k": "g146",
+      "key": "std.durability.label.overheating",
+      "text": "16개"
+    },
+    {
+      "k": "g147",
+      "key": "std.durability.label.scorch_marks_smell",
+      "text": "17개"
+    },
+    {
+      "k": "g148",
+      "key": "std.durability.label.intermittent_malfunction",
+      "text": "17개"
+    },
+    {
+      "k": "g149",
+      "key": "f.durability.use_duration.total",
+      "text": "278개"
+    },
+    {
+      "k": "g150",
+      "key": "f.durability.use_duration.months_1_to_3",
+      "text": "120개"
+    },
+    {
+      "k": "g151",
+      "key": "f.durability.use_duration.under_1_month",
+      "text": "52개"
+    },
+    {
+      "k": "g152",
+      "key": "f.durability.use_duration.year_1_plus",
+      "text": "37개"
+    },
+    {
+      "k": "g153",
+      "key": "std.durability.label.early_failure",
+      "text": "24개"
+    },
+    {
+      "k": "g154",
+      "key": "f.time_use.session_minutes.n",
+      "text": "30개"
+    },
+    {
+      "k": "g155",
+      "key": "f.time_use.session_minutes.median",
+      "text": "30분"
+    },
+    {
+      "k": "g156",
+      "key": "f.time_use.session_minutes.bin4",
+      "text": "10개"
+    },
+    {
+      "k": "g157",
+      "key": "f.time_use.session_minutes.bin1",
+      "text": "9개"
+    },
+    {
+      "k": "g158",
+      "key": "std.treatment_time.label.long_session",
+      "text": "26개"
+    },
+    {
+      "k": "g159",
+      "key": "std.treatment_time.label.demanding_schedule",
+      "text": "21개"
+    },
+    {
+      "k": "g160",
+      "key": "std.treatment_time.label.large_area_slow",
+      "text": "14개"
+    },
+    {
+      "k": "g161",
+      "key": "std.treatment_time.label.longer_than_expected",
+      "text": "6개"
+    },
+    {
+      "k": "g162",
+      "key": "f.time_use.desired_improvement.total",
+      "text": "26개"
+    },
+    {
+      "k": "g163",
+      "key": "f.time_use.desired_improvement.better_goggles",
+      "text": "8개"
+    },
+    {
+      "k": "g164",
+      "key": "f.time_use.desired_improvement.larger_head",
+      "text": "5개"
+    },
+    {
+      "k": "g165",
+      "key": "f.time_use.desired_improvement.clearer_instructions",
+      "text": "4개"
+    },
+    {
+      "k": "g166",
+      "key": "f.time_use.desired_improvement.faster_flash",
+      "text": "3개"
+    },
+    {
+      "k": "g167",
+      "key": "f.time_use.comparison_reference.total",
+      "text": "115개"
+    },
+    {
+      "k": "g168",
+      "key": "f.time_use.comparison_reference.professional_treatment",
+      "text": "63개"
+    },
+    {
+      "k": "g169",
+      "key": "p.safety_text",
+      "text": "안전 부정 리뷰 79개: 두통 1개(가중 0.0%), 피부 55개(가중 2.0%), 이상 반응 없음 23개"
+    },
+    {
+      "k": "g170",
+      "key": "std.skin_safety.label.skin_burns",
+      "text": "22개"
+    },
+    {
+      "k": "g171",
+      "key": "std.skin_safety.label.rash_bumps_allergy",
+      "text": "16개"
+    },
+    {
+      "k": "g172",
+      "key": "std.skin_safety.label.irritation_redness",
+      "text": "12개"
+    },
+    {
+      "k": "g173",
+      "key": "std.skin_safety.label.pigment_scars",
+      "text": "12개"
+    },
+    {
+      "k": "g174",
+      "key": "std.skin_safety.label.eye_flash_glare",
+      "text": "11개"
+    },
+    {
+      "k": "g175",
+      "key": "f.pain_skin.discomfort_area.tattoo_or_spot_reaction",
+      "text": "5개"
+    },
+    {
+      "k": "g176",
+      "key": "std.skin_safety.label.eye_flash_glare",
+      "text": "11개"
+    },
+    {
+      "k": "g177",
+      "key": "f.time_use.desired_improvement.better_goggles",
+      "text": "8개"
+    },
+    {
+      "k": "g178",
+      "key": "m.price_band2_range",
+      "text": "88.14~199.84"
+    },
+    {
+      "k": "g179",
+      "key": "head.topic_neg",
+      "text": "7.2%"
+    },
+    {
+      "k": "g180",
+      "key": "p.map.quality",
+      "text": "6.2%"
+    },
+    {
+      "k": "g181",
+      "key": "p.gap3",
+      "text": "-2.82"
+    },
+    {
+      "k": "g182",
+      "key": "m.price_band2_range",
+      "text": "88.14~199.84"
+    },
+    {
+      "k": "g183",
+      "key": "std.efficacy.label.no_effect",
+      "text": "161개"
+    },
+    {
+      "k": "g184",
+      "key": "f.efficacy.area_result.face_weak",
+      "text": "35개"
+    },
+    {
+      "k": "g185",
+      "key": "f.efficacy.area_result.face_works",
+      "text": "31개"
+    },
+    {
+      "k": "g186",
+      "key": "p.gap2",
+      "text": "-2.83"
+    },
+    {
+      "k": "g187",
+      "key": "s.B07WYY6KKC.price",
+      "text": "377.16달러"
+    },
+    {
+      "k": "g188",
+      "key": "s.B0CWL9S4L1.price",
+      "text": "90.42달러"
+    },
+    {
+      "k": "g189",
+      "key": "f.durability.failed_component.no_flash",
+      "text": "29개"
+    },
+    {
+      "k": "g190",
+      "key": "f.durability.failed_component.skin_sensor",
+      "text": "18개"
+    },
+    {
+      "k": "g191",
+      "key": "f.durability.failure_time.median",
+      "text": "6.5개월"
+    },
+    {
+      "k": "g192",
+      "key": "std.returns_service.label.missed_return_window",
+      "text": "17개"
+    },
+    {
+      "k": "g193",
+      "key": "std.returns_service.label.window_ends_before_results",
+      "text": "4개"
+    },
+    {
+      "k": "g194",
+      "key": "f.efficacy.time_to_results.total",
+      "text": "55개"
+    },
+    {
+      "k": "g195",
+      "key": "f.efficacy.time_to_results.months_3_plus",
+      "text": "2개"
+    },
+    {
+      "k": "g196",
+      "key": "std.efficacy.neg",
+      "text": "268개"
+    },
+    {
+      "k": "g197",
+      "key": "std.efficacy.neg_pct",
+      "text": "11.0%"
+    },
+    {
+      "k": "g198",
+      "key": "std.efficacy.label.no_effect",
+      "text": "161개"
+    },
+    {
+      "k": "g199",
+      "key": "std.efficacy.label.partial_reduction",
+      "text": "41개"
+    },
+    {
+      "k": "g200",
+      "key": "std.efficacy.label.uneven_by_area",
+      "text": "36개"
+    },
+    {
+      "k": "g201",
+      "key": "f.efficacy.area_result.face_weak",
+      "text": "35개"
+    },
+    {
+      "k": "g202",
+      "key": "std.efficacy.pos",
+      "text": "432개"
+    },
+    {
+      "k": "g203",
+      "key": "std.efficacy.best",
+      "text": "PHILIPS 5.1%"
+    },
+    {
+      "k": "g204",
+      "key": "f.efficacy.time_to_results.sessions_1_to_3",
+      "text": "24개"
+    },
+    {
+      "k": "g205",
+      "key": "std.pain_comfort.neg",
+      "text": "64개"
+    },
+    {
+      "k": "g206",
+      "key": "std.pain_comfort.neg_pct",
+      "text": "4.0%"
+    },
+    {
+      "k": "g207",
+      "key": "std.pain_comfort.label.mild_sting",
+      "text": "15개"
+    },
+    {
+      "k": "g208",
+      "key": "std.pain_comfort.label.sensitive_area_pain",
+      "text": "14개"
+    },
+    {
+      "k": "g209",
+      "key": "std.pain_comfort.label.hot_burning_sensation",
+      "text": "11개"
+    },
+    {
+      "k": "g210",
+      "key": "std.pain_comfort.label.cooling_insufficient",
+      "text": "6개"
+    },
+    {
+      "k": "g211",
+      "key": "std.pain_comfort.pos",
+      "text": "186개"
+    },
+    {
+      "k": "g212",
+      "key": "std.pain_comfort.best",
+      "text": "Ulike 0.0%"
+    },
+    {
+      "k": "g213",
+      "key": "head.dir_ratio",
+      "text": "편안함 180개 대 아픔 40개(4.50배)"
+    },
+    {
+      "k": "g214",
+      "key": "std.pain_comfort.label.high_setting_too_strong",
+      "text": "7개"
+    },
+    {
+      "k": "g215",
+      "key": "std.skin_safety.neg",
+      "text": "74개"
+    },
+    {
+      "k": "g216",
+      "key": "std.skin_safety.neg_pct",
+      "text": "3.9%"
+    },
+    {
+      "k": "g217",
+      "key": "std.skin_safety.label.skin_burns",
+      "text": "22개"
+    },
+    {
+      "k": "g218",
+      "key": "std.skin_safety.label.rash_bumps_allergy",
+      "text": "16개"
+    },
+    {
+      "k": "g219",
+      "key": "std.skin_safety.label.pigment_scars",
+      "text": "12개"
+    },
+    {
+      "k": "g220",
+      "key": "f.pain_skin.discomfort_area.tattoo_or_spot_reaction",
+      "text": "5개"
+    },
+    {
+      "k": "g221",
+      "key": "std.skin_safety.pos",
+      "text": "29개"
+    },
+    {
+      "k": "g222",
+      "key": "std.skin_safety.best",
+      "text": "PHILIPS 1.2%"
+    },
+    {
+      "k": "g223",
+      "key": "std.durability.neg",
+      "text": "154개"
+    },
+    {
+      "k": "g224",
+      "key": "std.durability.neg_pct",
+      "text": "6.5%"
+    },
+    {
+      "k": "g225",
+      "key": "std.durability.label.failed_after_months",
+      "text": "35개"
+    },
+    {
+      "k": "g226",
+      "key": "std.durability.label.failure_unspecified",
+      "text": "30개"
+    },
+    {
+      "k": "g227",
+      "key": "std.durability.label.early_failure",
+      "text": "24개"
+    },
+    {
+      "k": "g228",
+      "key": "f.durability.failed_component.no_flash",
+      "text": "29개"
+    },
+    {
+      "k": "g229",
+      "key": "f.durability.failed_component.skin_sensor",
+      "text": "18개"
+    },
+    {
+      "k": "g230",
+      "key": "f.durability.failure_time.median",
+      "text": "6.5개월"
+    },
+    {
+      "k": "g231",
+      "key": "std.durability.pos",
+      "text": "64개"
+    },
+    {
+      "k": "g232",
+      "key": "std.durability.best",
+      "text": "PHILIPS 0.9%"
+    },
+    {
+      "k": "g233",
+      "key": "f.durability.failure_time.median",
+      "text": "6.5개월"
+    },
+    {
+      "k": "g234",
+      "key": "std.treatment_time.neg",
+      "text": "79개"
+    },
+    {
+      "k": "g235",
+      "key": "std.treatment_time.neg_pct",
+      "text": "3.1%"
+    },
+    {
+      "k": "g236",
+      "key": "std.treatment_time.label.long_session",
+      "text": "26개"
+    },
+    {
+      "k": "g237",
+      "key": "std.treatment_time.label.demanding_schedule",
+      "text": "21개"
+    },
+    {
+      "k": "g238",
+      "key": "std.treatment_time.label.large_area_slow",
+      "text": "14개"
+    },
+    {
+      "k": "g239",
+      "key": "std.treatment_time.label.slow_flash",
+      "text": "9개"
+    },
+    {
+      "k": "g240",
+      "key": "f.time_use.session_minutes.median",
+      "text": "30분"
+    },
+    {
+      "k": "g241",
+      "key": "std.treatment_time.pos",
+      "text": "42개"
+    },
+    {
+      "k": "g242",
+      "key": "std.treatment_time.best",
+      "text": "PHILIPS 1.3%"
+    },
+    {
+      "k": "g243",
+      "key": "f.time_use.desired_improvement.larger_head",
+      "text": "5개"
+    },
+    {
+      "k": "g244",
+      "key": "std.suitability.neg",
+      "text": "58개"
+    },
+    {
+      "k": "g245",
+      "key": "std.suitability.neg_pct",
+      "text": "2.7%"
+    },
+    {
+      "k": "g246",
+      "key": "std.suitability.label.dark_skin_tone",
+      "text": "21개"
+    },
+    {
+      "k": "g247",
+      "key": "std.suitability.label.light_fine_hair",
+      "text": "13개"
+    },
+    {
+      "k": "g248",
+      "key": "std.suitability.label.thick_coarse_hair",
+      "text": "13개"
+    },
+    {
+      "k": "g249",
+      "key": "std.suitability.label.dark_body_areas",
+      "text": "9개"
+    },
+    {
+      "k": "g250",
+      "key": "std.suitability.label.gray_white_hair",
+      "text": "6개"
+    },
+    {
+      "k": "g251",
+      "key": "p.gap2",
+      "text": "-2.83"
+    },
+    {
+      "k": "g252",
+      "key": "std.suitability.pos",
+      "text": "0개"
+    },
+    {
+      "k": "g253",
+      "key": "std.suitability.best",
+      "text": "Ulike 0.7%"
+    },
+    {
+      "k": "g254",
+      "key": "f.efficacy.reviewer_skin_tone.dark",
+      "text": "6개"
+    },
+    {
+      "k": "g255",
+      "key": "std.returns_service.neg",
+      "text": "48개"
+    },
+    {
+      "k": "g256",
+      "key": "std.returns_service.neg_pct",
+      "text": "1.7%"
+    },
+    {
+      "k": "g257",
+      "key": "std.returns_service.label.missed_return_window",
+      "text": "17개"
+    },
+    {
+      "k": "g258",
+      "key": "std.returns_service.label.no_response",
+      "text": "13개"
+    },
+    {
+      "k": "g259",
+      "key": "std.returns_service.label.refund_replace_refused",
+      "text": "8개"
+    },
+    {
+      "k": "g260",
+      "key": "std.returns_service.label.window_ends_before_results",
+      "text": "4개"
+    },
+    {
+      "k": "g261",
+      "key": "p.gap1_neg",
+      "text": "1.48★"
+    },
+    {
+      "k": "g262",
+      "key": "std.returns_service.pos",
+      "text": "20개"
+    },
+    {
+      "k": "g263",
+      "key": "std.returns_service.best",
+      "text": "PHILIPS 0.0%"
+    },
+    {
+      "k": "g264",
+      "key": "f.efficacy.time_to_results.months_3_plus",
+      "text": "2개"
+    },
+    {
+      "k": "g265",
+      "key": "m.top10_share_IPL",
+      "text": "96.2%"
+    },
+    {
+      "k": "g266",
+      "key": "f.efficacy.area_result.face_weak",
+      "text": "35개"
+    },
+    {
+      "k": "g267",
+      "key": "f.efficacy.area_result.face_works",
+      "text": "31개"
+    },
+    {
+      "k": "g268",
+      "key": "f.pain_skin.user_condition.hormonal",
+      "text": "21개"
+    },
+    {
+      "k": "g269",
+      "key": "std.suitability.label.dark_skin_tone",
+      "text": "21개"
+    },
+    {
+      "k": "g270",
+      "key": "f.efficacy.reviewer_skin_tone.dark",
+      "text": "6개"
+    },
+    {
+      "k": "g271",
+      "key": "m.top1_LLE",
+      "text": "Braun 97.4%"
+    },
+    {
+      "k": "g272",
+      "key": "m.terms_male_n",
+      "text": "0개"
+    },
+    {
+      "k": "g273",
+      "key": "m.price_band2_range",
+      "text": "88.14~199.84"
+    },
+    {
+      "k": "g274",
+      "key": "m.price_band2_share",
+      "text": "22.4%"
+    },
+    {
+      "k": "g275",
+      "key": "m.price_band2_rating",
+      "text": "4.28★"
+    },
+    {
+      "k": "g276",
+      "key": "m.price_band3_range",
+      "text": "207.96~572.23"
+    },
+    {
+      "k": "g277",
+      "key": "m.price_band3_share",
+      "text": "76.5%"
+    },
+    {
+      "k": "g278",
+      "key": "m.price_band3_rating",
+      "text": "4.01★"
+    },
+    {
+      "k": "g279",
+      "key": "s.B0CWL9S4L1.price",
+      "text": "90.42달러"
+    },
+    {
+      "k": "g280",
+      "key": "s.B0CV3ZJ2PN.price",
+      "text": "349.00달러"
+    },
+    {
+      "k": "g281",
+      "key": "s.B07WYY6KKC.price",
+      "text": "377.16달러"
+    },
+    {
+      "k": "g282",
+      "key": "p.gap3_neg",
+      "text": "1.68★"
+    },
+    {
+      "k": "g283",
+      "key": "std.suitability.label.dark_skin_tone",
+      "text": "21개"
+    },
+    {
+      "k": "g284",
+      "key": "std.suitability.label.light_fine_hair",
+      "text": "13개"
+    },
+    {
+      "k": "g285",
+      "key": "f.efficacy.area_result.face_weak",
+      "text": "35개"
+    },
+    {
+      "k": "g286",
+      "key": "std.returns_service.label.window_ends_before_results",
+      "text": "4개"
+    },
+    {
+      "k": "g287",
+      "key": "f.durability.failed_component.no_flash",
+      "text": "29개"
+    },
+    {
+      "k": "g288",
+      "key": "std.returns_service.label.no_response",
+      "text": "13개"
+    },
+    {
+      "k": "g289",
+      "key": "m.terms_common_n",
+      "text": "40개"
+    },
+    {
+      "k": "g290",
+      "key": "m.terms_common_volume",
+      "text": "1,051,188"
+    },
+    {
+      "k": "g291",
+      "key": "m.terms_female_n",
+      "text": "10개"
+    },
+    {
+      "k": "g292",
+      "key": "m.terms_female_volume",
+      "text": "355,407"
+    },
+    {
+      "k": "g293",
+      "key": "p.map.hair_reduction",
+      "text": "7.2%"
+    },
+    {
+      "k": "g294",
+      "key": "p.map.quality",
+      "text": "6.2%"
+    },
+    {
+      "k": "g295",
+      "key": "p.map.price_value",
+      "text": "5.3%"
+    },
+    {
+      "k": "g296",
+      "key": "p.map.safety",
+      "text": "3.1%"
+    },
+    {
+      "k": "g297",
+      "key": "p.map.treatment_time",
+      "text": "2.7%"
+    },
+    {
+      "k": "g298",
+      "key": "p.map.skin_hair_suitability",
+      "text": "2.5%"
+    },
+    {
+      "k": "g299",
+      "key": "p.map.customer_service",
+      "text": "1.7%"
+    },
+    {
+      "k": "g300",
+      "key": "p.gap1",
+      "text": "-2.92"
+    },
+    {
+      "k": "g301",
+      "key": "p.map.pain_comfort",
+      "text": "1.4%"
+    },
+    {
+      "k": "g302",
+      "key": "f.durability.failure_time.median",
+      "text": "6.5개월"
+    },
+    {
+      "k": "g303",
+      "key": "head.topic_neg",
+      "text": "7.2%"
+    },
+    {
+      "k": "g304",
+      "key": "std.treatment_time.label.large_area_slow",
+      "text": "14개"
+    },
+    {
+      "k": "g305",
+      "key": "f.time_use.desired_improvement.larger_head",
+      "text": "5개"
+    },
+    {
+      "k": "g306",
+      "key": "std.pain_comfort.label.high_setting_too_strong",
+      "text": "7개"
+    },
+    {
+      "k": "g307",
+      "key": "std.pain_comfort.label.sensitive_area_pain",
+      "text": "14개"
+    },
+    {
+      "k": "g308",
+      "key": "head.dir_ratio",
+      "text": "편안함 180개 대 아픔 40개(4.50배)"
+    },
+    {
+      "k": "g309",
+      "key": "std.pain_comfort.label.heats_up_with_use",
+      "text": "4개"
+    },
+    {
+      "k": "g310",
+      "key": "f.durability.failed_component.skin_sensor",
+      "text": "18개"
+    },
+    {
+      "k": "g311",
+      "key": "std.suitability.label.dark_skin_tone",
+      "text": "21개"
+    },
+    {
+      "k": "g312",
+      "key": "f.durability.failed_component.no_flash",
+      "text": "29개"
+    },
+    {
+      "k": "g313",
+      "key": "f.durability.failure_time.median",
+      "text": "6.5개월"
+    },
+    {
+      "k": "g314",
+      "key": "std.durability.label.overheating",
+      "text": "16개"
+    },
+    {
+      "k": "g315",
+      "key": "std.durability.label.scorch_marks_smell",
+      "text": "17개"
+    },
+    {
+      "k": "g316",
+      "key": "f.durability.failed_component.power_supply",
+      "text": "7개"
+    },
+    {
+      "k": "g317",
+      "key": "f.time_use.desired_improvement.better_goggles",
+      "text": "8개"
+    },
+    {
+      "k": "g318",
+      "key": "std.skin_safety.label.eye_flash_glare",
+      "text": "11개"
+    },
+    {
+      "k": "g319",
+      "key": "f.pain_skin.discomfort_area.tattoo_or_spot_reaction",
+      "text": "5개"
+    },
+    {
+      "k": "g320",
+      "key": "f.durability.failure_time.median",
+      "text": "6.5개월"
+    },
+    {
+      "k": "g321",
+      "key": "head.topic_neg",
+      "text": "7.2%"
+    },
+    {
+      "k": "g322",
+      "key": "a.robust.loo_flips",
+      "text": "5번 중 5번"
+    },
+    {
+      "k": "g323",
+      "key": "a.robust.loo_head_neg",
+      "text": "6.5%~8.0%"
+    },
+    {
+      "k": "g324",
+      "key": "a.robust.loo_low_share",
+      "text": "76.1%~87.8%"
+    },
+    {
+      "k": "g325",
+      "key": "a.robust.n",
+      "text": "2,000번"
+    },
+    {
+      "k": "g326",
+      "key": "a.robust.head_first",
+      "text": "81.7%"
+    },
+    {
+      "k": "g327",
+      "key": "a.robust.head_neg_ci",
+      "text": "5.9%~8.8%"
+    },
+    {
+      "k": "g328",
+      "key": "a.robust.weakest_dist",
+      "text": "1개 5.5%, 2개 52.8%, 3개 36.3%, 4개 5.4%"
+    },
+    {
+      "k": "g329",
+      "key": "m.growth_candidates",
+      "text": "49개"
+    },
+    {
+      "k": "g330",
+      "key": "m.growth_ranked",
+      "text": "20개"
+    },
+    {
+      "k": "g331",
+      "key": "f.durability.use_duration.months_1_to_3",
+      "text": "120개"
+    }
+  ],
+  "marker_misses": [],
+  "research_misses": [],
+  "used_claims": [
+    "ind_01",
+    "ind_02",
+    "ind_03",
+    "ind_04",
+    "ind_05",
+    "ind_06",
+    "ind_07",
+    "ind_08",
+    "ind_09",
+    "ind_10",
+    "ind_11",
+    "ind_14",
+    "ind_15",
+    "ind_16",
+    "ind_17",
+    "ind_18",
+    "ind_19",
+    "ind_20",
+    "ind_21",
+    "ind_22",
+    "ind_23",
+    "ind_24",
+    "mkt_01",
+    "mkt_02",
+    "mkt_03",
+    "mkt_04",
+    "mkt_06",
+    "mkt_08",
+    "mkt_09",
+    "mkt_12",
+    "mkt_13",
+    "reg_01",
+    "reg_02",
+    "reg_03",
+    "reg_04",
+    "reg_05",
+    "reg_06",
+    "reg_07",
+    "reg_11",
+    "reg_13",
+    "reg_15",
+    "reg_16",
+    "reg_17",
+    "reg_18",
+    "reg_20",
+    "reg_21",
+    "reg_22",
+    "tst_01",
+    "tst_02",
+    "tst_03",
+    "tst_04",
+    "tst_05",
+    "tst_06",
+    "tst_08",
+    "tst_10",
+    "tst_11",
+    "tst_12",
+    "tst_13"
+  ]
+}

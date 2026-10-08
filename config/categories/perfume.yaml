@@ -58,7 +58,11 @@ guide:
     min_volume: 30000                   # 30일 검색량이 이 값 이상인 카테고리 검색어만 후보
     exclude_words: [bag, underwear, boxer, bra, socks, shoes, organizer, clearance]   # 브랜드 이름 규칙을 통과하지만 이 카테고리 상품이 아닌 검색어
   duration_bins: [1, 3, 6, 12]          # 말한 지속 시간 구간(시간)
-  price_bands: 3                        # 시장 데이터 브랜드 표의 평균 가격으로 나눌 구간 수
+  price_bands: 3
+  value_aliases:                        # 설계 정보 글 값의 다른 표기 묶기(2026-10-09 민재님 "전부 넘기기")
+    comparison_named:
+      Black Opium: ["black opium", "YSL Black Opium", "YSL black opium", "Black Opium YSL", "YSL’s Black Opium"]
+      Lattafa: ["Lataffa"]                        # 시장 데이터 브랜드 표의 평균 가격으로 나눌 구간 수
   focus:                                # 03장 집중 분석 4개
     - id: longevity
       title: 지속력과 세기
@@ -127,7 +131,7 @@ guide:
       title: 피부와 몸 반응
       neg_labels: []
       pos_labels: []
-      safety: true                      # 07c 몸 증상 판정을 쓴다
+      safety: true                      # 07c 이상 반응 판정을 쓴다
       items: []
       search_words: ["hypoallergenic", "sensitive", "clean"]
     - id: sampling_returns
@@ -186,7 +190,7 @@ specs:
     duration: longevity_strength      # 농도와 말한 지속 시간(guide.duration_item)
     notes: scent_accuracy             # 공식 노트와 리뷰가 말한 노트(note_item)
     parts: bottle_sprayer             # 병과 분사기 사양과 망가진 부품(part_item)
-    body: skin_body                   # 몸 증상 리뷰와 표시 알레르기 성분
+    body: skin_body                   # 이상 반응 리뷰와 표시 알레르기 성분
   note_item: scent_note
   part_item: part_failure
   # 리뷰 설계 정보 scent_note 값과 공식 노트 낱말을 맞대는 규칙(소문자 부분 일치). other는 note_word를 공식 노트와 직접 맞댄다.

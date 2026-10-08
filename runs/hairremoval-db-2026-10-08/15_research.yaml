@@ -1,0 +1,750 @@
+researched_on: 2026-10-09
+category: hairremoval
+notes:
+  - "quote는 WebFetch 요약 모델이 페이지에서 옮긴 문장이다. 가이드에 쓰기 전 research.py check로 다시 열어 대조할 것."
+  - "ind_ 중 '\"title\":...,\"price\":...' 형태의 quote는 브랜드 공식 Shopify 상품 JSON(<상품 URL>.json)의 변형 이름과 가격 필드 원문이다(문장이 아니라 필드 값). 상품 이름은 같은 JSON의 title 필드에서 확인했다."
+  - "fda.innolitics.com은 FDA 510(k) 요약을 정리해 보여 주는 제3자 사이트다. 'Bench testing only. No clinical data provided.' 같은 문장은 그 사이트의 정리 문장이므로 FDA 원문(accessdata.fda.gov PDF)과 대조가 필요하다(PDF는 이번에 글자로 읽지 못함)."
+  - "시장 보고서 숫자는 대부분 전 세계 값이다. 미국만의 가정용 IPL, 레이저 제모기 시장 규모는 공개 요약에서 찾지 못했다(not_found 참고)."
+  - "amazon.com 페이지는 열지 않았다."
+claims:
+  # ---------------- 시장(market) ----------------
+  - id: mkt_01
+    area: market
+    claim_ko: 미국 가정용 뷰티 기기 시장은 2024년 74억 달러였고 2025~2032년 27% 성장해 2032년 451억 달러에 이를 것으로 본다
+    subject: P&S Intelligence
+    value: USD 7.4 billion (2024), USD 45.1 billion (2032)
+    year: 2024
+    url: https://www.psmarketresearch.com/market-analysis/us-home-use-beauty-devices-market
+    source_name: P&S Intelligence, U.S. Home-Use Beauty Devices Market 요약 페이지
+    quote: "The U.S. home-use beauty devices market size was USD 7.4 billion in 2024, and it will grow by 27% during 2025–2032, reaching USD 45.1 billion by 2032."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: mkt_02
+    area: market
+    claim_ko: 미국 가정용 뷰티 기기 시장에서 제모 기기가 2024년 25%로 가장 큰 비중이었다
+    subject: P&S Intelligence
+    value: 25%
+    year: 2024
+    url: https://www.psmarketresearch.com/market-analysis/us-home-use-beauty-devices-market
+    source_name: P&S Intelligence, U.S. Home-Use Beauty Devices Market 요약 페이지
+    quote: "The hair removal category held the largest market share, of 25%, in 2024."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: mkt_03
+    area: market
+    claim_ko: 전 세계 가정용 IPL 제모기 시장은 2024년 12억 4,800만 달러로 추정되고 2031년 17억 9,200만 달러(연평균 5.4%)로 전망된다
+    subject: QYResearch
+    value: US$ 1248 million (2024), US$ 1792 million (2031), CAGR 5.4%
+    year: 2024
+    url: https://www.giikorea.co.kr/report/qyr1861219-at-home-use-ipl-hair-removal-device-global-market.html
+    source_name: QYResearch 보고서 소개(GII 판매 페이지)
+    quote: "The global market for At-home Use IPL Hair Removal Device was estimated to be worth US$ 1248 million in 2024 and is forecast to a readjusted size of US$ 1792 million by 2031 with a CAGR of 5.4% during the forecast period 2025-2031."
+    checked_on: 2026-10-09
+    conflict_with: [mkt_04]
+  - id: mkt_04
+    area: market
+    claim_ko: 전 세계 소비자용 IPL 제모기 시장은 2025년 19억 3천만 달러에서 2035년 47억 달러로 연평균 9.31% 커질 것으로 본다
+    subject: Spherical Insights
+    value: USD 1.93 Billion (2025), USD 4.7 Billion (2035), CAGR 9.31%
+    year: 2025
+    url: https://www.sphericalinsights.com/blogs/top-20-companies-in-global-consumer-use-ipl-hair-removal-devices-market-global-share-market-size-revenue-report-2024-2035
+    source_name: Spherical Insights 블로그(보고서 요약)
+    quote: "The Global Consumer Use IPL Hair Removal Devices Market size is projected to grow from USD 1.93 Billion in 2025 to USD 4.7 Billion by 2035, at a CAGR of 9.31%"
+    checked_on: 2026-10-09
+    conflict_with: [mkt_03]
+  - id: mkt_05
+    area: market
+    claim_ko: 전 세계 가정용 레이저 기기 시장(제모 외 용도 포함)은 2025년 18억 달러이고 2034년 45억 달러로 전망된다
+    subject: Market Intelo
+    value: $1.8 billion (2025), $4.5 billion (2034)
+    year: 2025
+    url: https://marketintelo.com/report/at-home-laser-device-market
+    source_name: Market Intelo, At-Home Laser Device Market 보고서 요약
+    quote: "The global at-home laser device market is experiencing robust expansion, valued at $1.8 billion in 2025 and projected to reach $4.5 billion by 2034."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: mkt_06
+    area: market
+    claim_ko: 가정용 레이저 기기 시장에서 북미가 2025년 6억 8,840만 달러(38.2%)로 가장 큰 지역이었다
+    subject: Market Intelo
+    value: $688.4 million, 38.2%
+    year: 2025
+    url: https://marketintelo.com/report/at-home-laser-device-market
+    source_name: Market Intelo, At-Home Laser Device Market 보고서 요약
+    quote: "North America maintained its position as the dominant regional market in 2025, commanding $688.4 million or 38.2% of global market share."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: mkt_07
+    area: market
+    claim_ko: 가정용 레이저 기기 매출에서 제모 용도가 2025년 41.2%(약 7억 4,160만 달러)를 차지했다
+    subject: Market Intelo
+    value: 41.2%, $741.6 million
+    year: 2025
+    url: https://marketintelo.com/report/at-home-laser-device-market
+    source_name: Market Intelo, At-Home Laser Device Market 보고서 요약
+    quote: "Hair Removal as an application category accounted for 41.2% of market revenue in 2025 at approximately $741.6 million."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: mkt_08
+    area: market
+    claim_ko: 전 세계 제모 기기 시장(살롱용 포함)은 2024년 37억 260만 달러이고 2032년 92억 9,926만 달러로 전망된다
+    subject: Credence Research
+    value: USD 3702.6 million (2024), USD 9299.26 million (2032)
+    year: 2024
+    url: https://www.credenceresearch.com/report/hair-removal-devices-market
+    source_name: Credence Research, Hair Removal Devices Market 요약
+    quote: "Hair Removal Devices market size was valued at USD 3702.6 million in 2024 and is projected to reach USD 9299.26 million by 2032."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: mkt_09
+    area: market
+    claim_ko: 2024년 제모 기기 시장에서 가정용 기기가 45%를 차지했다
+    subject: Credence Research
+    value: 45%
+    year: 2024
+    url: https://www.credenceresearch.com/report/hair-removal-devices-market
+    source_name: Credence Research, Hair Removal Devices Market 요약
+    quote: "In 2024, at-home hair removal devices account for 45% of the total market share."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: mkt_10
+    area: market
+    claim_ko: 전 세계 레이저 제모 시장(시술 장비 중심)은 2025년 15억 달러이고 2035년 58억 달러(연평균 14.7%)로 전망된다
+    subject: Global Market Insights
+    value: USD 1.5 billion (2025), USD 5.8 billion (2035), CAGR 14.7%
+    year: 2025
+    url: https://www.gminsights.com/industry-analysis/laser-hair-removal-market
+    source_name: Global Market Insights, Laser Hair Removal Market 요약
+    quote: "The global laser hair removal market was valued at USD 1.5 billion in 2025 and is projected to grow from USD 1.7 billion in 2026 to USD 5.8 billion by 2035, expanding at a CAGR of 14.7%, according to the latest report published by Global Market Insights Inc."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: mkt_11
+    area: market
+    claim_ko: 제모 제품 시장(면도기, 크림 포함)에서 2025년 북미가 가장 큰 지역이었고 미국이 북미 매출의 78%를 차지했다
+    subject: Global Market Insights
+    value: 78%
+    year: 2025
+    url: https://www.gminsights.com/industry-analysis/hair-removal-market
+    source_name: Global Market Insights, Hair Removal Market 요약
+    quote: "North America was the largest regional market in 2025, with the U.S. accounting for 78% of regional revenue and Canada representing 22%."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: mkt_12
+    area: market
+    claim_ko: 미국 면도와 제모 시장 전체는 2024년 38억 달러를 넘을 것으로 보이나 성장은 제한적이다
+    subject: Mintel
+    value: $3.8 billion
+    year: 2024
+    url: https://store.mintel.com/report/us-shaving-and-hair-removal-market-report-2024
+    source_name: Mintel, US Shaving and Hair Removal Market Report 2024 소개 페이지
+    quote: "The US shaving and hair removal market is expected to surpass $3.8 billion in 2024, exhibiting limited growth."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: mkt_13
+    area: market
+    claim_ko: 미국 면도와 제모 시장에서 가정용 레이저 시술이 다리 제모용 대체 기기 성장에 기여한다
+    subject: Mintel
+    year: 2024
+    url: https://store.mintel.com/report/us-shaving-and-hair-removal-market-report-2024
+    source_name: Mintel, US Shaving and Hair Removal Market Report 2024 소개 페이지
+    quote: "At-home laser treatments contribute to growth of alternative devices on leg hair removal"
+    checked_on: 2026-10-09
+    conflict_with: []
+
+  # ---------------- 업계 구조(industry) ----------------
+  - id: ind_01
+    area: industry
+    claim_ko: Ulike Air 10은 공식몰에서 Air 10 Deluxe 구성이 369달러다(기본 색상은 349달러)
+    subject: Ulike
+    value: $369.00 (Air 10 Deluxe)
+    url: https://www.ulike.com/products/sapphire-air-10-ipl-hair-removal.json
+    source_name: Ulike 공식몰 상품 JSON(Ulike Air 10)
+    quote: '"title":"Air 10 Deluxe","price":"369.00"'
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_02
+    area: industry
+    claim_ko: Ulike는 Air 10 상세페이지에서 2주 만에 96% 털 감소를 주장한다(각주 표시)
+    subject: Ulike
+    value: 96%, 2 weeks
+    url: https://www.ulike.com/products/sapphire-air-10-ipl-hair-removal.json
+    source_name: Ulike 공식몰 상품 JSON(Ulike Air 10 body_html)
+    quote: "96% hair reduction in just 2 weeks"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_03
+    area: industry
+    claim_ko: Ulike의 아래 단계 모델 Air 4는 공식몰에서 259달러다
+    subject: Ulike
+    value: $259.00
+    url: https://www.ulike.com/products/sapphire-air-4-ipl-laser-hair-removal.json
+    source_name: Ulike 공식몰 상품 JSON(Ulike Air 4)
+    quote: '"title":"Purple","price":"259.00"'
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_04
+    area: industry
+    claim_ko: Ulike는 Air 4 상세페이지에서 4주 만에 95.8% 털 감소를 주장한다(각주 표시)
+    subject: Ulike
+    value: 95.8%, 4 weeks
+    url: https://www.ulike.com/products/sapphire-air-4-ipl-laser-hair-removal.json
+    source_name: Ulike 공식몰 상품 JSON(Ulike Air 4 body_html)
+    quote: "95.8% hair reduction in 4 weeks"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_05
+    area: industry
+    claim_ko: Braun Skin i-expert는 수명 발광 횟수를 40만 회로 적는다(권장 일정 기준)
+    subject: Braun
+    value: 400,000 flashes
+    url: https://us.braun.com/en-us/skin-i-expert-ipl
+    source_name: Braun 미국 공식 사이트, Skin i-expert 페이지
+    quote: "400,000 flashes. When following recommended regimen."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_06
+    area: industry
+    claim_ko: Braun Skin i-expert는 출력 단계가 10단계다
+    subject: Braun
+    value: 10 intensity levels
+    url: https://us.braun.com/en-us/female-hair-removal/ipl/skin-i-expert-ipl-pl7387
+    source_name: Braun 미국 공식 사이트, Skin i-expert PL7387 상품 페이지
+    quote: "10 intensity levels"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_07
+    area: industry
+    claim_ko: Braun은 Skin i-expert에 100일 환불 보장을 내건다
+    subject: Braun
+    value: 100-Day
+    url: https://us.braun.com/en-us/skin-i-expert-ipl
+    source_name: Braun 미국 공식 사이트, Skin i-expert 페이지
+    quote: "100-Day Money Back Guarantee"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_08
+    area: industry
+    claim_ko: Braun은 Skin i-expert로 한 달 만에 95% 털 감소를 주장한다(각주 표시)
+    subject: Braun
+    value: 95%, 1 month
+    url: https://us.braun.com/en-us/skin-i-expert-ipl
+    source_name: Braun 미국 공식 사이트, Skin i-expert 페이지
+    quote: "95% hair reduction in 1 month"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_09
+    area: industry
+    claim_ko: Braun은 자사 IPL을 피부 유형 I~V에만 쓰도록 한다
+    subject: Braun
+    value: skin tones I to V
+    url: https://us.braun.com/en-us/skin-i-expert-ipl
+    source_name: Braun 미국 공식 사이트, Skin i-expert 페이지
+    quote: "Braun's IPLs are suitable for skin tones I to V only to ensure optimal safety and efficacy."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_10
+    area: industry
+    claim_ko: Braun은 아주 옅은 금발, 붉은 털, 회색이나 흰 털에는 IPL이 가장 맞지 않는다고 적는다
+    subject: Braun
+    url: https://us.braun.com/en-us/female-hair-removal/ipl/skin-i-expert-ipl-pl7387
+    source_name: Braun 미국 공식 사이트, Skin i-expert PL7387 상품 페이지
+    quote: "IPL technology is least suitable on very blonde, red, grey or white hair where there is less melanin to absorb the light."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_11
+    area: industry
+    claim_ko: Philips Lumea IPL은 미국에서 아마존 단독으로 권장 소비자가 399.99~579.99달러에 팔리고 제품 등록 시 5년 보증을 준다
+    subject: Philips
+    value: $399.99 - $579.99
+    year: 2025
+    url: https://www.usa.philips.com/a-w/about/news/archive/standard/news/press/2025/its-not-me-its-you-an-official-breakup-letter-to-my-old-hair-removal-routine.html
+    source_name: Philips 미국 보도자료(2025)
+    quote: "Philips Lumea IPL is available now exclusively in Amazon's U.S. store with a suggested retail price of $399.99 - $579.99 and an extended five-year warranty with product registration."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_12
+    area: industry
+    claim_ko: Philips는 Lumea가 세 번 시술로 원치 않는 털의 90% 넘게 없앤다고 주장한다
+    subject: Philips
+    value: over 90%, 3 sessions
+    year: 2025
+    url: https://www.usa.philips.com/a-w/about/news/archive/standard/news/press/2025/its-not-me-its-you-an-official-breakup-letter-to-my-old-hair-removal-routine.html
+    source_name: Philips 미국 보도자료(2025)
+    quote: "In three sessions, over 90% of unwanted hair was gone."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_13
+    area: industry
+    claim_ko: Philips는 2025년 8월 SenseIQ를 단 Lumea IPL을 미국에 출시했다
+    subject: Philips
+    year: 2025
+    url: https://www.gminsights.com/industry-analysis/hair-removal-market
+    source_name: Global Market Insights, Hair Removal Market 요약
+    quote: "In August 2025, Philips launched Lumea IPL in the U.S., extending its SenseIQ-equipped at-home IPL proposition into the market."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_14
+    area: industry
+    claim_ko: Nood The Flasher 2.0은 공식몰에서 199달러다
+    subject: Nood
+    value: $199.00
+    url: https://www.trynood.com/products/the-flasher-2.json
+    source_name: Nood 공식몰 상품 JSON(The Flasher 2.0)
+    quote: '"title":"Gloss White","price":"199.00"'
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_15
+    area: industry
+    claim_ko: Nood는 Flasher 2.0으로 2~3주에 효과가 보이고 6~8주에 영구 제모가 된다고 적는다(FDA 허가 표현인 영구 감소와 다름, reg_04 참고)
+    subject: Nood
+    value: 2-3 weeks, 6-8 weeks
+    url: https://www.trynood.com/products/the-flasher-2.json
+    source_name: Nood 공식몰 상품 JSON(The Flasher 2.0 body_html)
+    quote: "Start seeing results in 2-3 weeks and permanent hair removal in 6-8 weeks."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_16
+    area: industry
+    claim_ko: Nood의 위 단계 모델 The Flasher Pro는 공식몰에서 379달러다
+    subject: Nood
+    value: $379.00
+    url: https://www.trynood.com/products/the-flasher-pro.json
+    source_name: Nood 공식몰 상품 JSON(The Flasher Pro)
+    quote: '"title":"Gloss White","price":"379.00"'
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_17
+    area: industry
+    claim_ko: Nood는 The Flasher Pro를 렌즈 두 개로 제모와 피부 관리를 함께 하는 첫 IPL 기기라고 내세운다
+    subject: Nood
+    url: https://www.trynood.com/products/the-flasher-pro.json
+    source_name: Nood 공식몰 상품 JSON(The Flasher Pro body_html)
+    quote: "Featuring two lenses, it's the first IPL device for both hair removal and skin rejuvenation."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_18
+    area: industry
+    claim_ko: DermRays는 1064nm 다이오드 레이저 V6S를 어두운 피부색용으로 따로 둔다
+    subject: DermRays
+    value: 1064nm
+    url: https://dermrays.com/products/dermrays-v6s-1064nm-diode-laser-hair-removal-at-home.json
+    source_name: DermRays 공식몰 상품 JSON(V6S)
+    quote: "DermRays V6S 1064nm Diode Laser Hair Removal Device for Darker Skin Tones"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_19
+    area: industry
+    claim_ko: DermRays의 810nm 다이오드 레이저 V4S(민감 피부용)는 공식몰에서 549달러다
+    subject: DermRays
+    value: $549.00
+    url: https://dermrays.com/products/dermrays-v4s-810nm-diode-laser-hair-removal-at-home.json
+    source_name: DermRays 공식몰 상품 JSON(V4S)
+    quote: '"title":"Default Title","price":"549.00"'
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_20
+    area: industry
+    claim_ko: SmoothSkin Pure Fit은 미국 공식몰에서 199달러다
+    subject: SmoothSkin
+    value: $199.00
+    url: https://www.smoothskin.com/products/pure-fit.json
+    source_name: SmoothSkin 미국 공식몰 상품 JSON(Pure Fit)
+    quote: '"title":"Default Title","price":"199.00"'
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_21
+    area: industry
+    claim_ko: SmoothSkin은 흰 털과 회색 털에는 IPL이 듣지 않고 붉은 털의 멜라닌도 반응하지 않는다고 적는다
+    subject: SmoothSkin
+    url: https://www.smoothskin.com/products/pure-fit
+    source_name: SmoothSkin 미국 공식몰, Pure Fit 상품 페이지
+    quote: "IPL isn't effective on white or grey hair due to lower amounts of melanin, and red hair contains a different type of melanin which isn't responsive to IPL."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_22
+    area: industry
+    claim_ko: wavytalk의 IPL 제모기 Bare It(롤러 제외 구성)은 공식몰에서 216달러다
+    subject: wavytalk
+    value: $216.00
+    url: https://www.wavytalk.com/products/bare-it-without-roller.json
+    source_name: wavytalk 공식몰 상품 JSON(Bare It Without Roller)
+    quote: '"title":"White","price":"216.00"'
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_23
+    area: industry
+    claim_ko: wavytalk Bare It은 아이스 쿨링으로 시술을 시원하고 편하게 한다고 내세운다
+    subject: wavytalk
+    url: https://www.wavytalk.com/products/bare-it-without-roller.json
+    source_name: wavytalk 공식몰 상품 JSON(Bare It Without Roller body_html)
+    quote: "Ice Cooling Care to remove hair fast, while keeping treatments cool and comfortable"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_24
+    area: industry
+    claim_ko: Tria 4X 다이오드 레이저 제모기(2세대)는 공식몰에서 599.99달러다
+    subject: Tria Beauty
+    value: $599.99
+    url: https://www.trialaser.com/products/hair-removal-laser-4x.json
+    source_name: Tria 공식몰 상품 JSON(Tria 4X Hair Removal Laser 2nd Gen)
+    quote: '"title":"Default Title","price":"599.99"'
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: ind_25
+    area: industry
+    claim_ko: Tria는 4X를 가정용 영구 털 감소로 FDA 허가를 받은 유일한 레이저라고 내세운다
+    subject: Tria Beauty
+    url: https://www.trialaser.com/products/hair-removal-laser-4x.json
+    source_name: Tria 공식몰 상품 JSON(Tria 4X body_html)
+    quote: "The only FDA-cleared laser for permanent at-home hair reduction."
+    checked_on: 2026-10-09
+    conflict_with: []
+
+  # ---------------- 규제와 표시 의무(regulation) ----------------
+  - id: reg_01
+    area: regulation
+    claim_ko: FDA 제품 코드 OHT(빛 기반 일반 판매 제모기)는 열 에너지로 모낭을 죽여 털을 없애는 일반 판매(OTC) 기기로 정의된다
+    subject: FDA
+    url: https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPCD/classification.cfm?id=OHT
+    source_name: FDA Product Classification 데이터베이스, 제품 코드 OHT
+    quote: "Over-the-counter device uses thermal energy to kill hair follicles for hair removal."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_02
+    area: regulation
+    claim_ko: OHT가 속한 21 CFR 878.4810 조항의 기기는 2등급(Class II)으로 분류된다(OHT 제출 방식은 510(k), reg_01 페이지)
+    subject: FDA, 21 CFR 878.4810
+    value: Class II
+    url: https://www.law.cornell.edu/cfr/text/21/878.4810
+    source_name: 21 CFR 878.4810 (Cornell LII)
+    quote: "(1) Class II."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_03
+    area: regulation
+    claim_ko: Ulike 제조사(Shenzhen Ulike Smart Electronics)의 IPL 제모기 UI06 계열이 2023-02-28 OHT 510(k)로 동등 판정을 받았다
+    subject: Shenzhen Ulike Smart Electronics Co., Ltd. (K223618)
+    year: 2023
+    url: https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K223618
+    source_name: FDA 510(k) 데이터베이스 K223618
+    quote: "IPL Hair Removal Device, Model(s): UI06 PN, UI06 PL, UI06 JL, UI06 BR, UI06 DB, UI06 PR, UI06 OG, UI06 RD"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_04
+    area: regulation
+    claim_ko: 510(k) 허가 문구에서 영구 털 감소는 시술을 마친 뒤 6, 9, 12개월에 다시 나는 털 수가 오래 안정적으로 줄어든 것으로 정의된다(영구 제거가 아님)
+    subject: Ulike K223618 허가 사용 목적
+    url: https://fda.innolitics.com/device/K223618
+    source_name: Innolitics 510(k) 정리 페이지 K223618
+    quote: "IPL Hair Removal Device is indicated for the removal of unwanted hair. The device is also indicated for the permanent reduction in hair regrowth, defined as the long-term, stable reduction in the number of hairs regrowing when measured at 6, 9 and 12 months after the completion of a treatment regime."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_05
+    area: regulation
+    claim_ko: Ulike K223618의 허가 대상은 피부 유형 Fitzpatrick I~V의 성인이다
+    subject: Ulike K223618
+    value: Fitzpatrick I-V
+    year: 2023
+    url: https://fda.innolitics.com/device/K223618
+    source_name: Innolitics 510(k) 정리 페이지 K223618
+    quote: "Indicated for removal of unwanted hair and permanent reduction in hair regrowth in adults with Fitzpatrick skin types I-V."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_06
+    area: regulation
+    claim_ko: 다른 OTC IPL 허가(Cosbeauty Joy Version, K173813)는 대상을 피부 유형 I~IV 성인으로 더 좁게 정했다
+    subject: Shen Zhen Cosbeauty Co., Ltd. (K173813)
+    value: Fitzpatrick I-IV
+    year: 2018
+    url: https://fda.innolitics.com/device/K173813
+    source_name: Innolitics 510(k) 정리 페이지 K173813
+    quote: "The device is used for adults with Fitzpatrick skin types I – IV."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_07
+    area: regulation
+    claim_ko: Braun Aura 9(6042)가 Cyden Limited 신청으로 2026-09-25 OHT 510(k) 동등 판정을 받았다
+    subject: Cyden Limited (K261977)
+    year: 2026
+    url: https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K261977
+    source_name: FDA 510(k) 데이터베이스 K261977
+    quote: "Braun Aura 9 (6042)"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_08
+    area: regulation
+    claim_ko: Tria 다이오드 레이저는 면도와 함께 쓰는 OTC 제모기로 허가받았다(K120737, 2012)
+    subject: Tria Beauty, Inc. (K120737)
+    year: 2012
+    url: https://fda.innolitics.com/device/K120737
+    source_name: Innolitics 510(k) 정리 페이지 K120737
+    quote: "TRIA is an over-the-counter device intended for adjunctive use with shaving for hair removal sustained with periodic treatments."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_09
+    area: regulation
+    claim_ko: 레이저 제품 제조사는 21 CFR 1000~1005(방사선 보건) 요건을 모두 지켜야 한다
+    subject: FDA
+    url: https://www.fda.gov/radiation-emitting-products/home-business-and-entertainment-products/laser-products-and-instruments
+    source_name: FDA, Laser Products and Instruments
+    quote: "Manufacturers of laser products are responsible for compliance with all applicable requirements of Title 21 Code of Federal Regulations (Subchapter J, Radiological Health) Parts 1000 through 1005."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_10
+    area: regulation
+    claim_ko: 의료용으로 쓰는 레이저 제품은 의료기기 규정도 함께 지켜야 한다
+    subject: FDA
+    url: https://www.fda.gov/radiation-emitting-products/home-business-and-entertainment-products/laser-products-and-instruments
+    source_name: FDA, Laser Products and Instruments
+    quote: "Laser products that are used for medical applications must also comply with the medical device regulations."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_11
+    area: regulation
+    claim_ko: 21 CFR 1040.10은 4등급 레이저 제품에 눈과 피부 노출을 피하라는 경고 문구를 요구한다
+    subject: FDA, 21 CFR 1040.10
+    url: https://www.law.cornell.edu/cfr/text/21/1040.10
+    source_name: 21 CFR 1040.10 (Cornell LII)
+    quote: "LASER RADIATION—AVOID EYE OR SKIN EXPOSURE TO DIRECT OR SCATTERED RADIATION"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_12
+    area: regulation
+    claim_ko: IEC 60825-1 3판과 IEC 60601-2-22 3.1판의 해당 조항을 따르는 레이저 제조사에는 FDA가 1040.10, 1040.11 해당 요건을 집행하지 않는다(Laser Notice 56, 2023년 2월)
+    subject: FDA Laser Notice No. 56
+    year: 2023
+    url: https://www.fda.gov/regulatory-information/search-fda-guidance-documents/laser-products-conformance-iec-60825-1-ed-3-and-iec-60601-2-22-ed-31-laser-notice-no-56
+    source_name: FDA 지침, Laser Notice No. 56
+    quote: "FDA does not intend to enforce the applicable requirements in 21 CFR 1040.10 and 1040.11."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_13
+    area: regulation
+    claim_ko: 의료기기 표시에는 일반인이 안전하게 쓸 수 있는 적절한 사용 설명이 있어야 한다(21 CFR 801.5)
+    subject: FDA, 21 CFR 801.5
+    url: https://www.law.cornell.edu/cfr/text/21/801.5
+    source_name: 21 CFR 801.5 (Cornell LII)
+    quote: "Adequate directions for use means directions under which the layman can use a device safely and for the purposes for which it is intended."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_14
+    area: regulation
+    claim_ko: 의료기기 라벨에는 제조사, 포장사 또는 유통사의 이름과 주소가 있어야 한다(21 CFR 801.1)
+    subject: FDA
+    url: https://www.fda.gov/medical-devices/device-labeling/general-device-labeling-requirements
+    source_name: FDA, General Device Labeling Requirements
+    quote: "The label of a device shall contain the name and place of business of manufacturer, packer, or distributor including the street address, city, state, and zip code."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_15
+    area: regulation
+    claim_ko: 모든 의료기기 라벨에는 고유 기기 식별자(UDI)가 있어야 한다(21 CFR 801.20)
+    subject: FDA, 21 CFR 801.20
+    url: https://www.law.cornell.edu/cfr/text/21/801.20
+    source_name: 21 CFR 801.20 (Cornell LII)
+    quote: "The label of every medical device shall bear a unique device identifier (UDI)"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_16
+    area: regulation
+    claim_ko: FTC는 건강 효과 주장을 뒷받침하려면 대체로 무작위 대조 인체 임상시험이 필요하다고 본다(Health Products Compliance Guidance)
+    subject: FTC
+    url: https://www.ftc.gov/business-guidance/resources/health-products-compliance-guidance
+    source_name: FTC, Health Products Compliance Guidance
+    quote: "As a general matter, substantiation of health-related benefits will need to be in the form of randomized, controlled human clinical testing to meet the competent and reliable scientific standard."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_17
+    area: regulation
+    claim_ko: FTC 광고법은 모든 제품과 주장에 적용된다
+    subject: FTC
+    url: https://www.ftc.gov/business-guidance/resources/health-products-compliance-guidance
+    source_name: FTC, Health Products Compliance Guidance
+    quote: "FTC advertising law applies to all products and claims."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_18
+    area: regulation
+    claim_ko: 업계 자율 심의기구 NAD는 VISS IPL 제모기 광고를 회사가 심의를 거부하자 FTC와 FDA에 넘겼다(2011, 영구 털 감소 등 주장 문제)
+    subject: BBB National Programs, NAD
+    year: 2011
+    url: https://bbbprograms.org/media/newsroom/decisions/nad-refers-advertising-from-viss-beauty-to-ftc-for-review
+    source_name: BBB National Programs, NAD 결정 보도
+    quote: "The National Advertising Division of the Council of Better Business Bureaus has referred advertising claims made by VISS Beauty Inc., to the Federal Trade Commission and Food and Drug Administration for further review, following the company's refusal to participate in an NAD review."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_19
+    area: regulation
+    claim_ko: 텍사스 주 레이저 제모 시설 규정은 제모에 쓰는 레이저와 IPL을 모두 레이저 제모 기기로 본다(시설 대상 규정이며 가정용 판매 규정은 아님)
+    subject: Texas Department of Licensing and Regulation
+    url: https://www.tdlr.texas.gov/las/lasfaq.htm
+    source_name: TDLR Laser Hair Removal FAQ
+    quote: "Laser hair removal devices are any lasers or IPL's used for removing hair"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_20
+    area: regulation
+    claim_ko: 리튬 전지는 UN 시험 기준 38.3을 통과한 형식이어야 운송할 수 있다(무선 제모기 배송 시, 49 CFR 173.185)
+    subject: PHMSA, 49 CFR 173.185
+    url: https://www.law.cornell.edu/cfr/text/49/173.185
+    source_name: 49 CFR 173.185 (Cornell LII)
+    quote: "Each lithium cell or battery must be of the type proven to meet the criteria in part III, sub-section 38.3 of the UN Manual of Tests and Criteria"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_21
+    area: regulation
+    claim_ko: 체계적 문헌 검토(2023)는 제조사가 포장에 눈 위험, 보안경 착용의 중요성, 접촉 센서를 우회하지 말라는 경고를 분명히 적어야 한다고 권고한다
+    subject: Clinical, Cosmetic and Investigational Dermatology (2023) 체계적 문헌 검토
+    year: 2023
+    url: https://pmc.ncbi.nlm.nih.gov/articles/PMC10752016
+    source_name: PMC, Is It Possible for Light-Based Hair Removal Home Devices to Induce Ocular Damage? Systematic Review
+    quote: "Manufacturers should provide clear instructions on the package regarding the ocular hazards, the importance of using protective goggles, and a firm warning not to overcome the contact sensors."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: reg_22
+    area: regulation
+    claim_ko: 같은 검토는 가정용 기기 노출 뒤 보고된 눈 손상 사례를 찾지 못했다
+    subject: Clinical, Cosmetic and Investigational Dermatology (2023) 체계적 문헌 검토
+    year: 2023
+    url: https://pmc.ncbi.nlm.nih.gov/articles/PMC10752016
+    source_name: PMC, Is It Possible for Light-Based Hair Removal Home Devices to Induce Ocular Damage? Systematic Review
+    quote: "We could not identify any case reported following exposure to home devices"
+    checked_on: 2026-10-09
+    conflict_with: []
+
+  # ---------------- 시험 기준(testing) ----------------
+  - id: tst_01
+    area: testing
+    claim_ko: FDA가 OHT 제품 코드에 연결한 인정 표준에는 광생물학적 안전 표준 IEC 62471(인정 번호 12-249)이 있다
+    subject: FDA, IEC 62471
+    url: https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPCD/classification.cfm?id=OHT
+    source_name: FDA Product Classification 데이터베이스, 제품 코드 OHT
+    quote: "IEC 62471 First edition 2006-07"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: tst_02
+    area: testing
+    claim_ko: IEC 62471은 레이저를 뺀 200~3000nm 비간섭 광원의 노출 한계, 측정법, 위험군 분류를 정한다
+    subject: IEC 62471:2006
+    url: https://www.evs.ee/en/iec-62471-2006
+    source_name: EVS 표준 판매 페이지, IEC 62471:2006
+    quote: "Specifically it specifies the exposure limits, reference measurement technique and classification scheme for the evaluation and control of photobiological hazards from all electrically powered incoherent broadband sources of optical radiation, including LEDs but excluding lasers, in the wavelength range from 200 nm through 3000 nm."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: tst_03
+    area: testing
+    claim_ko: IEC 60601-2-57(2023, 2판)은 미용 목적을 포함해 레이저가 아닌 200~3000nm 광원 의료기기의 기본 안전과 필수 성능 표준이다
+    subject: IEC 60601-2-57:2023
+    year: 2023
+    url: https://webstore.iec.ch/en/publication/73147
+    source_name: IEC Webstore, IEC 60601-2-57:2023
+    quote: "IEC 60601-2-57:2023 applies to basic safety and essential performance of equipment incorporating one or more sources of optical radiation in the wavelength range 200 nm to 3 000 nm, with the exception of laser radiation, and intended to create photobiological effects in humans for therapeutic, diagnostic, monitoring, and cosmetic or aesthetic applications"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: tst_04
+    area: testing
+    claim_ko: IEC 60335-2-113은 레이저나 강한 광원(ILS)을 쓰는 가정용 미용 기기 안전 표준이며 털 성장 억제 기기를 포함한다
+    subject: IEC 60335-2-113:2016+AMD1:2021
+    url: https://webstore.iec.ch/en/publication/72187
+    source_name: IEC Webstore, IEC 60335-2-113 통합판
+    quote: "appliances for control of hair growth"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: tst_05
+    area: testing
+    claim_ko: IEC 60335-2-113은 발광 면적 25cm² 미만 기기를 다룬다
+    subject: IEC 60335-2-113:2016+AMD1:2021
+    value: less than 25 cm2
+    url: https://webstore.iec.ch/en/publication/72187
+    source_name: IEC Webstore, IEC 60335-2-113 통합판
+    quote: "This standard covers appliances with a light emitting surface less than 25"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: tst_06
+    area: testing
+    claim_ko: IEC 60601-1-11은 일반인이 쓰든 의료인이 쓰든 가정 의료 환경에서 쓰는 의료 전기기기에 적용된다
+    subject: IEC 60601-1-11:2015
+    url: https://genorma.com/en/standards/iec-60601-1-11-2015
+    source_name: Genorma 표준 페이지, IEC 60601-1-11:2015
+    quote: "regardless of whether the medical electrical equipment or medical electrical system is intended for use by a lay operator or by trained healthcare personnel"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: tst_07
+    area: testing
+    claim_ko: IEC 60601-2-83은 일반인이 주로 쓰는 가정용 광치료 기기(레이저 제외)의 안전 표준이다
+    subject: IEC 60601-2-83:2019+AMD1:2022
+    url: https://webstore.iec.ch/en/publication/80973
+    source_name: IEC Webstore, IEC 60601-2-83
+    quote: "typically used by a lay operator"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: tst_08
+    area: testing
+    claim_ko: 다이오드 레이저 제모기에 해당하는 IEC 60825-1(2014)은 180nm~1mm 레이저 제품의 안전 표준이다
+    subject: IEC 60825-1:2014
+    year: 2014
+    url: https://webstore.iec.ch/en/publication/3587
+    source_name: IEC Webstore, IEC 60825-1:2014
+    quote: "IEC 60825-1:2014 is applicable to safety of laser products emitting laser radiation in the wavelength range 180 nm to 1 mm."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: tst_09
+    area: testing
+    claim_ko: Ulike K223618은 눈 안전을 IEC 62471로 시험했다
+    subject: Ulike K223618
+    url: https://fda.innolitics.com/device/K223618
+    source_name: Innolitics 510(k) 정리 페이지 K223618
+    quote: "Eye safety testing was performed according to IEC 62471 photobiological safety standards."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: tst_10
+    area: testing
+    claim_ko: Ulike K223618 허가는 벤치 시험만으로 이뤄졌고 임상 자료는 내지 않았다(Innolitics 정리 문장)
+    subject: Ulike K223618
+    url: https://fda.innolitics.com/device/K223618
+    source_name: Innolitics 510(k) 정리 페이지 K223618
+    quote: "Bench testing only. No clinical data provided."
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: tst_11
+    area: testing
+    claim_ko: OTC IPL 제모기 510(k)(K212318)는 IEC 60601-2-57을 시험 표준으로 적었다
+    subject: Dongguan Define Beauty Electronic Technology (K212318)
+    year: 2022
+    url: https://fda.innolitics.com/device/K212318
+    source_name: Innolitics 510(k) 정리 페이지 K212318
+    quote: "IEC 60601-2-57 Medical electrical equipment -Part 2-57: Particular requirements for the basic safety and essential performance of non-laser source equipment intended for therapeutic, diagnostic, monitoring and cosmetic/aesthetic use"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: tst_12
+    area: testing
+    claim_ko: Beurer IPL 8500 510(k)(K181734)는 라벨 이해와 자가 선택 시험에서 참가자 전원이 맞게 답했다고 적었다(참가자 25명)
+    subject: Home Well Trading, Ltd. (K181734)
+    value: 100%
+    year: 2018
+    url: https://fda.innolitics.com/device/K181734
+    source_name: Innolitics 510(k) 정리 페이지 K181734
+    quote: "100% of the participants had reported correct answers"
+    checked_on: 2026-10-09
+    conflict_with: []
+  - id: tst_13
+    area: testing
+    claim_ko: Beurer IPL 8500에는 피부 근접 센서와 색소 센서가 있다
+    subject: Home Well Trading, Ltd. (K181734)
+    year: 2018
+    url: https://fda.innolitics.com/device/K181734
+    source_name: Innolitics 510(k) 정리 페이지 K181734
+    quote: "skin proximity and pigmentation sensors"
+    checked_on: 2026-10-09
+    conflict_with: []
+not_found:
+  - {area: market, what: "미국만의 가정용 IPL, 레이저 제모기 시장 규모(달러)와 성장률. 공개 요약은 전 세계나 북미 값, 또는 미국 뷰티 기기 전체 값만 줌", tried: ["U.S. home use IPL hair removal devices market size", "\"U.S. laser hair removal market\" accounted USD million 2024", "United States IPL hair removal market size report", "Circana beauty devices sales hair removal IPL 2025 U.S."]}
+  - {area: market, what: "Allied Market Research 미국 레이저 제모 시장, GMI 세부 페이지(403, 410으로 열리지 않음). SourceReady 미국 뷰티 기기 수치(2024년 약 58억 달러)는 AI가 쓴 페이지라 주장에서 뺌", tried: ["alliedmarketresearch.com/u-s-laser-hair-removal-market-A22393", "gminsights.com/industry-analysis/laser-hair-removal-market/market-size", "sourceready.com us-at-home-beauty-devices-market-2025-2026-forecast"]}
+  - {area: industry, what: "INNZA, Ubroo, Oreeth, AMOTAOS, INIA, BoSidin 공식 사이트와 제품 라인. 아마존 위주 브랜드라 공식몰을 찾지 못했고 Walmart, Newegg 페이지는 열리지 않음", tried: ["INNZA IPL hair removal device official site", "Ubroo IPL hair removal official website", "BoSidin laser hair removal official site price", "INIA IPL hair removal device official website"]}
+  - {area: industry, what: "Braun Silk-expert Pro 3, Pro 5와 Skin i-expert의 미국 공식 가격(공식 페이지에 가격이 표시되지 않음, Pro 3 페이지는 스테이징 도메인에서만 열려 쓰지 않음)", tried: ["us.braun.com/en-us/female-hair-removal/ipls", "braun.com en-us Skin i-expert smart IPL price flashes"]}
+  - {area: industry, what: "Philips Lumea 미국 상품 페이지와 피부색, 털 색 안내(페이지가 스크립트로 그려져 글자를 읽지 못함)", tried: ["usa.philips.com/c-f/XC000003324", "usa.philips.com Lumea IPL 9000 Series BRI958"]}
+  - {area: industry, what: "Michael Todd Beauty의 IPL 제품(공식몰 JSON에는 소닉 더마플레이닝 기기만 있음)", tried: ["michaeltoddbeauty.com/products.json"]}
+  - {area: industry, what: "체험용 소용량, 리필, 교체 램프 같은 단계 구성. 조사한 브랜드는 본체 등급과 구성품 묶음으로만 단계를 나눔(교체 카트리지 판매는 확인하지 못함)", tried: ["ulike.com/products.json", "smoothskin.com/products.json", "trynood.com/products.json"]}
+  - {area: regulation, what: "가정용 IPL, 레이저 제모기 판매 자체를 다루는 주 법규. 찾은 주 규정(텍사스)은 제모 시설과 시술자 대상", tried: ["Texas DSHS laser hair removal program rules home use OR over-the-counter devices exempt"]}
+  - {area: regulation, what: "FDA의 가정용 제모기 소비자 안내 페이지, 510(k) 요약 PDF 원문의 경고 문구(PDF 글자를 읽지 못함)", tried: ["FDA Removing Hair Safely lasers intense pulsed light", "accessdata.fda.gov/cdrh_docs/pdf24/K241120.pdf"]}
+  - {area: testing, what: "FDA 인정 표준 데이터베이스에서 IEC 60601-2-57의 현재 인정 번호(검색 결과 페이지가 조건을 반영하지 않음)", tried: ["FDA recognized consensus standards IEC 60601-2-57 recognition number"]}

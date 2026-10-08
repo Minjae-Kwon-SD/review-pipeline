@@ -1,0 +1,573 @@
+{
+  "made_at": "2026-10-08T22:27:43+09:00",
+  "per": 150,
+  "min": 20,
+  "exclude": [
+    "overall",
+    "off_category"
+  ],
+  "items": [
+    {
+      "topic": "price_value",
+      "name_ko": "가격 대비 가치",
+      "direction": "negative",
+      "quotes": 125,
+      "sampled": 125,
+      "file": "07a_issue_samples/price_value_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 47,
+        "B0CV3ZJ2PN": 54,
+        "B0CWL9S4L1": 13,
+        "B0FGB2NS3C": 6,
+        "B0G39WBP1S": 5
+      },
+      "by_star_group": {
+        "neg": 88,
+        "neu": 26,
+        "pos": 11
+      }
+    },
+    {
+      "topic": "price_value",
+      "name_ko": "가격 대비 가치",
+      "direction": "positive",
+      "quotes": 111,
+      "sampled": 111,
+      "file": "07a_issue_samples/price_value_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 27,
+        "B0CV3ZJ2PN": 22,
+        "B0CWL9S4L1": 29,
+        "B0FGB2NS3C": 11,
+        "B0G39WBP1S": 22
+      },
+      "by_star_group": {
+        "neu": 3,
+        "pos": 106,
+        "neg": 2
+      }
+    },
+    {
+      "topic": "brand_experience",
+      "name_ko": "브랜드 경험",
+      "direction": "negative",
+      "quotes": 64,
+      "sampled": 64,
+      "file": "07a_issue_samples/brand_experience_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 21,
+        "B0CV3ZJ2PN": 24,
+        "B0CWL9S4L1": 15,
+        "B0G39WBP1S": 4
+      },
+      "by_star_group": {
+        "neg": 49,
+        "neu": 9,
+        "pos": 6
+      }
+    },
+    {
+      "topic": "brand_experience",
+      "name_ko": "브랜드 경험",
+      "direction": "positive",
+      "quotes": 118,
+      "sampled": 118,
+      "file": "07a_issue_samples/brand_experience_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 27,
+        "B0CV3ZJ2PN": 22,
+        "B0CWL9S4L1": 33,
+        "B0FGB2NS3C": 12,
+        "B0G39WBP1S": 24
+      },
+      "by_star_group": {
+        "neu": 3,
+        "pos": 114,
+        "neg": 1
+      }
+    },
+    {
+      "topic": "trust",
+      "name_ko": "신뢰",
+      "direction": "negative",
+      "quotes": 40,
+      "sampled": 40,
+      "file": "07a_issue_samples/trust_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 17,
+        "B0CV3ZJ2PN": 18,
+        "B0CWL9S4L1": 4,
+        "B0FGB2NS3C": 1
+      },
+      "by_star_group": {
+        "neg": 29,
+        "neu": 9,
+        "pos": 2
+      }
+    },
+    {
+      "topic": "trust",
+      "name_ko": "신뢰",
+      "direction": "positive",
+      "quotes": 8,
+      "sampled": 0,
+      "file": null,
+      "only_other": true
+    },
+    {
+      "topic": "shipping",
+      "name_ko": "배송",
+      "direction": "negative",
+      "quotes": 4,
+      "sampled": 0,
+      "file": null,
+      "only_other": true
+    },
+    {
+      "topic": "shipping",
+      "name_ko": "배송",
+      "direction": "positive",
+      "quotes": 15,
+      "sampled": 0,
+      "file": null,
+      "only_other": true
+    },
+    {
+      "topic": "customer_service",
+      "name_ko": "고객 응대",
+      "direction": "negative",
+      "quotes": 52,
+      "sampled": 52,
+      "file": "07a_issue_samples/customer_service_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 22,
+        "B0CV3ZJ2PN": 20,
+        "B0CWL9S4L1": 10
+      },
+      "by_star_group": {
+        "neg": 36,
+        "neu": 11,
+        "pos": 5
+      }
+    },
+    {
+      "topic": "customer_service",
+      "name_ko": "고객 응대",
+      "direction": "positive",
+      "quotes": 20,
+      "sampled": 20,
+      "file": "07a_issue_samples/customer_service_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 7,
+        "B0CV3ZJ2PN": 10,
+        "B0CWL9S4L1": 1,
+        "B0G39WBP1S": 2
+      },
+      "by_star_group": {
+        "neg": 3,
+        "pos": 14,
+        "neu": 3
+      }
+    },
+    {
+      "topic": "packaging",
+      "name_ko": "포장",
+      "direction": "negative",
+      "quotes": 3,
+      "sampled": 0,
+      "file": null,
+      "only_other": true
+    },
+    {
+      "topic": "packaging",
+      "name_ko": "포장",
+      "direction": "positive",
+      "quotes": 26,
+      "sampled": 26,
+      "file": "07a_issue_samples/packaging_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 1,
+        "B0CV3ZJ2PN": 13,
+        "B0CWL9S4L1": 6,
+        "B0FGB2NS3C": 3,
+        "B0G39WBP1S": 3
+      },
+      "by_star_group": {
+        "neg": 1,
+        "neu": 3,
+        "pos": 22
+      }
+    },
+    {
+      "topic": "quality",
+      "name_ko": "품질",
+      "direction": "negative",
+      "quotes": 156,
+      "sampled": 150,
+      "file": "07a_issue_samples/quality_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 57,
+        "B0CV3ZJ2PN": 44,
+        "B0CWL9S4L1": 46,
+        "B0FGB2NS3C": 1,
+        "B0G39WBP1S": 2
+      },
+      "by_star_group": {
+        "neg": 83,
+        "neu": 36,
+        "pos": 31
+      }
+    },
+    {
+      "topic": "quality",
+      "name_ko": "품질",
+      "direction": "positive",
+      "quotes": 65,
+      "sampled": 65,
+      "file": "07a_issue_samples/quality_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 6,
+        "B0CV3ZJ2PN": 18,
+        "B0CWL9S4L1": 13,
+        "B0FGB2NS3C": 8,
+        "B0G39WBP1S": 20
+      },
+      "by_star_group": {
+        "neg": 4,
+        "pos": 59,
+        "neu": 2
+      }
+    },
+    {
+      "topic": "hair_reduction",
+      "name_ko": "제모 효과",
+      "direction": "negative",
+      "quotes": 286,
+      "sampled": 150,
+      "file": "07a_issue_samples/hair_reduction_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 54,
+        "B0CV3ZJ2PN": 44,
+        "B0CWL9S4L1": 36,
+        "B0FGB2NS3C": 5,
+        "B0G39WBP1S": 11
+      },
+      "by_star_group": {
+        "neg": 62,
+        "neu": 48,
+        "pos": 40
+      }
+    },
+    {
+      "topic": "hair_reduction",
+      "name_ko": "제모 효과",
+      "direction": "positive",
+      "quotes": 444,
+      "sampled": 150,
+      "file": "07a_issue_samples/hair_reduction_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 39,
+        "B0CV3ZJ2PN": 42,
+        "B0CWL9S4L1": 37,
+        "B0FGB2NS3C": 17,
+        "B0G39WBP1S": 15
+      },
+      "by_star_group": {
+        "neg": 29,
+        "neu": 46,
+        "pos": 75
+      }
+    },
+    {
+      "topic": "pain_comfort",
+      "name_ko": "통증과 시술 편안함",
+      "direction": "negative",
+      "quotes": 64,
+      "sampled": 64,
+      "file": "07a_issue_samples/pain_comfort_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 27,
+        "B0CV3ZJ2PN": 15,
+        "B0CWL9S4L1": 20,
+        "B0FGB2NS3C": 2
+      },
+      "by_star_group": {
+        "neg": 20,
+        "neu": 14,
+        "pos": 30
+      }
+    },
+    {
+      "topic": "pain_comfort",
+      "name_ko": "통증과 시술 편안함",
+      "direction": "positive",
+      "quotes": 201,
+      "sampled": 150,
+      "file": "07a_issue_samples/pain_comfort_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 28,
+        "B0CV3ZJ2PN": 48,
+        "B0CWL9S4L1": 33,
+        "B0FGB2NS3C": 13,
+        "B0G39WBP1S": 28
+      },
+      "by_star_group": {
+        "neg": 14,
+        "neu": 17,
+        "pos": 119
+      }
+    },
+    {
+      "topic": "safety",
+      "name_ko": "안전",
+      "direction": "negative",
+      "quotes": 84,
+      "sampled": 84,
+      "file": "07a_issue_samples/safety_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 44,
+        "B0CV3ZJ2PN": 18,
+        "B0CWL9S4L1": 18,
+        "B0FGB2NS3C": 1,
+        "B0G39WBP1S": 3
+      },
+      "by_star_group": {
+        "neg": 36,
+        "neu": 18,
+        "pos": 30
+      }
+    },
+    {
+      "topic": "safety",
+      "name_ko": "안전",
+      "direction": "positive",
+      "quotes": 37,
+      "sampled": 37,
+      "file": "07a_issue_samples/safety_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 4,
+        "B0CV3ZJ2PN": 11,
+        "B0CWL9S4L1": 7,
+        "B0FGB2NS3C": 7,
+        "B0G39WBP1S": 8
+      },
+      "by_star_group": {
+        "pos": 34,
+        "neg": 2,
+        "neu": 1
+      }
+    },
+    {
+      "topic": "design",
+      "name_ko": "디자인과 형태",
+      "direction": "negative",
+      "quotes": 47,
+      "sampled": 47,
+      "file": "07a_issue_samples/design_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 7,
+        "B0CV3ZJ2PN": 18,
+        "B0CWL9S4L1": 16,
+        "B0FGB2NS3C": 5,
+        "B0G39WBP1S": 1
+      },
+      "by_star_group": {
+        "neg": 12,
+        "neu": 10,
+        "pos": 25
+      }
+    },
+    {
+      "topic": "design",
+      "name_ko": "디자인과 형태",
+      "direction": "positive",
+      "quotes": 55,
+      "sampled": 55,
+      "file": "07a_issue_samples/design_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 5,
+        "B0CV3ZJ2PN": 18,
+        "B0CWL9S4L1": 10,
+        "B0FGB2NS3C": 10,
+        "B0G39WBP1S": 12
+      },
+      "by_star_group": {
+        "neg": 3,
+        "neu": 3,
+        "pos": 49
+      }
+    },
+    {
+      "topic": "ease_of_use",
+      "name_ko": "사용 편의",
+      "direction": "negative",
+      "quotes": 44,
+      "sampled": 44,
+      "file": "07a_issue_samples/ease_of_use_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 23,
+        "B0CV3ZJ2PN": 15,
+        "B0CWL9S4L1": 3,
+        "B0FGB2NS3C": 2,
+        "B0G39WBP1S": 1
+      },
+      "by_star_group": {
+        "neg": 12,
+        "neu": 12,
+        "pos": 20
+      }
+    },
+    {
+      "topic": "ease_of_use",
+      "name_ko": "사용 편의",
+      "direction": "positive",
+      "quotes": 176,
+      "sampled": 150,
+      "file": "07a_issue_samples/ease_of_use_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 29,
+        "B0CV3ZJ2PN": 40,
+        "B0CWL9S4L1": 31,
+        "B0FGB2NS3C": 21,
+        "B0G39WBP1S": 29
+      },
+      "by_star_group": {
+        "neg": 9,
+        "neu": 13,
+        "pos": 128
+      }
+    },
+    {
+      "topic": "treatment_time",
+      "name_ko": "시술 시간과 관리 부담",
+      "direction": "negative",
+      "quotes": 79,
+      "sampled": 79,
+      "file": "07a_issue_samples/treatment_time_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 13,
+        "B0CV3ZJ2PN": 32,
+        "B0CWL9S4L1": 30,
+        "B0FGB2NS3C": 1,
+        "B0G39WBP1S": 3
+      },
+      "by_star_group": {
+        "neg": 29,
+        "neu": 27,
+        "pos": 23
+      }
+    },
+    {
+      "topic": "treatment_time",
+      "name_ko": "시술 시간과 관리 부담",
+      "direction": "positive",
+      "quotes": 47,
+      "sampled": 47,
+      "file": "07a_issue_samples/treatment_time_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 5,
+        "B0CV3ZJ2PN": 17,
+        "B0CWL9S4L1": 5,
+        "B0FGB2NS3C": 5,
+        "B0G39WBP1S": 15
+      },
+      "by_star_group": {
+        "neg": 1,
+        "neu": 1,
+        "pos": 45
+      }
+    },
+    {
+      "topic": "skin_hair_suitability",
+      "name_ko": "피부색과 털 색 적합성",
+      "direction": "negative",
+      "quotes": 65,
+      "sampled": 65,
+      "file": "07a_issue_samples/skin_hair_suitability_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 32,
+        "B0CV3ZJ2PN": 23,
+        "B0CWL9S4L1": 7,
+        "B0FGB2NS3C": 2,
+        "B0G39WBP1S": 1
+      },
+      "by_star_group": {
+        "neg": 38,
+        "neu": 9,
+        "pos": 18
+      }
+    },
+    {
+      "topic": "skin_hair_suitability",
+      "name_ko": "피부색과 털 색 적합성",
+      "direction": "positive",
+      "quotes": 14,
+      "sampled": 0,
+      "file": null,
+      "only_other": true
+    },
+    {
+      "topic": "accessories",
+      "name_ko": "구성품과 보관 케이스",
+      "direction": "negative",
+      "quotes": 20,
+      "sampled": 20,
+      "file": "07a_issue_samples/accessories_negative.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 11,
+        "B0CV3ZJ2PN": 7,
+        "B0CWL9S4L1": 2
+      },
+      "by_star_group": {
+        "neg": 2,
+        "neu": 6,
+        "pos": 12
+      }
+    },
+    {
+      "topic": "accessories",
+      "name_ko": "구성품과 보관 케이스",
+      "direction": "positive",
+      "quotes": 41,
+      "sampled": 41,
+      "file": "07a_issue_samples/accessories_positive.jsonl",
+      "only_other": false,
+      "by_asin": {
+        "B07WYY6KKC": 8,
+        "B0CV3ZJ2PN": 7,
+        "B0CWL9S4L1": 7,
+        "B0FGB2NS3C": 1,
+        "B0G39WBP1S": 18
+      },
+      "by_star_group": {
+        "neg": 1,
+        "neu": 3,
+        "pos": 37
+      }
+    }
+  ]
+}

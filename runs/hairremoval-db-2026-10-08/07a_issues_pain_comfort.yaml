@@ -1,0 +1,118 @@
+topic: pain_comfort
+directions:
+  negative:                       # 부정과 혼합 인용 64개 표본에서 찾은 불만 이슈
+    labels:
+      - id: strong_pain
+        name_ko: 심하게 아픔
+        name_en: Strong pain
+        include: 쏠 때 많이 아프다, 감전된 것 같다, 못 참겠다처럼 통증을 세게 말하는 말(부위, 단계, 열감 언급 없이)
+        exclude: 조금, 약간, 참을 만하다는 단서가 붙으면 mild_sting. 특정 부위를 말하면 sensitive_area_pain, 뜨겁다거나 타는 느낌이면 hot_burning_sensation
+        examples:
+          - {review_id: R1MF4HYB0A1PZ4, quote: "Hurts like crazy!!"}
+          - {review_id: R2MTD56P6QYOUV, quote: "it feels like you getting electrocuted"}
+        approx_count: 15
+      - id: mild_sting
+        name_ko: 약간 따끔함, 기대만큼 무통은 아님
+        name_en: Mild sting, not fully painless
+        include: 조금 아프다, 가끔 따끔하다, 고무줄 튕기는 느낌이다, 참을 만하지만 무통은 아니다, 광고나 기대만큼 무통은 아니다, 처음 몇 번 조금 아팠다
+        exclude: 통증을 세게 말하면 strong_pain. 특정 부위를 말하면 sensitive_area_pain, 높은 단계 때문이라고 하면 high_setting_too_strong
+        examples:
+          - {review_id: R54TAWF3OMWUZ, quote: "it hurts a bit, but I can tolerate it"}
+          - {review_id: R71QMDUFW94NP, quote: "It was not as painless as I expected."}
+        approx_count: 17
+      - id: sensitive_area_pain
+        name_ko: 민감한 부위나 특정 지점에서 아픔
+        name_en: Pain on sensitive areas or spots
+        include: 비키니, 겨드랑이, 허벅지 안쪽, 은밀한 부위, 문신이나 주근깨 위, 몇몇 지점처럼 부위를 짚어 그곳이 아프다는 말
+        exclude: 부위 언급 없이 아프다는 말은 strong_pain이나 mild_sting. 그 부위 때문에 단계를 낮춰야 한다는 말이 함께 있으면 high_setting_too_strong을 두 번째로 단다
+        examples:
+          - {review_id: RITH3PKTVCDLZ, quote: "I tried the bikini line, but it was too painful"}
+          - {review_id: RH6TJCI4IIG0W, quote: "it hurt especially in the underarm area"}
+        approx_count: 13
+      - id: hot_burning_sensation
+        name_ko: 쏠 때 뜨겁거나 타는 느낌
+        name_en: Hot or burning sensation during flash
+        include: 발광할 때 뜨겁다, 타는 듯하다, 피부 온도가 오른다(quema, burn sensation)처럼 쏘는 순간의 열감
+        exclude: 오래 쓸수록 뜨거워진다는 말은 heats_up_with_use. 냉각이 소용없다는 말이 함께 있으면 cooling_insufficient. 화상 상처처럼 남는 피부 손상은 주제 밖(safety)
+        examples:
+          - {review_id: R4FJL7WTJVD4I, quote: "extremely hot during the flash"}
+          - {review_id: RXVJQ54HKI82D, quote: "quema al contacto con la piel"}
+        approx_count: 12
+      - id: heats_up_with_use
+        name_ko: 오래 쓸수록 뜨거워지고 더 아픔
+        name_en: Gets hotter and more painful during a session
+        include: 한 번 시술하는 도중 시간이 지나면 창이 뜨거워진다, 오래 대고 있을수록 더 아프다
+        exclude: 처음부터 쏠 때 뜨겁다는 말은 hot_burning_sensation. 기기 몸체가 과열돼 멈추는 고장은 주제 밖(quality)
+        examples:
+          - {review_id: R7SOJ6E4622H6, quote: "this gets so hot & hurts so bad after awhile"}
+          - {review_id: R1S9BDFJ2QUC6U, quote: "It doesn't hurt at all but can get hot if you're using it for a long time"}
+        approx_count: 4
+      - id: cooling_insufficient
+        name_ko: 냉각 기능이 약하거나 없음
+        name_en: Cooling ineffective or missing
+        include: 냉각 기능이 차이를 못 만든다, 기대보다 약하다, 높은 단계에서는 덜 듣는다, 냉각이 있는데도 뜨겁다, 냉각 기능이 없다
+        exclude: 냉각 언급 없이 뜨겁다는 말은 hot_burning_sensation
+        examples:
+          - {review_id: R2WKT4WSARV4ZP, quote: "I don't think the cooling makes a difference."}
+          - {review_id: RI2SISRQKM0M2, quote: "The cooling function is also not as effective as I expected"}
+        approx_count: 6
+      - id: high_setting_too_strong
+        name_ko: 높은 단계가 세서 낮춰야 함
+        name_en: Higher settings too strong
+        include: 높은 단계(레벨 9, SHR 등)가 세다, 한 단계 낮춰야 편하다, 낮게 시작하라, 가장 낮은 단계에서도 아프다
+        exclude: 단계 언급 없이 아프다는 말은 strong_pain이나 mild_sting
+        examples:
+          - {review_id: R2OFSAFX7C3B4C, quote: "I use level 9 but have a high tolerance. However, sometimes the level 9 is strong so just be careful."}
+          - {review_id: R1ZBU72UNF0W78, quote: "It isnt as painless as I had hoped, it always felt like it was one setting too high for my comfort."}
+        approx_count: 6
+    other_approx_count: 2
+    notes: "부위, 단계, 냉각, 열감 언급이 세기 표현(심함, 약간)과 한 인용에 함께 나오는 일이 많아, 원인(부위, 단계, 냉각, 열감)을 먼저 달고 세기 라벨은 원인 언급이 없을 때만 다는 순서가 필요함. 털이 남아 따끔하다(R1E3UY1UREFRJ5)는 2개뿐이라 mild_sting에 넣음. 'it burned so bad'(RK36OGAJTBQZI, 문신 위)처럼 감각인지 피부 손상인지 애매한 인용이 있음."
+  positive:                       # 긍정과 혼합 인용 150개 표본에서 찾은 칭찬 이슈
+    labels:
+      - id: painless_comfortable
+        name_ko: 아프지 않고 편함
+        name_en: Painless and comfortable
+        include: 아프지 않다, 무통이다, 전혀 못 느끼겠다, 편하다, 부드럽다(no duele, sans douleur 포함)
+        exclude: 거의, 조금, 참을 만하다는 단서나 따뜻한 느낌이 붙으면 mild_tolerable. 냉각 덕분이라고 하면 cooling_comfort, 다른 제모 방법과 비교하면 less_painful_than_alternatives
+        examples:
+          - {review_id: R2CS77XLUVIHJ1, quote: "doesnt hurt at all"}
+          - {review_id: R1R8M6N2N5OPF, quote: "no duele para nada"}
+        approx_count: 65
+      - id: mild_tolerable
+        name_ko: 거의 무통이거나 참을 만함
+        name_en: Nearly painless or tolerable
+        include: 거의 아프지 않다, 통증이 적다, 그렇게 나쁘지 않다, 따끔하지만 참을 만하다, 따뜻한 느낌 정도다(gentle warmth, sensación leve de calor)
+        exclude: 단서 없이 아프지 않다는 말은 painless_comfortable. 높은 단계나 민감한 부위에서도 괜찮다는 말은 fine_on_high_setting_or_sensitive_area
+        examples:
+          - {review_id: RKY1PUP3AY62W, quote: "minimal pain"}
+          - {review_id: R1P2GZ35WDN7RQ, quote: "the mild stinging is tolerable"}
+        approx_count: 30
+      - id: cooling_comfort
+        name_ko: 냉각 기능 덕분에 편함
+        name_en: Cooling makes it comfortable
+        include: 냉각 기능, 차가운 느낌, 아이스 쿨링 덕분에 편하다, 덜 아프다, 냉각 기능이 좋다(se siente frío 포함)
+        exclude: 냉각 언급 없이 아프지 않다는 말은 painless_comfortable
+        examples:
+          - {review_id: R21RTTZMPSBND7, quote: "The cooling mechanisms are great, making the removal much less painful."}
+          - {review_id: R1YD46GOLUQL4B, quote: "no duele, se siente frío"}
+        approx_count: 36
+      - id: less_painful_than_alternatives
+        name_ko: 왁싱이나 병원 레이저보다 덜 아픔
+        name_en: Less painful than waxing or salon laser
+        include: 왁싱, 피부과나 살롱 레이저, 전에 쓴 다른 제모기보다 덜 아프다, 걱정했던 것보다 아프지 않다며 다른 기기 경험과 비교
+        exclude: 비교 대상 없이 아프지 않다는 말은 painless_comfortable. 다른 기기와 비교하며 냉각 덕분이라고 하면 cooling_comfort를 함께 단다
+        examples:
+          - {review_id: R8Y3GAPALYC2D, quote: "waayyyyyy more comfortable than professional laser hair removal"}
+          - {review_id: R25ARWS7R12PWW, quote: "no duele para nada a comparación de la depilación con cera"}
+        approx_count: 10
+      - id: fine_on_high_setting_or_sensitive_area
+        name_ko: 높은 단계나 민감한 부위에서도 괜찮음
+        name_en: Fine even on high settings or sensitive areas
+        include: 가장 높은 단계에서도 아프지 않다, 비키니나 민감한 피부에도 참을 만하다, 다리와 팔은 최대 단계로 쓴다
+        exclude: 단계나 부위 언급 없이 아프지 않다는 말은 painless_comfortable이나 mild_tolerable
+        examples:
+          - {review_id: R2SGB5RDA6XE9, quote: "The pain is super minor on the highest setting (2/10)"}
+          - {review_id: R9M2I2AM5KP6S, quote: "the sting from the razor is very tolerable, even on bikini region"}
+        approx_count: 8
+    other_approx_count: 2
+    notes: "fine_on_high_setting_or_sensitive_area는 표본의 5% 언저리(어림 8개)라 합칠지 판단이 필요함. painless_comfortable과 mild_tolerable은 '거의', '조금' 같은 단서 유무로만 갈려 경계가 얇음. 쓰다 보면 익숙해진다(R3TZKM2YDQ6CJZ, R1NJL66X5FEMYR)는 2개뿐이라 기타."

@@ -12,12 +12,13 @@
 # 근거와 한계: docs/compare_v2_result.md, docs/decisions_log.md.
 
 limits:
-  bulk_concurrency: 4          # 대량 작업자(sonnet) 동시 실행
+  bulk_concurrency: 4          # 대량 작업자(sonnet) 동시 실행(이슈 라벨, 설계 정보 추출)
+  tagging_concurrency: 8       # 태깅(05_tagging) review-tagger 동시 실행. 2026-10-09 민재님 "상위 작성자 4, 태깅 8" 추천대로
   worker_max_batches: 4        # 작업자 하나가 맡는 묶음
   worker_max_reviews: 200      # 작업자 하나가 맡는 리뷰
   retry_per_batch: 2           # 묶음마다 재시도
   retry_per_stage: 4           # 단계 전체 재시도 호출
-  top_writers: 1               # 상위 모델 작성자
+  top_writers: 4               # 상위 모델 작성자 동시 실행(예: 주제별 issue-labeler). 2026-10-09 1에서 4로
   top_auditors: 1              # 상위 모델 감사자(작성이 끝난 뒤, 동시에 돌리지 않음)
   review_lenses: 4             # 검토형(같은 큰 자료를 여럿이 봄) 읽기 전용 렌즈. 매번 민재님 허락
 

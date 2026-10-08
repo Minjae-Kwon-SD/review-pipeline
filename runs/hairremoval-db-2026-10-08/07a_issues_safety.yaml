@@ -1,0 +1,109 @@
+topic: safety
+directions:
+  negative:
+    labels:
+      - id: skin_burns
+        name_ko: 화상이나 물집
+        name_en: Burns or blisters
+        include: 기기 때문에 피부가 데었다, 화상, 화상 자국, 물집이 생겼다는 말(설명서대로 했는데도, 문신 위, 패치 테스트에서 등). 화상 뒤 남은 자국이나 반점도 화상을 함께 말하면 여기
+        exclude: 화상이라는 말 없이 검은 반점, 색이 빠짐, 흉터만 말하면 pigment_scars. 화상을 입을까 무섭다는 걱정만 있으면 safety_worry. 쏘는 순간 뜨겁다, 따갑다는 감각은 주제 밖(pain_comfort)
+        examples:
+          - {review_id: R2XB776KKIF8N9, quote: "I followed the instructions and this left blisters on my leg."}
+          - {review_id: RELGENLC93HHW, quote: "by the next day it was clear my legs were covered in 1st degree burns"}
+        approx_count: 22
+      - id: irritation_redness
+        name_ko: 자극, 붉음, 가려움
+        name_en: Irritation, redness or itching
+        include: 시술 뒤 피부가 자극받았다, 붉어졌다, 가렵다, 건조해졌다, 민감한 피부에는 맞지 않는다는 말(눈에 띄는 돋음이나 발진 없이 느낌과 붉음만)
+        exclude: 발진, 뾰루지, 여드름 같은 돋음, 모낭염, 인그로운 헤어, 알레르기 반응을 말하면 rash_bumps_allergy. 데었다는 말은 skin_burns
+        examples:
+          - {review_id: R1EO3673L9E28J, quote: "the skin irritation is massive"}
+          - {review_id: R2A2KTRD9JXJMV, quote: "the skin became red"}
+        approx_count: 11
+      - id: rash_bumps_allergy
+        name_ko: 발진, 뾰루지, 알레르기 반응
+        name_en: Rash, bumps or allergic reaction
+        include: 시술 뒤 발진, 두드러기 같은 돋음, 여드름이나 뾰루지, 모낭염, 인그로운 헤어가 늘었다, 알레르기(히스타민) 반응이 났다는 말. 가려운 발진처럼 가려움과 함께 나와도 돋음이 있으면 여기
+        exclude: 돋음 없이 자극, 붉음, 가려움만이면 irritation_redness. 면도 트러블(인그로운 헤어)이 줄었다는 좋은 변화는 주제 밖(hair_reduction)
+        examples:
+          - {review_id: R3FCCN4LLKDHW9, quote: "Gave me horrible folliculitis."}
+          - {review_id: R395GW5N4JJ51A, quote: "had an allergic reaction the second time"}
+        approx_count: 17
+      - id: pigment_scars
+        name_ko: 색소 변화나 흉터
+        name_en: Pigment change or scarring
+        include: 피부에 검은 반점이나 자국이 생겼다, 색이 빠지거나 하얗게 됐다, 변색, 흉터가 남았다, 이상한 점이 생겼다는 말(화상이라는 말 없이)
+        exclude: 데었다, 화상 자국이라고 말하면 skin_burns. 발진이나 뾰루지는 rash_bumps_allergy
+        examples:
+          - {review_id: R1JRAFD7P6L9RA, quote: "ended up with dark spots on my shins"}
+          - {review_id: R7MKP02LZBEEJ, quote: "it removed pigment from my skin"}
+        approx_count: 11
+      - id: eye_flash_glare
+        name_ko: 눈부심이나 눈 안전
+        name_en: Flash glare or eye safety
+        include: 섬광이 너무 밝다, 보안경을 써도 빛이 들어온다, 눈에 해롭다, 두통이나 편두통, 시야 이상이 생겼다, 광고에 보안경 없이 쓰는 모습이 나온다는 말
+        exclude: 보안경이 구성에 들어 있는지는 주제 밖(accessories). 빛이 창 가장자리나 피부 밖으로 새어 다른 곳에 닿는다는 말은 기타
+        examples:
+          - {review_id: R30MIFDD6J1ZO9, quote: "The flash is still bright even with glasses on and sometimes does cause me headaches after use"}
+          - {review_id: R300NO6N06MI3R, quote: "the light is so harmful for the eyes"}
+        approx_count: 11
+      - id: safety_worry
+        name_ko: 안전 불안이나 쓰기 무서움
+        name_en: Safety doubts or fear of use
+        include: 실제 피부 반응을 말하지 않고 안전한지 의심된다, 위험하다, 쓰기 무섭다, 데일까 겁났다, 민감한 부위에 안전하지 않다, 상자에 경고 문구가 없다는 말
+        exclude: 실제로 데었거나 반응이 났다는 말이 같은 인용에 있으면 그 반응 라벨(예 데고 나서 무섭다는 skin_burns). 눈에 대한 걱정은 eye_flash_glare
+        examples:
+          - {review_id: RL9O9OQ9H76YI, quote: "Is this safe? I have my doubts"}
+          - {review_id: RUOAHQVG9XL2W, quote: "me da miedo seguir usándola"}
+        approx_count: 9
+    other_approx_count: 3
+    notes: "기타는 빛이 창 가장자리나 피부 밖으로 새어 나감(R371G2D4TFMWP7, R1NZEC16D5FOP4, 2개로 5% 미만)과 뜻이 불분명한 인용(R2822A4GNWEGMX). \"it burns\", \"my skin started to burn\"처럼 쏘는 순간 감각(pain_comfort)인지 화상인지 애매한 인용이 몇 개 있어 skin_burns로 셌다."
+  positive:
+    labels:
+      - id: no_irritation
+        name_ko: 자극이나 피부 반응 없음
+        name_en: No irritation or skin reaction
+        include: 시술 뒤 자극, 붉음, 뾰루지, 건조함, 색소 침착 같은 피부 반응이 전혀 없었다, 피부에 순하다는 말
+        exclude: 민감한 피부인데도 괜찮다고 하면 sensitive_skin_ok. 반응이 조금 있었지만 가라앉았다, 심하지 않았다면 mild_transient. 통증이 없다는 부분은 주제 밖(pain_comfort)
+        examples:
+          - {review_id: R3BL6AS4FEBLLB, quote: "no skin irritation"}
+          - {review_id: R1FJKJ53PU9AIM, quote: "I had no discomfort, redness, or irritation at all after using it for the first time"}
+        approx_count: 20
+      - id: mild_transient
+        name_ko: 반응이 가볍거나 금방 가라앉음
+        name_en: Mild or short-lived reaction
+        include: 자극이나 돋음이 있었지만 가벼웠다, 하루 만에 또는 회차를 거듭하며 가라앉았다는 말(혼합 인용의 칭찬 부분)
+        exclude: 반응이 전혀 없었다는 말만 있으면 no_irritation. 가라앉았다는 말 없이 반응만 있으면 칭찬이 아니므로 기타
+        examples:
+          - {review_id: R3AL97KPZJMJ8N, quote: "I did get some stippling on the back of my legs where I used it, but it cleared up quickly"}
+          - {review_id: R3OHPHFT97EWOM, quote: "I had minor irritation when going over a specific area more than twice in one session, but nothing major."}
+        approx_count: 4
+      - id: sensitive_skin_ok
+        name_ko: 민감한 피부에도 괜찮음
+        name_en: Fine for sensitive skin
+        include: 민감한 피부에 맞다, 민감한 피부인데도 문제없었다, 민감한 피부에도 안전하다는 말
+        exclude: 민감한 피부 언급 없이 반응이 없었다는 말은 no_irritation
+        examples:
+          - {review_id: R1CKMAYZ81JWU, quote: "perfect for sensitive skin"}
+          - {review_id: R2VNEBLNFNGTZ1, quote: "I have sensitive skin but have zero issues using on highest setting, 9."}
+        approx_count: 3
+      - id: safety_feature
+        name_ko: 피부 센서 같은 안전 기능 덕에 안심
+        name_en: Reassured by safety features
+        include: 피부 센서, 피부에 완전히 닿아야 발광하는 기능 같은 기기 기능 덕분에 더 안전하다, 안심된다는 말. 무엇 덕분인지 인용 안에 다 나오지 않아도 어떤 것이 더 안전하게 만든다(makes it feel safer)는 말이면 여기
+        exclude: 이유 없이 안전하다고만 하면 feels_safe. 센서가 어두운 부위에서 발광을 막는 불만은 주제 밖(skin_hair_suitability)
+        examples:
+          - {review_id: R3I3HAIAL07C08, quote: "The built-in skin sensor adds peace of mind"}
+          - {review_id: R2W8VLAJW7Q7LS, quote: "only goes off when fully on skin so it’s safe to use"}
+        approx_count: 6
+      - id: feels_safe
+        name_ko: 쓰기에 안전하다는 느낌
+        name_en: Feels safe to use
+        include: 이유나 기능을 말하지 않고 안전하다, 안심하고 쓴다는 말
+        exclude: 기기 기능이 이유로 붙으면 safety_feature. 피부 반응이 없었다는 구체적인 말은 no_irritation
+        examples:
+          - {review_id: R2JZ3KC3BU5VN8, quote: "Safe and effective"}
+          - {review_id: R3INSXQHFCICQI, quote: "I feel safe using this as well"}
+        approx_count: 3
+    other_approx_count: 1
+    notes: "기타 1개는 칭찬 부분이 없는 혼합 인용(R2EAVV0BSKGP5V, 인그로운 헤어 흉터). R1CW4J5AG5XQYJ(반응 없었지만 비키니 부위만 하루 자극)는 mild_transient로 셌고 no_irritation과 경계가 가깝다."

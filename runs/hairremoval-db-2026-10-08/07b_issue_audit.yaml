@@ -1,0 +1,10 @@
+audit:
+  stage: issues
+  run: hairremoval-db-2026-10-08
+  checked: 150
+  findings:
+    - {review_id: R6D06EC30JD9M, topic: hair_reduction, direction: positive, status: FAIL, finding: "인용 'crece poco el bello'가 털이 덜 자란다는 구체적 변화라 reduced_regrowth만 맞음. works_general은 털이 어떻게 변했는지 말하지 않을 때만 쓰고, exclude가 구체적으로 말하면 reduced_regrowth라고 정함", required_action: "labels를 [reduced_regrowth]로(works_general 빼기)"}
+    - {review_id: R2L84EJIUTMX78, topic: ease_of_use, direction: positive, status: FAIL, finding: "'Very easy to use with the auto program'은 쉽다는 칭찬 하나를 자동 모드 덕으로 돌린 말임. easy_to_use의 exclude가 자동 모드를 지목하면 handy_modes라고 정함. 두 칭찬이 따로 있는 인용이 아님", required_action: "labels를 [handy_modes]로(easy_to_use 빼기)"}
+    - {review_id: R3PMKM8B44XQ44, topic: customer_service, direction: negative, status: UNVERIFIED, finding: "'And can't return.'에는 반품 기한이 지났다는 말이 없음. 기한 경과(missed_return_window)인지, 거절(refund_replace_refused)인지, 효과 확인 전 기한 종료(window_ends_before_results)인지 인용만으로 정할 수 없음", required_action: "원문 앞 문맥에서 반품 못 하는 이유를 확인하고 라벨 정하기. 이유가 안 나오면 other"}
+    - {review_id: R18XD7IXMDFRMP, topic: treatment_time, direction: negative, status: UNVERIFIED, finding: "'That seemed like too much work for me.'에는 횟수나 일정(이틀마다, 주 2~3회, 몇 달) 언급이 없음. demanding_schedule인지 한 번 시술이 길다는 long_session인지 인용만으로 정할 수 없음", required_action: "원문 앞 문장에서 'that'이 무엇을 가리키는지 확인. 일정 이야기면 그대로, 한 번 시술 시간이면 long_session, 둘 다 아니면 other"}
+    - {review_id: R1TFLY7XTQVMG4, topic: brand_experience, direction: positive, status: UNVERIFIED, finding: "'I would recommend if you are wanting to do a large area, go to a professional first'는 두 가지로 읽힘. 넓은 부위는 전문 시술을 먼저 받고 기기를 쓰라는 조건부 추천(conditional_recommend)일 수도, 전문 시술을 권하는 말일 수도 있음. 뒤쪽이면 conditional_recommend의 exclude에 따라 부정 방향 go_professional이고, 긍정 방향에는 칭찬 부분이 없어 other가 됨", required_action: "원문에서 기기를 추천하는지 확인. 추천하면 그대로, 아니면 긍정 방향 라벨을 other로"}

@@ -1,0 +1,430 @@
+category: hairremoval
+version: draft
+sample_reviews: 125               # 03_schema_sample.csv 실제 행 수(ASIN 5개 x 25개). 영어 아닌 리뷰(es, fr) 포함
+topics:
+  # ---------------- 브랜드 쪽(공통 그대로) ----------------
+  - id: price_value
+    name_ko: 가격 대비 가치
+    side: B
+    common_id: price_value
+    definition: 가격, 용량 대비 값어치, 할인
+    include:
+      - 비싸다, 싸다, 할인이나 프라임데이 가격
+      - 값어치가 있다, 돈 낭비다, 돈값을 못 한다
+      - 가격에 비해 수명이 짧다는 평가(가격을 함께 말할 때)
+      - 살롱 시술, 면도기, 왁싱에 드는 돈과 비교해 아낀다, 더 든다
+      - 충전기 같은 것을 따로 사느라 돈이 더 든다
+    exclude:
+      - 효과가 없다는 말 자체는 hair_reduction
+      - 고장 자체는 quality
+      - 살롱에 안 가도 되는 편리함(돈 이야기 없이)은 ease_of_use
+    examples:
+      - {review_id: R2PNK8AF14NNHH, quote: "Great value and beginner friendly!"}
+      - {review_id: R2JM1I6ZLDWZ00, quote: "Way too expensive for its useful life"}
+    confusions: >-
+      "돈 낭비다(Don't waste your money)"는 price_value negative로 달고, 그 이유(효과 없음, 고장)는 해당 주제에 따로 단다.
+      "$300짜리가 넉 달 만에 고장"처럼 가격과 고장이 한 문장이면 고장은 quality, 가격 대비 실망은 price_value에 각각 단다.
+      "살롱에 가지 않아도 되고 돈도 아낀다"에서 돈 부분은 price_value, 집에서 하는 편리함은 ease_of_use.
+    sentiment_notes: >-
+      "비싸지만 값어치가 있다(pricey, but value for the money)"는 positive. "비싸다"만 있고 값어치 판단이 없으면 negative.
+      할인 덕에 괜찮았다, 할인 없었으면 실망했을 것이라는 말은 mixed.
+    evidence_count: 30
+
+  - id: brand_experience
+    name_ko: 브랜드 경험
+    side: B
+    common_id: brand_experience
+    definition: 브랜드 호감, 재구매, 추천 의향
+    include:
+      - 추천한다, 추천하지 않는다, 사지 마라, 후회하지 않을 것이다
+      - 다시 사겠다, 다시 안 산다, 상위 모델로 바꿨다
+      - 같은 브랜드의 이전 기기 경험, 다른 브랜드(INIA, Braun 등)와 비교
+      - 브랜드 이름에 대한 호감이나 신뢰(독일 공학, 유명 브랜드)
+      - 브랜드 광고에 대한 불만
+    exclude:
+      - 판매자나 고객센터의 응대는 customer_service
+      - 특정 속성 없이 제품이 좋다, 나쁘다는 overall
+      - 광고 내용과 실제가 다르다는 말은 trust 또는 해당 속성 주제
+    examples:
+      - {review_id: R3I65RNL68LQ79, quote: "I definitely recommend getting the product as long as you are ready to commit"}
+      - {review_id: R3VWK5YR08SZQD, quote: "I will never buy this razor and am ashamed of the company"}
+    confusions: >-
+      "Highly recommend", "La recomiendo 100%", "Don't buy it"처럼 추천이나 구매 권유가 있으면 brand_experience. 같은 리뷰의 "I love it" 같은 전체 평은 overall에 따로 단다.
+      "얼굴에는 추천하지 않는다"처럼 부위를 한정한 비추천은 brand_experience가 아니라 그 이유가 되는 주제(효과면 hair_reduction, 통증이면 pain_comfort, 눈부심이면 safety).
+      고객센터가 잘해 줘서 상위 모델로 바꿨다는 말은 응대는 customer_service, 업그레이드 구매는 brand_experience.
+    sentiment_notes: >-
+      다른 브랜드와 비교하며 "둘 다 좋다, 저쪽이 조금 낫다"는 mixed. 이전 기기 이력만 말하면 neutral.
+    evidence_count: 24
+
+  - id: trust
+    name_ko: 신뢰
+    side: B
+    common_id: trust
+    definition: 리스팅과 실물 차이, 정품 여부 의심
+    include:
+      - 새 제품으로 샀는데 쓴 흔적이 있다
+      - 설명에 적힌 구성(헤드 4개)과 받은 구성(3개)이 다르다
+      - 사진과 같다, 설명대로 왔다
+      - 광고가 과장이다, 오해하게 만든다, 협찬 리뷰가 아니라고 밝힘
+      - 반품이 잦은 상품 표시나 부정 리뷰를 보고 의심했다
+    exclude:
+      - 광고와 다른 점이 특정 속성(효과, 시술 시간)이면 그 속성은 hair_reduction, treatment_time
+      - 상품 자체의 고장이나 불량은 quality
+    examples:
+      - {review_id: RA584ASEV75UM, quote: "igual que en la foto"}
+      - {review_id: R1IDEF8M2BTYAL, quote: "venía con claros signos de haber sido utilizado anteriormente"}
+    confusions: >-
+      "광고에는 10분이라더니 45분 걸린다"는 시간은 treatment_time. 같은 리뷰에 "this product is a bit misleading"처럼 광고 자체를 믿을 수 없다는 말이 따로 있으면 그 문장으로 trust도 단다.
+      설명과 다른 구성품은 trust, 구성품이 원래 없거나 있다는 평가(보안경이 안 들어 있다)는 accessories.
+      중고처럼 왔고 케이블도 망가졌다면 중고 흔적은 trust, 망가진 케이블은 quality.
+    sentiment_notes: 사진과 같다, 설명대로 다 왔다는 positive. 의심했지만 실제로 써 보니 된다는 mixed.
+    evidence_count: 6
+
+  - id: shipping
+    name_ko: 배송
+    side: B
+    common_id: shipping
+    definition: 배송 속도, 파손, 누락
+    include:
+      - 빨리 왔다, 늦게 왔다, 받기까지 문제가 많았다
+      - 제품이 좋은 상태로 도착했다, 망가져 도착했다(llegó en buen estado)
+      - 해외(페루 등)로 받는 절차가 길었다
+    exclude:
+      - 상자나 포장재 상태는 packaging
+      - 구성품이 다 들어 있는지는 accessories, 설명과 다르면 trust
+    examples:
+      - {review_id: RIS7ZS62PR674, quote: "Also I ordered it in the morning, then I got it in the afternoon."}
+      - {review_id: R25H686ZWIWEWC, quote: "It was a huge ordeal to get this in my hands"}
+    confusions: >-
+      "Llegó algo maltratado el empaque, pero el contenido se encuentra todo bien"처럼 상자가 상했다는 말은 packaging, 내용물이 멀쩡하게 왔다는 말은 shipping.
+      "Llego excelente"처럼 도착 상태만 좋다고 하면 shipping positive.
+    sentiment_notes: 배송 사실만 적고 평가가 없으면 neutral.
+    evidence_count: 6
+
+  - id: customer_service
+    name_ko: 고객 응대
+    side: B
+    common_id: customer_service
+    definition: 반품, 환불, 판매자 응대
+    include:
+      - 고객센터, 판매자, 채팅 지원의 응답 여부와 태도
+      - 환불, 교체, 무상 교환을 받았다, 못 받았다
+      - 반품 기한이 짧다, 기한이 지나 반품을 못 한다
+      - 보증(warranty)이 있는지 모르겠다
+    exclude:
+      - 고장 자체는 quality
+      - 반품 이유가 되는 효과, 통증 등은 각 주제
+    examples:
+      - {review_id: R10EBCR0NL97P2, quote: "Customer Service team was quick to respond and offered several options to rectify the issue."}
+      - {review_id: R29LTEY2ULGDKX, quote: "their customer service won’t answer the phone"}
+    confusions: >-
+      "효과가 4주 뒤에 나온다는데 반품은 4주 안에만 된다"는 반품 정책 평가라 customer_service negative.
+      "반품하겠다, 환불받고 싶다"처럼 계획만 있고 절차나 응대 경험이 없으면 customer_service를 달지 않고 그 이유 주제만 단다(questions 1 참고).
+      고장 났지만 무상 교체를 받았다는 말은 고장은 quality, 교체는 customer_service positive.
+    sentiment_notes: 환불이나 교체 요청을 보냈다는 사실만 있고 결과가 없으면 neutral.
+    evidence_count: 13
+
+  - id: packaging
+    name_ko: 포장
+    side: B
+    common_id: packaging
+    definition: 상자, 선물 포장 상태
+    include:
+      - 제품 상자나 포장이 좋다, 상했다(empaque)
+      - 선물하기 좋은 포장
+      - 튼튼한 제품 상자에 계속 보관한다
+    exclude:
+      - 기기와 함께 오는 보관 케이스, 파우치는 accessories
+      - 제품이 망가져 도착한 것은 shipping
+    examples:
+      - {review_id: R1NE4QCL8NG603, quote: "It was well-packaged"}
+      - {review_id: R1YNXHIQAI3M3A, quote: "Llegó algo maltratado el empaque"}
+    confusions: >-
+      "the box is really nice, includes a razor and storage pouch"는 상자가 좋다는 부분은 packaging, 면도기와 파우치가 들어 있다는 부분은 accessories.
+      "estuche(케이스)가 더 예뻤으면"은 accessories, "caja donde llega(배송 온 상자)"의 외관은 packaging. 한 문장에 둘이 섞이면 요구하는 대상(케이스)을 따라 accessories.
+    sentiment_notes: 포장 사실만 적으면 neutral.
+    evidence_count: 7
+
+  # ---------------- 제품 쪽 ----------------
+  - id: overall
+    name_ko: 전체 만족도
+    side: P
+    common_id: overall
+    definition: 특정 속성 없이 제품이 좋다, 나쁘다
+    include:
+      - 좋다, 최고다, 사랑한다, 최악이다, 실망했다(이유 없이)
+      - 올해 최고의 쇼핑, 최고의 투자
+      - 첫인상이 좋다, 전반적으로 만족한다
+      - 한두 단어 리뷰(Excelente, Super buena, It's good)
+    exclude:
+      - 이유가 붙은 평가는 그 이유 주제(효과, 고장, 통증 등)
+      - 추천, 재구매 의향은 brand_experience
+    examples:
+      - {review_id: R2SHOGGCY8H1V5, quote: "My greatest shop of 2025"}
+      - {review_id: R27D9PZ4ENRQ81, quote: "it has been very mediocre"}
+    confusions: >-
+      "Does not work"처럼 짧아도 '작동, 효과'를 말하면 overall이 아니라 hair_reduction.
+      "Disappointing" 제목 뒤에 "Stopped working"이 오면 제목은 overall이 아니라 이유 주제(quality)로만 단다. 이유가 하나도 없을 때만 overall.
+      "Overall, this product is great and definitely lessens the hair"처럼 총평과 효과가 함께 있으면 둘 다 단다.
+    sentiment_notes: >-
+      별점과 무관하게 글로 판단한다. "아직 모르겠지만 기대된다"는 neutral, "좋지만 기대만큼은 아니다"는 mixed.
+    evidence_count: 40
+
+  - id: quality
+    name_ko: 품질
+    side: P
+    common_id: quality
+    definition: 만듦새, 내구성, 불량, 변질
+    include:
+      - 만듦새가 좋다, 고급스럽다, 튼튼하다, 재질이 약해 보인다
+      - 몇 번, 몇 달 만에 고장, 켜지지 않음, 발광이 안 됨
+      - 갈수록 센서가 나빠져 발광이 약해짐(기기 이상)
+      - 조사창 안의 검은 얼룩, 탄내, 사파이어 창에 김이 서려 빛이 안 나감
+      - 충전기나 케이블 불량, 받았을 때 나쁜 상태(mala condición)
+      - 기기 자체가 뜨거워진다
+    exclude:
+      - 털이 안 줄었다는 의미의 "안 된다"는 hair_reduction
+      - 피부에 닿아야 발광하는 사용 방식의 불편은 ease_of_use
+      - 피부색 때문에 센서가 발광을 막는 것은 skin_hair_suitability
+    examples:
+      - {review_id: R371G2D4TFMWP7, quote: "The quality of Ulike is superb."}
+      - {review_id: RTZ6KQ6T15U3J, quote: "Stopped working after 4 months."}
+    confusions: >-
+      "Does not work"만 있으면 hair_reduction. 켜지지 않는다, 발광이 멈췄다, 고장(stopped working, no volvió a encender)처럼 기계가 안 돌아간다는 말이 있을 때만 quality.
+      "Barely works after a few months of use"처럼 시간이 지나며 약해졌다는 말은 기기 수명이라 quality.
+      얼룩과 탄내가 나서 쓰기 무섭다면 얼룩과 탄내는 quality, 무섭다(위험하다)는 안전 우려는 safety에도 단다.
+      창에 닿는 피부가 뜨겁다, 탈 것 같다는 감각은 pain_comfort, 기기 몸체가 뜨거워진다는 말은 quality.
+    sentiment_notes: 품질이 좋아 보인다(feels high quality)처럼 첫인상만이어도 positive.
+    evidence_count: 28
+
+  - id: hair_reduction
+    name_ko: 제모 효과
+    side: P
+    common_id: performance
+    definition: 털이 줄거나 느리게, 가늘게 자라는지, 효과가 몇 주 만에 보이는지, 부위마다 효과가 다른지
+    include:
+      - 털이 줄었다, 덜 자란다, 가늘고 옅어졌다, 효과가 없다(Does not work, no funciona)
+      - 효과가 보이기까지 걸린 기간, 광고보다 오래 걸린다
+      - 부위별 효과 차이(다리와 겨드랑이는 되는데 얼굴은 안 된다)
+      - 면도 횟수가 줄었다
+      - 털이 줄어 피부가 매끈해지고 면도 트러블(인그로운 헤어, 면도 발진)이 줄었다
+      - 오히려 털이 더 났다
+      - 꾸준히 써야 효과가 난다는 조건(효과 문장 안에서)
+    exclude:
+      - 피부색, 털 색 때문에 된다, 안 된다는 skin_hair_suitability
+      - 한 번 시술에 걸리는 시간과 일정을 지키는 부담은 treatment_time
+      - 기기 고장으로 못 쓴 것은 quality
+    examples:
+      - {review_id: R380XCNEXZQ8JX, quote: "this has substantially helped slow my hair growth and make the hair much finer"}
+      - {review_id: R2CTHNZB9TFPR2, quote: "but I do not see any different."}
+    confusions: >-
+      "맞는 피부와 털인데도 안 됐다(despite having ideal fair skin and dark hair)"처럼 자기 유형을 배경으로만 말하면 hair_reduction만 단다.
+      "금발에는 안 된다, 진한 털이 아니면 사지 마라"처럼 유형에 따라 효과가 갈린다고 말하면 skin_hair_suitability.
+      "몇 주 지나야 효과가 보인다"는 hair_reduction, "그 일정을 계속할 시간이 없다, 너무 자주 해야 한다"는 treatment_time.
+      면도 트러블이 줄었다는 좋은 변화는 hair_reduction, 기기 때문에 생긴 붉음, 따가움, 뾰루지는 safety.
+    sentiment_notes: >-
+      "줄긴 했지만 여전히 매일 면도해야 한다", "어떤 부위는 되고 어떤 부위는 안 된다"는 mixed.
+      "아직 결과가 없다, 몇 주 더 써 보겠다"처럼 판단을 미루면 neutral. 기대한 기간이 지났는데 변화가 없다고 하면 negative.
+    evidence_count: 85
+
+  - id: pain_comfort
+    name_ko: 통증과 시술 편안함
+    side: P
+    common_id: null
+    definition: 빛을 쏠 때의 아픔, 따끔함, 열감과 냉각 기능 덕분의 편안함
+    include:
+      - 아프지 않다, 거의 무통, 따뜻한 느낌, 고무줄 튕기는 정도
+      - 쏠 때 아프다, 따끔하다, 뜨겁다, 탈 것 같다(감각)
+      - 냉각 기능, 차가운 느낌 덕분에 편하다
+      - 부위(비키니, 겨드랑이, 문신 근처, 여드름 위)나 면도 안 한 털 때문에 아프다
+      - 높은 단계에서도 아프지 않다
+    exclude:
+      - 시술 뒤 남는 피부 반응(붉음, 가려움, 뾰루지, 화상 상처)은 safety
+      - 손에 쥐는 느낌은 design
+    examples:
+      - {review_id: R94M6H5QBSPH, quote: "There is zero pain or burn even when I am using the highest setting!"}
+      - {review_id: R300NO6N06MI3R, quote: "the shots became super painful"}
+    confusions: >-
+      "No pain no burn", "se siente frío"처럼 쏘는 순간의 감각이면 pain_comfort. "quemaduras(화상)", "burned my skin"처럼 피부 손상이면 safety.
+      "It's comfortable to use"는 쏠 때의 감각을 말하면 pain_comfort, 쥐는 느낌이나 조작을 말하면 design 또는 ease_of_use. 문맥이 없으면 pain_comfort.
+      "기기가 뜨거워져 쉬게 해야 한다"는 피부에 닿는 창이 뜨거워 불편하면 pain_comfort, 기기 과열 고장이면 quality.
+    sentiment_notes: >-
+      "대부분 아프지 않은데 비키니 부위는 아팠다"는 mixed. "통증이 없어 처음엔 안 되는 줄 알았다"는 통증 평가로 positive.
+    evidence_count: 30
+
+  - id: safety
+    name_ko: 안전
+    side: P
+    common_id: safety
+    definition: 피부나 몸의 반응, 자극, 알레르기, 안전 우려
+    include:
+      - 시술 뒤 붉음, 가려움, 뾰루지, 염증, 알레르기 반응, 자극(me irrita la piel)
+      - 피부가 붉어지지 않았다, 트러블이 없었다, 민감한 피부에도 괜찮다
+      - 화상 위험, 면도를 잘 해야 화상을 피한다
+      - 섬광이 눈에 해롭다, 눈부시다, 두통이 난다, 보안경을 꼭 써라
+      - 빛이 창 가장자리로 새어 원치 않는 곳에 닿는다
+      - 피부색 센서 덕분에 더 안전하다
+      - 기기 얼룩, 탄내 때문에 위험하다, 쓰기 무섭다
+    exclude:
+      - 쏘는 순간의 통증과 열감은 pain_comfort
+      - 면도 트러블이 줄었다는 좋은 변화는 hair_reduction
+      - 보안경이 구성에 들어 있는지는 accessories
+    examples:
+      - {review_id: R3BL6AS4FEBLLB, quote: "no skin irritation"}
+      - {review_id: RYYOMX94IOUX0, quote: "I developed a significant allergic-type skin reaction"}
+    confusions: >-
+      "I wonder why they did not include a goggle? the light is so harmful for the eyes"는 보안경이 없다는 부분은 accessories, 눈에 해롭다는 부분은 safety.
+      "광고에 보안경 없이 쓰는 모습만 나온다"는 눈 안전 우려라 safety로 단다.
+      "No recomiendo la cara, el destello es muy fuerte para los ojos"는 눈부심 이유라 safety.
+      피부색 센서가 어두운 부위에서 발광을 막는다는 불만은 skin_hair_suitability, 그 센서 덕에 안전하다는 말은 safety.
+    sentiment_notes: >-
+      "보안경을 꼭 써라"처럼 주의만 주면 neutral. 자극이 있었지만 일정을 줄이니 괜찮았다는 mixed.
+      반응이 없었다는 말은 positive.
+    evidence_count: 19
+
+  - id: design
+    name_ko: 디자인과 형태
+    side: P
+    common_id: design
+    definition: 모양, 색, 크기, 휴대성
+    include:
+      - 색(보라색 등), 세련된 모양, 예쁘다
+      - 무게, 가볍다, 무겁다, 손에 쥐기 좋다, 쥐기 어렵다
+      - 조사창과 헤드 크기, 부위별 교체 헤드(attachments) 구성
+      - 전원 코드 길이, 무선이 아니라 꽂아 써야 한다
+      - 작동 소음(팬 소리)
+    exclude:
+      - 만듦새와 재질 강도는 quality
+      - 조작, 설명서, 모드, 센서 반응은 ease_of_use
+      - 헤드가 작아 오래 걸린다는 시간 불만은 treatment_time
+      - 보관 케이스, 파우치는 accessories
+    examples:
+      - {review_id: RSUV6NFE2R8FB, quote: "It is lightweight and easy to hold."}
+      - {review_id: R2MI0HOHIKSDB6, quote: "Must stay plugged in, not portable at all."}
+    confusions: >-
+      "헤드가 작아 넓은 부위는 오래 걸린다(el cabezal pequeño hace que la depilación de zonas grandes sea demorado)"는 시간 불만이라 treatment_time, "다리용 큰 헤드가 있어야 한다"는 요구는 design.
+      "겨드랑이에는 더 작은 헤드가 편하겠다"는 design.
+      "sleek and honestly a pretty device"는 design, 같은 문장의 "quality of the device is very obvious"는 quality.
+    sentiment_notes: 배터리식인 줄 알았는데 유선이었다는 말은 리뷰어가 자기 탓이라 해도 negative.
+    evidence_count: 19
+
+  # ---------------- 카테고리 전용 ----------------
+  - id: ease_of_use
+    name_ko: 사용 편의
+    side: P
+    common_id: null
+    definition: 켜고 설정하고 쏘는 조작, 설명서, 모드와 자동 발광, 센서 반응, 앱, 집에서 하는 편리함
+    include:
+      - 쓰기 쉽다, 설정이 쉽다, 처음 쓰는 사람도 할 수 있다, 복잡하다
+      - 설명서가 분명하다, 부족하다, 영상을 찾아봐야 했다
+      - 단계(세기) 조절, 자동 모드, 미끄러뜨리며 쏘기
+      - 피부에 딱 붙여야 발광한다, 누르기 힘들다
+      - 어디를 쏘았는지 표시가 없어 헷갈린다
+      - 피부색 센서가 단계를 자동으로 맞춰 준다, 위치 확인 표시등
+      - 앱으로 일정 알림
+      - 살롱에 가지 않고 집에서 할 수 있어 편하다
+    exclude:
+      - 한 번에 걸리는 시간과 발광 속도는 treatment_time
+      - 손에 쥐는 느낌, 무게, 크기는 design
+      - 피부색 때문에 센서가 막는 것은 skin_hair_suitability
+      - 기기 이상으로 발광이 안 되는 것은 quality
+    examples:
+      - {review_id: R3EVC73JWUDCAY, quote: "Instructions are clear and straightforward making the product easy to use."}
+      - {review_id: R2EDE4DS2YX5SP, quote: "Confusing modes and reading the sensor light, had to watch a few videos to get it down."}
+    confusions: >-
+      "The auto mode is fast"는 속도라 treatment_time, "automatic function, I just have to place it on the skin without touching buttons"는 조작이라 ease_of_use.
+      "피부에 완전히 붙어야 발광해서 겨드랑이가 어렵다"는 ease_of_use, 그 때문에 "더 작은 헤드가 좋겠다"는 design.
+      "Easy to use"와 "painless"가 한 문장에 나열되면 각각 ease_of_use와 pain_comfort로 나눠 단다.
+      "you can adjust the intensity"는 ease_of_use. "높은 단계일수록 잘 된다"는 hair_reduction.
+    sentiment_notes: 기능 소개만 있고 평가가 없으면(앱이 있다) neutral. "쉽지만 처음 몇 번은 발광이 잘 안 됐다"는 mixed.
+    evidence_count: 33
+
+  - id: treatment_time
+    name_ko: 시술 시간과 관리 부담
+    side: P
+    common_id: null
+    definition: 한 번 시술에 걸리는 시간과 발광 속도, 정해진 일정을 오래 지켜야 하는 부담
+    include:
+      - 한 번에 몇 분 걸리는지, 다리 전체에 30분에서 1시간, 광고보다 오래 걸린다
+      - 발광이 빠르다, 느리다, 이중 발광이나 자동 모드로 빨라진다
+      - 헤드가 작아 넓은 부위가 오래 걸린다
+      - 이틀마다, 몇 주 동안 해야 하는 일정이 부담이다, 시간이 없다
+      - 일주일에 20분이면 된다, 시간을 아껴 준다
+    exclude:
+      - 효과가 보이기까지의 기간 자체(몇 주 만에 줄었다)는 hair_reduction
+      - 조작이 쉽다, 어렵다는 ease_of_use
+    examples:
+      - {review_id: RDP6VFH1J365D, quote: "For the small areas I am doing, I spend less than 20 minutes a week on it."}
+      - {review_id: R3DS39VF4SYRUU, quote: "it takes way longer than 10 mins like advertised."}
+    confusions: >-
+      "4 stars only because it takes very consistent use (every other day for several weeks) in order to achieve results"는 일정 부담 평가라 treatment_time. 같은 리뷰의 "effective"는 hair_reduction.
+      "Loses a star for taking substantially longer than advertised to really get rid of the hair"는 효과가 늦다는 말이라 hair_reduction.
+      "Consistency is the key", "si eres constante sirve"처럼 꾸준함을 효과 조건으로만 말하면 hair_reduction에 함께 넣고 treatment_time은 달지 않는다.
+      면도기, 면도 크림을 덜 써서 시간과 돈을 아낀다면 시간은 treatment_time, 돈은 price_value.
+    sentiment_notes: 걸린 시간만 적고 평가가 없으면 neutral. "시간이 좀 들지만 그만한 가치가 있다"는 mixed.
+    evidence_count: 17
+
+  - id: skin_hair_suitability
+    name_ko: 피부색과 털 색 적합성
+    side: P
+    common_id: null
+    definition: 피부색, 털 색, 털 굵기에 따라 쓸 수 있는지, 효과가 갈리는지, 피부색 센서가 어두운 부위에서 발광을 막는지
+    include:
+      - 진한 털에만 된다, 금발이나 옅은 털, 흰 털에는 안 된다
+      - 맞지 않는 유형인데도 된다
+      - 굵은 털에는 덜 듣는다, 가는 털이 더 낫다
+      - 어두운 부위(비키니)나 피부색 때문에 센서가 발광을 막는다
+      - 팔 털은 대상이 아니라고 나온다
+    exclude:
+      - 유형을 배경으로만 말하고 효과가 없다는 말은 hair_reduction
+      - 부위별 효과 차이(얼굴은 안 된다)는 hair_reduction
+      - 센서 고장은 quality
+    examples:
+      - {review_id: RDP6VFH1J365D, quote: "Works pretty well, even on less than ideal candidates"}
+      - {review_id: R318SFXHXXSV87, quote: "Absolutely do not get if you do not have very dark hair."}
+    confusions: >-
+      "I have pale skin and very dark hair so it should have worked"는 유형 배경이라 hair_reduction negative만 단다.
+      "The sensor gives me nothing at all - darker areas and soft areas"는 어두운 부위에서 막는 것이라 skin_hair_suitability. 같은 리뷰에서 센서가 갈수록 나빠졌다는 기기 이상은 quality.
+      "I hope it works out better for those with less course hair"는 털 굵기에 따른 차이라 skin_hair_suitability.
+    sentiment_notes: >-
+      "옅은 털엔 안 되지만 진한 금발인 내게는 됐다"는 mixed. 맞는 유형을 안내만 하면 neutral.
+    evidence_count: 7
+
+  - id: accessories
+    name_ko: 구성품과 보관 케이스
+    side: P
+    common_id: null
+    definition: 기기와 함께 오는 보안경, 면도기, 보관 케이스와 파우치, 수건 등이 들어 있는지와 그 쓸모, 만듦새
+    include:
+      - 보관 케이스, 파우치, 가방이 예쁘다, 튼튼하다, 정리가 잘 된다
+      - 보안경이 들어 있다, 없어 따로 사야 했다
+      - 면도기가 들어 있다, 필요 없다
+      - 구성품이 다 들어 있다(llegó completo, trae gafas, cuchilla)
+      - 더 예쁜 케이스가 있었으면 한다
+    exclude:
+      - 제품 상자의 상태는 packaging
+      - 설명에 적힌 구성과 받은 것이 다르면 trust
+      - 부위별 교체 헤드는 design
+      - 충전기 불량은 quality
+    examples:
+      - {review_id: R10M1894KLFI0O, quote: "I also really love the carrying case that comes with it"}
+      - {review_id: R300NO6N06MI3R, quote: "You have to purchase your goggle separately."}
+    confusions: >-
+      "Instead, it comes with a razor which I believe was not necessary at all compare to a goggle"는 accessories negative.
+      "With the cost of this device I'm disappointed they are not included"는 보안경이 빠진 실망이라 accessories, 가격 대비 불만이 따로 있으면 price_value도 단다.
+      "It comes in a nice, heavy duty case with specific cavities for each item"은 보관 케이스라 accessories.
+    sentiment_notes: 들어 있는 것만 나열하면 neutral, "recomiendo"처럼 평가가 붙으면 그 방향.
+    evidence_count: 12
+
+changes:
+  - {action: redefine, ids: [performance, hair_reduction], reason: "표본에서 성능 이야기는 거의 털이 줄었는지, 몇 주 만에 보이는지, 부위별 차이(어림 85개)"}
+  - {action: add, ids: [pain_comfort], reason: "쏠 때의 통증, 열감, 냉각 기능 이야기가 피부 반응(safety)과 따로 자주 나옴(어림 30개)"}
+  - {action: add, ids: [ease_of_use], reason: "조작, 설명서, 자동 모드, 센서 반응, 앱 이야기가 공통 주제에 담기지 않음(어림 33개)"}
+  - {action: add, ids: [treatment_time], reason: "한 번에 걸리는 시간, 발광 속도, 일정을 지키는 부담이 효과와 따로 나옴(어림 17개)"}
+  - {action: add, ids: [skin_hair_suitability], reason: "피부색, 털 색에 따라 된다, 안 된다, 센서가 어두운 부위를 막는다는 말(어림 7개, 유형을 배경으로만 말한 리뷰는 뺀 수)"}
+  - {action: add, ids: [accessories], reason: "보관 케이스, 보안경, 면도기 구성 이야기가 상자 상태(packaging)와 따로 나옴(어림 12개)"}
+
+questions:
+  - "반품하겠다, 환불받고 싶다는 계획만 있고 응대 경험이 없는 말(R3HVTBHR4WOWKF, RA7TUO3R3XVJA 등 어림 5개)을 초안은 customer_service로 달지 않게 했습니다. 정답 세트를 태깅하실 때의 기준과 같은지 정해 주세요."
+  - "제품을 쓰지 않고 브랜드 광고만 비판한 리뷰(R3VWK5YR08SZQD)를 초안은 brand_experience로 두었습니다. off_category로 뺄지 정해 주세요."
+  - "살롱 시술, 면도, 왁싱과 비교하는 말(어림 11개)을 따로 주제로 두지 않고 돈은 price_value, 편리함은 ease_of_use, 효과는 hair_reduction으로 나눴습니다. 지금 16개 상한이 차 있어 따로 두려면 다른 주제 하나를 합쳐야 합니다."

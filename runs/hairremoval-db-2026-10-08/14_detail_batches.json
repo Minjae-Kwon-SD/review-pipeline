@@ -1,0 +1,161 @@
+{
+  "made_at": "2026-10-08T23:21:02+09:00",
+  "size": 50,
+  "reviews": 1012,
+  "batches": [
+    {
+      "batch_id": "B07WYY6KKC_01",
+      "asin": "B07WYY6KKC",
+      "reviews": 50,
+      "input": "14_detail_input/B07WYY6KKC_01.jsonl",
+      "output": "14_details_B07WYY6KKC_01.jsonl"
+    },
+    {
+      "batch_id": "B07WYY6KKC_02",
+      "asin": "B07WYY6KKC",
+      "reviews": 50,
+      "input": "14_detail_input/B07WYY6KKC_02.jsonl",
+      "output": "14_details_B07WYY6KKC_02.jsonl"
+    },
+    {
+      "batch_id": "B07WYY6KKC_03",
+      "asin": "B07WYY6KKC",
+      "reviews": 50,
+      "input": "14_detail_input/B07WYY6KKC_03.jsonl",
+      "output": "14_details_B07WYY6KKC_03.jsonl"
+    },
+    {
+      "batch_id": "B07WYY6KKC_04",
+      "asin": "B07WYY6KKC",
+      "reviews": 50,
+      "input": "14_detail_input/B07WYY6KKC_04.jsonl",
+      "output": "14_details_B07WYY6KKC_04.jsonl"
+    },
+    {
+      "batch_id": "B07WYY6KKC_05",
+      "asin": "B07WYY6KKC",
+      "reviews": 50,
+      "input": "14_detail_input/B07WYY6KKC_05.jsonl",
+      "output": "14_details_B07WYY6KKC_05.jsonl"
+    },
+    {
+      "batch_id": "B07WYY6KKC_06",
+      "asin": "B07WYY6KKC",
+      "reviews": 49,
+      "input": "14_detail_input/B07WYY6KKC_06.jsonl",
+      "output": "14_details_B07WYY6KKC_06.jsonl"
+    },
+    {
+      "batch_id": "B0CV3ZJ2PN_01",
+      "asin": "B0CV3ZJ2PN",
+      "reviews": 50,
+      "input": "14_detail_input/B0CV3ZJ2PN_01.jsonl",
+      "output": "14_details_B0CV3ZJ2PN_01.jsonl"
+    },
+    {
+      "batch_id": "B0CV3ZJ2PN_02",
+      "asin": "B0CV3ZJ2PN",
+      "reviews": 50,
+      "input": "14_detail_input/B0CV3ZJ2PN_02.jsonl",
+      "output": "14_details_B0CV3ZJ2PN_02.jsonl"
+    },
+    {
+      "batch_id": "B0CV3ZJ2PN_03",
+      "asin": "B0CV3ZJ2PN",
+      "reviews": 50,
+      "input": "14_detail_input/B0CV3ZJ2PN_03.jsonl",
+      "output": "14_details_B0CV3ZJ2PN_03.jsonl"
+    },
+    {
+      "batch_id": "B0CV3ZJ2PN_04",
+      "asin": "B0CV3ZJ2PN",
+      "reviews": 50,
+      "input": "14_detail_input/B0CV3ZJ2PN_04.jsonl",
+      "output": "14_details_B0CV3ZJ2PN_04.jsonl"
+    },
+    {
+      "batch_id": "B0CV3ZJ2PN_05",
+      "asin": "B0CV3ZJ2PN",
+      "reviews": 50,
+      "input": "14_detail_input/B0CV3ZJ2PN_05.jsonl",
+      "output": "14_details_B0CV3ZJ2PN_05.jsonl"
+    },
+    {
+      "batch_id": "B0CV3ZJ2PN_06",
+      "asin": "B0CV3ZJ2PN",
+      "reviews": 40,
+      "input": "14_detail_input/B0CV3ZJ2PN_06.jsonl",
+      "output": "14_details_B0CV3ZJ2PN_06.jsonl"
+    },
+    {
+      "batch_id": "B0CWL9S4L1_01",
+      "asin": "B0CWL9S4L1",
+      "reviews": 50,
+      "input": "14_detail_input/B0CWL9S4L1_01.jsonl",
+      "output": "14_details_B0CWL9S4L1_01.jsonl"
+    },
+    {
+      "batch_id": "B0CWL9S4L1_02",
+      "asin": "B0CWL9S4L1",
+      "reviews": 50,
+      "input": "14_detail_input/B0CWL9S4L1_02.jsonl",
+      "output": "14_details_B0CWL9S4L1_02.jsonl"
+    },
+    {
+      "batch_id": "B0CWL9S4L1_03",
+      "asin": "B0CWL9S4L1",
+      "reviews": 50,
+      "input": "14_detail_input/B0CWL9S4L1_03.jsonl",
+      "output": "14_details_B0CWL9S4L1_03.jsonl"
+    },
+    {
+      "batch_id": "B0CWL9S4L1_04",
+      "asin": "B0CWL9S4L1",
+      "reviews": 50,
+      "input": "14_detail_input/B0CWL9S4L1_04.jsonl",
+      "output": "14_details_B0CWL9S4L1_04.jsonl"
+    },
+    {
+      "batch_id": "B0CWL9S4L1_05",
+      "asin": "B0CWL9S4L1",
+      "reviews": 50,
+      "input": "14_detail_input/B0CWL9S4L1_05.jsonl",
+      "output": "14_details_B0CWL9S4L1_05.jsonl"
+    },
+    {
+      "batch_id": "B0CWL9S4L1_06",
+      "asin": "B0CWL9S4L1",
+      "reviews": 11,
+      "input": "14_detail_input/B0CWL9S4L1_06.jsonl",
+      "output": "14_details_B0CWL9S4L1_06.jsonl"
+    },
+    {
+      "batch_id": "B0FGB2NS3C_01",
+      "asin": "B0FGB2NS3C",
+      "reviews": 50,
+      "input": "14_detail_input/B0FGB2NS3C_01.jsonl",
+      "output": "14_details_B0FGB2NS3C_01.jsonl"
+    },
+    {
+      "batch_id": "B0FGB2NS3C_02",
+      "asin": "B0FGB2NS3C",
+      "reviews": 24,
+      "input": "14_detail_input/B0FGB2NS3C_02.jsonl",
+      "output": "14_details_B0FGB2NS3C_02.jsonl"
+    },
+    {
+      "batch_id": "B0G39WBP1S_01",
+      "asin": "B0G39WBP1S",
+      "reviews": 50,
+      "input": "14_detail_input/B0G39WBP1S_01.jsonl",
+      "output": "14_details_B0G39WBP1S_01.jsonl"
+    },
+    {
+      "batch_id": "B0G39WBP1S_02",
+      "asin": "B0G39WBP1S",
+      "reviews": 38,
+      "input": "14_detail_input/B0G39WBP1S_02.jsonl",
+      "output": "14_details_B0G39WBP1S_02.jsonl"
+    }
+  ]
+}

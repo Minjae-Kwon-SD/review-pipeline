@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-10-08T21:01:46+09:00",
+  "model": "top",
+  "only": null,
+  "batches": {
+    "gold": {
+      "status": "PASS",
+      "asin": null,
+      "reviews": 25,
+      "tags": 97,
+      "quote_exact": 97,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "2번째 태그: R1MTC9UZLPYN2 hair_reduction 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    }
+  },
+  "status": "PASS",
+  "failed_batches": []
+}

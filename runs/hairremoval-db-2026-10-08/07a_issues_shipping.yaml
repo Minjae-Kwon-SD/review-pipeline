@@ -1,0 +1,10 @@
+topic: shipping
+directions:
+  negative:
+    labels: []
+    other_approx_count: 4
+    notes: "07a_issue_plan.json에서 only_other가 true(인용 4개, 표본 없음). 라벨 없이 전부 기타로 둠"
+  positive:
+    labels: []
+    other_approx_count: 15
+    notes: "07a_issue_plan.json에서 only_other가 true(인용 15개, 표본 없음). 라벨 없이 전부 기타로 둠"

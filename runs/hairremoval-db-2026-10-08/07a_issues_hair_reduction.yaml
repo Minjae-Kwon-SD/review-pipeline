@@ -1,0 +1,118 @@
+topic: hair_reduction
+directions:
+  negative:
+    labels:
+      - id: no_effect
+        name_ko: 효과 없음
+        name_en: No visible effect
+        include: 써 봐도 털에 변화가 없거나 아주 적다는 말, 기대나 광고, 다른 리뷰만큼 효과가 없다는 말(줄었다는 인정 없이)
+        exclude: 줄거나 가늘어졌다고 인정하면 partial_reduction, 일부 부위만 안 되면 uneven_by_area, 아직 기다리는 중이라며 늦다고 하면 slow_results
+        examples:
+          - {review_id: R2DXIC5NR8A970, quote: "Absolutely zero results"}
+          - {review_id: R1ZM15KT6ZURLE, quote: "I have been using it for 4 months with no change"}
+        approx_count: 68
+      - id: partial_reduction
+        name_ko: 줄었지만 다 없어지지 않음
+        name_en: Reduced but not gone
+        include: 털이 줄거나 느리게, 가늘게 자란다고 인정하면서 다 없어지지 않았다, 여전히 면도나 뽑기를 해야 한다, 완전히 없애 주지는 못한다는 말
+        exclude: 사용을 멈춘 뒤 다시 자란다, 영구적이지 않다는 말은 not_lasting, 부위를 나눠 되고 안 되고를 말하면 uneven_by_area
+        examples:
+          - {review_id: R2X5WAT77HEGQH, quote: "my hair growth is less but certainly not gone"}
+          - {review_id: R220YD40R0TEWH, quote: "It's definitely slows the grow after consistent use. But I still shave couple times a week."}
+        approx_count: 29
+      - id: uneven_by_area
+        name_ko: 부위마다 효과 차이
+        name_en: Uneven results across body areas
+        include: 어떤 부위(겨드랑이, 다리)는 되는데 다른 부위(얼굴, 비키니, 음모)는 안 되거나 덜 된다는 말, 특정 부위에서만 효과가 없다는 말
+        exclude: 피부색, 털 색 때문에 갈린다는 말은 이 주제 밖(skin_hair_suitability), 부위 구분 없이 전체가 덜 줄었다는 말은 partial_reduction
+        examples:
+          - {review_id: R1UI82S8I64AUB, quote: "It worked very well for my underarms. But hasn't done much for my bikini area."}
+          - {review_id: R1WAF4RFXZ6I6S, quote: "Buena para el cuerpo pero no sirve en la cara"}
+        approx_count: 25
+      - id: slow_results
+        name_ko: 효과가 늦게 나타남
+        name_en: Results take too long
+        include: 효과가 아주 천천히 나온다, 광고보다 오래 걸린다, 생각보다 늦다, 아직 큰 변화가 없어 더 오래 써야 할 것 같다는 말
+        exclude: 충분히 썼는데 변화가 없다고 결론 내리면 no_effect, 일정을 지키는 시간 부담은 이 주제 밖(treatment_time)
+        examples:
+          - {review_id: R1LS0E4XTPW5B3, quote: "It works but it takes longer than advertised."}
+          - {review_id: RYNUARHCQ2I8S, quote: "If you expect quick hair removal, you may be disappointed because the changes are very gradual"}
+        approx_count: 10
+      - id: not_lasting
+        name_ko: 멈추면 다시 나고 영구적이지 않음
+        name_en: Regrows after stopping, not permanent
+        include: 사용을 멈추면 털이 다시 자란다, 효과가 오래 가지 않는다, 영구 제모가 아니다, 계속 관리해야 유지된다는 말
+        exclude: 사용하는 동안에도 다 없어지지 않았다는 말은 partial_reduction
+        examples:
+          - {review_id: R3P4S1IA50BL9G, quote: "the hair still growing back after you stop using it for a month"}
+          - {review_id: R1NX4O5T45E2TY, quote: "Noticed difference but results are not permanent at all"}
+        approx_count: 10
+    other_approx_count: 8
+    notes: 오히려 털이 더 나거나 굵어졌다는 말(R7MKP02LZBEEJ, RPVH9XL7JMHEX, R3EGHJ3KA8QM68 등 4개)은 5% 미만이라 기타로 셈. 기타에는 단계(세기)에 따라 효과가 갈린다는 말, 놓친 곳(hot spots), 먼저 면도해야 한다는 말, 흰 피부라 안 된다는 유형 이야기(skin_hair_suitability에 가까움)도 있음.
+  positive:
+    labels:
+      - id: works_general
+        name_ko: 효과가 있음
+        name_en: It works
+        include: 털이 어떻게 변했는지 구체적으로 말하지 않고 효과가 있다, 잘 된다, 결과가 보인다는 말
+        exclude: 털이 줄거나 느리게 자란다고 구체적으로 말하면 reduced_regrowth, 부위를 들어 말하면 works_on_areas, 꾸준히 써야 한다는 조건이 붙으면 works_with_consistency
+        examples:
+          - {review_id: R5A9JWD6G35F8, quote: "really works well"}
+          - {review_id: R2ZL2O4HNXMEWG, quote: "it really works"}
+        approx_count: 56
+      - id: reduced_regrowth
+        name_ko: 털이 줄고 느리게 자람
+        name_en: Less and slower regrowth
+        include: 털의 양이 줄었다, 다시 자라는 속도가 느려졌다, 수염 자국이 늦게 올라온다는 말
+        exclude: 가늘고 옅어진 질감 변화가 중심이면 finer_lighter, 거의 없어졌거나 면도를 거의 안 한다면 nearly_gone_less_shaving
+        examples:
+          - {review_id: R1NE4QCL8NG603, quote: "it has significantly reduced the hair growth on my legs and underarms"}
+          - {review_id: RZWG7C67I26NH, quote: "I started noticing slower hair regrowth"}
+        approx_count: 25
+      - id: finer_lighter
+        name_ko: 털이 가늘고 옅어짐
+        name_en: Finer and lighter hair
+        include: 털이 가늘어졌다, 옅어졌다, 부드러워졌다, 성기게 났다는 말
+        exclude: 털의 양이나 속도만 말하면 reduced_regrowth
+        examples:
+          - {review_id: R2VNEBLNFNGTZ1, quote: "noticed my hair growing back way slower and in some areas thinner and lighter"}
+          - {review_id: RDP6VFH1J365D, quote: "it is much slower and much thinner"}
+        approx_count: 11
+      - id: nearly_gone_less_shaving
+        name_ko: 거의 없어지거나 면도가 줄어듦
+        name_en: Nearly hair-free, less shaving
+        include: 털이 거의 다 없어졌다, 어떤 부위는 아예 안 난다, 면도나 뽑기를 거의 안 하게 됐다, 며칠에서 몇 주씩 면도 없이 지낸다, 피부가 매끈해졌다는 말
+        exclude: 줄었다는 정도만 말하면 reduced_regrowth
+        examples:
+          - {review_id: R1CW4J5AG5XQYJ, quote: "My legs are much smoother and I can go 2 weeks without shaving them"}
+          - {review_id: R3TZKM2YDQ6CJZ, quote: "I didn't have to pluck my chin hairs or remove my mustache at all"}
+        approx_count: 16
+      - id: works_on_areas
+        name_ko: 특정 부위에 잘 됨
+        name_en: Works well on specific areas
+        include: 겨드랑이, 다리, 윗입술, 비키니 등 부위를 들어 그곳에 효과가 있다는 말(다른 부위는 안 된다는 혼합 인용의 칭찬 부분 포함)
+        exclude: 부위 언급 없이 효과가 있다는 말은 works_general
+        examples:
+          - {review_id: R3EX80CEESZ3VQ, quote: "It has worked really well on the under arm and the upper lip area."}
+          - {review_id: R25K2A8S4MLZQH, quote: "It works well - like professional grade on the bikini line and underarms."}
+        approx_count: 20
+      - id: quick_results
+        name_ko: 빨리 효과가 보임
+        name_en: Quick visible results
+        include: 몇 번, 몇 주 만에(이미, 벌써) 효과가 보였다는 말
+        exclude: 오래 걸렸지만 결국 됐다는 말은 works_general이나 해당 변화 라벨
+        examples:
+          - {review_id: R135IHQ3F4GVSS, quote: "super large reduction by just 3 treatments"}
+          - {review_id: RW52SEIQ8TX0B, quote: "We could see a difference after a couple of uses"}
+        approx_count: 12
+      - id: works_with_consistency
+        name_ko: 꾸준히 쓰면 효과가 남
+        name_en: Works with consistent use
+        include: 꾸준히, 규칙적으로, 참을성 있게 쓰면 효과가 있다는 조건을 붙인 칭찬
+        exclude: 일정을 지키는 시간 부담 평가는 이 주제 밖(treatment_time)
+        examples:
+          - {review_id: R1J63SGER4AU6O, quote: "This really works, but you have to be consistent."}
+          - {review_id: R21FD6E2B6LEB7, quote: "IPL technology can greatly reduce hair growth with constant use"}
+        approx_count: 8
+    other_approx_count: 7
+    notes: 살롱 레이저 뒤 유지용으로 좋다는 말(R3RK6KXOETTEWH, R35BI1HBVKI1R, R1VFPBIS4Y1VID 3개)은 5% 미만이라 기타. 거의 없어짐과 면도 줄어듦은 따로 두면 각각 5% 미만이라 하나로 합침. reduced_regrowth와 quick_results는 "이미 줄었다"처럼 함께 달릴 수 있음.

@@ -1,0 +1,106 @@
+topic: ease_of_use
+directions:
+  negative:
+    labels:
+      - id: hard_to_trigger_flash
+        name_ko: 피부에 붙여도 발광이 잘 안 됨
+        name_en: Hard to get it to flash on contact
+        include: 피부 접촉 센서가 접촉을 못 읽어 계속 옮기고 눌러야 발광한다, 턱, 무릎, 굴곡진 부위에서 발광이 안 된다, 처음 몇 번은 발광시키기 어려웠다는 말
+        exclude: 피부색이나 어두운 부위 때문에 센서가 막는 것은 skin_hair_suitability, 기기 고장으로 발광이 멈춘 것은 quality, 센서가 세기를 멋대로 낮추는 것은 sensor_auto_adjust
+        examples:
+          - {review_id: R1NZEC16D5FOP4, quote: "It can be REALLY hard to get the sensors to flash, even when the plate is flush against my skin."}
+          - {review_id: RLH6WCEL9CZ4C, quote: "Has trouble activating around more uneven body parts, such as the knees."}
+        approx_count: 14
+      - id: sensor_auto_adjust
+        name_ko: 센서 자동 조절이 거슬림
+        name_en: Annoying automatic sensor adjustment
+        include: 피부 센서가 세기를 자동으로 낮추거나 판정을 지나치게 조심스럽게 해서 짜증 난다, 자동 조절을 끌 수 없다는 말
+        exclude: 피부 접촉을 못 읽어 발광이 안 되는 것은 hard_to_trigger_flash, 피부색이 어두워 쓸 수 없다는 것은 skin_hair_suitability
+        examples:
+          - {review_id: RRHU7A16IHWSW, quote: "Air 10's overly cautious skin sensor frequently reduces intensity unnecessarily"}
+          - {review_id: R2I474SRDNJLW9, quote: "If it didn't auto adjust the sensitivity or I had the option to override it, that would be amazing!"}
+        approx_count: 5
+      - id: unclear_instructions
+        name_ko: 설명서가 부족하거나 불분명함
+        name_en: Unclear or lacking instructions
+        include: 설명서에 사용법, 설정, 자동 모드 켜는 법, 한 부위에 몇 번 쏘는지, 시술 뒤 관리 정보가 없다, 번역이 어색하다, 영상을 찾아봐야 했다는 말
+        exclude: 설명서 언급 없이 기기 조작 자체가 복잡하다는 말은 complicated_operation
+        examples:
+          - {review_id: R1NE4QCL8NG603, quote: "the directions to use the device were lacking much needed information"}
+          - {review_id: RD0ZNS0BJ5RSM, quote: "The instructions could be better on how to set it up."}
+        approx_count: 9
+      - id: complicated_operation
+        name_ko: 조작이 복잡하고 어려움
+        name_en: Complicated to operate
+        include: 기기가 복잡하다, 기능을 어떻게 쓰는지 알기 어렵다, 생각보다 쉽지 않다, 사용자 친화적이지 않다는 전반적인 말
+        exclude: 설명서 탓을 말하면 unclear_instructions, 특정 모드나 버튼을 지목한 불만은 mode_button_gripes, 발광이 잘 안 되는 것은 hard_to_trigger_flash
+        examples:
+          - {review_id: RWTBVMS6K6M9P, quote: "This is a complicated device that requires a lot of patience."}
+          - {review_id: R39LEEA7D1DVP8, quote: "It is difficult to figure out how to work the various features."}
+        approx_count: 4
+      - id: mode_button_gripes
+        name_ko: 모드나 버튼 구성이 불편함
+        name_en: Inconvenient modes or buttons
+        include: 자동이나 연속 발광 모드가 없어 매번 버튼을 눌러야 한다, 연속 발광 설정이 싫다, 세기 버튼이 실수로 눌린다, 단계 선택지가 부족하다는 말
+        exclude: 센서가 세기를 자동으로 바꾸는 것은 sensor_auto_adjust, 발광 속도나 걸리는 시간은 treatment_time
+        examples:
+          - {review_id: R30SXDQSJ7QM37, quote: "does not have auto glide function thus you have constantly press the flash button every time which is a pain"}
+          - {review_id: RJ70XYUA71OQC, quote: "the power level button is so easy to hit accidentally"}
+        approx_count: 6
+      - id: shaving_prep
+        name_ko: 쓸 때마다 면도해야 하는 번거로움
+        name_en: Need to shave before each use
+        include: 사용 전에 매번, 자주 면도해야 해서 번거롭다는 말
+        exclude: 면도 횟수가 줄었다는 효과 이야기는 hair_reduction, 면도 안 한 털 때문에 아프다는 말은 pain_comfort
+        examples:
+          - {review_id: R2MZ9ZWPKOLRZQ, quote: "the fact that i have to shave before every use is a little annoying"}
+          - {review_id: R1E37CQXV0TSOA, quote: "You also have to shave a lot."}
+        approx_count: 3
+    other_approx_count: 3
+    notes: >-
+      기타는 쏜 자리를 알기 어렵다(2개), 교체 부품 세척이 어렵다(1개). R3D6Y9OCRHDR0X "the skin sensor is too sensitive"와
+      R2HTPKGOEZ3WN7 "won't flash because it is reading red"는 접촉 센서인지 피부색 센서인지 애매해 sensor_auto_adjust로 셌다(피부색으로 막는 것이면 skin_hair_suitability 쪽).
+      shaving_prep은 주제 정의에 직접 적혀 있지 않은 사전 준비 부담이라 treatment_time(관리 부담)으로 옮길지 정해 주세요.
+  positive:
+    labels:
+      - id: easy_to_use
+        name_ko: 쓰기 쉽고 간단함
+        name_en: Easy and simple to use
+        include: 쓰기 쉽다, 간단하다, 처음 써도 된다, 꽂고 켜서 바로 쓴다, 설정이 쉽다, 편하게 쓴다는 전반적인 말
+        exclude: 설명서를 칭찬하면 clear_instructions, 집에서 할 수 있다는 편리함은 home_convenience, 자동 모드나 단계 조절 기능을 지목하면 handy_modes
+        examples:
+          - {review_id: RAUDHBMFX7194, quote: "The device itself is also very easy to use, even as a beginner"}
+          - {review_id: R25H686ZWIWEWC, quote: "This device is very easy to use, plug, turn on and go."}
+        approx_count: 115
+      - id: clear_instructions
+        name_ko: 설명서가 분명함
+        name_en: Clear instructions
+        include: 설명서가 분명하다, 간단하다, 알아보기 쉽다는 말
+        exclude: 설명서 언급 없이 쓰기 쉽다는 말은 easy_to_use
+        examples:
+          - {review_id: R3EVC73JWUDCAY, quote: "Instructions are clear and straightforward making the product easy to use."}
+          - {review_id: R18D1G0XPQQ91Y, quote: "The instructions were straightforward"}
+        approx_count: 13
+      - id: home_convenience
+        name_ko: 집에서 할 수 있어 편함
+        name_en: Convenient to do at home
+        include: 살롱에 가지 않고 집에서, 혼자 편하게 할 수 있어 좋다는 말
+        exclude: 살롱보다 돈을 아낀다는 말은 price_value, 집 언급 없이 편하다는 말은 easy_to_use
+        examples:
+          - {review_id: RDEHKQF7X6P2P, quote: "It has been especially convenient to be able to use it at home rather than having to schedule regular salon or professional treatments"}
+          - {review_id: R2SZDL813OQQ0C, quote: "la comodidad de poder usarla en casa"}
+        approx_count: 10
+      - id: handy_modes
+        name_ko: 자동 모드와 단계 조절이 편함
+        name_en: Handy auto mode and settings
+        include: 자동 모드 덕에 버튼을 계속 누르지 않아도 된다, 세기를 원하는 대로 조절할 수 있다, 모드가 여러 개다, 화면이나 터치스크린으로 설정 바꾸기가 쉽다는 말
+        exclude: 자동 모드가 빨라서 시간이 준다는 말은 treatment_time, 피부 센서 칭찬은 기타
+        examples:
+          - {review_id: RLK89470RDJIH, quote: "It comes with different levels of intensity and auto so no need to keep button pressed all the time."}
+          - {review_id: R65FSNN1S9RE3, quote: "It’s easy to use, and the touchscreen makes switching settings simple"}
+        approx_count: 11
+    other_approx_count: 9
+    notes: >-
+      표본 대부분이 "easy to use" 한마디라 easy_to_use가 4분의 3을 넘는다. 기타는 세척과 관리가 쉽다(3개), 피부 센서가 잘 된다(2개), 앱(2개),
+      가볍고 다루기 쉽다(R7SFT1B4QUIDU, 무게는 design 쪽), 교체 헤드 덕에 쉽다(RRCG4FZAZP9UC, 헤드는 design 쪽).
+      "easy to use, instructions are clear"처럼 두 칭찬이 한 인용에 있으면 easy_to_use와 clear_instructions 둘 다 셌다.

@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-10-09T01:15:39+09:00",
+  "status": "PASS",
+  "failed_batches": [],
+  "errors": [],
+  "values": 1584,
+  "dropped_quotes": 0,
+  "dropped": [],
+  "known_exceptions": [],
+  "counts": {
+    "area_result": 177,
+    "failed_component": 78,
+    "failure_time": 46,
+    "use_duration": 278,
+    "usage_frequency": 136,
+    "time_to_results": 55,
+    "session_minutes": 29,
+    "intensity_setting": 50,
+    "reviewer_skin_tone": 102,
+    "reviewer_hair_type": 141,
+    "user_condition": 44,
+    "shaving_prep": 20,
+    "discomfort_area": 47,
+    "desired_improvement": 26,
+    "comparison_reference": 115
+  }
+}

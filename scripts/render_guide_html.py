@@ -91,6 +91,19 @@ class R:
             return f'<span class="numlink {cls}" data-k="{k}" data-drill="ev" data-key="{esc(v["ev"])}" tabindex="0">{esc(v["text"])}</span>'
         return f'<span class="{cls}" data-k="{k}">{esc(v["text"])}</span>'
 
+    def pc(self, v, n=None, kind_w=False):
+        """비율 표기: 0이 아닌데 0.05% 미만이면 '0.1% 미만', 리뷰가 10개 미만이면 (잠정)"""
+        tiny = (v and 0 < float(v) < 0.05) or (not v and n and n > 0 and kind_w)   # 가중 비율이 반올림으로 0이 된 경우
+        t = "0.1% 미만" if tiny else f"{float(v or 0):.1f}%"
+        return t + ("(잠정)" if n is not None and 0 < n < 10 else "")
+
+    def nm(self, kind, key, sub=None):
+        """영어 id 대신 승인 파일의 한국어 이름(없으면 id 그대로)"""
+        names = (self.M["tables"].get("meta.names") or {}).get(kind) or {}
+        if sub is not None:
+            return (names.get(key) or {}).get(str(sub)) or str(sub)
+        return names.get(key) or key
+
     def tnum(self, text, ev=None, cls=""):
         """표 칸 숫자(표기는 metrics 표에 이미 있는 값에서 만든 것)."""
         if ev and self.M["ev"].get(ev, {}).get("n"):
@@ -233,7 +246,7 @@ class R:
         mt = lambda r: "" if r["match"] == "일치 확인" else f"<div class='mut small'>{esc(r['match'])}</div>"
         if sid == "duration":
             body = [[f"<b>{esc(r['brand'])}</b>" + mt(r), esc(r["subcategory"] or "-"), esc(r["concentration"]) + " " + self.srcs(r["src"]),
-                     esc(f"{r['neg_pct']:.1f}%"), esc(str(r["duration_values"])),
+                     esc(self.pc(r['neg_pct'])), esc(str(r["duration_values"])),
                      esc("-" if r["duration_median"] is None else f"{r['duration_median']:g}시간")] for r in rows]
             return ("<div class='coltitle' style='margin-top:10px'>상품 사양과 나란히: 농도, 지속력과 세기 부정(가중), 말한 지속 시간</div>"
                     + self.table(["상품", "하위 카테고리", "농도(사양)", "부정(가중)", "말한 지속 시간 값", "중앙값"], body)
@@ -245,7 +258,7 @@ class R:
                      esc("-" if r["missing"] is None else str(r["missing"])), esc(r["missing_notes"])] for r in rows]
             return ("<div class='coltitle' style='margin-top:10px'>공식 노트 구성과 리뷰가 말한 노트</div>"
                     + self.table(["상품", "공식 노트(사양)", "노트를 말한 리뷰", "공식 노트(계열)를 말한 리뷰", "설명한 노트가 안 남", "그 리뷰가 말한 노트"], body)
-                    + "<div class='fn'>리뷰의 노트는 설계 정보 scent_note 값(계열)이고, 공식 노트 낱말과는 config의 note_map으로 맞댔다. (공식)은 그 상품 공식 노트 계열.</div>")
+                    + "<div class='fn'>리뷰의 노트는 설계 정보 항목 '리뷰에 나온 노트'의 값(계열)이고, 공식 노트 낱말과는 config의 note_map으로 맞댔다. (공식)은 그 상품 공식 노트 계열.</div>")
         if sid == "parts":
             body = [[f"<b>{esc(r['brand'])}</b>" + mt(r), esc(r["sprayer"]) + " " + self.srcs(r["src"]),
                      self.tnum(f"{r['parts']}개", r["ev"] if r["parts"] else None), esc(r["top"])] for r in rows]
@@ -254,29 +267,29 @@ class R:
         if sid == "body":
             body = [[f"<b>{esc(r['brand'])}</b>" + mt(r), esc(str(r["symptoms"])), esc(r["by_type"]),
                      esc(r["allergens"]) + " " + self.srcs(r["src"])] for r in rows]
-            return ("<div class='coltitle' style='margin-top:10px'>몸 증상 리뷰와 표시 알레르기 성분(나열만)</div>"
-                    + self.table(["상품", "몸 증상 리뷰", "종류", "표시 알레르기 성분(사양)"], body)
-                    + "<div class='fn'>몸 증상 리뷰가 적어 상품별 비율이나 성분과의 관계를 말하지 않는다.</div>")
+            return ("<div class='coltitle' style='margin-top:10px'>이상 반응 리뷰와 표시 알레르기 성분(나열만)</div>"
+                    + self.table(["상품", "이상 반응 리뷰", "종류", "표시 알레르기 성분(사양)"], body)
+                    + "<div class='fn'>이상 반응 리뷰가 적어 상품별 비율이나 성분과의 관계를 말하지 않는다.</div>")
         return ""
 
     def insert_for(self, title):
         T = self.M["tables"]
         t = title
         if "TAM" in t:
-            rows = [[esc(r["name"]), self.tnum(r["revenue_text"]), esc(f"{r['brands']:,}"), esc(f"{r['asins']:,}"), esc(f"{r['avg_price']:.2f}"),
+            rows = [[esc(r["name"]), self.tnum(r["revenue_text"]), esc(f"{r['brands']:,}"), esc(f"{r['asins']:,}"), esc("-" if r.get('avg_price') is None else f"{r['avg_price']:.2f}"),
                      esc(f"{r['avg_rating']:.2f}"), esc(f"{r['mom12']:.2f}"), esc(f"{r['az']:.4f}")] for r in T.get("m.subcategories", [])]
             return ("<div class='coltitle'>하위 카테고리(시장 데이터, 월 매출 칸과 증감, azRevenuePct 단위 미확인)</div>"
-                    + self.table(["노드", "월 매출", "브랜드", "ASIN", "평균 가격", "평균 별점", "momGrowth12", "azRevenuePct"], rows)
+                    + self.table(["노드", "월 매출", "브랜드", "ASIN", "평균 가격", "평균 별점", "12개월 증감(momGrowth12)", "아마존 직판 비중(azRevenuePct)"], rows)
                     + "".join(f"<div class='coltitle' style='margin-top:12px'>브랜드 점유율 상위 10: {esc(n)}</div>"
-                              + self.table(["순위", "브랜드", "marketshare(%로 읽음)", "평균 가격", "평균 별점"],
+                              + self.table(["순위", "브랜드", "점유율(marketshare, %로 읽음)", "평균 가격", "평균 별점"],
                                            [[esc(r["rank"]), esc(r["brand"]), esc(r["share_text"]), esc(f"{r['avg_price']:.2f}"),
-                                             esc(f"{r['rating']:.2f}")] for r in T.get(f"m.brands_{k}", [])])
+                                             esc("-" if r.get('rating') is None else f"{r['rating']:.2f}")] for r in T.get(f"m.brands_{k}", [])])   # 빈 값은 -
                               for k, n in zip(T.get("meta.market_keys") or [], T.get("meta.brand_nodes") or [])))
         if "검색 수요" in t:
             parts = []
             for g, n in (("female", "여성 검색어"), ("male", "남성 검색어"), ("common", "공통 검색어")):
-                parts.append(f"<div class='col'><div class='coltitle'>{n}(30일 검색량, yoYChangePct)</div>"
-                             + self.table(["검색어", "검색량", "yoY"], [[esc(r["term"]), esc(r["volume_text"]), esc(r["yoy_text"])]
+                parts.append(f"<div class='col'><div class='coltitle'>{n}(30일 검색량, 전년 대비 증감)</div>"
+                             + self.table(["검색어", "검색량", "전년 대비"], [[esc(r["term"]), esc(r["volume_text"]), esc(r["yoy_text"])]
                                                                     for r in T.get(f"m.terms_{g}", [])]) + "</div>")
             pb = T.get("m.price_bands", [])
             return (f"<div class='cols'>{''.join(parts)}</div><div class='coltitle' style='margin-top:12px'>가격대(브랜드 평균 가격 3구간)</div>"
@@ -284,24 +297,35 @@ class R:
                                  [[esc(r["band"]), esc(r["price_range"]), esc(r["brands"]), esc("-" if r["avg_rating"] is None else f"{r['avg_rating']:.2f}"),
                                    esc(f"{r['revenue_share']:.1f}%")] for r in pb]))
         if "점수표" in t:
+            sb = T.get("meta.scoreboard") or {}      # 카테고리 이름(없으면 향수 때 문구)
+            tn, hi, lo = sb.get("topic_name"), sb.get("dir_high", "너무 셈"), sb.get("dir_low", "약함")
+            du, dn = sb.get("duration_unit", "시간"), sb.get("duration_name", "말한 지속 시간")
+            show_size = (not sb) or any(r.get("size") or r.get("price_per_oz") for r in T.get("s.scoreboard", []))
             rows = []
             for r in T.get("s.scoreboard", []):
                 rows.append([f"<b>{esc(r['brand'])}</b><div class='mono mut'>{esc(r['asin'])}</div>", esc(r["subcategory"] or "-"),
-                             esc(f"{r['price']:.2f}" if r["price"] else "-"), esc(r["size"] or "-"),
-                             esc(f"{r['price_per_oz']:.2f}" if r["price_per_oz"] else "-"), esc(f"{r['weighted_star']:.2f}★"),
-                             self.tnum(f"{r['topic_neg_pct']:.1f}%", r["ev"]["topic_neg"]),
+                             esc(f"{r['price']:.2f}" if r["price"] else "-")]
+                            + ([esc(r["size"] or "-"), esc(f"{r['price_per_oz']:.2f}" if r["price_per_oz"] else "-")] if show_size else [])
+                            + [esc(f"{r['weighted_star']:.2f}★"),
+                             self.tnum(self.pc(r['topic_neg_pct']), r["ev"]["topic_neg"]),
                              self.tnum("-" if r["dir_index"] is None else f"{r['dir_index']:+.2f}", r["ev"]["dir_low"])
-                             + f"<div class='mut small'>약함 {r['dir_low']} 대 너무 셈 {r['dir_high']}</div>",
-                             self.tnum("-" if r["duration_median"] is None else f"{r['duration_median']:g}시간", r["ev"]["duration"])
+                             + f"<div class='mut small'>{esc(lo)} {r['dir_low']} 대 {esc(hi)} {r['dir_high']}</div>",
+                             self.tnum("-" if r["duration_median"] is None else (f"약 {round(r['duration_median'] * 60)}분" if du == "시간" and r['duration_median'] < 1 else f"{r['duration_median']:g}{du}"), r["ev"]["duration"])
                              + f"<div class='mut small'>값 {r['duration_values']}개</div>",
                              esc(r["strength"] or "-"), esc(r["weakness"] or "-")]
                             + ([esc(r.get("spec_concentration") or "-") + ("" if r.get("spec_match") in (None, "일치 확인") else
                                                                          f"<div class='mut small'>{esc(r['spec_match'])}</div>"),
                                 esc(r.get("spec_notes") or "-") + " " + self.srcs(r.get("spec_src"))] if "spec_concentration" in r else []))
             spec_head = ["농도(사양)", "노트 구성(사양)"] if any("spec_concentration" in r for r in T.get("s.scoreboard", [])) else []
-            return self.table(["상품", "하위 카테고리", "가격", "용량", "온스당", "가중 별점", "지속력 부정(가중)", "세기 방향 지수", "말한 지속 시간 중앙값",
-                               "가장 큰 강점", "가장 큰 약점"] + spec_head, rows) + \
-                "<div class='fn'>세기 방향 지수 = (너무 셈 − 약함) ÷ (너무 셈 + 약함), 방향 언급 25개 이상인 상품만. 지속 시간 중앙값은 값 5개 이상일 때만.</div>"
+            if not sb:      # 향수 회차(이전 metrics)와 같은 화면
+                head = ["상품", "하위 카테고리", "가격", "용량", "온스당", "가중 별점", "지속력 부정(가중)", "세기 방향 지수", "말한 지속 시간 중앙값"]
+                fn = "세기 방향 지수 = (너무 셈 − 약함) ÷ (너무 셈 + 약함), 방향 언급 25개 이상인 상품만. 지속 시간 중앙값은 값 5개 이상일 때만."
+            else:
+                head = (["상품", "하위 카테고리", "가격"] + (["용량", "온스당"] if show_size else []) + ["가중 별점", f"{tn} 부정(가중)",
+                        f"방향 지수({hi}, {lo})", f"{dn} 중앙값"])
+                fn = (f"방향 지수 = ({hi} − {lo}) ÷ ({hi} + {lo}), 방향 언급 {sb.get('dir_min')}개 이상인 상품만. "
+                      f"{dn} 중앙값은 값 {sb.get('duration_min')}개 이상일 때만.")
+            return self.table(head + ["가장 큰 강점", "가장 큰 약점"] + spec_head, rows) + f"<div class='fn'>{esc(fn)}</div>"
         if "하위 카테고리 비교" in t:
             sub = {}
             for r in T.get("s.scoreboard", []):
@@ -334,27 +358,35 @@ class R:
             fmeta = focus[int(m.group(1)) - 1]
             fid = fmeta["id"]
             parts = []
+            drawn = getattr(self, "_drawn_items", set())      # 앞 집중 분석에서 이미 그린 항목 표는 다시 그리지 않음
+            self._drawn_items = drawn
             for k, rows in T.items():
                 if not k.startswith(f"f.{fid}."):
                     continue
+                it_id = k.split(".")[2]
+                if it_id in drawn and not (k.endswith(".bins") or ".by_" in k or ".labels." in k):
+                    parts.append(f"<div class='fn'>{esc(self.nm('items', it_id))} 표는 앞 집중 분석과 같아 다시 싣지 않습니다.</div>")
+                    continue
+                if not (".by_" in k or ".labels." in k or k.endswith(".bins")):
+                    drawn.add(it_id)
                 if k.endswith(".bins"):
                     parts.append(f"<div class='coltitle'>{esc(T.get('meta.duration_name') or '값')} 분포</div>" + self.bars(
                         [{**r, "n_text": f"{r['reviews']}개"} for r in rows], "bin", "reviews", "n_text", "ev", color="mix"))
                 elif ".by_" in k:
                     sl = fmeta.get("split_label_name") or "라벨"
-                    parts.append(f"<div class='coltitle'>{esc(k.split('.')[2])}별 {esc(sl)} 비율</div>" + self.table(
-                        ["값", "리뷰", sl, "비율"], [[esc(r["ko"]), esc(r["reviews"]), esc(r["with_label"]), esc(f"{r['share']:.1f}%")] for r in rows]))
+                    parts.append(f"<div class='coltitle'>{esc(self.nm('items', k.split('.')[2]))}별 {esc(sl)} 비율</div>" + self.table(
+                        ["값", "리뷰", sl, "비율"], [[esc(r["ko"]), esc(r["reviews"]), esc(r["with_label"]), esc(self.pc(r['share'], r["reviews"]))] for r in rows]))
                 elif k.endswith(".note_x_direction"):
                     parts.append("<div class='coltitle'>노트 x 방향(같은 인용에서 짝지은 수)</div>" + self.table(
-                        ["노트", "방향", "리뷰"], [[esc(r["note"]), esc(r["direction"]), esc(r["reviews"])] for r in rows[:20]]))
+                        ["노트", "방향", "리뷰"], [[esc(self.nm('values', 'scent_note', r["note"])), esc(self.nm('values', 'note_direction', r["direction"])), esc(r["reviews"])] for r in rows[:20]]))
                 elif ".labels." in k:
-                    parts.append(f"<div class='coltitle'>세부 이슈 라벨: {esc(k.split('.')[-1])} 부정</div>" + self.table(
-                        ["라벨", "리뷰", "가중"], [[esc(r["name"]), esc(r["reviews"]), esc(f"{r['weighted_pct']:.1f}%")] for r in rows]))
+                    parts.append(f"<div class='coltitle'>세부 이슈 라벨: {esc(self.nm('topics', k.split('.')[-1]))} 부정</div>" + self.table(
+                        ["라벨", "리뷰", "가중"], [[esc(r["name"]), esc(r["reviews"]), esc(self.pc(r['weighted_pct'], r["reviews"], kind_w=True))] for r in rows]))
                 elif rows and "ko" in rows[0]:
-                    parts.append(f"<div class='coltitle'>{esc(k.split('.')[-1])}</div>" + self.bars(
+                    parts.append(f"<div class='coltitle'>{esc(self.nm('items', k.split('.')[-1]))}</div>" + self.bars(
                         [{**r, "n_text": f"{r['reviews']}개"} for r in rows], "ko", "reviews", "n_text", "ev", color="prod"))
                 elif rows and "value" in rows[0]:
-                    parts.append(f"<div class='coltitle'>{esc(k.split('.')[-1])}(원문 표기)</div>" + self.table(
+                    parts.append(f"<div class='coltitle'>{esc(self.nm('items', k.split('.')[-1]))}(원문 표기)</div>" + self.table(
                         ["값", "리뷰"], [[esc(r["value"]), esc(r["reviews"])] for r in rows]))
             return "".join(parts)
         if t.startswith("안전"):
@@ -368,10 +400,10 @@ class R:
                 items = ", ".join(esc(x.get("text") or f"{x['ko']} {x['reviews']}") for x in s["items"][:4]) or "-"
                 terms = ", ".join(f"{esc(x['term'])} {x['volume']:,}" for x in s["terms"][:3]) or "-"
                 cells.append(f"<div class='std'><div class='std-h'><span class='n'>{i}</span>{esc(s['title'])}</div>"
-                             f"<div class='std-grid'><div><b>벌주는 리뷰</b> {self.tnum(f'{s[chr(110)+chr(101)+chr(103)+chr(95)+chr(114)+chr(101)+chr(118)+chr(105)+chr(101)+chr(119)+chr(115)]:,}개', s['ev']['neg'])}"
-                             f"(가중 {s['neg_weighted_pct']:.1f}%)<div class='mut small'>{labs}</div></div>"
+                             f"<div class='std-grid'><div><b>불만 리뷰</b> {self.tnum(f'{s[chr(110)+chr(101)+chr(103)+chr(95)+chr(114)+chr(101)+chr(118)+chr(105)+chr(101)+chr(119)+chr(115)]:,}개', s['ev']['neg'])}"
+                             f"(가중 {self.pc(s['neg_weighted_pct'])})<div class='mut small'>{labs}</div></div>"
                              f"<div><b>만족 리뷰</b> {self.tnum(f'{s[chr(112)+chr(111)+chr(115)+chr(95)+chr(114)+chr(101)+chr(118)+chr(105)+chr(101)+chr(119)+chr(115)]:,}개', s['ev']['pos'])}"
-                             f"<div class='mut small'>부정이 가장 적은 상품: {esc(s['best']['brand'])} {s['best']['neg_pct']:.1f}%</div></div>"
+                             f"<div class='mut small'>부정이 가장 적은 상품: {esc(s['best']['brand'])} {self.pc(s['best']['neg_pct'])}</div></div>"
                              f"<div><b>설계 정보</b><div class='mut small'>{items}</div></div><div><b>관련 검색어</b><div class='mut small'>{terms}</div></div></div></div>")
             return "".join(cells)
         if "견고성" in t:
@@ -399,7 +431,7 @@ class R:
         return ""
 
     def std_card(self, n):
-        """기준 n의 숫자 칸(벌주는 리뷰, 만족 리뷰, 부정이 가장 적은 상품, 설계 정보, 관련 검색어). 문장의 '#### 기준 n' 아래에 놓는다."""
+        """기준 n의 숫자 칸(불만 리뷰, 만족 리뷰, 부정이 가장 적은 상품, 설계 정보, 관련 검색어). 문장의 '#### 기준 n' 아래에 놓는다."""
         board = self.M["tables"].get("std.board", [])
         if not 1 <= n <= len(board):
             return ""
@@ -410,8 +442,8 @@ class R:
         neg = self.tnum(f"{s['neg_reviews']:,}개", s["ev"]["neg"])
         pos = self.tnum(f"{s['pos_reviews']:,}개", s["ev"]["pos"])
         return (f"<div class='std'><div class='std-h'><span class='n'>{n}</span>{esc(s['title'])}: 데이터</div><div class='std-grid'>"
-                f"<div><b>벌주는 리뷰</b> {neg}(가중 {s['neg_weighted_pct']:.1f}%)<div class='mut small'>{labs}</div></div>"
-                f"<div><b>만족 리뷰</b> {pos}<div class='mut small'>부정이 가장 적은 상품: {esc(s['best']['brand'])} {s['best']['neg_pct']:.1f}%</div></div>"
+                f"<div><b>불만 리뷰</b> {neg}(가중 {s['neg_weighted_pct']:.1f}%)<div class='mut small'>{labs}</div></div>"
+                f"<div><b>만족 리뷰</b> {pos}<div class='mut small'>부정이 가장 적은 상품: {esc(s['best']['brand'])} {self.pc(s['best']['neg_pct'])}</div></div>"
                 f"<div><b>설계 정보</b><div class='mut small'>{items}</div></div><div><b>관련 검색어(30일 검색량)</b><div class='mut small'>{terms}</div></div></div></div>"
                 + self.spec_table(s["id"]))
 
@@ -454,7 +486,8 @@ class R:
             if m:
                 heads[m.group(1)] = m.group(2)
         kp = []
-        for key in ("head.market_year", "head.topic_neg", "head.topic_weakest", "head.dir_ratio", "head.fastest_term"):
+        # 머리 숫자는 문장에 적힌 순서대로(키를 바꿔 쓸 수 있게). 문장에 없으면 기본 다섯
+        for key in (list(heads) or ["head.market_year", "head.topic_neg", "head.topic_weakest", "head.dir_ratio", "head.fastest_term"]):
             if key not in self.V:
                 continue
             cap = heads.get(key, "")

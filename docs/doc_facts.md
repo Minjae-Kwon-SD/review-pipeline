@@ -1,6 +1,6 @@
 # 문서 숫자 출처
 
-회차 perfume-db-2026-10-07, 2026-10-08T19:53 기준. `python scripts/doc_facts.py build`가 만든다.
+회차 perfume-db-2026-10-07, 2026-10-08T23:17 기준. `python scripts/doc_facts.py build`가 만든다.
 
 | 키 | 표기 | 출처 |
 |---|---|---|

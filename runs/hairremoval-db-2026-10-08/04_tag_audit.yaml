@@ -1,0 +1,137 @@
+audit:
+  stage: tags
+  run: hairremoval-db-2026-10-08
+  overall_status: FAIL
+  summary: "표본 150개 중 FAIL 23개(약 15%). 20개가 overall 태그로, 효과(it works, No results, sirve bien), 고장(Manchas raras), 크기(Humongous), 화상처럼 이유가 되는 속성만 말하는 제목이나 문장을 overall로 달아 같은 말이 이유 주제와 두 번 집계됨(스키마 overall exclude와 confusions 위반). 나머지는 시간 대 효과 구분 1건, 면도 트러블 감소를 safety로 단 1건, 잘린 인용 1건."
+  checked: 150
+  findings:
+    - review_id: R2A9JP5INWC1G7
+      topic: overall
+      status: FAIL
+      finding: "인용 'Easy to use and effective too'는 사용 편의와 효과라는 속성만 말함. 둘 다 ease_of_use, hair_reduction에 따로 달려 있고, overall은 이유가 없을 때만 다는 주제임"
+      required_action: "overall 인용을 'I believe it’s possible with this magic machine.'으로 바꾸거나 overall 태그 삭제"
+    - review_id: R67FII42ZG841
+      topic: overall
+      status: FAIL
+      finding: "'No change'는 털이 줄지 않았다는 효과 이야기라 hair_reduction(이미 있음). 스키마: 짧아도 효과를 말하면 overall이 아님"
+      required_action: "overall 태그 삭제"
+    - review_id: R3APZ6JWV7H4XD
+      topic: overall
+      status: FAIL
+      finding: "'No results'는 효과 이야기라 hair_reduction(이미 있음)"
+      required_action: "overall 태그 삭제"
+    - review_id: R34MDGSMXQ8YWH
+      topic: overall
+      status: FAIL
+      finding: "'Used it over an OLD tattoo ... burned myself.'는 화상(safety) 이야기이고 같은 인용으로 safety가 이미 달려 있음. 리뷰는 4점이고 문신 밖에서는 'the device operated as expected'라고 함"
+      required_action: "overall 태그 삭제(전체 평을 남기려면 'aside from the tattooed area the device operated as expected', positive)"
+    - review_id: R3CXU474QJCRGR
+      topic: overall
+      status: FAIL
+      finding: "스키마 confusions가 'Don't waste your money'를 price_value로 지정했고 같은 인용으로 price_value가 이미 있음. 이유(quit working)도 quality에 달려 있어 overall로 셀 내용이 없음"
+      required_action: "overall 태그 삭제"
+    - review_id: RH6TJCI4IIG0W
+      topic: overall
+      status: FAIL
+      finding: "'Works but it hurts.'는 효과(hair_reduction)와 통증(pain_comfort)이라는 두 속성뿐이고 둘 다 따로 달려 있음"
+      required_action: "overall 태그 삭제"
+    - review_id: R1LY9NEVXGJBWW
+      topic: overall
+      status: FAIL
+      finding: "'it works! Just keep up with it!'는 효과와 꾸준함이라는 효과 조건이라 hair_reduction에 해당(이미 있음)"
+      required_action: "overall 태그 삭제"
+    - review_id: R5SJYXEK6GLD6
+      topic: overall
+      status: FAIL
+      finding: "'Semi-permanent at best... NOT permanent.'는 효과가 영구적이지 않다는 hair_reduction 이야기이고 hair_reduction mixed가 이미 있음"
+      required_action: "overall 태그 삭제"
+    - review_id: R17X5OGFX3L1Q4
+      topic: overall
+      status: FAIL
+      finding: "'This thing works!'는 효과 이야기라 hair_reduction(이미 있음)"
+      required_action: "overall 태그 삭제"
+    - review_id: R2MZ9ZWPKOLRZQ
+      topic: overall
+      status: FAIL
+      finding: "'is a little annoying'은 'the fact that i have to shave before every use is a little annoying'에서 잘라 온 말로, 매번 면도해야 하는 불편(ease_of_use negative, 이미 있음)을 가리킴. 리뷰 전체는 아직 판단을 미룬 상태"
+      required_action: "overall 태그 삭제, 또는 'i will be using it for the next couple of weeks to get a better idea if this is the product for me'로 인용을 바꾸고 neutral로"
+    - review_id: R3LZWIQRKS8R3A
+      topic: overall
+      status: FAIL
+      finding: "제목 'Don't waste your money'는 스키마상 price_value 문구이고 price_value('Don't waste your $400')가 이미 있음. 이유(효과 없음)도 hair_reduction에 달려 있음"
+      required_action: "overall 태그 삭제"
+    - review_id: R2333Y60LJ8Y8B
+      topic: overall
+      status: FAIL
+      finding: "'Súper fácil de usar y funciona'는 사용 편의와 효과뿐이고 ease_of_use, hair_reduction에 따로 달려 있음. 총평 문구는 없음(제목 Recomendado는 brand_experience)"
+      required_action: "overall 태그 삭제"
+    - review_id: R2Z9MITKBORPPL
+      topic: treatment_time
+      status: FAIL
+      finding: "'expect to be doing this weekly for up to a year in some spots'는 뒤에 'to go from thick hair growth to almost nothing'이 이어지는, 효과가 나기까지 걸리는 기간 안내임. 일정 부담에 대한 불평이 없고 스키마 confusions도 효과가 늦다는 말은 hair_reduction으로 봄. negative도 원문 근거가 없음"
+      required_action: "treatment_time 태그 삭제. 효과가 늦다는 점은 hair_reduction에 반영(mixed로 바꾸고 인용을 'it takes a while to really do it's thing and results can vary on different parts of the body'로 하는 것을 검토)"
+    - review_id: RUOAHQVG9XL2W
+      topic: overall
+      status: FAIL
+      finding: "'Manchas raras'(이상한 얼룩)은 기기 얼룩이라 quality 이야기이고 quality가 이미 있음"
+      required_action: "overall 태그 삭제"
+    - review_id: RMQNDNZ0FACDR
+      topic: overall
+      status: FAIL
+      finding: "'sirve bien'(잘 듣는다)은 효과 이야기이고 같은 인용으로 hair_reduction이 이미 있어 두 번 집계됨"
+      required_action: "overall 태그 삭제"
+    - review_id: R2GZ6MHPUO6SY2
+      topic: overall
+      status: FAIL
+      finding: "'Yo no noto nada'(아무 변화도 못 느낀다)는 효과 이야기라 hair_reduction(이미 negative로 있음). 인용 자체로는 mixed의 근거도 없음"
+      required_action: "overall 태그 삭제"
+    - review_id: R9C46AH6450H7
+      topic: overall
+      status: FAIL
+      finding: "'It worked but this is the lens after only three months of use.'는 효과(hair_reduction)와 렌즈 손상(quality)뿐이고 둘 다 따로 달려 있음"
+      required_action: "overall 태그 삭제"
+    - review_id: R2V5RNF586IBAW
+      topic: overall
+      status: FAIL
+      finding: "'Humongous'(엄청 크다)는 크기 이야기라 design이고 design negative가 이미 있음"
+      required_action: "overall 태그 삭제"
+    - review_id: R3OKWM306XWINV
+      topic: safety
+      status: FAIL
+      finding: "'no se me irritaba la piel'은 면도할 때 생기던 자극이 이 기기를 쓴 뒤 사라졌다는 말임(원문 앞부분: cuando me rasuraba se me irritaba mucho la piel). 스키마상 면도 트러블 감소는 hair_reduction이고 safety exclude에 해당"
+      required_action: "safety 태그 삭제(hair_reduction positive가 이미 있음)"
+    - review_id: R3UFI10NZBE0BU
+      topic: overall
+      status: FAIL
+      finding: "제목 'Works better than salon'은 살롱과 비교한 효과(hair_reduction) 이야기임. 인용에는 mixed의 근거도 없음(무게 불만은 design에 따로 있음)"
+      required_action: "overall 태그 삭제"
+    - review_id: R12DL2XYKNVTLP
+      topic: safety
+      status: FAIL
+      finding: "인용이 'but with each session the irritation'에서 끊겨 '줄었다(has decreased)'는 서술이 빠짐. 인용만 보면 mixed의 좋아진 쪽 근거가 없고 번역하면 뜻이 달라짐"
+      required_action: "인용을 'In the beginning I got a bit of acne and irritation, but with each session the irritation (as in acne from shaving - follicular acne) has decreased'까지 늘리기(원문 그대로)"
+    - review_id: R2H56B7VCISJG6
+      topic: overall
+      status: FAIL
+      finding: "'Muy estético'(아주 예쁘다)는 외관이라 design이고 같은 인용으로 design이 이미 있음. 본문에는 총평 문구가 없음"
+      required_action: "overall 태그 삭제"
+    - review_id: R17Z3G31WY4J6A
+      topic: overall
+      status: FAIL
+      finding: "'Finally an IPL that WORKS!!'는 효과 이야기(hair_reduction, 이미 있음). 본문에 총평 문장이 따로 있음"
+      required_action: "overall 인용을 'Overall, very satisfied with this IPL'로 바꾸기"
+  missed:
+    - {review_id: R2BIBB7MLELDCS, topic: customer_service, reason: "purchased a replacement/returned defective device ... appears return window has closed (반품 경험과 반품 기한 지남)"}
+    - {review_id: R1KBFBFJOJG3R, topic: customer_service, reason: "I had to return it for a replacement ... I sent it back before the return window closed (교체 반품 경험, neutral)"}
+    - {review_id: R1LY9NEVXGJBWW, topic: skin_hair_suitability, reason: "제목 Girls with light skin and dark stubble…it works! (맞는 유형 안내)"}
+    - {review_id: RHIX3UB7PUARG, topic: skin_hair_suitability, reason: "I have fine hair on the outside of my thigh so of course it did nothing there (털 굵기에 따라 효과가 갈림)"}
+    - {review_id: R23CLRWII4NXT8, topic: design, reason: "it comes with a long charging cable, so you don't have to worry about the cable being too short (전원 코드 길이)"}
+    - {review_id: RPKW26NCED8Q8, topic: safety, reason: "some even developed a dark/black spot on them, which went away in about a week (시술 뒤 피부 반응)"}
+    - {review_id: RPKW26NCED8Q8, topic: skin_hair_suitability, reason: "my legs and arms were more sensitive to the treatment with their slightly darker skin tone (피부색에 따른 차이)"}
+    - {review_id: R3LZWIQRKS8R3A, topic: trust, reason: "The comments always seemed like bot responses (리뷰가 의심스러웠다)"}
+    - {review_id: R1KNHD542ODN3O, topic: safety, reason: "sometimes I smell plastic burning. The laser window has scorch marks on it and probably shouldn't be used (탄내와 그을음 때문에 쓰면 안 될 것 같다는 안전 우려)"}
+    - {review_id: R1E8UGOQ0TAQSW, topic: ease_of_use, reason: "Came with a very detailed guide and warnings (설명서 평가)"}
+    - {review_id: R326Z0592LU7XL, topic: price_value, reason: "without having to make appointments or keep paying someone else (시술 비용 절감)"}
+    - {review_id: R85QRKGVJQ1AI, topic: skin_hair_suitability, reason: "I'm fair skinned with light hair and it really works! (맞지 않는 유형인데도 됨)"}
+    - {review_id: R17Z3G31WY4J6A, topic: brand_experience, reason: "If you've tried other IPLs and have been disappointed then you need to try this one (추천)"}
+  next_action: RETURN_TO_OWNER

@@ -1,0 +1,177 @@
+# 가정용 IPL, 레이저 제모기 카테고리. collect.py candidates와 asin-selector가 읽는다.
+# 2026-10-08 민재님 "레이저 가정용 제모기"로 범위를 정함(제모 크림, 왁스, 에필레이터, 면도기, 트리머는 뺌).
+category: hairremoval
+name_ko: 가정용 IPL 레이저 제모기
+
+# 공유 DB의 search_reviews keyword(리뷰 제목과 본문 부분일치)
+keywords: [IPL, laser hair removal, hair removal device, at home laser, hair removal]
+
+# 상품 제목(대소문자 무시)에 하나라도 있으면 후보, title_exclude가 하나라도 있으면 뺀다
+title_include: [IPL, Laser Hair Removal, Hair Removal Device, Light Hair Removal, Permanent Hair Removal]
+title_exclude: [Cream, Wax, Strip, Razor, Epilator, Trimmer, Shaver, Spray, Gel, Lotion, Serum, Goggles, Glasses,
+                Replacement, Cartridge, Numbing, Inhibitor, Stick, Eraser, Crystal]
+
+# kind_hint 규칙: 먼저 맞는 것
+kind_rules:
+  laser_diode: [Diode, Laser]
+  ipl: [IPL, Intense Pulsed Light, Light]
+
+# 리뷰 리포트(render_html.py, issues.py가 읽음)
+report:
+  title: {ko: "아마존 리뷰 분석: 가정용 IPL 레이저 제모기", en: "Amazon Review Analysis: At-home IPL and Laser Hair Removal"}
+  helpful_min_voted_reviews: 30
+
+# 시장 데이터(market.py, market_build.py, guide_metrics.py가 읽음). 노드는 spd-amz-market 하위 카테고리 목록에서 찾음
+# (Beauty > Shave & Hair Removal > Women's > Laser, Light & Electrolysis Hair Removal > Light Hair Removal)
+market:
+  seed: "laser hair removal"
+  parent_node: 13406780011             # Laser, Light & Electrolysis Hair Removal(자식: Light Hair Removal)
+  context_nodes: [3778591, 13269990011, 13406780011]   # Shave & Hair Removal, Women's, Laser Light & Electrolysis
+  max_nodes: 15
+  nodes:
+    IPL: "Light Hair Removal Devices"
+    LLE: "Laser, Light & Electrolysis Hair Removal"
+  term_words: [ipl, laser, "hair removal", "hair remover", "light hair", "permanent hair"]
+
+# 상품 사양 수집(specs.py, product-spec-collector가 읽음). 항목 이름과 뜻은 카테고리마다 여기에만 적는다.
+# links(기준표와 사양 잇기)는 세부 이슈와 설계 정보 항목이 승인된 뒤 guide 절과 함께 정한다.
+specs:
+  items:
+    - id: light_type
+      name_ko: 광원 방식
+      ask: "광원 방식(IPL, 다이오드 레이저 등)과 파장 범위(nm)가 적혀 있으면 그 범위"
+      format: text
+    - id: energy_levels
+      name_ko: 출력 단계와 최대 에너지
+      ask: "출력(세기) 단계 수, 최대 에너지(J) 또는 에너지 밀도(J/cm²), 자동 출력(피부 센서로 단계 조절) 여부"
+      format: text
+    - id: flash_count
+      name_ko: 발광 횟수(수명)
+      ask: "기기 수명으로 적힌 총 발광 횟수(예: 400,000, 999,999, 무제한)"
+      format: text
+    - id: flash_speed_window
+      name_ko: 발광 간격과 창 크기
+      ask: "발광 간격(초)이나 연속 발광 모드, 창(헤드) 크기(cm²)와 부위별 헤드 수"
+      format: text
+    - id: cooling
+      name_ko: 냉각 기능
+      ask: "냉각 기능(사파이어 냉각, 아이스 쿨링 등) 여부와 설명"
+      format: text
+    - id: skin_tone_range
+      name_ko: 쓸 수 있는 피부색과 털 색
+      ask: "쓸 수 있는 피부색 범위(Fitzpatrick 유형 등), 피부색 센서 여부, 쓸 수 없는 털 색(흰털, 금발, 붉은 털 등)"
+      format: text
+    - id: treatment_schedule
+      name_ko: 권장 시술 일정과 시간
+      ask: "제조사가 적은 권장 시술 일정(처음 몇 주 동안 주 몇 번, 그 뒤 유지 주기)과 부위별 시술 시간, 효과가 보이기까지 걸린다는 기간"
+      format: text
+    - id: power_source
+      name_ko: 전원(유선, 무선)
+      ask: "유선인지 무선(배터리)인지, 배터리면 한 번 충전으로 쓰는 시간"
+      format: text
+    - id: in_box
+      name_ko: 구성품
+      ask: "상자에 든 구성품(보안경, 면도기, 파우치나 케이스, 부위별 헤드 등)"
+      format: list
+    - id: clearance_warranty
+      name_ko: 인증과 보증
+      ask: "FDA 510(k) 허가나 등록 같은 규제 표시, 임상 시험 표시, 보증 기간과 환불 보장 기간"
+      format: text
+    - id: list_price
+      name_ko: 정가
+      ask: "출처 사이트에 적힌 가격(통화 포함). 여러 구성이면 모두"
+      format: list
+
+issues:
+  # 같은 리뷰에 함께 붙는지 셀 두 라벨(주제, 라벨 id)
+  overlap: [[hair_reduction, no_effect], [skin_hair_suitability, light_fine_hair]]
+
+# 제품 개발 가이드(guide_metrics.py가 읽음). 2026-10-08 세부 이슈와 설계 정보 항목 승인 뒤 Claude가 정함(민재님 위임).
+guide:
+  title: 아마존 미국 가정용 IPL, 레이저 제모기 제품 개발 가이드
+  market_node_head: "13406780011"       # 머리 숫자의 시장 노드(Laser, Light & Electrolysis Hair Removal)
+  market_nodes_brand_share: ["Light Hair Removal Devices", "Laser, Light & Electrolysis Hair Removal"]
+  head_topic: hair_reduction            # 머리 숫자: 이 주제의 부정 리뷰 비율(가중), 가장 큰 약점이 이 주제인 상품 수
+  direction_index:                      # 방향 지수 = (high - low) / (high + low): 통증 쪽과 편안함 쪽
+    topic: pain_comfort
+    high: {name: 아픔, labels: [strong_pain, high_setting_too_strong, hot_burning_sensation, sensitive_area_pain]}
+    low: {name: 편안함, labels: [painless_comfortable, mild_tolerable, cooling_comfort]}
+    min_reviews: 15
+  duration_item: session_minutes        # 숫자 항목(한 번 시술 시간, 분)
+  duration_min_values: 3
+  duration_bins: [5, 15, 30, 60]        # 한 번 시술 시간 구간(분)
+  number_names: {session_minutes: 한 번 시술 시간, failure_time: 고장까지 쓴 기간}
+  gender_words:
+    male: ["men", "mens", "men's", "for men", "beard"]
+    female: ["women", "womens", "women's", "for women", "bikini"]
+  fastest_term_min_volume: 10000
+  growth:
+    window_weeks: 4
+    min_volume: 10000
+    exclude_words: [cream, wax, razor, epilator, trimmer, spray, strips, shaver, nair, dermaplaning, wavytalk, "series 9", flawless]   # 다른 제모 방식이나 다른 상품의 검색어
+  price_bands: 3
+  caveat_subcategory: "Light Hair Removal Devices"
+  caveats_extra:
+    - "무료 공유 DB에 있는 IPL, 레이저 제모기 5종 전부를 썼다(Ulike Air 10과 Air 10 Deluxe는 같은 모델의 두 리스팅). Philips는 부정 표본이 1개, Ulike Deluxe는 중립 표본이 0개다."
+  focus:                                # 03장 집중 분석 4개
+    - id: efficacy
+      title: 제모 효과
+      topics: [hair_reduction, skin_hair_suitability]
+      items: [area_result, time_to_results, reviewer_hair_type, reviewer_skin_tone, usage_frequency, intensity_setting]
+      split_label: no_effect            # 털 색, 피부색, 빈도, 출력 단계별 효과 없음 비율
+    - id: pain_skin
+      title: 통증과 피부 반응
+      topics: [pain_comfort, safety]
+      items: [discomfort_area, intensity_setting, shaving_prep, user_condition]
+    - id: durability
+      title: 고장과 내구성
+      topics: [quality]
+      items: [failed_component, failure_time, use_duration]
+    - id: time_use
+      title: 시술 시간과 사용 편의
+      topics: [treatment_time, ease_of_use, design, accessories]
+      items: [session_minutes, desired_improvement, comparison_reference]
+  standards:                            # 04장 소비자 기준표 후보
+    - id: efficacy
+      title: 제모 효과
+      neg_labels: [no_effect, partial_reduction, uneven_by_area, slow_results, not_lasting]
+      pos_labels: [works_general, reduced_regrowth, finer_lighter, nearly_gone_less_shaving, works_on_areas, quick_results, works_with_consistency]
+      items: [time_to_results, area_result]
+      search_words: ["permanent", "results"]
+    - id: pain_comfort
+      title: 통증과 냉각
+      neg_labels: [strong_pain, mild_sting, sensitive_area_pain, hot_burning_sensation, heats_up_with_use, cooling_insufficient, high_setting_too_strong]
+      pos_labels: [painless_comfortable, mild_tolerable, cooling_comfort, less_painful_than_alternatives]
+      items: [discomfort_area, intensity_setting]
+      search_words: ["painless", "ice cooling"]
+    - id: skin_safety
+      title: 피부 안전
+      neg_labels: [skin_burns, irritation_redness, rash_bumps_allergy, pigment_scars, eye_flash_glare]
+      pos_labels: [no_irritation, sensitive_skin_ok, safety_feature]
+      safety: true                      # 07c 이상 반응 판정을 쓴다
+      items: [discomfort_area]
+      search_words: ["safe", "fda"]
+    - id: durability
+      title: 내구성
+      neg_labels: [early_failure, failed_after_months, failure_unspecified, partial_failure, intermittent_malfunction, overheating, scorch_marks_smell, fragile_build]
+      pos_labels: [well_made, durable]
+      items: [failed_component, failure_time]
+      search_words: ["flashes", "warranty"]
+    - id: treatment_time
+      title: 시술 시간과 일정
+      neg_labels: [long_session, large_area_slow, slow_flash, small_window_passes, demanding_schedule, longer_than_expected]
+      pos_labels: [quick_session, fast_flash_mode, large_area_quick, light_schedule]
+      items: [session_minutes, usage_frequency]
+      search_words: ["fast", "10 minutes"]
+    - id: suitability
+      title: 피부색과 털 색 적합성
+      neg_labels: [dark_skin_tone, dark_body_areas, light_fine_hair, gray_white_hair, thick_coarse_hair]
+      pos_labels: []
+      items: [reviewer_skin_tone, reviewer_hair_type]
+      search_words: ["dark skin", "blonde"]
+    - id: returns_service
+      title: 반품과 고객 응대
+      neg_labels: [missed_return_window, window_ends_before_results, no_response, refund_replace_refused, unhelpful_service, slow_return_process]
+      pos_labels: [refund_granted, free_replacement, helpful_service]
+      items: [use_duration]
+      search_words: ["money back", "guarantee"]

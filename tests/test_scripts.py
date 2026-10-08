@@ -309,7 +309,7 @@ def test_issues(tmp):
     au = json.loads((run_ / "07b_issue_audit_summary.json").read_text(encoding="utf-8"))
     eq("감사 집계", (au["status"], au["fail"], au["fail_rate"], len(au["warnings"])), ("FAIL", 1, 0.1, 1))
     run("issues.py", "audit", run_, "--max-fail", "0.2")
-    # 안전: 부정 2(몸 증상 1, 없음 1), 긍정 1(없음)
+    # 안전: 부정 2(이상 반응 1, 없음 1), 긍정 1(없음)
     extra = [{"review_id": "R00ISSUEXYZ", "topic": "safety", "sentiment": "negative", "quote": "Body 0"},
              {"review_id": "R01ISSUEXYZ", "topic": "safety", "sentiment": "negative", "quote": "Body 1"},
              {"review_id": "R02ISSUEXYZ", "topic": "safety", "sentiment": "positive", "quote": "Body 2"}]
@@ -327,27 +327,27 @@ def test_issues(tmp):
     run("issues.py", "safety-render", run_)
     ss = json.loads((run_ / "07c_safety_summary.json").read_text(encoding="utf-8"))
     eq("안전 판정 집계", (ss["negative_symptom"], ss["negative_no_symptom"], ss["positive_no_symptom"]), (1, 1, 1))
-    # 증상별: 두통 1개(가중치 1 / 30 = 3.3%), 몸 증상 없음 1개
+    # 증상별: 두통 1개(가중치 1 / 30 = 3.3%), 이상 반응 없음 1개
     eq("안전 증상별", (ss["by_symptom"], ss["negative_text"]),
-       ([{"name": "두통", "reviews": 1, "weighted_pct": 3.3}], "안전 부정 리뷰 2개: 두통 1개(가중 3.3%), 몸 증상 없음 1개(향의 세기 등)"))
+       ([{"name": "두통", "reviews": 1, "weighted_pct": 3.3}], "안전 부정 리뷰 2개: 두통 1개(가중 3.3%), 이상 반응 없음 1개"))
     v["audit"]["verdicts"][0].pop("symptom_type")
     (run_ / "07c_safety_verdicts.yaml").write_text(yaml.safe_dump(v, allow_unicode=True), encoding="utf-8")
     out = run("issues.py", "safety-render", run_, expect=2)
     if "symptom_type" not in out:
-        FAILS.append(f"증상 분류 없는 몸 증상을 잡지 못함:\n{out}")
+        FAILS.append(f"증상 분류 없는 이상 반응을 잡지 못함:\n{out}")
     v["audit"]["verdicts"][0]["symptom_type"] = "두통"
     (run_ / "07c_safety_verdicts.yaml").write_text(yaml.safe_dump(v, allow_unicode=True), encoding="utf-8")
     run("issues.py", "safety-render", run_)
     rows = sections.render_issues({"safety.negative": {"topic": "safety", "direction": "negative", "units": 2, "other_pct": 100.0,
                                                        "top": []}}, {"safety": {"name_ko": "안전"}}, None, ss)
-    eq("8장 표 안전 부정 칸", rows[2], "| 안전 | 부정 이슈 | 두통 리뷰 1개(3.3%), 몸 증상 없음 리뷰 1개 | 증상별 분류(07c) |")
+    eq("8장 표 안전 부정 칸", rows[2], "| 안전 | 부정 이슈 | 두통 리뷰 1개(3.3%), 이상 반응 없음 리뷰 1개 | 증상별 분류(07c) |")
     md = (run_ / "07c_safety_check.md").read_text(encoding="utf-8")
-    eq("안전 확인표에 원문", ("Body 1" in md, "몸 증상 있음" in md), (True, True))
+    eq("안전 확인표에 원문", ("Body 1" in md, "이상 반응 있음" in md), (True, True))
     # 리포트 문장 속 세부 이슈 개수 대조(표 블록 밖, 10장은 브랜드 ASIN 합)
     from audit_quotes import check_issue_counts
     brands = {"B0ISSUE001": "BrandA", "B0ISSUE002": "BrandB"}
-    ok = ("## 8. 핵심 인사이트\n지속력 약점. 세부 이슈: 금방 날아감 리뷰 10개.\n안전 부정: 몸 증상 1개, 나머지 1개는 향의 세기 등.\n"
-          "안전 부정 리뷰 2개: 두통 1개(가중 3.3%), 몸 증상 없음 1개(향의 세기 등)입니다.\n"
+    ok = ("## 8. 핵심 인사이트\n지속력 약점. 세부 이슈: 금방 날아감 리뷰 10개.\n안전 부정: 이상 반응 1개, 나머지 1개는 향의 세기 등.\n"
+          "안전 부정 리뷰 2개: 두통 1개(가중 3.3%), 이상 반응 없음 1개입니다.\n"
           "## 10. 브랜드 심층\n### BrandA\n- 약점 1: 세부: 금방 날아감 리뷰 5개\n## 12. 전략 방향\n샘플\n")
     eq("리포트 개수 대조(맞음)", check_issue_counts(run_, ok, brands), [])
     bad = ok.replace("리뷰 10개", "리뷰 9개").replace("리뷰 5개", "리뷰 10개").replace("나머지 1개", "나머지 2개")

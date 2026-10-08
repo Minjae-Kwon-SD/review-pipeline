@@ -1,0 +1,2151 @@
+{
+  "total_reviews": 1012,
+  "topics": {
+    "accessories.negative": {
+      "topic": "accessories",
+      "direction": "negative",
+      "units": 20,
+      "other_units": 3,
+      "other_pct": 15.0,
+      "labels": [
+        {
+          "id": "goggles_missing",
+          "name_ko": "보안경이 없거나 빠져 옴",
+          "name_en": "Goggles not included or missing",
+          "reviews": 11,
+          "weighted_pct": 0.8,
+          "by_asin": {
+            "B07WYY6KKC": 8,
+            "B0CV3ZJ2PN": 3
+          }
+        },
+        {
+          "id": "case_lacking",
+          "name_ko": "보관 케이스가 없거나 아쉬움",
+          "name_en": "Storage case missing or unappealing",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 1
+          }
+        },
+        {
+          "id": "goggles_poor_fit",
+          "name_ko": "보안경 착용감이나 품질 불만",
+          "name_en": "Goggles fit poorly or protect poorly",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CV3ZJ2PN": 1
+          }
+        }
+      ]
+    },
+    "accessories.positive": {
+      "topic": "accessories",
+      "direction": "positive",
+      "units": 41,
+      "other_units": 2,
+      "other_pct": 4.9,
+      "labels": [
+        {
+          "id": "case_nice",
+          "name_ko": "보관 케이스나 파우치가 좋음",
+          "name_en": "Nice storage case or pouch",
+          "reviews": 22,
+          "weighted_pct": 2.4,
+          "by_asin": {
+            "B07WYY6KKC": 8,
+            "B0CV3ZJ2PN": 1,
+            "B0FGB2NS3C": 1,
+            "B0G39WBP1S": 12
+          }
+        },
+        {
+          "id": "complete_kit",
+          "name_ko": "필요한 구성품이 다 들어 있음",
+          "name_en": "Complete kit with everything needed",
+          "reviews": 9,
+          "weighted_pct": 1.1,
+          "by_asin": {
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 2,
+            "B0G39WBP1S": 6
+          }
+        },
+        {
+          "id": "goggles_included",
+          "name_ko": "보안경이 들어 있음",
+          "name_en": "Protective goggles included",
+          "reviews": 9,
+          "weighted_pct": 1.7,
+          "by_asin": {
+            "B0CV3ZJ2PN": 3,
+            "B0CWL9S4L1": 5,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 2,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B0CV3ZJ2PN": 2
+          }
+        }
+      ]
+    },
+    "brand_experience.negative": {
+      "topic": "brand_experience",
+      "direction": "negative",
+      "units": 64,
+      "other_units": 5,
+      "other_pct": 7.8,
+      "labels": [
+        {
+          "id": "not_recommend",
+          "name_ko": "비추천이나 사지 말라는 경고",
+          "name_en": "Does not recommend or warns not to buy",
+          "reviews": 36,
+          "weighted_pct": 1.3,
+          "by_asin": {
+            "B07WYY6KKC": 12,
+            "B0CV3ZJ2PN": 13,
+            "B0CWL9S4L1": 10,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "no_repurchase",
+          "name_ko": "다시 사지 않음",
+          "name_en": "Would not buy again",
+          "reviews": 7,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B07WYY6KKC": 3,
+            "B0CV3ZJ2PN": 4
+          }
+        },
+        {
+          "id": "switch_brand",
+          "name_ko": "다른 브랜드나 제품이 나음",
+          "name_en": "Another brand or product is better",
+          "reviews": 7,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B07WYY6KKC": 3,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 1,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "go_professional",
+          "name_ko": "전문 시술을 권함",
+          "name_en": "Recommends professional treatment instead",
+          "reviews": 5,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 3
+          }
+        },
+        {
+          "id": "brand_disappointment",
+          "name_ko": "브랜드나 광고에 실망",
+          "name_en": "Disappointed in the brand or its marketing",
+          "reviews": 4,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 2,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 5,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 1,
+            "B0G39WBP1S": 1
+          }
+        }
+      ]
+    },
+    "brand_experience.positive": {
+      "topic": "brand_experience",
+      "direction": "positive",
+      "units": 118,
+      "other_units": 5,
+      "other_pct": 4.2,
+      "labels": [
+        {
+          "id": "recommend",
+          "name_ko": "추천이나 사라는 권유",
+          "name_en": "Recommends or urges others to buy",
+          "reviews": 76,
+          "weighted_pct": 15.0,
+          "by_asin": {
+            "B07WYY6KKC": 14,
+            "B0CV3ZJ2PN": 12,
+            "B0CWL9S4L1": 25,
+            "B0FGB2NS3C": 8,
+            "B0G39WBP1S": 17
+          }
+        },
+        {
+          "id": "buy_again_or_upgrade",
+          "name_ko": "재구매나 상위 모델로 바꿈",
+          "name_en": "Would buy again or upgraded",
+          "reviews": 9,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B07WYY6KKC": 4,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 2,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "favorable_comparison",
+          "name_ko": "이전 기기나 다른 브랜드보다 만족",
+          "name_en": "Better than previous devices or other brands",
+          "reviews": 8,
+          "weighted_pct": 0.9,
+          "by_asin": {
+            "B07WYY6KKC": 3,
+            "B0CV3ZJ2PN": 1,
+            "B0G39WBP1S": 4
+          }
+        },
+        {
+          "id": "keeps_using",
+          "name_ko": "오래 계속 씀",
+          "name_en": "Keeps using it long term",
+          "reviews": 8,
+          "weighted_pct": 1.3,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 3,
+            "B0FGB2NS3C": 1,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "no_regret",
+          "name_ko": "후회 없는 구매",
+          "name_en": "No regrets about buying",
+          "reviews": 8,
+          "weighted_pct": 1.6,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 1,
+            "B0FGB2NS3C": 4,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "conditional_recommend",
+          "name_ko": "조건을 붙인 추천",
+          "name_en": "Recommends with conditions",
+          "reviews": 7,
+          "weighted_pct": 0.3,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 3
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 5,
+          "weighted_pct": 1.0,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 3,
+            "B0FGB2NS3C": 1
+          }
+        }
+      ]
+    },
+    "customer_service.negative": {
+      "topic": "customer_service",
+      "direction": "negative",
+      "units": 52,
+      "other_units": 4,
+      "other_pct": 7.7,
+      "labels": [
+        {
+          "id": "missed_return_window",
+          "name_ko": "반품 기한이 지나 반품이나 환불 불가",
+          "name_en": "Past the return window",
+          "reviews": 17,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B07WYY6KKC": 8,
+            "B0CV3ZJ2PN": 5,
+            "B0CWL9S4L1": 4
+          }
+        },
+        {
+          "id": "no_response",
+          "name_ko": "고객센터 연락 불가나 무응답",
+          "name_en": "Unreachable or no response",
+          "reviews": 13,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B07WYY6KKC": 5,
+            "B0CV3ZJ2PN": 5,
+            "B0CWL9S4L1": 3
+          }
+        },
+        {
+          "id": "refund_replace_refused",
+          "name_ko": "환불이나 교체, 수리 거절",
+          "name_en": "Refund or replacement refused",
+          "reviews": 8,
+          "weighted_pct": 0.3,
+          "by_asin": {
+            "B07WYY6KKC": 5,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 1
+          }
+        },
+        {
+          "id": "unhelpful_service",
+          "name_ko": "응대가 성의 없거나 도움이 안 됨",
+          "name_en": "Unhelpful or poor service",
+          "reviews": 4,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 1
+          }
+        },
+        {
+          "id": "window_ends_before_results",
+          "name_ko": "효과 확인 전에 반품 기한이 끝남",
+          "name_en": "Return window ends before results show",
+          "reviews": 4,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 3
+          }
+        },
+        {
+          "id": "slow_return_process",
+          "name_ko": "반품이나 환불 절차가 느리고 번거로움",
+          "name_en": "Slow or tedious return process",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CV3ZJ2PN": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 4,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 2
+          }
+        }
+      ]
+    },
+    "customer_service.positive": {
+      "topic": "customer_service",
+      "direction": "positive",
+      "units": 20,
+      "other_units": 0,
+      "other_pct": 0.0,
+      "labels": [
+        {
+          "id": "helpful_service",
+          "name_ko": "응대가 친절하고 빠름",
+          "name_en": "Helpful and responsive service",
+          "reviews": 8,
+          "weighted_pct": 1.2,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CV3ZJ2PN": 4,
+            "B0G39WBP1S": 2
+          }
+        },
+        {
+          "id": "refund_granted",
+          "name_ko": "환불이나 반품을 받아 줌",
+          "name_en": "Refund or return granted",
+          "reviews": 7,
+          "weighted_pct": 0.3,
+          "by_asin": {
+            "B07WYY6KKC": 3,
+            "B0CV3ZJ2PN": 3,
+            "B0CWL9S4L1": 1
+          }
+        },
+        {
+          "id": "free_replacement",
+          "name_ko": "무상 교체나 새 제품 발송",
+          "name_en": "Free replacement",
+          "reviews": 5,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CV3ZJ2PN": 3
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 0,
+          "weighted_pct": 0.0,
+          "by_asin": {}
+        }
+      ]
+    },
+    "design.negative": {
+      "topic": "design",
+      "direction": "negative",
+      "units": 47,
+      "other_units": 4,
+      "other_pct": 8.5,
+      "labels": [
+        {
+          "id": "bulky_heavy",
+          "name_ko": "크고 무거움",
+          "name_en": "Bulky or heavy",
+          "reviews": 14,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B0CV3ZJ2PN": 9,
+            "B0CWL9S4L1": 3,
+            "B0FGB2NS3C": 1,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "awkward_grip",
+          "name_ko": "모양이 쥐기 불편함",
+          "name_en": "Awkward shape or grip",
+          "reviews": 12,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B07WYY6KKC": 4,
+            "B0CV3ZJ2PN": 4,
+            "B0CWL9S4L1": 2,
+            "B0FGB2NS3C": 2
+          }
+        },
+        {
+          "id": "not_cordless",
+          "name_ko": "무선이 아니라 꽂아 써야 함",
+          "name_en": "Not cordless",
+          "reviews": 7,
+          "weighted_pct": 0.3,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 2,
+            "B0FGB2NS3C": 2
+          }
+        },
+        {
+          "id": "small_window",
+          "name_ko": "조사창이 작음",
+          "name_en": "Treatment window too small",
+          "reviews": 6,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 5
+          }
+        },
+        {
+          "id": "noisy",
+          "name_ko": "작동 소음이 큼",
+          "name_en": "Loud operating noise",
+          "reviews": 5,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 2
+          }
+        },
+        {
+          "id": "cord_adapter",
+          "name_ko": "코드가 짧거나 어댑터가 큼",
+          "name_en": "Short cord or bulky power adapter",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 2
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 4,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 2
+          }
+        }
+      ]
+    },
+    "design.positive": {
+      "topic": "design",
+      "direction": "positive",
+      "units": 55,
+      "other_units": 3,
+      "other_pct": 5.5,
+      "labels": [
+        {
+          "id": "looks_good",
+          "name_ko": "예쁘고 고급스러운 외관",
+          "name_en": "Attractive, premium look",
+          "reviews": 23,
+          "weighted_pct": 4.6,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CV3ZJ2PN": 11,
+            "B0CWL9S4L1": 3,
+            "B0FGB2NS3C": 2,
+            "B0G39WBP1S": 5
+          }
+        },
+        {
+          "id": "light_easy_grip",
+          "name_ko": "가볍고 쥐기 편함",
+          "name_en": "Lightweight and easy to hold",
+          "reviews": 18,
+          "weighted_pct": 2.6,
+          "by_asin": {
+            "B0CV3ZJ2PN": 5,
+            "B0CWL9S4L1": 4,
+            "B0FGB2NS3C": 4,
+            "B0G39WBP1S": 5
+          }
+        },
+        {
+          "id": "compact_portable",
+          "name_ko": "작고 휴대하기 좋음",
+          "name_en": "Compact and portable",
+          "reviews": 7,
+          "weighted_pct": 0.9,
+          "by_asin": {
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 4,
+            "B0G39WBP1S": 2
+          }
+        },
+        {
+          "id": "long_cord",
+          "name_ko": "전원 코드가 넉넉함",
+          "name_en": "Long enough power cord",
+          "reviews": 4,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CWL9S4L1": 1,
+            "B0FGB2NS3C": 1
+          }
+        },
+        {
+          "id": "attachments_versatile",
+          "name_ko": "부위별 교체 헤드",
+          "name_en": "Interchangeable heads for body areas",
+          "reviews": 3,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0FGB2NS3C": 2
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 3,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B0CV3ZJ2PN": 2,
+            "B0FGB2NS3C": 1
+          }
+        }
+      ]
+    },
+    "ease_of_use.negative": {
+      "topic": "ease_of_use",
+      "direction": "negative",
+      "units": 44,
+      "other_units": 3,
+      "other_pct": 6.8,
+      "labels": [
+        {
+          "id": "hard_to_trigger_flash",
+          "name_ko": "피부에 붙여도 발광이 잘 안 됨",
+          "name_en": "Hard to get it to flash on contact",
+          "reviews": 12,
+          "weighted_pct": 0.9,
+          "by_asin": {
+            "B07WYY6KKC": 8,
+            "B0CV3ZJ2PN": 2,
+            "B0FGB2NS3C": 2
+          }
+        },
+        {
+          "id": "unclear_instructions",
+          "name_ko": "설명서가 부족하거나 불분명함",
+          "name_en": "Unclear or lacking instructions",
+          "reviews": 9,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B07WYY6KKC": 3,
+            "B0CV3ZJ2PN": 5,
+            "B0CWL9S4L1": 1
+          }
+        },
+        {
+          "id": "mode_button_gripes",
+          "name_ko": "모드나 버튼 구성이 불편함",
+          "name_en": "Inconvenient modes or buttons",
+          "reviews": 7,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B07WYY6KKC": 3,
+            "B0CV3ZJ2PN": 4
+          }
+        },
+        {
+          "id": "sensor_auto_adjust",
+          "name_ko": "센서 자동 조절이 거슬림",
+          "name_en": "Annoying automatic sensor adjustment",
+          "reviews": 7,
+          "weighted_pct": 0.3,
+          "by_asin": {
+            "B07WYY6KKC": 5,
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 1
+          }
+        },
+        {
+          "id": "complicated_operation",
+          "name_ko": "조작이 복잡하고 어려움",
+          "name_en": "Complicated to operate",
+          "reviews": 4,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CWL9S4L1": 1,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "shaving_prep",
+          "name_ko": "쓸 때마다 면도해야 하는 번거로움",
+          "name_en": "Need to shave before each use",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B0CV3ZJ2PN": 3
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CV3ZJ2PN": 1
+          }
+        }
+      ]
+    },
+    "ease_of_use.positive": {
+      "topic": "ease_of_use",
+      "direction": "positive",
+      "units": 176,
+      "other_units": 9,
+      "other_pct": 5.1,
+      "labels": [
+        {
+          "id": "easy_to_use",
+          "name_ko": "쓰기 쉽고 간단함",
+          "name_en": "Easy and simple to use",
+          "reviews": 146,
+          "weighted_pct": 22.2,
+          "by_asin": {
+            "B07WYY6KKC": 25,
+            "B0CV3ZJ2PN": 48,
+            "B0CWL9S4L1": 24,
+            "B0FGB2NS3C": 16,
+            "B0G39WBP1S": 33
+          }
+        },
+        {
+          "id": "clear_instructions",
+          "name_ko": "설명서가 분명함",
+          "name_en": "Clear instructions",
+          "reviews": 13,
+          "weighted_pct": 2.1,
+          "by_asin": {
+            "B07WYY6KKC": 4,
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 3,
+            "B0FGB2NS3C": 3,
+            "B0G39WBP1S": 2
+          }
+        },
+        {
+          "id": "handy_modes",
+          "name_ko": "자동 모드와 단계 조절이 편함",
+          "name_en": "Handy auto mode and settings",
+          "reviews": 13,
+          "weighted_pct": 1.7,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CV3ZJ2PN": 3,
+            "B0CWL9S4L1": 4,
+            "B0G39WBP1S": 4
+          }
+        },
+        {
+          "id": "home_convenience",
+          "name_ko": "집에서 할 수 있어 편함",
+          "name_en": "Convenient to do at home",
+          "reviews": 10,
+          "weighted_pct": 2.0,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 4,
+            "B0CWL9S4L1": 2,
+            "B0G39WBP1S": 3
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 9,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 1,
+            "B0FGB2NS3C": 5,
+            "B0G39WBP1S": 1
+          }
+        }
+      ]
+    },
+    "hair_reduction.negative": {
+      "topic": "hair_reduction",
+      "direction": "negative",
+      "units": 286,
+      "other_units": 18,
+      "other_pct": 6.3,
+      "labels": [
+        {
+          "id": "no_effect",
+          "name_ko": "효과 없음",
+          "name_en": "No visible effect",
+          "reviews": 161,
+          "weighted_pct": 5.8,
+          "by_asin": {
+            "B07WYY6KKC": 48,
+            "B0CV3ZJ2PN": 75,
+            "B0CWL9S4L1": 28,
+            "B0FGB2NS3C": 2,
+            "B0G39WBP1S": 8
+          }
+        },
+        {
+          "id": "partial_reduction",
+          "name_ko": "줄었지만 다 없어지지 않음",
+          "name_en": "Reduced but not gone",
+          "reviews": 41,
+          "weighted_pct": 1.8,
+          "by_asin": {
+            "B07WYY6KKC": 20,
+            "B0CV3ZJ2PN": 12,
+            "B0CWL9S4L1": 6,
+            "B0FGB2NS3C": 1,
+            "B0G39WBP1S": 2
+          }
+        },
+        {
+          "id": "uneven_by_area",
+          "name_ko": "부위마다 효과 차이",
+          "name_en": "Uneven results across body areas",
+          "reviews": 36,
+          "weighted_pct": 1.6,
+          "by_asin": {
+            "B07WYY6KKC": 18,
+            "B0CV3ZJ2PN": 9,
+            "B0CWL9S4L1": 7,
+            "B0FGB2NS3C": 2
+          }
+        },
+        {
+          "id": "not_lasting",
+          "name_ko": "멈추면 다시 나고 영구적이지 않음",
+          "name_en": "Regrows after stopping, not permanent",
+          "reviews": 19,
+          "weighted_pct": 0.9,
+          "by_asin": {
+            "B07WYY6KKC": 10,
+            "B0CV3ZJ2PN": 6,
+            "B0CWL9S4L1": 3
+          }
+        },
+        {
+          "id": "slow_results",
+          "name_ko": "효과가 늦게 나타남",
+          "name_en": "Results take too long",
+          "reviews": 13,
+          "weighted_pct": 0.9,
+          "by_asin": {
+            "B07WYY6KKC": 4,
+            "B0CV3ZJ2PN": 7,
+            "B0CWL9S4L1": 1,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 18,
+          "weighted_pct": 0.9,
+          "by_asin": {
+            "B07WYY6KKC": 5,
+            "B0CV3ZJ2PN": 8,
+            "B0CWL9S4L1": 5
+          }
+        }
+      ]
+    },
+    "hair_reduction.positive": {
+      "topic": "hair_reduction",
+      "direction": "positive",
+      "units": 444,
+      "other_units": 12,
+      "other_pct": 2.7,
+      "labels": [
+        {
+          "id": "works_general",
+          "name_ko": "효과가 있음",
+          "name_en": "It works",
+          "reviews": 154,
+          "weighted_pct": 19.2,
+          "by_asin": {
+            "B07WYY6KKC": 49,
+            "B0CV3ZJ2PN": 30,
+            "B0CWL9S4L1": 52,
+            "B0FGB2NS3C": 11,
+            "B0G39WBP1S": 12
+          }
+        },
+        {
+          "id": "reduced_regrowth",
+          "name_ko": "털이 줄고 느리게 자람",
+          "name_en": "Less and slower regrowth",
+          "reviews": 119,
+          "weighted_pct": 16.8,
+          "by_asin": {
+            "B07WYY6KKC": 42,
+            "B0CV3ZJ2PN": 34,
+            "B0CWL9S4L1": 20,
+            "B0FGB2NS3C": 11,
+            "B0G39WBP1S": 12
+          }
+        },
+        {
+          "id": "nearly_gone_less_shaving",
+          "name_ko": "거의 없어지거나 면도가 줄어듦",
+          "name_en": "Nearly hair-free, less shaving",
+          "reviews": 64,
+          "weighted_pct": 10.1,
+          "by_asin": {
+            "B07WYY6KKC": 17,
+            "B0CV3ZJ2PN": 14,
+            "B0CWL9S4L1": 18,
+            "B0FGB2NS3C": 8,
+            "B0G39WBP1S": 7
+          }
+        },
+        {
+          "id": "works_on_areas",
+          "name_ko": "특정 부위에 잘 됨",
+          "name_en": "Works well on specific areas",
+          "reviews": 51,
+          "weighted_pct": 5.0,
+          "by_asin": {
+            "B07WYY6KKC": 17,
+            "B0CV3ZJ2PN": 12,
+            "B0CWL9S4L1": 14,
+            "B0FGB2NS3C": 4,
+            "B0G39WBP1S": 4
+          }
+        },
+        {
+          "id": "quick_results",
+          "name_ko": "빨리 효과가 보임",
+          "name_en": "Quick visible results",
+          "reviews": 47,
+          "weighted_pct": 6.7,
+          "by_asin": {
+            "B07WYY6KKC": 11,
+            "B0CV3ZJ2PN": 8,
+            "B0CWL9S4L1": 6,
+            "B0FGB2NS3C": 10,
+            "B0G39WBP1S": 12
+          }
+        },
+        {
+          "id": "finer_lighter",
+          "name_ko": "털이 가늘고 옅어짐",
+          "name_en": "Finer and lighter hair",
+          "reviews": 40,
+          "weighted_pct": 3.9,
+          "by_asin": {
+            "B07WYY6KKC": 8,
+            "B0CV3ZJ2PN": 11,
+            "B0CWL9S4L1": 10,
+            "B0FGB2NS3C": 5,
+            "B0G39WBP1S": 6
+          }
+        },
+        {
+          "id": "works_with_consistency",
+          "name_ko": "꾸준히 쓰면 효과가 남",
+          "name_en": "Works with consistent use",
+          "reviews": 31,
+          "weighted_pct": 4.7,
+          "by_asin": {
+            "B07WYY6KKC": 9,
+            "B0CV3ZJ2PN": 7,
+            "B0CWL9S4L1": 13,
+            "B0FGB2NS3C": 1,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 12,
+          "weighted_pct": 1.0,
+          "by_asin": {
+            "B07WYY6KKC": 4,
+            "B0CV3ZJ2PN": 3,
+            "B0CWL9S4L1": 2,
+            "B0FGB2NS3C": 1,
+            "B0G39WBP1S": 2
+          }
+        }
+      ]
+    },
+    "packaging.negative": {
+      "topic": "packaging",
+      "direction": "negative",
+      "units": 3,
+      "other_units": 3,
+      "other_pct": 100.0,
+      "labels": [
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 1
+          }
+        }
+      ]
+    },
+    "packaging.positive": {
+      "topic": "packaging",
+      "direction": "positive",
+      "units": 26,
+      "other_units": 0,
+      "other_pct": 0.0,
+      "labels": [
+        {
+          "id": "attractive_premium_box",
+          "name_ko": "예쁘고 고급스러운 포장",
+          "name_en": "Attractive, premium-looking packaging",
+          "reviews": 18,
+          "weighted_pct": 3.5,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 9,
+            "B0CWL9S4L1": 4,
+            "B0FGB2NS3C": 2,
+            "B0G39WBP1S": 2
+          }
+        },
+        {
+          "id": "well_packed",
+          "name_ko": "꼼꼼하게 잘 포장되어 옴",
+          "name_en": "Well packed",
+          "reviews": 5,
+          "weighted_pct": 1.2,
+          "by_asin": {
+            "B0CV3ZJ2PN": 3,
+            "B0CWL9S4L1": 2
+          }
+        },
+        {
+          "id": "practical_storage_box",
+          "name_ko": "보관에 쓰기 좋은 실용적인 상자",
+          "name_en": "Practical box for storage",
+          "reviews": 3,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B0CV3ZJ2PN": 1,
+            "B0FGB2NS3C": 1,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 0,
+          "weighted_pct": 0.0,
+          "by_asin": {}
+        }
+      ]
+    },
+    "pain_comfort.negative": {
+      "topic": "pain_comfort",
+      "direction": "negative",
+      "units": 64,
+      "other_units": 0,
+      "other_pct": 0.0,
+      "labels": [
+        {
+          "id": "mild_sting",
+          "name_ko": "약간 따끔함, 기대만큼 무통은 아님",
+          "name_en": "Mild sting, not fully painless",
+          "reviews": 15,
+          "weighted_pct": 1.2,
+          "by_asin": {
+            "B07WYY6KKC": 5,
+            "B0CV3ZJ2PN": 5,
+            "B0CWL9S4L1": 5
+          }
+        },
+        {
+          "id": "sensitive_area_pain",
+          "name_ko": "민감한 부위나 특정 지점에서 아픔",
+          "name_en": "Pain on sensitive areas or spots",
+          "reviews": 14,
+          "weighted_pct": 1.2,
+          "by_asin": {
+            "B07WYY6KKC": 6,
+            "B0CV3ZJ2PN": 3,
+            "B0CWL9S4L1": 4,
+            "B0FGB2NS3C": 1
+          }
+        },
+        {
+          "id": "strong_pain",
+          "name_ko": "심하게 아픔",
+          "name_en": "Strong pain",
+          "reviews": 13,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B07WYY6KKC": 9,
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 3
+          }
+        },
+        {
+          "id": "hot_burning_sensation",
+          "name_ko": "쏠 때 뜨겁거나 타는 느낌",
+          "name_en": "Hot or burning sensation during flash",
+          "reviews": 11,
+          "weighted_pct": 0.3,
+          "by_asin": {
+            "B07WYY6KKC": 4,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 5
+          }
+        },
+        {
+          "id": "high_setting_too_strong",
+          "name_ko": "높은 단계가 세서 낮춰야 함",
+          "name_en": "Higher settings too strong",
+          "reviews": 7,
+          "weighted_pct": 0.3,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 3,
+            "B0FGB2NS3C": 2
+          }
+        },
+        {
+          "id": "cooling_insufficient",
+          "name_ko": "냉각 기능이 약하거나 없음",
+          "name_en": "Cooling ineffective or missing",
+          "reviews": 6,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 4,
+            "B0CWL9S4L1": 1
+          }
+        },
+        {
+          "id": "heats_up_with_use",
+          "name_ko": "오래 쓸수록 뜨거워지고 더 아픔",
+          "name_en": "Gets hotter and more painful during a session",
+          "reviews": 4,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B07WYY6KKC": 4
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 0,
+          "weighted_pct": 0.0,
+          "by_asin": {}
+        }
+      ]
+    },
+    "pain_comfort.positive": {
+      "topic": "pain_comfort",
+      "direction": "positive",
+      "units": 201,
+      "other_units": 4,
+      "other_pct": 2.0,
+      "labels": [
+        {
+          "id": "painless_comfortable",
+          "name_ko": "아프지 않고 편함",
+          "name_en": "Painless and comfortable",
+          "reviews": 91,
+          "weighted_pct": 12.9,
+          "by_asin": {
+            "B07WYY6KKC": 9,
+            "B0CV3ZJ2PN": 37,
+            "B0CWL9S4L1": 14,
+            "B0FGB2NS3C": 9,
+            "B0G39WBP1S": 22
+          }
+        },
+        {
+          "id": "cooling_comfort",
+          "name_ko": "냉각 기능 덕분에 편함",
+          "name_en": "Cooling makes it comfortable",
+          "reviews": 53,
+          "weighted_pct": 8.6,
+          "by_asin": {
+            "B0CV3ZJ2PN": 26,
+            "B0CWL9S4L1": 7,
+            "B0G39WBP1S": 20
+          }
+        },
+        {
+          "id": "mild_tolerable",
+          "name_ko": "거의 무통이거나 참을 만함",
+          "name_en": "Nearly painless or tolerable",
+          "reviews": 37,
+          "weighted_pct": 4.3,
+          "by_asin": {
+            "B07WYY6KKC": 13,
+            "B0CV3ZJ2PN": 9,
+            "B0CWL9S4L1": 9,
+            "B0FGB2NS3C": 2,
+            "B0G39WBP1S": 4
+          }
+        },
+        {
+          "id": "fine_on_high_setting_or_sensitive_area",
+          "name_ko": "높은 단계나 민감한 부위에서도 괜찮음",
+          "name_en": "Fine even on high settings or sensitive areas",
+          "reviews": 11,
+          "weighted_pct": 2.0,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CV3ZJ2PN": 3,
+            "B0CWL9S4L1": 4,
+            "B0G39WBP1S": 2
+          }
+        },
+        {
+          "id": "less_painful_than_alternatives",
+          "name_ko": "왁싱이나 병원 레이저보다 덜 아픔",
+          "name_en": "Less painful than waxing or salon laser",
+          "reviews": 10,
+          "weighted_pct": 2.1,
+          "by_asin": {
+            "B07WYY6KKC": 4,
+            "B0CV3ZJ2PN": 3,
+            "B0FGB2NS3C": 2,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 4,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 1,
+            "B0FGB2NS3C": 1
+          }
+        }
+      ]
+    },
+    "price_value.negative": {
+      "topic": "price_value",
+      "direction": "negative",
+      "units": 125,
+      "other_units": 7,
+      "other_pct": 5.6,
+      "labels": [
+        {
+          "id": "not_worth_money",
+          "name_ko": "돈 낭비, 값어치 없음",
+          "name_en": "Waste of money",
+          "reviews": 61,
+          "weighted_pct": 2.3,
+          "by_asin": {
+            "B07WYY6KKC": 20,
+            "B0CV3ZJ2PN": 30,
+            "B0CWL9S4L1": 9,
+            "B0G39WBP1S": 2
+          }
+        },
+        {
+          "id": "disappointing_for_price",
+          "name_ko": "가격에 비해 효과나 성능이 실망스러움",
+          "name_en": "Disappointing results for the price",
+          "reviews": 26,
+          "weighted_pct": 0.9,
+          "by_asin": {
+            "B07WYY6KKC": 11,
+            "B0CV3ZJ2PN": 10,
+            "B0CWL9S4L1": 3,
+            "B0G39WBP1S": 2
+          }
+        },
+        {
+          "id": "expensive_for_lifespan",
+          "name_ko": "비싼 값에 비해 빨리 고장 남",
+          "name_en": "Too costly for its short lifespan",
+          "reviews": 17,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B07WYY6KKC": 11,
+            "B0CV3ZJ2PN": 6
+          }
+        },
+        {
+          "id": "too_expensive",
+          "name_ko": "가격 자체가 비쌈",
+          "name_en": "Too expensive",
+          "reviews": 15,
+          "weighted_pct": 1.6,
+          "by_asin": {
+            "B07WYY6KKC": 3,
+            "B0CV3ZJ2PN": 5,
+            "B0FGB2NS3C": 6,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 7,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B07WYY6KKC": 3,
+            "B0CV3ZJ2PN": 3,
+            "B0CWL9S4L1": 1
+          }
+        }
+      ]
+    },
+    "price_value.positive": {
+      "topic": "price_value",
+      "direction": "positive",
+      "units": 111,
+      "other_units": 1,
+      "other_pct": 0.9,
+      "labels": [
+        {
+          "id": "worth_the_money",
+          "name_ko": "값어치가 있음",
+          "name_en": "Worth the money",
+          "reviews": 47,
+          "weighted_pct": 7.2,
+          "by_asin": {
+            "B07WYY6KKC": 11,
+            "B0CV3ZJ2PN": 10,
+            "B0CWL9S4L1": 7,
+            "B0FGB2NS3C": 7,
+            "B0G39WBP1S": 12
+          }
+        },
+        {
+          "id": "saves_vs_salon",
+          "name_ko": "살롱이나 전문 레이저 시술보다 쌈",
+          "name_en": "Cheaper than salon treatments",
+          "reviews": 28,
+          "weighted_pct": 4.0,
+          "by_asin": {
+            "B07WYY6KKC": 8,
+            "B0CV3ZJ2PN": 5,
+            "B0CWL9S4L1": 8,
+            "B0FGB2NS3C": 2,
+            "B0G39WBP1S": 5
+          }
+        },
+        {
+          "id": "good_price",
+          "name_ko": "가격이 착하고 가성비가 좋음",
+          "name_en": "Good value for the price",
+          "reviews": 26,
+          "weighted_pct": 3.8,
+          "by_asin": {
+            "B07WYY6KKC": 5,
+            "B0CV3ZJ2PN": 5,
+            "B0CWL9S4L1": 13,
+            "B0G39WBP1S": 3
+          }
+        },
+        {
+          "id": "saves_money_overall",
+          "name_ko": "길게 보면 돈을 아낌",
+          "name_en": "Saves money over time",
+          "reviews": 13,
+          "weighted_pct": 2.7,
+          "by_asin": {
+            "B07WYY6KKC": 4,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 3,
+            "B0FGB2NS3C": 2,
+            "B0G39WBP1S": 2
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 1,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B0FGB2NS3C": 1
+          }
+        }
+      ]
+    },
+    "quality.negative": {
+      "topic": "quality",
+      "direction": "negative",
+      "units": 156,
+      "other_units": 2,
+      "other_pct": 1.3,
+      "labels": [
+        {
+          "id": "failed_after_months",
+          "name_ko": "몇 달 쓴 뒤 고장이나 성능 저하",
+          "name_en": "Failed or weakened after months of use",
+          "reviews": 35,
+          "weighted_pct": 1.1,
+          "by_asin": {
+            "B07WYY6KKC": 19,
+            "B0CV3ZJ2PN": 9,
+            "B0CWL9S4L1": 7
+          }
+        },
+        {
+          "id": "failure_unspecified",
+          "name_ko": "고장(시기 언급 없음)",
+          "name_en": "Stopped working, timing not stated",
+          "reviews": 30,
+          "weighted_pct": 1.6,
+          "by_asin": {
+            "B07WYY6KKC": 16,
+            "B0CV3ZJ2PN": 9,
+            "B0CWL9S4L1": 4,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "early_failure",
+          "name_ko": "받자마자 또는 한 달 안에 고장",
+          "name_en": "Defective on arrival or failed within a month",
+          "reviews": 24,
+          "weighted_pct": 1.0,
+          "by_asin": {
+            "B07WYY6KKC": 9,
+            "B0CV3ZJ2PN": 4,
+            "B0CWL9S4L1": 10,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "intermittent_malfunction",
+          "name_ko": "가끔 발광 안 함이나 저절로 꺼짐",
+          "name_en": "Misfires, freezes, or shuts off randomly",
+          "reviews": 17,
+          "weighted_pct": 1.0,
+          "by_asin": {
+            "B07WYY6KKC": 7,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 8
+          }
+        },
+        {
+          "id": "scorch_marks_smell",
+          "name_ko": "조사창 얼룩이나 탄내, 연기",
+          "name_en": "Window scorch marks, burning smell, or smoke",
+          "reviews": 17,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 5,
+            "B0CWL9S4L1": 11
+          }
+        },
+        {
+          "id": "overheating",
+          "name_ko": "기기 과열",
+          "name_en": "Device overheats",
+          "reviews": 16,
+          "weighted_pct": 0.9,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 7,
+            "B0CWL9S4L1": 7,
+            "B0FGB2NS3C": 1
+          }
+        },
+        {
+          "id": "partial_failure",
+          "name_ko": "특정 모드나 버튼, 센서만 고장",
+          "name_en": "Specific mode, button, or sensor failed",
+          "reviews": 14,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B07WYY6KKC": 5,
+            "B0CV3ZJ2PN": 8,
+            "B0CWL9S4L1": 1
+          }
+        },
+        {
+          "id": "fragile_build",
+          "name_ko": "약한 만듦새나 부품 파손",
+          "name_en": "Flimsy build or broken parts",
+          "reviews": 7,
+          "weighted_pct": 0.3,
+          "by_asin": {
+            "B07WYY6KKC": 5,
+            "B0CV3ZJ2PN": 1,
+            "B0FGB2NS3C": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 2,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 1
+          }
+        }
+      ]
+    },
+    "quality.positive": {
+      "topic": "quality",
+      "direction": "positive",
+      "units": 65,
+      "other_units": 1,
+      "other_pct": 1.5,
+      "labels": [
+        {
+          "id": "well_made",
+          "name_ko": "잘 만든 느낌, 고급스러움",
+          "name_en": "Feels well made and premium",
+          "reviews": 57,
+          "weighted_pct": 9.9,
+          "by_asin": {
+            "B07WYY6KKC": 4,
+            "B0CV3ZJ2PN": 16,
+            "B0CWL9S4L1": 10,
+            "B0FGB2NS3C": 7,
+            "B0G39WBP1S": 20
+          }
+        },
+        {
+          "id": "durable",
+          "name_ko": "튼튼하고 오래 작동함",
+          "name_en": "Sturdy and durable",
+          "reviews": 7,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 3,
+            "B0FGB2NS3C": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 1,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B07WYY6KKC": 1
+          }
+        }
+      ]
+    },
+    "safety.negative": {
+      "topic": "safety",
+      "direction": "negative",
+      "units": 84,
+      "other_units": 4,
+      "other_pct": 4.8,
+      "labels": [
+        {
+          "id": "skin_burns",
+          "name_ko": "화상이나 물집",
+          "name_en": "Burns or blisters",
+          "reviews": 22,
+          "weighted_pct": 0.7,
+          "by_asin": {
+            "B07WYY6KKC": 12,
+            "B0CV3ZJ2PN": 3,
+            "B0CWL9S4L1": 7
+          }
+        },
+        {
+          "id": "rash_bumps_allergy",
+          "name_ko": "발진, 뾰루지, 알레르기 반응",
+          "name_en": "Rash, bumps or allergic reaction",
+          "reviews": 16,
+          "weighted_pct": 1.0,
+          "by_asin": {
+            "B07WYY6KKC": 7,
+            "B0CV3ZJ2PN": 5,
+            "B0CWL9S4L1": 2,
+            "B0FGB2NS3C": 1,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "irritation_redness",
+          "name_ko": "자극, 붉음, 가려움",
+          "name_en": "Irritation, redness or itching",
+          "reviews": 12,
+          "weighted_pct": 1.3,
+          "by_asin": {
+            "B07WYY6KKC": 5,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 3,
+            "B0FGB2NS3C": 1,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "pigment_scars",
+          "name_ko": "색소 변화나 흉터",
+          "name_en": "Pigment change or scarring",
+          "reviews": 12,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B07WYY6KKC": 6,
+            "B0CV3ZJ2PN": 3,
+            "B0CWL9S4L1": 3
+          }
+        },
+        {
+          "id": "eye_flash_glare",
+          "name_ko": "눈부심이나 눈 안전",
+          "name_en": "Flash glare or eye safety",
+          "reviews": 11,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B07WYY6KKC": 8,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 1
+          }
+        },
+        {
+          "id": "safety_worry",
+          "name_ko": "안전 불안이나 쓰기 무서움",
+          "name_en": "Safety doubts or fear of use",
+          "reviews": 8,
+          "weighted_pct": 0.3,
+          "by_asin": {
+            "B07WYY6KKC": 4,
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 2
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 4,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CV3ZJ2PN": 1,
+            "B0G39WBP1S": 1
+          }
+        }
+      ]
+    },
+    "safety.positive": {
+      "topic": "safety",
+      "direction": "positive",
+      "units": 37,
+      "other_units": 1,
+      "other_pct": 2.7,
+      "labels": [
+        {
+          "id": "no_irritation",
+          "name_ko": "자극이나 피부 반응 없음",
+          "name_en": "No irritation or skin reaction",
+          "reviews": 20,
+          "weighted_pct": 2.3,
+          "by_asin": {
+            "B0CV3ZJ2PN": 8,
+            "B0CWL9S4L1": 4,
+            "B0FGB2NS3C": 3,
+            "B0G39WBP1S": 5
+          }
+        },
+        {
+          "id": "safety_feature",
+          "name_ko": "피부 센서 같은 안전 기능 덕에 안심",
+          "name_en": "Reassured by safety features",
+          "reviews": 6,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0FGB2NS3C": 3,
+            "B0G39WBP1S": 2
+          }
+        },
+        {
+          "id": "mild_transient",
+          "name_ko": "반응이 가볍거나 금방 가라앉음",
+          "name_en": "Mild or short-lived reaction",
+          "reviews": 4,
+          "weighted_pct": 1.2,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CWL9S4L1": 1,
+            "B0FGB2NS3C": 1
+          }
+        },
+        {
+          "id": "feels_safe",
+          "name_ko": "쓰기에 안전하다는 느낌",
+          "name_en": "Feels safe to use",
+          "reviews": 3,
+          "weighted_pct": 0.9,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 2
+          }
+        },
+        {
+          "id": "sensitive_skin_ok",
+          "name_ko": "민감한 피부에도 괜찮음",
+          "name_en": "Fine for sensitive skin",
+          "reviews": 3,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 1,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 1,
+          "weighted_pct": 0.0,
+          "by_asin": {
+            "B0CWL9S4L1": 1
+          }
+        }
+      ]
+    },
+    "shipping.negative": {
+      "topic": "shipping",
+      "direction": "negative",
+      "units": 4,
+      "other_units": 4,
+      "other_pct": 100.0,
+      "labels": [
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 4,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 1
+          }
+        }
+      ]
+    },
+    "shipping.positive": {
+      "topic": "shipping",
+      "direction": "positive",
+      "units": 15,
+      "other_units": 15,
+      "other_pct": 100.0,
+      "labels": [
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 15,
+          "weighted_pct": 0.8,
+          "by_asin": {
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 7,
+            "B0FGB2NS3C": 3,
+            "B0G39WBP1S": 3
+          }
+        }
+      ]
+    },
+    "skin_hair_suitability.negative": {
+      "topic": "skin_hair_suitability",
+      "direction": "negative",
+      "units": 65,
+      "other_units": 7,
+      "other_pct": 10.8,
+      "labels": [
+        {
+          "id": "dark_skin_tone",
+          "name_ko": "어두운 피부색에는 못 씀",
+          "name_en": "Not for darker skin tones",
+          "reviews": 21,
+          "weighted_pct": 1.1,
+          "by_asin": {
+            "B07WYY6KKC": 13,
+            "B0CV3ZJ2PN": 7,
+            "B0CWL9S4L1": 1
+          }
+        },
+        {
+          "id": "light_fine_hair",
+          "name_ko": "금발이나 옅은 털, 가는 솜털에는 안 들음",
+          "name_en": "Weak on blonde, light or fine hair",
+          "reviews": 13,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B07WYY6KKC": 4,
+            "B0CV3ZJ2PN": 7,
+            "B0CWL9S4L1": 2
+          }
+        },
+        {
+          "id": "thick_coarse_hair",
+          "name_ko": "굵고 억센 털에는 덜 들음",
+          "name_en": "Weak on thick or coarse hair",
+          "reviews": 13,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B07WYY6KKC": 4,
+            "B0CV3ZJ2PN": 6,
+            "B0CWL9S4L1": 3
+          }
+        },
+        {
+          "id": "dark_body_areas",
+          "name_ko": "비키니나 겨드랑이처럼 어두운 부위에서 안 됨",
+          "name_en": "Blocked or weak on darker body areas",
+          "reviews": 9,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B07WYY6KKC": 6,
+            "B0FGB2NS3C": 2,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "gray_white_hair",
+          "name_ko": "흰 털이나 회색 털에는 안 들음",
+          "name_en": "Does not work on gray or white hair",
+          "reviews": 6,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B0CV3ZJ2PN": 5,
+            "B0CWL9S4L1": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 7,
+          "weighted_pct": 0.3,
+          "by_asin": {
+            "B07WYY6KKC": 5,
+            "B0CV3ZJ2PN": 2
+          }
+        }
+      ]
+    },
+    "skin_hair_suitability.positive": {
+      "topic": "skin_hair_suitability",
+      "direction": "positive",
+      "units": 14,
+      "other_units": 14,
+      "other_pct": 100.0,
+      "labels": [
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 14,
+          "weighted_pct": 1.6,
+          "by_asin": {
+            "B07WYY6KKC": 7,
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 5,
+            "B0FGB2NS3C": 1
+          }
+        }
+      ]
+    },
+    "treatment_time.negative": {
+      "topic": "treatment_time",
+      "direction": "negative",
+      "units": 79,
+      "other_units": 0,
+      "other_pct": 0.0,
+      "labels": [
+        {
+          "id": "long_session",
+          "name_ko": "한 번 시술이 오래 걸림",
+          "name_en": "Sessions take a long time",
+          "reviews": 26,
+          "weighted_pct": 1.1,
+          "by_asin": {
+            "B07WYY6KKC": 7,
+            "B0CV3ZJ2PN": 9,
+            "B0CWL9S4L1": 9,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "demanding_schedule",
+          "name_ko": "자주, 오래 지켜야 하는 일정이 부담",
+          "name_en": "Demanding treatment schedule",
+          "reviews": 21,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B07WYY6KKC": 2,
+            "B0CV3ZJ2PN": 13,
+            "B0CWL9S4L1": 5,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "large_area_slow",
+          "name_ko": "다리나 몸 전체 같은 넓은 부위가 오래 걸림",
+          "name_en": "Large areas take too long",
+          "reviews": 14,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B07WYY6KKC": 4,
+            "B0CV3ZJ2PN": 5,
+            "B0CWL9S4L1": 5
+          }
+        },
+        {
+          "id": "slow_flash",
+          "name_ko": "발광 간격이 길거나 기기가 느림",
+          "name_en": "Slow flash rate or recharge wait",
+          "reviews": 9,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 8
+          }
+        },
+        {
+          "id": "longer_than_expected",
+          "name_ko": "광고나 기대보다 오래 걸림",
+          "name_en": "Takes longer than advertised or expected",
+          "reviews": 6,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B0CV3ZJ2PN": 3,
+            "B0CWL9S4L1": 2,
+            "B0FGB2NS3C": 1
+          }
+        },
+        {
+          "id": "small_window_passes",
+          "name_ko": "작은 조사창이나 반복 조사 때문에 오래 걸림",
+          "name_en": "Small window or repeat passes slow it down",
+          "reviews": 6,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 3,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 0,
+          "weighted_pct": 0.0,
+          "by_asin": {}
+        }
+      ]
+    },
+    "treatment_time.positive": {
+      "topic": "treatment_time",
+      "direction": "positive",
+      "units": 47,
+      "other_units": 2,
+      "other_pct": 4.3,
+      "labels": [
+        {
+          "id": "quick_session",
+          "name_ko": "시술이 빠르고 오래 안 걸림",
+          "name_en": "Quick sessions",
+          "reviews": 30,
+          "weighted_pct": 7.2,
+          "by_asin": {
+            "B07WYY6KKC": 4,
+            "B0CV3ZJ2PN": 15,
+            "B0CWL9S4L1": 1,
+            "B0FGB2NS3C": 1,
+            "B0G39WBP1S": 9
+          }
+        },
+        {
+          "id": "fast_flash_mode",
+          "name_ko": "발광이 빠르거나 자동 모드, 이중 발광으로 빨라짐",
+          "name_en": "Fast flash or auto and double flash modes",
+          "reviews": 5,
+          "weighted_pct": 0.7,
+          "by_asin": {
+            "B0CV3ZJ2PN": 1,
+            "B0FGB2NS3C": 1,
+            "B0G39WBP1S": 3
+          }
+        },
+        {
+          "id": "light_schedule",
+          "name_ko": "일정이 가볍고 생활에 맞추기 쉬움",
+          "name_en": "Light, easy-to-keep schedule",
+          "reviews": 5,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B0FGB2NS3C": 3,
+            "B0G39WBP1S": 2
+          }
+        },
+        {
+          "id": "large_area_quick",
+          "name_ko": "다리나 몸 전체도 짧게 끝남",
+          "name_en": "Large areas done quickly",
+          "reviews": 4,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CWL9S4L1": 1,
+            "B0G39WBP1S": 2
+          }
+        },
+        {
+          "id": "time_worth_it",
+          "name_ko": "시간이 들지만 견딜 만하거나 그만한 가치가 있음",
+          "name_en": "Time is acceptable or worth it",
+          "reviews": 3,
+          "weighted_pct": 0.4,
+          "by_asin": {
+            "B0CWL9S4L1": 2,
+            "B0G39WBP1S": 1
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 2,
+          "weighted_pct": 0.7,
+          "by_asin": {
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 1
+          }
+        }
+      ]
+    },
+    "trust.negative": {
+      "topic": "trust",
+      "direction": "negative",
+      "units": 40,
+      "other_units": 2,
+      "other_pct": 5.0,
+      "labels": [
+        {
+          "id": "misleading_claims",
+          "name_ko": "과장 광고나 거짓 설명",
+          "name_en": "Misleading or false claims",
+          "reviews": 15,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B07WYY6KKC": 5,
+            "B0CV3ZJ2PN": 9,
+            "B0CWL9S4L1": 1
+          }
+        },
+        {
+          "id": "arrived_used",
+          "name_ko": "중고나 개봉 흔적",
+          "name_en": "Arrived used or opened",
+          "reviews": 12,
+          "weighted_pct": 0.5,
+          "by_asin": {
+            "B07WYY6KKC": 10,
+            "B0CWL9S4L1": 2
+          }
+        },
+        {
+          "id": "missing_listed_items",
+          "name_ko": "설명과 다른 구성품",
+          "name_en": "Listed items missing",
+          "reviews": 5,
+          "weighted_pct": 0.2,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 3,
+            "B0FGB2NS3C": 1
+          }
+        },
+        {
+          "id": "doubted_before_purchase",
+          "name_ko": "협찬 리뷰나 반품 표시로 생긴 의심",
+          "name_en": "Doubt from paid reviews or return warnings",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B0CV3ZJ2PN": 3
+          }
+        },
+        {
+          "id": "suitability_misinformed",
+          "name_ko": "피부색 적합성 안내 부족이나 잘못된 안내",
+          "name_en": "Skin tone suitability not disclosed or misstated",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B07WYY6KKC": 1,
+            "B0CV3ZJ2PN": 2
+          }
+        },
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 2,
+          "weighted_pct": 0.1,
+          "by_asin": {
+            "B0CV3ZJ2PN": 1,
+            "B0CWL9S4L1": 1
+          }
+        }
+      ]
+    },
+    "trust.positive": {
+      "topic": "trust",
+      "direction": "positive",
+      "units": 8,
+      "other_units": 8,
+      "other_pct": 100.0,
+      "labels": [
+        {
+          "id": "other",
+          "name_ko": "기타",
+          "name_en": "Other",
+          "reviews": 8,
+          "weighted_pct": 0.6,
+          "by_asin": {
+            "B0CV3ZJ2PN": 2,
+            "B0CWL9S4L1": 4,
+            "B0FGB2NS3C": 1,
+            "B0G39WBP1S": 1
+          }
+        }
+      ]
+    }
+  }
+}

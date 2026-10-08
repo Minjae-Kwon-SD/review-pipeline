@@ -19,7 +19,7 @@
     06_report.md 검사: 05_tables.md의 표가 글자 그대로 들어갔는지, 인용 뒤 (브랜드, 별점★, review_id)가
     실제 리뷰와 맞는지, 모르는 review_id가 없는지, 12개 장과 부록이 있는지.
     07b_issue_counts.json이 있으면: 표 밖 문장의 "<라벨 이름> 리뷰 n개"가 07b 개수와 같은지(8장은 전체, 10장은 그 브랜드
-    ASIN의 by_asin 합), "몸 증상 n개, 나머지 m개"가 07c_safety_summary.json과, "함께 붙은 리뷰 n개"가 overlap과 같은지,
+    ASIN의 by_asin 합), "이상 반응 n개, 나머지 m개"가 07c_safety_summary.json과, "함께 붙은 리뷰 n개"가 overlap과 같은지,
     반품이나 환불 불가 라벨이 있으면 12장에 "샘플"이 있는지, "안전 부정 리뷰 n개:" 문장이 07c negative_text와 같은지.
     리포트 어디든 가운뎃점(·)이 있으면 FAIL.
     결과: 07_quote_check.json. 오류가 있으면 종료 코드 1.
@@ -255,9 +255,9 @@ def check_issue_counts(run, report, brands):
                 if not text[m.start():].startswith(s["negative_text"]):
                     errors.append(f"안전 부정 문장이 07c_safety_summary.json의 negative_text와 다릅니다: "
                                   f"{text[m.start():m.start() + 80]}")
-        for m in re.finditer(r"몸 증상\s*(\d+)개,\s*나머지\s*(\d+)개", text):
+        for m in re.finditer(r"(?:이상 반응|몸 증상)\s*(\d+)개,\s*나머지\s*(\d+)개", text):
             if (int(m.group(1)), int(m.group(2))) != (s["negative_symptom"], s["negative_no_symptom"]):
-                errors.append(f"'몸 증상 {m.group(1)}개, 나머지 {m.group(2)}개': 07c_safety_summary.json은 "
+                errors.append(f"'이상 반응 {m.group(1)}개, 나머지 {m.group(2)}개': 07c_safety_summary.json은 "
                               f"{s['negative_symptom']}개, {s['negative_no_symptom']}개")
     t, d, lid = SAMPLE_LABEL
     lab = next((l for l in counts["topics"].get(f"{t}.{d}", {}).get("labels", []) if l["id"] == lid), None)

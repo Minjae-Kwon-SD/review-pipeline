@@ -1,0 +1,563 @@
+category: hairremoval
+version: approved
+sample_reviews: 150
+items:
+- id: area_result
+  name_ko: 부위별 효과
+  kind: 1
+  format: choice
+  unit: null
+  allowed_values:
+  - value: face_works
+    ko: 얼굴(윗입술, 턱, 수염)에 효과 있음
+  - value: face_weak
+    ko: 얼굴에 효과 없거나 약함
+  - value: underarm_works
+    ko: 겨드랑이에 효과 있음
+  - value: underarm_weak
+    ko: 겨드랑이에 효과 없거나 약함
+  - value: bikini_intimate_works
+    ko: 비키니나 은밀한 부위에 효과 있음
+  - value: bikini_intimate_weak
+    ko: 비키니나 은밀한 부위에 효과 없거나 약함(센서가 막음 포함)
+  - value: legs_works
+    ko: 다리(허벅지, 종아리)에 효과 있음
+  - value: legs_weak
+    ko: 다리에 효과 없거나 약함
+  - value: arms_works
+    ko: 팔에 효과 있음
+  - value: arms_weak
+    ko: 팔에 효과 없거나 약함
+  - value: torso_works
+    ko: 몸통(배, 가슴, 등)에 효과 있음
+  - value: torso_weak
+    ko: 몸통에 효과 없거나 약함
+  definition: 리뷰어가 몸의 부위를 짚어 그 부위에서 털이 줄었는지, 효과가 없거나 약했는지(센서가 발광을 막아 못 쓴 것 포함) 말한 것. 부위마다 값 하나
+  fill_rule: 부위 이름과 그 부위의 결과가 함께 있을 때만 채운다. 쓴 부위를 나열만 하고 결과를 전체로 말하면(다리, 겨드랑이, 윗입술에 썼는데 차이가 거의 없다) 비운다. 한 부위 안에서 되는 곳과 안 되는 곳을 모두 말하면 두 값을 다 넣는다. 통증이나 피부 반응이 난 부위는 이 항목이 아니라 discomfort_area
+  quote_required: true
+  sample_count: 28
+  overlap:
+  - hair_reduction
+  - uneven_by_area
+  - works_on_areas
+  - dark_body_areas
+  new_info: 라벨은 부위마다 효과가 다르다는 사실만 세고, 이 항목은 어느 부위가 되고 어느 부위가 안 되는지(표본에서 겨드랑이 되는 쪽 13, 안 되는 쪽 7, 비키니 안 되는 쪽 5)를 센다
+  examples:
+  - review_id: RXBX1IOM03910
+    quote: Para axilas, bigote, bikini, etc funciona excelente.
+  - review_id: RHIX3UB7PUARG
+    quote: Underarms did nothing not even on the highest setting.
+  guide_use:
+  - 집중 분석
+  - 소비자 기준표
+  - 상세페이지 문구
+- id: failed_component
+  name_ko: 고장 난 부품이나 기능
+  kind: 5
+  format: choice
+  unit: null
+  allowed_values:
+  - value: no_power
+    ko: 전원이 켜지지 않음
+  - value: no_flash
+    ko: 켜지지만 발광하지 않거나 버튼을 눌러도 자주 헛발사
+  - value: shuts_off
+    ko: 켠 뒤 곧 저절로 꺼짐
+  - value: skin_sensor
+    ko: 피부 접촉 센서가 피부를 더는 읽지 못함
+  - value: mode_or_level
+    ko: 특정 모드(얼굴, 연속 발광)나 단계만 안 됨
+  - value: output_drop
+    ko: 발광 세기가 약해지거나 발광 간격이 길어짐
+  - value: power_supply
+    ko: 충전기, 배터리, 전원 방식 문제(꽂아야만 켜짐 포함)
+  - value: head_damage
+    ko: 헤드나 조사창 부식, 깨짐
+  definition: 기기 고장이나 이상을 말할 때 무엇이 안 되는지(부품이나 기능). 털이 안 줄었다는 효과 이야기는 넣지 않는다
+  fill_rule: 리뷰가 안 되는 부품이나 기능을 말할 때만 채운다. "not working", "stopped working"처럼 무엇이 안 되는지 없이 멈췄다고만 하면 비운다(라벨 failure_unspecified가 셈). 과열로 꺼지거나 쉬어야 하는 것, 조사창 얼룩과 탄내는 라벨(overheating, scorch_marks_smell)이 이미 세므로 넣지 않는다. 피부색이나 어두운 부위 때문에 센서가 막는 것은 고장이 아니므로 비운다
+  quote_required: true
+  sample_count: 16
+  overlap:
+  - early_failure
+  - failed_after_months
+  - failure_unspecified
+  - partial_failure
+  - intermittent_malfunction
+  - fragile_build
+  - not_cordless
+  new_info: 품질 라벨은 고장을 시기(한 달 안, 한 달 넘게, 언급 없음)로 나누고, 이 항목은 고장 난 부품(전원, 발광, 센서, 모드, 충전기)을 센다
+  examples:
+  - review_id: R2OSHXQ067Z325
+    quote: It turns on when I turn it on but has no pulsation anymore.
+  - review_id: R38YNQA8ATNIF1
+    quote: Suddenly, it stops detecting the skin and does not flash.
+  guide_use:
+  - 집중 분석
+  - 경쟁사 점수표
+  - 시장 진입 조건
+- id: failure_time
+  name_ko: 고장까지 쓴 기간
+  kind: 6
+  format: number
+  unit: 개월
+  allowed_values: []
+  definition: 기기가 멈추거나 고장, 이상(얼룩, 센서 불량 포함)이 처음 생기기까지 쓴 기간
+  fill_rule: 리뷰가 기간을 숫자나 말로 분명히 적을 때만 채운다(a month는 1, about a year는 12, 1.5 months는 1.5, nine months는 9). "after a few months", "less than a month"처럼 숫자를 정할 수 없으면 비운다. "2nd time", "after 3 uses"처럼 횟수로만 말하면 비운다(라벨 early_failure가 셈). 제목과 본문 기간이 다르면 본문을 따른다
+  quote_required: true
+  sample_count: 10
+  overlap:
+  - early_failure
+  - failed_after_months
+  - expensive_for_lifespan
+  new_info: 라벨은 한 달을 기준으로만 나누고, 이 항목은 실제 개월 수(표본에서 1, 1.5, 2, 8, 9, 12개월)를 남겨 보증 기간과 견줄 수 있게 한다
+  examples:
+  - review_id: R2SLSVNFPQPFQJ
+    quote: It stopped working after nine months.
+  - review_id: RGWGOEWT83E05
+    quote: Stopped working after 1.5 months, sadly.
+  guide_use:
+  - 경쟁사 점수표
+  - 시장 진입 조건
+- id: use_duration
+  name_ko: 리뷰를 쓸 때까지 쓴 기간
+  kind: 2
+  format: choice
+  unit: null
+  allowed_values:
+  - value: under_1_month
+    ko: 4주 미만(며칠, 한두 주, 3주)
+  - value: months_1_to_3
+    ko: 4주 이상 3달 미만
+  - value: months_3_to_6
+    ko: 3달 이상 6달 미만
+  - value: months_6_to_12
+    ko: 6달 이상 1년 미만
+  - value: year_1_plus
+    ko: 1년 이상
+  definition: 리뷰를 쓸 때까지(또는 고장 나거나 그만둘 때까지) 기기를 쓴 기간. 리뷰가 적은 기간을 묶음으로 옮긴다
+  fill_rule: 기간이 숫자나 분명한 말(a week, a month and a half, half a year, one year)로 있을 때만 채운다. "a few weeks", "for months", "a while"처럼 묶음을 정할 수 없으면 비운다. 횟수(3 treatments, 5th session)만 있으면 비운다. 산 날과 고장 난 날을 달 이름으로만 적으면(March, May) 리뷰가 그 기간을 따로 말할 때만 채운다
+  quote_required: true
+  sample_count: 53
+  overlap:
+  - keeps_using
+  - no_effect
+  - slow_results
+  new_info: 효과 없음이나 효과 늦음이 몇 주를 써 보고 한 말인지(4주 미만 리뷰 12개) 가를 수 있다. 라벨에는 사용 기간이 없다
+  examples:
+  - review_id: R1S9BDFJ2QUC6U
+    quote: I've been using this weekly for 9 weeks, and am seeing some results but not completely yet.
+  - review_id: R299GBDZFNM22Q
+    quote: Writing this review ONE YEAR after purchase - it barely works.
+  guide_use:
+  - 집중 분석
+- id: usage_frequency
+  name_ko: 사용 빈도
+  kind: 2
+  format: choice
+  unit: null
+  allowed_values:
+  - value: daily
+    ko: 매일(주 5회 이상)
+  - value: every_2_3_days
+    ko: 주 2~4회(이틀이나 사흘마다)
+  - value: weekly
+    ko: 주 1회
+  - value: less_than_weekly
+    ko: 2주 이상에 한 번
+  definition: 리뷰어가 실제로 기기를 쓴 빈도
+  fill_rule: 리뷰어가 자기가 쓴 빈도를 말할 때만 채운다. 설명서나 제조사가 권한 빈도("you only have to use it 2 times a week", "It's recommended to do weekly treatments")만 있으면 비운다. 시기마다 빈도가 달랐으면(처음 주 1회, 나중 주 2~3회) 둘 다 넣는다. 범위(2-3 times a week)는 그 범위가 든 값으로 넣는다
+  quote_required: true
+  sample_count: 22
+  overlap:
+  - demanding_schedule
+  - light_schedule
+  - works_with_consistency
+  new_info: 라벨은 일정이 부담이다, 가볍다는 평가만 세고, 이 항목은 실제 빈도를 남겨 효과와 함께 볼 수 있게 한다(매일 4, 주 2~4회 9, 주 1회 7, 그보다 드묾 3)
+  examples:
+  - review_id: R18UY4HW9LQGON
+    quote: My husband used it once a week for 16 weeks very meticulously and precisely
+  - review_id: R1MER6HMWWEBWK
+    quote: I think I've been doing it daily for 3 months and just now noticed a huge difference.
+  guide_use:
+  - 집중 분석
+  - 상세페이지 문구
+- id: time_to_results
+  name_ko: 효과가 처음 보인 때
+  kind: 6
+  format: choice
+  unit: null
+  allowed_values:
+  - value: sessions_1_to_3
+    ko: 1~3회 쓰고 보임
+  - value: sessions_4_plus
+    ko: 4회 이상 쓰고 보임
+  - value: weeks_under_4
+    ko: 4주 안에 보임
+  - value: months_1_to_3
+    ko: 4주 이상 3달 안에 보임
+  - value: months_3_plus
+    ko: 3달 이상 걸려 보임
+  definition: 리뷰어가 털이 줄었다는 효과를 처음 알아챈 때를 횟수나 기간으로 말한 것
+  fill_rule: '"after X", "took X before I realized", "finally starting", "since the first time"처럼 효과가 보이기 시작한 때를 말할 때만 채운다. 지금까지 쓴 기간과 지금의 결과만 말하면(9주 썼고 털이 줄었다) 비운다(use_duration이 담음). 횟수로 말하면 sessions 값, 기간으로 말하면 기간 값, 둘 다 있으면 기간 값. 범위(3-4 times)는 큰 쪽 묶음. 효과가 없었다는 리뷰는 비운다'
+  quote_required: true
+  sample_count: 13
+  overlap:
+  - quick_results
+  - slow_results
+  new_info: 라벨은 빠르다, 늦다는 평가만 세고, 이 항목은 몇 회나 몇 주 만에 보였는지(1~3회 4, 4주 안 3, 3달 이상 2 등)를 남긴다
+  examples:
+  - review_id: R2S5WD06YE4TMI
+    quote: My underarms were basically hairless after 2 uses
+  - review_id: R3JNRN5BWUNUNO
+    quote: It took at least three weeks before I realized that my hair wasn't growing back!
+  guide_use:
+  - 상세페이지 문구
+  - 소비자 기준표
+- id: session_minutes
+  name_ko: 한 번 시술 시간
+  kind: 2
+  format: number
+  unit: 분
+  allowed_values: []
+  definition: 리뷰어가 말한 한 번 시술에 걸리는 시간(분). 어느 부위를 했는지는 인용에 남긴다
+  fill_rule: 시간 숫자나 분명한 말(couple minutes는 2, nearly an hour는 60)이 있을 때만 채운다. 범위(30-45 minutes, 30 minutes to an hour)는 큰 값을 넣는다. 면도나 샤워를 함께 센 시간이라도 리뷰어가 한 번에 걸린다고 말한 그대로 넣는다. "takes forever", "hours"처럼 숫자가 없거나, 해 보지 않고 짐작한 시간(if I had the patience)은 비운다
+  quote_required: true
+  sample_count: 6
+  overlap:
+  - long_session
+  - large_area_slow
+  - quick_session
+  - large_area_quick
+  new_info: 라벨은 오래 걸린다, 빠르다는 평가만 세고, 이 항목은 실제 분과 부위를 남겨 광고 문구(전신 10분)와 견줄 수 있게 한다
+  examples:
+  - review_id: R1M9QNHVS55ACH
+    quote: I get my whole toes, hands, arms, legs, stomach, bikini, and mustache areas done in about 30-45 minutes.
+  - review_id: R3I3HAIAL07C08
+    quote: a full session only takes about 10 minutes
+  guide_use:
+  - 상세페이지 문구
+  - 경쟁사 점수표
+- id: intensity_setting
+  name_ko: 쓴 출력 단계
+  kind: 7
+  format: choice
+  unit: null
+  allowed_values:
+  - value: highest
+    ko: 가장 높은 단계로 씀
+  - value: low_or_middle
+    ko: 가장 낮은, 낮은, 중간, 초보 단계로 씀
+  - value: raised_over_time
+    ko: 낮게 시작해 높임
+  - value: auto_recommended
+    ko: 센서 자동 조절이나 권장 단계 그대로 씀
+  definition: 리뷰어가 실제로 쓴 출력(세기) 단계
+  fill_rule: 리뷰어가 자기가 쓴 단계를 말할 때만 채운다. 단계 숫자만 있고 그 숫자가 가장 높은지 낮은지 리뷰에 없으면(level 9, temperatura en 7) 비운다(다른 리뷰나 원문 밖 지식으로 기기 단계 수를 짐작하지 않음). 처음 단계와 바꾼 단계를 함께 말하면(5에서 9로) raised_over_time, 그 끝이 가장 높은 단계라고 말하면 highest도 넣는다. 단계가 여럿 있다는 기능 소개, "높을수록 잘 된다" 같은 일반 관찰만 있으면 비운다
+  quote_required: true
+  sample_count: 12
+  overlap:
+  - high_setting_too_strong
+  - fine_on_high_setting_or_sensitive_area
+  - sensor_auto_adjust
+  - handy_modes
+  new_info: 효과가 없었다는 리뷰가 가장 높은 단계로 써 본 것인지(표본 highest 5개 중 2개가 효과 없음)를 가를 수 있다. 라벨은 단계가 세다, 높아도 괜찮다는 통증 평가만 센다
+  examples:
+  - review_id: R1TFI2Y1S0PDBG
+    quote: after over 3 months of frequent use on the highest setting, it has done absolutely nothing to reduce hair.
+  - review_id: R2VNEBLNFNGTZ1
+    quote: Started at 5 but it was so painless I jumped up by third use.
+  guide_use:
+  - 집중 분석
+- id: reviewer_skin_tone
+  name_ko: 쓴 사람의 피부색
+  kind: 7
+  format: choice
+  unit: null
+  allowed_values:
+  - value: fair_light
+    ko: 밝은, 흰, 창백한 피부
+  - value: medium
+    ko: 중간 톤(중간에서 조금 어두운 피부 포함)
+  - value: dark
+    ko: 갈색이나 어두운 피부
+  definition: 기기를 쓴 사람(리뷰어, 또는 리뷰에 적힌 가족)이 밝힌 자기 피부색. 쓴 사람이 여럿이면 사람마다 값 하나
+  fill_rule: 리뷰가 피부색을 말로 밝힐 때만 채운다(light skin, fair, pale, medium skin tone, brown skin, piel súper clara). "suitable skin type", "met the skin colour requirement", "I'm not that dark", 출신이나 인종만 있으면 비운다. 몸의 일부가 어둡다는 말(비키니가 어둡다)은 사람의 피부색이 아니므로 비운다(area_result가 담음)
+  quote_required: true
+  sample_count: 15
+  overlap:
+  - skin_hair_suitability
+  - dark_skin_tone
+  new_info: 스키마는 피부색을 배경으로만 말한 리뷰를 hair_reduction에 넣어 라벨로 세지 않는다. 이 항목은 효과를 말한 사람의 피부색(밝은 피부 12, 중간 3, 어두운 1)을 남겨 피부색별 효과를 볼 수 있게 한다
+  examples:
+  - review_id: R20YZ6NU24ISYK
+    quote: When it arrived, it would not work because my skin is too dark
+  - review_id: R3UUWNR9MDJHAI
+    quote: a 60's-ish caucasian male with medium skin color
+  guide_use:
+  - 소비자 기준표
+  - 시장 진입 조건
+- id: reviewer_hair_type
+  name_ko: 쓴 사람의 털 색과 굵기
+  kind: 7
+  format: choice
+  unit: null
+  allowed_values:
+  - value: dark
+    ko: 검은, 진한 갈색, 갈색 털
+  - value: light_or_blonde
+    ko: 금발, 옅은 갈색, 붉은 털, 너무 옅은 털
+  - value: gray_white
+    ko: 흰 털이나 회색 털
+  - value: thick_coarse
+    ko: 굵고 억센 털
+  - value: fine
+    ko: 가는 털, 솜털
+  definition: 기기를 쓴 사람이 밝힌 자기 털의 색과 굵기. 색과 굵기를 함께 말하면 둘 다, 쓴 사람이나 부위마다 다르면 각각 넣는다
+  fill_rule: 리뷰가 털 색이나 굵기를 말로 밝힐 때만 채운다(dark hair, blond, gray, thick, coarse, vello grueso). 남에게 하는 조언("if you have thick stubborn hair maybe look for something else")만 있고 자기 털을 말하지 않으면 비운다. 털이 많다(hairy)는 양만 있으면 비운다. "Asian hair"처럼 색과 굵기를 알 수 없으면 비운다
+  quote_required: true
+  sample_count: 26
+  overlap:
+  - light_fine_hair
+  - gray_white_hair
+  - thick_coarse_hair
+  new_info: 라벨은 털 유형 때문에 안 된다고 말한 리뷰만 센다. 이 항목은 결과와 관계없이 쓴 사람의 털 유형(진한 털 17, 굵은 털 11 등)을 남겨, 맞는 유형인데도 효과가 없었다는 리뷰를 따로 볼 수 있게 한다
+  examples:
+  - review_id: R17Y43JGIRI90P
+    quote: I have thick, coarse Italian hair
+  - review_id: R1NE4QCL8NG603
+    quote: I have pale skin and avoid the sun and brown and blond hairs.
+  guide_use:
+  - 소비자 기준표
+  - 시장 진입 조건
+- id: user_condition
+  name_ko: 쓴 사람의 털과 피부 사정
+  kind: 7
+  format: choice
+  unit: null
+  allowed_values:
+  - value: hormonal
+    ko: PCOS, 호르몬 문제, 임신 뒤 털이 늘었다고 말함
+  - value: ingrown_or_razor_bumps
+    ko: 인그로운 헤어, 면도 발진, 모낭 문제
+  - value: sensitive_skin
+    ko: 민감한 피부라고 말함
+  definition: 기기를 쓴 사람이 밝힌, 제모기를 쓰게 된 털이나 피부 사정
+  fill_rule: 리뷰가 그 사정을 쓴 사람의 일로 말할 때만 채운다. 기기 때문에 생긴 뾰루지나 자극은 이 항목이 아니다(safety). 털이 많다, 털이 고민이다처럼 원인을 말하지 않으면 비운다
+  quote_required: true
+  sample_count: 12
+  overlap:
+  - sensitive_skin_ok
+  new_info: 호르몬성 털(PCOS 등 6개)과 인그로운 헤어 고민(4개)을 가진 쓴 사람을 따로 셀 수 있다. 주제나 라벨에는 이 사정이 없고, sensitive_skin_ok는 민감한 피부에도 괜찮았다는 평가만 센다
+  examples:
+  - review_id: R2R9O05EK9W6YR
+    quote: I have PCOS so I grow dark hair everywhere
+  - review_id: RL2K07ZS9TAJN
+    quote: I struggle with ingrown hairs and razor bumps no matter what.
+  guide_use:
+  - 소비자 기준표
+  - 상세페이지 문구
+- id: shaving_prep
+  name_ko: 시술 전 면도 시점
+  kind: 7
+  format: choice
+  unit: null
+  allowed_values:
+  - value: shaved_right_before
+    ko: 바로 전에 면도함
+  - value: shaved_day_before
+    ko: 전날 면도함
+  - value: stubble_left
+    ko: 털을 다 밀지 않고 씀
+  - value: shaved_timing_unstated
+    ko: 면도하고 썼지만 시점은 말하지 않음
+  definition: 리뷰어가 시술 전에 면도를 언제 했는지, 털을 남긴 채 썼는지
+  fill_rule: 리뷰어가 자기 면도 준비를 말할 때만 채운다(설명서 지시를 따랐다고 하면 그 시점으로). 같은 리뷰에서 시점이 바뀌었으면 둘 다 넣는다. 면도 횟수가 줄었다는 효과 이야기, 비교하려고 한쪽만 면도했다는 말은 비운다
+  quote_required: true
+  sample_count: 9
+  overlap:
+  - shaving_prep
+  new_info: 라벨 shaving_prep은 매번 면도해야 하는 번거로움만 센다. 이 항목은 면도 시점(바로 전 4, 전날 2)과 그때 생긴 일(남은 털 때문에 탄내, 따끔함, 반응)을 인용으로 남겨 사용 안내 문구에 쓴다
+  examples:
+  - review_id: R2S5WD06YE4TMI
+    quote: Be careful to shave right before using it - if you wait a day after shaving, some hair growth starts and that can cause a reaction from the IPL.
+  - review_id: R1E8UGOQ0TAQSW
+    quote: So I shaved my chin the day before so I had a tiny stubble peeping through but tried it any way.
+  guide_use:
+  - 상세페이지 문구
+- id: discomfort_area
+  name_ko: 아프거나 피부 반응이 난 부위
+  kind: 1
+  format: choice
+  unit: null
+  allowed_values:
+  - value: face_pain
+    ko: 얼굴에서 아픔
+  - value: face_reaction
+    ko: 얼굴에 피부 반응(화상, 변색, 발진, 자극)
+  - value: underarm_pain
+    ko: 겨드랑이에서 아픔
+  - value: underarm_reaction
+    ko: 겨드랑이에 피부 반응
+  - value: bikini_intimate_pain
+    ko: 비키니나 은밀한 부위에서 아픔
+  - value: bikini_intimate_reaction
+    ko: 비키니나 은밀한 부위에 피부 반응
+  - value: legs_pain
+    ko: 다리에서 아픔
+  - value: legs_reaction
+    ko: 다리에 피부 반응
+  - value: arms_pain
+    ko: 팔에서 아픔
+  - value: arms_reaction
+    ko: 팔에 피부 반응
+  - value: torso_pain
+    ko: 몸통에서 아픔
+  - value: torso_reaction
+    ko: 몸통에 피부 반응
+  - value: tattoo_or_spot_pain
+    ko: 문신이나 점 위에서 아픔
+  - value: tattoo_or_spot_reaction
+    ko: 문신이나 점 위에 피부 반응
+  definition: 쏠 때 아프거나(pain) 시술 뒤 피부 반응(화상, 물집, 변색, 발진, 자극)이 났다고(reaction) 리뷰어가 부위를 짚어 말한 것
+  fill_rule: 부위 이름과 아픔이나 피부 반응이 함께 있을 때만 채운다. 부위 없이 아프다, 데었다고만 하면 비운다. 아프다는 말 없이 느낌이 온다(feel it working)는 비운다. 두 부위를 견주어(팔보다 얼굴이 더 아프다) 말하면 더 아프다고 한 부위만 넣는다
+  quote_required: true
+  sample_count: 11
+  overlap:
+  - sensitive_area_pain
+  - skin_burns
+  - rash_bumps_allergy
+  - pigment_scars
+  - irritation_redness
+  new_info: 라벨은 민감한 부위가 아프다, 데었다는 사실을 세고, 이 항목은 어느 부위인지(얼굴 통증과 반응 4, 다리 반응 3 등)를 남겨 부위별 주의 문구와 헤드 설계에 쓴다
+  examples:
+  - review_id: RX1GNKYNEYHW1
+    quote: hurts less on the arms then it did on the face.
+  - review_id: R2XB776KKIF8N9
+    quote: I followed the instructions and this left blisters on my leg.
+  guide_use:
+  - 집중 분석
+  - 상세페이지 문구
+- id: desired_improvement
+  name_ko: 바라는 개선
+  kind: 3
+  format: choice
+  unit: null
+  allowed_values:
+  - value: better_goggles
+    ko: 보안경을 넣거나 더 크고 잘 막는 보안경
+  - value: faster_flash
+    ko: 더 빠른 발광
+  - value: larger_head
+    ko: 넓은 부위용 더 큰 헤드
+  - value: storage_case
+    ko: 보관 케이스
+  - value: clearer_instructions
+    ko: 더 자세한 사용 안내
+  - value: works_on_dark_areas
+    ko: 어두운 부위에서도 쓸 수 있게
+  - value: other
+    ko: 그 밖의 바람
+  definition: 리뷰어가 제품에 있었으면 하는 기능이나 상태를 바람, 요구로 말한 것
+  fill_rule: '"should include", "I wish", "debería tener", "habría estado bien", "PLEASE offer"처럼 바라는 말이 있을 때만 채운다. 불만만 있고 바라는 상태가 없으면(설명서가 부족했다) 비운다. 새 버전이 더 빠르다며 아쉬워하면 faster_flash로 넣는다. 반품이나 환불을 바라는 말은 제품 개선이 아니므로 비운다'
+  quote_required: true
+  sample_count: 10
+  overlap:
+  - goggles_missing
+  - goggles_poor_fit
+  - small_window
+  - slow_flash
+  - case_lacking
+  - unclear_instructions
+  - dark_body_areas
+  new_info: 여러 주제에 흩어진 불만을 리뷰어가 직접 말한 바람 하나의 목록으로 모은다(보안경 3, 빠른 발광 2 등). 라벨은 불만을 세고 바라는 상태는 세지 않는다
+  examples:
+  - review_id: R1QJ3XS7DRLDT5
+    quote: Should include goggles or glasses with this.
+  - review_id: RXBX1IOM03910
+    quote: debería tener un aditamento más grande para piernas y brazos
+  guide_use:
+  - 시장 진입 조건
+  - 집중 분석
+- id: comparison_reference
+  name_ko: 비교 대상
+  kind: 8
+  format: choice
+  unit: null
+  allowed_values:
+  - value: professional_treatment
+    ko: 살롱, 클리닉, 메디스파의 전문 레이저 시술
+  - value: other_removal_method
+    ko: 면도, 왁싱, 트리머 같은 다른 제모 방법
+  - value: same_brand_other_model
+    ko: 같은 브랜드의 이전이나 다른 모델(Ulike Air 3, 새 버전 등)
+  - value: other_brand_device
+    ko: 다른 브랜드라고 밝힌 가정용 기기(Braun 등)
+  - value: other_product
+    ko: 다른 제품(브랜드나 모델을 알 수 없거나 같은 제품인지 가를 수 없는 비교 포함)
+  - value: same_product_before
+    ko: 리뷰어가 예전에 쓰거나 산 같은 제품(표본 0)
+  - value: store_purchase
+    ko: 매장(정규 매장, 백화점, 브랜드 공식 사이트)에서 산 같은 제품(표본 0)
+  - value: original_unspecified
+    ko: 어디서 온 기준인지 없이 정품, 원래 것이라고만 말한 기준(표본 0)
+  - value: dupe_target
+    ko: 듀프, 대체품, inspired by처럼 원조 관계를 말한 원조 제품(표본 0)
+  definition: 리뷰어가 이 제품을 견준 대상. 대상마다 값 하나
+  fill_rule: 이 제품과 견주는 말(더 낫다, 못하다, 만큼 세지 않다, 대신 하라, 보다 싸다, 비교하려고 한쪽만 면도했다)이 있을 때만 채운다. 비교 대상 하나에는 값을 하나만 넣고 가장 구체적인 값을 고른다(같은 브랜드 모델이면 same_brand_other_model, 다른 브랜드라고 밝히면 other_brand_device, 알 수 없으면 other_product). 예전 같은 제품을 정규 판매처(매장, 백화점, 브랜드 공식 사이트)에서 샀다고 말하면 store_purchase, 그 밖에 예전에 쓰거나 산 같은 제품이면 same_product_before, 어디서 온 기준인지 없이 "정품", "원래 것"만 말하면 original_unspecified. 같은 제품인지 다른 제품인지 원문으로 가를 수 없으면 other_product. dupe_target은 리뷰가 듀프, 대체품, "inspired by"처럼 원조 관계를 말할 때만 채우고 닮았다는 말만 있으면 other_product. 비교 대상이 서로 다르면(살롱과 면도) 대상마다 하나씩 넣는다. 다른 시술을 받아 왔다, 같은 브랜드를 써 봤다는 말만 있고 이 제품과 견주지 않으면 비운다. 정품이나 중고 의심 자체는 trust 주제(arrived_used 라벨)가 담으므로 넣지 않는다. 판정은 원문 밖 지식을 쓰지 않는다
+  quote_required: true
+  sample_count: 26
+  overlap:
+  - switch_brand
+  - favorable_comparison
+  - go_professional
+  - saves_vs_salon
+  - less_painful_than_alternatives
+  - buy_again_or_upgrade
+  new_info: 라벨은 주제마다(가격, 통증, 브랜드) 비교를 따로 세고 대상 이름이 없다. 이 항목은 무엇과 견주었는지(전문 시술 10, 다른 제모 방법 5, 같은 브랜드 다른 모델 4, 다른 브랜드 2, 알 수 없는 다른 제품 5)를 한 목록으로 센다
+  examples:
+  - review_id: R4N2FP3FJ4PMC
+    quote: mientras que la Braun el primer mes lo usas una vez por semana y listo
+  - review_id: R1A6DQ2G52XFX2
+    quote: It is not as strong as a salon laser removal device
+  guide_use:
+  - 경쟁사 점수표
+  - 상세페이지 문구
+discarded:
+- name_ko: 구매 맥락(선물, 재구매, 첫 구매)
+  sample_count: 1
+  reason: 5개 미만. 공통 규칙 값으로 채울 리뷰는 first_purchase 1개(R1Q2IRRDGT4OYT). 선물이 될 수 있다는 가정형 말(R3EVC73JWUDCAY, R27C7U0ZYUMOEM)은 공통 규칙상 비움. 상위 모델로 바꿈 3개는 comparison_reference와 buy_again_or_upgrade가 셈. 지인 추천 2, 할인 구매 2는 흩어져 따로 두지 않음
+- name_ko: 구성 요소 평가(냉각, 보안경, 케이스, 코드, 앱)
+  sample_count: 22
+  reason: 라벨과 같음. cooling_comfort, cooling_insufficient, goggles_included, goggles_missing, goggles_poor_fit, case_nice, case_lacking, long_cord가 이미 셈. 앱은 4개로 5개 미만
+- name_ko: 과열, 조사창 얼룩과 탄내(고장 부품 값으로)
+  sample_count: 7
+  reason: 라벨과 같음(overheating, scorch_marks_smell). failed_component 값에서 뺌
+- name_ko: 반품 기한과 보증 기간
+  sample_count: 7
+  reason: 라벨과 같음(missed_return_window, window_ends_before_results, refund_replace_refused). 기간 숫자를 적은 리뷰는 1개(보증 끝나고 2달)뿐
+- name_ko: 사용을 멈춘 뒤 다시 자람
+  sample_count: 5
+  reason: 라벨 not_lasting과 같음. 다시 자란 시점 숫자가 거의 없음
+- name_ko: 쓰는 사람(남성, 가족과 함께 씀)
+  sample_count: 5
+  reason: 남성 사용자와 가족 공유가 섞여 뜻이 모호하고 항목 상한(15개)에 닿음. 피부색과 털 항목은 쓴 사람마다 채워 가족 사용자를 일부 담음
+- name_ko: 털 감소 비율(%)
+  sample_count: 4
+  reason: 5개 미만(5-10%, 60%, 85%, 이전 모델 70%)
+- name_ko: 면도 없이 지내는 기간
+  sample_count: 4
+  reason: 5개 미만(사흘, 일주일 넘게, 2주, 2-4일마다 면도). 라벨 nearly_gone_less_shaving과도 겹침
+- name_ko: 시술 뒤 관리(진정 젤, 로션 미루기)
+  sample_count: 4
+  reason: 5개 미만
+- name_ko: 지불 가격과 할인 구매
+  sample_count: 3
+  reason: 5개 미만(300달러 아래 할인, 프라임데이, 산 뒤 100달러 넘게 내림)
+- name_ko: 발광 횟수 한도(999999회 등)
+  sample_count: 2
+  reason: 5개 미만
+approved_at: 2026-10-08T14:22Z
+approved_by: Claude(민재님 위임 2026-10-08 21:54:40 KST '너가 판단가능한거는 일단해봐'). 초안 그대로, 표본 0인 비교 값 4개는 공통 경계 규칙과 맞추려고 남김
+edits:
+  split_values: []
+  extra: []

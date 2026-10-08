@@ -17,6 +17,7 @@
 """
 import argparse
 import json
+import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -41,7 +42,8 @@ def f_int(v):
 
 
 def f_pct(v):
-    return f"{float(v):.1f}%"
+    v = float(v)
+    return "0.1% 미만" if 0 < v < 0.05 else f"{v:.1f}%"      # 0이 아닌데 0.0%로 보이지 않게
 
 
 def f_star(v):
@@ -61,6 +63,19 @@ def median(v):
 
 
 class G:
+    def unit(self, item):
+        """숫자 항목의 단위(승인 스키마 unit). 없으면 향수 때의 기본값 시간"""
+        return re.sub(r"\(.*?\)", "", self.detail_units.get(item) or "시간").strip() or "시간"
+
+    def dur(self, v, item):
+        """숫자 항목 표기. 단위가 시간이고 1시간 미만이면 분으로(0.292시간 -> 약 18분)"""
+        u = self.unit(item)
+        return f"약 {round(v * 60)}분" if u == "시간" and v < 1 else f"{v:g}{u}"
+
+    def item_name(self, item):
+        """숫자 항목의 짧은 이름(카테고리 설정 guide.number_names, 없으면 향수 때의 '말한 지속 시간')"""
+        return (self.conf.get("number_names") or {}).get(item) or "말한 지속 시간"
+
     def __init__(self, run):
         self.run = run
         self.m = json.loads((run / "05_metrics.json").read_text(encoding="utf-8"))
@@ -78,6 +93,7 @@ class G:
         self.dcounts = json.loads((run / "14_detail_counts.json").read_text(encoding="utf-8"))
         self.detail_units = {i["id"]: i.get("unit") for i in (load_yaml(run / "13_detail_schema_approved.yaml") or {}).get("items") or []}
         self.market = json.loads((run / "market" / "market.json").read_text(encoding="utf-8"))
+        self.detail_names = {i["id"]: i.get("name_ko") for i in (load_yaml(run / "13_detail_schema_approved.yaml") or {}).get("items") or []}
         self.mkeys = list(((category_conf(run).get("market") or {}).get("nodes") or {}).keys())    # 시장 표 이름 키
         self.safety = json.loads((run / "07c_safety_summary.json").read_text(encoding="utf-8"))
         self.verdicts = ((load_yaml(run / "07c_safety_verdicts.yaml") or {}).get("audit") or {}).get("verdicts") or []
@@ -265,7 +281,7 @@ class G:
         for g in ("female", "male", "common"):
             rows = sorted(groups[g], key=lambda r: -(r.get("volume30Day") or 0))[:10]
             self.tables[f"m.terms_{g}"] = [{"term": r["searchTermValue"], "volume": r["volume30Day"], "volume_text": f_int(r["volume30Day"] or 0),
-                                            "yoy_pct": r.get("yoYChangePct"), "yoy_text": "-" if r.get("yoYChangePct") is None else f"{r['yoYChangePct']:.4f}"}
+                                            "yoy_pct": r.get("yoYChangePct"), "yoy_text": "-" if r.get("yoYChangePct") is None else f"{r['yoYChangePct'] * 100:+.1f}%"}   # 응답 값 0.0874를 +8.7%로(비율로 읽음)
                                            for r in rows]
             self.put(f"m.terms_{g}_n", len(groups[g]), f"{f_int(len(groups[g]))}개")
             self.put(f"m.terms_{g}_volume", sum(r.get("volume30Day") or 0 for r in groups[g]),
@@ -285,7 +301,8 @@ class G:
             lo = min(r["avgPrice"] for r in rs) if rs else None
             hi = max(r["avgPrice"] for r in rs) if rs else None
             rows.append({"band": i + 1, "price_range": f"{lo:.2f}~{hi:.2f}" if rs else "-", "brands": len(rs),
-                         "avg_rating": round(sum(r["reviewRating"] for r in rs) / len(rs), 2) if rs else None,
+                         # 별점이 비어 있는 브랜드는 평균에서 뺀다(시장 도구 응답에 None이 있음)
+                         "avg_rating": (round(sum(x) / len(x), 2) if (x := [r["reviewRating"] for r in rs if r.get("reviewRating") is not None]) else None),
                          "revenue_share": pct(sum(r["revenue"] or 0 for r in rs), tot)})
         self.tables["m.price_bands"] = rows
         for r in rows:
@@ -320,7 +337,7 @@ class G:
                                 + " 부정 언급", neg, self.tag_quote(tp))
             evl = self.evidence(f"ev.{asin}.dir_low", f"{a['brand']}: {di['low']['name']}", di["low"]["name"] + " 쪽 라벨이 붙은", low, self.tag_quote(tp))
             evh = self.evidence(f"ev.{asin}.dir_high", f"{a['brand']}: {di['high']['name']}", di["high"]["name"] + " 쪽 라벨이 붙은", high, self.tag_quote(tp))
-            evd = self.evidence(f"ev.{asin}.duration", f"{a['brand']}: 말한 지속 시간", "말한 지속 시간(숫자)",
+            evd = self.evidence(f"ev.{asin}.duration", f"{a['brand']}: {self.item_name(c['duration_item'])}", f"{self.item_name(c['duration_item'])}(숫자)",
                                 {d["review_id"] for d in self.details if d["item"] == c["duration_item"] and d["asin"] == asin},
                                 self.detail_quote(c["duration_item"]))
             row = {"asin": asin, "brand": a["brand"], "subcategory": p.get("subcategory"), "price": price,
@@ -335,7 +352,7 @@ class G:
             self.put(f"{k}.star", row["weighted_star"], f_star(row["weighted_star"]))
             self.put(f"{k}.topic_neg", row["topic_neg_pct"], f_pct(row["topic_neg_pct"]), evn)
             self.put(f"{k}.dir_index", idx, "-" if idx is None else f"{idx:+.2f}", evl)
-            self.put(f"{k}.duration_median", med, "-" if med is None else f"{med:g}시간", evd)
+            self.put(f"{k}.duration_median", med, "-" if med is None else self.dur(med, c['duration_item']), evd)
         self.tables["s.scoreboard"] = rows
 
     # ------------------------------------------------ 03 문제
@@ -361,9 +378,12 @@ class G:
         for f in self.conf["focus"]:
             self.focus(f)
         sc = self.safety
+        # 07c_safety_summary와 같은 규칙: 부정 감성 인용 중 이상 반응으로 판정된 리뷰만 증상별로 묶는다
+        neg_ids = {str(r["review_id"]) for r in read_jsonl(self.run / "07c_safety_input.jsonl") if r.get("sentiment") == "negative"}
+        is_sym = lambda v: str(v.get("verdict")).lower() in ("symptom", "이상 반응 있음", "몸 증상 있음", "yes", "true")
         symp = {}
         for v in self.verdicts:
-            if v.get("symptom_type"):
+            if v.get("symptom_type") and is_sym(v) and str(v["review_id"]) in neg_ids:
                 symp.setdefault(v["symptom_type"], []).append(str(v["review_id"]))
         st = []
         for x in sc.get("by_symptom") or []:
@@ -406,18 +426,22 @@ class G:
                 rows = []
                 for lo, hi in zip(edges, edges[1:]):
                     rids = {r for r, v in allv if lo <= v < hi}
-                    lab = f"{lo:g}~{hi:g}시간" if hi != float("inf") else f"{lo:g}시간 이상"
+                    u = self.unit(item)      # 숫자 항목의 단위(승인 스키마의 unit, 없으면 시간)
+                    nm = self.item_name(item)
+                    lab = f"{lo:g}~{hi:g}{u}" if hi != float("inf") else f"{lo:g}{u} 이상"
                     if lo == 0:
-                        lab = f"{hi:g}시간 미만"
-                    ev = self.evidence(f"ev.{key}.{item}.bin{len(rows)}", f"말한 지속 시간 {lab}", f"말한 지속 시간 {lab}", rids,
+                        lab = f"{hi:g}{u} 미만"
+                    ev = self.evidence(f"ev.{key}.{item}.bin{len(rows)}", f"{nm} {lab}", f"{nm} {lab}", rids,
                                        self.detail_quote(item))
                     rows.append({"bin": lab, "reviews": len(rids), "ev": ev})
                     self.put(f"{key}.{item}.bin{len(rows) - 1}", len(rids), f"{len(rids)}개", ev)
                 self.tables[f"{key}.{item}.bins"] = rows
-                self.put(f"{key}.{item}.median", it["median"], f"{it['median']:g}시간" if it["median"] is not None else "-")
+                self.put(f"{key}.{item}.median", it["median"], self.dur(it['median'], item) if it["median"] is not None else "-")
                 self.put(f"{key}.{item}.n", len(allv), f"{len(allv)}개")
             elif fmt == "text":
-                vals = Counter(str(d["value"]).strip() for d in self.details if d["item"] == item)
+                # 같은 이름의 다른 표기를 묶는다(카테고리 설정 guide.value_aliases, 대소문자 무시)
+                al = {v.lower(): canon for canon, vs in ((self.conf.get("value_aliases") or {}).get(item) or {}).items() for v in [canon] + vs}
+                vals = Counter(al.get(str(d["value"]).strip().lower(), str(d["value"]).strip()) for d in self.details if d["item"] == item)
                 self.tables[f"{key}.{item}"] = [{"value": v, "reviews": n} for v, n in vals.most_common(15)]
                 self.put(f"{key}.{item}.n", sum(vals.values()), f"{sum(vals.values())}개")
         if f.get("split_label") and f.get("items"):
@@ -484,7 +508,7 @@ class G:
             pos = set().union(*[self.label_reviews[l] for l in s.get("pos_labels") or []]) if s.get("pos_labels") else set()
             qf = (lambda r: (self.tag.get((r, "safety")) or {}).get("quote")) if s.get("safety") else \
                 (lambda r, s=s: next((self.label_quote(l)(r) for l in s.get("neg_labels") or [] if r in self.label_reviews[l]), None))
-            evn = self.evidence(f"ev.std.{s['id']}.neg", f"{s['title']}: 벌주는 리뷰", s["title"] + " 부정 라벨이 붙은", neg, qf)
+            evn = self.evidence(f"ev.std.{s['id']}.neg", f"{s['title']}: 불만 리뷰", s["title"] + " 부정 라벨이 붙은", neg, qf)
             qp = lambda r, s=s: next((self.label_quote(l)(r) for l in s.get("pos_labels") or [] if r in self.label_reviews[l]), None)
             evp = self.evidence(f"ev.std.{s['id']}.pos", f"{s['title']}: 만족한 리뷰", s["title"] + " 긍정 라벨이 붙은", pos, qp)
             by_asin = []
@@ -589,7 +613,7 @@ class G:
                 self.put(f"std.{b1['id']}.best_women", bw["brand"], f"{bw['brand']} {f_pct(bw['neg_pct'])}",
                          note="여성 하위 카테고리 상품 가운데 지속력과 세기 부정(가중)이 가장 낮은 상품")
                 self.put(f"std.{b1['id']}.best_women_median", bw["duration_median"],
-                         "-" if bw["duration_median"] is None else f"{bw['duration_median']:g}시간")
+                         "-" if bw["duration_median"] is None else self.dur(bw['duration_median'], self.conf['duration_item']))
             best = b1["best"]
             self.put(f"std.{b1['id']}.best_sub", score.get(best["asin"], {}).get("subcategory"),
                      score.get(best["asin"], {}).get("subcategory") or "-", note="부정이 가장 적은 상품의 하위 카테고리")
@@ -597,7 +621,7 @@ class G:
                 k = f"std.spec.{b1['id']}.{r['asin']}"
                 self.put(f"{k}.neg_pct", r["neg_pct"], f_pct(r["neg_pct"]))
                 self.put(f"{k}.duration", r["duration_median"], f"값 {r['duration_values']}개" +
-                         ("" if r["duration_median"] is None else f", 중앙값 {r['duration_median']:g}시간"))
+                         ("" if r["duration_median"] is None else f", 중앙값 {self.dur(r['duration_median'], self.conf['duration_item'])}"))
 
         # 기준 2: 공식 노트와 리뷰가 말한 노트
         b2 = board.get(links.get("notes"))
@@ -657,7 +681,7 @@ class G:
                 self.put(f"std.spec.{b4['id']}.{asin}.parts", len(ids), f"{len(ids)}개", ev)
             self.tables[f"std.spec.{b4['id']}"] = rows
 
-        # 기준 6: 몸 증상 리뷰와 표시 알레르기 성분(나열만)
+        # 기준 6: 이상 반응 리뷰와 표시 알레르기 성분(나열만)
         b6 = board.get(links.get("body"))
         if b6:
             asin_of = {r["review_id"]: r["asin"] for r in self.reviews}
@@ -710,6 +734,15 @@ class G:
         bs = R["bootstrap"]
         T = R["texts"]
         self.put("a.robust.n", bs["n"], f"{bs['n']:,}번", note=f"난수 씨앗 {bs['seed']}")
+        # A장 정확도 두 줄: 설계 정보 추출 감사, 웹 조사 주장 확인
+        da = self.run / "14b_detail_audit_summary.json"
+        if da.exists():
+            d = json.loads(da.read_text(encoding="utf-8"))
+            self.put("a.detail_audit", d["fail_rate"], f"표본 {d['sample']}개 중 FAIL {d['fail']}개({d['fail_rate'] * 100:.1f}%)")
+        rc = self.run / "15_research_check.json"
+        if rc.exists():
+            d = json.loads(rc.read_text(encoding="utf-8"))
+            self.put("a.research_verified", d.get("verified"), f"{d.get('claims')}개 중 {d.get('verified')}개")
         self.put("a.robust.head_first", bs["head_first_pct"], T["head_first"],
                  note=f"다시 뽑기에서 {nm[R['head_topic']]}가 부정 언급 리뷰어(가중) 1위로 남은 비율")
         self.put("a.robust.head_neg_ci", bs["head_neg_ci"], T["head_neg_ci"], note="머리 숫자 2의 95% 구간(다시 뽑기)")
@@ -730,15 +763,17 @@ class G:
 
     def caveats(self):
         n = self.m["summary"]
+        subs = [r.get("subcategory") for r in self.tables.get("s.scoreboard", [])]
+        most = "모두" if subs and all(s == self.conf.get("caveat_subcategory") for s in subs) else "대부분"
         return [
             f"리뷰는 공유 리뷰 DB 표본(리뷰 {n['reviews']:,}개, ASIN {n['asins']}개)이라 낮은 별점이 실제보다 많다(표본 평균 {n['sample_mean_star']:.2f}★, "
             f"가중 평균 {n['weighted_mean_star']:.2f}★). 비율은 별점 묶음 가중으로 되돌렸다.",
-            "자유 서술에서 뽑은 수치(말한 지속 시간 등)는 리뷰어가 적은 값이라 측정값이 아니다. 방향과 분포로만 읽는다.",
+            f"자유 서술에서 뽑은 수치({self.item_name(self.conf['duration_item'])} 등)는 리뷰어가 적은 값이라 측정값이 아니다. 방향과 분포로만 읽는다.",
             "개발 기준의 사양 숫자는 웹 조사 출처를 근거로 한 시작점이고 시험으로 확인해야 한다.",
-            f"상품 {n['asins']}개, 대부분 한 하위 카테고리({self.conf.get('caveat_subcategory', '-')})라 상품끼리, 하위 카테고리끼리의 비교가 약하다."
+            f"상품 {n['asins']}개, {most} 한 하위 카테고리({self.conf.get('caveat_subcategory', '-')})라 상품끼리, 하위 카테고리끼리의 비교가 약하다."
             if self.conf.get("caveat_subcategory") else f"상품 {n['asins']}개라 상품끼리, 하위 카테고리끼리의 비교가 약하다.",
             "시장 데이터(spd-amz-market)의 매출, 점유율, 증감, 승률 칸은 문서에 단위가 없어 단위 미확인으로 적었다.",
-            "ASIN은 매출 순위가 아니라 공유 DB에 리뷰가 많은 후보 10개 중 민재님이 고른 6개다.",
+            f"ASIN은 매출 순위가 아니라 공유 DB에 리뷰가 많은 후보 가운데 고른 {len(self.asins) if hasattr(self, 'asins') else ''}개다(상품 확인 관문에서 사람이 확인).",
             f"머리 숫자 5번(성장 배수)은 30일 검색량 {self.conf['growth']['min_volume']:,} 이상 카테고리 검색어 "
             f"{self.values.get('m.growth_candidates', {}).get('value', '-')}개 중 2년 주간 이력을 받은 "
             f"{self.values.get('m.growth_ranked', {}).get('value', '-')}개에서 골랐다. 나머지는 이력이 없어 순위에서 빠졌다. "
@@ -759,6 +794,16 @@ def build(run):
                                "split_label_name": g.label_name.get(f.get("split_label"), f.get("split_label"))} for f in g.conf.get("focus") or []]
     g.tables["meta.brand_nodes"] = list(g.conf.get("market_nodes_brand_share") or [])
     g.tables["meta.market_keys"] = g.mkeys
+    # 점수표 머리와 각주에 쓸 카테고리 이름(없으면 렌더러가 향수 때의 문구를 씀)
+    di = g.conf["direction_index"]
+    g.tables["meta.scoreboard"] = {"topic_name": g.schema[g.conf["head_topic"]]["name_ko"], "dir_high": di["high"]["name"],
+                                   "dir_low": di["low"]["name"], "dir_min": di["min_reviews"], "duration_name": g.item_name(g.conf["duration_item"]),
+                                   "duration_unit": g.unit(g.conf["duration_item"]), "duration_min": g.conf["duration_min_values"]}
+    # 화면 제목과 값 이름(영어 id 대신): 설계 정보 항목 이름, 값 이름, 주제 이름
+    _items = (load_yaml(g.run / "13_detail_schema_approved.yaml") or {}).get("items") or []
+    g.tables["meta.names"] = {"items": {i["id"]: i.get("name_ko") for i in _items},
+                              "values": {i["id"]: {str(v.get("value")): v.get("ko") for v in i.get("allowed_values") or []} for i in _items},
+                              "topics": {k: v["name_ko"] for k, v in g.schema.items()}}
     g.tables["meta.duration_name"] = (g.dcounts["items"].get(g.conf.get("duration_item")) or {}).get("name_ko")
     if g.conf.get("anatomy"):
         g.tables["meta.anatomy"] = g.conf["anatomy"]

@@ -177,7 +177,7 @@ def pick(run, per_asin, min_chars, sample_per_asin):
 
 # ---------------------------------------------------------------- sheet
 
-def sheet(run):
+def sheet(run, translations=None):
     schema = load_schema(run)
     picked = run / "gold" / "gold_reviews.csv"
     if not picked.exists():
@@ -187,7 +187,8 @@ def sheet(run):
     reviews = {r["review_id"]: r for r in load_csv_or_die(run / "02_reviews.csv", REVIEW_COLS)}
     brands = {r["asin"]: r["brand"] for r in load_csv_or_die(run / "01_asins.csv", ASIN_COLS)}
     # 있으면 원문 아래에 한국어 번역을 참고용으로 보여 준다(태깅은 원문 기준, 리포트와 인용 검사에는 쓰지 않음)
-    tr_path = run / "gold" / "gold_translations_ko.json"
+    # 번역 파일은 gold 폴더(기본)나 --translations로 준 경로(gold 폴더 쓰기가 막힌 세션에서 메인 세션이 쓴 파일)
+    tr_path = Path(translations) if translations else run / "gold" / "gold_translations_ko.json"
     tr = json.loads(tr_path.read_text(encoding="utf-8")) if tr_path.exists() else {}
     data = {
         "run": run.name,
@@ -519,12 +520,13 @@ def main():
     ap.add_argument("--sentiment", type=float, default=0.90)
     ap.add_argument("--n", type=int, default=150, help="audit-sample 전체 표본 태그 수(ASIN마다 n / ASIN 수)")
     ap.add_argument("--max-fail", type=float, default=0.05)
+    ap.add_argument("--translations", default=None, help="sheet: 한국어 번역 JSON 경로(기본 gold/gold_translations_ko.json)")
     args = ap.parse_args()
     run = resolve_run(args.run)
     if args.mode == "pick":
         sys.exit(pick(run, args.per_asin, args.min_chars, args.sample_per_asin))
     if args.mode == "sheet":
-        sys.exit(sheet(run))
+        sys.exit(sheet(run, args.translations))
     if args.mode == "gold":
         sys.exit(check_gold(run))
     if args.mode == "score":

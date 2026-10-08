@@ -1,0 +1,91 @@
+topic: customer_service
+directions:
+  negative:
+    labels:
+      - id: missed_return_window
+        name_ko: 반품 기한이 지나 반품이나 환불 불가
+        name_en: Past the return window
+        include: 반품 기한이나 환불 보장 기간(30일, 100일 등)이 지나 반품, 환불을 못 한다, 기한을 놓쳐 떠안았다는 말
+        exclude: 효과가 나오기 전에 기한이 끝난다고 기한과 효과 시점을 비교하면 window_ends_before_results. 기한 안인데 거절당하면 refund_replace_refused
+        examples:
+          - {review_id: R3SYQQVFXZOBU4, quote: "I missed the window to return it so now I’m stuck with it."}
+          - {review_id: R2UV6FE2VGLK51, quote: "Outside of the 100 day guarantee so I cannot get a refund."}
+        approx_count: 17
+      - id: window_ends_before_results
+        name_ko: 효과 확인 전에 반품 기한이 끝남
+        name_en: Return window ends before results show
+        include: 효과를 알기까지 걸리는 기간보다 반품 기한이 짧아 판단하기 전에 반품할 수 없게 된다는 정책 불만
+        exclude: 기한을 놓쳤다는 말만 있고 효과 시점과 비교하지 않으면 missed_return_window. 효과가 늦다는 말 자체는 hair_reduction
+        examples:
+          - {review_id: R3I8VU9TXZJ1N2, quote: "You only have 4 weeks to return but yet it says you won’t see results till 4 weeks"}
+          - {review_id: R1ZM15KT6ZURLE, quote: "I cannot return this because it takes so long to really find out if it works"}
+        approx_count: 4
+      - id: no_response
+        name_ko: 고객센터 연락 불가나 무응답
+        name_en: Unreachable or no response
+        include: 고객센터, 판매자, 제조사에 전화, 메시지, 채팅을 했는데 답이 없다, 사람과 연결이 안 된다, 여러 번 연락해야 했다는 말
+        exclude: 연락은 닿았지만 환불, 교체를 거절당하면 refund_replace_refused. 답은 왔지만 성의 없거나 도움이 안 되면 unhelpful_service
+        examples:
+          - {review_id: R29LTEY2ULGDKX, quote: "their customer service won’t answer the phone"}
+          - {review_id: R3AHPS52Z6NIVG, quote: "The seller has refused to acknowledge any of my 5 messages."}
+        approx_count: 13
+      - id: refund_replace_refused
+        name_ko: 환불이나 교체, 수리 거절
+        name_en: Refund or replacement refused
+        include: 환불, 교체, 수리, 반품을 거절당했다, 사용자 과실로 돌렸다, 가격 차액이나 스토어 크레딧처럼 일부만 보상받았다는 말
+        exclude: 거절 이유가 기한 경과뿐이면 missed_return_window. 답 자체가 없으면 no_response
+        examples:
+          - {review_id: R1BT7Y43OAYIN7, quote: "they declined to repair or replace it"}
+          - {review_id: R2OHNX29MJBII3, quote: "Best amazon could do after contacting them three times was a $50 store credit"}
+        approx_count: 7
+      - id: unhelpful_service
+        name_ko: 응대가 성의 없거나 도움이 안 됨
+        name_en: Unhelpful or poor service
+        include: 고객센터가 형편없다, 도와줄 수 있는 게 없다고 했다, 제품을 책임지지 않는다, 문제를 대수롭지 않게 넘겼다는 말
+        exclude: 연락이 안 되거나 답이 없으면 no_response. 구체적으로 환불, 교체를 거절했으면 refund_replace_refused
+        examples:
+          - {review_id: R1BRBOP254558S, quote: "I reached out to customer service and they told me to not worry about it"}
+          - {review_id: R30SXDQSJ7QM37, quote: "The customer service is also poor"}
+        approx_count: 4
+      - id: slow_return_process
+        name_ko: 반품이나 환불 절차가 느리고 번거로움
+        name_en: Slow or tedious return process
+        include: 반품 절차가 길고 번거롭다, 환불이 몇 달째 안 들어왔다, 여러 번 시도한 끝에 겨우 환불받았다는 말
+        exclude: 연락 자체가 안 되면 no_response. 결국 거절당했으면 refund_replace_refused
+        examples:
+          - {review_id: R26NCNGHQU12WZ, quote: "Months later, I still have not received my refund."}
+          - {review_id: R2JZND2LNQW1IF, quote: "Amazon has changed their return process and makes that long and somewhat annoying"}
+        approx_count: 3
+    other_approx_count: 4
+    notes: 반품 기한 관련 인용이 절반 가까이 된다. R3LZWIQRKS8R3A처럼 "this also passes the return period"는 앞 문맥상 효과 확인 기간과 비교한 말로 보여 window_ends_before_results로 셌지만 인용만으로는 경계가 애매하다. 보증 기간이 1년뿐이다(R4I22WQC4FUKT), 돈을 돌려 달라(R97OX7XS8RVRJ)처럼 응대 경험 없는 말은 기타로 셌다.
+  positive:
+    labels:
+      - id: refund_granted
+        name_ko: 환불이나 반품을 받아 줌
+        name_en: Refund or return granted
+        include: 환불을 문제없이 받았다, 기한이 지났는데도 반품이나 전액 환불을 해 줬다, 판매자가 먼저 연락해 환불해 줬다는 말
+        exclude: 돈이 아니라 새 제품으로 바꿔 줬으면 free_replacement. 구체적 결과 없이 응대 태도만 칭찬하면 helpful_service
+        examples:
+          - {review_id: R5A9JWD6G35F8, quote: "refund issued no problem"}
+          - {review_id: R1SDYJMPTO5X2D, quote: "The company reached out and offered full refund even though it was beyond 100 days"}
+        approx_count: 7
+      - id: free_replacement
+        name_ko: 무상 교체나 새 제품 발송
+        name_en: Free replacement
+        include: 고장이나 문제가 생기자 새 제품으로 바꿔 줬다, 무상 교체를 제안했다, 새 기기를 보내 줬다는 말
+        exclude: 환불을 받았으면 refund_granted. 고장 자체는 quality
+        examples:
+          - {review_id: R2TAW3BLI22CBT, quote: "Braun is replacing it for free"}
+          - {review_id: RDEHKQF7X6P2P, quote: "the company responded quickly and replaced it with a brand-new product"}
+        approx_count: 5
+      - id: helpful_service
+        name_ko: 응대가 친절하고 빠름
+        name_en: Helpful and responsive service
+        include: 고객센터가 친절하다, 훌륭하다, 빨리 답했다, 해결 방법을 여러 가지 제시했다, 고객 만족에 힘쓴다는 말(환불, 교체 같은 구체적 결과 없이)
+        exclude: 환불이나 교체를 받았다는 결과가 있으면 refund_granted 또는 free_replacement
+        examples:
+          - {review_id: R10EBCR0NL97P2, quote: "Customer Service team was quick to respond and offered several options to rectify the issue."}
+          - {review_id: R18XD7IXMDFRMP, quote: "They were very pleasant and helpful."}
+        approx_count: 8
+    other_approx_count: 0
+    notes: 표본이 20개뿐이라 라벨마다 개수가 적다. 1,2★ 리뷰에서도 환불, 교체 칭찬이 나온다(R343EEURPQIXZ2, RGRI74CC8ENT0).

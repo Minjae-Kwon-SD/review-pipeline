@@ -456,23 +456,23 @@ SYMPTOMS = ("두통", "메스꺼움", "호흡", "어지럼", "피부", "알레�
 
 def safety_render(run):
     """evidence-auditor 판정(07c_safety_verdicts.yaml)과 원문을 합쳐 07c_safety_check.md와 07c_safety_summary.json.
-    몸 증상이 있으면 symptom_type(SYMPTOMS 중 하나)이 있어야 하고, 증상마다 리뷰 수와 가중 비율을 센다."""
+    이상 반응이 있으면 symptom_type(SYMPTOMS 중 하나)이 있어야 하고, 증상마다 리뷰 수와 가중 비율을 센다."""
     rows = read_jsonl(run / "07c_safety_input.jsonl")
     data = load_yaml(run / "07c_safety_verdicts.yaml") or {}
     verdicts = {str(v.get("review_id")): v for v in ((data.get("audit") or {}).get("verdicts") or [])}
     missing = [r["review_id"] for r in rows if r["review_id"] not in verdicts]
     if missing:
         die(f"판정이 없는 안전 인용: {', '.join(missing)}")
-    is_sym = lambda v: str(v.get("verdict")).lower() in ("symptom", "몸 증상 있음", "yes", "true")
+    is_sym = lambda v: str(v.get("verdict")).lower() in ("symptom", "이상 반응 있음", "몸 증상 있음", "yes", "true")
     bad = [r["review_id"] for r in rows if is_sym(verdicts[r["review_id"]])
            and verdicts[r["review_id"]].get("symptom_type") not in SYMPTOMS]
     if bad:
-        die(f"몸 증상인데 symptom_type({', '.join(SYMPTOMS)})이 없거나 목록 밖: {', '.join(bad)}")
+        die(f"이상 반응인데 symptom_type({', '.join(SYMPTOMS)})이 없거나 목록 밖: {', '.join(bad)}")
     reviews, weight = review_weights(run)
     total_w = sum(weight.values())
     cell = lambda s: str(s or "").replace("|", "/").replace("\n", " ")
-    lines = ["# 안전 인용 확인", "", "안전 주제로 태깅된 인용 전부(라벨 없음). 상위 모델(evidence-auditor)이 몸 증상(피부 반응, 두통, 알레르기, 호흡 등)이 "
-             "있는지 판정했고, 몸 증상은 증상별로 나눴습니다. 태그는 고치지 않았습니다.", "",
+    lines = ["# 안전 인용 확인", "", "안전 주제로 태깅된 인용 전부(라벨 없음). 상위 모델(evidence-auditor)이 이상 반응(피부 반응, 두통, 알레르기, 호흡 등)이 "
+             "있는지 판정했고, 이상 반응은 증상별로 나눴습니다. 태그는 고치지 않았습니다.", "",
              "| review_id | ASIN | 별점 | 감성 | 인용 원문 | 리뷰 원문(제목 / 본문) | 판정 | 증상 | 이유 |", "|---|---|---|---|---|---|---|---|---|"]
     summary = Counter()
     by_sym = defaultdict(set)
@@ -483,7 +483,7 @@ def safety_render(run):
         if sym and r["sentiment"] == "negative":
             by_sym[v["symptom_type"]].add(r["review_id"])
         lines.append(f"| {r['review_id']} | {r['asin']} | {r['star']}★ | {r['sentiment']} | {cell(r['quote'])} | "
-                     f"{cell(r['title'])} / {cell(r['body'])} | {'몸 증상 있음' if sym else '없음'} | "
+                     f"{cell(r['title'])} / {cell(r['body'])} | {'이상 반응 있음' if sym else '없음'} | "
                      f"{v.get('symptom_type', '-') if sym else '-'} | {cell(v.get('reason'))} |")
     out = {"negative_symptom": summary[("negative", True)], "negative_no_symptom": summary[("negative", False)],
            "positive_symptom": summary[("positive", True)], "positive_no_symptom": summary[("positive", False)],
@@ -493,15 +493,15 @@ def safety_render(run):
     neg = out["negative_symptom"] + out["negative_no_symptom"]
     parts = [f"{s['name']} {s['reviews']}개(가중 {s['weighted_pct']}%)" for s in out["by_symptom"]]
     if out["negative_no_symptom"]:
-        parts.append(f"몸 증상 없음 {out['negative_no_symptom']}개(향의 세기 등)")
+        parts.append(f"이상 반응 없음 {out['negative_no_symptom']}개")
     out["negative_text"] = f"안전 부정 리뷰 {neg}개: " + ", ".join(parts) if neg else ""
-    lines += ["", f"부정 {neg}개 중 몸 증상 있음 {out['negative_symptom']}개, 없음 {out['negative_no_symptom']}개. "
-                  f"긍정 {out['positive_symptom'] + out['positive_no_symptom']}개 중 몸 증상 있음 {out['positive_symptom']}개, "
+    lines += ["", f"부정 {neg}개 중 이상 반응 있음 {out['negative_symptom']}개, 없음 {out['negative_no_symptom']}개. "
+                  f"긍정 {out['positive_symptom'] + out['positive_no_symptom']}개 중 이상 반응 있음 {out['positive_symptom']}개, "
                   f"없음 {out['positive_no_symptom']}개.", "", f"증상별(부정): {out['negative_text']}. "
                   "가중 비율은 그 증상 리뷰의 가중치 합 ÷ 전체 리뷰 가중치 합. 알레르기 언급은 본인 반응을 직접 묘사하지 않은 리뷰."]
     (run / "07c_safety_check.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     write_json(run / "07c_safety_summary.json", out)
-    print(f"안전 확인표: {out['negative_text'] or '안전 부정 없음'}. 긍정 몸 증상 {out['positive_symptom']}개, "
+    print(f"안전 확인표: {out['negative_text'] or '안전 부정 없음'}. 긍정 이상 반응 {out['positive_symptom']}개, "
           f"없음 {out['positive_no_symptom']}개 → 07c_safety_check.md")
     return 0
 

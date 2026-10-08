@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-10-09T02:37:48+09:00",
+  "status": "PASS",
+  "numbers_checked": 332,
+  "evidence_bundles": 187,
+  "evidence_reviews": 870,
+  "source_links": 235,
+  "external_refs": 0,
+  "middle_dots": 0,
+  "size_kb": 1020,
+  "lang": "ko",
+  "errors": [],
+  "warnings": []
+}

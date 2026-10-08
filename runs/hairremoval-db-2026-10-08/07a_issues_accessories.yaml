@@ -1,0 +1,64 @@
+topic: accessories
+directions:
+  negative:
+    labels:
+      - id: goggles_missing
+        name_ko: 보안경이 없거나 빠져 옴
+        name_en: Goggles not included or missing
+        include: 보안경(glasses, goggles, lentes, gafas)이 구성에 없거나 받은 상자에 빠져 있었다, 따로 사야 했다, 들어 있어야 한다는 말
+        exclude: 들어 있는 보안경이 잘 안 맞거나 빛을 못 막는다는 말은 goggles_poor_fit, 보관 케이스가 없다는 말은 case_lacking
+        examples:
+          - {review_id: R300NO6N06MI3R, quote: "You have to purchase your goggle separately."}
+          - {review_id: R5SZEZK6R7OAM, quote: "faltaron los lentes"}
+        approx_count: 11
+      - id: goggles_poor_fit
+        name_ko: 보안경 착용감이나 품질 불만
+        name_en: Goggles fit poorly or protect poorly
+        include: 들어 있는 보안경이 안경 위에 안 맞는다, 허술하다, 빛을 잘 막지 못한다는 말
+        exclude: 보안경이 아예 없거나 빠져 왔다는 말은 goggles_missing, 섬광이 눈에 해롭다는 안전 우려 자체는 safety 주제
+        examples:
+          - {review_id: R30ODGD4OXKWUU, quote: "the safety glasses that come with this product are not well made ESPECIALLY if you wear glasses!"}
+          - {review_id: R2V5RNF586IBAW, quote: "Glasses didn’t offer much help against laser light"}
+        approx_count: 4
+      - id: case_lacking
+        name_ko: 보관 케이스가 없거나 아쉬움
+        name_en: Storage case missing or unappealing
+        include: 보관 케이스나 파우치가 없어 아쉽다, 있었으면 좋겠다, 케이스 색이나 모양이 마음에 들지 않는다는 말
+        exclude: 제품 상자(배송 온 상자)의 상태나 외관은 packaging 주제, 보안경이나 면도기가 빠진 것은 goggles_missing 또는 기타
+        examples:
+          - {review_id: R1YD46GOLUQL4B, quote: "Me encantó! Me ubuera gustado tener un estuche :D"}
+          - {review_id: RJ70XYUA71OQC, quote: "the case it came with is a pinkish/coral color, which is a little conspicuous to have around"}
+        approx_count: 3
+    other_approx_count: 2
+    notes: 면도기가 빠졌다는 말은 2개(R34MFAS0SGKRBD, R2LT3QNM94WMEI의 보안경과 함께 빠진 경우)뿐이라 라벨로 두지 않음. R3LDIX6PWLVIRZ("said was included")는 스키마상 설명과 다른 구성이라 trust에 가까움. 보안경이 원래 구성에 없는 것(B07WYY6KKC)과 받은 상자에서 빠진 것(B0CV3ZJ2PN)은 인용만으로 가르기 어려워 goggles_missing 하나로 합침. R2QV46JTGZRGAW, R2IBA63SK8LQIJ는 인용에 불만 내용이 거의 없거나 무엇이 문제인지 없어 기타.
+  positive:
+    labels:
+      - id: case_nice
+        name_ko: 보관 케이스나 파우치가 좋음
+        name_en: Nice storage case or pouch
+        include: 함께 오는 보관 케이스, 파우치, 가방이 예쁘다, 튼튼하다, 고급스럽다, 정리가 잘 된다는 말
+        exclude: 필요한 것이 다 들어 있다는 구성 전체 평은 complete_kit, 제품 상자의 포장 상태는 packaging 주제
+        examples:
+          - {review_id: RDP6VFH1J365D, quote: "It comes in a nice, heavy duty case with specific cavities for each item."}
+          - {review_id: R4BPUJN9EOB08, quote: "the storage case is beautiful"}
+        approx_count: 22
+      - id: goggles_included
+        name_ko: 보안경이 들어 있음
+        name_en: Protective goggles included
+        include: 보안경이 함께 들어 있어 좋다, 안경 위에도 맞는다, 착용감이 편하다는 말
+        exclude: 보안경을 여러 구성품 중 하나로 나열하며 다 들어 있다고만 하면 complete_kit
+        examples:
+          - {review_id: R3INSXQHFCICQI, quote: "love that it comes with the sunglasses to protect your eyes"}
+          - {review_id: RJ86SS9SV6XB0, quote: "the glasses fit over my prescription ones so it’s easy to protect my eyes"}
+        approx_count: 9
+      - id: complete_kit
+        name_ko: 필요한 구성품이 다 들어 있음
+        name_en: Complete kit with everything needed
+        include: 필요한 것이 다 들어 있다, 완전한 구성이다, 빠진 것 없이 왔다(viene con todos sus artículos)는 말이나 구성품을 세 가지 이상 나열하며 갖춰졌다고 하는 말
+        exclude: 케이스 하나의 모양이나 튼튼함을 칭찬하면 case_nice, 보안경 하나를 짚어 칭찬하면 goggles_included
+        examples:
+          - {review_id: R9H5CZX785L9U, quote: "comes with everything you need to get started"}
+          - {review_id: R2TNKBB9DW6MXY, quote: "includes everything—charger, goggles, blades, manual"}
+        approx_count: 9
+    other_approx_count: 2
+    notes: 면도기 포함을 칭찬하는 말은 케이스나 보안경과 함께 나오는 경우가 대부분이라 따로 두지 않음. R2IBA63SK8LQIJ, R1YD46GOLUQL4B(혼합)는 인용에 구성품 칭찬이 없어 기타. B0G39WBP1S 인용이 18개로 표본의 절반 가까이를 차지함.

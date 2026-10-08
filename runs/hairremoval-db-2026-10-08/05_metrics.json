@@ -1,0 +1,5991 @@
+{
+  "generated_at": "2026-10-09T01:11:28+09:00",
+  "run": "hairremoval-db-2026-10-08",
+  "tags_file": "04_tags.jsonl",
+  "rules": {
+    "impact_min_neg_reviews": 20,
+    "strength_min_mentions": 10,
+    "compare_exclude_topics": [
+      "overall"
+    ],
+    "rounding": "비율은 소수 첫째 자리 %, 별점은 소수 둘째 자리"
+  },
+  "summary": {
+    "asins": 5,
+    "reviews": 1012,
+    "tags": 3437,
+    "brands": 4,
+    "tags_per_review": 3.4,
+    "sample_mean_star": 3.26,
+    "weighted_mean_star": 4.34,
+    "date_min": "2022-05-01",
+    "date_max": "2026-10-03"
+  },
+  "sentiment": {
+    "raw": {
+      "positive": 1669,
+      "negative": 1341,
+      "mixed": 345,
+      "neutral": 82
+    },
+    "raw_pct": {
+      "positive": 48.6,
+      "negative": 39.0,
+      "mixed": 10.0,
+      "neutral": 2.4
+    },
+    "weighted_pct": {
+      "positive": 77.2,
+      "negative": 15.0,
+      "mixed": 5.3,
+      "neutral": 2.5
+    }
+  },
+  "side": {
+    "raw": {
+      "P": 2860,
+      "B": 577
+    },
+    "raw_pct": {
+      "P": 83.2,
+      "B": 16.8
+    }
+  },
+  "stars": {
+    "sample_counts": {
+      "1": 220,
+      "2": 112,
+      "3": 159,
+      "4": 223,
+      "5": 298
+    },
+    "real_pct": {
+      "1": 9.8,
+      "2": 2.7,
+      "3": 4.6,
+      "4": 9.2,
+      "5": 73.7
+    },
+    "missing_real_pct": 0.3
+  },
+  "topics": [
+    {
+      "id": "overall",
+      "mentions": 1012,
+      "positive": 451,
+      "negative": 368,
+      "mixed": 185,
+      "neutral": 8,
+      "neg_pct": 36.4,
+      "weighted_neg_pct": 14.0,
+      "neg_reviewer_pct": 14.0,
+      "pos_reviewer_pct": 78.8,
+      "name_ko": "전체 만족도",
+      "side": "P"
+    },
+    {
+      "id": "hair_reduction",
+      "mentions": 667,
+      "positive": 349,
+      "negative": 191,
+      "mixed": 95,
+      "neutral": 32,
+      "neg_pct": 28.6,
+      "weighted_neg_pct": 10.4,
+      "neg_reviewer_pct": 7.2,
+      "pos_reviewer_pct": 53.2,
+      "name_ko": "제모 효과",
+      "side": "P"
+    },
+    {
+      "id": "pain_comfort",
+      "mentions": 245,
+      "positive": 179,
+      "negative": 42,
+      "mixed": 22,
+      "neutral": 2,
+      "neg_pct": 17.1,
+      "weighted_neg_pct": 4.4,
+      "neg_reviewer_pct": 1.4,
+      "pos_reviewer_pct": 27.3,
+      "name_ko": "통증과 시술 편안함",
+      "side": "P"
+    },
+    {
+      "id": "price_value",
+      "mentions": 230,
+      "positive": 105,
+      "negative": 119,
+      "mixed": 6,
+      "neutral": 0,
+      "neg_pct": 51.7,
+      "weighted_neg_pct": 23.3,
+      "neg_reviewer_pct": 5.3,
+      "pos_reviewer_pct": 17.3,
+      "name_ko": "가격 대비 가치",
+      "side": "B"
+    },
+    {
+      "id": "quality",
+      "mentions": 221,
+      "positive": 64,
+      "negative": 155,
+      "mixed": 1,
+      "neutral": 1,
+      "neg_pct": 70.1,
+      "weighted_neg_pct": 35.8,
+      "neg_reviewer_pct": 6.2,
+      "pos_reviewer_pct": 10.5,
+      "name_ko": "품질",
+      "side": "P"
+    },
+    {
+      "id": "ease_of_use",
+      "mentions": 220,
+      "positive": 174,
+      "negative": 42,
+      "mixed": 2,
+      "neutral": 2,
+      "neg_pct": 19.1,
+      "weighted_neg_pct": 6.9,
+      "neg_reviewer_pct": 2.0,
+      "pos_reviewer_pct": 25.8,
+      "name_ko": "사용 편의",
+      "side": "P"
+    },
+    {
+      "id": "brand_experience",
+      "mentions": 180,
+      "positive": 114,
+      "negative": 60,
+      "mixed": 4,
+      "neutral": 2,
+      "neg_pct": 33.3,
+      "weighted_neg_pct": 9.1,
+      "neg_reviewer_pct": 2.0,
+      "pos_reviewer_pct": 20.1,
+      "name_ko": "브랜드 경험",
+      "side": "B"
+    },
+    {
+      "id": "safety",
+      "mentions": 129,
+      "positive": 32,
+      "negative": 79,
+      "mixed": 5,
+      "neutral": 13,
+      "neg_pct": 61.2,
+      "weighted_neg_pct": 33.0,
+      "neg_reviewer_pct": 3.1,
+      "pos_reviewer_pct": 4.3,
+      "name_ko": "안전",
+      "side": "P"
+    },
+    {
+      "id": "treatment_time",
+      "mentions": 127,
+      "positive": 43,
+      "negative": 75,
+      "mixed": 4,
+      "neutral": 5,
+      "neg_pct": 59.1,
+      "weighted_neg_pct": 20.9,
+      "neg_reviewer_pct": 2.7,
+      "pos_reviewer_pct": 9.1,
+      "name_ko": "시술 시간과 관리 부담",
+      "side": "P"
+    },
+    {
+      "id": "design",
+      "mentions": 99,
+      "positive": 51,
+      "negative": 43,
+      "mixed": 4,
+      "neutral": 1,
+      "neg_pct": 43.4,
+      "weighted_neg_pct": 18.8,
+      "neg_reviewer_pct": 2.1,
+      "pos_reviewer_pct": 9.0,
+      "name_ko": "디자인과 형태",
+      "side": "P"
+    },
+    {
+      "id": "skin_hair_suitability",
+      "mentions": 81,
+      "positive": 7,
+      "negative": 58,
+      "mixed": 7,
+      "neutral": 9,
+      "neg_pct": 71.6,
+      "weighted_neg_pct": 49.6,
+      "neg_reviewer_pct": 2.5,
+      "pos_reviewer_pct": 1.1,
+      "name_ko": "피부색과 털 색 적합성",
+      "side": "P"
+    },
+    {
+      "id": "customer_service",
+      "mentions": 73,
+      "positive": 17,
+      "negative": 49,
+      "mixed": 3,
+      "neutral": 4,
+      "neg_pct": 67.1,
+      "weighted_neg_pct": 43.8,
+      "neg_reviewer_pct": 1.7,
+      "pos_reviewer_pct": 2.0,
+      "name_ko": "고객 응대",
+      "side": "B"
+    },
+    {
+      "id": "accessories",
+      "mentions": 59,
+      "positive": 36,
+      "negative": 15,
+      "mixed": 5,
+      "neutral": 3,
+      "neg_pct": 25.4,
+      "weighted_neg_pct": 9.4,
+      "neg_reviewer_pct": 0.6,
+      "pos_reviewer_pct": 4.6,
+      "name_ko": "구성품과 보관 케이스",
+      "side": "P"
+    },
+    {
+      "id": "trust",
+      "mentions": 46,
+      "positive": 6,
+      "negative": 38,
+      "mixed": 2,
+      "neutral": 0,
+      "neg_pct": 82.6,
+      "weighted_neg_pct": 68.6,
+      "neg_reviewer_pct": 1.3,
+      "pos_reviewer_pct": 0.5,
+      "name_ko": "신뢰",
+      "side": "B"
+    },
+    {
+      "id": "packaging",
+      "mentions": 29,
+      "positive": 26,
+      "negative": 3,
+      "mixed": 0,
+      "neutral": 0,
+      "neg_pct": 10.3,
+      "weighted_neg_pct": 1.9,
+      "neg_reviewer_pct": 0.1,
+      "pos_reviewer_pct": 4.9,
+      "name_ko": "포장",
+      "side": "B"
+    },
+    {
+      "id": "shipping",
+      "mentions": 19,
+      "positive": 15,
+      "negative": 4,
+      "mixed": 0,
+      "neutral": 0,
+      "neg_pct": 21.1,
+      "weighted_neg_pct": 13.1,
+      "neg_reviewer_pct": 0.1,
+      "pos_reviewer_pct": 0.8,
+      "name_ko": "배송",
+      "side": "B"
+    }
+  ],
+  "impact": [
+    {
+      "id": "brand_experience",
+      "name_ko": "브랜드 경험",
+      "neg_reviews": 60,
+      "neg_avg_star": 1.48,
+      "other_avg_star": 4.4,
+      "gap": -2.92
+    },
+    {
+      "id": "trust",
+      "name_ko": "신뢰",
+      "neg_reviews": 38,
+      "neg_avg_star": 1.55,
+      "other_avg_star": 4.38,
+      "gap": -2.83
+    },
+    {
+      "id": "price_value",
+      "name_ko": "가격 대비 가치",
+      "neg_reviews": 119,
+      "neg_avg_star": 1.68,
+      "other_avg_star": 4.49,
+      "gap": -2.82
+    },
+    {
+      "id": "hair_reduction",
+      "name_ko": "제모 효과",
+      "neg_reviews": 191,
+      "neg_avg_star": 1.77,
+      "other_avg_star": 4.54,
+      "gap": -2.77
+    },
+    {
+      "id": "customer_service",
+      "name_ko": "고객 응대",
+      "neg_reviews": 49,
+      "neg_avg_star": 1.68,
+      "other_avg_star": 4.39,
+      "gap": -2.71
+    },
+    {
+      "id": "quality",
+      "name_ko": "품질",
+      "neg_reviews": 155,
+      "neg_avg_star": 2.57,
+      "other_avg_star": 4.46,
+      "gap": -1.89
+    },
+    {
+      "id": "skin_hair_suitability",
+      "name_ko": "피부색과 털 색 적합성",
+      "neg_reviews": 58,
+      "neg_avg_star": 2.66,
+      "other_avg_star": 4.38,
+      "gap": -1.72
+    },
+    {
+      "id": "safety",
+      "name_ko": "안전",
+      "neg_reviews": 79,
+      "neg_avg_star": 2.84,
+      "other_avg_star": 4.39,
+      "gap": -1.54
+    },
+    {
+      "id": "pain_comfort",
+      "name_ko": "통증과 시술 편안함",
+      "neg_reviews": 42,
+      "neg_avg_star": 2.85,
+      "other_avg_star": 4.36,
+      "gap": -1.51
+    },
+    {
+      "id": "treatment_time",
+      "name_ko": "시술 시간과 관리 부담",
+      "neg_reviews": 75,
+      "neg_avg_star": 2.91,
+      "other_avg_star": 4.38,
+      "gap": -1.47
+    },
+    {
+      "id": "ease_of_use",
+      "name_ko": "사용 편의",
+      "neg_reviews": 42,
+      "neg_avg_star": 3.45,
+      "other_avg_star": 4.36,
+      "gap": -0.91
+    },
+    {
+      "id": "design",
+      "name_ko": "디자인과 형태",
+      "neg_reviews": 43,
+      "neg_avg_star": 3.69,
+      "other_avg_star": 4.36,
+      "gap": -0.66
+    }
+  ],
+  "asins": [
+    {
+      "asin": "B07WYY6KKC",
+      "brand": "Braun",
+      "price_band": "",
+      "amazon_rating": "4.2",
+      "tags": 982,
+      "weighted_pos_pct": 68.1,
+      "weighted_neg_pct": 21.9,
+      "strength": {
+        "id": "hair_reduction",
+        "name_ko": "제모 효과",
+        "pos_reviewer_pct": 66.9
+      },
+      "weakness": {
+        "id": "quality",
+        "name_ko": "품질",
+        "neg_reviewer_pct": 9.0
+      },
+      "sample_reviews": 299,
+      "sample_counts": {
+        "1": 80,
+        "2": 30,
+        "3": 70,
+        "4": 70,
+        "5": 49
+      },
+      "real_pct": {
+        "1": 11.0,
+        "2": 4.0,
+        "3": 6.0,
+        "4": 12.0,
+        "5": 67.0
+      },
+      "weights": {
+        "1": 0.4111,
+        "2": 0.3987,
+        "3": 0.2563,
+        "4": 0.5126,
+        "5": 4.0884
+      },
+      "sample_mean_star": 2.93,
+      "weighted_mean_star": 4.2,
+      "hist_mean_star": 4.2,
+      "covered_hist_mean_star": 4.2,
+      "missing_real_pct": 0
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "brand": "Ulike",
+      "price_band": "",
+      "amazon_rating": "4.3",
+      "tags": 1044,
+      "weighted_pos_pct": 81.0,
+      "weighted_neg_pct": 12.3,
+      "strength": {
+        "id": "pain_comfort",
+        "name_ko": "통증과 시술 편안함",
+        "pos_reviewer_pct": 50.9
+      },
+      "weakness": {
+        "id": "hair_reduction",
+        "name_ko": "제모 효과",
+        "neg_reviewer_pct": 9.1
+      },
+      "sample_reviews": 290,
+      "sample_counts": {
+        "1": 80,
+        "2": 52,
+        "3": 48,
+        "4": 60,
+        "5": 50
+      },
+      "real_pct": {
+        "1": 10.0,
+        "2": 3.0,
+        "3": 4.0,
+        "4": 8.0,
+        "5": 75.0
+      },
+      "weights": {
+        "1": 0.3625,
+        "2": 0.1673,
+        "3": 0.2417,
+        "4": 0.3867,
+        "5": 4.35
+      },
+      "sample_mean_star": 2.82,
+      "weighted_mean_star": 4.35,
+      "hist_mean_star": 4.35,
+      "covered_hist_mean_star": 4.35,
+      "missing_real_pct": 0
+    },
+    {
+      "asin": "B0CWL9S4L1",
+      "brand": "INNZA",
+      "price_band": "",
+      "amazon_rating": "4.4",
+      "tags": 800,
+      "weighted_pos_pct": 77.0,
+      "weighted_neg_pct": 13.9,
+      "strength": {
+        "id": "hair_reduction",
+        "name_ko": "제모 효과",
+        "pos_reviewer_pct": 52.2
+      },
+      "weakness": {
+        "id": "quality",
+        "name_ko": "품질",
+        "neg_reviewer_pct": 6.1
+      },
+      "sample_reviews": 261,
+      "sample_counts": {
+        "1": 50,
+        "2": 27,
+        "3": 34,
+        "4": 80,
+        "5": 70
+      },
+      "real_pct": {
+        "1": 9.0,
+        "2": 1.0,
+        "3": 5.0,
+        "4": 9.0,
+        "5": 76.0
+      },
+      "weights": {
+        "1": 0.4698,
+        "2": 0.0967,
+        "3": 0.3838,
+        "4": 0.2936,
+        "5": 2.8337
+      },
+      "sample_mean_star": 3.36,
+      "weighted_mean_star": 4.42,
+      "hist_mean_star": 4.42,
+      "covered_hist_mean_star": 4.42,
+      "missing_real_pct": 0
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "brand": "PHILIPS",
+      "price_band": "",
+      "amazon_rating": "4.3",
+      "tags": 232,
+      "weighted_pos_pct": 77.9,
+      "weighted_neg_pct": 15.5,
+      "strength": {
+        "id": "hair_reduction",
+        "name_ko": "제모 효과",
+        "pos_reviewer_pct": 44.7
+      },
+      "weakness": {
+        "id": "price_value",
+        "name_ko": "가격 대비 가치",
+        "neg_reviewer_pct": 15.9
+      },
+      "sample_reviews": 74,
+      "sample_counts": {
+        "1": 0,
+        "2": 1,
+        "3": 7,
+        "4": 7,
+        "5": 59
+      },
+      "real_pct": {
+        "1": 10.0,
+        "2": 2.0,
+        "3": 6.0,
+        "4": 9.0,
+        "5": 73.0
+      },
+      "weights": {
+        "2": 8.88,
+        "3": 0.6343,
+        "4": 0.9514,
+        "5": 0.9156
+      },
+      "sample_mean_star": 4.68,
+      "weighted_mean_star": 4.33,
+      "hist_mean_star": 4.33,
+      "covered_hist_mean_star": 4.33,
+      "missing_real_pct": 0
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "brand": "Ulike",
+      "price_band": "",
+      "amazon_rating": "4.5",
+      "tags": 379,
+      "weighted_pos_pct": 89.0,
+      "weighted_neg_pct": 7.8,
+      "strength": {
+        "id": "pain_comfort",
+        "name_ko": "통증과 시술 편안함",
+        "pos_reviewer_pct": 55.2
+      },
+      "weakness": {
+        "id": "hair_reduction",
+        "name_ko": "제모 효과",
+        "neg_reviewer_pct": 8.2
+      },
+      "sample_reviews": 88,
+      "sample_counts": {
+        "1": 10,
+        "2": 2,
+        "3": 0,
+        "4": 6,
+        "5": 70
+      },
+      "real_pct": {
+        "1": 7.0,
+        "2": 3.0,
+        "3": 4.0,
+        "4": 4.0,
+        "5": 82.0
+      },
+      "weights": {
+        "1": 0.6417,
+        "2": 1.375,
+        "4": 0.6111,
+        "5": 1.0738
+      },
+      "sample_mean_star": 4.41,
+      "weighted_mean_star": 4.57,
+      "hist_mean_star": 4.51,
+      "covered_hist_mean_star": 4.57,
+      "missing_real_pct": 4.0
+    }
+  ],
+  "cooccurrence_neg": [
+    {
+      "a": "hair_reduction",
+      "b": "price_value",
+      "count": 62
+    },
+    {
+      "a": "price_value",
+      "b": "quality",
+      "count": 34
+    },
+    {
+      "a": "customer_service",
+      "b": "quality",
+      "count": 25
+    },
+    {
+      "a": "brand_experience",
+      "b": "hair_reduction",
+      "count": 25
+    },
+    {
+      "a": "customer_service",
+      "b": "price_value",
+      "count": 20
+    },
+    {
+      "a": "brand_experience",
+      "b": "quality",
+      "count": 20
+    },
+    {
+      "a": "hair_reduction",
+      "b": "treatment_time",
+      "count": 19
+    },
+    {
+      "a": "brand_experience",
+      "b": "price_value",
+      "count": 18
+    },
+    {
+      "a": "customer_service",
+      "b": "hair_reduction",
+      "count": 17
+    },
+    {
+      "a": "price_value",
+      "b": "treatment_time",
+      "count": 15
+    },
+    {
+      "a": "design",
+      "b": "treatment_time",
+      "count": 14
+    },
+    {
+      "a": "hair_reduction",
+      "b": "safety",
+      "count": 12
+    },
+    {
+      "a": "quality",
+      "b": "treatment_time",
+      "count": 11
+    },
+    {
+      "a": "design",
+      "b": "ease_of_use",
+      "count": 11
+    },
+    {
+      "a": "hair_reduction",
+      "b": "quality",
+      "count": 10
+    },
+    {
+      "a": "ease_of_use",
+      "b": "treatment_time",
+      "count": 10
+    },
+    {
+      "a": "price_value",
+      "b": "safety",
+      "count": 9
+    },
+    {
+      "a": "hair_reduction",
+      "b": "pain_comfort",
+      "count": 9
+    },
+    {
+      "a": "pain_comfort",
+      "b": "safety",
+      "count": 9
+    },
+    {
+      "a": "brand_experience",
+      "b": "customer_service",
+      "count": 8
+    },
+    {
+      "a": "customer_service",
+      "b": "treatment_time",
+      "count": 8
+    },
+    {
+      "a": "brand_experience",
+      "b": "treatment_time",
+      "count": 8
+    },
+    {
+      "a": "hair_reduction",
+      "b": "trust",
+      "count": 8
+    },
+    {
+      "a": "design",
+      "b": "hair_reduction",
+      "count": 8
+    },
+    {
+      "a": "brand_experience",
+      "b": "safety",
+      "count": 7
+    },
+    {
+      "a": "hair_reduction",
+      "b": "skin_hair_suitability",
+      "count": 7
+    },
+    {
+      "a": "safety",
+      "b": "treatment_time",
+      "count": 7
+    },
+    {
+      "a": "design",
+      "b": "price_value",
+      "count": 6
+    },
+    {
+      "a": "skin_hair_suitability",
+      "b": "trust",
+      "count": 6
+    },
+    {
+      "a": "ease_of_use",
+      "b": "hair_reduction",
+      "count": 6
+    },
+    {
+      "a": "accessories",
+      "b": "safety",
+      "count": 6
+    },
+    {
+      "a": "ease_of_use",
+      "b": "safety",
+      "count": 6
+    },
+    {
+      "a": "quality",
+      "b": "skin_hair_suitability",
+      "count": 6
+    },
+    {
+      "a": "price_value",
+      "b": "skin_hair_suitability",
+      "count": 5
+    },
+    {
+      "a": "pain_comfort",
+      "b": "skin_hair_suitability",
+      "count": 5
+    },
+    {
+      "a": "design",
+      "b": "quality",
+      "count": 5
+    },
+    {
+      "a": "quality",
+      "b": "trust",
+      "count": 5
+    },
+    {
+      "a": "pain_comfort",
+      "b": "quality",
+      "count": 5
+    },
+    {
+      "a": "brand_experience",
+      "b": "pain_comfort",
+      "count": 5
+    },
+    {
+      "a": "safety",
+      "b": "skin_hair_suitability",
+      "count": 4
+    },
+    {
+      "a": "brand_experience",
+      "b": "ease_of_use",
+      "count": 4
+    },
+    {
+      "a": "pain_comfort",
+      "b": "price_value",
+      "count": 4
+    },
+    {
+      "a": "pain_comfort",
+      "b": "treatment_time",
+      "count": 4
+    },
+    {
+      "a": "ease_of_use",
+      "b": "price_value",
+      "count": 4
+    },
+    {
+      "a": "ease_of_use",
+      "b": "trust",
+      "count": 4
+    },
+    {
+      "a": "safety",
+      "b": "trust",
+      "count": 4
+    },
+    {
+      "a": "quality",
+      "b": "safety",
+      "count": 4
+    },
+    {
+      "a": "ease_of_use",
+      "b": "pain_comfort",
+      "count": 4
+    },
+    {
+      "a": "customer_service",
+      "b": "design",
+      "count": 3
+    },
+    {
+      "a": "price_value",
+      "b": "trust",
+      "count": 3
+    },
+    {
+      "a": "brand_experience",
+      "b": "trust",
+      "count": 3
+    },
+    {
+      "a": "ease_of_use",
+      "b": "quality",
+      "count": 3
+    },
+    {
+      "a": "customer_service",
+      "b": "trust",
+      "count": 3
+    },
+    {
+      "a": "customer_service",
+      "b": "ease_of_use",
+      "count": 3
+    },
+    {
+      "a": "brand_experience",
+      "b": "design",
+      "count": 3
+    },
+    {
+      "a": "treatment_time",
+      "b": "trust",
+      "count": 3
+    },
+    {
+      "a": "accessories",
+      "b": "pain_comfort",
+      "count": 2
+    },
+    {
+      "a": "customer_service",
+      "b": "pain_comfort",
+      "count": 2
+    },
+    {
+      "a": "customer_service",
+      "b": "skin_hair_suitability",
+      "count": 2
+    },
+    {
+      "a": "accessories",
+      "b": "hair_reduction",
+      "count": 2
+    },
+    {
+      "a": "design",
+      "b": "safety",
+      "count": 2
+    },
+    {
+      "a": "accessories",
+      "b": "trust",
+      "count": 2
+    },
+    {
+      "a": "customer_service",
+      "b": "safety",
+      "count": 2
+    },
+    {
+      "a": "design",
+      "b": "trust",
+      "count": 2
+    },
+    {
+      "a": "accessories",
+      "b": "ease_of_use",
+      "count": 1
+    },
+    {
+      "a": "design",
+      "b": "skin_hair_suitability",
+      "count": 1
+    },
+    {
+      "a": "ease_of_use",
+      "b": "skin_hair_suitability",
+      "count": 1
+    },
+    {
+      "a": "accessories",
+      "b": "price_value",
+      "count": 1
+    },
+    {
+      "a": "accessories",
+      "b": "shipping",
+      "count": 1
+    },
+    {
+      "a": "accessories",
+      "b": "customer_service",
+      "count": 1
+    },
+    {
+      "a": "accessories",
+      "b": "packaging",
+      "count": 1
+    },
+    {
+      "a": "customer_service",
+      "b": "packaging",
+      "count": 1
+    },
+    {
+      "a": "skin_hair_suitability",
+      "b": "treatment_time",
+      "count": 1
+    },
+    {
+      "a": "customer_service",
+      "b": "shipping",
+      "count": 1
+    },
+    {
+      "a": "pain_comfort",
+      "b": "trust",
+      "count": 1
+    },
+    {
+      "a": "packaging",
+      "b": "trust",
+      "count": 1
+    },
+    {
+      "a": "accessories",
+      "b": "design",
+      "count": 1
+    },
+    {
+      "a": "brand_experience",
+      "b": "skin_hair_suitability",
+      "count": 1
+    }
+  ],
+  "weighting": {
+    "method": "star_groups",
+    "groups": {
+      "negative": [
+        1,
+        2
+      ],
+      "neutral": [
+        3
+      ],
+      "positive": [
+        4,
+        5
+      ]
+    },
+    "per_asin": {
+      "B07WYY6KKC": {
+        "sample_reviews": 299,
+        "covered_real_pct": 100.0,
+        "missing_real_pct": 0,
+        "all_per_star": true,
+        "groups": {
+          "negative": {
+            "stars": [
+              1,
+              2
+            ],
+            "sample": 110,
+            "real_pct": 15.0,
+            "mode": "per_star",
+            "weights": {
+              "1": 0.411125,
+              "2": 0.398667
+            },
+            "effective_star": null,
+            "max_weight": 0.411125,
+            "max_review_share_pct": 0.14
+          },
+          "neutral": {
+            "stars": [
+              3
+            ],
+            "sample": 70,
+            "real_pct": 6.0,
+            "mode": "per_star",
+            "weights": {
+              "3": 0.256286
+            },
+            "effective_star": null,
+            "max_weight": 0.256286,
+            "max_review_share_pct": 0.09
+          },
+          "positive": {
+            "stars": [
+              4,
+              5
+            ],
+            "sample": 119,
+            "real_pct": 79.0,
+            "mode": "per_star",
+            "weights": {
+              "4": 0.512571,
+              "5": 4.088367
+            },
+            "effective_star": null,
+            "max_weight": 4.088367,
+            "max_review_share_pct": 1.37
+          }
+        }
+      },
+      "B0CV3ZJ2PN": {
+        "sample_reviews": 290,
+        "covered_real_pct": 100.0,
+        "missing_real_pct": 0,
+        "all_per_star": true,
+        "groups": {
+          "negative": {
+            "stars": [
+              1,
+              2
+            ],
+            "sample": 132,
+            "real_pct": 13.0,
+            "mode": "per_star",
+            "weights": {
+              "1": 0.3625,
+              "2": 0.167308
+            },
+            "effective_star": null,
+            "max_weight": 0.3625,
+            "max_review_share_pct": 0.13
+          },
+          "neutral": {
+            "stars": [
+              3
+            ],
+            "sample": 48,
+            "real_pct": 4.0,
+            "mode": "per_star",
+            "weights": {
+              "3": 0.241667
+            },
+            "effective_star": null,
+            "max_weight": 0.241667,
+            "max_review_share_pct": 0.08
+          },
+          "positive": {
+            "stars": [
+              4,
+              5
+            ],
+            "sample": 110,
+            "real_pct": 83.0,
+            "mode": "per_star",
+            "weights": {
+              "4": 0.386667,
+              "5": 4.35
+            },
+            "effective_star": null,
+            "max_weight": 4.35,
+            "max_review_share_pct": 1.5
+          }
+        }
+      },
+      "B0CWL9S4L1": {
+        "sample_reviews": 261,
+        "covered_real_pct": 100.0,
+        "missing_real_pct": 0,
+        "all_per_star": true,
+        "groups": {
+          "negative": {
+            "stars": [
+              1,
+              2
+            ],
+            "sample": 77,
+            "real_pct": 10.0,
+            "mode": "per_star",
+            "weights": {
+              "1": 0.4698,
+              "2": 0.096667
+            },
+            "effective_star": null,
+            "max_weight": 0.4698,
+            "max_review_share_pct": 0.18
+          },
+          "neutral": {
+            "stars": [
+              3
+            ],
+            "sample": 34,
+            "real_pct": 5.0,
+            "mode": "per_star",
+            "weights": {
+              "3": 0.383824
+            },
+            "effective_star": null,
+            "max_weight": 0.383824,
+            "max_review_share_pct": 0.15
+          },
+          "positive": {
+            "stars": [
+              4,
+              5
+            ],
+            "sample": 150,
+            "real_pct": 85.0,
+            "mode": "per_star",
+            "weights": {
+              "4": 0.293625,
+              "5": 2.833714
+            },
+            "effective_star": null,
+            "max_weight": 2.833714,
+            "max_review_share_pct": 1.09
+          }
+        }
+      },
+      "B0FGB2NS3C": {
+        "sample_reviews": 74,
+        "covered_real_pct": 100.0,
+        "missing_real_pct": 0,
+        "all_per_star": false,
+        "groups": {
+          "negative": {
+            "stars": [
+              1,
+              2
+            ],
+            "sample": 1,
+            "real_pct": 12.0,
+            "mode": "group",
+            "weights": {
+              "2": 8.88
+            },
+            "effective_star": 1.166667,
+            "max_weight": 8.88,
+            "max_review_share_pct": 12.0
+          },
+          "neutral": {
+            "stars": [
+              3
+            ],
+            "sample": 7,
+            "real_pct": 6.0,
+            "mode": "per_star",
+            "weights": {
+              "3": 0.634286
+            },
+            "effective_star": null,
+            "max_weight": 0.634286,
+            "max_review_share_pct": 0.86
+          },
+          "positive": {
+            "stars": [
+              4,
+              5
+            ],
+            "sample": 66,
+            "real_pct": 82.0,
+            "mode": "per_star",
+            "weights": {
+              "4": 0.951429,
+              "5": 0.915593
+            },
+            "effective_star": null,
+            "max_weight": 0.951429,
+            "max_review_share_pct": 1.29
+          }
+        }
+      },
+      "B0G39WBP1S": {
+        "sample_reviews": 88,
+        "covered_real_pct": 96.0,
+        "missing_real_pct": 4.0,
+        "all_per_star": false,
+        "groups": {
+          "negative": {
+            "stars": [
+              1,
+              2
+            ],
+            "sample": 12,
+            "real_pct": 10.0,
+            "mode": "per_star",
+            "weights": {
+              "1": 0.641667,
+              "2": 1.375
+            },
+            "effective_star": null,
+            "max_weight": 1.375,
+            "max_review_share_pct": 1.56
+          },
+          "neutral": {
+            "stars": [
+              3
+            ],
+            "sample": 0,
+            "real_pct": 4.0,
+            "mode": "empty",
+            "weights": {},
+            "effective_star": null,
+            "max_weight": null,
+            "max_review_share_pct": null
+          },
+          "positive": {
+            "stars": [
+              4,
+              5
+            ],
+            "sample": 76,
+            "real_pct": 86.0,
+            "mode": "per_star",
+            "weights": {
+              "4": 0.611111,
+              "5": 1.07381
+            },
+            "effective_star": null,
+            "max_weight": 1.07381,
+            "max_review_share_pct": 1.22
+          }
+        }
+      }
+    },
+    "warnings": [
+      "B0FGB2NS3C negative: 묶음 표본 1개(기준 30개 미만)",
+      "B0FGB2NS3C negative: 리뷰 한 개 비중 12.0%(가중치 8.880 / 표본 74개, 기준 2.0% 초과)",
+      "B0FGB2NS3C neutral: 묶음 표본 7개(기준 30개 미만)",
+      "B0G39WBP1S negative: 묶음 표본 12개(기준 30개 미만)"
+    ]
+  },
+  "time_trend": {
+    "as_of": "2026-10-08",
+    "rule": "최근 분기는 기준 날짜가 든 분기가 아니라 그 직전에 끝난 분기. 진행 중인 분기의 리뷰는 기간에서 뺌",
+    "in_progress_from": "2026-10-01",
+    "in_progress_reviews": 14,
+    "periods": [
+      {
+        "period": "~2024년",
+        "start": "1900-01-01",
+        "end": "2024-12-31",
+        "reviews": 163,
+        "star_counts": {
+          "1": 0,
+          "2": 21,
+          "3": 80,
+          "4": 62,
+          "5": 0
+        },
+        "sample_mean_star": 3.25,
+        "weighted_group_pct": {
+          "negative": 6.3,
+          "neutral": 40.5,
+          "positive": 53.2
+        },
+        "negative_tags": 209,
+        "neg_topic_share": {
+          "quality": 14.4,
+          "hair_reduction": 13.4,
+          "safety": 12.0,
+          "price_value": 11.0,
+          "treatment_time": 9.6,
+          "ease_of_use": 8.1,
+          "design": 6.2,
+          "pain_comfort": 5.7,
+          "brand_experience": 4.8,
+          "customer_service": 4.8,
+          "accessories": 3.3,
+          "skin_hair_suitability": 2.9,
+          "trust": 2.4,
+          "shipping": 1.0,
+          "packaging": 0.5
+        }
+      },
+      {
+        "period": "2025년",
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "reviews": 204,
+        "star_counts": {
+          "1": 30,
+          "2": 39,
+          "3": 38,
+          "4": 75,
+          "5": 22
+        },
+        "sample_mean_star": 3.1,
+        "weighted_group_pct": {
+          "negative": 24.2,
+          "neutral": 13.5,
+          "positive": 62.3
+        },
+        "negative_tags": 211,
+        "neg_topic_share": {
+          "hair_reduction": 18.5,
+          "quality": 15.6,
+          "price_value": 11.4,
+          "skin_hair_suitability": 10.0,
+          "safety": 8.1,
+          "treatment_time": 7.6,
+          "brand_experience": 6.6,
+          "pain_comfort": 5.7,
+          "ease_of_use": 4.7,
+          "trust": 3.8,
+          "design": 3.3,
+          "customer_service": 2.8,
+          "accessories": 0.9,
+          "packaging": 0.5,
+          "shipping": 0.5
+        }
+      },
+      {
+        "period": "2026년 1~6월",
+        "start": "2026-01-01",
+        "end": "2026-06-30",
+        "reviews": 252,
+        "star_counts": {
+          "1": 85,
+          "2": 36,
+          "3": 29,
+          "4": 57,
+          "5": 45
+        },
+        "sample_mean_star": 2.77,
+        "weighted_group_pct": {
+          "negative": 26.3,
+          "neutral": 5.1,
+          "positive": 68.5
+        },
+        "negative_tags": 285,
+        "neg_topic_share": {
+          "hair_reduction": 22.8,
+          "quality": 14.4,
+          "price_value": 12.3,
+          "treatment_time": 7.4,
+          "safety": 7.0,
+          "skin_hair_suitability": 6.7,
+          "brand_experience": 5.3,
+          "design": 5.3,
+          "customer_service": 4.9,
+          "trust": 4.6,
+          "ease_of_use": 4.2,
+          "pain_comfort": 3.9,
+          "accessories": 1.1,
+          "shipping": 0.4
+        }
+      },
+      {
+        "period": "2026년 7~9월",
+        "start": "2026-07-01",
+        "end": "2026-09-30",
+        "reviews": 379,
+        "star_counts": {
+          "1": 104,
+          "2": 16,
+          "3": 12,
+          "4": 29,
+          "5": 218
+        },
+        "sample_mean_star": 3.64,
+        "weighted_group_pct": {
+          "negative": 8.1,
+          "neutral": 0.7,
+          "positive": 91.2
+        },
+        "negative_tags": 267,
+        "neg_topic_share": {
+          "hair_reduction": 22.1,
+          "quality": 18.7,
+          "price_value": 13.9,
+          "brand_experience": 7.9,
+          "customer_service": 7.1,
+          "treatment_time": 6.7,
+          "safety": 6.4,
+          "skin_hair_suitability": 4.5,
+          "trust": 4.5,
+          "design": 3.0,
+          "pain_comfort": 2.6,
+          "ease_of_use": 1.1,
+          "accessories": 1.1,
+          "packaging": 0.4
+        }
+      }
+    ]
+  },
+  "cooccurrence": {
+    "negative": [
+      {
+        "a": "hair_reduction",
+        "b": "price_value",
+        "reviews": 62
+      },
+      {
+        "a": "price_value",
+        "b": "quality",
+        "reviews": 34
+      },
+      {
+        "a": "brand_experience",
+        "b": "hair_reduction",
+        "reviews": 25
+      },
+      {
+        "a": "customer_service",
+        "b": "quality",
+        "reviews": 25
+      },
+      {
+        "a": "brand_experience",
+        "b": "quality",
+        "reviews": 20
+      },
+      {
+        "a": "customer_service",
+        "b": "price_value",
+        "reviews": 20
+      },
+      {
+        "a": "hair_reduction",
+        "b": "treatment_time",
+        "reviews": 19
+      },
+      {
+        "a": "brand_experience",
+        "b": "price_value",
+        "reviews": 18
+      }
+    ],
+    "positive": [
+      {
+        "a": "hair_reduction",
+        "b": "pain_comfort",
+        "reviews": 100
+      },
+      {
+        "a": "ease_of_use",
+        "b": "pain_comfort",
+        "reviews": 99
+      },
+      {
+        "a": "ease_of_use",
+        "b": "hair_reduction",
+        "reviews": 90
+      },
+      {
+        "a": "brand_experience",
+        "b": "hair_reduction",
+        "reviews": 78
+      },
+      {
+        "a": "hair_reduction",
+        "b": "price_value",
+        "reviews": 78
+      }
+    ]
+  },
+  "trust_signals": {
+    "verified": {
+      "reviews": 948,
+      "mean_star": 3.3,
+      "negative_pct": 31.5
+    },
+    "unverified": {
+      "reviews": 64,
+      "mean_star": 2.66,
+      "negative_pct": 51.6
+    },
+    "vine": {
+      "reviews": 25,
+      "mean_star": 3.92,
+      "negative_pct": 12.0
+    },
+    "helpful_total": 5080,
+    "helpful_reviews": 586,
+    "helpful_min_voted": 30,
+    "helpful_provisional": false,
+    "helpful_negative_reviews": 1114,
+    "helpful_positive_reviews": 3038,
+    "helpful_negative_pct": 26.8,
+    "helpful_positive_pct": 73.2,
+    "helpful_weighted_complaints": [
+      {
+        "topic": "quality",
+        "votes": 1466,
+        "share_pct": 17.5
+      },
+      {
+        "topic": "design",
+        "votes": 1204,
+        "share_pct": 14.4
+      },
+      {
+        "topic": "treatment_time",
+        "votes": 1092,
+        "share_pct": 13.1
+      },
+      {
+        "topic": "price_value",
+        "votes": 942,
+        "share_pct": 11.3
+      },
+      {
+        "topic": "safety",
+        "votes": 766,
+        "share_pct": 9.2
+      },
+      {
+        "topic": "hair_reduction",
+        "votes": 764,
+        "share_pct": 9.1
+      },
+      {
+        "topic": "pain_comfort",
+        "votes": 399,
+        "share_pct": 4.8
+      },
+      {
+        "topic": "ease_of_use",
+        "votes": 388,
+        "share_pct": 4.6
+      },
+      {
+        "topic": "customer_service",
+        "votes": 351,
+        "share_pct": 4.2
+      },
+      {
+        "topic": "brand_experience",
+        "votes": 281,
+        "share_pct": 3.4
+      },
+      {
+        "topic": "skin_hair_suitability",
+        "votes": 258,
+        "share_pct": 3.1
+      },
+      {
+        "topic": "trust",
+        "votes": 173,
+        "share_pct": 2.1
+      },
+      {
+        "topic": "accessories",
+        "votes": 161,
+        "share_pct": 1.9
+      },
+      {
+        "topic": "shipping",
+        "votes": 107,
+        "share_pct": 1.3
+      },
+      {
+        "topic": "packaging",
+        "votes": 5,
+        "share_pct": 0.1
+      }
+    ],
+    "top_helpful": [
+      {
+        "review_id": "R1JLZT6OS3U6JO",
+        "asin": "B0CWL9S4L1",
+        "star": 4,
+        "title": "The jury is still out…..UPDATED!",
+        "votes": 390
+      },
+      {
+        "review_id": "RPKW26NCED8Q8",
+        "asin": "B0CV3ZJ2PN",
+        "star": 4,
+        "title": "Good but Not Perfect",
+        "votes": 339
+      },
+      {
+        "review_id": "R1WSQ04XZHYRM8",
+        "asin": "B0CV3ZJ2PN",
+        "star": 4,
+        "title": "Helpful for hair removal and for lightening KP redness!",
+        "votes": 204
+      },
+      {
+        "review_id": "R36AFFT8C80WMF",
+        "asin": "B0CV3ZJ2PN",
+        "star": 3,
+        "title": "Horrible customer services",
+        "votes": 152
+      },
+      {
+        "review_id": "R2MTD56P6QYOUV",
+        "asin": "B07WYY6KKC",
+        "star": 1,
+        "title": "Sort of \"working\" but not really",
+        "votes": 113
+      },
+      {
+        "review_id": "R33AU9CUYNIANU",
+        "asin": "B0CV3ZJ2PN",
+        "star": 4,
+        "title": "Effective, BUT Limited flashes, Gets hot quickly",
+        "votes": 105
+      },
+      {
+        "review_id": "R25H686ZWIWEWC",
+        "asin": "B07WYY6KKC",
+        "star": 3,
+        "title": "No progress, yet.",
+        "votes": 102
+      },
+      {
+        "review_id": "R35T6O9HV1N4EB",
+        "asin": "B0CV3ZJ2PN",
+        "star": 4,
+        "title": "PCOS GIRLIES LISTEN UP",
+        "votes": 102
+      }
+    ]
+  },
+  "brand_deep": [
+    {
+      "brand": "Braun",
+      "asins": [
+        "B07WYY6KKC"
+      ],
+      "reviews": 299,
+      "top_topics": [
+        {
+          "id": "hair_reduction",
+          "name_ko": "제모 효과",
+          "mentions": 206,
+          "positive": 96,
+          "negative": 54,
+          "mixed": 49,
+          "neutral": 7,
+          "neg_pct": 26.2,
+          "weighted_neg_pct": 9.7,
+          "pos_reviewer_pct": 66.9,
+          "neg_reviewer_pct": 8.3
+        },
+        {
+          "id": "price_value",
+          "name_ko": "가격 대비 가치",
+          "mentions": 74,
+          "positive": 27,
+          "negative": 47,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 63.5,
+          "weighted_neg_pct": 23.0,
+          "pos_reviewer_pct": 20.1,
+          "neg_reviewer_pct": 6.0
+        },
+        {
+          "id": "quality",
+          "name_ko": "품질",
+          "mentions": 67,
+          "positive": 5,
+          "negative": 61,
+          "mixed": 1,
+          "neutral": 0,
+          "neg_pct": 91.0,
+          "weighted_neg_pct": 61.0,
+          "pos_reviewer_pct": 4.4,
+          "neg_reviewer_pct": 9.0
+        },
+        {
+          "id": "ease_of_use",
+          "name_ko": "사용 편의",
+          "mentions": 52,
+          "positive": 29,
+          "negative": 23,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 44.2,
+          "weighted_neg_pct": 21.7,
+          "pos_reviewer_pct": 16.2,
+          "neg_reviewer_pct": 4.5
+        },
+        {
+          "id": "safety",
+          "name_ko": "안전",
+          "mentions": 50,
+          "positive": 2,
+          "negative": 42,
+          "mixed": 2,
+          "neutral": 4,
+          "neg_pct": 84.0,
+          "weighted_neg_pct": 54.0,
+          "pos_reviewer_pct": 1.5,
+          "neg_reviewer_pct": 5.6
+        },
+        {
+          "id": "pain_comfort",
+          "name_ko": "통증과 시술 편안함",
+          "mentions": 49,
+          "positive": 21,
+          "negative": 20,
+          "mixed": 7,
+          "neutral": 1,
+          "neg_pct": 40.8,
+          "weighted_neg_pct": 15.6,
+          "pos_reviewer_pct": 9.1,
+          "neg_reviewer_pct": 2.6
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 48,
+          "positive": 27,
+          "negative": 21,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 43.8,
+          "weighted_neg_pct": 11.8,
+          "pos_reviewer_pct": 20.1,
+          "neg_reviewer_pct": 2.7
+        },
+        {
+          "id": "skin_hair_suitability",
+          "name_ko": "피부색과 털 색 적합성",
+          "mentions": 37,
+          "positive": 3,
+          "negative": 28,
+          "mixed": 4,
+          "neutral": 2,
+          "neg_pct": 75.7,
+          "weighted_neg_pct": 79.5,
+          "pos_reviewer_pct": 0.4,
+          "neg_reviewer_pct": 5.0
+        }
+      ],
+      "strengths": [
+        {
+          "id": "hair_reduction",
+          "name_ko": "제모 효과",
+          "mentions": 206,
+          "pos_reviewer_pct": 66.9,
+          "quote_candidates": [
+            {
+              "review_id": "R1NZEC16D5FOP4",
+              "star": 4,
+              "quote": "after a year of weekly sessions all over my entire body, I’m almost completely hairless",
+              "helpful_votes": 82
+            },
+            {
+              "review_id": "R1NJL66X5FEMYR",
+              "star": 4,
+              "quote": "los resultados hablan por sí solos",
+              "helpful_votes": 51
+            },
+            {
+              "review_id": "R2HTPKGOEZ3WN7",
+              "star": 4,
+              "quote": "After 12-weeks, there was no more hair.",
+              "helpful_votes": 46
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "works_general",
+              "name_ko": "효과가 있음",
+              "reviews": 49
+            },
+            {
+              "id": "reduced_regrowth",
+              "name_ko": "털이 줄고 느리게 자람",
+              "reviews": 42
+            },
+            {
+              "id": "nearly_gone_less_shaving",
+              "name_ko": "거의 없어지거나 면도가 줄어듦",
+              "reviews": 17
+            }
+          ]
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 48,
+          "pos_reviewer_pct": 20.1,
+          "quote_candidates": [
+            {
+              "review_id": "R1NJL66X5FEMYR",
+              "star": 4,
+              "quote": "Para las personas de pieles claras, se lo súper recomiendo",
+              "helpful_votes": 51
+            },
+            {
+              "review_id": "R2HTPKGOEZ3WN7",
+              "star": 4,
+              "quote": "I will have to buy my daughter her own.",
+              "helpful_votes": 46
+            },
+            {
+              "review_id": "R1LY9NEVXGJBWW",
+              "star": 4,
+              "quote": "If you are on the fence about buying this I would say just do it!",
+              "helpful_votes": 33
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "recommend",
+              "name_ko": "추천이나 사라는 권유",
+              "reviews": 14
+            },
+            {
+              "id": "buy_again_or_upgrade",
+              "name_ko": "재구매나 상위 모델로 바꿈",
+              "reviews": 4
+            },
+            {
+              "id": "favorable_comparison",
+              "name_ko": "이전 기기나 다른 브랜드보다 만족",
+              "reviews": 3
+            }
+          ]
+        }
+      ],
+      "weaknesses": [
+        {
+          "id": "quality",
+          "name_ko": "품질",
+          "mentions": 67,
+          "neg_reviewer_pct": 9.0,
+          "quote_candidates": [
+            {
+              "review_id": "R2MTD56P6QYOUV",
+              "star": 1,
+              "quote": "For the price I expected a bit more quality out of this product",
+              "helpful_votes": 113
+            },
+            {
+              "review_id": "R1KBFBFJOJG3R",
+              "star": 3,
+              "quote": "my unit’s intensity dropped off after only a few sessions",
+              "helpful_votes": 24
+            },
+            {
+              "review_id": "R3MARNI9LJRQEF",
+              "star": 3,
+              "quote": "Device stopped working after about 18 months.",
+              "helpful_votes": 20
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "failed_after_months",
+              "name_ko": "몇 달 쓴 뒤 고장이나 성능 저하",
+              "reviews": 19
+            },
+            {
+              "id": "failure_unspecified",
+              "name_ko": "고장(시기 언급 없음)",
+              "reviews": 16
+            },
+            {
+              "id": "early_failure",
+              "name_ko": "받자마자 또는 한 달 안에 고장",
+              "reviews": 9
+            }
+          ]
+        },
+        {
+          "id": "hair_reduction",
+          "name_ko": "제모 효과",
+          "mentions": 206,
+          "neg_reviewer_pct": 8.3,
+          "quote_candidates": [
+            {
+              "review_id": "R2MTD56P6QYOUV",
+              "star": 1,
+              "quote": "After 18+ weeks no improvement in fact some hair seems to be growing back faster",
+              "helpful_votes": 113
+            },
+            {
+              "review_id": "R3K8ZTJYQXSZKQ",
+              "star": 1,
+              "quote": "I have the same amount of hair",
+              "helpful_votes": 12
+            },
+            {
+              "review_id": "RSCSB7G8UO720",
+              "star": 1,
+              "quote": "no hair reduction to speak of either",
+              "helpful_votes": 12
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "no_effect",
+              "name_ko": "효과 없음",
+              "reviews": 48
+            },
+            {
+              "id": "partial_reduction",
+              "name_ko": "줄었지만 다 없어지지 않음",
+              "reviews": 20
+            },
+            {
+              "id": "uneven_by_area",
+              "name_ko": "부위마다 효과 차이",
+              "reviews": 18
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "INNZA",
+      "asins": [
+        "B0CWL9S4L1"
+      ],
+      "reviews": 261,
+      "top_topics": [
+        {
+          "id": "hair_reduction",
+          "name_ko": "제모 효과",
+          "mentions": 158,
+          "positive": 99,
+          "negative": 35,
+          "mixed": 15,
+          "neutral": 9,
+          "neg_pct": 22.2,
+          "weighted_neg_pct": 8.2,
+          "pos_reviewer_pct": 52.2,
+          "neg_reviewer_pct": 5.1
+        },
+        {
+          "id": "quality",
+          "name_ko": "품질",
+          "mentions": 61,
+          "positive": 13,
+          "negative": 47,
+          "mixed": 0,
+          "neutral": 1,
+          "neg_pct": 77.0,
+          "weighted_neg_pct": 42.1,
+          "pos_reviewer_pct": 7.3,
+          "neg_reviewer_pct": 6.1
+        },
+        {
+          "id": "pain_comfort",
+          "name_ko": "통증과 시술 편안함",
+          "mentions": 49,
+          "positive": 28,
+          "negative": 13,
+          "mixed": 7,
+          "neutral": 1,
+          "neg_pct": 26.5,
+          "weighted_neg_pct": 7.0,
+          "pos_reviewer_pct": 15.8,
+          "neg_reviewer_pct": 1.4
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 46,
+          "positive": 31,
+          "negative": 13,
+          "mixed": 2,
+          "neutral": 0,
+          "neg_pct": 28.3,
+          "weighted_neg_pct": 6.6,
+          "pos_reviewer_pct": 23.0,
+          "neg_reviewer_pct": 1.6
+        },
+        {
+          "id": "price_value",
+          "name_ko": "가격 대비 가치",
+          "mentions": 41,
+          "positive": 28,
+          "negative": 12,
+          "mixed": 1,
+          "neutral": 0,
+          "neg_pct": 29.3,
+          "weighted_neg_pct": 10.6,
+          "pos_reviewer_pct": 13.9,
+          "neg_reviewer_pct": 1.7
+        },
+        {
+          "id": "treatment_time",
+          "name_ko": "시술 시간과 관리 부담",
+          "mentions": 35,
+          "positive": 3,
+          "negative": 28,
+          "mixed": 2,
+          "neutral": 2,
+          "neg_pct": 80.0,
+          "weighted_neg_pct": 55.3,
+          "pos_reviewer_pct": 1.3,
+          "neg_reviewer_pct": 4.6
+        },
+        {
+          "id": "ease_of_use",
+          "name_ko": "사용 편의",
+          "mentions": 34,
+          "positive": 31,
+          "negative": 2,
+          "mixed": 1,
+          "neutral": 0,
+          "neg_pct": 5.9,
+          "weighted_neg_pct": 2.8,
+          "pos_reviewer_pct": 10.1,
+          "neg_reviewer_pct": 0.3
+        },
+        {
+          "id": "safety",
+          "name_ko": "안전",
+          "mentions": 28,
+          "positive": 5,
+          "negative": 16,
+          "mixed": 2,
+          "neutral": 5,
+          "neg_pct": 57.1,
+          "weighted_neg_pct": 45.2,
+          "pos_reviewer_pct": 0.6,
+          "neg_reviewer_pct": 2.7
+        }
+      ],
+      "strengths": [
+        {
+          "id": "hair_reduction",
+          "name_ko": "제모 효과",
+          "mentions": 158,
+          "pos_reviewer_pct": 52.2,
+          "quote_candidates": [
+            {
+              "review_id": "R2SGB5RDA6XE9",
+              "star": 4,
+              "quote": "As long as you’re consistent, it will work.",
+              "helpful_votes": 37
+            },
+            {
+              "review_id": "RET1TSE8MRX2V",
+              "star": 3,
+              "quote": "stubble takes a little longer to appear",
+              "helpful_votes": 30
+            },
+            {
+              "review_id": "R33VWEUQ5BZQE1",
+              "star": 4,
+              "quote": "the hair is growing back much slower and finer",
+              "helpful_votes": 20
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "works_general",
+              "name_ko": "효과가 있음",
+              "reviews": 52
+            },
+            {
+              "id": "reduced_regrowth",
+              "name_ko": "털이 줄고 느리게 자람",
+              "reviews": 20
+            },
+            {
+              "id": "nearly_gone_less_shaving",
+              "name_ko": "거의 없어지거나 면도가 줄어듦",
+              "reviews": 18
+            }
+          ]
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 46,
+          "pos_reviewer_pct": 23.0,
+          "quote_candidates": [
+            {
+              "review_id": "R3HIZNMTW2OV0Y",
+              "star": 4,
+              "quote": "I’ve been using this for over a year now and it works really well",
+              "helpful_votes": 12
+            },
+            {
+              "review_id": "RXBX1IOM03910",
+              "star": 4,
+              "quote": "Recomendable si eres cumplido con los días de depilación",
+              "helpful_votes": 10
+            },
+            {
+              "review_id": "R23TCN41TWMFZV",
+              "star": 5,
+              "quote": "BUY ITTTTT!!!",
+              "helpful_votes": 6
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "recommend",
+              "name_ko": "추천이나 사라는 권유",
+              "reviews": 25
+            },
+            {
+              "id": "conditional_recommend",
+              "name_ko": "조건을 붙인 추천",
+              "reviews": 3
+            },
+            {
+              "id": "keeps_using",
+              "name_ko": "오래 계속 씀",
+              "reviews": 3
+            }
+          ]
+        }
+      ],
+      "weaknesses": [
+        {
+          "id": "quality",
+          "name_ko": "품질",
+          "mentions": 61,
+          "neg_reviewer_pct": 6.1,
+          "quote_candidates": [
+            {
+              "review_id": "R2IW5AKUW2LVDH",
+              "star": 4,
+              "quote": "the device does heat up quickly",
+              "helpful_votes": 90
+            },
+            {
+              "review_id": "RDG83J4KRD8TL",
+              "star": 3,
+              "quote": "it only worked for 3 months, suddenly it stopped working",
+              "helpful_votes": 12
+            },
+            {
+              "review_id": "R2Q6O0AJCQWPKV",
+              "star": 4,
+              "quote": "The only downside is that it has one million zap so after you zap it 1 million times it's no longer useful",
+              "helpful_votes": 10
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "scorch_marks_smell",
+              "name_ko": "조사창 얼룩이나 탄내, 연기",
+              "reviews": 11
+            },
+            {
+              "id": "early_failure",
+              "name_ko": "받자마자 또는 한 달 안에 고장",
+              "reviews": 10
+            },
+            {
+              "id": "intermittent_malfunction",
+              "name_ko": "가끔 발광 안 함이나 저절로 꺼짐",
+              "reviews": 8
+            }
+          ]
+        },
+        {
+          "id": "hair_reduction",
+          "name_ko": "제모 효과",
+          "mentions": 158,
+          "neg_reviewer_pct": 5.1,
+          "quote_candidates": [
+            {
+              "review_id": "R2L8DPMBMY7WOZ",
+              "star": 2,
+              "quote": "have not seen any reduction in hair growth or need to shave",
+              "helpful_votes": 9
+            },
+            {
+              "review_id": "R4FJL7WTJVD4I",
+              "star": 3,
+              "quote": "it did nothing to the hair",
+              "helpful_votes": 7
+            },
+            {
+              "review_id": "R2JC9WK6MSOUG3",
+              "star": 2,
+              "quote": "have seen absolutely zero results",
+              "helpful_votes": 4
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "no_effect",
+              "name_ko": "효과 없음",
+              "reviews": 28
+            },
+            {
+              "id": "uneven_by_area",
+              "name_ko": "부위마다 효과 차이",
+              "reviews": 7
+            },
+            {
+              "id": "partial_reduction",
+              "name_ko": "줄었지만 다 없어지지 않음",
+              "reviews": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "PHILIPS",
+      "asins": [
+        "B0FGB2NS3C"
+      ],
+      "reviews": 74,
+      "top_topics": [
+        {
+          "id": "hair_reduction",
+          "name_ko": "제모 효과",
+          "mentions": 42,
+          "positive": 36,
+          "negative": 2,
+          "mixed": 3,
+          "neutral": 1,
+          "neg_pct": 4.8,
+          "weighted_neg_pct": 4.2,
+          "pos_reviewer_pct": 44.7,
+          "neg_reviewer_pct": 2.1
+        },
+        {
+          "id": "ease_of_use",
+          "name_ko": "사용 편의",
+          "mentions": 23,
+          "positive": 20,
+          "negative": 1,
+          "mixed": 1,
+          "neutral": 1,
+          "neg_pct": 4.3,
+          "weighted_neg_pct": 3.0,
+          "pos_reviewer_pct": 24.8,
+          "neg_reviewer_pct": 0.9
+        },
+        {
+          "id": "price_value",
+          "name_ko": "가격 대비 가치",
+          "mentions": 16,
+          "positive": 10,
+          "negative": 5,
+          "mixed": 1,
+          "neutral": 0,
+          "neg_pct": 31.2,
+          "weighted_neg_pct": 53.7,
+          "pos_reviewer_pct": 12.4,
+          "neg_reviewer_pct": 15.9
+        },
+        {
+          "id": "design",
+          "name_ko": "디자인과 형태",
+          "mentions": 15,
+          "positive": 10,
+          "negative": 5,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 33.3,
+          "weighted_neg_pct": 32.5,
+          "pos_reviewer_pct": 12.4,
+          "neg_reviewer_pct": 6.0
+        },
+        {
+          "id": "pain_comfort",
+          "name_ko": "통증과 시술 편안함",
+          "mentions": 14,
+          "positive": 12,
+          "negative": 1,
+          "mixed": 1,
+          "neutral": 0,
+          "neg_pct": 7.1,
+          "weighted_neg_pct": 7.1,
+          "pos_reviewer_pct": 14.8,
+          "neg_reviewer_pct": 1.2
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 13,
+          "positive": 12,
+          "negative": 0,
+          "mixed": 0,
+          "neutral": 1,
+          "neg_pct": 0.0,
+          "weighted_neg_pct": 0.0,
+          "pos_reviewer_pct": 14.9,
+          "neg_reviewer_pct": 0.0
+        },
+        {
+          "id": "quality",
+          "name_ko": "품질",
+          "mentions": 9,
+          "positive": 8,
+          "negative": 1,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 11.1,
+          "weighted_neg_pct": 7.9,
+          "pos_reviewer_pct": 9.9,
+          "neg_reviewer_pct": 0.9
+        },
+        {
+          "id": "safety",
+          "name_ko": "안전",
+          "mentions": 8,
+          "positive": 6,
+          "negative": 0,
+          "mixed": 1,
+          "neutral": 1,
+          "neg_pct": 0.0,
+          "weighted_neg_pct": 0.0,
+          "pos_reviewer_pct": 7.4,
+          "neg_reviewer_pct": 0.0
+        }
+      ],
+      "strengths": [
+        {
+          "id": "hair_reduction",
+          "name_ko": "제모 효과",
+          "mentions": 42,
+          "pos_reviewer_pct": 44.7,
+          "quote_candidates": [
+            {
+              "review_id": "R28XQXRI4LXP8S",
+              "star": 5,
+              "quote": "I noticed slower hair regrowth and smoother skin",
+              "helpful_votes": 27
+            },
+            {
+              "review_id": "RDP6VFH1J365D",
+              "star": 5,
+              "quote": "it is much slower and much thinner",
+              "helpful_votes": 21
+            },
+            {
+              "review_id": "R17Z3G31WY4J6A",
+              "star": 5,
+              "quote": "After a couple weeks of use, I have definitely noticed some great results",
+              "helpful_votes": 20
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "reduced_regrowth",
+              "name_ko": "털이 줄고 느리게 자람",
+              "reviews": 11
+            },
+            {
+              "id": "works_general",
+              "name_ko": "효과가 있음",
+              "reviews": 11
+            },
+            {
+              "id": "quick_results",
+              "name_ko": "빨리 효과가 보임",
+              "reviews": 10
+            }
+          ]
+        },
+        {
+          "id": "ease_of_use",
+          "name_ko": "사용 편의",
+          "mentions": 23,
+          "pos_reviewer_pct": 24.8,
+          "quote_candidates": [
+            {
+              "review_id": "R28XQXRI4LXP8S",
+              "star": 5,
+              "quote": "The device is easy to use, and the instructions are clear",
+              "helpful_votes": 27
+            },
+            {
+              "review_id": "R33CIWCAJBOV2F",
+              "star": 5,
+              "quote": "it’s way easier to use than I expected",
+              "helpful_votes": 27
+            },
+            {
+              "review_id": "RDP6VFH1J365D",
+              "star": 5,
+              "quote": "The instructions are simple and the device is easy to use.",
+              "helpful_votes": 21
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "easy_to_use",
+              "name_ko": "쓰기 쉽고 간단함",
+              "reviews": 16
+            },
+            {
+              "id": "clear_instructions",
+              "name_ko": "설명서가 분명함",
+              "reviews": 3
+            }
+          ]
+        }
+      ],
+      "weaknesses": [
+        {
+          "id": "price_value",
+          "name_ko": "가격 대비 가치",
+          "mentions": 16,
+          "neg_reviewer_pct": 15.9,
+          "quote_candidates": [
+            {
+              "review_id": "R1F3PPA88YT8QQ",
+              "star": 3,
+              "quote": "Too expensive.",
+              "helpful_votes": 12
+            },
+            {
+              "review_id": "R3UUWNR9MDJHAI",
+              "star": 3,
+              "quote": "motorized body hair trimmer at 1/10th the cost",
+              "helpful_votes": 6
+            },
+            {
+              "review_id": "R13KA0GLHA9QHI",
+              "star": 3,
+              "quote": "esta cara la maquina",
+              "helpful_votes": 4
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "too_expensive",
+              "name_ko": "가격 자체가 비쌈",
+              "reviews": 6
+            }
+          ]
+        },
+        {
+          "id": "design",
+          "name_ko": "디자인과 형태",
+          "mentions": 15,
+          "neg_reviewer_pct": 6.0,
+          "quote_candidates": [
+            {
+              "review_id": "R1W4CHDH2UJAL2",
+              "star": 4,
+              "quote": "the hairdryer-style hand grip design is awkward when you’re switching angles across different body parts",
+              "helpful_votes": 7
+            },
+            {
+              "review_id": "R3UUWNR9MDJHAI",
+              "star": 3,
+              "quote": "the physical design was hard to hold onto even for my larger man-hands",
+              "helpful_votes": 6
+            },
+            {
+              "review_id": "R3EVC73JWUDCAY",
+              "star": 4,
+              "quote": "It's a little bit heavy but that's probably to be expected.",
+              "helpful_votes": 3
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "awkward_grip",
+              "name_ko": "모양이 쥐기 불편함",
+              "reviews": 2
+            },
+            {
+              "id": "not_cordless",
+              "name_ko": "무선이 아니라 꽂아 써야 함",
+              "reviews": 2
+            },
+            {
+              "id": "bulky_heavy",
+              "name_ko": "크고 무거움",
+              "reviews": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Ulike",
+      "asins": [
+        "B0CV3ZJ2PN",
+        "B0G39WBP1S"
+      ],
+      "reviews": 378,
+      "top_topics": [
+        {
+          "id": "hair_reduction",
+          "name_ko": "제모 효과",
+          "mentions": 261,
+          "positive": 118,
+          "negative": 100,
+          "mixed": 28,
+          "neutral": 15,
+          "neg_pct": 38.3,
+          "weighted_neg_pct": 13.6,
+          "pos_reviewer_pct": 44.8,
+          "neg_reviewer_pct": 8.9
+        },
+        {
+          "id": "pain_comfort",
+          "name_ko": "통증과 시술 편안함",
+          "mentions": 133,
+          "positive": 118,
+          "negative": 8,
+          "mixed": 7,
+          "neutral": 0,
+          "neg_pct": 6.0,
+          "weighted_neg_pct": 0.9,
+          "pos_reviewer_pct": 51.9,
+          "neg_reviewer_pct": 0.5
+        },
+        {
+          "id": "ease_of_use",
+          "name_ko": "사용 편의",
+          "mentions": 111,
+          "positive": 94,
+          "negative": 16,
+          "mixed": 0,
+          "neutral": 1,
+          "neg_pct": 14.4,
+          "weighted_neg_pct": 2.8,
+          "pos_reviewer_pct": 44.4,
+          "neg_reviewer_pct": 1.3
+        },
+        {
+          "id": "price_value",
+          "name_ko": "가격 대비 가치",
+          "mentions": 99,
+          "positive": 40,
+          "negative": 55,
+          "mixed": 4,
+          "neutral": 0,
+          "neg_pct": 55.6,
+          "weighted_neg_pct": 21.9,
+          "pos_reviewer_pct": 18.3,
+          "neg_reviewer_pct": 5.2
+        },
+        {
+          "id": "quality",
+          "name_ko": "품질",
+          "mentions": 84,
+          "positive": 38,
+          "negative": 46,
+          "mixed": 0,
+          "neutral": 0,
+          "neg_pct": 54.8,
+          "weighted_neg_pct": 22.5,
+          "pos_reviewer_pct": 17.5,
+          "neg_reviewer_pct": 5.1
+        },
+        {
+          "id": "brand_experience",
+          "name_ko": "브랜드 경험",
+          "mentions": 73,
+          "positive": 44,
+          "negative": 26,
+          "mixed": 2,
+          "neutral": 1,
+          "neg_pct": 35.6,
+          "weighted_neg_pct": 10.1,
+          "pos_reviewer_pct": 19.0,
+          "neg_reviewer_pct": 2.2
+        },
+        {
+          "id": "treatment_time",
+          "name_ko": "시술 시간과 관리 부담",
+          "mentions": 66,
+          "positive": 30,
+          "negative": 33,
+          "mixed": 2,
+          "neutral": 1,
+          "neg_pct": 50.0,
+          "weighted_neg_pct": 10.9,
+          "pos_reviewer_pct": 18.9,
+          "neg_reviewer_pct": 2.4
+        },
+        {
+          "id": "design",
+          "name_ko": "디자인과 형태",
+          "mentions": 46,
+          "positive": 26,
+          "negative": 15,
+          "mixed": 4,
+          "neutral": 1,
+          "neg_pct": 32.6,
+          "weighted_neg_pct": 7.4,
+          "pos_reviewer_pct": 16.1,
+          "neg_reviewer_pct": 1.3
+        }
+      ],
+      "strengths": [
+        {
+          "id": "pain_comfort",
+          "name_ko": "통증과 시술 편안함",
+          "mentions": 133,
+          "pos_reviewer_pct": 51.9,
+          "quote_candidates": [
+            {
+              "review_id": "RPKW26NCED8Q8",
+              "star": 4,
+              "quote": "the cooling tech makes it virtually painless",
+              "helpful_votes": 339
+            },
+            {
+              "review_id": "R1WSQ04XZHYRM8",
+              "star": 4,
+              "quote": "The ice cooling makes it to where I don't feel anything even when using the SHR mode",
+              "helpful_votes": 204
+            },
+            {
+              "review_id": "R371G2D4TFMWP7",
+              "star": 4,
+              "quote": "It did not hurt",
+              "helpful_votes": 41
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "painless_comfortable",
+              "name_ko": "아프지 않고 편함",
+              "reviews": 59
+            },
+            {
+              "id": "cooling_comfort",
+              "name_ko": "냉각 기능 덕분에 편함",
+              "reviews": 46
+            },
+            {
+              "id": "mild_tolerable",
+              "name_ko": "거의 무통이거나 참을 만함",
+              "reviews": 13
+            }
+          ]
+        },
+        {
+          "id": "hair_reduction",
+          "name_ko": "제모 효과",
+          "mentions": 261,
+          "pos_reviewer_pct": 44.8,
+          "quote_candidates": [
+            {
+              "review_id": "R1WSQ04XZHYRM8",
+              "star": 4,
+              "quote": "It definitely works and I have seen results",
+              "helpful_votes": 204
+            },
+            {
+              "review_id": "R33AU9CUYNIANU",
+              "star": 4,
+              "quote": "The unit is effective at slowing and reducing/eliminating hair growth.",
+              "helpful_votes": 105
+            },
+            {
+              "review_id": "R371G2D4TFMWP7",
+              "star": 4,
+              "quote": "More hair has disappeared from both armpits",
+              "helpful_votes": 41
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "reduced_regrowth",
+              "name_ko": "털이 줄고 느리게 자람",
+              "reviews": 46
+            },
+            {
+              "id": "works_general",
+              "name_ko": "효과가 있음",
+              "reviews": 42
+            },
+            {
+              "id": "nearly_gone_less_shaving",
+              "name_ko": "거의 없어지거나 면도가 줄어듦",
+              "reviews": 21
+            }
+          ]
+        }
+      ],
+      "weaknesses": [
+        {
+          "id": "hair_reduction",
+          "name_ko": "제모 효과",
+          "mentions": 261,
+          "neg_reviewer_pct": 8.9,
+          "quote_candidates": [
+            {
+              "review_id": "R2JLMBJIYIWMGE",
+              "star": 1,
+              "quote": "I would say (at best) I have roughly 20% density reduction and 0% hair count reduction.",
+              "helpful_votes": 80
+            },
+            {
+              "review_id": "R3P97P9K3JWHHR",
+              "star": 1,
+              "quote": "ZERO results",
+              "helpful_votes": 28
+            },
+            {
+              "review_id": "ROIZA77SNR48H",
+              "star": 1,
+              "quote": "I haven't seen any hair reduction or changes at all",
+              "helpful_votes": 25
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "no_effect",
+              "name_ko": "효과 없음",
+              "reviews": 83
+            },
+            {
+              "id": "partial_reduction",
+              "name_ko": "줄었지만 다 없어지지 않음",
+              "reviews": 14
+            },
+            {
+              "id": "uneven_by_area",
+              "name_ko": "부위마다 효과 차이",
+              "reviews": 9
+            }
+          ]
+        },
+        {
+          "id": "price_value",
+          "name_ko": "가격 대비 가치",
+          "mentions": 99,
+          "neg_reviewer_pct": 5.2,
+          "quote_candidates": [
+            {
+              "review_id": "R1WSQ04XZHYRM8",
+              "star": 4,
+              "quote": "it is pretty expensive",
+              "helpful_votes": 204
+            },
+            {
+              "review_id": "R33AU9CUYNIANU",
+              "star": 4,
+              "quote": "the Ulike was more than 5 times the cost",
+              "helpful_votes": 105
+            },
+            {
+              "review_id": "R38YNQA8ATNIF1",
+              "star": 3,
+              "quote": "It is a relatively expensive product and it was only used for a month and it has this problem",
+              "helpful_votes": 50
+            }
+          ],
+          "top_issues": [
+            {
+              "id": "not_worth_money",
+              "name_ko": "돈 낭비, 값어치 없음",
+              "reviews": 32
+            },
+            {
+              "id": "disappointing_for_price",
+              "name_ko": "가격에 비해 효과나 성능이 실망스러움",
+              "reviews": 12
+            },
+            {
+              "id": "expensive_for_lifespan",
+              "name_ko": "비싼 값에 비해 빨리 고장 남",
+              "reviews": 6
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "notes": {
+    "data_source": "공유 리뷰 DB에서 받음, 본문 없는 리뷰 2개 제외",
+    "sample_notice": "표본에는 낮은 별점이 실제보다 많습니다(표본 평균 3.26★, 실제 분포로 되돌린 가중 평균 4.34★). ASIN 1개는 표본이 없는 별점 묶음이 있어, 그 묶음의 실제 비율은 가중 결과에서 빠졌습니다(ASIN별 비율은 1장 분포 표).",
+    "asin_sample_text": "ASIN당 표본 리뷰 74~299개"
+  },
+  "variant_signal": {
+    "key": "Color",
+    "key_scores": {
+      "Design": 0,
+      "Color": 1,
+      "Style": 0
+    },
+    "rules": {
+      "min_reviews": 15,
+      "min_tags": 12,
+      "topic_min": 10
+    },
+    "checked_on": null,
+    "asins": [
+      {
+        "asin": "B0CWL9S4L1",
+        "variants_total": 2,
+        "variants_shown": 2,
+        "hidden_low_tags": [],
+        "topics": [
+          "hair_reduction",
+          "quality",
+          "pain_comfort",
+          "brand_experience",
+          "price_value",
+          "treatment_time",
+          "ease_of_use",
+          "safety",
+          "design",
+          "skin_hair_suitability",
+          "customer_service",
+          "accessories"
+        ],
+        "rows": [
+          {
+            "variant": "Rose Gold",
+            "variant_asin": "B0BKKYPP9S",
+            "oz": null,
+            "pack": 1,
+            "reviews": 100,
+            "tags": 316,
+            "price": null,
+            "price_per_oz": null,
+            "neg_reviewer_pct": {
+              "hair_reduction": 5.2,
+              "quality": 8.2,
+              "pain_comfort": 1.6,
+              "brand_experience": 1.7,
+              "price_value": 2.9,
+              "treatment_time": 6.3,
+              "ease_of_use": 0.5,
+              "safety": 1.2,
+              "design": 2.3,
+              "skin_hair_suitability": 0.8,
+              "customer_service": 3.7,
+              "accessories": 0.5
+            }
+          },
+          {
+            "variant": "White",
+            "variant_asin": "B0CWL9S4L1",
+            "oz": null,
+            "pack": 1,
+            "reviews": 161,
+            "tags": 484,
+            "price": null,
+            "price_per_oz": null,
+            "neg_reviewer_pct": {
+              "hair_reduction": 5.1,
+              "quality": 5.4,
+              "pain_comfort": 1.3,
+              "brand_experience": 1.6,
+              "price_value": 1.2,
+              "treatment_time": 3.9,
+              "ease_of_use": 0.2,
+              "safety": 3.3,
+              "design": 2.0,
+              "skin_hair_suitability": 0.5,
+              "customer_service": 0.8,
+              "accessories": 0.0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "brand_of_asin": {
+    "B07WYY6KKC": "Braun",
+    "B0CV3ZJ2PN": "Ulike",
+    "B0CWL9S4L1": "INNZA",
+    "B0FGB2NS3C": "PHILIPS",
+    "B0G39WBP1S": "Ulike"
+  },
+  "issues": {
+    "accessories.negative": {
+      "topic": "accessories",
+      "direction": "negative",
+      "units": 20,
+      "other_pct": 15.0,
+      "top": [
+        {
+          "id": "goggles_missing",
+          "name_ko": "보안경이 없거나 빠져 옴",
+          "reviews": 11,
+          "weighted_pct": 0.8
+        },
+        {
+          "id": "case_lacking",
+          "name_ko": "보관 케이스가 없거나 아쉬움",
+          "reviews": 3,
+          "weighted_pct": 0.1
+        },
+        {
+          "id": "goggles_poor_fit",
+          "name_ko": "보안경 착용감이나 품질 불만",
+          "reviews": 3,
+          "weighted_pct": 0.1
+        }
+      ],
+      "labels": [
+        {
+          "id": "goggles_missing",
+          "name_ko": "보안경이 없거나 빠져 옴",
+          "reviews": 11,
+          "weighted_pct": 0.8,
+          "quote_candidates": [
+            {
+              "review_id": "R25H686ZWIWEWC",
+              "star": 3,
+              "quote": "I'm disappointed they are not included with the device"
+            },
+            {
+              "review_id": "RLFYC8A61CQ1",
+              "star": 4,
+              "quote": "I ended up buying safety glasses separately"
+            }
+          ]
+        },
+        {
+          "id": "case_lacking",
+          "name_ko": "보관 케이스가 없거나 아쉬움",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "RJ70XYUA71OQC",
+              "star": 4,
+              "quote": "the case it came with is a pinkish/coral color, which is a little conspicuous to have around"
+            },
+            {
+              "review_id": "R1YD46GOLUQL4B",
+              "star": 4,
+              "quote": "Me encantó! Me ubuera gustado tener un estuche :D"
+            }
+          ]
+        },
+        {
+          "id": "goggles_poor_fit",
+          "name_ko": "보안경 착용감이나 품질 불만",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "R2V5RNF586IBAW",
+              "star": 3,
+              "quote": "Glasses didn’t offer much help against laser light"
+            },
+            {
+              "review_id": "RPNGZRN9YW76Z",
+              "star": 4,
+              "quote": "I had to put my glasses over them, because they wouldn't fit with my glasses on"
+            }
+          ]
+        }
+      ]
+    },
+    "accessories.positive": {
+      "topic": "accessories",
+      "direction": "positive",
+      "units": 41,
+      "other_pct": 4.9,
+      "top": [
+        {
+          "id": "case_nice",
+          "name_ko": "보관 케이스나 파우치가 좋음",
+          "reviews": 22,
+          "weighted_pct": 2.4
+        },
+        {
+          "id": "complete_kit",
+          "name_ko": "필요한 구성품이 다 들어 있음",
+          "reviews": 9,
+          "weighted_pct": 1.1
+        },
+        {
+          "id": "goggles_included",
+          "name_ko": "보안경이 들어 있음",
+          "reviews": 9,
+          "weighted_pct": 1.7
+        }
+      ],
+      "labels": [
+        {
+          "id": "case_nice",
+          "name_ko": "보관 케이스나 파우치가 좋음",
+          "reviews": 22,
+          "weighted_pct": 2.4,
+          "quote_candidates": [
+            {
+              "review_id": "R371G2D4TFMWP7",
+              "star": 4,
+              "quote": "It comes with a very nice case to store everything in."
+            },
+            {
+              "review_id": "R2QV46JTGZRGAW",
+              "star": 4,
+              "quote": "The pouch it comes with is actually cute and practical, and everything fits inside neatly."
+            }
+          ]
+        },
+        {
+          "id": "complete_kit",
+          "name_ko": "필요한 구성품이 다 들어 있음",
+          "reviews": 9,
+          "weighted_pct": 1.1,
+          "quote_candidates": [
+            {
+              "review_id": "R15B0J10LVE60I",
+              "star": 5,
+              "quote": "comes with everything need( protective glasses, razor, and case)"
+            },
+            {
+              "review_id": "R242U1UOPD1C6T",
+              "star": 5,
+              "quote": "It also comes with everything I need, including the glasses and a storage case."
+            }
+          ]
+        },
+        {
+          "id": "goggles_included",
+          "name_ko": "보안경이 들어 있음",
+          "reviews": 9,
+          "weighted_pct": 1.7,
+          "quote_candidates": [
+            {
+              "review_id": "RJ86SS9SV6XB0",
+              "star": 4,
+              "quote": "the glasses fit over my prescription ones so it’s easy to protect my eyes"
+            },
+            {
+              "review_id": "R3INSXQHFCICQI",
+              "star": 4,
+              "quote": "love that it comes with the sunglasses to protect your eyes"
+            }
+          ]
+        }
+      ]
+    },
+    "brand_experience.negative": {
+      "topic": "brand_experience",
+      "direction": "negative",
+      "units": 64,
+      "other_pct": 7.8,
+      "top": [
+        {
+          "id": "not_recommend",
+          "name_ko": "비추천이나 사지 말라는 경고",
+          "reviews": 36,
+          "weighted_pct": 1.3
+        },
+        {
+          "id": "no_repurchase",
+          "name_ko": "다시 사지 않음",
+          "reviews": 7,
+          "weighted_pct": 0.2
+        },
+        {
+          "id": "switch_brand",
+          "name_ko": "다른 브랜드나 제품이 나음",
+          "reviews": 7,
+          "weighted_pct": 0.2
+        }
+      ],
+      "labels": [
+        {
+          "id": "not_recommend",
+          "name_ko": "비추천이나 사지 말라는 경고",
+          "reviews": 36,
+          "weighted_pct": 1.3,
+          "quote_candidates": [
+            {
+              "review_id": "R12VOGR84SGJE2",
+              "star": 3,
+              "quote": "Save your money, ladies....This thing sucks."
+            },
+            {
+              "review_id": "R2OEZ28614WRBE",
+              "star": 1,
+              "quote": "I regret this purchase and would not recommend it based on my experience"
+            }
+          ]
+        },
+        {
+          "id": "no_repurchase",
+          "name_ko": "다시 사지 않음",
+          "reviews": 7,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "R33AU9CUYNIANU",
+              "star": 4,
+              "quote": "At the end of the day, yes, I use and am happy for the most part with the Ulike. Will I spend the same amount again? Absolutely NOT."
+            },
+            {
+              "review_id": "R1NZEC16D5FOP4",
+              "star": 4,
+              "quote": "I probably won’t rebuy this model when I run out of flashes"
+            }
+          ]
+        },
+        {
+          "id": "switch_brand",
+          "name_ko": "다른 브랜드나 제품이 나음",
+          "reviews": 7,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "R371G2D4TFMWP7",
+              "star": 4,
+              "quote": "Ulike IPL is a fair rival to the INIA."
+            },
+            {
+              "review_id": "R1J0FN4Q6D535P",
+              "star": 2,
+              "quote": "Find a better product."
+            }
+          ]
+        },
+        {
+          "id": "go_professional",
+          "name_ko": "전문 시술을 권함",
+          "reviews": 5,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "R2SGB5RDA6XE9",
+              "star": 4,
+              "quote": "Overall, I’d recommend knowing it is not as strong or efficient as professional laser hair removal"
+            },
+            {
+              "review_id": "RR06PKULANNQ7",
+              "star": 3,
+              "quote": "I would recommend just going to a professional"
+            }
+          ]
+        },
+        {
+          "id": "brand_disappointment",
+          "name_ko": "브랜드나 광고에 실망",
+          "reviews": 4,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "R26RQQHSAX8XYF",
+              "star": 4,
+              "quote": "I have purchased several items from Braun in the past but sadly this might be my last"
+            },
+            {
+              "review_id": "R1GS66C9G3XIZ2",
+              "star": 1,
+              "quote": "I bought this product because of the publicity but honestly it’s just that it feels influencer’s that influence me"
+            }
+          ]
+        }
+      ]
+    },
+    "brand_experience.positive": {
+      "topic": "brand_experience",
+      "direction": "positive",
+      "units": 118,
+      "other_pct": 4.2,
+      "top": [
+        {
+          "id": "recommend",
+          "name_ko": "추천이나 사라는 권유",
+          "reviews": 76,
+          "weighted_pct": 15.0
+        },
+        {
+          "id": "buy_again_or_upgrade",
+          "name_ko": "재구매나 상위 모델로 바꿈",
+          "reviews": 9,
+          "weighted_pct": 0.4
+        },
+        {
+          "id": "favorable_comparison",
+          "name_ko": "이전 기기나 다른 브랜드보다 만족",
+          "reviews": 8,
+          "weighted_pct": 0.9
+        }
+      ],
+      "labels": [
+        {
+          "id": "recommend",
+          "name_ko": "추천이나 사라는 권유",
+          "reviews": 76,
+          "weighted_pct": 15.0,
+          "quote_candidates": [
+            {
+              "review_id": "R1LY9NEVXGJBWW",
+              "star": 4,
+              "quote": "If you are on the fence about buying this I would say just do it!"
+            },
+            {
+              "review_id": "RLFYC8A61CQ1",
+              "star": 4,
+              "quote": "would recommend it to anyone looking for an at-home hair removal option"
+            }
+          ]
+        },
+        {
+          "id": "buy_again_or_upgrade",
+          "name_ko": "재구매나 상위 모델로 바꿈",
+          "reviews": 9,
+          "weighted_pct": 0.4,
+          "quote_candidates": [
+            {
+              "review_id": "R2HTPKGOEZ3WN7",
+              "star": 4,
+              "quote": "I will have to buy my daughter her own."
+            },
+            {
+              "review_id": "R10EBCR0NL97P2",
+              "star": 5,
+              "quote": "went ahead and upgraded to the Air 10 deluxe"
+            }
+          ]
+        },
+        {
+          "id": "favorable_comparison",
+          "name_ko": "이전 기기나 다른 브랜드보다 만족",
+          "reviews": 8,
+          "weighted_pct": 0.9,
+          "quote_candidates": [
+            {
+              "review_id": "R371G2D4TFMWP7",
+              "star": 4,
+              "quote": "Ulike IPL is a fair rival to the INIA."
+            },
+            {
+              "review_id": "R3D6Y9OCRHDR0X",
+              "star": 4,
+              "quote": "I had purchased another brand of IPL several years ago, and while I think it helped, it took many, many passes over the same area to notice a slight difference."
+            }
+          ]
+        },
+        {
+          "id": "keeps_using",
+          "name_ko": "오래 계속 씀",
+          "reviews": 8,
+          "weighted_pct": 1.3,
+          "quote_candidates": [
+            {
+              "review_id": "R3I69UPM0EAH8D",
+              "star": 4,
+              "quote": "I’ve had it for over a year now"
+            },
+            {
+              "review_id": "R3TZKM2YDQ6CJZ",
+              "star": 4,
+              "quote": "I expect to keep using this device for years."
+            }
+          ]
+        },
+        {
+          "id": "no_regret",
+          "name_ko": "후회 없는 구매",
+          "reviews": 8,
+          "weighted_pct": 1.6,
+          "quote_candidates": [
+            {
+              "review_id": "R12OUD5KSFNDOD",
+              "star": 5,
+              "quote": "literally don’t hesitate, cause you will not regret it"
+            },
+            {
+              "review_id": "R2RJKR1CW4FKBT",
+              "star": 5,
+              "quote": "¡NO SE VAN A ARREPENTIR!"
+            }
+          ]
+        },
+        {
+          "id": "conditional_recommend",
+          "name_ko": "조건을 붙인 추천",
+          "reviews": 7,
+          "weighted_pct": 0.3,
+          "quote_candidates": [
+            {
+              "review_id": "R1NJL66X5FEMYR",
+              "star": 4,
+              "quote": "Para las personas de pieles claras, se lo súper recomiendo"
+            },
+            {
+              "review_id": "R2SGB5RDA6XE9",
+              "star": 4,
+              "quote": "Overall, I’d recommend knowing it is not as strong or efficient as professional laser hair removal"
+            }
+          ]
+        }
+      ]
+    },
+    "customer_service.negative": {
+      "topic": "customer_service",
+      "direction": "negative",
+      "units": 52,
+      "other_pct": 7.7,
+      "top": [
+        {
+          "id": "missed_return_window",
+          "name_ko": "반품 기한이 지나 반품이나 환불 불가",
+          "reviews": 17,
+          "weighted_pct": 0.6
+        },
+        {
+          "id": "no_response",
+          "name_ko": "고객센터 연락 불가나 무응답",
+          "reviews": 13,
+          "weighted_pct": 0.5
+        },
+        {
+          "id": "refund_replace_refused",
+          "name_ko": "환불이나 교체, 수리 거절",
+          "reviews": 8,
+          "weighted_pct": 0.3
+        }
+      ],
+      "labels": [
+        {
+          "id": "missed_return_window",
+          "name_ko": "반품 기한이 지나 반품이나 환불 불가",
+          "reviews": 17,
+          "weighted_pct": 0.6,
+          "quote_candidates": [
+            {
+              "review_id": "R2H4C4PU8K8PK1",
+              "star": 1,
+              "quote": "Can't return it because of the 30 days window."
+            },
+            {
+              "review_id": "R2OEZ28614WRBE",
+              "star": 1,
+              "quote": "the return window has already expired, so I’m stuck with a product that doesn’t work"
+            }
+          ]
+        },
+        {
+          "id": "no_response",
+          "name_ko": "고객센터 연락 불가나 무응답",
+          "reviews": 13,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "R36AFFT8C80WMF",
+              "star": 3,
+              "quote": "They will not answer me."
+            },
+            {
+              "review_id": "R3R1S946CJ2HDH",
+              "star": 1,
+              "quote": "Tried to use the support chat and website and couldn’t get anyone to talk to me!"
+            }
+          ]
+        },
+        {
+          "id": "refund_replace_refused",
+          "name_ko": "환불이나 교체, 수리 거절",
+          "reviews": 8,
+          "weighted_pct": 0.3,
+          "quote_candidates": [
+            {
+              "review_id": "R3P4S1IA50BL9G",
+              "star": 3,
+              "quote": "they say that it’s because of use and abuse from the producto"
+            },
+            {
+              "review_id": "R1BT7Y43OAYIN7",
+              "star": 1,
+              "quote": "they declined to repair or replace it"
+            }
+          ]
+        },
+        {
+          "id": "unhelpful_service",
+          "name_ko": "응대가 성의 없거나 도움이 안 됨",
+          "reviews": 4,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "RSCSB7G8UO720",
+              "star": 1,
+              "quote": "of course they don’t stand by the product"
+            },
+            {
+              "review_id": "R30SXDQSJ7QM37",
+              "star": 2,
+              "quote": "The customer service is also poor"
+            }
+          ]
+        },
+        {
+          "id": "window_ends_before_results",
+          "name_ko": "효과 확인 전에 반품 기한이 끝남",
+          "reviews": 4,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "R12UHR0YCJ95LC",
+              "star": 1,
+              "quote": "the return policy closes before that"
+            },
+            {
+              "review_id": "R3LZWIQRKS8R3A",
+              "star": 2,
+              "quote": "Unfortunately, this also passes the return period, so now you're out the $400 you just wasted"
+            }
+          ]
+        },
+        {
+          "id": "slow_return_process",
+          "name_ko": "반품이나 환불 절차가 느리고 번거로움",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "R26RQQHSAX8XYF",
+              "star": 4,
+              "quote": "Update! After the third try, I was able to get the money back guarantee."
+            },
+            {
+              "review_id": "R2JZND2LNQW1IF",
+              "star": 3,
+              "quote": "Amazon has changed their return process and makes that long and somewhat annoying"
+            }
+          ]
+        }
+      ]
+    },
+    "customer_service.positive": {
+      "topic": "customer_service",
+      "direction": "positive",
+      "units": 20,
+      "other_pct": 0.0,
+      "top": [
+        {
+          "id": "helpful_service",
+          "name_ko": "응대가 친절하고 빠름",
+          "reviews": 8,
+          "weighted_pct": 1.2
+        },
+        {
+          "id": "refund_granted",
+          "name_ko": "환불이나 반품을 받아 줌",
+          "reviews": 7,
+          "weighted_pct": 0.3
+        },
+        {
+          "id": "free_replacement",
+          "name_ko": "무상 교체나 새 제품 발송",
+          "reviews": 5,
+          "weighted_pct": 0.6
+        }
+      ],
+      "labels": [
+        {
+          "id": "helpful_service",
+          "name_ko": "응대가 친절하고 빠름",
+          "reviews": 8,
+          "weighted_pct": 1.2,
+          "quote_candidates": [
+            {
+              "review_id": "R26Y9WIBMYQJAJ",
+              "star": 4,
+              "quote": "customer service responded quickly"
+            },
+            {
+              "review_id": "R18XD7IXMDFRMP",
+              "star": 4,
+              "quote": "They were very pleasant and helpful."
+            }
+          ]
+        },
+        {
+          "id": "refund_granted",
+          "name_ko": "환불이나 반품을 받아 줌",
+          "reviews": 7,
+          "weighted_pct": 0.3,
+          "quote_candidates": [
+            {
+              "review_id": "R1SDYJMPTO5X2D",
+              "star": 3,
+              "quote": "The company reached out and offered full refund even though it was beyond 100 days"
+            },
+            {
+              "review_id": "RGRI74CC8ENT0",
+              "star": 1,
+              "quote": "I returned it and promptly received my refund and refund on the warranty."
+            }
+          ]
+        },
+        {
+          "id": "free_replacement",
+          "name_ko": "무상 교체나 새 제품 발송",
+          "reviews": 5,
+          "weighted_pct": 0.6,
+          "quote_candidates": [
+            {
+              "review_id": "R1XYM58U3K0JNP",
+              "star": 4,
+              "quote": "They also offered me a replacement at no cost."
+            },
+            {
+              "review_id": "R2TAW3BLI22CBT",
+              "star": 4,
+              "quote": "Braun is replacing it for free"
+            }
+          ]
+        }
+      ]
+    },
+    "design.negative": {
+      "topic": "design",
+      "direction": "negative",
+      "units": 47,
+      "other_pct": 8.5,
+      "top": [
+        {
+          "id": "bulky_heavy",
+          "name_ko": "크고 무거움",
+          "reviews": 14,
+          "weighted_pct": 0.6
+        },
+        {
+          "id": "awkward_grip",
+          "name_ko": "모양이 쥐기 불편함",
+          "reviews": 12,
+          "weighted_pct": 0.5
+        },
+        {
+          "id": "not_cordless",
+          "name_ko": "무선이 아니라 꽂아 써야 함",
+          "reviews": 7,
+          "weighted_pct": 0.3
+        }
+      ],
+      "labels": [
+        {
+          "id": "bulky_heavy",
+          "name_ko": "크고 무거움",
+          "reviews": 14,
+          "weighted_pct": 0.6,
+          "quote_candidates": [
+            {
+              "review_id": "RPKW26NCED8Q8",
+              "star": 4,
+              "quote": "The device is pretty bulky if you're trying to do the Brazilian area"
+            },
+            {
+              "review_id": "RRHU7A16IHWSW",
+              "star": 3,
+              "quote": "Bulky design makes handling and maneuvering the device difficult"
+            }
+          ]
+        },
+        {
+          "id": "awkward_grip",
+          "name_ko": "모양이 쥐기 불편함",
+          "reviews": 12,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "R1NZEC16D5FOP4",
+              "star": 4,
+              "quote": "The design is also soooo uncomfortable to use at certain angles."
+            },
+            {
+              "review_id": "R2HTPKGOEZ3WN7",
+              "star": 4,
+              "quote": "The shape of it is a bit challenging."
+            }
+          ]
+        },
+        {
+          "id": "not_cordless",
+          "name_ko": "무선이 아니라 꽂아 써야 함",
+          "reviews": 7,
+          "weighted_pct": 0.3,
+          "quote_candidates": [
+            {
+              "review_id": "RWAZ8LIF87E1F",
+              "star": 1,
+              "quote": "Only comes on when plugged in."
+            },
+            {
+              "review_id": "RNZOJCGW6MO10",
+              "star": 4,
+              "quote": "it actually has to be plugged in"
+            }
+          ]
+        },
+        {
+          "id": "small_window",
+          "name_ko": "조사창이 작음",
+          "reviews": 6,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "R1JLZT6OS3U6JO",
+              "star": 4,
+              "quote": "some huge drawbacks for me are the small flash window + thick plastic edge"
+            },
+            {
+              "review_id": "R35T6O9HV1N4EB",
+              "star": 4,
+              "quote": "I wish the laser head was a tad bit bigger"
+            }
+          ]
+        },
+        {
+          "id": "noisy",
+          "name_ko": "작동 소음이 큼",
+          "reviews": 5,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "RJ86SS9SV6XB0",
+              "star": 4,
+              "quote": "the sound it makes is like a plug when it sparks"
+            },
+            {
+              "review_id": "R3JUXEAH0BW780",
+              "star": 3,
+              "quote": "it’s a little loud because of the fan but it’s not bad. It’s small and a convenient size"
+            }
+          ]
+        },
+        {
+          "id": "cord_adapter",
+          "name_ko": "코드가 짧거나 어댑터가 큼",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "R25K2A8S4MLZQH",
+              "star": 3,
+              "quote": "The cord is short, the design is odd, and it is difficult to control."
+            },
+            {
+              "review_id": "R2MBCDJ6VJPRMQ",
+              "star": 2,
+              "quote": "Its power supply is about as large as unit itself, and definitely heavier"
+            }
+          ]
+        }
+      ]
+    },
+    "design.positive": {
+      "topic": "design",
+      "direction": "positive",
+      "units": 55,
+      "other_pct": 5.5,
+      "top": [
+        {
+          "id": "looks_good",
+          "name_ko": "예쁘고 고급스러운 외관",
+          "reviews": 23,
+          "weighted_pct": 4.6
+        },
+        {
+          "id": "light_easy_grip",
+          "name_ko": "가볍고 쥐기 편함",
+          "reviews": 18,
+          "weighted_pct": 2.6
+        },
+        {
+          "id": "compact_portable",
+          "name_ko": "작고 휴대하기 좋음",
+          "reviews": 7,
+          "weighted_pct": 0.9
+        }
+      ],
+      "labels": [
+        {
+          "id": "looks_good",
+          "name_ko": "예쁘고 고급스러운 외관",
+          "reviews": 23,
+          "weighted_pct": 4.6,
+          "quote_candidates": [
+            {
+              "review_id": "R20B18UJ8O3GYM",
+              "star": 4,
+              "quote": "It feels lightweight and comfortable to handle, and the design looks nice and well put together"
+            },
+            {
+              "review_id": "R2W8VLAJW7Q7LS",
+              "star": 4,
+              "quote": "Very sleek"
+            }
+          ]
+        },
+        {
+          "id": "light_easy_grip",
+          "name_ko": "가볍고 쥐기 편함",
+          "reviews": 18,
+          "weighted_pct": 2.6,
+          "quote_candidates": [
+            {
+              "review_id": "R20B18UJ8O3GYM",
+              "star": 4,
+              "quote": "It feels lightweight and comfortable to handle, and the design looks nice and well put together"
+            },
+            {
+              "review_id": "RC7NRMK409U55",
+              "star": 5,
+              "quote": "lightweight, ergonomic"
+            }
+          ]
+        },
+        {
+          "id": "compact_portable",
+          "name_ko": "작고 휴대하기 좋음",
+          "reviews": 7,
+          "weighted_pct": 0.9,
+          "quote_candidates": [
+            {
+              "review_id": "R3JUXEAH0BW780",
+              "star": 3,
+              "quote": "it’s a little loud because of the fan but it’s not bad. It’s small and a convenient size"
+            },
+            {
+              "review_id": "R189Y6KI3NJHWQ",
+              "star": 5,
+              "quote": "the portability is amazing"
+            }
+          ]
+        },
+        {
+          "id": "long_cord",
+          "name_ko": "전원 코드가 넉넉함",
+          "reviews": 4,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "R17Z3G31WY4J6A",
+              "star": 5,
+              "quote": "The 6ft cord a nice length"
+            },
+            {
+              "review_id": "R9PCFNCTJ78GB",
+              "star": 4,
+              "quote": "the cord is long"
+            }
+          ]
+        },
+        {
+          "id": "attachments_versatile",
+          "name_ko": "부위별 교체 헤드",
+          "reviews": 3,
+          "weighted_pct": 0.6,
+          "quote_candidates": [
+            {
+              "review_id": "R21347ABXUYQR7",
+              "star": 5,
+              "quote": "the four attachments make it incredibly versatile for different areas"
+            },
+            {
+              "review_id": "R2527CST84MMJT",
+              "star": 5,
+              "quote": "The multiple attachments make it versatile for different body areas"
+            }
+          ]
+        }
+      ]
+    },
+    "ease_of_use.negative": {
+      "topic": "ease_of_use",
+      "direction": "negative",
+      "units": 44,
+      "other_pct": 6.8,
+      "top": [
+        {
+          "id": "hard_to_trigger_flash",
+          "name_ko": "피부에 붙여도 발광이 잘 안 됨",
+          "reviews": 12,
+          "weighted_pct": 0.9
+        },
+        {
+          "id": "unclear_instructions",
+          "name_ko": "설명서가 부족하거나 불분명함",
+          "reviews": 9,
+          "weighted_pct": 0.6
+        },
+        {
+          "id": "mode_button_gripes",
+          "name_ko": "모드나 버튼 구성이 불편함",
+          "reviews": 7,
+          "weighted_pct": 0.2
+        }
+      ],
+      "labels": [
+        {
+          "id": "hard_to_trigger_flash",
+          "name_ko": "피부에 붙여도 발광이 잘 안 됨",
+          "reviews": 12,
+          "weighted_pct": 0.9,
+          "quote_candidates": [
+            {
+              "review_id": "R1NZEC16D5FOP4",
+              "star": 4,
+              "quote": "It can be REALLY hard to get the sensors to flash, even when the plate is flush against my skin."
+            },
+            {
+              "review_id": "RBBCFQWS2G0TM",
+              "star": 5,
+              "quote": "I had trouble the first couple sessions getting the device to flash"
+            }
+          ]
+        },
+        {
+          "id": "unclear_instructions",
+          "name_ko": "설명서가 부족하거나 불분명함",
+          "reviews": 9,
+          "weighted_pct": 0.6,
+          "quote_candidates": [
+            {
+              "review_id": "R1NE4QCL8NG603",
+              "star": 3,
+              "quote": "the directions to use the device were lacking much needed information"
+            },
+            {
+              "review_id": "R1U2RD0VZRSPNC",
+              "star": 4,
+              "quote": "I’m not sure how many times to press the button per leg for example."
+            }
+          ]
+        },
+        {
+          "id": "mode_button_gripes",
+          "name_ko": "모드나 버튼 구성이 불편함",
+          "reviews": 7,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "R2T2JDN7PVVK4G",
+              "star": 4,
+              "quote": "I really, really despise the \"continuous flash\" setting"
+            },
+            {
+              "review_id": "R6YW7XS4EI7QZ",
+              "star": 3,
+              "quote": "I was disappointed that the SHR mode did not have a continuous mode option"
+            }
+          ]
+        },
+        {
+          "id": "sensor_auto_adjust",
+          "name_ko": "센서 자동 조절이 거슬림",
+          "reviews": 7,
+          "weighted_pct": 0.3,
+          "quote_candidates": [
+            {
+              "review_id": "R2HTPKGOEZ3WN7",
+              "star": 4,
+              "quote": "The most frustrating part is when it won't flash because it is reading red."
+            },
+            {
+              "review_id": "RRHU7A16IHWSW",
+              "star": 3,
+              "quote": "Air 10's overly cautious skin sensor frequently reduces intensity unnecessarily"
+            }
+          ]
+        },
+        {
+          "id": "complicated_operation",
+          "name_ko": "조작이 복잡하고 어려움",
+          "reviews": 4,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "R2ON4WB4I6JTQG",
+              "star": 3,
+              "quote": "Not super user friendly thus far"
+            },
+            {
+              "review_id": "RWTBVMS6K6M9P",
+              "star": 4,
+              "quote": "This is a complicated device that requires a lot of patience."
+            }
+          ]
+        },
+        {
+          "id": "shaving_prep",
+          "name_ko": "쓸 때마다 면도해야 하는 번거로움",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "R1E37CQXV0TSOA",
+              "star": 4,
+              "quote": "You also have to shave a lot."
+            },
+            {
+              "review_id": "R1E3UY1UREFRJ5",
+              "star": 2,
+              "quote": "You have to shave a lot"
+            }
+          ]
+        }
+      ]
+    },
+    "ease_of_use.positive": {
+      "topic": "ease_of_use",
+      "direction": "positive",
+      "units": 176,
+      "other_pct": 5.1,
+      "top": [
+        {
+          "id": "easy_to_use",
+          "name_ko": "쓰기 쉽고 간단함",
+          "reviews": 146,
+          "weighted_pct": 22.2
+        },
+        {
+          "id": "clear_instructions",
+          "name_ko": "설명서가 분명함",
+          "reviews": 13,
+          "weighted_pct": 2.1
+        },
+        {
+          "id": "handy_modes",
+          "name_ko": "자동 모드와 단계 조절이 편함",
+          "reviews": 13,
+          "weighted_pct": 1.7
+        }
+      ],
+      "labels": [
+        {
+          "id": "easy_to_use",
+          "name_ko": "쓰기 쉽고 간단함",
+          "reviews": 146,
+          "weighted_pct": 22.2,
+          "quote_candidates": [
+            {
+              "review_id": "R1JLZT6OS3U6JO",
+              "star": 4,
+              "quote": "It’s very easy to use!"
+            },
+            {
+              "review_id": "R1WSQ04XZHYRM8",
+              "star": 4,
+              "quote": "it's super easy to use and has 3 different modes"
+            }
+          ]
+        },
+        {
+          "id": "clear_instructions",
+          "name_ko": "설명서가 분명함",
+          "reviews": 13,
+          "weighted_pct": 2.1,
+          "quote_candidates": [
+            {
+              "review_id": "R28XQXRI4LXP8S",
+              "star": 5,
+              "quote": "The device is easy to use, and the instructions are clear"
+            },
+            {
+              "review_id": "R2QV46JTGZRGAW",
+              "star": 4,
+              "quote": "clear instructions"
+            }
+          ]
+        },
+        {
+          "id": "handy_modes",
+          "name_ko": "자동 모드와 단계 조절이 편함",
+          "reviews": 13,
+          "weighted_pct": 1.7,
+          "quote_candidates": [
+            {
+              "review_id": "RPKW26NCED8Q8",
+              "star": 4,
+              "quote": "Glide mode is amazing"
+            },
+            {
+              "review_id": "R1WSQ04XZHYRM8",
+              "star": 4,
+              "quote": "it's super easy to use and has 3 different modes"
+            }
+          ]
+        },
+        {
+          "id": "home_convenience",
+          "name_ko": "집에서 할 수 있어 편함",
+          "reviews": 10,
+          "weighted_pct": 2.0,
+          "quote_candidates": [
+            {
+              "review_id": "R2SGB5RDA6XE9",
+              "star": 4,
+              "quote": "at least you can do it in the comfort of your own home"
+            },
+            {
+              "review_id": "R326Z0592LU7XL",
+              "star": 5,
+              "quote": "being able to do this in the privacy of my own home"
+            }
+          ]
+        }
+      ]
+    },
+    "hair_reduction.negative": {
+      "topic": "hair_reduction",
+      "direction": "negative",
+      "units": 286,
+      "other_pct": 6.3,
+      "top": [
+        {
+          "id": "no_effect",
+          "name_ko": "효과 없음",
+          "reviews": 161,
+          "weighted_pct": 5.8
+        },
+        {
+          "id": "partial_reduction",
+          "name_ko": "줄었지만 다 없어지지 않음",
+          "reviews": 41,
+          "weighted_pct": 1.8
+        },
+        {
+          "id": "uneven_by_area",
+          "name_ko": "부위마다 효과 차이",
+          "reviews": 36,
+          "weighted_pct": 1.6
+        }
+      ],
+      "labels": [
+        {
+          "id": "no_effect",
+          "name_ko": "효과 없음",
+          "reviews": 161,
+          "weighted_pct": 5.8,
+          "quote_candidates": [
+            {
+              "review_id": "R2MTD56P6QYOUV",
+              "star": 1,
+              "quote": "After 18+ weeks no improvement in fact some hair seems to be growing back faster"
+            },
+            {
+              "review_id": "R3P97P9K3JWHHR",
+              "star": 1,
+              "quote": "ZERO results"
+            }
+          ]
+        },
+        {
+          "id": "partial_reduction",
+          "name_ko": "줄었지만 다 없어지지 않음",
+          "reviews": 41,
+          "weighted_pct": 1.8,
+          "quote_candidates": [
+            {
+              "review_id": "R1JLZT6OS3U6JO",
+              "star": 4,
+              "quote": "Yes, it works up to a certain point. No, it does not completely remove hair growth."
+            },
+            {
+              "review_id": "RPKW26NCED8Q8",
+              "star": 4,
+              "quote": "I do have less hair in the after picture, but only about a 30% reduction"
+            }
+          ]
+        },
+        {
+          "id": "uneven_by_area",
+          "name_ko": "부위마다 효과 차이",
+          "reviews": 36,
+          "weighted_pct": 1.6,
+          "quote_candidates": [
+            {
+              "review_id": "R2IW5AKUW2LVDH",
+              "star": 4,
+              "quote": "My one other issue is that it didn't work on my armpits. But it worked so well on my legs that it's hard to care!"
+            },
+            {
+              "review_id": "RJ70XYUA71OQC",
+              "star": 4,
+              "quote": "In some areas, like the chest, it has been very effective. In others, like the front of my neck, it reduced the amount of hair growth but not that noticeably."
+            }
+          ]
+        },
+        {
+          "id": "not_lasting",
+          "name_ko": "멈추면 다시 나고 영구적이지 않음",
+          "reviews": 19,
+          "weighted_pct": 0.9,
+          "quote_candidates": [
+            {
+              "review_id": "R8Y3GAPALYC2D",
+              "star": 4,
+              "quote": "Decent, but not permanent hair reduction"
+            },
+            {
+              "review_id": "R3P4S1IA50BL9G",
+              "star": 3,
+              "quote": "the hair still growing back after you stop using it for a month"
+            }
+          ]
+        },
+        {
+          "id": "slow_results",
+          "name_ko": "효과가 늦게 나타남",
+          "reviews": 13,
+          "weighted_pct": 0.9,
+          "quote_candidates": [
+            {
+              "review_id": "R1MER6HMWWEBWK",
+              "star": 4,
+              "quote": "I disliked how long it took. I think I've been doing it daily for 3 months and just now noticed a huge difference."
+            },
+            {
+              "review_id": "R1U2RD0VZRSPNC",
+              "star": 4,
+              "quote": "It slows down the hair growth but definitely not as fast as advertised."
+            }
+          ]
+        }
+      ]
+    },
+    "hair_reduction.positive": {
+      "topic": "hair_reduction",
+      "direction": "positive",
+      "units": 444,
+      "other_pct": 2.7,
+      "top": [
+        {
+          "id": "works_general",
+          "name_ko": "효과가 있음",
+          "reviews": 154,
+          "weighted_pct": 19.2
+        },
+        {
+          "id": "reduced_regrowth",
+          "name_ko": "털이 줄고 느리게 자람",
+          "reviews": 119,
+          "weighted_pct": 16.8
+        },
+        {
+          "id": "nearly_gone_less_shaving",
+          "name_ko": "거의 없어지거나 면도가 줄어듦",
+          "reviews": 64,
+          "weighted_pct": 10.1
+        }
+      ],
+      "labels": [
+        {
+          "id": "works_general",
+          "name_ko": "효과가 있음",
+          "reviews": 154,
+          "weighted_pct": 19.2,
+          "quote_candidates": [
+            {
+              "review_id": "R1JLZT6OS3U6JO",
+              "star": 4,
+              "quote": "Yes, it works up to a certain point. No, it does not completely remove hair growth."
+            },
+            {
+              "review_id": "R1WSQ04XZHYRM8",
+              "star": 4,
+              "quote": "It definitely works and I have seen results"
+            }
+          ]
+        },
+        {
+          "id": "reduced_regrowth",
+          "name_ko": "털이 줄고 느리게 자람",
+          "reviews": 119,
+          "weighted_pct": 16.8,
+          "quote_candidates": [
+            {
+              "review_id": "RPKW26NCED8Q8",
+              "star": 4,
+              "quote": "I do have less hair in the after picture, but only about a 30% reduction"
+            },
+            {
+              "review_id": "R33AU9CUYNIANU",
+              "star": 4,
+              "quote": "The unit is effective at slowing and reducing/eliminating hair growth."
+            }
+          ]
+        },
+        {
+          "id": "nearly_gone_less_shaving",
+          "name_ko": "거의 없어지거나 면도가 줄어듦",
+          "reviews": 64,
+          "weighted_pct": 10.1,
+          "quote_candidates": [
+            {
+              "review_id": "R1NZEC16D5FOP4",
+              "star": 4,
+              "quote": "after a year of weekly sessions all over my entire body, I’m almost completely hairless"
+            },
+            {
+              "review_id": "R2HTPKGOEZ3WN7",
+              "star": 4,
+              "quote": "After 12-weeks, there was no more hair."
+            }
+          ]
+        },
+        {
+          "id": "works_on_areas",
+          "name_ko": "특정 부위에 잘 됨",
+          "reviews": 51,
+          "weighted_pct": 5.0,
+          "quote_candidates": [
+            {
+              "review_id": "R2IW5AKUW2LVDH",
+              "star": 4,
+              "quote": "My one other issue is that it didn't work on my armpits. But it worked so well on my legs that it's hard to care!"
+            },
+            {
+              "review_id": "R371G2D4TFMWP7",
+              "star": 4,
+              "quote": "More hair has disappeared from both armpits"
+            }
+          ]
+        },
+        {
+          "id": "quick_results",
+          "name_ko": "빨리 효과가 보임",
+          "reviews": 47,
+          "weighted_pct": 6.7,
+          "quote_candidates": [
+            {
+              "review_id": "R3JL1X6MGXLUXX",
+              "star": 4,
+              "quote": "I’m already seeing significantly slowed hair growth"
+            },
+            {
+              "review_id": "R3D6Y9OCRHDR0X",
+              "star": 4,
+              "quote": "After only one use I noticed a significant difference."
+            }
+          ]
+        },
+        {
+          "id": "finer_lighter",
+          "name_ko": "털이 가늘고 옅어짐",
+          "reviews": 40,
+          "weighted_pct": 3.9,
+          "quote_candidates": [
+            {
+              "review_id": "RDP6VFH1J365D",
+              "star": 5,
+              "quote": "it is much slower and much thinner"
+            },
+            {
+              "review_id": "R33VWEUQ5BZQE1",
+              "star": 4,
+              "quote": "the hair is growing back much slower and finer"
+            }
+          ]
+        },
+        {
+          "id": "works_with_consistency",
+          "name_ko": "꾸준히 쓰면 효과가 남",
+          "reviews": 31,
+          "weighted_pct": 4.7,
+          "quote_candidates": [
+            {
+              "review_id": "R2SGB5RDA6XE9",
+              "star": 4,
+              "quote": "As long as you’re consistent, it will work."
+            },
+            {
+              "review_id": "R3HIZNMTW2OV0Y",
+              "star": 4,
+              "quote": "I’ve noticed my hair getting thinner and lighter with consistent use which is great"
+            }
+          ]
+        }
+      ]
+    },
+    "packaging.negative": {
+      "topic": "packaging",
+      "direction": "negative",
+      "units": 3,
+      "other_pct": 100.0,
+      "top": [],
+      "labels": []
+    },
+    "packaging.positive": {
+      "topic": "packaging",
+      "direction": "positive",
+      "units": 26,
+      "other_pct": 0.0,
+      "top": [
+        {
+          "id": "attractive_premium_box",
+          "name_ko": "예쁘고 고급스러운 포장",
+          "reviews": 18,
+          "weighted_pct": 3.5
+        },
+        {
+          "id": "well_packed",
+          "name_ko": "꼼꼼하게 잘 포장되어 옴",
+          "reviews": 5,
+          "weighted_pct": 1.2
+        },
+        {
+          "id": "practical_storage_box",
+          "name_ko": "보관에 쓰기 좋은 실용적인 상자",
+          "reviews": 3,
+          "weighted_pct": 0.2
+        }
+      ],
+      "labels": [
+        {
+          "id": "attractive_premium_box",
+          "name_ko": "예쁘고 고급스러운 포장",
+          "reviews": 18,
+          "weighted_pct": 3.5,
+          "quote_candidates": [
+            {
+              "review_id": "R1MER6HMWWEBWK",
+              "star": 4,
+              "quote": "The packaging was super attractive"
+            },
+            {
+              "review_id": "R2D5BIKVEMGFGD",
+              "star": 5,
+              "quote": "it comes in a beautiful box"
+            }
+          ]
+        },
+        {
+          "id": "well_packed",
+          "name_ko": "꼼꼼하게 잘 포장되어 옴",
+          "reviews": 5,
+          "weighted_pct": 1.2,
+          "quote_candidates": [
+            {
+              "review_id": "R1NE4QCL8NG603",
+              "star": 3,
+              "quote": "It was well-packaged"
+            },
+            {
+              "review_id": "R37BVWJW81QEP9",
+              "star": 5,
+              "quote": "it came very well packaged"
+            }
+          ]
+        },
+        {
+          "id": "practical_storage_box",
+          "name_ko": "보관에 쓰기 좋은 실용적인 상자",
+          "reviews": 3,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "R17Z3G31WY4J6A",
+              "star": 5,
+              "quote": "It comes in a very nice clampshell type box that keeps everything organized while looking nice."
+            },
+            {
+              "review_id": "R2EDE4DS2YX5SP",
+              "star": 4,
+              "quote": "I am keeping in the Ulike sturdy box for added care"
+            }
+          ]
+        }
+      ]
+    },
+    "pain_comfort.negative": {
+      "topic": "pain_comfort",
+      "direction": "negative",
+      "units": 64,
+      "other_pct": 0.0,
+      "top": [
+        {
+          "id": "mild_sting",
+          "name_ko": "약간 따끔함, 기대만큼 무통은 아님",
+          "reviews": 15,
+          "weighted_pct": 1.2
+        },
+        {
+          "id": "sensitive_area_pain",
+          "name_ko": "민감한 부위나 특정 지점에서 아픔",
+          "reviews": 14,
+          "weighted_pct": 1.2
+        },
+        {
+          "id": "strong_pain",
+          "name_ko": "심하게 아픔",
+          "reviews": 13,
+          "weighted_pct": 0.4
+        }
+      ],
+      "labels": [
+        {
+          "id": "mild_sting",
+          "name_ko": "약간 따끔함, 기대만큼 무통은 아님",
+          "reviews": 15,
+          "weighted_pct": 1.2,
+          "quote_candidates": [
+            {
+              "review_id": "R1JLZT6OS3U6JO",
+              "star": 4,
+              "quote": "It definitely zaps you but does it hurt??? I wouldn’t call it pain exactly unless you do it again too soon."
+            },
+            {
+              "review_id": "R1NJL66X5FEMYR",
+              "star": 4,
+              "quote": "si duele un poquito según va avanzando a la 3 semana, pero luego la piel se acostumbra y ya no dolerá tanto"
+            }
+          ]
+        },
+        {
+          "id": "sensitive_area_pain",
+          "name_ko": "민감한 부위나 특정 지점에서 아픔",
+          "reviews": 14,
+          "weighted_pct": 1.2,
+          "quote_candidates": [
+            {
+              "review_id": "R35T6O9HV1N4EB",
+              "star": 4,
+              "quote": "Only a few spots it stings a little bit but overall it is pretty painless."
+            },
+            {
+              "review_id": "R2IW5AKUW2LVDH",
+              "star": 4,
+              "quote": "it hurts and zaps your freckles"
+            }
+          ]
+        },
+        {
+          "id": "strong_pain",
+          "name_ko": "심하게 아픔",
+          "reviews": 13,
+          "weighted_pct": 0.4,
+          "quote_candidates": [
+            {
+              "review_id": "R2MTD56P6QYOUV",
+              "star": 1,
+              "quote": "it feels like you getting electrocuted"
+            },
+            {
+              "review_id": "RGRI74CC8ENT0",
+              "star": 1,
+              "quote": "Don't buy unless you like using a teaser on your face."
+            }
+          ]
+        },
+        {
+          "id": "hot_burning_sensation",
+          "name_ko": "쏠 때 뜨겁거나 타는 느낌",
+          "reviews": 11,
+          "weighted_pct": 0.3,
+          "quote_candidates": [
+            {
+              "review_id": "R4FJL7WTJVD4I",
+              "star": 3,
+              "quote": "extremely hot during the flash"
+            },
+            {
+              "review_id": "R16RHLDXFP7HCJ",
+              "star": 3,
+              "quote": "It also burns like heck in certain spots."
+            }
+          ]
+        },
+        {
+          "id": "high_setting_too_strong",
+          "name_ko": "높은 단계가 세서 낮춰야 함",
+          "reviews": 7,
+          "weighted_pct": 0.3,
+          "quote_candidates": [
+            {
+              "review_id": "R1ZBU72UNF0W78",
+              "star": 5,
+              "quote": "It isnt as painless as I had hoped, it always felt like it was one setting too high for my comfort."
+            },
+            {
+              "review_id": "R3TZKM2YDQ6CJZ",
+              "star": 4,
+              "quote": "The higher settings can definitely sting, especially in more sensitive areas, but the discomfort becomes much more tolerable over time"
+            }
+          ]
+        },
+        {
+          "id": "cooling_insufficient",
+          "name_ko": "냉각 기능이 약하거나 없음",
+          "reviews": 6,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "R2WKT4WSARV4ZP",
+              "star": 2,
+              "quote": "I don't think the cooling makes a difference."
+            },
+            {
+              "review_id": "R6YW7XS4EI7QZ",
+              "star": 3,
+              "quote": "The cooling technology was helpful to an extent, but did not compensate for the hot air that was released"
+            }
+          ]
+        },
+        {
+          "id": "heats_up_with_use",
+          "name_ko": "오래 쓸수록 뜨거워지고 더 아픔",
+          "reviews": 4,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "R17FQDNSNKZ5BG",
+              "star": 4,
+              "quote": "the opening against the sking starts feeling hot/ borderline burning half way through"
+            },
+            {
+              "review_id": "R1C0FQG1QDWZZD",
+              "star": 1,
+              "quote": "the longer it’s in the more painful it gets"
+            }
+          ]
+        }
+      ]
+    },
+    "pain_comfort.positive": {
+      "topic": "pain_comfort",
+      "direction": "positive",
+      "units": 201,
+      "other_pct": 2.0,
+      "top": [
+        {
+          "id": "painless_comfortable",
+          "name_ko": "아프지 않고 편함",
+          "reviews": 91,
+          "weighted_pct": 12.9
+        },
+        {
+          "id": "cooling_comfort",
+          "name_ko": "냉각 기능 덕분에 편함",
+          "reviews": 53,
+          "weighted_pct": 8.6
+        },
+        {
+          "id": "mild_tolerable",
+          "name_ko": "거의 무통이거나 참을 만함",
+          "reviews": 37,
+          "weighted_pct": 4.3
+        }
+      ],
+      "labels": [
+        {
+          "id": "painless_comfortable",
+          "name_ko": "아프지 않고 편함",
+          "reviews": 91,
+          "weighted_pct": 12.9,
+          "quote_candidates": [
+            {
+              "review_id": "R371G2D4TFMWP7",
+              "star": 4,
+              "quote": "It did not hurt"
+            },
+            {
+              "review_id": "R2FA3ODX0DHYD8",
+              "star": 4,
+              "quote": "It doesn't hurt at all"
+            }
+          ]
+        },
+        {
+          "id": "cooling_comfort",
+          "name_ko": "냉각 기능 덕분에 편함",
+          "reviews": 53,
+          "weighted_pct": 8.6,
+          "quote_candidates": [
+            {
+              "review_id": "RPKW26NCED8Q8",
+              "star": 4,
+              "quote": "the cooling tech makes it virtually painless"
+            },
+            {
+              "review_id": "R1WSQ04XZHYRM8",
+              "star": 4,
+              "quote": "The ice cooling makes it to where I don't feel anything even when using the SHR mode"
+            }
+          ]
+        },
+        {
+          "id": "mild_tolerable",
+          "name_ko": "거의 무통이거나 참을 만함",
+          "reviews": 37,
+          "weighted_pct": 4.3,
+          "quote_candidates": [
+            {
+              "review_id": "R1JLZT6OS3U6JO",
+              "star": 4,
+              "quote": "It definitely zaps you but does it hurt??? I wouldn’t call it pain exactly unless you do it again too soon."
+            },
+            {
+              "review_id": "R25H686ZWIWEWC",
+              "star": 3,
+              "quote": "I don't have much noticeable anything in regards to pain or discomfort."
+            }
+          ]
+        },
+        {
+          "id": "fine_on_high_setting_or_sensitive_area",
+          "name_ko": "높은 단계나 민감한 부위에서도 괜찮음",
+          "reviews": 11,
+          "weighted_pct": 2.0,
+          "quote_candidates": [
+            {
+              "review_id": "R2SGB5RDA6XE9",
+              "star": 4,
+              "quote": "The pain is super minor on the highest setting (2/10)"
+            },
+            {
+              "review_id": "R33VWEUQ5BZQE1",
+              "star": 4,
+              "quote": "it can hurt a little in more sensitive areas, but it’s tolerable"
+            }
+          ]
+        },
+        {
+          "id": "less_painful_than_alternatives",
+          "name_ko": "왁싱이나 병원 레이저보다 덜 아픔",
+          "reviews": 10,
+          "weighted_pct": 2.1,
+          "quote_candidates": [
+            {
+              "review_id": "R1LY9NEVXGJBWW",
+              "star": 4,
+              "quote": "Yes it feels like someone is shooting you with a rubber band, but honestly it’s nothing next to the pain of my previous experiences"
+            },
+            {
+              "review_id": "R8Y3GAPALYC2D",
+              "star": 4,
+              "quote": "waayyyyyy more comfortable than professional laser hair removal"
+            }
+          ]
+        }
+      ]
+    },
+    "price_value.negative": {
+      "topic": "price_value",
+      "direction": "negative",
+      "units": 125,
+      "other_pct": 5.6,
+      "top": [
+        {
+          "id": "not_worth_money",
+          "name_ko": "돈 낭비, 값어치 없음",
+          "reviews": 61,
+          "weighted_pct": 2.3
+        },
+        {
+          "id": "disappointing_for_price",
+          "name_ko": "가격에 비해 효과나 성능이 실망스러움",
+          "reviews": 26,
+          "weighted_pct": 0.9
+        },
+        {
+          "id": "expensive_for_lifespan",
+          "name_ko": "비싼 값에 비해 빨리 고장 남",
+          "reviews": 17,
+          "weighted_pct": 0.6
+        }
+      ],
+      "labels": [
+        {
+          "id": "not_worth_money",
+          "name_ko": "돈 낭비, 값어치 없음",
+          "reviews": 61,
+          "weighted_pct": 2.3,
+          "quote_candidates": [
+            {
+              "review_id": "ROIZA77SNR48H",
+              "star": 1,
+              "quote": "after 60 days it feels like a total waste of money and effort"
+            },
+            {
+              "review_id": "R2H4C4PU8K8PK1",
+              "star": 1,
+              "quote": "PLEASE DO NOT WASTE YOUR MONEY."
+            }
+          ]
+        },
+        {
+          "id": "disappointing_for_price",
+          "name_ko": "가격에 비해 효과나 성능이 실망스러움",
+          "reviews": 26,
+          "weighted_pct": 0.9,
+          "quote_candidates": [
+            {
+              "review_id": "R2MTD56P6QYOUV",
+              "star": 1,
+              "quote": "This does nothing but waste time and money."
+            },
+            {
+              "review_id": "R1TFI2Y1S0PDBG",
+              "star": 1,
+              "quote": "For how expensive this device is, I expected at least some improvement"
+            }
+          ]
+        },
+        {
+          "id": "expensive_for_lifespan",
+          "name_ko": "비싼 값에 비해 빨리 고장 남",
+          "reviews": 17,
+          "weighted_pct": 0.6,
+          "quote_candidates": [
+            {
+              "review_id": "R38YNQA8ATNIF1",
+              "star": 3,
+              "quote": "It is a relatively expensive product and it was only used for a month and it has this problem"
+            },
+            {
+              "review_id": "R2OEZ28614WRBE",
+              "star": 1,
+              "quote": "For the price, I expected much better performance and durability"
+            }
+          ]
+        },
+        {
+          "id": "too_expensive",
+          "name_ko": "가격 자체가 비쌈",
+          "reviews": 15,
+          "weighted_pct": 1.6,
+          "quote_candidates": [
+            {
+              "review_id": "R1WSQ04XZHYRM8",
+              "star": 4,
+              "quote": "it is pretty expensive"
+            },
+            {
+              "review_id": "R33AU9CUYNIANU",
+              "star": 4,
+              "quote": "the Ulike was more than 5 times the cost"
+            }
+          ]
+        }
+      ]
+    },
+    "price_value.positive": {
+      "topic": "price_value",
+      "direction": "positive",
+      "units": 111,
+      "other_pct": 0.9,
+      "top": [
+        {
+          "id": "worth_the_money",
+          "name_ko": "값어치가 있음",
+          "reviews": 47,
+          "weighted_pct": 7.2
+        },
+        {
+          "id": "saves_vs_salon",
+          "name_ko": "살롱이나 전문 레이저 시술보다 쌈",
+          "reviews": 28,
+          "weighted_pct": 4.0
+        },
+        {
+          "id": "good_price",
+          "name_ko": "가격이 착하고 가성비가 좋음",
+          "reviews": 26,
+          "weighted_pct": 3.8
+        }
+      ],
+      "labels": [
+        {
+          "id": "worth_the_money",
+          "name_ko": "값어치가 있음",
+          "reviews": 47,
+          "weighted_pct": 7.2,
+          "quote_candidates": [
+            {
+              "review_id": "R2IW5AKUW2LVDH",
+              "star": 4,
+              "quote": "this is a great product and well worth the money!"
+            },
+            {
+              "review_id": "R2HTPKGOEZ3WN7",
+              "star": 4,
+              "quote": "Well worth the money though."
+            }
+          ]
+        },
+        {
+          "id": "saves_vs_salon",
+          "name_ko": "살롱이나 전문 레이저 시술보다 쌈",
+          "reviews": 28,
+          "weighted_pct": 4.0,
+          "quote_candidates": [
+            {
+              "review_id": "R3JL1X6MGXLUXX",
+              "star": 4,
+              "quote": "Still cheaper than booking a year’s worth of laser!"
+            },
+            {
+              "review_id": "R1LY9NEVXGJBWW",
+              "star": 4,
+              "quote": "It is way less expensive than going in for laser hair removal"
+            }
+          ]
+        },
+        {
+          "id": "good_price",
+          "name_ko": "가격이 착하고 가성비가 좋음",
+          "reviews": 26,
+          "weighted_pct": 3.8,
+          "quote_candidates": [
+            {
+              "review_id": "R20B18UJ8O3GYM",
+              "star": 4,
+              "quote": "it’s a solid option for the price"
+            },
+            {
+              "review_id": "R2QV46JTGZRGAW",
+              "star": 4,
+              "quote": "without breaking the bank"
+            }
+          ]
+        },
+        {
+          "id": "saves_money_overall",
+          "name_ko": "길게 보면 돈을 아낌",
+          "reviews": 13,
+          "weighted_pct": 2.7,
+          "quote_candidates": [
+            {
+              "review_id": "R2W8VLAJW7Q7LS",
+              "star": 4,
+              "quote": "I’m happy to do this for a few min every week and save my money"
+            },
+            {
+              "review_id": "R3GMJKYQ9OQT80",
+              "star": 5,
+              "quote": "it saves both time and money on razors and shaving cream"
+            }
+          ]
+        }
+      ]
+    },
+    "quality.negative": {
+      "topic": "quality",
+      "direction": "negative",
+      "units": 156,
+      "other_pct": 1.3,
+      "top": [
+        {
+          "id": "failed_after_months",
+          "name_ko": "몇 달 쓴 뒤 고장이나 성능 저하",
+          "reviews": 35,
+          "weighted_pct": 1.1
+        },
+        {
+          "id": "failure_unspecified",
+          "name_ko": "고장(시기 언급 없음)",
+          "reviews": 30,
+          "weighted_pct": 1.6
+        },
+        {
+          "id": "early_failure",
+          "name_ko": "받자마자 또는 한 달 안에 고장",
+          "reviews": 24,
+          "weighted_pct": 1.0
+        }
+      ],
+      "labels": [
+        {
+          "id": "failed_after_months",
+          "name_ko": "몇 달 쓴 뒤 고장이나 성능 저하",
+          "reviews": 35,
+          "weighted_pct": 1.1,
+          "quote_candidates": [
+            {
+              "review_id": "R1KBFBFJOJG3R",
+              "star": 3,
+              "quote": "my unit’s intensity dropped off after only a few sessions"
+            },
+            {
+              "review_id": "R3MARNI9LJRQEF",
+              "star": 3,
+              "quote": "Device stopped working after about 18 months."
+            }
+          ]
+        },
+        {
+          "id": "failure_unspecified",
+          "name_ko": "고장(시기 언급 없음)",
+          "reviews": 30,
+          "weighted_pct": 1.6,
+          "quote_candidates": [
+            {
+              "review_id": "R12VOGR84SGJE2",
+              "star": 3,
+              "quote": "now, a few days after the return window, it won't flash at all"
+            },
+            {
+              "review_id": "R2OEZ28614WRBE",
+              "star": 1,
+              "quote": "Now, it no longer works at all."
+            }
+          ]
+        },
+        {
+          "id": "early_failure",
+          "name_ko": "받자마자 또는 한 달 안에 고장",
+          "reviews": 24,
+          "weighted_pct": 1.0,
+          "quote_candidates": [
+            {
+              "review_id": "R3R1S946CJ2HDH",
+              "star": 1,
+              "quote": "I used mine approximately 6 times and it stopped working"
+            },
+            {
+              "review_id": "RAF9X5W93VJK8",
+              "star": 2,
+              "quote": "it has died in two weeks and is no longer functional"
+            }
+          ]
+        },
+        {
+          "id": "intermittent_malfunction",
+          "name_ko": "가끔 발광 안 함이나 저절로 꺼짐",
+          "reviews": 17,
+          "weighted_pct": 1.0,
+          "quote_candidates": [
+            {
+              "review_id": "R3N6VYJ1RIB711",
+              "star": 5,
+              "quote": "The skin-adjusting sensor has glitched once, but unplugging it helped."
+            },
+            {
+              "review_id": "R1J0FN4Q6D535P",
+              "star": 2,
+              "quote": "The device resets so often it makes trying to get through a single leg impossible."
+            }
+          ]
+        },
+        {
+          "id": "scorch_marks_smell",
+          "name_ko": "조사창 얼룩이나 탄내, 연기",
+          "reviews": 17,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "R26Y9WIBMYQJAJ",
+              "star": 4,
+              "quote": "While using it today, there was a loud pop, and then the device no longer will flash."
+            },
+            {
+              "review_id": "R1KNHD542ODN3O",
+              "star": 3,
+              "quote": "The laser window has scorch marks on it"
+            }
+          ]
+        },
+        {
+          "id": "overheating",
+          "name_ko": "기기 과열",
+          "reviews": 16,
+          "weighted_pct": 0.9,
+          "quote_candidates": [
+            {
+              "review_id": "RPKW26NCED8Q8",
+              "star": 4,
+              "quote": "It still overheats faster than it should"
+            },
+            {
+              "review_id": "R1WSQ04XZHYRM8",
+              "star": 4,
+              "quote": "the device can overheat when used too long and it will shut off on its own"
+            }
+          ]
+        },
+        {
+          "id": "partial_failure",
+          "name_ko": "특정 모드나 버튼, 센서만 고장",
+          "reviews": 14,
+          "weighted_pct": 0.4,
+          "quote_candidates": [
+            {
+              "review_id": "R36AFFT8C80WMF",
+              "star": 3,
+              "quote": "My device only works on one setting"
+            },
+            {
+              "review_id": "R38YNQA8ATNIF1",
+              "star": 3,
+              "quote": "Suddenly, it stops detecting the skin and does not flash"
+            }
+          ]
+        },
+        {
+          "id": "fragile_build",
+          "name_ko": "약한 만듦새나 부품 파손",
+          "reviews": 7,
+          "weighted_pct": 0.3,
+          "quote_candidates": [
+            {
+              "review_id": "RLH6WCEL9CZ4C",
+              "star": 4,
+              "quote": "Buttons have an unpleasant clicky/hollow sound to it."
+            },
+            {
+              "review_id": "R3ZQFXJQLBQ0I",
+              "star": 2,
+              "quote": "The head piece will start to corrode & need replacement after 8 months of use"
+            }
+          ]
+        }
+      ]
+    },
+    "quality.positive": {
+      "topic": "quality",
+      "direction": "positive",
+      "units": 65,
+      "other_pct": 1.5,
+      "top": [
+        {
+          "id": "well_made",
+          "name_ko": "잘 만든 느낌, 고급스러움",
+          "reviews": 57,
+          "weighted_pct": 9.9
+        },
+        {
+          "id": "durable",
+          "name_ko": "튼튼하고 오래 작동함",
+          "reviews": 7,
+          "weighted_pct": 0.5
+        }
+      ],
+      "labels": [
+        {
+          "id": "well_made",
+          "name_ko": "잘 만든 느낌, 고급스러움",
+          "reviews": 57,
+          "weighted_pct": 9.9,
+          "quote_candidates": [
+            {
+              "review_id": "R1JLZT6OS3U6JO",
+              "star": 4,
+              "quote": "The whole thing seems like good quality to me"
+            },
+            {
+              "review_id": "R1MER6HMWWEBWK",
+              "star": 4,
+              "quote": "the quality seems pretty nice as well"
+            }
+          ]
+        },
+        {
+          "id": "durable",
+          "name_ko": "튼튼하고 오래 작동함",
+          "reviews": 7,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "R20B18UJ8O3GYM",
+              "star": 4,
+              "quote": "It's fairly durable"
+            },
+            {
+              "review_id": "RDP6VFH1J365D",
+              "star": 5,
+              "quote": "It is robustly built."
+            }
+          ]
+        }
+      ]
+    },
+    "safety.negative": {
+      "topic": "safety",
+      "direction": "negative",
+      "units": 84,
+      "other_pct": 4.8,
+      "top": [
+        {
+          "id": "skin_burns",
+          "name_ko": "화상이나 물집",
+          "reviews": 22,
+          "weighted_pct": 0.7
+        },
+        {
+          "id": "rash_bumps_allergy",
+          "name_ko": "발진, 뾰루지, 알레르기 반응",
+          "reviews": 16,
+          "weighted_pct": 1.0
+        },
+        {
+          "id": "irritation_redness",
+          "name_ko": "자극, 붉음, 가려움",
+          "reviews": 12,
+          "weighted_pct": 1.3
+        }
+      ],
+      "labels": [
+        {
+          "id": "skin_burns",
+          "name_ko": "화상이나 물집",
+          "reviews": 22,
+          "weighted_pct": 0.7,
+          "quote_candidates": [
+            {
+              "review_id": "R3AKBOZYED1PR5",
+              "star": 3,
+              "quote": "It burned on first contact, now I'm scared to use it"
+            },
+            {
+              "review_id": "R2T2JDN7PVVK4G",
+              "star": 4,
+              "quote": "it actually burned my leg to the point that I had red rectangular spots"
+            }
+          ]
+        },
+        {
+          "id": "rash_bumps_allergy",
+          "name_ko": "발진, 뾰루지, 알레르기 반응",
+          "reviews": 16,
+          "weighted_pct": 1.0,
+          "quote_candidates": [
+            {
+              "review_id": "R33AU9CUYNIANU",
+              "star": 4,
+              "quote": "I was unlucky enough to have the histamine reaction some people have to the light pulses"
+            },
+            {
+              "review_id": "R3PZ0KT5YYAYC8",
+              "star": 3,
+              "quote": "I am experiencing a pretty bad rash as a result of using this IPL device"
+            }
+          ]
+        },
+        {
+          "id": "irritation_redness",
+          "name_ko": "자극, 붉음, 가려움",
+          "reviews": 12,
+          "weighted_pct": 1.3,
+          "quote_candidates": [
+            {
+              "review_id": "R12DL2XYKNVTLP",
+              "star": 5,
+              "quote": "In the beginning I got a bit of acne and irritation, but with each session the irritation"
+            },
+            {
+              "review_id": "R35TWH6AQKGH7Q",
+              "star": 3,
+              "quote": "Not advisable for sensitive skin"
+            }
+          ]
+        },
+        {
+          "id": "pigment_scars",
+          "name_ko": "색소 변화나 흉터",
+          "reviews": 12,
+          "weighted_pct": 0.4,
+          "quote_candidates": [
+            {
+              "review_id": "R3JL1X6MGXLUXX",
+              "star": 4,
+              "quote": "I’m noticing the appearance of some strange moles on top of certain follicles"
+            },
+            {
+              "review_id": "R2WKT4WSARV4ZP",
+              "star": 2,
+              "quote": "(Spots were a lot darker)"
+            }
+          ]
+        },
+        {
+          "id": "eye_flash_glare",
+          "name_ko": "눈부심이나 눈 안전",
+          "reviews": 11,
+          "weighted_pct": 0.4,
+          "quote_candidates": [
+            {
+              "review_id": "RLFYC8A61CQ1",
+              "star": 4,
+              "quote": "My only complaint is that the light is extremely bright"
+            },
+            {
+              "review_id": "R2QV46JTGZRGAW",
+              "star": 4,
+              "quote": "since bright lights can give me migraines, I have to be careful"
+            }
+          ]
+        },
+        {
+          "id": "safety_worry",
+          "name_ko": "안전 불안이나 쓰기 무서움",
+          "reviews": 8,
+          "weighted_pct": 0.3,
+          "quote_candidates": [
+            {
+              "review_id": "RGRI74CC8ENT0",
+              "star": 1,
+              "quote": "was terrified after the one and only ZAP"
+            },
+            {
+              "review_id": "R3Q7Z1O3M1F8SM",
+              "star": 1,
+              "quote": "chat GPT says to not use it anymore because it can be dangerous"
+            }
+          ]
+        }
+      ]
+    },
+    "safety.positive": {
+      "topic": "safety",
+      "direction": "positive",
+      "units": 37,
+      "other_pct": 2.7,
+      "top": [
+        {
+          "id": "no_irritation",
+          "name_ko": "자극이나 피부 반응 없음",
+          "reviews": 20,
+          "weighted_pct": 2.3
+        },
+        {
+          "id": "safety_feature",
+          "name_ko": "피부 센서 같은 안전 기능 덕에 안심",
+          "reviews": 6,
+          "weighted_pct": 0.5
+        },
+        {
+          "id": "mild_transient",
+          "name_ko": "반응이 가볍거나 금방 가라앉음",
+          "reviews": 4,
+          "weighted_pct": 1.2
+        }
+      ],
+      "labels": [
+        {
+          "id": "no_irritation",
+          "name_ko": "자극이나 피부 반응 없음",
+          "reviews": 20,
+          "weighted_pct": 2.3,
+          "quote_candidates": [
+            {
+              "review_id": "R20B18UJ8O3GYM",
+              "star": 4,
+              "quote": "I also haven’t experienced any irritation"
+            },
+            {
+              "review_id": "RJ86SS9SV6XB0",
+              "star": 4,
+              "quote": "I didn’t have any skin reactions"
+            }
+          ]
+        },
+        {
+          "id": "safety_feature",
+          "name_ko": "피부 센서 같은 안전 기능 덕에 안심",
+          "reviews": 6,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "R28XQXRI4LXP8S",
+              "star": 5,
+              "quote": "makes it feel safer and more comfortable"
+            },
+            {
+              "review_id": "R2W8VLAJW7Q7LS",
+              "star": 4,
+              "quote": "only goes off when fully on skin so it’s safe to use"
+            }
+          ]
+        },
+        {
+          "id": "mild_transient",
+          "name_ko": "반응이 가볍거나 금방 가라앉음",
+          "reviews": 4,
+          "weighted_pct": 1.2,
+          "quote_candidates": [
+            {
+              "review_id": "R12DL2XYKNVTLP",
+              "star": 5,
+              "quote": "In the beginning I got a bit of acne and irritation, but with each session the irritation"
+            },
+            {
+              "review_id": "R3AL97KPZJMJ8N",
+              "star": 5,
+              "quote": "I did get some stippling on the back of my legs where I used it, but it cleared up quickly"
+            }
+          ]
+        },
+        {
+          "id": "feels_safe",
+          "name_ko": "쓰기에 안전하다는 느낌",
+          "reviews": 3,
+          "weighted_pct": 0.9,
+          "quote_candidates": [
+            {
+              "review_id": "R3INSXQHFCICQI",
+              "star": 4,
+              "quote": "I feel safe using this as well"
+            },
+            {
+              "review_id": "R2JZ3KC3BU5VN8",
+              "star": 5,
+              "quote": "Safe and effective"
+            }
+          ]
+        },
+        {
+          "id": "sensitive_skin_ok",
+          "name_ko": "민감한 피부에도 괜찮음",
+          "reviews": 3,
+          "weighted_pct": 0.6,
+          "quote_candidates": [
+            {
+              "review_id": "R2VNEBLNFNGTZ1",
+              "star": 4,
+              "quote": "I have sensitive skin but have zero issues using on highest setting, 9."
+            },
+            {
+              "review_id": "R1CKMAYZ81JWU",
+              "star": 5,
+              "quote": "perfect for sensitive skin"
+            }
+          ]
+        }
+      ]
+    },
+    "shipping.negative": {
+      "topic": "shipping",
+      "direction": "negative",
+      "units": 4,
+      "other_pct": 100.0,
+      "top": [],
+      "labels": []
+    },
+    "shipping.positive": {
+      "topic": "shipping",
+      "direction": "positive",
+      "units": 15,
+      "other_pct": 100.0,
+      "top": [],
+      "labels": []
+    },
+    "skin_hair_suitability.negative": {
+      "topic": "skin_hair_suitability",
+      "direction": "negative",
+      "units": 65,
+      "other_pct": 10.8,
+      "top": [
+        {
+          "id": "dark_skin_tone",
+          "name_ko": "어두운 피부색에는 못 씀",
+          "reviews": 21,
+          "weighted_pct": 1.1
+        },
+        {
+          "id": "light_fine_hair",
+          "name_ko": "금발이나 옅은 털, 가는 솜털에는 안 들음",
+          "reviews": 13,
+          "weighted_pct": 0.5
+        },
+        {
+          "id": "thick_coarse_hair",
+          "name_ko": "굵고 억센 털에는 덜 들음",
+          "reviews": 13,
+          "weighted_pct": 0.4
+        }
+      ],
+      "labels": [
+        {
+          "id": "dark_skin_tone",
+          "name_ko": "어두운 피부색에는 못 씀",
+          "reviews": 21,
+          "weighted_pct": 1.1,
+          "quote_candidates": [
+            {
+              "review_id": "R2WKT4WSARV4ZP",
+              "star": 2,
+              "quote": "I don't think this for dark skin like not even brown skin."
+            },
+            {
+              "review_id": "RL4CIP8VWPLYA",
+              "star": 1,
+              "quote": "It does not register my skin color it’s only made for lighter complexions"
+            }
+          ]
+        },
+        {
+          "id": "light_fine_hair",
+          "name_ko": "금발이나 옅은 털, 가는 솜털에는 안 들음",
+          "reviews": 13,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "R1JLZT6OS3U6JO",
+              "star": 4,
+              "quote": "If you have thick, black hair, this device is worth your time and money. If you have thin/fine hair that’s easy to shave and doesn’t give you much trouble, then don’t bother."
+            },
+            {
+              "review_id": "R1BICTURUAEEBJ",
+              "star": 3,
+              "quote": "Does not work for blonde or light brown hair."
+            }
+          ]
+        },
+        {
+          "id": "thick_coarse_hair",
+          "name_ko": "굵고 억센 털에는 덜 들음",
+          "reviews": 13,
+          "weighted_pct": 0.4,
+          "quote_candidates": [
+            {
+              "review_id": "RRCOL1QVXGMSS",
+              "star": 4,
+              "quote": "While this is great for thinner hair, this product fails with very thick hair"
+            },
+            {
+              "review_id": "R3JUXEAH0BW780",
+              "star": 3,
+              "quote": "if you have thick stubborn hair maybe look for something else"
+            }
+          ]
+        },
+        {
+          "id": "dark_body_areas",
+          "name_ko": "비키니나 겨드랑이처럼 어두운 부위에서 안 됨",
+          "reviews": 9,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "R1NJL66X5FEMYR",
+              "star": 4,
+              "quote": "en mi parte íntima ya donde se oscurece más la piel prácticamente no funciona"
+            },
+            {
+              "review_id": "R3TZKM2YDQ6CJZ",
+              "star": 4,
+              "quote": "it doesn't work well on areas where my skin is too dark"
+            }
+          ]
+        },
+        {
+          "id": "gray_white_hair",
+          "name_ko": "흰 털이나 회색 털에는 안 들음",
+          "reviews": 6,
+          "weighted_pct": 0.4,
+          "quote_candidates": [
+            {
+              "review_id": "RGRI74CC8ENT0",
+              "star": 1,
+              "quote": "does not work on grey or black hair"
+            },
+            {
+              "review_id": "R2KN7LI0XMQ42G",
+              "star": 4,
+              "quote": "Too bad it doesn’t work on my peach fuzz and gray hair"
+            }
+          ]
+        }
+      ]
+    },
+    "skin_hair_suitability.positive": {
+      "topic": "skin_hair_suitability",
+      "direction": "positive",
+      "units": 14,
+      "other_pct": 100.0,
+      "top": [],
+      "labels": []
+    },
+    "treatment_time.negative": {
+      "topic": "treatment_time",
+      "direction": "negative",
+      "units": 79,
+      "other_pct": 0.0,
+      "top": [
+        {
+          "id": "long_session",
+          "name_ko": "한 번 시술이 오래 걸림",
+          "reviews": 26,
+          "weighted_pct": 1.1
+        },
+        {
+          "id": "demanding_schedule",
+          "name_ko": "자주, 오래 지켜야 하는 일정이 부담",
+          "reviews": 21,
+          "weighted_pct": 0.6
+        },
+        {
+          "id": "large_area_slow",
+          "name_ko": "다리나 몸 전체 같은 넓은 부위가 오래 걸림",
+          "reviews": 14,
+          "weighted_pct": 0.5
+        }
+      ],
+      "labels": [
+        {
+          "id": "long_session",
+          "name_ko": "한 번 시술이 오래 걸림",
+          "reviews": 26,
+          "weighted_pct": 1.1,
+          "quote_candidates": [
+            {
+              "review_id": "R1NZEC16D5FOP4",
+              "star": 4,
+              "quote": "takes TWO HOURS"
+            },
+            {
+              "review_id": "R3PZ0KT5YYAYC8",
+              "star": 3,
+              "quote": "since it takes sooooooo long"
+            }
+          ]
+        },
+        {
+          "id": "demanding_schedule",
+          "name_ko": "자주, 오래 지켜야 하는 일정이 부담",
+          "reviews": 21,
+          "weighted_pct": 0.6,
+          "quote_candidates": [
+            {
+              "review_id": "R2JLMBJIYIWMGE",
+              "star": 1,
+              "quote": "I estimate I have spent 3 hours a week using this"
+            },
+            {
+              "review_id": "R2FA3ODX0DHYD8",
+              "star": 4,
+              "quote": "Having to do this 2 times a week for 5 months"
+            }
+          ]
+        },
+        {
+          "id": "large_area_slow",
+          "name_ko": "다리나 몸 전체 같은 넓은 부위가 오래 걸림",
+          "reviews": 14,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "R1JLZT6OS3U6JO",
+              "star": 4,
+              "quote": "it takes a LONG time to do a large area, like a leg. Very time consuming."
+            },
+            {
+              "review_id": "R2HTPKGOEZ3WN7",
+              "star": 4,
+              "quote": "I gave up on my legs because it took too long."
+            }
+          ]
+        },
+        {
+          "id": "slow_flash",
+          "name_ko": "발광 간격이 길거나 기기가 느림",
+          "reviews": 9,
+          "weighted_pct": 0.6,
+          "quote_candidates": [
+            {
+              "review_id": "R3AHPS52Z6NIVG",
+              "star": 1,
+              "quote": "the automatic mode is useless and not fast"
+            },
+            {
+              "review_id": "R3HIZNMTW2OV0Y",
+              "star": 4,
+              "quote": "the device takes a few seconds between zaps and the little window is so small that it takes absolutely forever to do large sections"
+            }
+          ]
+        },
+        {
+          "id": "longer_than_expected",
+          "name_ko": "광고나 기대보다 오래 걸림",
+          "reviews": 6,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "R1W4CHDH2UJAL2",
+              "star": 4,
+              "quote": "it still takes almost as long as the other units, so I didn’t really save any time"
+            },
+            {
+              "review_id": "R3TBTATZWLRUQN",
+              "star": 2,
+              "quote": "much more time consuming than they advertise"
+            }
+          ]
+        },
+        {
+          "id": "small_window_passes",
+          "name_ko": "작은 조사창이나 반복 조사 때문에 오래 걸림",
+          "reviews": 6,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "R2SGB5RDA6XE9",
+              "star": 4,
+              "quote": "The device is small so it takes awhile to treat"
+            },
+            {
+              "review_id": "R3HIZNMTW2OV0Y",
+              "star": 4,
+              "quote": "the device takes a few seconds between zaps and the little window is so small that it takes absolutely forever to do large sections"
+            }
+          ]
+        }
+      ]
+    },
+    "treatment_time.positive": {
+      "topic": "treatment_time",
+      "direction": "positive",
+      "units": 47,
+      "other_pct": 4.3,
+      "top": [
+        {
+          "id": "quick_session",
+          "name_ko": "시술이 빠르고 오래 안 걸림",
+          "reviews": 30,
+          "weighted_pct": 7.2
+        },
+        {
+          "id": "fast_flash_mode",
+          "name_ko": "발광이 빠르거나 자동 모드, 이중 발광으로 빨라짐",
+          "reviews": 5,
+          "weighted_pct": 0.7
+        },
+        {
+          "id": "light_schedule",
+          "name_ko": "일정이 가볍고 생활에 맞추기 쉬움",
+          "reviews": 5,
+          "weighted_pct": 0.5
+        }
+      ],
+      "labels": [
+        {
+          "id": "quick_session",
+          "name_ko": "시술이 빠르고 오래 안 걸림",
+          "reviews": 30,
+          "weighted_pct": 7.2,
+          "quote_candidates": [
+            {
+              "review_id": "RPKW26NCED8Q8",
+              "star": 4,
+              "quote": "Very quick (could do both armpits in 5 minutes)"
+            },
+            {
+              "review_id": "R3I69UPM0EAH8D",
+              "star": 4,
+              "quote": "It’s also quick to use"
+            }
+          ]
+        },
+        {
+          "id": "fast_flash_mode",
+          "name_ko": "발광이 빠르거나 자동 모드, 이중 발광으로 빨라짐",
+          "reviews": 5,
+          "weighted_pct": 0.7,
+          "quote_candidates": [
+            {
+              "review_id": "R371G2D4TFMWP7",
+              "star": 4,
+              "quote": "The double flash of the Ulike makes the process pretty quick."
+            },
+            {
+              "review_id": "R3GMJKYQ9OQT80",
+              "star": 5,
+              "quote": "the flash cycle is quick, so the process doesn’t drag on"
+            }
+          ]
+        },
+        {
+          "id": "light_schedule",
+          "name_ko": "일정이 가볍고 생활에 맞추기 쉬움",
+          "reviews": 5,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "RDP6VFH1J365D",
+              "star": 5,
+              "quote": "I spend less than 20 minutes a week on it."
+            },
+            {
+              "review_id": "R17Z3G31WY4J6A",
+              "star": 5,
+              "quote": "you only have to use it 2 times a week to start seeing results"
+            }
+          ]
+        },
+        {
+          "id": "large_area_quick",
+          "name_ko": "다리나 몸 전체도 짧게 끝남",
+          "reviews": 4,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "R2IW5AKUW2LVDH",
+              "star": 4,
+              "quote": "it only takes me about 10 minutes total to do the lower section of both legs"
+            },
+            {
+              "review_id": "R7SFT1B4QUIDU",
+              "star": 4,
+              "quote": "Larger areas such as legs can be covered relatively quickly thanks to the rapid flash cycle, but smaller or more contoured areas still require slower, careful passes"
+            }
+          ]
+        },
+        {
+          "id": "time_worth_it",
+          "name_ko": "시간이 들지만 견딜 만하거나 그만한 가치가 있음",
+          "reviews": 3,
+          "weighted_pct": 0.4,
+          "quote_candidates": [
+            {
+              "review_id": "R380XCNEXZQ8JX",
+              "star": 4,
+              "quote": "It is a little time consuming for the results have been worth it for me."
+            },
+            {
+              "review_id": "R1KWW1ZMRJ0A1O",
+              "star": 4,
+              "quote": "It will take a little time and feel tedious, but it isn't too bad."
+            }
+          ]
+        }
+      ]
+    },
+    "trust.negative": {
+      "topic": "trust",
+      "direction": "negative",
+      "units": 40,
+      "other_pct": 5.0,
+      "top": [
+        {
+          "id": "misleading_claims",
+          "name_ko": "과장 광고나 거짓 설명",
+          "reviews": 15,
+          "weighted_pct": 0.5
+        },
+        {
+          "id": "arrived_used",
+          "name_ko": "중고나 개봉 흔적",
+          "reviews": 12,
+          "weighted_pct": 0.5
+        },
+        {
+          "id": "missing_listed_items",
+          "name_ko": "설명과 다른 구성품",
+          "reviews": 5,
+          "weighted_pct": 0.2
+        }
+      ],
+      "labels": [
+        {
+          "id": "misleading_claims",
+          "name_ko": "과장 광고나 거짓 설명",
+          "reviews": 15,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "RRN4BPFZ4WBLC",
+              "star": 1,
+              "quote": "This is a scam"
+            },
+            {
+              "review_id": "R2REPQMI1I28HD",
+              "star": 1,
+              "quote": "This product is a scam"
+            }
+          ]
+        },
+        {
+          "id": "arrived_used",
+          "name_ko": "중고나 개봉 흔적",
+          "reviews": 12,
+          "weighted_pct": 0.5,
+          "quote_candidates": [
+            {
+              "review_id": "RM02BPEEW2J9W",
+              "star": 3,
+              "quote": "Looks like other people’s fried hairs?!!"
+            },
+            {
+              "review_id": "R2OHNX29MJBII3",
+              "star": 1,
+              "quote": "I noticed somebody else’s hair"
+            }
+          ]
+        },
+        {
+          "id": "missing_listed_items",
+          "name_ko": "설명과 다른 구성품",
+          "reviews": 5,
+          "weighted_pct": 0.2,
+          "quote_candidates": [
+            {
+              "review_id": "RZH0ENS9J3SL",
+              "star": 3,
+              "quote": "El manual indica que incluye razor y goggles, pero no vinieron en la caja."
+            },
+            {
+              "review_id": "R31YMYK1WQIX4C",
+              "star": 2,
+              "quote": "However, these items were not included in my package."
+            }
+          ]
+        },
+        {
+          "id": "doubted_before_purchase",
+          "name_ko": "협찬 리뷰나 반품 표시로 생긴 의심",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "R1NE4QCL8NG603",
+              "star": 3,
+              "quote": "Was skeptical but it really does work"
+            },
+            {
+              "review_id": "RKEMYTS0L15RN",
+              "star": 2,
+              "quote": "I think there is a lot of paid promotion with this product."
+            }
+          ]
+        },
+        {
+          "id": "suitability_misinformed",
+          "name_ko": "피부색 적합성 안내 부족이나 잘못된 안내",
+          "reviews": 3,
+          "weighted_pct": 0.1,
+          "quote_candidates": [
+            {
+              "review_id": "R2WKT4WSARV4ZP",
+              "star": 2,
+              "quote": "the kind of false advertising and the people they gift these to saying that dark skin can use it"
+            },
+            {
+              "review_id": "RL4CIP8VWPLYA",
+              "star": 1,
+              "quote": "they never said it’s not for Black people or dark colored people"
+            }
+          ]
+        }
+      ]
+    },
+    "trust.positive": {
+      "topic": "trust",
+      "direction": "positive",
+      "units": 8,
+      "other_pct": 100.0,
+      "top": [],
+      "labels": []
+    }
+  },
+  "issue_overlap": null,
+  "safety_check": {
+    "negative_symptom": 56,
+    "negative_no_symptom": 23,
+    "positive_symptom": 0,
+    "positive_no_symptom": 32,
+    "other_sentiment": 18,
+    "by_symptom": [
+      {
+        "name": "두통",
+        "reviews": 1,
+        "weighted_pct": 0.0
+      },
+      {
+        "name": "피부",
+        "reviews": 55,
+        "weighted_pct": 2.0
+      }
+    ],
+    "negative_text": "안전 부정 리뷰 79개: 두통 1개(가중 0.0%), 피부 55개(가중 2.0%), 이상 반응 없음 23개"
+  },
+  "accuracy": {
+    "gold_reviews": 25,
+    "status": "FAIL",
+    "sonnet": {
+      "topic_f1": 0.81,
+      "sentiment_pct": 74.0,
+      "topic_f1_text": "0.81",
+      "sentiment_text": "74.0%"
+    },
+    "top": {
+      "topic_f1": 0.8,
+      "sentiment_pct": 74.0,
+      "topic_f1_text": "0.80",
+      "sentiment_text": "74.0%"
+    }
+  },
+  "robustness": {
+    "texts": {
+      "weakest": "5개 중 2개(리뷰를 다시 뽑아 보면 1~4개)",
+      "head_first": "81.7%",
+      "head_neg_ci": "5.9%~8.8%",
+      "weakest_dist": "1개 5.5%, 2개 52.8%, 3개 36.3%, 4개 5.4%",
+      "loo_flips": "5번 중 5번"
+    },
+    "bootstrap": {
+      "n": 2000,
+      "seed": 7,
+      "head_first_pct": 81.7,
+      "head_neg_ci": [
+        5.9,
+        8.8
+      ],
+      "weakest_dist": {
+        "1": 5.5,
+        "2": 52.8,
+        "3": 36.3,
+        "4": 5.4
+      },
+      "weakest_range": [
+        1,
+        4
+      ],
+      "weakest_range_cover": 100.0
+    },
+    "base": {
+      "head_neg": 7.2,
+      "weakest": 2,
+      "asins": 5,
+      "weakest_by_asin": {
+        "B07WYY6KKC": "quality",
+        "B0CV3ZJ2PN": "hair_reduction",
+        "B0CWL9S4L1": "quality",
+        "B0G39WBP1S": "hair_reduction",
+        "B0FGB2NS3C": "price_value"
+      }
+    },
+    "leave_one_out_flips": 5,
+    "leave_one_out_runs": 5,
+    "leave_one_out_head_neg": [
+      6.8,
+      6.5,
+      8.0,
+      7.6,
+      7.1
+    ],
+    "leave_one_out_head_neg_text": "6.5%~8.0%"
+  }
+}

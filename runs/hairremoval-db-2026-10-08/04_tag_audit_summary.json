@@ -1,0 +1,68 @@
+{
+  "checked_at": "2026-10-08T22:25:01+09:00",
+  "status": "FAIL",
+  "sample_tags": 150,
+  "auditor_checked": 150,
+  "excluded_gold_tags": 0,
+  "fail": 23,
+  "unverified": 0,
+  "missed": 13,
+  "fail_rate": 0.153,
+  "conservative_rate": 0.221,
+  "conservative_rule": "(FAIL + UNVERIFIED + missed) / (표본 태그 + missed)",
+  "max_fail_rate": 0.05,
+  "by_asin": {
+    "B07WYY6KKC": {
+      "sample": 30,
+      "fail": 8,
+      "fail_rate": 0.267
+    },
+    "B0CV3ZJ2PN": {
+      "sample": 30,
+      "fail": 3,
+      "fail_rate": 0.1
+    },
+    "B0CWL9S4L1": {
+      "sample": 30,
+      "fail": 7,
+      "fail_rate": 0.233
+    },
+    "B0FGB2NS3C": {
+      "sample": 30,
+      "fail": 3,
+      "fail_rate": 0.1
+    },
+    "B0G39WBP1S": {
+      "sample": 30,
+      "fail": 2,
+      "fail_rate": 0.067
+    }
+  },
+  "asins_with_findings": [
+    "B07WYY6KKC",
+    "B0CV3ZJ2PN",
+    "B0CWL9S4L1",
+    "B0FGB2NS3C",
+    "B0G39WBP1S"
+  ],
+  "batches_with_findings": [
+    "B07WYY6KKC_01",
+    "B07WYY6KKC_02",
+    "B07WYY6KKC_03",
+    "B07WYY6KKC_04",
+    "B07WYY6KKC_05",
+    "B07WYY6KKC_06",
+    "B0CV3ZJ2PN_01",
+    "B0CV3ZJ2PN_02",
+    "B0CV3ZJ2PN_06",
+    "B0CWL9S4L1_01",
+    "B0CWL9S4L1_02",
+    "B0CWL9S4L1_03",
+    "B0CWL9S4L1_05",
+    "B0FGB2NS3C_01",
+    "B0FGB2NS3C_02",
+    "B0G39WBP1S_01",
+    "B0G39WBP1S_02"
+  ],
+  "warnings": []
+}

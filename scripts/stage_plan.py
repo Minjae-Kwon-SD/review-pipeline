@@ -36,7 +36,7 @@ for _s in (sys.stdout, sys.stderr):
         pass
 
 CONF = ROOT / "config" / "stages.yaml"
-LIMIT_KEYS = ("bulk_concurrency", "worker_max_batches", "worker_max_reviews", "retry_per_batch", "retry_per_stage",
+LIMIT_KEYS = ("bulk_concurrency", "tagging_concurrency", "worker_max_batches", "worker_max_reviews", "retry_per_batch", "retry_per_stage",
               "top_writers", "top_auditors", "review_lenses")
 
 
@@ -64,6 +64,16 @@ def input_hash(run, stage):
             h.update(str(f.relative_to(ROOT if pat.startswith("config:") else run)).replace("\\", "/").encode("utf-8"))
             h.update(f.read_bytes())
     return h.hexdigest()[:16]
+
+
+def input_files(run, stage):
+    """단계 입력 가운데 지금 있는 파일마다 내용 해시 {상대 경로: 해시}. 단계가 스스로 만드는 입력(예: market/raw)은 시작 때 없으므로 빠진다."""
+    out = {}
+    for pat in stage.get("inputs") or []:
+        base = ROOT if pat.startswith("config:") else run
+        for f in expand(run, pat):
+            out[str(f.relative_to(base)).replace("\\", "/")] = hashlib.sha256(f.read_bytes()).hexdigest()[:16]
+    return out
 
 
 def code_hash(stage):

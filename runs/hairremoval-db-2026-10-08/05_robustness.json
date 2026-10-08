@@ -1,0 +1,229 @@
+{
+  "made_at": "2026-10-09T01:11:12+09:00",
+  "run": "hairremoval-db-2026-10-08",
+  "head_topic": "hair_reduction",
+  "head_name": "제모 효과",
+  "rules": {
+    "strength_min_mentions": 10,
+    "exclude": [
+      "overall"
+    ],
+    "direction_index": {
+      "topic": "pain_comfort",
+      "high": {
+        "name": "아픔",
+        "labels": [
+          "strong_pain",
+          "high_setting_too_strong",
+          "hot_burning_sensation",
+          "sensitive_area_pain"
+        ]
+      },
+      "low": {
+        "name": "편안함",
+        "labels": [
+          "painless_comfortable",
+          "mild_tolerable",
+          "cooling_comfort"
+        ]
+      },
+      "min_reviews": 15
+    }
+  },
+  "base": {
+    "head_neg": 7.2,
+    "weakest": 2,
+    "asins": 5,
+    "weakest_by_asin": {
+      "B07WYY6KKC": "quality",
+      "B0CV3ZJ2PN": "hair_reduction",
+      "B0CWL9S4L1": "quality",
+      "B0G39WBP1S": "hair_reduction",
+      "B0FGB2NS3C": "price_value"
+    }
+  },
+  "bootstrap": {
+    "n": 2000,
+    "seed": 7,
+    "head_first_pct": 81.7,
+    "head_neg_ci": [
+      5.9,
+      8.8
+    ],
+    "weakest_dist": {
+      "1": 5.5,
+      "2": 52.8,
+      "3": 36.3,
+      "4": 5.4
+    },
+    "weakest_range": [
+      1,
+      4
+    ],
+    "weakest_range_cover": 100.0
+  },
+  "leave_one_out": [
+    {
+      "out": null,
+      "reviews": 1012,
+      "head_neg": 7.2,
+      "first": "hair_reduction",
+      "first_pct": 7.2,
+      "second": "quality",
+      "second_pct": 6.2,
+      "weakest": 2,
+      "remain": 5,
+      "low": 180,
+      "high": 40,
+      "low_share": 81.8,
+      "top3": [
+        "hair_reduction",
+        "quality",
+        "price_value"
+      ],
+      "flips": [
+        "최대 약점 상품이 과반 아님"
+      ]
+    },
+    {
+      "out": "B07WYY6KKC",
+      "reviews": 713,
+      "head_neg": 6.8,
+      "first": "hair_reduction",
+      "first_pct": 6.8,
+      "second": "quality",
+      "second_pct": 5.0,
+      "weakest": 2,
+      "remain": 4,
+      "low": 158,
+      "high": 22,
+      "low_share": 87.8,
+      "top3": [
+        "hair_reduction",
+        "quality",
+        "price_value"
+      ],
+      "flips": [
+        "최대 약점 상품이 과반 아님"
+      ],
+      "top3_changed": false
+    },
+    {
+      "out": "B0CV3ZJ2PN",
+      "reviews": 722,
+      "head_neg": 6.5,
+      "first": "hair_reduction",
+      "first_pct": 6.5,
+      "second": "quality",
+      "second_pct": 6.3,
+      "weakest": 1,
+      "remain": 4,
+      "low": 108,
+      "high": 34,
+      "low_share": 76.1,
+      "top3": [
+        "hair_reduction",
+        "quality",
+        "price_value"
+      ],
+      "flips": [
+        "최대 약점 상품이 과반 아님"
+      ],
+      "top3_changed": false
+    },
+    {
+      "out": "B0CWL9S4L1",
+      "reviews": 751,
+      "head_neg": 8.0,
+      "first": "hair_reduction",
+      "first_pct": 8.0,
+      "second": "price_value",
+      "second_pct": 6.6,
+      "weakest": 2,
+      "remain": 4,
+      "low": 150,
+      "high": 26,
+      "low_share": 85.2,
+      "top3": [
+        "hair_reduction",
+        "price_value",
+        "quality"
+      ],
+      "flips": [
+        "최대 약점 상품이 과반 아님"
+      ],
+      "top3_changed": true
+    },
+    {
+      "out": "B0FGB2NS3C",
+      "reviews": 938,
+      "head_neg": 7.6,
+      "first": "hair_reduction",
+      "first_pct": 7.6,
+      "second": "quality",
+      "second_pct": 6.6,
+      "weakest": 2,
+      "remain": 4,
+      "low": 169,
+      "high": 38,
+      "low_share": 81.6,
+      "top3": [
+        "hair_reduction",
+        "quality",
+        "price_value"
+      ],
+      "flips": [
+        "최대 약점 상품이 과반 아님"
+      ],
+      "top3_changed": false
+    },
+    {
+      "out": "B0G39WBP1S",
+      "reviews": 924,
+      "head_neg": 7.1,
+      "first": "hair_reduction",
+      "first_pct": 7.1,
+      "second": "quality",
+      "second_pct": 6.6,
+      "weakest": 1,
+      "remain": 4,
+      "low": 135,
+      "high": 40,
+      "low_share": 77.1,
+      "top3": [
+        "hair_reduction",
+        "quality",
+        "price_value"
+      ],
+      "flips": [
+        "최대 약점 상품이 과반 아님"
+      ],
+      "top3_changed": false
+    }
+  ],
+  "texts": {
+    "weakest": "5개 중 2개(리뷰를 다시 뽑아 보면 1~4개)",
+    "head_first": "81.7%",
+    "head_neg_ci": "5.9%~8.8%",
+    "weakest_dist": "1개 5.5%, 2개 52.8%, 3개 36.3%, 4개 5.4%",
+    "loo_flips": "5번 중 5번"
+  },
+  "names": {
+    "price_value": "가격 대비 가치",
+    "brand_experience": "브랜드 경험",
+    "trust": "신뢰",
+    "shipping": "배송",
+    "customer_service": "고객 응대",
+    "packaging": "포장",
+    "overall": "전체 만족도",
+    "quality": "품질",
+    "hair_reduction": "제모 효과",
+    "pain_comfort": "통증과 시술 편안함",
+    "safety": "안전",
+    "design": "디자인과 형태",
+    "ease_of_use": "사용 편의",
+    "treatment_time": "시술 시간과 관리 부담",
+    "skin_hair_suitability": "피부색과 털 색 적합성",
+    "accessories": "구성품과 보관 케이스"
+  }
+}

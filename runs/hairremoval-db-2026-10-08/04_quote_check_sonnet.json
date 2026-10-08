@@ -1,0 +1,308 @@
+{
+  "checked_at": "2026-10-08T22:18:27+09:00",
+  "model": "sonnet",
+  "only": null,
+  "batches": {
+    "B07WYY6KKC_01": {
+      "status": "PASS",
+      "asin": "B07WYY6KKC",
+      "reviews": 50,
+      "tags": 175,
+      "quote_exact": 175,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "2번째 태그: R5SJYXEK6GLD6 trust 인용 바로 앞에 부정어 'no'(인용에 부정어까지 넣어야 하는지 확인)",
+        "155번째 태그: R3OKB08M2HNIX7 overall 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B07WYY6KKC_02": {
+      "status": "PASS",
+      "asin": "B07WYY6KKC",
+      "reviews": 50,
+      "tags": 170,
+      "quote_exact": 170,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "92번째 태그: RLH6WCEL9CZ4C overall 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)",
+        "96번째 태그: R9PCFNCTJ78GB design 인용 바로 앞에 부정어 'no'(인용에 부정어까지 넣어야 하는지 확인)",
+        "122번째 태그: R1NJL66X5FEMYR skin_hair_suitability 인용 바로 앞에 부정어 'no'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B07WYY6KKC_03": {
+      "status": "PASS",
+      "asin": "B07WYY6KKC",
+      "reviews": 50,
+      "tags": 156,
+      "quote_exact": 156,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": []
+    },
+    "B07WYY6KKC_04": {
+      "status": "PASS",
+      "asin": "B07WYY6KKC",
+      "reviews": 50,
+      "tags": 150,
+      "quote_exact": 150,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "6번째 태그: R1MTC9UZLPYN2 hair_reduction 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)",
+        "15번째 태그: R2YFT2FDHPXYSV hair_reduction 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B07WYY6KKC_05": {
+      "status": "PASS",
+      "asin": "B07WYY6KKC",
+      "reviews": 50,
+      "tags": 165,
+      "quote_exact": 165,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "91번째 태그: R2I474SRDNJLW9 price_value 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B07WYY6KKC_06": {
+      "status": "PASS",
+      "asin": "B07WYY6KKC",
+      "reviews": 49,
+      "tags": 166,
+      "quote_exact": 166,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "24번째 태그: R29LTEY2ULGDKX customer_service 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)",
+        "32번째 태그: R6945P4YM4VQ0 customer_service 인용 바로 앞에 부정어 'wasn't'(인용에 부정어까지 넣어야 하는지 확인)",
+        "119번째 태그: RGBD8NOM7BGLD pain_comfort 인용 바로 앞에 부정어 'no'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B0CV3ZJ2PN_01": {
+      "status": "PASS",
+      "asin": "B0CV3ZJ2PN",
+      "reviews": 50,
+      "tags": 195,
+      "quote_exact": 195,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": []
+    },
+    "B0CV3ZJ2PN_02": {
+      "status": "PASS",
+      "asin": "B0CV3ZJ2PN",
+      "reviews": 50,
+      "tags": 167,
+      "quote_exact": 167,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": []
+    },
+    "B0CV3ZJ2PN_03": {
+      "status": "PASS",
+      "asin": "B0CV3ZJ2PN",
+      "reviews": 50,
+      "tags": 160,
+      "quote_exact": 160,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "52번째 태그: R1GQ3BRRGM4GNL price_value 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B0CV3ZJ2PN_04": {
+      "status": "PASS",
+      "asin": "B0CV3ZJ2PN",
+      "reviews": 50,
+      "tags": 164,
+      "quote_exact": 164,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "8번째 태그: R3EP1VLA65CL0 overall 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)",
+        "54번째 태그: R1957BA3KFVSJ1 design 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B0CV3ZJ2PN_05": {
+      "status": "PASS",
+      "asin": "B0CV3ZJ2PN",
+      "reviews": 50,
+      "tags": 200,
+      "quote_exact": 200,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "67번째 태그: R1PCWLE9OPVPR9 brand_experience 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)",
+        "68번째 태그: R1PCWLE9OPVPR9 pain_comfort 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B0CV3ZJ2PN_06": {
+      "status": "PASS",
+      "asin": "B0CV3ZJ2PN",
+      "reviews": 40,
+      "tags": 158,
+      "quote_exact": 157,
+      "quote_whitespace_or_quote_marks": 1,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": []
+    },
+    "B0CWL9S4L1_01": {
+      "status": "PASS",
+      "asin": "B0CWL9S4L1",
+      "reviews": 50,
+      "tags": 165,
+      "quote_exact": 164,
+      "quote_whitespace_or_quote_marks": 1,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": []
+    },
+    "B0CWL9S4L1_02": {
+      "status": "PASS",
+      "asin": "B0CWL9S4L1",
+      "reviews": 50,
+      "tags": 166,
+      "quote_exact": 166,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "124번째 태그: R3I9GJ0OJ7522H safety 인용 바로 앞에 부정어 'no'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B0CWL9S4L1_03": {
+      "status": "PASS",
+      "asin": "B0CWL9S4L1",
+      "reviews": 50,
+      "tags": 146,
+      "quote_exact": 145,
+      "quote_whitespace_or_quote_marks": 1,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "18번째 태그: R2NCETRZSVJSE1 price_value 인용 바로 앞에 부정어 'aren't'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B0CWL9S4L1_04": {
+      "status": "PASS",
+      "asin": "B0CWL9S4L1",
+      "reviews": 50,
+      "tags": 154,
+      "quote_exact": 154,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "23번째 태그: R1W8MKKMT4L94O price_value 인용 바로 앞에 부정어 'no'(인용에 부정어까지 넣어야 하는지 확인)",
+        "61번째 태그: R2B1ZQS0KR1OUP customer_service 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B0CWL9S4L1_05": {
+      "status": "PASS",
+      "asin": "B0CWL9S4L1",
+      "reviews": 50,
+      "tags": 132,
+      "quote_exact": 132,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "27번째 태그: R35ETHHJ4MTC25 hair_reduction 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B0CWL9S4L1_06": {
+      "status": "PASS",
+      "asin": "B0CWL9S4L1",
+      "reviews": 11,
+      "tags": 37,
+      "quote_exact": 37,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "37번째 태그: R369DK4FKFL2HI hair_reduction 인용 바로 앞에 부정어 'no'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B0FGB2NS3C_01": {
+      "status": "PASS",
+      "asin": "B0FGB2NS3C",
+      "reviews": 50,
+      "tags": 167,
+      "quote_exact": 167,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "55번째 태그: R2JFM0JZBLV17V quality 인용 바로 앞에 부정어 'no'(인용에 부정어까지 넣어야 하는지 확인)",
+        "76번째 태그: R1Q2IRRDGT4OYT pain_comfort 인용 바로 앞에 부정어 'no'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B0FGB2NS3C_02": {
+      "status": "PASS",
+      "asin": "B0FGB2NS3C",
+      "reviews": 24,
+      "tags": 65,
+      "quote_exact": 65,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "64번째 태그: R2IDRB9JD7AD7M safety 인용 바로 앞에 부정어 'no'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B0G39WBP1S_01": {
+      "status": "PASS",
+      "asin": "B0G39WBP1S",
+      "reviews": 50,
+      "tags": 237,
+      "quote_exact": 237,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "69번째 태그: R2KM2005M6F4RJ price_value 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)",
+        "230번째 태그: R15VZPF8LOLEW4 price_value 인용 바로 앞에 부정어 'without'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    },
+    "B0G39WBP1S_02": {
+      "status": "PASS",
+      "asin": "B0G39WBP1S",
+      "reviews": 38,
+      "tags": 142,
+      "quote_exact": 142,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": []
+    },
+    "gold": {
+      "status": "PASS",
+      "asin": null,
+      "reviews": 25,
+      "tags": 94,
+      "quote_exact": 94,
+      "quote_whitespace_or_quote_marks": 0,
+      "untagged_reviews": 0,
+      "issues": [],
+      "warnings": [
+        "2번째 태그: R1MTC9UZLPYN2 hair_reduction 인용 바로 앞에 부정어 'not'(인용에 부정어까지 넣어야 하는지 확인)"
+      ]
+    }
+  },
+  "status": "PASS",
+  "failed_batches": [],
+  "merged_into": "04_tags.jsonl"
+}

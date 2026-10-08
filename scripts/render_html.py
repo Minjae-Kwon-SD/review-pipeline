@@ -541,7 +541,7 @@ def build_html(run, lang="ko"):
     heads3 = [T("주제"), T("언급")] + list(SENTL) + [T("부정 비율"), T("가중 부정 비율"), T("부정 언급 리뷰어(가중)"), T("긍정 언급 리뷰어(가중)")]
     body = ('<div class="tscroll"><table class="ct"><thead><tr><th></th>' + "".join(f'<th{" class=tl" if j == 0 else ""}>{esc(h)}</th>' for j, h in enumerate(heads3))
             + '</tr></thead><tbody>' + "".join(trs) + '</tbody></table></div><div class="fn">'
-            + esc(T('원본 수는 "무엇을 불평하는가", 가중 비율은 아마존 실제 별점 분포로 되돌린 "얼마나 흔한가"입니다. 숫자를 누르면 그 리뷰가 열립니다.'))
+            + esc(T('원본 수는 어떤 불만이 있는지, 가중 비율은 아마존 실제 별점 분포로 되돌렸을 때 그 불만이 얼마나 흔한지를 보여 줍니다. 숫자를 누르면 그 리뷰가 열립니다.'))
             + '</div>' + reading_html(readings(ch[3]), link))
     parts.append(section(3, CH[3], T("모은 표본의 원본 수와, 실제 별점 분포로 되돌린 가중 비율"), body))
 
@@ -573,7 +573,7 @@ def build_html(run, lang="ko"):
             + f'</div><div class="tscroll"><table class="ct"><thead><tr><th class="tl">{esc(T("주제"))}</th><th>{esc(T("부정 언급 리뷰"))}</th>'
             f'<th>{esc(T("부정 리뷰 평균"))}</th><th>{esc(T("나머지 평균"))}</th><th>{esc(T("격차"))}</th></tr></thead><tbody>{trs}</tbody></table></div>'
             + reading_html(readings(ch[4]), link))
-    parts.append(section(4, T("영향 분석: 어느 불만이 별점을 가장 깎는가"), T("그 주제를 부정으로 말한 리뷰와 나머지 리뷰의 가중 평균 별점 비교"), body, new=True))
+    parts.append(section(4, T("영향 분석: 별점을 가장 많이 깎는 불만"), T("그 주제를 부정으로 말한 리뷰와 나머지 리뷰의 가중 평균 별점 비교"), body, new=True))
 
     # 5장 시간 추이
     tt = m["time_trend"]
@@ -722,15 +722,15 @@ def build_html(run, lang="ko"):
         b = bidx[a["brand"]]
         wp, wn = a["weighted_pos_pct"], a["weighted_neg_pct"]
         stn, wkn = name[a["strength"]["id"]], name[a["weakness"]["id"]]
-        trs += (f'<tr><td class="tl clk"{drill_attr({"brand": b}, a["brand"], a["sample_reviews"])}><b>{esc(a["brand"])}</b><div class="mono mut">{a["asin"]}</div></td>'
+        trs += (f'<tr><td class="tl clk"{drill_attr({"asin": a["asin"]}, a["brand"], a["sample_reviews"])}><b>{esc(a["brand"])}</b><div class="mono mut">{a["asin"]}</div></td>'
                 f'<td class="small tl">{o.num("metrics", ["asins", i, "price_band"], "raw")}</td><td>{o.num("metrics", ["asins", i, "amazon_rating"], "raw")}★</td>'
-                f'<td class="clk"{drill_attr({"brand": b}, a["brand"], a["sample_reviews"])}>{o.num("metrics", ["asins", i, "sample_reviews"], "int")}</td>'
+                f'<td class="clk"{drill_attr({"asin": a["asin"]}, a["brand"], a["sample_reviews"])}>{o.num("metrics", ["asins", i, "sample_reviews"], "int")}</td>'
                 f'<td>{o.num("metrics", ["asins", i, "weighted_mean_star"], "star")}</td>'
                 f'<td><div class="minibar"><span style="width:{wp:.1f}%;background:var(--pos)"></span><span style="width:{wn:.1f}%;background:var(--neg)"></span></div>'
                 f'<span class="cpos small">{o.num("metrics", ["asins", i, "weighted_pos_pct"], "pct")}</span> / <span class="cneg small">{o.num("metrics", ["asins", i, "weighted_neg_pct"], "pct")}</span></td>'
-                f'<td class="tl cpos small clk"{drill_attr({"brand": b, "sub": sidx[a["strength"]["id"]], "sent": 0}, T("{b}: {t} 긍정", b=a["brand"], t=stn))}>'
+                f'<td class="tl cpos small clk"{drill_attr({"asin": a["asin"], "sub": sidx[a["strength"]["id"]], "sent": 0}, T("{b}: {t} 긍정", b=a["brand"], t=stn))}>'
                 f'{esc(stn)} {o.num("metrics", ["asins", i, "strength", "pos_reviewer_pct"], "pct")}</td>'
-                f'<td class="tl cneg small clk"{drill_attr({"brand": b, "sub": sidx[a["weakness"]["id"]], "sent": 1}, T("{b}: {t} 부정", b=a["brand"], t=wkn))}>'
+                f'<td class="tl cneg small clk"{drill_attr({"asin": a["asin"], "sub": sidx[a["weakness"]["id"]], "sent": 1}, T("{b}: {t} 부정", b=a["brand"], t=wkn))}>'
                 f'{esc(wkn)} {o.num("metrics", ["asins", i, "weakness", "neg_reviewer_pct"], "pct")}</td></tr>')
     heads9 = [T("브랜드, ASIN"), T("가격대(현재)"), T("아마존 별점"), T("표본 리뷰"), T("가중 평균"), T("가중 긍정 / 부정"),
               T("가장 큰 강점(긍정 언급 리뷰어, 가중)"), T("가장 큰 약점(부정 언급 리뷰어, 가중)")]
@@ -857,7 +857,7 @@ def build_html(run, lang="ko"):
     # 주의 사항(부록)
     app = [l[2:].strip() for l in ch.get("appendix", []) if l.startswith("- ")]
     caveat = (f'<div class="caveat"><b>{esc(T("주의 사항(방법과 한계)"))}</b><ul>' + "".join(f"<li>{link(md(x))}</li>" for x in app)
-              + f'<li>{esc(T("안전 판정: 안전 주제로 태깅된 인용 전부를 상위 모델이 원문과 대조해 몸 증상 여부와 종류를 정했습니다(07c_safety_check.md)."))}</li></ul></div>')
+              + f'<li>{esc(T("안전 판정: 안전 주제로 태깅된 인용 전부를 상위 모델이 원문과 대조해 이상 반응 여부와 종류를 정했습니다(07c_safety_check.md)."))}</li></ul></div>')
     parts.append(caveat)
     parts.append(f'<div class="fn" style="text-align:center;margin:20px 0 40px">'
                  + esc(T("만든 날 {d}(v1 HTML, {ed}), 회차 {r}. 원본: 02_reviews.csv(리뷰 {n}개), 04_tags.jsonl(태그 {t}개), 05_metrics.json, 07b_issue_counts.json, 07c_safety_summary.json, {md}",
@@ -911,6 +911,8 @@ def py_match(D, f):
         if rset is not None and ri not in rset:
             continue
         if "brand" in f and r[9] != f["brand"]:
+            continue
+        if "asin" in f and r[1] != f["asin"]:      # 같은 브랜드에 상품이 둘 이상일 때 9장은 상품(ASIN)으로 거른다
             continue
         if "star" in f and r[3] != f["star"]:
             continue
@@ -1238,6 +1240,7 @@ function matchReviews(f){
     const r=D.R[ri];
     if(rs&&!rs.has(ri))continue;
     if(f.brand!=null&&r[9]!==f.brand)continue;
+    if(f.asin!=null&&r[1]!==f.asin)continue;
     if(f.star!=null&&r[3]!==f.star)continue;
     if(f.dfrom!=null&&r[6]<f.dfrom)continue;
     if(f.dto!=null&&r[6]>f.dto)continue;

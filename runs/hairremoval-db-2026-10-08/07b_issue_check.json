@@ -1,0 +1,10 @@
+{
+  "checked_at": "2026-10-08T23:07:17+09:00",
+  "status": "PASS",
+  "failed_batches": [],
+  "errors": [],
+  "counts": {
+    "labels": 154,
+    "overlap": null
+  }
+}

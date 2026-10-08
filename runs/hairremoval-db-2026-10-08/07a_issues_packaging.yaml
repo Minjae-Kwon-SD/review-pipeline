@@ -1,0 +1,37 @@
+topic: packaging
+directions:
+  negative:
+    labels: []
+    other_approx_count: 3
+    notes: "07a_issue_plan.json에서 only_other(인용 3개)라 라벨을 두지 않음"
+  positive:
+    labels:
+      - id: attractive_premium_box
+        name_ko: 예쁘고 고급스러운 포장
+        name_en: Attractive, premium-looking packaging
+        include: 상자나 포장이 예쁘다, 고급스럽다, 세련됐다, 보기 좋게 담겨 왔다, 선물하기 좋다는 말과 포장이 좋다, 마음에 든다는 전반적 호감
+        exclude: 꼼꼼히 잘 포장되어 왔다(well packaged, bien empaquetado)는 말은 well_packed, 상자를 보관이나 정리에 쓴다는 말은 practical_storage_box, 기기와 함께 오는 보관 케이스나 파우치는 accessories
+        examples:
+          - {review_id: R2FH84S1LVI3LT, quote: "The packaging is beautiful and feels very premium."}
+          - {review_id: R1E8UGOQ0TAQSW, quote: "This came beautifully boxed and presented"}
+        approx_count: 18
+      - id: well_packed
+        name_ko: 꼼꼼하게 잘 포장되어 옴
+        name_en: Well packed
+        include: 잘 포장되어 왔다, 포장을 잘 했다(well packaged, well packed, bien empaquetado)처럼 포장 작업이나 보호 상태를 칭찬하는 말
+        exclude: 포장의 겉모습이나 고급스러움을 칭찬하면 attractive_premium_box, 제품이 멀쩡하게 도착했다는 말은 shipping
+        examples:
+          - {review_id: R37BVWJW81QEP9, quote: "it came very well packaged"}
+          - {review_id: RQUQENL329XRW, quote: "súper bien empaquetado"}
+        approx_count: 5
+      - id: practical_storage_box
+        name_ko: 보관에 쓰기 좋은 실용적인 상자
+        name_en: Practical box for storage
+        include: 제품 상자가 튼튼하거나 실용적이어서 계속 보관하거나 구성품을 정리해 두기 좋다는 말
+        exclude: 보기 좋다는 말만 있으면 attractive_premium_box, 기기와 함께 오는 보관 케이스, 파우치, 가방은 accessories
+        examples:
+          - {review_id: R2EDE4DS2YX5SP, quote: "I am keeping in the Ulike sturdy box for added care"}
+          - {review_id: R17Z3G31WY4J6A, quote: "It comes in a very nice clampshell type box that keeps everything organized while looking nice."}
+        approx_count: 3
+    other_approx_count: 0
+    notes: "\"El empaque muy bien\", \"The packaging was nice\"처럼 이유 없이 포장이 좋다는 말은 attractive_premium_box로 셌음. well_packed와는 '잘 포장해 보냈다'(동사형, 보호)인지 '포장이 좋다, 예쁘다'(겉모습, 호감)인지로 나눔"

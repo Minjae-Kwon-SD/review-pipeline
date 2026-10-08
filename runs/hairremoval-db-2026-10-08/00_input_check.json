@@ -1,0 +1,187 @@
+{
+  "checked_at": "2026-10-08T20:40:45+09:00",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [
+    "B0FGB2NS3C: negative 묶음(1,2★) 표본이 1개입니다(기준 30개).",
+    "B0FGB2NS3C: neutral 묶음(3★) 표본이 7개입니다(기준 30개).",
+    "B0G39WBP1S: negative 묶음(1,2★) 표본이 12개입니다(기준 30개).",
+    "B0G39WBP1S: neutral 묶음(3★)에 표본이 없습니다(실제 비율 4.0%). 이 비율은 가중 결과에서 빠집니다."
+  ],
+  "asins": 5,
+  "reviews": 1012,
+  "sample_counts": {
+    "B07WYY6KKC": {
+      "1": 80,
+      "2": 30,
+      "3": 70,
+      "4": 70,
+      "5": 49
+    },
+    "B0CV3ZJ2PN": {
+      "1": 80,
+      "2": 52,
+      "3": 48,
+      "4": 60,
+      "5": 50
+    },
+    "B0CWL9S4L1": {
+      "1": 50,
+      "2": 27,
+      "3": 34,
+      "4": 80,
+      "5": 70
+    },
+    "B0FGB2NS3C": {
+      "1": 0,
+      "2": 1,
+      "3": 7,
+      "4": 7,
+      "5": 59
+    },
+    "B0G39WBP1S": {
+      "1": 10,
+      "2": 2,
+      "3": 0,
+      "4": 6,
+      "5": 70
+    }
+  },
+  "groups": {
+    "negative": [
+      1,
+      2
+    ],
+    "neutral": [
+      3
+    ],
+    "positive": [
+      4,
+      5
+    ]
+  },
+  "group_coverage": {
+    "B07WYY6KKC": {
+      "negative": {
+        "sample": 110,
+        "real_pct": 15.0,
+        "mode": "per_star"
+      },
+      "neutral": {
+        "sample": 70,
+        "real_pct": 6.0,
+        "mode": "per_star"
+      },
+      "positive": {
+        "sample": 119,
+        "real_pct": 79.0,
+        "mode": "per_star"
+      }
+    },
+    "B0CV3ZJ2PN": {
+      "negative": {
+        "sample": 132,
+        "real_pct": 13.0,
+        "mode": "per_star"
+      },
+      "neutral": {
+        "sample": 48,
+        "real_pct": 4.0,
+        "mode": "per_star"
+      },
+      "positive": {
+        "sample": 110,
+        "real_pct": 83.0,
+        "mode": "per_star"
+      }
+    },
+    "B0CWL9S4L1": {
+      "negative": {
+        "sample": 77,
+        "real_pct": 10.0,
+        "mode": "per_star"
+      },
+      "neutral": {
+        "sample": 34,
+        "real_pct": 5.0,
+        "mode": "per_star"
+      },
+      "positive": {
+        "sample": 150,
+        "real_pct": 85.0,
+        "mode": "per_star"
+      }
+    },
+    "B0FGB2NS3C": {
+      "negative": {
+        "sample": 1,
+        "real_pct": 12.0,
+        "mode": "group"
+      },
+      "neutral": {
+        "sample": 7,
+        "real_pct": 6.0,
+        "mode": "per_star"
+      },
+      "positive": {
+        "sample": 66,
+        "real_pct": 82.0,
+        "mode": "per_star"
+      }
+    },
+    "B0G39WBP1S": {
+      "negative": {
+        "sample": 12,
+        "real_pct": 10.0,
+        "mode": "per_star"
+      },
+      "neutral": {
+        "sample": 0,
+        "real_pct": 4.0,
+        "mode": "empty"
+      },
+      "positive": {
+        "sample": 76,
+        "real_pct": 86.0,
+        "mode": "per_star"
+      }
+    }
+  },
+  "missing_real_pct": {
+    "B07WYY6KKC": 0,
+    "B0CV3ZJ2PN": 0,
+    "B0CWL9S4L1": 0,
+    "B0FGB2NS3C": 0,
+    "B0G39WBP1S": 4.0
+  },
+  "languages": {
+    "B07WYY6KKC": {
+      "blank": 282,
+      "es": 17
+    },
+    "B0CV3ZJ2PN": {
+      "blank": 267,
+      "es": 23
+    },
+    "B0CWL9S4L1": {
+      "blank": 178,
+      "es": 82,
+      "pt": 1
+    },
+    "B0FGB2NS3C": {
+      "blank": 49,
+      "es": 25
+    },
+    "B0G39WBP1S": {
+      "blank": 77,
+      "es": 10,
+      "fr": 1
+    }
+  },
+  "languages_total": {
+    "blank": 853,
+    "es": 157,
+    "pt": 1,
+    "fr": 1
+  }
+}

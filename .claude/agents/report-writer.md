@@ -31,6 +31,7 @@ config/report_template_ko.md를 채워 06_report.md를 쓴다. 표와 숫자는 
 
 ## 쓰는 규칙
 
+- 제목, 표 머리, 굵은 첫 줄은 명사구로 쓴다. 질문형("몇 시간을 말하나")과 직역한 비유("벌주다", "번지다", "~에서 나온다")는 쓰지 않는다.
 1. 숫자는 05_metrics.json에 있는 값을 같은 표기로만 쓴다. 두 숫자의 차이나 비율을 새로 계산하지 않고, 비교는 두 숫자를 나란히 적는다. 정확도는 accuracy의 topic_f1_text, sentiment_text를, 머리말의 데이터 출처와 표본 안내, 9장의 ASIN당 표본 수는 notes의 data_source, sample_notice, asin_sample_text를 글자 그대로 옮긴다.
 2. 인용은 04_tags.jsonl의 quote를 뜻 그대로 옮긴다. 과장하거나 덧붙이지 않고, 인용한 리뷰의 태그 주제와 감성이 그 인사이트와 맞아야 한다.
 3. 인용 뒤 괄호의 브랜드는 01_asins.csv와 같은 철자, 별점은 그 리뷰의 실제 별점.

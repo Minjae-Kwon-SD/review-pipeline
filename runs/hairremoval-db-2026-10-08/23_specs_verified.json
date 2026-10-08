@@ -1,0 +1,819 @@
+{
+  "checked_at": "2026-10-08T21:43:39+09:00",
+  "products": {
+    "B07WYY6KKC": {
+      "match": "일치 확인",
+      "match_reason": "Braun 미국 공식 상품 페이지 제목이 'Braun Smart IPL, Silk·Expert Pro 5 ... with 2 Caps and Leather Pouch, IPL5137'로 브랜드, 상품 이름(Silk·Expert Pro 5), 유형(IPL), 모델(IPL5137), 구성(헤드 2개, 파우치)이 아마존 상품명과 같음",
+      "amazon_title": "Braun IPL, Silk·Expert Pro 5, IPL Hair Removal for Women and Men, Permanent Laser Hair Reduction At-Home, 2 Heads, Pouch, IPL5137",
+      "missing": [
+        "cooling"
+      ],
+      "values": {
+        "light_type": [
+          {
+            "value": "Smart IPL",
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "Braun Smart IPL, Silk·Expert Pro 5: At Home Alternative to Laser Hair Removal with 2 Caps and Leather Pouch, IPL5137"
+          }
+        ],
+        "energy_levels": [
+          {
+            "value": "10 intensity levels",
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "10 intensity levels"
+          },
+          {
+            "value": "3 modes: normal, sensitive, extra sensitive",
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "3 modes: normal, sensitive, extra sensitive"
+          },
+          {
+            "value": "automatically adjusts each flash",
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "GENTLE ON SKIN: The best skin tone sensor reads your skin tone and automatically adjusts each flash for a safe treatment, even in hard-to-see areas like the pubic region."
+          }
+        ],
+        "flash_count": [
+          {
+            "value": "400,000 flashes",
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "400,000 flashes"
+          }
+        ],
+        "flash_speed_window": [
+          {
+            "value": "2 Caps",
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "Braun Smart IPL, Silk·Expert Pro 5: At Home Alternative to Laser Hair Removal with 2 Caps and Leather Pouch, IPL5137"
+          }
+        ],
+        "skin_tone_range": [
+          {
+            "value": "skin tone sensor",
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "GENTLE ON SKIN: The best skin tone sensor reads your skin tone and automatically adjusts each flash for a safe treatment, even in hard-to-see areas like the pubic region."
+          },
+          {
+            "value": "suited to many different skin and hair tones",
+            "url": "https://www.braunshop.co.uk/p/ipl-hair-removal/silk-expert-pro-5/silk-expert-pro-5-pl5137-ipl/12893150/",
+            "source_type": "official",
+            "quote": "The Braun IPL Silk-expert Pro 5 PL5137 automatically adjusts making it suited to many different skin and hair tones including variable skin colouration."
+          }
+        ],
+        "treatment_schedule": [
+          {
+            "value": "1 SESSION PER WEEK",
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "Requires ONLY 1 SESSION PER WEEK."
+          },
+          {
+            "value": "weekly full body treatment can be conducted in just ten minutes",
+            "url": "https://www.braunshop.co.uk/p/ipl-hair-removal/silk-expert-pro-5/silk-expert-pro-5-pl5137-ipl/12893150/",
+            "source_type": "official",
+            "quote": "For example, both lower legs can be treated in less than five minutes while a weekly full body treatment can be conducted in just ten minutes."
+          }
+        ],
+        "power_source": [
+          {
+            "value": "attached cord",
+            "url": "https://www.braunshop.co.uk/p/ipl-hair-removal/silk-expert-pro-5/silk-expert-pro-5-pl5137-ipl/12893150/",
+            "source_type": "official",
+            "quote": "The attached cord is long enough so it can be easily used while plugged far from a mirror."
+          }
+        ],
+        "in_box": [
+          {
+            "value": [
+              "2 Caps",
+              "Leather Pouch"
+            ],
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "Braun Smart IPL, Silk·Expert Pro 5: At Home Alternative to Laser Hair Removal with 2 Caps and Leather Pouch, IPL5137"
+          },
+          {
+            "value": [
+              "Standard Cap"
+            ],
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "Standard Cap"
+          },
+          {
+            "value": [
+              "Face Precision Head"
+            ],
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "Face Precision Head"
+          },
+          {
+            "value": [
+              "Venus razor"
+            ],
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "Venus razor"
+          },
+          {
+            "value": [
+              "Leather Zip Pouch"
+            ],
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "Leather Zip Pouch"
+          }
+        ],
+        "clearance_warranty": [
+          {
+            "value": "FDA-cleared",
+            "url": "https://us.braun.com/en-us/service/products/6031",
+            "source_type": "official",
+            "quote": "Braun IPL devices are safe, FDA-cleared, and dermatologist-approved."
+          },
+          {
+            "value": "Clinically proven effectiveness",
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "FULL BODY PERMANENT HAIR REDUCTION: Clinically proven effectiveness on facial hair removal for women, body and pubic areas."
+          },
+          {
+            "value": "Dermatologically and gynecologically approved",
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "Dermatologically and gynecologically approved, and eye-safe: NO GLASSES NEEDED."
+          },
+          {
+            "value": "Up to 5-year Warranty",
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "Up to 5-year Warranty*"
+          },
+          {
+            "value": "100-Day Money Back Guarantee",
+            "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+            "source_type": "official",
+            "quote": "100-Day Money Back Guarantee*"
+          }
+        ],
+        "list_price": [
+          {
+            "value": [
+              "£610.00"
+            ],
+            "url": "https://www.braunshop.co.uk/p/ipl-hair-removal/silk-expert-pro-5/silk-expert-pro-5-pl5137-ipl/12893150/",
+            "source_type": "official",
+            "quote": "Current price: £610.00"
+          }
+        ]
+      }
+    },
+    "B0CV3ZJ2PN": {
+      "match": "일치 확인",
+      "match_reason": "Ulta 상품 페이지(Ulike Air10 Ice Cooling IPL Hair Removal Device)와 The Brick 상품 페이지(Ulike Air 10 IPL Laser Hair Removal Device - Dual Lights, SHR Mode & Ice Cooling)가 브랜드(Ulike), 상품 이름(Air 10), 유형(IPL, 두 광원, 아이스 쿨링, SHR 모드)이 아마존 상품명과 같음",
+      "amazon_title": "Ulike Laser Hair Removal Device Air 10 Ipl Gift for Women and Men, Ice Cool and Permanent Hair Reduction for Nearly Painless, Dual Lights, Skin Sensor & USHR Mode Hair Removal in 10mins from Home",
+      "missing": [
+        "power_source"
+      ],
+      "values": {
+        "light_type": [
+          {
+            "value": "dual IPL lights",
+            "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+            "source_type": "retailer",
+            "quote": "The Air10 is Ulike's most advanced at-home IPL hair removal device, equipped with dual IPL lights to deliver visible 96.5% hair reduction in just 2 weeks."
+          }
+        ],
+        "energy_levels": [
+          {
+            "value": "4 modes",
+            "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+            "source_type": "retailer",
+            "quote": "4 modes, 2 IPL lights for 65% greater maximum energy output vs. Ulike Air3"
+          },
+          {
+            "value": "23.6 J/cm² energy output",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "Elevate your hair removal routine with the Ulike Air 10 — Ulike's most advanced IPL device yet. Featuring industry-leading 23.6 J/cm² energy output and upgraded Sapphire Ice-Cooling 2.0, it delivers faster, virtually painless treatments with visible results in just 2–3 weeks."
+          },
+          {
+            "value": "26J of total energy",
+            "url": "https://au.ulike.com/products/ulike-air10",
+            "source_type": "official",
+            "quote": "Powered by 26J of total energy"
+          },
+          {
+            "value": "auto adjusts power",
+            "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+            "source_type": "retailer",
+            "quote": "Skin sensor detects skin tone and auto adjusts power for faster, easier treatments"
+          }
+        ],
+        "flash_count": [
+          {
+            "value": "1,000,000 flashes",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "Delivers up to 1,000,000 flashes with no need for refills — one device for years of smooth skin."
+          }
+        ],
+        "flash_speed_window": [
+          {
+            "value": "automatic flashes every 0.25 seconds",
+            "url": "https://au.ulike.com/products/ulike-air10",
+            "source_type": "official",
+            "quote": "With automatic flashes every 0.25 seconds"
+          },
+          {
+            "value": "Flashing every 0.5 seconds",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "► Fast - Flashing every 0.5 seconds"
+          },
+          {
+            "value": "3.9cm² light spout",
+            "url": "https://au.ulike.com/products/ulike-air10",
+            "source_type": "official",
+            "quote": "Large 3.9cm² light spout for more efficient hair removal"
+          }
+        ],
+        "cooling": [
+          {
+            "value": "Sapphire Ice-Cooling 2.0",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "Elevate your hair removal routine with the Ulike Air 10 — Ulike's most advanced IPL device yet. Featuring industry-leading 23.6 J/cm² energy output and upgraded Sapphire Ice-Cooling 2.0, it delivers faster, virtually painless treatments with visible results in just 2–3 weeks."
+          },
+          {
+            "value": "cool 65°F contact temperature",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "Maintaining a cool 65°F contact temperature, the Air 10 helps to prevent burns and irritation, ensuring nearly painless hair removal even in sensitive areas."
+          }
+        ],
+        "skin_tone_range": [
+          {
+            "value": "Skin sensor detects skin tone",
+            "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+            "source_type": "retailer",
+            "quote": "Skin sensor detects skin tone and auto adjusts power for faster, easier treatments"
+          },
+          {
+            "value": "less effective on lighter hair colors",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "As a result, IPL may be less effective on lighter hair colors due to lower melanin levels, and it could pose safety concerns for darker skin tones, which absorb higher levels of energy due to their higher melanin content."
+          },
+          {
+            "value": "safety concerns for darker skin tones",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "As a result, IPL may be less effective on lighter hair colors due to lower melanin levels, and it could pose safety concerns for darker skin tones, which absorb higher levels of energy due to their higher melanin content."
+          }
+        ],
+        "treatment_schedule": [
+          {
+            "value": "3 times per week during the first 2 weeks",
+            "url": "https://au.ulike.com/products/ulike-air10",
+            "source_type": "official",
+            "quote": "For best results, use 3 times per week during the first 2 weeks."
+          },
+          {
+            "value": "full-body treatments in as little as 7 minutes",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "Complete full-body treatments in as little as 7 minutes."
+          },
+          {
+            "value": "full-body treatment in just 12 minutes",
+            "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+            "source_type": "retailer",
+            "quote": "Auto-glide function delivers a thumbs-free full-body treatment in just 12 minutes"
+          },
+          {
+            "value": "visible results in just 2–3 weeks",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "Elevate your hair removal routine with the Ulike Air 10 — Ulike's most advanced IPL device yet. Featuring industry-leading 23.6 J/cm² energy output and upgraded Sapphire Ice-Cooling 2.0, it delivers faster, virtually painless treatments with visible results in just 2–3 weeks."
+          }
+        ],
+        "in_box": [
+          {
+            "value": [
+              "razor"
+            ],
+            "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+            "source_type": "retailer",
+            "quote": "Prepare for hair removal by shaving the areas you want to treat with Ulike IPL the device even comes with a razor!"
+          },
+          {
+            "value": [
+              "protective glasses"
+            ],
+            "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+            "source_type": "retailer",
+            "quote": "Protect your eyes with the included protective glasses."
+          }
+        ],
+        "clearance_warranty": [
+          {
+            "value": "FDA and Health Canada Approved",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "FDA and Health Canada Approved - Dermatologist-Recommended."
+          },
+          {
+            "value": "Clinically proven effectiveness",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "Clinically proven effectiveness - 96% Hair Density Reduction in 2 Weeks."
+          },
+          {
+            "value": "2 years",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "Manufacturer's Warranty: 2 years"
+          },
+          {
+            "value": "100-Day Money-Back Guarantee",
+            "url": "https://www.ulike.com/products/ulike-air-10",
+            "source_type": "official",
+            "quote": "100-Day Money-Back Guarantee"
+          }
+        ],
+        "list_price": [
+          {
+            "value": [
+              "279.00 USD"
+            ],
+            "url": "https://www.ulike.com/products/ulike-air-10",
+            "source_type": "official",
+            "quote": "Ulike Air 10 Bestseller 279.00 USD"
+          },
+          {
+            "value": [
+              "$349.00"
+            ],
+            "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+            "source_type": "retailer",
+            "quote": "$349.00"
+          }
+        ]
+      }
+    },
+    "B0CWL9S4L1": {
+      "match": "이름만 일치",
+      "match_reason": "INNZA 공식 사이트(innzahairremoval.com)에 'INNZA Laser Hair Removal with Ice Cooling Care Function'(IPL, 999,999 flashes) 카드가 있어 브랜드와 상품 이름은 맞지만, 카드가 아마존 단축 링크로만 이어져 모델(JD-TM016)과 판이 이 ASIN과 같은지 페이지로 확인하지 못함",
+      "amazon_title": "INNZA IPL Hair Removal with Ice Cooling Care Function for Women and men",
+      "missing": [
+        "energy_levels",
+        "flash_speed_window",
+        "treatment_schedule",
+        "power_source",
+        "in_box",
+        "clearance_warranty",
+        "list_price"
+      ],
+      "values": {
+        "light_type": [
+          {
+            "value": "IPL",
+            "url": "https://innzahairremoval.com/",
+            "source_type": "official",
+            "quote": "Permanent hair removal: Say bye to endless shaving! Our IPL technology zaps hair for good, giving you smooth skin you'll love."
+          }
+        ],
+        "flash_count": [
+          {
+            "value": "999,999 flashes",
+            "url": "https://innzahairremoval.com/",
+            "source_type": "official",
+            "quote": "Super Long Life: With 999,999 flashes, share it with friends or keep it just for you; it's built to last!"
+          }
+        ],
+        "cooling": [
+          {
+            "value": "Ice Cooling Care",
+            "url": "https://innzahairremoval.com/",
+            "source_type": "official",
+            "quote": "Ice Cooling Care: Keeps skin chill and comfy during hair removal. No more redness or heat, just cool vibes!"
+          }
+        ],
+        "skin_tone_range": [
+          {
+            "value": "dark hair and lighter skin tones",
+            "url": "https://innzahairremoval.com/",
+            "source_type": "official",
+            "quote": "While IPL technology has advanced, it works best on individuals with dark hair and lighter skin tones."
+          },
+          {
+            "value": "very light or white hair",
+            "url": "https://innzahairremoval.com/",
+            "source_type": "official",
+            "quote": "Those with very light or white hair might not see as effective results, as there is less melanin to absorb the light energy."
+          },
+          {
+            "value": "Skin that is too dark",
+            "url": "https://innzahairremoval.com/",
+            "source_type": "official",
+            "quote": "Skin that is too dark may also risk damage, as the skin itself could absorb too much of the light energy, causing burns."
+          }
+        ]
+      }
+    },
+    "B0G39WBP1S": {
+      "match": "이름만 일치",
+      "match_reason": "Ulike 미국 공식 사이트에 'Ulike Air 10 Deluxe'($349.00) 카드가 있고 Air 10 상품 페이지로 이어져 브랜드와 이름은 맞지만, Deluxe 구성(추가 구성품)을 글자로 보여 주는 페이지를 찾지 못해 판(Deluxe 구성)을 페이지로 확인하지 못함. 기기 사양은 같은 Air 10 기기(아마존 모델 UI20 DB로 B0CV3ZJ2PN과 같음)의 페이지에서 가져옴",
+      "amazon_title": "Ulike Laser Hair Removal Air 10 Deluxe Version IPL for for Women and Men with Ice-Cooling Technology, Nealy Painless and Permanent Hair Reduction, at Home Hair Removal in 10mins with Skin Sensor",
+      "missing": [
+        "power_source",
+        "in_box"
+      ],
+      "values": {
+        "light_type": [
+          {
+            "value": "dual IPL lights",
+            "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+            "source_type": "retailer",
+            "quote": "The Air10 is Ulike's most advanced at-home IPL hair removal device, equipped with dual IPL lights to deliver visible 96.5% hair reduction in just 2 weeks."
+          }
+        ],
+        "energy_levels": [
+          {
+            "value": "4 modes",
+            "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+            "source_type": "retailer",
+            "quote": "4 modes, 2 IPL lights for 65% greater maximum energy output vs. Ulike Air3"
+          },
+          {
+            "value": "23.6 J/cm² energy output",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "Elevate your hair removal routine with the Ulike Air 10 — Ulike's most advanced IPL device yet. Featuring industry-leading 23.6 J/cm² energy output and upgraded Sapphire Ice-Cooling 2.0, it delivers faster, virtually painless treatments with visible results in just 2–3 weeks."
+          },
+          {
+            "value": "auto adjusts power",
+            "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+            "source_type": "retailer",
+            "quote": "Skin sensor detects skin tone and auto adjusts power for faster, easier treatments"
+          }
+        ],
+        "flash_count": [
+          {
+            "value": "1,000,000 flashes",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "Delivers up to 1,000,000 flashes with no need for refills — one device for years of smooth skin."
+          }
+        ],
+        "flash_speed_window": [
+          {
+            "value": "automatic flashes every 0.25 seconds",
+            "url": "https://au.ulike.com/products/ulike-air10",
+            "source_type": "official",
+            "quote": "With automatic flashes every 0.25 seconds"
+          },
+          {
+            "value": "3.9cm² light spout",
+            "url": "https://au.ulike.com/products/ulike-air10",
+            "source_type": "official",
+            "quote": "Large 3.9cm² light spout for more efficient hair removal"
+          }
+        ],
+        "cooling": [
+          {
+            "value": "Sapphire Ice-Cooling 2.0",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "Elevate your hair removal routine with the Ulike Air 10 — Ulike's most advanced IPL device yet. Featuring industry-leading 23.6 J/cm² energy output and upgraded Sapphire Ice-Cooling 2.0, it delivers faster, virtually painless treatments with visible results in just 2–3 weeks."
+          },
+          {
+            "value": "cool 65°F contact temperature",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "Maintaining a cool 65°F contact temperature, the Air 10 helps to prevent burns and irritation, ensuring nearly painless hair removal even in sensitive areas."
+          }
+        ],
+        "skin_tone_range": [
+          {
+            "value": "Skin sensor detects skin tone",
+            "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+            "source_type": "retailer",
+            "quote": "Skin sensor detects skin tone and auto adjusts power for faster, easier treatments"
+          },
+          {
+            "value": "less effective on lighter hair colors",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "As a result, IPL may be less effective on lighter hair colors due to lower melanin levels, and it could pose safety concerns for darker skin tones, which absorb higher levels of energy due to their higher melanin content."
+          },
+          {
+            "value": "safety concerns for darker skin tones",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "As a result, IPL may be less effective on lighter hair colors due to lower melanin levels, and it could pose safety concerns for darker skin tones, which absorb higher levels of energy due to their higher melanin content."
+          }
+        ],
+        "treatment_schedule": [
+          {
+            "value": "3 times per week during the first 2 weeks",
+            "url": "https://au.ulike.com/products/ulike-air10",
+            "source_type": "official",
+            "quote": "For best results, use 3 times per week during the first 2 weeks."
+          },
+          {
+            "value": "full-body treatments in as little as 7 minutes",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "Complete full-body treatments in as little as 7 minutes."
+          }
+        ],
+        "clearance_warranty": [
+          {
+            "value": "FDA and Health Canada Approved",
+            "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+            "source_type": "retailer",
+            "quote": "FDA and Health Canada Approved - Dermatologist-Recommended."
+          },
+          {
+            "value": "100-Day Money-Back Guarantee",
+            "url": "https://www.ulike.com/products/ulike-air-10",
+            "source_type": "official",
+            "quote": "100-Day Money-Back Guarantee"
+          }
+        ],
+        "list_price": [
+          {
+            "value": [
+              "$349.00"
+            ],
+            "url": "https://www.ulike.com/pages/ipl-hair-removal-device-for-men",
+            "source_type": "official",
+            "quote": "Ulike Air 10 Deluxe★ 5.0 (1707)$349.00"
+          }
+        ]
+      }
+    },
+    "B0FGB2NS3C": {
+      "match": "일치 확인",
+      "match_reason": "Philips 미국 공식 페이지 'BRI984 - Lumea IPL 9000 Series IPL Hair removal device with SenseIQ'(BRI984/03)가 브랜드, 상품 이름(Lumea 9000), 유형(IPL)이 같고, 4개 부착 헤드(face, body, armpits, bikini)가 아마존 용량 'Body+Face+Bikini+Underarm'과 같음(아마존 상품 정보의 모델도 BRI984/03)",
+      "amazon_title": "Philips Lumea 9000 IPL Hair Removal Device for Long-Lasting Smooth Skin",
+      "missing": [
+        "cooling",
+        "list_price"
+      ],
+      "values": {
+        "light_type": [
+          {
+            "value": "IPL",
+            "url": "https://www.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se",
+            "source_type": "official",
+            "quote": "BRI984 - Lumea IPL 9000 Series IPL Hair removal device with SenseIQ"
+          },
+          {
+            "value": "SmartPulse light technology",
+            "url": "https://www.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se",
+            "source_type": "official",
+            "quote": "Powered by SmartPulse light technology, Philips Lumea delivers gentle pulses of light to the hair root, helping reduce regrowth over time."
+          }
+        ],
+        "energy_levels": [
+          {
+            "value": "5 intensity settings",
+            "url": "https://www.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se",
+            "source_type": "official",
+            "quote": "5 intensity settings"
+          },
+          {
+            "value": "SmartSkin sensor suggests right intensity",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "The SmartSkin sensor suggests right intensity for gentle use for comfort in every flash"
+          }
+        ],
+        "flash_count": [
+          {
+            "value": "400.000 flashes",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "High performance lamp 400.000 flashes"
+          }
+        ],
+        "flash_speed_window": [
+          {
+            "value": "4 dedicated attachments",
+            "url": "https://www.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se",
+            "source_type": "official",
+            "quote": "Philips Lumea 9000 SenseIQ is clinically proven to achieve up to 5 years of smooth-feeling skin*, with 4 dedicated attachments for face, body, armpits and bikini to provide you gentle & effective care even on delicate areas."
+          },
+          {
+            "value": "Body treatment attachment Shape: Curved Window size: 4.1 cm²",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Body treatment attachment Shape: Curved Window size: 4.1 cm²"
+          },
+          {
+            "value": "Face treatment attachment Shape: Flat + Red Filter Window size: 2 cm²",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Face treatment attachment Shape: Flat + Red Filter Window size: 2 cm²"
+          },
+          {
+            "value": "Bikini treatment attachment Shape: Curved Window size: 3 cm²",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Bikini treatment attachment Shape: Curved Window size: 3 cm²"
+          },
+          {
+            "value": "Underarm treatment attachment Shape: Curved Window size: 3cm²",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Underarm treatment attachment Shape: Curved Window size: 3cm²"
+          },
+          {
+            "value": "Slide and Flash",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Slide and Flash For larger areas (legs)"
+          }
+        ],
+        "skin_tone_range": [
+          {
+            "value": "naturally dark blonde, brown and black hair and on skin tones from fair to medium brown",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "IPL requires contrast between the pigments in the hair color and the skin tone and therefore works on naturally dark blonde, brown and black hair and on skin tones from fair to medium brown."
+          },
+          {
+            "value": "Measures your skin tone",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "SenseIQ Measures your skin tone & supports you in selecting a setting for a comfortable treatment"
+          }
+        ],
+        "treatment_schedule": [
+          {
+            "value": "Treat every two weeks for the first four treatments, then save time by touching-up once a month",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Treat every two weeks for the first four treatments, then save time by touching-up once a month."
+          },
+          {
+            "value": "Lower leg 11 min",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Lower leg 11 min ******"
+          },
+          {
+            "value": "Underarms 2 min",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Underarms 2 min******"
+          },
+          {
+            "value": "Bikini line 2 min",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Bikini line 2 min******"
+          },
+          {
+            "value": "Face areas 1.5 min",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Face areas 1.5 min******"
+          },
+          {
+            "value": "In just 2 sessions",
+            "url": "https://www.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se",
+            "source_type": "official",
+            "quote": "In just 2 sessions, you can achieve more than 80% hair reduction**, helping you feel smoother and more confident."
+          }
+        ],
+        "power_source": [
+          {
+            "value": "Corded use",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Corded / cordless use Corded use"
+          }
+        ],
+        "in_box": [
+          {
+            "value": [
+              "User manual",
+              "Luxury beauty box",
+              "Adapter",
+              "Cord"
+            ],
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Items included Instructions for use User manual Storage Luxury beauty box Adapter 19.5 V Cord 2 m"
+          },
+          {
+            "value": [
+              "face",
+              "body",
+              "armpits",
+              "bikini"
+            ],
+            "url": "https://www.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se",
+            "source_type": "official",
+            "quote": "Philips Lumea 9000 SenseIQ is clinically proven to achieve up to 5 years of smooth-feeling skin*, with 4 dedicated attachments for face, body, armpits and bikini to provide you gentle & effective care even on delicate areas."
+          }
+        ],
+        "clearance_warranty": [
+          {
+            "value": "FDA cleared",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "It is FDA cleared and has been chosen by over 6 million consumers worldwide."
+          },
+          {
+            "value": "tested with more than 3,000 women",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Developed in cooperation with dermatologists and tested with more than 3,000 women, Philips Lumea delivers clinically-proven performance from the comfort of your home."
+          },
+          {
+            "value": "up to 5 years warranty and 90 day money back guarantee",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Built for durability and effectiveness, Lumea comes with up to 5 years warranty and 90 day money back guarantee, ensuring your investment is protected."
+          },
+          {
+            "value": "2 years global warranty",
+            "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+            "source_type": "official",
+            "quote": "Warranty 2 years global warranty"
+          }
+        ]
+      }
+    }
+  },
+  "items": [
+    {
+      "id": "light_type",
+      "name_ko": "광원 방식",
+      "format": "text"
+    },
+    {
+      "id": "energy_levels",
+      "name_ko": "출력 단계와 최대 에너지",
+      "format": "text"
+    },
+    {
+      "id": "flash_count",
+      "name_ko": "발광 횟수(수명)",
+      "format": "text"
+    },
+    {
+      "id": "flash_speed_window",
+      "name_ko": "발광 간격과 창 크기",
+      "format": "text"
+    },
+    {
+      "id": "cooling",
+      "name_ko": "냉각 기능",
+      "format": "text"
+    },
+    {
+      "id": "skin_tone_range",
+      "name_ko": "쓸 수 있는 피부색과 털 색",
+      "format": "text"
+    },
+    {
+      "id": "treatment_schedule",
+      "name_ko": "권장 시술 일정과 시간",
+      "format": "text"
+    },
+    {
+      "id": "power_source",
+      "name_ko": "전원(유선, 무선)",
+      "format": "text"
+    },
+    {
+      "id": "in_box",
+      "name_ko": "구성품",
+      "format": "list"
+    },
+    {
+      "id": "clearance_warranty",
+      "name_ko": "인증과 보증",
+      "format": "text"
+    },
+    {
+      "id": "list_price",
+      "name_ko": "정가",
+      "format": "list"
+    }
+  ]
+}

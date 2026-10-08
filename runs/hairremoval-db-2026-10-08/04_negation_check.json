@@ -1,0 +1,201 @@
+{
+  "checked_at": "2026-10-08T22:18:31+09:00",
+  "tags_file": "04_tags.jsonl",
+  "warnings": 27,
+  "by_sentiment": {
+    "negative": 16,
+    "positive": 10,
+    "mixed": 1
+  },
+  "items": [
+    {
+      "review_id": "RGBD8NOM7BGLD",
+      "topic": "pain_comfort",
+      "sentiment": "negative",
+      "quote": "yo lo uso en lo mas bajo y quema bien feo",
+      "negation": "no"
+    },
+    {
+      "review_id": "R6945P4YM4VQ0",
+      "topic": "customer_service",
+      "sentiment": "negative",
+      "quote": "I was outside of the time window to return the item",
+      "negation": "wasn't"
+    },
+    {
+      "review_id": "R29LTEY2ULGDKX",
+      "topic": "customer_service",
+      "sentiment": "negative",
+      "quote": "their customer service won’t answer the phone",
+      "negation": "not"
+    },
+    {
+      "review_id": "R2I474SRDNJLW9",
+      "topic": "price_value",
+      "sentiment": "positive",
+      "quote": "it's a good more affordable option",
+      "negation": "not"
+    },
+    {
+      "review_id": "R2YFT2FDHPXYSV",
+      "topic": "hair_reduction",
+      "sentiment": "negative",
+      "quote": "No luck whatsoever",
+      "negation": "not"
+    },
+    {
+      "review_id": "R1MTC9UZLPYN2",
+      "topic": "hair_reduction",
+      "sentiment": "negative",
+      "quote": "haven't seen any results",
+      "negation": "not"
+    },
+    {
+      "review_id": "R1NJL66X5FEMYR",
+      "topic": "skin_hair_suitability",
+      "sentiment": "negative",
+      "quote": "en mi parte íntima ya donde se oscurece más la piel prácticamente no funciona",
+      "negation": "no"
+    },
+    {
+      "review_id": "R9PCFNCTJ78GB",
+      "topic": "design",
+      "sentiment": "positive",
+      "quote": "the cord is long",
+      "negation": "no"
+    },
+    {
+      "review_id": "RLH6WCEL9CZ4C",
+      "topic": "overall",
+      "sentiment": "negative",
+      "quote": "the device has effectively become useless for me",
+      "negation": "not"
+    },
+    {
+      "review_id": "R3OKB08M2HNIX7",
+      "topic": "overall",
+      "sentiment": "mixed",
+      "quote": "I still like it, but want to get something more powerful and more helpful",
+      "negation": "not"
+    },
+    {
+      "review_id": "R5SJYXEK6GLD6",
+      "topic": "trust",
+      "sentiment": "negative",
+      "quote": "very misleading claim",
+      "negation": "no"
+    },
+    {
+      "review_id": "R1PCWLE9OPVPR9",
+      "topic": "brand_experience",
+      "sentiment": "negative",
+      "quote": "Braun worked really well. Gave to parent and decided to try this. Not impressed",
+      "negation": "not"
+    },
+    {
+      "review_id": "R1PCWLE9OPVPR9",
+      "topic": "pain_comfort",
+      "sentiment": "positive",
+      "quote": "the chilling effect is nice and no burning at all",
+      "negation": "not"
+    },
+    {
+      "review_id": "R1957BA3KFVSJ1",
+      "topic": "design",
+      "sentiment": "negative",
+      "quote": "very heavy and awkward to hold",
+      "negation": "not"
+    },
+    {
+      "review_id": "R3EP1VLA65CL0",
+      "topic": "overall",
+      "sentiment": "negative",
+      "quote": "disappointing",
+      "negation": "not"
+    },
+    {
+      "review_id": "R1GQ3BRRGM4GNL",
+      "topic": "price_value",
+      "sentiment": "negative",
+      "quote": "just waste of money",
+      "negation": "not"
+    },
+    {
+      "review_id": "R369DK4FKFL2HI",
+      "topic": "hair_reduction",
+      "sentiment": "positive",
+      "quote": "en un mes ya no me crecían bellos en la zona tratada",
+      "negation": "no"
+    },
+    {
+      "review_id": "R35ETHHJ4MTC25",
+      "topic": "hair_reduction",
+      "sentiment": "negative",
+      "quote": "been using for 2 months consistently 2-3 times a week on 9 , no less growth",
+      "negation": "not"
+    },
+    {
+      "review_id": "R1W8MKKMT4L94O",
+      "topic": "price_value",
+      "sentiment": "positive",
+      "quote": "no paying such high prices at salons",
+      "negation": "no"
+    },
+    {
+      "review_id": "R2B1ZQS0KR1OUP",
+      "topic": "customer_service",
+      "sentiment": "negative",
+      "quote": "it’s too late to return",
+      "negation": "not"
+    },
+    {
+      "review_id": "R2NCETRZSVJSE1",
+      "topic": "price_value",
+      "sentiment": "negative",
+      "quote": "it's not worth the money or the hassle",
+      "negation": "aren't"
+    },
+    {
+      "review_id": "R3I9GJ0OJ7522H",
+      "topic": "safety",
+      "sentiment": "negative",
+      "quote": "me brotaba la piel",
+      "negation": "no"
+    },
+    {
+      "review_id": "R15VZPF8LOLEW4",
+      "topic": "price_value",
+      "sentiment": "positive",
+      "quote": "which saves both time and money",
+      "negation": "without"
+    },
+    {
+      "review_id": "R2KM2005M6F4RJ",
+      "topic": "price_value",
+      "sentiment": "positive",
+      "quote": "it is cheaper than professional hair removal services",
+      "negation": "not"
+    },
+    {
+      "review_id": "R2IDRB9JD7AD7M",
+      "topic": "safety",
+      "sentiment": "positive",
+      "quote": "doesn’t leave skin red or sensitive",
+      "negation": "no"
+    },
+    {
+      "review_id": "R2JFM0JZBLV17V",
+      "topic": "quality",
+      "sentiment": "positive",
+      "quote": "tiene muy buena presentación y calidad!!",
+      "negation": "no"
+    },
+    {
+      "review_id": "R1Q2IRRDGT4OYT",
+      "topic": "pain_comfort",
+      "sentiment": "positive",
+      "quote": "no me dolió nada",
+      "negation": "no"
+    }
+  ]
+}

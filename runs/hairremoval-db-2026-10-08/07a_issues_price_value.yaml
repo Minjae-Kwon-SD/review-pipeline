@@ -1,0 +1,82 @@
+topic: price_value
+directions:
+  negative:
+    labels:
+      - id: not_worth_money
+        name_ko: 돈 낭비, 값어치 없음
+        name_en: Waste of money
+        include: 돈 낭비다, 돈을 버렸다, 돈 아껴라, 값어치가 없다, 돈값을 못 한다는 판정만 있고 인용 안에 이유(효과, 고장)가 없는 말
+        exclude: 인용 안에 효과가 없다는 이유가 붙으면 disappointing_for_price, 고장이나 짧은 수명이 붙으면 expensive_for_lifespan, 가격이 높다는 말만 있으면 too_expensive
+        examples:
+          - {review_id: R1WTL5624OGXU, quote: "Waste of money."}
+          - {review_id: RI2SISRQKM0M2, quote: "Not worth the money"}
+        approx_count: 59
+      - id: disappointing_for_price
+        name_ko: 가격에 비해 효과나 성능이 실망스러움
+        name_en: Disappointing results for the price
+        include: 가격을 들며 효과, 결과, 성능이 기대에 못 미친다, 이 값이면 더 나아야 한다, 이만큼 썼는데 실망이다는 말(효과가 없어 돈을 버렸다 포함)
+        exclude: 가격에 비해 빨리 고장 나거나 수명이 짧다는 말은 expensive_for_lifespan, 이유 없는 돈 낭비 판정은 not_worth_money
+        examples:
+          - {review_id: R18UY4HW9LQGON, quote: "For the price.. and zero results."}
+          - {review_id: R28HE7BFJAEMNS, quote: "Given the price of this device, it was disappointing."}
+        approx_count: 28
+      - id: expensive_for_lifespan
+        name_ko: 비싼 값에 비해 빨리 고장 남
+        name_en: Too costly for its short lifespan
+        include: 이 가격이면 더 오래 가야 한다, 몇 주나 몇 달 만에 고장 났다, 몇 번 못 쓰고 멈췄다처럼 가격과 고장, 내구성, 수명을 함께 말하는 것
+        exclude: 가격과 함께 효과가 없다는 말은 disappointing_for_price, 가격 없이 고장만 말하는 것은 이 주제가 아님(quality)
+        examples:
+          - {review_id: RTZ6KQ6T15U3J, quote: "I would think for $350 this product would last longer than 4 months."}
+          - {review_id: R2JM1I6ZLDWZ00, quote: "Way too expensive for its useful life"}
+        approx_count: 17
+      - id: too_expensive
+        name_ko: 가격 자체가 비쌈
+        name_en: Too expensive
+        include: 비싸다, 너무 비싸다, 가격이 과하다, 다른 제품보다 몇 배 비싸다처럼 가격 수준 자체를 말하는 것(할인 없이는 실망했을 것이라는 말 포함)
+        exclude: 비싼데 효과가 없다는 말은 disappointing_for_price, 비싼데 고장 났다는 말은 expensive_for_lifespan, 비싸지만 값어치가 있다는 말은 positive 방향
+        examples:
+          - {review_id: R1F3PPA88YT8QQ, quote: "Too expensive."}
+          - {review_id: R1BW5S0JJO319S, quote: "Very expensive and found others at less than 1/2 the price"}
+        approx_count: 14
+    other_approx_count: 7
+    notes: 기타는 산 뒤 가격 인하 2, 교체 헤드나 충전기 추가 비용 2, 그 돈으로 면도기나 전기 제모, 전문 시술을 했어야 한다 3. "waste of time and money"의 시간 부분은 이 주제 밖. R2OEZ28614WRBE는 성능과 내구성을 함께 말해 disappointing_for_price와 expensive_for_lifespan 둘 다 될 수 있음
+  positive:
+    labels:
+      - id: worth_the_money
+        name_ko: 값어치가 있음
+        name_en: Worth the money
+        include: worth it, worth every penny, 좋은 투자다, vale la pena처럼 쓴 돈만큼 값어치가 있다는 판정(비싸지만 값어치가 있다 포함)
+        exclude: 가격이 싸다, 가성비가 좋다, 할인으로 샀다는 말은 good_price, 살롱이나 전문 시술과 비교하면 saves_vs_salon
+        examples:
+          - {review_id: R13MHEVNHMPLOI, quote: "Worth every penny!!"}
+          - {review_id: R2WQNV39LKPB5G, quote: "Yes, it’s on the expensive side, but for me it’s been completely worth it"}
+        approx_count: 45
+      - id: saves_vs_salon
+        name_ko: 살롱이나 전문 레이저 시술보다 쌈
+        name_en: Cheaper than salon treatments
+        include: 살롱, 클리닉, 전문 레이저 시술, estéticas에 드는 돈과 비교해 싸다, 돈을 아낀다(면도기와 함께 비교해도 여기)
+        exclude: 살롱 비교 없이 돈을 아낀다는 말은 saves_money_overall, 살롱에 안 가도 되는 편리함만 말하면 이 주제가 아님(ease_of_use)
+        examples:
+          - {review_id: R3V0MABRCY0HJC, quote: "the cost is a lot lower compare to the salon"}
+          - {review_id: R2KLY3J5B81QZS, quote: "Definitely more cost effective them salon treatments"}
+        approx_count: 28
+      - id: saves_money_overall
+        name_ko: 길게 보면 돈을 아낌
+        name_en: Saves money over time
+        include: 살롱 언급 없이 돈을 아낀다, 길게 보면 절약이다, 면도기나 면도 크림 같은 용품을 안 사도 된다
+        exclude: 살롱이나 전문 시술과 비교하면 saves_vs_salon, 시간을 아낀다는 부분은 이 주제가 아님(treatment_time)
+        examples:
+          - {review_id: R3GMJKYQ9OQT80, quote: "it saves both time and money on razors and shaving cream"}
+          - {review_id: R2WJT0O7RZ6EXV, quote: "save a lot of money in the long run"}
+        approx_count: 13
+      - id: good_price
+        name_ko: 가격이 착하고 가성비가 좋음
+        name_en: Good value for the price
+        include: 저렴하다, affordable, 가격에 비해 좋다(for the price), great value, bang for your buck, 할인이나 프라임데이에 잘 샀다
+        exclude: 가격 수준 언급 없이 값어치가 있다는 판정(worth it, 투자)은 worth_the_money, 살롱보다 싸다는 비교는 saves_vs_salon
+        examples:
+          - {review_id: R35JKDWHP2PZZ7, quote: "Great value for the price!"}
+          - {review_id: R2VNEBLNFNGTZ1, quote: "Got on prime day, and what a deal"}
+        approx_count: 24
+    other_approx_count: 1
+    notes: worth_the_money와 good_price의 경계는 표현으로 가름(worth, investment는 값어치, value, affordable, for the price, deal은 가성비). 기타 1개는 R2527CST84MMJT(비용이 문제가 아니면 기능이 좋다는 혼합 인용)

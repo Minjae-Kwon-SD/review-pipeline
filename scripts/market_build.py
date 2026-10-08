@@ -75,7 +75,7 @@ def build(run):
     out = {"made_at": now_iso(), "run": run.name, "marketplace": "US", "tables": {}, "fields": {}, "not_obtained": [], "notes": []}
     T = out["tables"]
 
-    # 1. 하위 카테고리(여성 향수 노드의 자식 + 위 노드)
+    # 1. 하위 카테고리(카테고리 노드의 자식 + 위 노드)
     subs, src = load(raw, "subcategories_search_all.json")
     by_id = {int(x["id"]): x for x in subs or []}
     cols = ["id", "subcategoryName", "subcategoryContextName", "parentId", "level", "totalMonthlyRevenue", "totalNumberUnitsSold",
@@ -192,19 +192,22 @@ def build(run):
     T["calls"] = calls
 
     out["not_obtained"] = [
-        "검색어별 CPC: 카테고리 검색어에는 없음. search_terms_ad_spy(브랜드 하나의 광고 검색어)에만 estimatedCpc가 있어, 이번에는 Calvin Klein 광고 검색어 20개만 받음(단위 미확인).",
+        "검색어별 CPC: 카테고리 검색어에는 없음. search_terms_ad_spy(브랜드 하나의 광고 검색어)에만 estimatedCpc가 있어, 이번에는 " + (", ".join(sorted({r["brand"] for r in T["ad_spy"]})) or "아무 브랜드도") + f" 광고 검색어 {len(T['ad_spy'])}개만 받음(단위 미확인).",
         "광고비 비중(검색 결과 중 스폰서 비율): 없음. 브랜드별 adSpendShare(경쟁 브랜드 표)와 검색어별 광고 승률만 있음(뜻과 단위 미확인).",
         "전체 시장 규모: 아마존 US 노드 월매출(totalMonthlyRevenue)만 있음. 아마존 밖 시장이나 연간 공식 수치는 없음(웹 조사 단계).",
         "아마존 직판(1P) 비중: azRevenuePct, sellerRevenuePct 칸은 있으나 뜻을 설명한 문서가 없음(단위 미확인).",
-        "상품 bullet 전체와 성분표: 칸이 없음. itemHighlights(한 줄 요약)만 6개 중 "
+        "상품 bullet 전체와 성분표: 칸이 없음. itemHighlights(한 줄 요약)만 " f"{len(prod)}개 중 "
         f"{sum(1 for r in prod if r.get('itemHighlights'))}개에 있고, 비어 있는 것은 "
         f"{', '.join(r['asin'] for r in prod if not r.get('itemHighlights')) or '없음'}.",
-        "subcategories_relevant_search_terms: 첫 시도들이 서버 오류(500), 이름만으로 부른 2번은 두 번 다 실패, 맥락 이름으로 다시 불러 받음.",
     ]
+    failed = [c for c in calls if not c.get("ok")]     # 받지 못한 호출(회차마다 다름)
+    if failed:
+        out["not_obtained"].append("실패한 호출: " + ", ".join(f"{c.get('tool')} {c.get('args', {}).get('keyword') or c.get('args', {}).get('subcategoryContextName') or ''}".strip() for c in failed[:10]))
     write_json(run / "market" / "market.json", out)
     (run / "market" / "market_summary.md").write_text(render(out), encoding="utf-8")
-    print(f"market.json, market_summary.md를 만들었습니다(하위 카테고리 {len(T['subcategories'])}행, 브랜드 EDP {len(T['brands_EDP'])}, EDT {len(T['brands_EDT'])}, "
-          f"검색어 EDP {len(T['terms_EDP'])}, EDT {len(T['terms_EDT'])}, 추이 {len(T['trends'])}, 우리 상품 {len(T['our_products'])}).")
+    per = ", ".join(f"{k} 브랜드 {len(T.get(f'brands_{k}', []))}, 검색어 {len(T.get(f'terms_{k}', []))}" for k in NODES)   # 노드 키는 카테고리 설정에서
+    print(f"market.json, market_summary.md를 만들었습니다(하위 카테고리 {len(T['subcategories'])}행, {per}, "
+          f"추이 {len(T['trends'])}, 우리 상품 {len(T['our_products'])}).")
     return 0
 
 
@@ -237,7 +240,7 @@ def render(o):
     called = sum(1 for c in T["calls"] if c.get("called"))
     L += ["", f"실제 호출 {called}번(한도 40번), 실패 {sum(1 for c in T['calls'] if c.get('called') and not c.get('ok'))}번.", ""]
 
-    L += ["## 2. 하위 카테고리(여성 향수 노드와 위 노드)", "", "월 매출, 판매량은 칸 이름(totalMonthlyRevenue, totalNumberUnitsSold) 그대로이고 통화와 기간은 문서에 없어 단위 미확인. "
+    L += ["## 2. 하위 카테고리(카테고리 노드와 위 노드)", "", "월 매출, 판매량은 칸 이름(totalMonthlyRevenue, totalNumberUnitsSold) 그대로이고 통화와 기간은 문서에 없어 단위 미확인. "
           "증감(momGrowth, momGrowth12), azRevenuePct, sellerRevenuePct도 단위 미확인.", "",
           "| 노드 id | 이름 | 월 매출 | 판매량 | 브랜드 수 | ASIN 수 | 평균 가격 | 평균 별점 | momGrowth | momGrowth12 | azRevenuePct | sellerRevenuePct |",
           "|---|---|---|---|---|---|---|---|---|---|---|---|"]
@@ -261,8 +264,8 @@ def render(o):
                      f"{n(r['yoYChange'])} | {n(r['yoYChangePct'], 4)} | {n(r['relevancy'])} |")
         L.append("")
     L += ["## 5. 검색어 추이(search_terms_trends, 12개월)", "", "growth 칸은 응답 값 그대로(estimateSearchesGrowth1Month 등, 단위 미확인). "
-          "향수 검색어 표시가 아니오인 것은 처음 고른 규칙(relevancy만)으로 잘못 고른 검색어라 해석에 쓰지 않습니다.", "",
-          "| 검색어 | 향수 검색어 | 추정 검색 수 | 1개월 | 3개월 | 6개월 | 12개월 | 이력 기간 | 주 수 | 첫 주 | 마지막 주 |", "|---|---|---|---|---|---|---|---|---|---|---|"]
+          "카테고리 검색어 표시가 아니오인 것은 처음 고른 규칙(relevancy만)으로 잘못 고른 검색어라 해석에 쓰지 않습니다.", "",
+          "| 검색어 | 카테고리 검색어 | 추정 검색 수 | 1개월 | 3개월 | 6개월 | 12개월 | 이력 기간 | 주 수 | 첫 주 | 마지막 주 |", "|---|---|---|---|---|---|---|---|---|---|---|"]
     for r in T["trends"]:
         if not r["found"]:
             L.append(f"| {r['keyword']} | {n(r['fragrance_term'])} | 응답에 그 검색어 행 없음 | | | | | | | | |")
@@ -291,7 +294,8 @@ def render(o):
     for r in T["advertised_brands"]:
         L.append(f"| {r.get('name')} | {n(r.get('sponsoredProducts'))} | {n(r.get('sponsoredBrandWinRate'), 3)} | {n(r.get('topGroupWinRate'), 3)} | {n(r.get('topSpotWinRate'), 3)} |")
     L += ["", "승률 칸은 응답 값 그대로(단위 미확인).", "", "### 브랜드 광고 검색어(search_terms_ad_spy)", "",
-          "search_terms_ad_spy는 입력이 브랜드 이름이라 검색어로는 부를 수 없어, 우리 6개 중 첫 브랜드(Calvin Klein)로 한 번 불렀습니다. estimatedCpc, totalAdSpend는 단위 미확인.", "",
+          "search_terms_ad_spy는 입력이 브랜드 이름이라 검색어로는 부를 수 없어, 우리 상품의 첫 브랜드("
+          + (", ".join(sorted({r["brand"] for r in T.get("ad_spy", [])})) or "없음") + ")로 한 번 불렀습니다. estimatedCpc, totalAdSpend는 단위 미확인.", "",
           "| 브랜드 | 검색어 | 추정 검색 수 | estimatedCpc | totalAdSpend | sponsoredProducts | topGroupWinRate | topSpotWinRate |", "|---|---|---|---|---|---|---|---|"]
     for r in T["ad_spy"]:
         L.append(f"| {r['brand']} | {r['searchTermValue']} | {n(r['estimateSearches'])} | {n(r['estimatedCpc'], 2)} | {n(r['totalAdSpend'], 2)} | "

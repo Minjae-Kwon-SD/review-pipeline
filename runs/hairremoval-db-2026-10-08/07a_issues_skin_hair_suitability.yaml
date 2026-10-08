@@ -1,0 +1,55 @@
+topic: skin_hair_suitability
+directions:
+  negative:
+    labels:
+      - id: dark_skin_tone
+        name_ko: 어두운 피부색에는 못 씀
+        name_en: Not for darker skin tones
+        include: 사람의 피부색 자체(태닝, 갈색, 올리브, 어두운 피부, 멜라닌)가 어둡거나 중간 톤이라 기기가 안 되거나, 센서가 피부색을 너무 어둡다고 읽어 못 쓴다는 말. 밝은 피부에만 맞는다는 말 포함
+        exclude: 피부색은 대상인데 비키니, 겨드랑이처럼 몸의 일부 어두운 부위에서만 막히거나 안 듣는다는 말은 dark_body_areas
+        examples:
+          - {review_id: R29W8ON8A13KN7, quote: "does not work on tanned or darker skin"}
+          - {review_id: R1T9EUE1DCTJRE, quote: "This item is not for dark skinned women."}
+        approx_count: 20
+      - id: dark_body_areas
+        name_ko: 비키니나 겨드랑이처럼 어두운 부위에서 안 됨
+        name_en: Blocked or weak on darker body areas
+        include: 비키니, 겨드랑이, 은밀한 부위, 허벅지 안쪽처럼 몸에서 색이 더 짙은 부위에서 센서가 발광을 막거나, 효과가 없거나 더 오래 걸린다는 말
+        exclude: 사람의 피부색 전체가 어두워 못 쓴다는 말은 dark_skin_tone. 피부색 언급 없이 부위마다 효과가 다르다는 말은 이 주제가 아님(hair_reduction)
+        examples:
+          - {review_id: RSE01I2TC1E64, quote: "the sensor would never light up in my bikini area"}
+          - {review_id: R3TZKM2YDQ6CJZ, quote: "it doesn't work well on areas where my skin is too dark"}
+        approx_count: 11
+      - id: light_fine_hair
+        name_ko: 금발이나 옅은 털, 가는 솜털에는 안 들음
+        name_en: Weak on blonde, light or fine hair
+        include: 금발, 옅은 갈색, 붉은 갈색처럼 옅은 털이나 가는 솜털에는 효과가 없다, 진한 털이 아니면 사지 마라, 털이 가늘면 살 필요가 없다는 말
+        exclude: 흰 털, 회색 털은 gray_white_hair. 굵은 털에 안 듣는다는 말은 thick_coarse_hair
+        examples:
+          - {review_id: R1BICTURUAEEBJ, quote: "Does not work for blonde or light brown hair."}
+          - {review_id: R2W2I33M3721W2, quote: "does not help with light colored hair"}
+        approx_count: 11
+      - id: gray_white_hair
+        name_ko: 흰 털이나 회색 털에는 안 들음
+        name_en: Does not work on gray or white hair
+        include: 흰 털, 회색 털, 나이 들며 생긴 흰 수염 같은 털에는 효과가 없다는 말
+        exclude: 금발이나 옅은 색 털만 말하면 light_fine_hair(금발과 회색을 함께 말하면 두 라벨 모두)
+        examples:
+          - {review_id: REG0KPBJPIX8G, quote: "Doesn’t work on white hair."}
+          - {review_id: R3NZXB8W5SMK1Z, quote: "Does not work on gray whisker hairs of an aging woman."}
+        approx_count: 6
+      - id: thick_coarse_hair
+        name_ko: 굵고 억센 털에는 덜 들음
+        name_en: Weak on thick or coarse hair
+        include: 굵은 털, 억센 털, 질긴 털에는 효과가 없거나 느리다, 굵은 털이면 다른 제품을 찾으라는 말
+        exclude: 가는 털이라 살 필요가 없다는 말은 light_fine_hair. 털 굵기 언급 없이 효과가 없다는 말은 이 주제가 아님(hair_reduction)
+        examples:
+          - {review_id: R9TSKT8GTJAHE, quote: "Doesn't work good on thicker hairs"}
+          - {review_id: R18W4UM9JN0TUP, quote: "Do not buy for coarser hair."}
+        approx_count: 13
+    other_approx_count: 6
+    notes: 센서가 발광을 막는다는 말은 따로 라벨을 두지 않고 피부색 전체(dark_skin_tone)인지 몸의 어두운 부위(dark_body_areas)인지로 나눴습니다. 기타에는 맞는 유형인데도 안 됐다는 배경 언급(R2DVO9V4IS6M9K, R1FZ8Q4JKOG31O)처럼 스키마상 hair_reduction에 가까운 인용과, 무엇이 문제인지 불분명한 인용(R3VS4576GY70LY, R18UY4HW9LQGON, R1H1B6Y8QUCDUM, R2T2JDN7PVVK4G)이 들어 있습니다.
+  positive:
+    labels: []
+    other_approx_count: 14
+    notes: "only_other(인용 14개, 표본 없음)"

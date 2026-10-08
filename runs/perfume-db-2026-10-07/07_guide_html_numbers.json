@@ -1,72 +1,72 @@
 {
-  "made_at": "2026-10-08T12:23:08+09:00",
+  "made_at": "2026-10-09T02:38:09+09:00",
   "lang": "ko",
   "missing_strings": [],
   "numbers": [
     {
       "k": "g0",
-      "key": "head.market_year",
-      "text": "864,689,610(월 매출을 달러로 읽을 때 연 환산)"
+      "key": "f.longevity.longevity_hours.median",
+      "text": "1시간"
     },
     {
       "k": "g1",
+      "key": "f.longevity.longevity_hours.n",
+      "text": "81개"
+    },
+    {
+      "k": "g2",
       "key": "head.topic_neg",
       "text": "10.0%"
     },
     {
-      "k": "g2",
+      "k": "g3",
       "key": "head.topic_weakest",
       "text": "6개 중 5개(리뷰를 다시 뽑아 보면 3~5개)"
     },
     {
-      "k": "g3",
+      "k": "g4",
       "key": "head.dir_ratio",
       "text": "약함 307개 대 너무 셈 50개(6.14배)"
     },
     {
-      "k": "g4",
+      "k": "g5",
       "key": "head.fastest_term",
       "text": "\"hair perfume spray\" 최근 4주 530,006, 1년 전 같은 4주 11,322, 46.81배"
     },
     {
-      "k": "g5",
+      "k": "g6",
       "key": "head.market_month",
       "text": "72,057,467(월 매출 칸, 단위 미확인)"
     },
     {
-      "k": "g6",
+      "k": "g7",
       "key": "m.top10_share_EDP",
       "text": "31.1%"
     },
     {
-      "k": "g7",
+      "k": "g8",
       "key": "m.top10_share_EDT",
       "text": "44.7%"
     },
     {
-      "k": "g8",
+      "k": "g9",
       "key": "head.topic_neg",
       "text": "10.0%"
     },
     {
-      "k": "g9",
+      "k": "g10",
       "key": "head.market_month",
       "text": "72,057,467(월 매출 칸, 단위 미확인)"
     },
     {
-      "k": "g10",
+      "k": "g11",
       "key": "head.market_year",
       "text": "864,689,610(월 매출을 달러로 읽을 때 연 환산)"
     },
     {
-      "k": "g11",
+      "k": "g12",
       "key": "m.top1_EDP",
       "text": "Lattafa 8.0%"
-    },
-    {
-      "k": "g12",
-      "key": "m.top10_share_EDP",
-      "text": "31.1%"
     },
     {
       "k": "g13",
@@ -75,1368 +75,1368 @@
     },
     {
       "k": "g14",
+      "key": "m.top10_share_EDP",
+      "text": "31.1%"
+    },
+    {
+      "k": "g15",
       "key": "m.top10_share_EDT",
       "text": "44.7%"
     },
     {
-      "k": "g15",
+      "k": "g16",
       "key": "head.topic_weakest",
       "text": "6개 중 5개(리뷰를 다시 뽑아 보면 3~5개)"
     },
     {
-      "k": "g16",
+      "k": "g17",
       "key": "m.terms_female_n",
       "text": "15개"
     },
     {
-      "k": "g17",
+      "k": "g18",
       "key": "m.terms_female_volume",
       "text": "1,022,775"
     },
     {
-      "k": "g18",
+      "k": "g19",
       "key": "m.terms_male_n",
       "text": "17개"
     },
     {
-      "k": "g19",
+      "k": "g20",
       "key": "m.terms_male_volume",
       "text": "1,265,622"
     },
     {
-      "k": "g20",
+      "k": "g21",
       "key": "m.terms_common_n",
       "text": "49개"
     },
     {
-      "k": "g21",
+      "k": "g22",
       "key": "m.terms_common_volume",
       "text": "3,213,197"
     },
     {
-      "k": "g22",
+      "k": "g23",
       "key": "std.scent_accuracy.term.vanilla perfume",
       "text": "94,475"
     },
     {
-      "k": "g23",
+      "k": "g24",
       "key": "std.bottle_sprayer.term.mini perfume",
       "text": "37,436"
     },
     {
-      "k": "g24",
+      "k": "g25",
       "key": "head.fastest_term",
       "text": "\"hair perfume spray\" 최근 4주 530,006, 1년 전 같은 4주 11,322, 46.81배"
     },
     {
-      "k": "g25",
+      "k": "g26",
       "key": "head.growth_weeks",
       "text": "2026-09-06 ~ 2026-09-27(1년 전 2025-09-07 ~ 2025-09-28)"
     },
     {
-      "k": "g26",
+      "k": "g27",
       "key": "m.growth_candidates",
       "text": "116개"
     },
     {
-      "k": "g27",
+      "k": "g28",
       "key": "m.growth_ranked",
       "text": "102개"
     },
     {
-      "k": "g28",
+      "k": "g29",
       "key": "m.price_band1_range",
       "text": "15.76~56.22"
     },
     {
-      "k": "g29",
+      "k": "g30",
       "key": "m.price_band1_share",
       "text": "39.2%"
     },
     {
-      "k": "g30",
+      "k": "g31",
       "key": "m.price_band1_rating",
       "text": "4.40★"
     },
     {
-      "k": "g31",
+      "k": "g32",
       "key": "m.price_band2_range",
       "text": "57.57~86.98"
     },
     {
-      "k": "g32",
+      "k": "g33",
       "key": "m.price_band2_share",
       "text": "31.0%"
     },
     {
-      "k": "g33",
+      "k": "g34",
       "key": "m.price_band2_rating",
       "text": "4.49★"
     },
     {
-      "k": "g34",
+      "k": "g35",
       "key": "m.price_band3_range",
       "text": "88.10~164.08"
     },
     {
-      "k": "g35",
+      "k": "g36",
       "key": "m.price_band3_share",
       "text": "29.8%"
     },
     {
-      "k": "g36",
+      "k": "g37",
       "key": "m.price_band3_rating",
       "text": "4.46★"
     },
     {
-      "k": "g37",
+      "k": "g38",
       "key": "f.longevity.longevity_hours.median",
       "text": "1시간"
     },
     {
-      "k": "g38",
+      "k": "g39",
       "key": "std.sampling_returns.neg",
       "text": "74개"
     },
     {
-      "k": "g39",
+      "k": "g40",
       "key": "std.sampling_returns.label.not_returnable",
       "text": "58개"
     },
     {
-      "k": "g40",
+      "k": "g41",
       "key": "s.B08FBQWRYC.star",
       "text": "4.76★"
     },
     {
-      "k": "g41",
+      "k": "g42",
       "key": "s.B08FBQWRYC.duration_median",
       "text": "6시간"
     },
     {
-      "k": "g42",
+      "k": "g43",
       "key": "s.B09X5BQ969.star",
       "text": "3.97★"
     },
     {
-      "k": "g43",
+      "k": "g44",
       "key": "spec.match_summary",
       "text": "일치 확인 6개"
     },
     {
-      "k": "g44",
+      "k": "g45",
       "key": "s.B08FBQWRYC.price",
       "text": "153.10달러"
     },
     {
-      "k": "g45",
+      "k": "g46",
       "key": "s.B08FBQWRYC.price_per_oz",
       "text": "36.45달러"
     },
     {
-      "k": "g46",
+      "k": "g47",
       "key": "s.B08FBQWRYC.star",
       "text": "4.76★"
     },
     {
-      "k": "g47",
+      "k": "g48",
       "key": "s.B08FBQWRYC.topic_neg",
       "text": "7.3%"
     },
     {
-      "k": "g48",
+      "k": "g49",
       "key": "s.B00021AJ5I.price",
       "text": "115.54달러"
     },
     {
-      "k": "g49",
+      "k": "g50",
       "key": "s.B00021AJ5I.star",
       "text": "4.52★"
     },
     {
-      "k": "g50",
+      "k": "g51",
       "key": "s.B00021AJ5I.dir_index",
       "text": "-0.95"
     },
     {
-      "k": "g51",
+      "k": "g52",
       "key": "s.B00021AJ5I.duration_median",
       "text": "1시간"
     },
     {
-      "k": "g52",
+      "k": "g53",
       "key": "s.B0GFGL26JD.price",
       "text": "82.00달러"
     },
     {
-      "k": "g53",
+      "k": "g54",
       "key": "s.B0GFGL26JD.price_per_oz",
       "text": "48.24달러"
     },
     {
-      "k": "g54",
+      "k": "g55",
       "key": "s.B0GFGL26JD.topic_neg",
       "text": "12.5%"
     },
     {
-      "k": "g55",
+      "k": "g56",
       "key": "s.B0GFGL26JD.dir_index",
       "text": "-0.94"
     },
     {
-      "k": "g56",
+      "k": "g57",
       "key": "s.B0BZDZJDTG.price",
       "text": "26.12달러"
     },
     {
-      "k": "g57",
+      "k": "g58",
       "key": "s.B0BZDZJDTG.price_per_oz",
       "text": "15.36달러"
     },
     {
-      "k": "g58",
+      "k": "g59",
       "key": "s.B0BZDZJDTG.star",
       "text": "4.41★"
     },
     {
-      "k": "g59",
+      "k": "g60",
       "key": "s.B0BZDZJDTG.topic_neg",
       "text": "10.8%"
     },
     {
-      "k": "g60",
+      "k": "g61",
       "key": "s.B0BZDZJDTG.dir_index",
       "text": "-0.75"
     },
     {
-      "k": "g61",
+      "k": "g62",
       "key": "s.B0009OAI8Q.price",
       "text": "25.73달러"
     },
     {
-      "k": "g62",
+      "k": "g63",
       "key": "s.B0009OAI8Q.price_per_oz",
       "text": "7.80달러"
     },
     {
-      "k": "g63",
+      "k": "g64",
       "key": "s.B0009OAI8Q.star",
       "text": "4.66★"
     },
     {
-      "k": "g64",
+      "k": "g65",
       "key": "s.B0009OAI8Q.dir_index",
       "text": "-0.13"
     },
     {
-      "k": "g65",
+      "k": "g66",
       "key": "s.B0009OAI8Q.duration_median",
-      "text": "0.292시간"
+      "text": "약 18분"
     },
     {
-      "k": "g66",
+      "k": "g67",
       "key": "s.B09X5BQ969.price",
       "text": "20.99달러"
     },
     {
-      "k": "g67",
+      "k": "g68",
       "key": "s.B09X5BQ969.price_per_oz",
       "text": "6.21달러"
     },
     {
-      "k": "g68",
+      "k": "g69",
       "key": "s.B09X5BQ969.star",
       "text": "3.97★"
     },
     {
-      "k": "g69",
+      "k": "g70",
       "key": "s.B09X5BQ969.topic_neg",
       "text": "13.6%"
     },
     {
-      "k": "g70",
+      "k": "g71",
       "key": "s.B09X5BQ969.dir_index",
       "text": "-0.16"
     },
     {
-      "k": "g71",
+      "k": "g72",
       "key": "s.B0GFGL26JD.duration_median",
       "text": "2시간"
     },
     {
-      "k": "g72",
+      "k": "g73",
       "key": "m.top10_share_EDT",
       "text": "44.7%"
     },
     {
-      "k": "g73",
+      "k": "g74",
       "key": "m.top1_EDT",
       "text": "Versace 9.0%"
     },
     {
-      "k": "g74",
+      "k": "g75",
       "key": "m.top10_share_EDP",
       "text": "31.1%"
     },
     {
-      "k": "g75",
+      "k": "g76",
       "key": "m.top1_EDP",
       "text": "Lattafa 8.0%"
     },
     {
-      "k": "g76",
+      "k": "g77",
       "key": "p.map.longevity_projection",
       "text": "10.0%"
     },
     {
-      "k": "g77",
+      "k": "g78",
       "key": "f.longevity.longevity_hours.median",
       "text": "1시간"
     },
     {
-      "k": "g78",
+      "k": "g79",
       "key": "p.gap1_neg",
       "text": "1.28★"
     },
     {
-      "k": "g79",
+      "k": "g80",
       "key": "f.trust_arrival.fake_suspicion_basis.weak_or_short",
       "text": "41개"
     },
     {
-      "k": "g80",
+      "k": "g81",
       "key": "p.map.longevity_projection",
       "text": "10.0%"
     },
     {
-      "k": "g81",
+      "k": "g82",
       "key": "p.map.scent",
       "text": "6.5%"
     },
     {
-      "k": "g82",
+      "k": "g83",
       "key": "p.map.trust",
       "text": "4.1%"
     },
     {
-      "k": "g83",
+      "k": "g84",
       "key": "p.map.price_value",
       "text": "2.1%"
     },
     {
-      "k": "g84",
+      "k": "g85",
       "key": "p.map.shipping",
       "text": "2.1%"
     },
     {
-      "k": "g85",
+      "k": "g86",
       "key": "p.map.customer_service",
       "text": "1.8%"
     },
     {
-      "k": "g86",
+      "k": "g87",
       "key": "p.map.quality",
       "text": "1.7%"
     },
     {
-      "k": "g87",
+      "k": "g88",
       "key": "p.map.brand_experience",
       "text": "1.5%"
     },
     {
-      "k": "g88",
+      "k": "g89",
       "key": "p.map.bottle_design",
       "text": "1.4%"
     },
     {
-      "k": "g89",
+      "k": "g90",
       "key": "p.map.packaging",
       "text": "1.3%"
     },
     {
-      "k": "g90",
+      "k": "g91",
       "key": "p.map.safety",
       "text": "0.5%"
     },
     {
-      "k": "g91",
+      "k": "g92",
       "key": "p.gap1",
       "text": "-3.27"
     },
     {
-      "k": "g92",
+      "k": "g93",
       "key": "p.gap2",
       "text": "-3.02"
     },
     {
-      "k": "g93",
+      "k": "g94",
       "key": "p.gap1_neg",
       "text": "1.28★"
     },
     {
-      "k": "g94",
+      "k": "g95",
       "key": "p.gap1_other",
       "text": "4.54★"
     },
     {
-      "k": "g95",
+      "k": "g96",
       "key": "p.gap1",
       "text": "-3.27"
     },
     {
-      "k": "g96",
+      "k": "g97",
       "key": "p.gap2_neg",
       "text": "1.51★"
     },
     {
-      "k": "g97",
+      "k": "g98",
       "key": "p.gap2_other",
       "text": "4.53★"
     },
     {
-      "k": "g98",
+      "k": "g99",
       "key": "p.gap2",
       "text": "-3.02"
     },
     {
-      "k": "g99",
+      "k": "g100",
       "key": "p.gap3_neg",
       "text": "2.15★"
     },
     {
-      "k": "g100",
+      "k": "g101",
       "key": "p.gap3_other",
       "text": "4.65★"
     },
     {
-      "k": "g101",
+      "k": "g102",
       "key": "p.gap3",
       "text": "-2.49"
     },
     {
-      "k": "g102",
+      "k": "g103",
       "key": "f.longevity.longevity_hours.n",
       "text": "81개"
     },
     {
-      "k": "g103",
+      "k": "g104",
       "key": "f.longevity.longevity_hours.median",
       "text": "1시간"
     },
     {
-      "k": "g104",
+      "k": "g105",
       "key": "f.longevity.longevity_hours.bin0",
       "text": "31개"
     },
     {
-      "k": "g105",
+      "k": "g106",
       "key": "f.longevity.longevity_hours.bin1",
       "text": "32개"
     },
     {
-      "k": "g106",
+      "k": "g107",
       "key": "f.longevity.longevity_hours.bin2",
       "text": "9개"
     },
     {
-      "k": "g107",
+      "k": "g108",
       "key": "f.longevity.longevity_hours.bin3",
       "text": "7개"
     },
     {
-      "k": "g108",
+      "k": "g109",
       "key": "f.longevity.longevity_hours.bin4",
       "text": "2개"
     },
     {
-      "k": "g109",
+      "k": "g110",
       "key": "std.longevity_strength.label.fades_fast",
       "text": "231개"
     },
     {
-      "k": "g110",
+      "k": "g111",
       "key": "std.longevity_strength.label.weak_scent",
       "text": "67개"
     },
     {
-      "k": "g111",
+      "k": "g112",
       "key": "std.longevity_strength.label.shorter_than_hoped",
       "text": "28개"
     },
     {
-      "k": "g112",
+      "k": "g113",
       "key": "std.longevity_strength.label.too_strong",
       "text": "50개"
     },
     {
-      "k": "g113",
+      "k": "g114",
       "key": "head.dir_low",
       "text": "307개"
     },
     {
-      "k": "g114",
+      "k": "g115",
       "key": "head.dir_high",
       "text": "50개"
     },
     {
-      "k": "g115",
+      "k": "g116",
       "key": "f.longevity.application_amount.light.fades_fast",
       "text": "21개 중 0개(0.0%)"
     },
     {
-      "k": "g116",
+      "k": "g117",
       "key": "f.longevity.application_amount.heavy.fades_fast",
       "text": "13개 중 10개(76.9%)"
     },
     {
-      "k": "g117",
+      "k": "g118",
       "key": "f.longevity.application_amount.reapplied.fades_fast",
       "text": "12개 중 8개(66.7%)"
     },
     {
-      "k": "g118",
+      "k": "g119",
       "key": "f.longevity.application_site.skin.fades_fast",
       "text": "18개 중 13개(72.2%)"
     },
     {
-      "k": "g119",
+      "k": "g120",
       "key": "f.longevity.application_site.clothing.fades_fast",
       "text": "19개 중 10개(52.6%)"
     },
     {
-      "k": "g120",
+      "k": "g121",
       "key": "f.longevity.application_site.layered_over_body_product.fades_fast",
       "text": "6개 중 4개(66.7%)"
     },
     {
-      "k": "g121",
+      "k": "g122",
       "key": "f.longevity.application_site.wrist_pulse_points.fades_fast",
       "text": "7개 중 2개(28.6%)"
     },
     {
-      "k": "g122",
+      "k": "g123",
       "key": "f.longevity.application_site.air_mist.fades_fast",
       "text": "4개 중 0개(0.0%)"
     },
     {
-      "k": "g123",
+      "k": "g124",
       "key": "f.longevity.fake_suspicion_basis.total",
       "text": "58개"
     },
     {
-      "k": "g124",
+      "k": "g125",
       "key": "f.longevity.fake_suspicion_basis.weak_or_short",
       "text": "41개"
     },
     {
-      "k": "g125",
+      "k": "g126",
       "key": "f.scent_accuracy.scent_note.total",
       "text": "210개"
     },
     {
-      "k": "g126",
+      "k": "g127",
       "key": "f.scent_accuracy.scent_note.vanilla",
       "text": "75개"
     },
     {
-      "k": "g127",
+      "k": "g128",
       "key": "f.scent_accuracy.scent_note.floral",
       "text": "50개"
     },
     {
-      "k": "g128",
+      "k": "g129",
       "key": "f.scent_accuracy.scent_note.fresh_clean",
       "text": "42개"
     },
     {
-      "k": "g129",
+      "k": "g130",
       "key": "f.scent_accuracy.scent_note.sweet_gourmand",
       "text": "36개"
     },
     {
-      "k": "g130",
+      "k": "g131",
       "key": "f.scent_accuracy.scent_note.amber_warm",
       "text": "32개"
     },
     {
-      "k": "g131",
+      "k": "g132",
       "key": "f.scent_accuracy.note_direction.liked",
       "text": "72개"
     },
     {
-      "k": "g132",
+      "k": "g133",
       "key": "f.scent_accuracy.note_direction.missing_or_weak",
       "text": "62개"
     },
     {
-      "k": "g133",
+      "k": "g134",
       "key": "f.scent_accuracy.note_direction.too_much",
       "text": "46개"
     },
     {
-      "k": "g134",
+      "k": "g135",
       "key": "f.scent_accuracy.note_pairs_unclear",
       "text": "8개"
     },
     {
-      "k": "g135",
+      "k": "g136",
       "key": "f.scent_accuracy.comparison_reference.total",
       "text": "175개"
     },
     {
-      "k": "g136",
+      "k": "g137",
       "key": "f.scent_accuracy.comparison_reference.same_product_before",
       "text": "59개"
     },
     {
-      "k": "g137",
+      "k": "g138",
       "key": "f.scent_accuracy.comparison_reference.other_product",
       "text": "40개"
     },
     {
-      "k": "g138",
+      "k": "g139",
       "key": "f.scent_accuracy.comparison_reference.original_unspecified",
       "text": "31개"
     },
     {
-      "k": "g139",
+      "k": "g140",
       "key": "f.scent_accuracy.comparison_reference.dupe_target",
       "text": "26개"
     },
     {
-      "k": "g140",
+      "k": "g141",
       "key": "f.scent_accuracy.comparison_reference.store_purchase",
       "text": "25개"
     },
     {
-      "k": "g141",
+      "k": "g142",
       "key": "f.scent_accuracy.comparison_named.n",
       "text": "67개"
     },
     {
-      "k": "g142",
+      "k": "g143",
       "key": "std.scent_accuracy.label.differs_from_original",
       "text": "52개"
     },
     {
-      "k": "g143",
+      "k": "g144",
       "key": "std.scent_accuracy.label.differs_from_genuine",
       "text": "35개"
     },
     {
-      "k": "g144",
+      "k": "g145",
       "key": "std.scent_accuracy.label.missing_described_notes",
       "text": "34개"
     },
     {
-      "k": "g145",
+      "k": "g146",
       "key": "std.scent_accuracy.label.cheap_artificial",
       "text": "19개"
     },
     {
-      "k": "g146",
+      "k": "g147",
       "key": "std.scent_accuracy.label.formula_changed",
       "text": "18개"
     },
     {
-      "k": "g147",
+      "k": "g148",
       "key": "std.scent_accuracy.label.alcohol_smell",
       "text": "16개"
     },
     {
-      "k": "g148",
+      "k": "g149",
       "key": "f.bottle_sprayer.part_failure.total",
       "text": "84개"
     },
     {
-      "k": "g149",
+      "k": "g150",
       "key": "f.bottle_sprayer.part_failure.bottle_leak",
       "text": "29개"
     },
     {
-      "k": "g150",
+      "k": "g151",
       "key": "f.bottle_sprayer.part_failure.sprayer_no_spray",
       "text": "19개"
     },
     {
-      "k": "g151",
+      "k": "g152",
       "key": "f.bottle_sprayer.part_failure.outer_case_damaged",
       "text": "18개"
     },
     {
-      "k": "g152",
+      "k": "g153",
       "key": "f.bottle_sprayer.part_failure.sprayer_broken",
       "text": "10개"
     },
     {
-      "k": "g153",
+      "k": "g154",
       "key": "f.bottle_sprayer.part_failure.sprayer_stream",
       "text": "6개"
     },
     {
-      "k": "g154",
+      "k": "g155",
       "key": "f.bottle_sprayer.part_failure.sprayer_stuck",
       "text": "5개"
     },
     {
-      "k": "g155",
+      "k": "g156",
       "key": "f.bottle_sprayer.part_failure.cap_missing",
       "text": "5개"
     },
     {
-      "k": "g156",
+      "k": "g157",
       "key": "f.bottle_sprayer.part_failure.bottle_cracked",
       "text": "5개"
     },
     {
-      "k": "g157",
+      "k": "g158",
       "key": "f.bottle_sprayer.part_failure.decoration_broken",
       "text": "4개"
     },
     {
-      "k": "g158",
+      "k": "g159",
       "key": "std.bottle_sprayer.label.sprayer_defective",
       "text": "13개"
     },
     {
-      "k": "g159",
+      "k": "g160",
       "key": "std.bottle_sprayer.label.sprayer_stopped_working",
       "text": "12개"
     },
     {
-      "k": "g160",
+      "k": "g161",
       "key": "std.bottle_sprayer.label.missing_parts",
       "text": "9개"
     },
     {
-      "k": "g161",
+      "k": "g162",
       "key": "std.bottle_sprayer.pos",
       "text": "52개"
     },
     {
-      "k": "g162",
+      "k": "g163",
       "key": "std.bottle_sprayer.neg",
       "text": "37개"
     },
     {
-      "k": "g163",
+      "k": "g164",
       "key": "std.authenticity.neg",
       "text": "94개"
     },
     {
-      "k": "g164",
+      "k": "g165",
       "key": "std.authenticity.label.fake_asserted",
       "text": "43개"
     },
     {
-      "k": "g165",
+      "k": "g166",
       "key": "std.authenticity.label.authenticity_doubt",
       "text": "36개"
     },
     {
-      "k": "g166",
+      "k": "g167",
       "key": "std.authenticity.label.diluted_or_tampered",
       "text": "16개"
     },
     {
-      "k": "g167",
+      "k": "g168",
       "key": "f.trust_arrival.fake_suspicion_basis.total",
       "text": "58개"
     },
     {
-      "k": "g168",
+      "k": "g169",
       "key": "f.trust_arrival.fake_suspicion_basis.weak_or_short",
       "text": "41개"
     },
     {
-      "k": "g169",
+      "k": "g170",
       "key": "f.trust_arrival.fake_suspicion_basis.smell_differs",
       "text": "17개"
     },
     {
-      "k": "g170",
+      "k": "g171",
       "key": "f.trust_arrival.fake_suspicion_basis.packaging_label",
       "text": "6개"
     },
     {
-      "k": "g171",
+      "k": "g172",
       "key": "f.trust_arrival.fake_suspicion_basis.opened_or_moved",
       "text": "2개"
     },
     {
-      "k": "g172",
+      "k": "g173",
       "key": "f.trust_arrival.fake_suspicion_basis.liquid_color",
       "text": "1개"
     },
     {
-      "k": "g173",
+      "k": "g174",
       "key": "f.trust_arrival.fake_suspicion_basis.cheap_price",
       "text": "1개"
     },
     {
-      "k": "g174",
+      "k": "g175",
       "key": "f.trust_arrival.label.arrived_broken",
       "text": "24개"
     },
     {
-      "k": "g175",
+      "k": "g176",
       "key": "f.trust_arrival.label.leaked_in_transit",
       "text": "21개"
     },
     {
-      "k": "g176",
+      "k": "g177",
       "key": "f.trust_arrival.label.arrived_underfilled",
       "text": "6개"
     },
     {
-      "k": "g177",
+      "k": "g178",
       "key": "f.trust_arrival.label.wrong_or_opened_item",
       "text": "6개"
     },
     {
-      "k": "g178",
+      "k": "g179",
       "key": "p.safety_text",
       "text": "안전 부정 리뷰 18개: 두통 8개(가중 0.2%), 메스꺼움 5개(가중 0.1%), 호흡 2개(가중 0.1%), 어지럼 1개(가중 0.0%), 알레르기 언급 2개(가중 0.1%)"
     },
     {
-      "k": "g179",
+      "k": "g180",
       "key": "head.topic_weakest",
       "text": "6개 중 5개(리뷰를 다시 뽑아 보면 3~5개)"
     },
     {
-      "k": "g180",
+      "k": "g181",
       "key": "p.gap1",
       "text": "-3.27"
     },
     {
-      "k": "g181",
+      "k": "g182",
       "key": "head.topic_weakest",
       "text": "6개 중 5개(리뷰를 다시 뽑아 보면 3~5개)"
     },
     {
-      "k": "g182",
+      "k": "g183",
       "key": "s.B09X5BQ969.price",
       "text": "20.99달러"
     },
     {
-      "k": "g183",
+      "k": "g184",
       "key": "s.B00021AJ5I.price",
       "text": "115.54달러"
     },
     {
-      "k": "g184",
+      "k": "g185",
       "key": "head.dir_ratio",
       "text": "약함 307개 대 너무 셈 50개(6.14배)"
     },
     {
-      "k": "g185",
+      "k": "g186",
       "key": "f.trust_arrival.fake_suspicion_basis.total",
       "text": "58개"
     },
     {
-      "k": "g186",
+      "k": "g187",
       "key": "f.trust_arrival.fake_suspicion_basis.weak_or_short",
       "text": "41개"
     },
     {
-      "k": "g187",
+      "k": "g188",
       "key": "std.sampling_returns.label.not_returnable",
       "text": "58개"
     },
     {
-      "k": "g188",
+      "k": "g189",
       "key": "f.longevity.longevity_hours.median",
       "text": "1시간"
     },
     {
-      "k": "g189",
+      "k": "g190",
       "key": "f.longevity.longevity_hours.bin0",
       "text": "31개"
     },
     {
-      "k": "g190",
+      "k": "g191",
       "key": "f.longevity.longevity_hours.bin1",
       "text": "32개"
     },
     {
-      "k": "g191",
+      "k": "g192",
       "key": "std.longevity_strength.neg",
       "text": "357개"
     },
     {
-      "k": "g192",
+      "k": "g193",
       "key": "std.longevity_strength.neg_pct",
       "text": "10.8%"
     },
     {
-      "k": "g193",
+      "k": "g194",
       "key": "std.longevity_strength.label.too_strong",
       "text": "50개"
     },
     {
-      "k": "g194",
+      "k": "g195",
       "key": "std.longevity_strength.label.not_lasting_for_price",
       "text": "4개"
     },
     {
-      "k": "g195",
+      "k": "g196",
       "key": "std.longevity_strength.best",
       "text": "Jean Paul Gaultier 8.7%"
     },
     {
-      "k": "g196",
+      "k": "g197",
       "key": "std.spec.longevity_strength.B08FBQWRYC.duration",
       "text": "값 7개, 중앙값 6시간"
     },
     {
-      "k": "g197",
+      "k": "g198",
       "key": "std.longevity_strength.best_sub",
       "text": "Men's Eau de Parfum"
     },
     {
-      "k": "g198",
+      "k": "g199",
       "key": "std.longevity_strength.best_women",
       "text": "Elizabeth Taylor 9.2%"
     },
     {
-      "k": "g199",
+      "k": "g200",
       "key": "std.spec.longevity_strength.B0009OAI8Q.duration",
-      "text": "값 6개, 중앙값 0.292시간"
+      "text": "값 6개, 중앙값 약 18분"
     },
     {
-      "k": "g200",
+      "k": "g201",
       "key": "std.longevity_strength.pos",
       "text": "140개"
     },
     {
-      "k": "g201",
+      "k": "g202",
       "key": "spec.B00021AJ5I.concentration",
       "text": "Eau de Parfum"
     },
     {
-      "k": "g202",
+      "k": "g203",
       "key": "spec.B0BZDZJDTG.concentration",
       "text": "Eau de Parfum, 15%"
     },
     {
-      "k": "g203",
+      "k": "g204",
       "key": "spec.B0009OAI8Q.concentration",
       "text": "Eau de Toilette"
     },
     {
-      "k": "g204",
+      "k": "g205",
       "key": "spec.B09X5BQ969.concentration",
       "text": "Eau De Parfum"
     },
     {
-      "k": "g205",
+      "k": "g206",
       "key": "spec.B08FBQWRYC.concentration",
       "text": "intense eau de parfum"
     },
     {
-      "k": "g206",
+      "k": "g207",
       "key": "spec.B0GFGL26JD.concentration",
       "text": "Eau de parfum"
     },
     {
-      "k": "g207",
+      "k": "g208",
       "key": "std.scent_accuracy.neg",
       "text": "141개"
     },
     {
-      "k": "g208",
+      "k": "g209",
       "key": "std.scent_accuracy.neg_pct",
       "text": "3.3%"
     },
     {
-      "k": "g209",
+      "k": "g210",
       "key": "std.scent_accuracy.label.differs_from_original",
       "text": "52개"
     },
     {
-      "k": "g210",
+      "k": "g211",
       "key": "std.scent_accuracy.label.missing_described_notes",
       "text": "34개"
     },
     {
-      "k": "g211",
+      "k": "g212",
       "key": "std.scent_accuracy.label.alcohol_smell",
       "text": "16개"
     },
     {
-      "k": "g212",
+      "k": "g213",
       "key": "f.scent_accuracy.scent_note.vanilla",
       "text": "75개"
     },
     {
-      "k": "g213",
+      "k": "g214",
       "key": "std.scent_accuracy.best",
       "text": "Jean Paul Gaultier 1.5%"
     },
     {
-      "k": "g214",
+      "k": "g215",
       "key": "std.scent_accuracy.pos",
       "text": "94개"
     },
     {
-      "k": "g215",
+      "k": "g216",
       "key": "std.spec.scent_accuracy.B0BZDZJDTG.said",
       "text": "81개"
     },
     {
-      "k": "g216",
+      "k": "g217",
       "key": "std.spec.scent_accuracy.B0BZDZJDTG.mention",
       "text": "75개"
     },
     {
-      "k": "g217",
+      "k": "g218",
       "key": "std.spec.scent_accuracy.B0BZDZJDTG.missing",
       "text": "32개"
     },
     {
-      "k": "g218",
+      "k": "g219",
       "key": "std.authenticity.neg",
       "text": "94개"
     },
     {
-      "k": "g219",
+      "k": "g220",
       "key": "std.authenticity.neg_pct",
       "text": "2.2%"
     },
     {
-      "k": "g220",
+      "k": "g221",
       "key": "f.trust_arrival.fake_suspicion_basis.weak_or_short",
       "text": "41개"
     },
     {
-      "k": "g221",
+      "k": "g222",
       "key": "f.trust_arrival.fake_suspicion_basis.packaging_label",
       "text": "6개"
     },
     {
-      "k": "g222",
+      "k": "g223",
       "key": "f.trust_arrival.fake_suspicion_basis.opened_or_moved",
       "text": "2개"
     },
     {
-      "k": "g223",
+      "k": "g224",
       "key": "std.authenticity.best",
       "text": "Elizabeth Taylor 0.4%"
     },
     {
-      "k": "g224",
+      "k": "g225",
       "key": "std.authenticity.pos",
       "text": "17개"
     },
     {
-      "k": "g225",
+      "k": "g226",
       "key": "std.bottle_sprayer.neg",
       "text": "37개"
     },
     {
-      "k": "g226",
+      "k": "g227",
       "key": "std.bottle_sprayer.neg_pct",
       "text": "0.8%"
     },
     {
-      "k": "g227",
+      "k": "g228",
       "key": "f.bottle_sprayer.part_failure.total",
       "text": "84개"
     },
     {
-      "k": "g228",
+      "k": "g229",
       "key": "f.bottle_sprayer.part_failure.bottle_leak",
       "text": "29개"
     },
     {
-      "k": "g229",
+      "k": "g230",
       "key": "f.bottle_sprayer.part_failure.sprayer_no_spray",
       "text": "19개"
     },
     {
-      "k": "g230",
+      "k": "g231",
       "key": "f.bottle_sprayer.part_failure.sprayer_stream",
       "text": "6개"
     },
     {
-      "k": "g231",
+      "k": "g232",
       "key": "std.bottle_sprayer.label.sprayer_stopped_working",
       "text": "12개"
     },
     {
-      "k": "g232",
+      "k": "g233",
       "key": "std.bottle_sprayer.best",
       "text": "Calvin Klein 0.3%"
     },
     {
-      "k": "g233",
+      "k": "g234",
       "key": "std.bottle_sprayer.pos",
       "text": "52개"
     },
     {
-      "k": "g234",
+      "k": "g235",
       "key": "std.spec.bottle_sprayer.B08FBQWRYC.parts",
       "text": "43개"
     },
     {
-      "k": "g235",
+      "k": "g236",
       "key": "std.arrival_packaging.neg",
       "text": "56개"
     },
     {
-      "k": "g236",
+      "k": "g237",
       "key": "std.arrival_packaging.neg_pct",
       "text": "1.9%"
     },
     {
-      "k": "g237",
+      "k": "g238",
       "key": "std.arrival_packaging.label.arrived_broken",
       "text": "24개"
     },
     {
-      "k": "g238",
+      "k": "g239",
       "key": "std.arrival_packaging.label.leaked_in_transit",
       "text": "21개"
     },
     {
-      "k": "g239",
+      "k": "g240",
       "key": "std.arrival_packaging.label.arrived_underfilled",
       "text": "6개"
     },
     {
-      "k": "g240",
+      "k": "g241",
       "key": "std.arrival_packaging.label.wrong_or_opened_item",
       "text": "6개"
     },
     {
-      "k": "g241",
+      "k": "g242",
       "key": "std.arrival_packaging.best",
       "text": "Bella Vita Luxury 0.0%"
     },
     {
-      "k": "g242",
+      "k": "g243",
       "key": "std.arrival_packaging.pos",
       "text": "25개"
     },
     {
-      "k": "g243",
+      "k": "g244",
       "key": "std.skin_body.neg",
       "text": "18개"
     },
     {
-      "k": "g244",
+      "k": "g245",
       "key": "p.safety.알레르기 언급",
       "text": "2개"
     },
     {
-      "k": "g245",
+      "k": "g246",
       "key": "std.skin_body.neg_pct",
       "text": "0.5%"
     },
     {
-      "k": "g246",
+      "k": "g247",
       "key": "p.safety.두통",
       "text": "8개"
     },
     {
-      "k": "g247",
+      "k": "g248",
       "key": "p.safety.메스꺼움",
       "text": "5개"
     },
     {
-      "k": "g248",
+      "k": "g249",
       "key": "p.safety.호흡",
       "text": "2개"
     },
     {
-      "k": "g249",
+      "k": "g250",
       "key": "p.safety.어지럼",
       "text": "1개"
     },
     {
-      "k": "g250",
+      "k": "g251",
       "key": "p.safety.알레르기 언급",
       "text": "2개"
     },
     {
-      "k": "g251",
+      "k": "g252",
       "key": "std.skin_body.best",
       "text": "Glossier 0.0%"
     },
     {
-      "k": "g252",
+      "k": "g253",
       "key": "std.skin_body.pos_tags",
       "text": "4개"
     },
     {
-      "k": "g253",
+      "k": "g254",
       "key": "std.spec.skin_body.allergen_products",
       "text": "6개 중 4개"
     },
     {
-      "k": "g254",
+      "k": "g255",
       "key": "std.sampling_returns.neg",
       "text": "74개"
     },
     {
-      "k": "g255",
+      "k": "g256",
       "key": "std.sampling_returns.neg_pct",
       "text": "1.6%"
     },
     {
-      "k": "g256",
+      "k": "g257",
       "key": "std.sampling_returns.label.not_returnable",
       "text": "58개"
     },
     {
-      "k": "g257",
+      "k": "g258",
       "key": "std.sampling_returns.label.refund_request",
       "text": "11개"
     },
     {
-      "k": "g258",
+      "k": "g259",
       "key": "std.sampling_returns.label.return_window_missed",
       "text": "5개"
     },
     {
-      "k": "g259",
+      "k": "g260",
       "key": "p.gap1_neg",
       "text": "1.28★"
     },
     {
-      "k": "g260",
+      "k": "g261",
       "key": "std.sampling_returns.best",
       "text": "Jean Paul Gaultier 0.3%"
     },
     {
-      "k": "g261",
+      "k": "g262",
       "key": "std.sampling_returns.pos",
       "text": "0개"
     },
     {
-      "k": "g262",
+      "k": "g263",
       "key": "m.top10_share_EDP",
       "text": "31.1%"
     },
     {
-      "k": "g263",
+      "k": "g264",
       "key": "head.fastest_term",
       "text": "\"hair perfume spray\" 최근 4주 530,006, 1년 전 같은 4주 11,322, 46.81배"
     },
     {
-      "k": "g264",
+      "k": "g265",
       "key": "m.top10_share_EDT",
       "text": "44.7%"
     },
     {
-      "k": "g265",
+      "k": "g266",
       "key": "m.top1_EDT",
       "text": "Versace 9.0%"
     },
     {
-      "k": "g266",
+      "k": "g267",
       "key": "m.price_band1_range",
       "text": "15.76~56.22"
     },
     {
-      "k": "g267",
+      "k": "g268",
       "key": "m.price_band1_share",
       "text": "39.2%"
     },
     {
-      "k": "g268",
+      "k": "g269",
       "key": "m.price_band1_rating",
       "text": "4.40★"
     },
     {
-      "k": "g269",
+      "k": "g270",
       "key": "m.price_band2_rating",
       "text": "4.49★"
     },
     {
-      "k": "g270",
+      "k": "g271",
       "key": "s.B0BZDZJDTG.price",
       "text": "26.12달러"
     },
     {
-      "k": "g271",
+      "k": "g272",
       "key": "s.B0BZDZJDTG.price_per_oz",
       "text": "15.36달러"
     },
     {
-      "k": "g272",
+      "k": "g273",
       "key": "std.longevity_strength.label.not_lasting_for_price",
       "text": "4개"
     },
     {
-      "k": "g273",
+      "k": "g274",
       "key": "s.B0GFGL26JD.price_per_oz",
       "text": "48.24달러"
     },
     {
-      "k": "g274",
+      "k": "g275",
       "key": "head.dir_low",
       "text": "307개"
     },
     {
-      "k": "g275",
+      "k": "g276",
       "key": "head.dir_high",
       "text": "50개"
     },
     {
-      "k": "g276",
+      "k": "g277",
       "key": "std.scent_accuracy.label.missing_described_notes",
       "text": "34개"
     },
     {
-      "k": "g277",
+      "k": "g278",
       "key": "std.sampling_returns.label.not_returnable",
       "text": "58개"
     },
     {
-      "k": "g278",
+      "k": "g279",
       "key": "f.trust_arrival.label.arrived_broken",
       "text": "24개"
     },
     {
-      "k": "g279",
+      "k": "g280",
       "key": "f.trust_arrival.label.leaked_in_transit",
       "text": "21개"
     },
     {
-      "k": "g280",
+      "k": "g281",
       "key": "m.terms_common_volume",
       "text": "3,213,197"
     },
     {
-      "k": "g281",
+      "k": "g282",
       "key": "m.terms_female_volume",
       "text": "1,022,775"
     },
     {
-      "k": "g282",
+      "k": "g283",
       "key": "std.scent_accuracy.term.vanilla perfume",
       "text": "94,475"
     },
     {
-      "k": "g283",
+      "k": "g284",
       "key": "std.bottle_sprayer.term.mini perfume",
       "text": "37,436"
     },
     {
-      "k": "g284",
+      "k": "g285",
       "key": "std.bottle_sprayer.term.travel perfume",
       "text": "34,634"
     },
     {
-      "k": "g285",
+      "k": "g286",
       "key": "f.longevity.longevity_hours.median",
       "text": "1시간"
-    },
-    {
-      "k": "g286",
-      "key": "s.B08FBQWRYC.duration_median",
-      "text": "6시간"
     },
     {
       "k": "g287",
@@ -1530,38 +1530,43 @@
     },
     {
       "k": "g305",
-      "key": "s.B08FBQWRYC.duration_median",
-      "text": "6시간"
-    },
-    {
-      "k": "g306",
       "key": "head.topic_neg",
       "text": "10.0%"
     },
     {
-      "k": "g307",
+      "k": "g306",
       "key": "a.robust.loo_flips",
       "text": "6번 중 0번"
     },
     {
-      "k": "g308",
+      "k": "g307",
       "key": "a.robust.loo_head_neg",
       "text": "9.5%~10.6%"
     },
     {
-      "k": "g309",
+      "k": "g308",
       "key": "a.robust.loo_low_share",
       "text": "79.2%~90.4%"
     },
     {
-      "k": "g310",
+      "k": "g309",
       "key": "a.robust.head_first",
       "text": "100.0%"
     },
     {
-      "k": "g311",
+      "k": "g310",
       "key": "a.robust.head_neg_ci",
       "text": "8.2%~11.9%"
+    },
+    {
+      "k": "g311",
+      "key": "a.detail_audit",
+      "text": "표본 150개 중 FAIL 4개(2.7%)"
+    },
+    {
+      "k": "g312",
+      "key": "a.research_verified",
+      "text": "104개 중 80개"
     }
   ],
   "marker_misses": [],

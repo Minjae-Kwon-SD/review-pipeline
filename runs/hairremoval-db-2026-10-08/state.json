@@ -1,0 +1,219 @@
+{
+  "run": "hairremoval-db-2026-10-08",
+  "steps": {
+    "00_collect": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-08T20:40:28+09:00"
+    },
+    "00_asin_review": {
+      "status": "done",
+      "kind": "human",
+      "updated": "2026-10-08T20:40:04+09:00"
+    },
+    "01_inputs": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-08T20:40:53+09:00",
+      "input_hash": "fa90861fccd1f5b9"
+    },
+    "02_schema_draft": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T20:49:26+09:00",
+      "calls": 1,
+      "retries": 0,
+      "workers": 1,
+      "input_hash": "5b5b6af4ce7f1e16",
+      "code_hash": "e3d001712a3362c3"
+    },
+    "03_schema_approval": {
+      "status": "done",
+      "kind": "human",
+      "updated": "2026-10-08T20:57:04+09:00",
+      "input_hash": "48956be6d8273a0a"
+    },
+    "04_gold_tagging": {
+      "status": "done",
+      "kind": "human",
+      "updated": "2026-10-08T21:19:32+09:00"
+    },
+    "05_tagging": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T22:17:15+09:00",
+      "calls": 24,
+      "retries": 0,
+      "workers": 4,
+      "input_hash": "4ba93f7965eab4e9",
+      "code_hash": "0db2fe31150c4947"
+    },
+    "12_market": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-08T21:07:39+09:00",
+      "input_hash": "492d6179b6f6c5b9"
+    },
+    "05a_pilot": {
+      "status": "done",
+      "kind": "human",
+      "updated": "2026-10-08T21:55:07+09:00"
+    },
+    "05b_gold_fix": {
+      "status": "done",
+      "kind": "human",
+      "updated": "2026-10-08T21:55:06+09:00"
+    },
+    "23_specs": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T21:43:43+09:00",
+      "calls": 2,
+      "input_hash": "b22ec4bc6feef549",
+      "code_hash": "6e3eb32b56198d79"
+    },
+    "06_tag_check": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T22:27:36+09:00",
+      "retries": 1,
+      "input_hash": "3ba2e69506ae97fc",
+      "code_hash": "de0c148d9bac79c2"
+    },
+    "07a_issue_draft": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T22:52:59+09:00",
+      "calls": 15,
+      "retries": 0,
+      "workers": 1,
+      "input_hash": "8e966776120a760f",
+      "code_hash": "11797773db4d6b4c"
+    },
+    "07a_issue_approval": {
+      "status": "done",
+      "kind": "human",
+      "updated": "2026-10-08T22:57:57+09:00",
+      "input_hash": "f6879ea0ce41dc9e"
+    },
+    "13_detail_schema_draft": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-08T23:19:34+09:00",
+      "input_hash": "78437dd775165f43",
+      "code_hash": "6a0834b6ce127f50"
+    },
+    "07b_issue_labeling": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T23:07:28+09:00",
+      "calls": 30,
+      "retries": 0,
+      "workers": 4,
+      "input_hash": "7c8003cb043a8fd8",
+      "code_hash": "fbf3dcd18ba4aa20"
+    },
+    "07c_issue_check": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-08T23:09:43+09:00",
+      "calls": 1,
+      "retries": 0,
+      "workers": 1,
+      "input_hash": "f99751489be578ff",
+      "code_hash": "de0c148d9bac79c2"
+    },
+    "22_robustness": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-09T01:11:20+09:00",
+      "input_hash": "efad1a060f6a60de",
+      "code_hash": "90ce8b7254ea69d4"
+    },
+    "07_weight": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-09T01:11:33+09:00",
+      "input_hash": "97349e25f6701a07",
+      "code_hash": "90ce8b7254ea69d4"
+    },
+    "08_report": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-09T01:17:01+09:00",
+      "calls": 1,
+      "retries": 0,
+      "workers": 1,
+      "input_hash": "7d3704ca0dead26b",
+      "code_hash": "24070a2ed7664129"
+    },
+    "09_report_check": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-09T01:33:21+09:00",
+      "input_hash": "c38ef3e753242da9",
+      "code_hash": "56d070b73294843a"
+    },
+    "13a_detail_schema_approval": {
+      "status": "done",
+      "kind": "human",
+      "updated": "2026-10-08T23:20:26+09:00",
+      "input_hash": "b61fe35a72fbe0fc"
+    },
+    "14_detail_extract": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-09T01:15:45+09:00",
+      "calls": 4,
+      "retries": 0,
+      "workers": 4,
+      "input_hash": "0c2c7fd03d7c2274",
+      "code_hash": "5b86f90df68ae4aa"
+    },
+    "14b_detail_check": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-09T01:31:42+09:00",
+      "input_hash": "b6142b39680dbbea",
+      "code_hash": "68c5bdd7930e7dad"
+    },
+    "15_research": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-09T01:50:40+09:00",
+      "input_hash": "53014fa45c403dbb",
+      "code_hash": "0feb9b26523273d3"
+    },
+    "10_timing": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-09T01:33:22+09:00"
+    },
+    "11_html": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-09T01:33:27+09:00",
+      "input_hash": "a838fadc5e69bfc5"
+    },
+    "17_guide_write": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-09T02:33:16+09:00",
+      "input_hash": "83a57913e3cf3b56",
+      "code_hash": "99b16e02a1d1374c"
+    },
+    "18_guide_check": {
+      "status": "done",
+      "kind": "agents",
+      "updated": "2026-10-09T02:33:16+09:00",
+      "input_hash": "6f54ce7489d71bca",
+      "code_hash": "56d070b73294843a"
+    },
+    "19_guide_html": {
+      "status": "done",
+      "kind": "script",
+      "updated": "2026-10-09T02:39:13+09:00",
+      "input_hash": "55ec1da2950e7be3"
+    }
+  }
+}

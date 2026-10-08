@@ -1,0 +1,109 @@
+topic: brand_experience
+directions:
+  negative:
+    labels:
+      - id: not_recommend
+        name_ko: 비추천이나 사지 말라는 경고
+        name_en: Does not recommend or warns not to buy
+        include: 추천하지 않는다, 사지 마라, 돈 낭비하지 마라, Buyer beware처럼 다른 사람에게 이 제품을 권하지 않거나 사지 말라고 하는 말(이유가 같이 붙어도 포함)
+        exclude: 자기가 다시 사지 않겠다는 말만 있으면 no_repurchase, 대신 다른 브랜드나 제품을 사라는 말은 switch_brand, 대신 전문 시술을 받으라는 말은 go_professional
+        examples:
+          - {review_id: R3FLHL10LKK79F, quote: "I can not in good faith recommend this product to anyone"}
+          - {review_id: R1JUHDD7LBTKAK, quote: "Save your money, don't buy."}
+        approx_count: 37
+      - id: no_repurchase
+        name_ko: 다시 사지 않음
+        name_en: Would not buy again
+        include: 자기가 이 제품이나 모델을 다시 사지 않겠다, 같은 돈을 다시 쓰지 않겠다, 다시 사기 망설여진다는 말
+        exclude: 다른 사람에게 사지 말라고 하면 not_recommend, 브랜드 전체를 다시 안 사겠다거나 회사에 실망했다는 말은 brand_disappointment
+        examples:
+          - {review_id: R1NZEC16D5FOP4, quote: "I probably won’t rebuy this model when I run out of flashes"}
+          - {review_id: R20SYP9R1KMKDR, quote: "Will not buy again."}
+        approx_count: 7
+      - id: switch_brand
+        name_ko: 다른 브랜드나 제품이 나음
+        name_en: Another brand or product is better
+        include: 다른 브랜드(Ulike, INIA, Braun 등)나 다른 제품을 사라, 그쪽을 살 걸 그랬다, 이전에 쓴 다른 브랜드가 더 나았다, 경쟁 제품과 비슷한 수준이라는 비교
+        exclude: 대신 전문 시술이나 살롱을 권하면 go_professional, 대안 없이 사지 말라는 말만 있으면 not_recommend
+        examples:
+          - {review_id: RH6TJCI4IIG0W, quote: "Get Ulike instead for better comfort."}
+          - {review_id: R3R5LESPOYWCJZ, quote: "Go with a different brand."}
+        approx_count: 7
+      - id: go_professional
+        name_ko: 전문 시술을 권함
+        name_en: Recommends professional treatment instead
+        include: 집에서 쓰는 기기보다 전문 레이저나 살롱 시술을 받으라, 전문 시술만큼 세지 않다, 집에서 스스로 하는 시술을 권하지 않는다는 말
+        exclude: 다른 가정용 브랜드나 제품을 권하면 switch_brand, 살롱 비용과의 돈 비교는 price_value(이 주제가 아님)
+        examples:
+          - {review_id: RR06PKULANNQ7, quote: "I would recommend just going to a professional"}
+          - {review_id: R3EGHJ3KA8QM68, quote: "don’t buy, go a professional places"}
+        approx_count: 5
+      - id: brand_disappointment
+        name_ko: 브랜드나 광고에 실망
+        name_en: Disappointed in the brand or its marketing
+        include: 브랜드 제품 전체를 사지 마라, 그 브랜드에서 사는 것은 이번이 마지막, 회사가 부끄럽다, 광고나 인플루언서에 끌려 샀다는 브랜드 자체에 대한 불만
+        exclude: 이 모델 하나를 다시 안 사겠다는 말은 no_repurchase, 광고 내용과 실물이 다르다는 말은 trust(이 주제가 아님)
+        examples:
+          - {review_id: R2W6NAVMEMCRIR, quote: "Don’t buy ulike products."}
+          - {review_id: R26RQQHSAX8XYF, quote: "I have purchased several items from Braun in the past but sadly this might be my last"}
+        approx_count: 4
+    other_approx_count: 4
+    notes: 추천을 미루거나 망설이는 말(R2ZKCTG5R8L6PV, R27D9PZ4ENRQ81, R2MBCDJ6VJPRMQ, 어림 3개)은 5% 미만이라 기타로 두었다. "don't buy, go a professional places"처럼 비추천과 대안이 한 문장이면 대안 라벨을 우선하고, 라벨 단계에서 1~2개를 함께 달 수 있다.
+  positive:
+    labels:
+      - id: recommend
+        name_ko: 추천이나 사라는 권유
+        name_en: Recommends or urges others to buy
+        include: 추천한다, 강력 추천, Lo recomiendo, Just buy it, Get it, 주변에 이미 추천했다, 모두에게 필요하다처럼 조건 없이 다른 사람에게 권하는 말
+        exclude: 피부 유형, 꾸준함, 기대치 같은 조건을 붙인 추천은 conditional_recommend, 후회하지 않을 것이다는 no_regret, 다시 사겠다는 buy_again_or_upgrade
+        examples:
+          - {review_id: R15CPIXT574AA3, quote: "I highly recommend it"}
+          - {review_id: R3CVPCV0EQPFAQ, quote: "do yourself a favour and buy it"}
+        approx_count: 73
+      - id: buy_again_or_upgrade
+        name_ko: 재구매나 상위 모델로 바꿈
+        name_en: Would buy again or upgraded
+        include: 다시 사겠다, 두 번째로 샀다, 가족 몫으로 하나 더 사겠다, 같은 브랜드 상위 모델로 바꿨다
+        exclude: 산 뒤 오래 계속 쓴다는 말은 keeps_using, 이전 모델보다 낫다는 비교만 있으면 favorable_comparison
+        examples:
+          - {review_id: R3F4KBJINTRL7F, quote: "I had the U3 and it solved 70% of my problem, so I decided to upgrade and bought the U10."}
+          - {review_id: R1MIIGBSIUFT00, quote: "I would defiantly buy it again."}
+        approx_count: 9
+      - id: no_regret
+        name_ko: 후회 없는 구매
+        name_en: No regrets about buying
+        include: 후회하지 않는다, 후회하지 않을 것이다, 돈 쓴 것이 아깝지 않다, 최고의 구매 중 하나라는 말
+        exclude: 직접 사라고 권하는 말은 recommend, 다시 사겠다는 말은 buy_again_or_upgrade, 가격 대비 값어치 평가는 price_value(이 주제가 아님)
+        examples:
+          - {review_id: R7IHM2Z8MJOFL, quote: "I do not regret this purchase!"}
+          - {review_id: R22D42ASN75CAQ, quote: "no te vas arrepentir"}
+        approx_count: 8
+      - id: keeps_using
+        name_ko: 오래 계속 씀
+        name_en: Keeps using it long term
+        include: 몇 달, 1년, 3년째 쓰고 있다, 앞으로도 계속 쓸 것이다, 그만 쓸 수 없다, 써 보고 돌아보지 않았다는 말
+        exclude: 오래 써도 고장이 없다는 내구성 평가는 quality(이 주제가 아님), 다시 샀다는 말은 buy_again_or_upgrade
+        examples:
+          - {review_id: R2LZPF2047BAEK, quote: "I’ve used it on and off for 3 years"}
+          - {review_id: R2TNKBB9DW6MXY, quote: "Impossible to stop using it."}
+        approx_count: 8
+      - id: favorable_comparison
+        name_ko: 이전 기기나 다른 브랜드보다 만족
+        name_en: Better than previous devices or other brands
+        include: 이전 모델이나 예전에 쓴 다른 브랜드, 무명 기기보다 낫다, 시장의 다른 제품보다 이것을 권한다, 경쟁 브랜드에 견줄 만하다, 같은 브랜드 이전 제품도 좋았다
+        exclude: 그 기기로 상위 모델을 다시 샀다는 말은 buy_again_or_upgrade, 브랜드 이름만 믿을 만하다는 말은 기타
+        examples:
+          - {review_id: R13FFPKEUHQJ4V, quote: "So much better compared to my old no-brand laser hair remover"}
+          - {review_id: R27C7U0ZYUMOEM, quote: "I’ve used Ulike products before and had a great experience"}
+        approx_count: 8
+      - id: conditional_recommend
+        name_ko: 조건을 붙인 추천
+        name_en: Recommends with conditions
+        include: 꾸준히 할 각오가 있으면, 밝은 피부라면, 일주일에 한 번 면도해도 괜찮다면, 전문 시술만큼 세지 않다는 것을 알면 추천한다처럼 조건을 걸고 권하는 말
+        exclude: 조건 없는 추천은 recommend, 조건 때문에 결국 전문 시술을 받으라는 불만 부분은 부정 방향 go_professional
+        examples:
+          - {review_id: R3I65RNL68LQ79, quote: "I definitely recommend getting the product as long as you are ready to commit"}
+          - {review_id: RXBX1IOM03910, quote: "Recomendable si eres cumplido con los días de depilación"}
+        approx_count: 7
+    other_approx_count: 5
+    notes: 브랜드 이름 자체에 대한 신뢰(R2YRR62H3ARYRY "A Trusted Brand", R2527CST84MMJT Philips, R32K12744AFVIO "German engineering", 어림 3개)는 5% 미만이라 기타로 두었다. R33AU9CUYNIANU의 칭찬 부분("happy for the most part")은 이유 없는 전체 평에 가까워 기타로 셌다.

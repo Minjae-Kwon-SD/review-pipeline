@@ -1,0 +1,271 @@
+{"ts": "2026-10-08T20:29:05+09:00", "event": "step_start", "step": "00_collect", "kind": "script", "status": "running"}
+{"ts": "2026-10-08T20:29:46+09:00", "event": "SubagentStart", "agent_type": "asin-selector", "agent_id": "ab7d9b60fc9a4e76d", "session_id": "a1ba7303-14eb-46e0-91ed-b6a06aa63e0c"}
+{"ts": "2026-10-08T20:30:45+09:00", "event": "SubagentStop", "agent_type": "asin-selector", "agent_id": "ab7d9b60fc9a4e76d", "session_id": "a1ba7303-14eb-46e0-91ed-b6a06aa63e0c"}
+{"ts": "2026-10-08T20:30:49+09:00", "event": "step_start", "step": "00_asin_review", "kind": "human", "status": "needs_human"}
+{"ts": "2026-10-08T20:40:04+09:00", "event": "step_end", "step": "00_asin_review", "kind": "human", "status": "done"}
+{"ts": "2026-10-08T20:40:28+09:00", "event": "step_end", "step": "00_collect", "kind": "script", "status": "done"}
+{"ts": "2026-10-08T20:40:45+09:00", "event": "step_start", "step": "01_inputs", "kind": "script", "status": "running"}
+{"ts": "2026-10-08T20:40:53+09:00", "event": "step_end", "step": "01_inputs", "kind": "script", "status": "done", "input_hash": "fa90861fccd1f5b9"}
+{"ts": "2026-10-08T20:40:54+09:00", "event": "step_start", "step": "02_schema_draft", "kind": "agents", "status": "running"}
+{"ts": "2026-10-08T20:40:59+09:00", "event": "SubagentStart", "agent_type": "schema-drafter", "agent_id": "a33969de5e86e359a", "session_id": "94666acb-c229-4027-ba7f-b055894d6a59"}
+{"ts": "2026-10-08T20:49:15+09:00", "event": "SubagentStop", "agent_type": "schema-drafter", "agent_id": "a33969de5e86e359a", "session_id": "94666acb-c229-4027-ba7f-b055894d6a59"}
+{"ts": "2026-10-08T20:49:26+09:00", "event": "step_end", "step": "02_schema_draft", "kind": "agents", "status": "done", "calls": 1, "retries": 0, "workers": 1, "input_hash": "5b5b6af4ce7f1e16", "code_hash": "e3d001712a3362c3"}
+{"ts": "2026-10-08T20:49:26+09:00", "event": "step_start", "step": "03_schema_approval", "kind": "human", "status": "needs_human"}
+{"ts": "2026-10-08T20:57:04+09:00", "event": "step_end", "step": "03_schema_approval", "kind": "human", "status": "done", "input_hash": "48956be6d8273a0a"}
+{"ts": "2026-10-08T20:57:04+09:00", "event": "step_start", "step": "04_gold_tagging", "kind": "human", "status": "needs_human"}
+{"ts": "2026-10-08T20:57:53+09:00", "event": "step_start", "step": "05_tagging", "kind": "agents", "status": "running"}
+{"ts": "2026-10-08T20:58:00+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "a4370cabcb55c816e", "session_id": "e10b3eea-811f-4316-8347-639042739172"}
+{"ts": "2026-10-08T20:58:01+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "a7617fd654423618d", "session_id": "e10b3eea-811f-4316-8347-639042739172"}
+{"ts": "2026-10-08T20:58:03+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "a734bc40c87e04642", "session_id": "e10b3eea-811f-4316-8347-639042739172"}
+{"ts": "2026-10-08T20:58:03+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "aefe2489cca5a77b9", "session_id": "e10b3eea-811f-4316-8347-639042739172"}
+{"ts": "2026-10-08T20:58:26+09:00", "event": "step_start", "step": "12_market", "kind": "script", "status": "running"}
+{"ts": "2026-10-08T20:59:19+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "a7617fd654423618d", "session_id": "e10b3eea-811f-4316-8347-639042739172"}
+{"ts": "2026-10-08T21:00:45+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "a4370cabcb55c816e", "session_id": "e10b3eea-811f-4316-8347-639042739172"}
+{"ts": "2026-10-08T21:00:59+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "a734bc40c87e04642", "session_id": "e10b3eea-811f-4316-8347-639042739172"}
+{"ts": "2026-10-08T21:01:43+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "aefe2489cca5a77b9", "session_id": "e10b3eea-811f-4316-8347-639042739172"}
+{"ts": "2026-10-08T21:06:00+09:00", "event": "step_end", "step": "12_market", "kind": "script", "status": "needs_human", "input_changed": ["27d6b9fa55636654", "492d6179b6f6c5b9"], "input_hash": "492d6179b6f6c5b9"}
+{"ts": "2026-10-08T21:07:39+09:00", "event": "step_end", "step": "12_market", "kind": "script", "status": "done", "input_hash": "492d6179b6f6c5b9"}
+{"ts": "2026-10-08T21:19:32+09:00", "event": "step_end", "step": "04_gold_tagging", "kind": "human", "status": "done"}
+{"ts": "2026-10-08T21:20:26+09:00", "event": "step_start", "step": "05a_pilot", "kind": "human", "status": "needs_human"}
+{"ts": "2026-10-08T21:24:06+09:00", "event": "step_start", "step": "05b_gold_fix", "kind": "human", "status": "needs_human"}
+{"ts": "2026-10-08T21:25:24+09:00", "event": "step_start", "step": "23_specs", "kind": "agents", "status": "running"}
+{"ts": "2026-10-08T21:25:26+09:00", "event": "SubagentStart", "agent_type": "product-spec-collector", "agent_id": "a6d5a81ef66f728ec", "session_id": "64415988-ee8a-42f7-ab20-0f6e6a576d0e"}
+{"ts": "2026-10-08T21:39:50+09:00", "event": "SubagentStop", "agent_type": "product-spec-collector", "agent_id": "a6d5a81ef66f728ec", "session_id": "64415988-ee8a-42f7-ab20-0f6e6a576d0e"}
+{"ts": "2026-10-08T21:40:11+09:00", "event": "SubagentStart", "agent_type": "product-spec-collector", "agent_id": "a8b4f9ba47b31cf93", "session_id": "64415988-ee8a-42f7-ab20-0f6e6a576d0e"}
+{"ts": "2026-10-08T21:43:25+09:00", "event": "SubagentStop", "agent_type": "product-spec-collector", "agent_id": "a8b4f9ba47b31cf93", "session_id": "64415988-ee8a-42f7-ab20-0f6e6a576d0e"}
+{"ts": "2026-10-08T21:43:43+09:00", "event": "step_end", "step": "23_specs", "kind": "agents", "status": "done", "calls": 2, "input_hash": "b22ec4bc6feef549", "code_hash": "6e3eb32b56198d79"}
+{"ts": "2026-10-08T21:55:06+09:00", "event": "step_end", "step": "05b_gold_fix", "kind": "human", "status": "done"}
+{"ts": "2026-10-08T21:55:07+09:00", "event": "step_end", "step": "05a_pilot", "kind": "human", "status": "done"}
+{"ts": "2026-10-08T21:55:29+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "aaec007747741120b", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T21:55:30+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "ab5c8cd686c5b5d70", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T21:55:32+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "af9b454251478d031", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T21:55:33+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "a7540726f4ef98660", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T21:58:35+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "a7540726f4ef98660", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T21:58:43+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "aaec007747741120b", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T21:58:52+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "ab5c8cd686c5b5d70", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T21:59:16+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "af9b454251478d031", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T21:59:19+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "a063f3cf799c67a9d", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T21:59:20+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "ade77f7360a65f52a", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T21:59:21+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "a90535504c79b52d2", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T21:59:22+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "aa62b09630d19e4f9", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:02:08+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "a063f3cf799c67a9d", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:02:11+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "ade77f7360a65f52a", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:02:56+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "aa62b09630d19e4f9", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:04:36+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "a90535504c79b52d2", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:04:39+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "a8946f9a33cc1cefc", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:04:40+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "abc3ef31e37bc82c2", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:04:41+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "a064f8aeacfa5bbdf", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:04:42+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "a7c3530a0dae8d551", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:07:35+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "a064f8aeacfa5bbdf", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:07:36+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "a8946f9a33cc1cefc", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:07:45+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "abc3ef31e37bc82c2", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:09:22+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "a7c3530a0dae8d551", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:09:25+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "ae2f3ed90a6721f14", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:09:26+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "aaade109278d80d07", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:09:27+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "a59e145126535ba7c", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:09:28+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "a85d1775ab40ca433", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:12:22+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "a85d1775ab40ca433", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:12:49+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "a59e145126535ba7c", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:12:56+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "aaade109278d80d07", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:13:00+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "ae2f3ed90a6721f14", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:13:03+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "ac819376b4895f8ff", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:13:04+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "a54f208ef1037c9df", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:13:05+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "aeb3797be7f1f3241", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:13:06+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "a0eb8e9c00e3fb73f", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:14:33+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "a54f208ef1037c9df", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:15:20+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "ac819376b4895f8ff", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:16:04+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "aeb3797be7f1f3241", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:17:09+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "a0eb8e9c00e3fb73f", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:17:15+09:00", "event": "step_end", "step": "05_tagging", "kind": "agents", "status": "done", "calls": 24, "retries": 0, "workers": 4, "input_hash": "4ba93f7965eab4e9", "code_hash": "0db2fe31150c4947"}
+{"ts": "2026-10-08T22:17:18+09:00", "event": "step_start", "step": "06_tag_check", "kind": "agents", "status": "running"}
+{"ts": "2026-10-08T22:17:24+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "af38b26648100cba8", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:18:24+09:00", "event": "SubagentStop", "agent_type": "review-tagger", "agent_id": "af38b26648100cba8", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:18:34+09:00", "event": "SubagentStart", "agent_type": "evidence-auditor", "agent_id": "ae6a635f58a8c75e9", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:24:27+09:00", "event": "SubagentStop", "agent_type": "evidence-auditor", "agent_id": "ae6a635f58a8c75e9", "session_id": "8fef17fd-9899-4ba8-8523-eaba8601084b"}
+{"ts": "2026-10-08T22:25:10+09:00", "event": "step_end", "step": "06_tag_check", "kind": "agents", "status": "needs_human", "calls": 2, "retries": 1, "workers": 1}
+{"ts": "2026-10-08T22:27:36+09:00", "event": "step_end", "step": "06_tag_check", "kind": "agents", "status": "done", "retries": 1, "input_hash": "3ba2e69506ae97fc", "code_hash": "de0c148d9bac79c2"}
+{"ts": "2026-10-08T22:27:40+09:00", "event": "step_start", "step": "07a_issue_draft", "kind": "agents", "status": "running"}
+{"ts": "2026-10-08T22:27:56+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "a019bcb644b574c55", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:29:58+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "a019bcb644b574c55", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:30:01+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "afbc1c2d9d9da7d6e", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:32:10+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "afbc1c2d9d9da7d6e", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:32:13+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "a62ba53519d67f64e", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:33:09+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "a62ba53519d67f64e", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:33:11+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "a038c84e77d462ab3", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:33:23+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "a038c84e77d462ab3", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:33:25+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "a07e21d81801c3e7a", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:34:38+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "a07e21d81801c3e7a", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:34:40+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "a393d2bf2c4bb43e9", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:35:18+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "a393d2bf2c4bb43e9", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:35:20+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "acc5f0d254053e656", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:37:41+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "acc5f0d254053e656", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:37:43+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "a2f2ac8b4eca5aefb", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:40:05+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "a2f2ac8b4eca5aefb", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:40:07+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "a3ac2e772fd0e2639", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:42:49+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "a3ac2e772fd0e2639", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:42:56+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "a040f8db0e7094780", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:44:32+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "a040f8db0e7094780", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:44:35+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "a152c87c4a74df675", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:46:01+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "a152c87c4a74df675", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:46:03+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "a5caabca4276f8d2c", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:47:40+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "a5caabca4276f8d2c", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:47:43+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "a30aefb165a0841a0", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:50:16+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "a30aefb165a0841a0", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:50:20+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "ae80c786d810eb2d0", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:51:44+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "ae80c786d810eb2d0", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:51:47+09:00", "event": "SubagentStart", "agent_type": "issue-labeler", "agent_id": "ae20e7348d37beb2f", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:52:51+09:00", "event": "SubagentStop", "agent_type": "issue-labeler", "agent_id": "ae20e7348d37beb2f", "session_id": "757ca9e1-0942-4b2f-8ccc-7127d98db9a9"}
+{"ts": "2026-10-08T22:52:59+09:00", "event": "step_end", "step": "07a_issue_draft", "kind": "agents", "status": "done", "calls": 15, "retries": 0, "workers": 1, "input_hash": "8e966776120a760f", "code_hash": "11797773db4d6b4c"}
+{"ts": "2026-10-08T22:53:04+09:00", "event": "step_start", "step": "07a_issue_approval", "kind": "human", "status": "needs_human"}
+{"ts": "2026-10-08T22:57:57+09:00", "event": "step_end", "step": "07a_issue_approval", "kind": "human", "status": "done", "input_hash": "f6879ea0ce41dc9e"}
+{"ts": "2026-10-08T22:58:22+09:00", "event": "step_start", "step": "13_detail_schema_draft", "kind": "agents", "status": "running"}
+{"ts": "2026-10-08T22:58:25+09:00", "event": "SubagentStart", "agent_type": "detail-schema-drafter", "agent_id": "af67873f46df29465", "session_id": "367e4c85-09f0-4ca0-867c-b51790cc3b2f"}
+{"ts": "2026-10-08T22:58:30+09:00", "event": "step_start", "step": "07b_issue_labeling", "kind": "agents", "status": "running"}
+{"ts": "2026-10-08T22:58:36+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a9257f40e67b8aa9c", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T22:58:37+09:00", "event": "SubagentStart", "agent_type": "evidence-auditor", "agent_id": "ab3feed1937562100", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T22:59:10+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a9257f40e67b8aa9c", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T22:59:14+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a237043b6bebb472c", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T22:59:15+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a24b74f0282a13d69", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T22:59:16+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a343fcb69024798bd", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T22:59:17+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a433cb4dc6070d3f3", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T22:59:53+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a237043b6bebb472c", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T22:59:55+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "aaff7e6b5c147e62b", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T22:59:57+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a24b74f0282a13d69", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T22:59:57+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a433cb4dc6070d3f3", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:00:00+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "ad55064a91a86e8f9", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:00:01+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "aaad7bd22c4eca210", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:00:17+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a343fcb69024798bd", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:00:18+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "aaff7e6b5c147e62b", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:00:19+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a66d3c98dc2a03de9", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:00:22+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a4a9d040bcaf10591", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:00:34+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "ad55064a91a86e8f9", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:00:36+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "af177adc01b91070f", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:00:50+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "aaad7bd22c4eca210", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:00:53+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "afe66add366635059", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:00:59+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a66d3c98dc2a03de9", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:01:01+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a696788e51b712a7a", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:01:35+09:00", "event": "SubagentStop", "agent_type": "evidence-auditor", "agent_id": "ab3feed1937562100", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:01:54+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "afe66add366635059", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:02:00+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "af177adc01b91070f", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:02:09+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a4a9d040bcaf10591", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:02:41+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a696788e51b712a7a", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:02:54+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "abc4ba75a60fc097c", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:02:56+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "ab8e811c093114c4e", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:02:56+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a6450a716dbeb78aa", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:02:56+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a2d9314a039346d4e", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:03:21+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a6450a716dbeb78aa", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:03:23+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a2cd1be8ceb4a24df", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:03:52+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "ab8e811c093114c4e", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:03:57+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "ad83ea11fcae82a11", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:04:08+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a2d9314a039346d4e", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:04:11+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "ac394fb0237e3a694", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:04:19+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "ad83ea11fcae82a11", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:04:22+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "ac869fe69df692135", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:04:26+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "abc4ba75a60fc097c", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:04:28+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a8ae89e76ade4e87d", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:05:14+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a2cd1be8ceb4a24df", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:05:17+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "adf24b69bc623abfe", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:05:19+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "ac869fe69df692135", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:05:25+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a7dfa709ee4d6993d", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:05:30+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "ac394fb0237e3a694", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:05:33+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a6e44eb0e9edaae83", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:05:49+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "adf24b69bc623abfe", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:05:52+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "ae5d440115935587c", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:06:04+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a8ae89e76ade4e87d", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:06:07+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "a02dd00bb8bce1d85", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:06:14+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a6e44eb0e9edaae83", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:06:16+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "aa0026f329d39a48b", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:06:31+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a7dfa709ee4d6993d", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:06:33+09:00", "event": "SubagentStart", "agent_type": "issue-tagger", "agent_id": "ab9e08799afdde2cb", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:06:52+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "aa0026f329d39a48b", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:06:54+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "ae5d440115935587c", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:07:04+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "ab9e08799afdde2cb", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:07:14+09:00", "event": "SubagentStop", "agent_type": "issue-tagger", "agent_id": "a02dd00bb8bce1d85", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:07:28+09:00", "event": "step_end", "step": "07b_issue_labeling", "kind": "agents", "status": "done", "calls": 30, "retries": 0, "workers": 4, "input_hash": "7c8003cb043a8fd8", "code_hash": "fbf3dcd18ba4aa20"}
+{"ts": "2026-10-08T23:07:28+09:00", "event": "step_start", "step": "07c_issue_check", "kind": "agents", "status": "running"}
+{"ts": "2026-10-08T23:07:36+09:00", "event": "SubagentStart", "agent_type": "evidence-auditor", "agent_id": "a57c275cee4e48053", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:09:23+09:00", "event": "SubagentStop", "agent_type": "evidence-auditor", "agent_id": "a57c275cee4e48053", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:09:43+09:00", "event": "step_end", "step": "07c_issue_check", "kind": "agents", "status": "done", "calls": 1, "retries": 0, "workers": 1, "input_hash": "f99751489be578ff", "code_hash": "de0c148d9bac79c2"}
+{"ts": "2026-10-08T23:09:43+09:00", "event": "step_start", "step": "22_robustness", "kind": "script", "status": "running"}
+{"ts": "2026-10-08T23:09:58+09:00", "event": "step_end", "step": "22_robustness", "kind": "script", "status": "needs_human"}
+{"ts": "2026-10-08T23:09:58+09:00", "event": "step_start", "step": "07_weight", "kind": "script", "status": "running"}
+{"ts": "2026-10-08T23:10:06+09:00", "event": "step_end", "step": "07_weight", "kind": "script", "status": "done", "input_hash": "470013b69546cd5c", "code_hash": "90ce8b7254ea69d4"}
+{"ts": "2026-10-08T23:10:07+09:00", "event": "step_start", "step": "08_report", "kind": "agents", "status": "running"}
+{"ts": "2026-10-08T23:10:20+09:00", "event": "SubagentStart", "agent_type": "report-writer", "agent_id": "aeff35a761d65ec0a", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:18:58+09:00", "event": "SubagentStop", "agent_type": "report-writer", "agent_id": "aeff35a761d65ec0a", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:19:25+09:00", "event": "SubagentStop", "agent_type": "detail-schema-drafter", "agent_id": "af67873f46df29465", "session_id": "367e4c85-09f0-4ca0-867c-b51790cc3b2f"}
+{"ts": "2026-10-08T23:19:26+09:00", "event": "step_end", "step": "08_report", "kind": "agents", "status": "needs_human", "calls": 1, "retries": 0, "workers": 1, "input_changed": ["05_metrics.json", "05_tables.md"], "input_hash": "7e062293501980ba", "code_hash": "24070a2ed7664129"}
+{"ts": "2026-10-08T23:19:26+09:00", "event": "step_start", "step": "09_report_check", "kind": "agents", "status": "running"}
+{"ts": "2026-10-08T23:19:32+09:00", "event": "SubagentStart", "agent_type": "evidence-auditor", "agent_id": "a68b75fcf83c95aab", "session_id": "ab0d9545-c771-4aaf-855f-93c9f7ee7999"}
+{"ts": "2026-10-08T23:19:34+09:00", "event": "step_end", "step": "13_detail_schema_draft", "kind": "script", "status": "done", "input_hash": "78437dd775165f43", "code_hash": "6a0834b6ce127f50"}
+{"ts": "2026-10-08T23:19:34+09:00", "event": "step_start", "step": "13a_detail_schema_approval", "kind": "human", "status": "needs_human"}
+{"ts": "2026-10-08T23:20:26+09:00", "event": "step_end", "step": "13a_detail_schema_approval", "kind": "human", "status": "done", "input_hash": "b61fe35a72fbe0fc"}
+{"ts": "2026-10-08T23:21:02+09:00", "event": "step_start", "step": "14_detail_extract", "kind": "agents", "status": "running"}
+{"ts": "2026-10-08T23:21:06+09:00", "event": "SubagentStart", "agent_type": "detail-extractor", "agent_id": "a8ee9da74a7bd7985", "session_id": "48d19a08-499c-4284-8003-27c7a8a82bf4"}
+{"ts": "2026-10-08T23:21:07+09:00", "event": "SubagentStart", "agent_type": "detail-extractor", "agent_id": "aaf13946af2524717", "session_id": "48d19a08-499c-4284-8003-27c7a8a82bf4"}
+{"ts": "2026-10-08T23:21:08+09:00", "event": "SubagentStart", "agent_type": "detail-extractor", "agent_id": "a911026602c7a73cd", "session_id": "48d19a08-499c-4284-8003-27c7a8a82bf4"}
+{"ts": "2026-10-08T23:21:08+09:00", "event": "SubagentStart", "agent_type": "detail-extractor", "agent_id": "a90fbc3ac91d5980c", "session_id": "48d19a08-499c-4284-8003-27c7a8a82bf4"}
+{"ts": "2026-10-09T01:10:40+09:00", "event": "step_start", "step": "14_detail_extract", "kind": "agents", "status": "running"}
+{"ts": "2026-10-09T01:10:51+09:00", "event": "SubagentStart", "agent_type": "detail-extractor", "agent_id": "a3114fb8835822f00", "session_id": "24c64d9e-0f48-4b07-b1e2-edee45fc96c2"}
+{"ts": "2026-10-09T01:10:52+09:00", "event": "SubagentStart", "agent_type": "detail-extractor", "agent_id": "a662937ad3d6434ab", "session_id": "24c64d9e-0f48-4b07-b1e2-edee45fc96c2"}
+{"ts": "2026-10-09T01:10:53+09:00", "event": "SubagentStart", "agent_type": "detail-extractor", "agent_id": "ab03ec73f6daa0f52", "session_id": "24c64d9e-0f48-4b07-b1e2-edee45fc96c2"}
+{"ts": "2026-10-09T01:10:54+09:00", "event": "SubagentStart", "agent_type": "detail-extractor", "agent_id": "a154fed3b53bb83a0", "session_id": "24c64d9e-0f48-4b07-b1e2-edee45fc96c2"}
+{"ts": "2026-10-09T01:10:58+09:00", "event": "step_start", "step": "22_robustness", "kind": "script", "status": "running"}
+{"ts": "2026-10-09T01:11:20+09:00", "event": "step_end", "step": "22_robustness", "kind": "script", "status": "done", "input_hash": "efad1a060f6a60de", "code_hash": "90ce8b7254ea69d4"}
+{"ts": "2026-10-09T01:11:22+09:00", "event": "step_start", "step": "07_weight", "kind": "script", "status": "running"}
+{"ts": "2026-10-09T01:11:33+09:00", "event": "step_end", "step": "07_weight", "kind": "script", "status": "done", "input_hash": "97349e25f6701a07", "code_hash": "90ce8b7254ea69d4"}
+{"ts": "2026-10-09T01:11:39+09:00", "event": "step_start", "step": "08_report", "kind": "agents", "status": "running"}
+{"ts": "2026-10-09T01:11:47+09:00", "event": "SubagentStart", "agent_type": "report-writer", "agent_id": "a2db8358fcdfbd746", "session_id": "bdf2fb38-327e-4a67-b9d2-2f3174bf8fbc"}
+{"ts": "2026-10-09T01:12:39+09:00", "event": "SubagentStop", "agent_type": "detail-extractor", "agent_id": "a154fed3b53bb83a0", "session_id": "24c64d9e-0f48-4b07-b1e2-edee45fc96c2"}
+{"ts": "2026-10-09T01:13:31+09:00", "event": "SubagentStop", "agent_type": "detail-extractor", "agent_id": "ab03ec73f6daa0f52", "session_id": "24c64d9e-0f48-4b07-b1e2-edee45fc96c2"}
+{"ts": "2026-10-09T01:15:26+09:00", "event": "SubagentStop", "agent_type": "detail-extractor", "agent_id": "a662937ad3d6434ab", "session_id": "24c64d9e-0f48-4b07-b1e2-edee45fc96c2"}
+{"ts": "2026-10-09T01:15:35+09:00", "event": "SubagentStop", "agent_type": "detail-extractor", "agent_id": "a3114fb8835822f00", "session_id": "24c64d9e-0f48-4b07-b1e2-edee45fc96c2"}
+{"ts": "2026-10-09T01:15:45+09:00", "event": "step_end", "step": "14_detail_extract", "kind": "script", "status": "done", "calls": 4, "retries": 0, "workers": 4, "input_hash": "0c2c7fd03d7c2274", "code_hash": "5b86f90df68ae4aa"}
+{"ts": "2026-10-09T01:16:55+09:00", "event": "SubagentStop", "agent_type": "report-writer", "agent_id": "a2db8358fcdfbd746", "session_id": "bdf2fb38-327e-4a67-b9d2-2f3174bf8fbc"}
+{"ts": "2026-10-09T01:17:01+09:00", "event": "step_end", "step": "08_report", "kind": "agents", "status": "done", "calls": 1, "retries": 0, "workers": 1, "input_hash": "7d3704ca0dead26b", "code_hash": "24070a2ed7664129"}
+{"ts": "2026-10-09T01:17:04+09:00", "event": "step_start", "step": "09_report_check", "kind": "agents", "status": "running"}
+{"ts": "2026-10-09T01:17:32+09:00", "event": "SubagentStart", "agent_type": "evidence-auditor", "agent_id": "a6c8884ef824c3cb9", "session_id": "bdf2fb38-327e-4a67-b9d2-2f3174bf8fbc"}
+{"ts": "2026-10-09T01:23:06+09:00", "event": "SubagentStop", "agent_type": "evidence-auditor", "agent_id": "a6c8884ef824c3cb9", "session_id": "bdf2fb38-327e-4a67-b9d2-2f3174bf8fbc"}
+{"ts": "2026-10-09T01:23:48+09:00", "event": "SubagentStart", "agent_type": "report-writer", "agent_id": "a2db8358fcdfbd746", "session_id": "bdf2fb38-327e-4a67-b9d2-2f3174bf8fbc"}
+{"ts": "2026-10-09T01:24:47+09:00", "event": "step_start", "step": "14b_detail_check", "kind": "agents", "status": "running"}
+{"ts": "2026-10-09T01:24:53+09:00", "event": "SubagentStart", "agent_type": "evidence-auditor", "agent_id": "a4ff39bf5673706cb", "session_id": "9580f3d2-0771-4f4f-a25e-c467725045dc"}
+{"ts": "2026-10-09T01:27:37+09:00", "event": "SubagentStop", "agent_type": "report-writer", "agent_id": "a2db8358fcdfbd746", "session_id": "bdf2fb38-327e-4a67-b9d2-2f3174bf8fbc"}
+{"ts": "2026-10-09T01:27:46+09:00", "event": "SubagentStart", "agent_type": "evidence-auditor", "agent_id": "a6c8884ef824c3cb9", "session_id": "bdf2fb38-327e-4a67-b9d2-2f3174bf8fbc"}
+{"ts": "2026-10-09T01:28:39+09:00", "event": "SubagentStop", "agent_type": "evidence-auditor", "agent_id": "a6c8884ef824c3cb9", "session_id": "bdf2fb38-327e-4a67-b9d2-2f3174bf8fbc"}
+{"ts": "2026-10-09T01:28:54+09:00", "event": "SubagentStart", "agent_type": "report-writer", "agent_id": "a2db8358fcdfbd746", "session_id": "bdf2fb38-327e-4a67-b9d2-2f3174bf8fbc"}
+{"ts": "2026-10-09T01:31:13+09:00", "event": "SubagentStop", "agent_type": "evidence-auditor", "agent_id": "a4ff39bf5673706cb", "session_id": "9580f3d2-0771-4f4f-a25e-c467725045dc"}
+{"ts": "2026-10-09T01:31:42+09:00", "event": "step_end", "step": "14b_detail_check", "kind": "script", "status": "done", "input_hash": "b6142b39680dbbea", "code_hash": "68c5bdd7930e7dad"}
+{"ts": "2026-10-09T01:31:53+09:00", "event": "SubagentStop", "agent_type": "report-writer", "agent_id": "a2db8358fcdfbd746", "session_id": "bdf2fb38-327e-4a67-b9d2-2f3174bf8fbc"}
+{"ts": "2026-10-09T01:32:00+09:00", "event": "SubagentStart", "agent_type": "evidence-auditor", "agent_id": "a6c8884ef824c3cb9", "session_id": "bdf2fb38-327e-4a67-b9d2-2f3174bf8fbc"}
+{"ts": "2026-10-09T01:32:18+09:00", "event": "SubagentStop", "agent_type": "evidence-auditor", "agent_id": "a6c8884ef824c3cb9", "session_id": "bdf2fb38-327e-4a67-b9d2-2f3174bf8fbc"}
+{"ts": "2026-10-09T01:32:34+09:00", "event": "step_start", "step": "15_research", "kind": "agents", "status": "running"}
+{"ts": "2026-10-09T01:32:34+09:00", "event": "step_end", "step": "09_report_check", "kind": "agents", "status": "needs_human", "calls": 5, "retries": 2, "workers": 1}
+{"ts": "2026-10-09T01:32:38+09:00", "event": "SubagentStart", "agent_type": "benchmark-researcher", "agent_id": "a6c087144776250b6", "session_id": "249297f1-625e-4cc8-8370-ef9f71177d4c"}
+{"ts": "2026-10-09T01:33:21+09:00", "event": "step_end", "step": "09_report_check", "kind": "agents", "status": "done", "input_hash": "c38ef3e753242da9", "code_hash": "56d070b73294843a"}
+{"ts": "2026-10-09T01:33:22+09:00", "event": "step_start", "step": "10_timing", "kind": "script", "status": "running"}
+{"ts": "2026-10-09T01:33:22+09:00", "event": "step_end", "step": "10_timing", "kind": "script", "status": "done"}
+{"ts": "2026-10-09T01:33:23+09:00", "event": "step_start", "step": "11_html", "kind": "script", "status": "running"}
+{"ts": "2026-10-09T01:33:27+09:00", "event": "step_end", "step": "11_html", "kind": "script", "status": "done", "input_hash": "a838fadc5e69bfc5"}
+{"ts": "2026-10-09T01:49:49+09:00", "event": "SubagentStop", "agent_type": "benchmark-researcher", "agent_id": "a6c087144776250b6", "session_id": "249297f1-625e-4cc8-8370-ef9f71177d4c"}
+{"ts": "2026-10-09T01:50:40+09:00", "event": "step_end", "step": "15_research", "kind": "agents", "status": "done", "input_hash": "53014fa45c403dbb", "code_hash": "0feb9b26523273d3"}
+{"ts": "2026-10-09T01:51:38+09:00", "event": "step_start", "step": "17_guide_write", "kind": "agents", "status": "running"}
+{"ts": "2026-10-09T01:51:43+09:00", "event": "SubagentStart", "agent_type": "guide-writer", "agent_id": "a1ed2c6749a3a7e62", "session_id": "7e7468a3-05f4-4e93-bb7b-9226f6eccf84"}
+{"ts": "2026-10-09T02:13:14+09:00", "event": "SubagentStop", "agent_type": "guide-writer", "agent_id": "a1ed2c6749a3a7e62", "session_id": "7e7468a3-05f4-4e93-bb7b-9226f6eccf84"}
+{"ts": "2026-10-09T02:13:18+09:00", "event": "step_end", "step": "17_guide_write", "kind": "agents", "status": "needs_human", "calls": 1, "retries": 0, "workers": 1, "input_changed": ["16_guide_metrics.json"], "input_hash": "729f9a27ffc7e99f", "code_hash": "99b16e02a1d1374c"}
+{"ts": "2026-10-09T02:13:19+09:00", "event": "step_start", "step": "18_guide_check", "kind": "agents", "status": "running"}
+{"ts": "2026-10-09T02:14:06+09:00", "event": "SubagentStart", "agent_type": "evidence-auditor", "agent_id": "a16b54460b981a268", "session_id": "7e7468a3-05f4-4e93-bb7b-9226f6eccf84"}
+{"ts": "2026-10-09T02:20:35+09:00", "event": "SubagentStop", "agent_type": "evidence-auditor", "agent_id": "a16b54460b981a268", "session_id": "7e7468a3-05f4-4e93-bb7b-9226f6eccf84"}
+{"ts": "2026-10-09T02:21:18+09:00", "event": "SubagentStart", "agent_type": "guide-writer", "agent_id": "a1ed2c6749a3a7e62", "session_id": "7e7468a3-05f4-4e93-bb7b-9226f6eccf84"}
+{"ts": "2026-10-09T02:25:44+09:00", "event": "SubagentStop", "agent_type": "guide-writer", "agent_id": "a1ed2c6749a3a7e62", "session_id": "7e7468a3-05f4-4e93-bb7b-9226f6eccf84"}
+{"ts": "2026-10-09T02:25:59+09:00", "event": "SubagentStart", "agent_type": "evidence-auditor", "agent_id": "a16b54460b981a268", "session_id": "7e7468a3-05f4-4e93-bb7b-9226f6eccf84"}
+{"ts": "2026-10-09T02:26:34+09:00", "event": "SubagentStop", "agent_type": "evidence-auditor", "agent_id": "a16b54460b981a268", "session_id": "7e7468a3-05f4-4e93-bb7b-9226f6eccf84"}
+{"ts": "2026-10-09T02:27:50+09:00", "event": "SubagentStart", "agent_type": "guide-writer", "agent_id": "a1ed2c6749a3a7e62", "session_id": "7e7468a3-05f4-4e93-bb7b-9226f6eccf84"}
+{"ts": "2026-10-09T02:31:38+09:00", "event": "SubagentStop", "agent_type": "guide-writer", "agent_id": "a1ed2c6749a3a7e62", "session_id": "7e7468a3-05f4-4e93-bb7b-9226f6eccf84"}
+{"ts": "2026-10-09T02:31:54+09:00", "event": "SubagentStart", "agent_type": "evidence-auditor", "agent_id": "a16b54460b981a268", "session_id": "7e7468a3-05f4-4e93-bb7b-9226f6eccf84"}
+{"ts": "2026-10-09T02:32:16+09:00", "event": "SubagentStop", "agent_type": "evidence-auditor", "agent_id": "a16b54460b981a268", "session_id": "7e7468a3-05f4-4e93-bb7b-9226f6eccf84"}
+{"ts": "2026-10-09T02:32:25+09:00", "event": "step_end", "step": "18_guide_check", "kind": "agents", "status": "needs_human", "calls": 4, "retries": 1, "workers": 1, "input_changed": ["16_guide_metrics.json", "17_guide.md"], "input_hash": "ed35d8657380faea", "code_hash": "56d070b73294843a"}
+{"ts": "2026-10-09T02:32:26+09:00", "event": "step_start", "step": "19_guide_html", "kind": "script", "status": "running"}
+{"ts": "2026-10-09T02:33:16+09:00", "event": "step_end", "step": "17_guide_write", "kind": "agents", "status": "done", "input_hash": "83a57913e3cf3b56", "code_hash": "99b16e02a1d1374c"}
+{"ts": "2026-10-09T02:33:16+09:00", "event": "step_end", "step": "18_guide_check", "kind": "agents", "status": "done", "input_hash": "6f54ce7489d71bca", "code_hash": "56d070b73294843a"}
+{"ts": "2026-10-09T02:33:18+09:00", "event": "step_end", "step": "19_guide_html", "kind": "script", "status": "needs_human", "input_changed": ["16_guide_metrics.json"], "input_hash": "2f84392d5715790c"}
+{"ts": "2026-10-09T02:39:13+09:00", "event": "step_end", "step": "19_guide_html", "kind": "script", "status": "done", "input_hash": "55ec1da2950e7be3"}

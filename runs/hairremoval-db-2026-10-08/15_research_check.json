@@ -1,0 +1,538 @@
+{
+  "checked_at": "2026-10-09T01:50:36+09:00",
+  "claims": 73,
+  "verified": 63,
+  "verified_from_cache": 0,
+  "verified_from_previous_check": 0,
+  "by_area": {
+    "industry": {
+      "verified": 22,
+      "unverified": 3
+    },
+    "market": {
+      "verified": 11,
+      "unverified": 2
+    },
+    "regulation": {
+      "verified": 18,
+      "unverified": 4
+    },
+    "testing": {
+      "verified": 12,
+      "unverified": 1
+    }
+  },
+  "items": [
+    {
+      "id": "mkt_01",
+      "area": "market",
+      "url": "https://www.psmarketresearch.com/market-analysis/us-home-use-beauty-devices-market",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "mkt_02",
+      "area": "market",
+      "url": "https://www.psmarketresearch.com/market-analysis/us-home-use-beauty-devices-market",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "mkt_03",
+      "area": "market",
+      "url": "https://www.giikorea.co.kr/report/qyr1861219-at-home-use-ipl-hair-removal-device-global-market.html",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "mkt_04",
+      "area": "market",
+      "url": "https://www.sphericalinsights.com/blogs/top-20-companies-in-global-consumer-use-ipl-hair-removal-devices-market-global-share-market-size-revenue-report-2024-2035",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "mkt_05",
+      "area": "market",
+      "url": "https://marketintelo.com/report/at-home-laser-device-market",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "mkt_06",
+      "area": "market",
+      "url": "https://marketintelo.com/report/at-home-laser-device-market",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "mkt_07",
+      "area": "market",
+      "url": "https://marketintelo.com/report/at-home-laser-device-market",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "mkt_08",
+      "area": "market",
+      "url": "https://www.credenceresearch.com/report/hair-removal-devices-market",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "mkt_09",
+      "area": "market",
+      "url": "https://www.credenceresearch.com/report/hair-removal-devices-market",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "mkt_10",
+      "area": "market",
+      "url": "https://www.gminsights.com/industry-analysis/laser-hair-removal-market",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "mkt_11",
+      "area": "market",
+      "url": "https://www.gminsights.com/industry-analysis/hair-removal-market",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "mkt_12",
+      "area": "market",
+      "url": "https://store.mintel.com/report/us-shaving-and-hair-removal-market-report-2024",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "mkt_13",
+      "area": "market",
+      "url": "https://store.mintel.com/report/us-shaving-and-hair-removal-market-report-2024",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_01",
+      "area": "industry",
+      "url": "https://www.ulike.com/products/sapphire-air-10-ipl-hair-removal.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_02",
+      "area": "industry",
+      "url": "https://www.ulike.com/products/sapphire-air-10-ipl-hair-removal.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_03",
+      "area": "industry",
+      "url": "https://www.ulike.com/products/sapphire-air-4-ipl-laser-hair-removal.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_04",
+      "area": "industry",
+      "url": "https://www.ulike.com/products/sapphire-air-4-ipl-laser-hair-removal.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_05",
+      "area": "industry",
+      "url": "https://us.braun.com/en-us/skin-i-expert-ipl",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_06",
+      "area": "industry",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipl/skin-i-expert-ipl-pl7387",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_07",
+      "area": "industry",
+      "url": "https://us.braun.com/en-us/skin-i-expert-ipl",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_08",
+      "area": "industry",
+      "url": "https://us.braun.com/en-us/skin-i-expert-ipl",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_09",
+      "area": "industry",
+      "url": "https://us.braun.com/en-us/skin-i-expert-ipl",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_10",
+      "area": "industry",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipl/skin-i-expert-ipl-pl7387",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_11",
+      "area": "industry",
+      "url": "https://www.usa.philips.com/a-w/about/news/archive/standard/news/press/2025/its-not-me-its-you-an-official-breakup-letter-to-my-old-hair-removal-routine.html",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_12",
+      "area": "industry",
+      "url": "https://www.usa.philips.com/a-w/about/news/archive/standard/news/press/2025/its-not-me-its-you-an-official-breakup-letter-to-my-old-hair-removal-routine.html",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "ind_13",
+      "area": "industry",
+      "url": "https://www.gminsights.com/industry-analysis/hair-removal-market",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "ind_14",
+      "area": "industry",
+      "url": "https://www.trynood.com/products/the-flasher-2.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_15",
+      "area": "industry",
+      "url": "https://www.trynood.com/products/the-flasher-2.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_16",
+      "area": "industry",
+      "url": "https://www.trynood.com/products/the-flasher-pro.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_17",
+      "area": "industry",
+      "url": "https://www.trynood.com/products/the-flasher-pro.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_18",
+      "area": "industry",
+      "url": "https://dermrays.com/products/dermrays-v6s-1064nm-diode-laser-hair-removal-at-home.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_19",
+      "area": "industry",
+      "url": "https://dermrays.com/products/dermrays-v4s-810nm-diode-laser-hair-removal-at-home.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_20",
+      "area": "industry",
+      "url": "https://www.smoothskin.com/products/pure-fit.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_21",
+      "area": "industry",
+      "url": "https://www.smoothskin.com/products/pure-fit",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_22",
+      "area": "industry",
+      "url": "https://www.wavytalk.com/products/bare-it-without-roller.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_23",
+      "area": "industry",
+      "url": "https://www.wavytalk.com/products/bare-it-without-roller.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_24",
+      "area": "industry",
+      "url": "https://www.trialaser.com/products/hair-removal-laser-4x.json",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "ind_25",
+      "area": "industry",
+      "url": "https://www.trialaser.com/products/hair-removal-laser-4x.json",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "reg_01",
+      "area": "regulation",
+      "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPCD/classification.cfm?id=OHT",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_02",
+      "area": "regulation",
+      "url": "https://www.law.cornell.edu/cfr/text/21/878.4810",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_03",
+      "area": "regulation",
+      "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K223618",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_04",
+      "area": "regulation",
+      "url": "https://fda.innolitics.com/device/K223618",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_05",
+      "area": "regulation",
+      "url": "https://fda.innolitics.com/device/K223618",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_06",
+      "area": "regulation",
+      "url": "https://fda.innolitics.com/device/K173813",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_07",
+      "area": "regulation",
+      "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K261977",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_08",
+      "area": "regulation",
+      "url": "https://fda.innolitics.com/device/K120737",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_09",
+      "area": "regulation",
+      "url": "https://www.fda.gov/radiation-emitting-products/home-business-and-entertainment-products/laser-products-and-instruments",
+      "status": "unverified",
+      "reason": "HTTP 404"
+    },
+    {
+      "id": "reg_10",
+      "area": "regulation",
+      "url": "https://www.fda.gov/radiation-emitting-products/home-business-and-entertainment-products/laser-products-and-instruments",
+      "status": "unverified",
+      "reason": "HTTP 404"
+    },
+    {
+      "id": "reg_11",
+      "area": "regulation",
+      "url": "https://www.law.cornell.edu/cfr/text/21/1040.10",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_12",
+      "area": "regulation",
+      "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/laser-products-conformance-iec-60825-1-ed-3-and-iec-60601-2-22-ed-31-laser-notice-no-56",
+      "status": "unverified",
+      "reason": "HTTP 404"
+    },
+    {
+      "id": "reg_13",
+      "area": "regulation",
+      "url": "https://www.law.cornell.edu/cfr/text/21/801.5",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_14",
+      "area": "regulation",
+      "url": "https://www.fda.gov/medical-devices/device-labeling/general-device-labeling-requirements",
+      "status": "unverified",
+      "reason": "HTTP 404"
+    },
+    {
+      "id": "reg_15",
+      "area": "regulation",
+      "url": "https://www.law.cornell.edu/cfr/text/21/801.20",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_16",
+      "area": "regulation",
+      "url": "https://www.ftc.gov/business-guidance/resources/health-products-compliance-guidance",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_17",
+      "area": "regulation",
+      "url": "https://www.ftc.gov/business-guidance/resources/health-products-compliance-guidance",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_18",
+      "area": "regulation",
+      "url": "https://bbbprograms.org/media/newsroom/decisions/nad-refers-advertising-from-viss-beauty-to-ftc-for-review",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_19",
+      "area": "regulation",
+      "url": "https://www.tdlr.texas.gov/las/lasfaq.htm",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_20",
+      "area": "regulation",
+      "url": "https://www.law.cornell.edu/cfr/text/49/173.185",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_21",
+      "area": "regulation",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10752016",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "reg_22",
+      "area": "regulation",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10752016",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_01",
+      "area": "testing",
+      "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPCD/classification.cfm?id=OHT",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_02",
+      "area": "testing",
+      "url": "https://www.evs.ee/en/iec-62471-2006",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_03",
+      "area": "testing",
+      "url": "https://webstore.iec.ch/en/publication/73147",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_04",
+      "area": "testing",
+      "url": "https://webstore.iec.ch/en/publication/72187",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_05",
+      "area": "testing",
+      "url": "https://webstore.iec.ch/en/publication/72187",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_06",
+      "area": "testing",
+      "url": "https://genorma.com/en/standards/iec-60601-1-11-2015",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_07",
+      "area": "testing",
+      "url": "https://webstore.iec.ch/en/publication/80973",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_08",
+      "area": "testing",
+      "url": "https://webstore.iec.ch/en/publication/3587",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_09",
+      "area": "testing",
+      "url": "https://fda.innolitics.com/device/K223618",
+      "status": "unverified",
+      "reason": "페이지에 원문 문장이 없음"
+    },
+    {
+      "id": "tst_10",
+      "area": "testing",
+      "url": "https://fda.innolitics.com/device/K223618",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_11",
+      "area": "testing",
+      "url": "https://fda.innolitics.com/device/K212318",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_12",
+      "area": "testing",
+      "url": "https://fda.innolitics.com/device/K181734",
+      "status": "verified",
+      "source": "live"
+    },
+    {
+      "id": "tst_13",
+      "area": "testing",
+      "url": "https://fda.innolitics.com/device/K181734",
+      "status": "verified",
+      "source": "live"
+    }
+  ]
+}

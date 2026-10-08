@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-10-09T01:31:37+09:00",
+  "status": "PASS",
+  "sample": 150,
+  "auditor_checked": 150,
+  "fail": 4,
+  "fail_rate": 0.027,
+  "max_fail_rate": 0.05,
+  "by_item": {
+    "failed_component": 1,
+    "shaving_prep": 2,
+    "session_minutes": 1
+  },
+  "by_change": {},
+  "warnings": []
+}

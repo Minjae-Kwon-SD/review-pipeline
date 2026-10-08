@@ -40,11 +40,11 @@ disable-model-invocation: true
 
 | 항목 | 기본값 |
 |---|---|
-| 대량 작업자(sonnet) 동시 실행 | 4 |
+| 대량 작업자(sonnet) 동시 실행 | 태깅 8, 이슈 라벨과 설계 정보 추출 4 |
 | 작업자 하나가 맡는 양 | 최대 4묶음 또는 리뷰 200개 |
 | 단계당 에이전트 호출 | 작업자 수 + 작성자 1 + 감사자 1 + 재시도 |
 | 재시도 | 묶음마다 2번, 단계 전체 재시도 호출 4번 |
-| 상위 모델 | 작성자 1, 감사자 1(작성이 끝난 뒤 감사, 동시에 돌리지 않음) |
+| 상위 모델 | 작성자 4(서로 다른 파일을 쓰는 작성자, 예: 주제별 issue-labeler), 감사자 1(작성이 끝난 뒤 감사, 동시에 돌리지 않음) |
 
 - **같은 모델 작업자 먼저 하나**: 같은 정의와 같은 모델의 작업자 가운데 하나를 먼저 띄우고 첫 출력이 나오면 나머지를 띄운다(캐시 후보, 절감률 미확인). 사람 관문은 큰 묶음 앞에 끝낸다.
 - **감사**: 작성자와 다른 감사자 하나. 기계 검사를 통과한 결과의 표본과 바뀐 행 전부를 본다. 표본이 비면 PASS가 아니라 EMPTY로 따로 정한다.
@@ -77,8 +77,8 @@ disable-model-invocation: true
    5. `python scripts/eval_gold.py score <회차>`. 출력의 모델별 한 줄 요약(04_gold_eval.json의 summary_ko, 예: "sonnet: 주제 F1 0.90(기준 0.80, 통과), 감성 일치 88.6%(기준 90.0%, 1.4%p 모자람)")을 민재님에게 글자 그대로 옮긴다. 기준과의 차이를 따로 계산하지 않는다. 판정은 리포트에 쓰는 sonnet 기준이다. 기준 미달이면 04_gold_eval.md의 불일치 목록을 보여 주고 ⏸ `06_gold_review`(human)로 멈춘다. 고를 수 있는 것: 스키마를 고쳐 3단계부터 다시, 정답 태깅을 고쳐 다시 채점, 이대로 진행(리포트 부록에 적음).
 6-1. **07a_issue_draft, agents** (세부 이슈 목록 초안):
    1. `python scripts/issues.py sample <회차>`: 주제(전체 만족도 제외)와 방향(부정 이슈: 부정과 혼합 인용, 긍정 이슈: 긍정과 혼합 인용)마다 인용을 최대 150개, ASIN과 별점 묶음이 고르게 섞이게 뽑는다. 인용 20개 미만인 주제와 방향은 기타만.
-   2. issue-labeler를 주제마다 하나씩 부른다(모델은 따로 주지 않음, 상위 모델. 상위 모델 작성자 상한을 넘기지 않게 차례로). 프롬프트 `회차: <회차>`, `주제: <topic id>`. 출력은 07a_issues_<주제>.yaml.
-   3. `python scripts/issues.py merge <회차>`. 오류가 있으면 그 주제의 issue-labeler에게 오류를 주고 한 번 고치게 한다. 07a_issues_draft.md의 주제별 표를 민재님에게 보여 준다.
+   2. issue-labeler를 주제마다 하나씩 부른다(모델은 따로 주지 않음, 상위 모델. 상위 모델 작성자 상한(4) 안에서 동시에). 프롬프트 `회차: <회차>`, `주제: <topic id>`. 출력은 07a_issues_<주제>.yaml.
+   3. `python scripts/issues.py merge <회차>`. 오류가 있으면 그 주제의 issue-labeler에게 오류를 주고 한 번 고치게 한다. 주제를 따로 동시에 썼으므로, 메인 세션이 주제끼리 뜻이 겹치는 라벨(같은 불만이 두 주제에 있음)을 확인해 민재님에게 보여 줄 표에 적는다. 07a_issues_draft.md의 주제별 표를 민재님에게 보여 준다.
 6-2. **07a_issue_approval, human** ⏸: "07a_issues_draft.yaml을 고쳐 07a_issues_approved.yaml로 저장한 뒤 알려 주세요"라고 하고 턴을 끝낸다.
    - 승인 기록: `python scripts/issues.py approve <회차> --approved-at <UTC 시각> --approved-by "<누가, 어떻게>"`가 초안을 07a_issues_approved.yaml로 복사하고 승인 시각과 승인자를 적는다.
      perfume-db-2026-10-07: 2026-10-07T09:09Z, 민재님, 카드 "제안 반영 후 승인"(라벨 71개).
@@ -125,7 +125,7 @@ disable-model-invocation: true
    - 문장 일부만 바꿨으면 `python scripts/guide_diff.py <회차> 17_guide_vN.md`(18_guide_changed.md)로 바뀐 줄을 뽑아 evidence-auditor는 그 줄만 본다.
 
    - 견고성 점검: 7_weight 앞에 `python scripts/robustness.py <회차>`(다시 뽑기 2,000번 씨앗 고정, 상품 하나씩 빼기 → 05_robustness.json). weight.py가 metrics의 robustness로 넣고(리포트 부록 문장과 "6개 중 5개(리뷰를 다시 뽑아 보면 3~5개)" 같은 표기), guide_metrics.py가 머리 숫자 3의 표기와 A장 "견고성 점검" 표로 쓴다. 가이드 A장에 `### 견고성 점검` 소제목이 있으면 HTML이 표를 넣는다.
-   - 상품 사양(선택, 무료 웹): `python scripts/specs.py prep <회차>`(23_spec_input.json, 항목은 config/categories/<카테고리>.yaml의 specs.items), product-spec-collector(모델 따로 주지 않음, 헤드리스면 --allowedTools에 WebSearch, WebFetch)가 23_specs.yaml, `python scripts/specs.py check <회차>`(주소를 다시 열어 원문 문장과 값 확인 → 23_specs_check.json, 확인된 값만 23_specs_verified.json). 버려진 값만 한 번 다시 찾기. guide_metrics.py가 점수표의 농도와 노트 칸, 기준 1(농도와 지속력), 2(공식 노트와 리뷰 노트, config specs.note_map), 4(병과 분사기와 망가진 부품), 6(몸 증상과 표시 알레르기 성분, 나열만) 표로 쓴다. amazon 주소는 열지 않는다.
+   - 상품 사양(선택, 무료 웹): `python scripts/specs.py prep <회차>`(23_spec_input.json, 항목은 config/categories/<카테고리>.yaml의 specs.items), product-spec-collector(모델 따로 주지 않음, 헤드리스면 --allowedTools에 WebSearch, WebFetch)가 23_specs.yaml, `python scripts/specs.py check <회차>`(주소를 다시 열어 원문 문장과 값 확인 → 23_specs_check.json, 확인된 값만 23_specs_verified.json). 버려진 값만 한 번 다시 찾기. guide_metrics.py가 점수표의 농도와 노트 칸, 기준 1(농도와 지속력), 2(공식 노트와 리뷰 노트, config specs.note_map), 4(병과 분사기와 망가진 부품), 6(이상 반응과 표시 알레르기 성분, 나열만) 표로 쓴다. amazon 주소는 열지 않는다.
 
    - 추출 항목 일부를 다시 판정할 때: `python scripts/detail.py rejudge-plan <회차> --items a,b`, detail-extractor(model: sonnet, "다시 판정" 절), `rejudge-merge`, 새로 생긴 값만 evidence-auditor(stage: details, 표본 14b_rejudge_audit_sample.jsonl), `detail.py audit --sample-file 14b_rejudge_audit_sample.jsonl --audit-file 14b_rejudge_audit.yaml`, 그다음 16~19.
    - 카테고리 전용 설정은 config/categories/<카테고리>.yaml에만: report.title, issues.overlap, guide.focus[].pair_items, guide.anatomy, guide.caveats_extra, guide.caveat_subcategory, specs.links, specs.note_item, specs.part_item. 없으면 그 표나 그림을 건너뛴다.

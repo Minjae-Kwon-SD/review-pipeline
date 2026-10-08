@@ -1,0 +1,109 @@
+topic: treatment_time
+directions:
+  negative:
+    labels:
+      - id: long_session
+        name_ko: 한 번 시술이 오래 걸림
+        name_en: Sessions take a long time
+        include: 시간이 많이 든다, 오래 걸린다, 몇 시간 걸린다는 말 중 부위, 원인, 비교 대상, 횟수를 말하지 않는 것(time consuming, takes forever, 시술 한 번에 30분)
+        exclude: 다리나 몸 전체 같은 넓은 부위를 말하면 large_area_slow, 발광 간격이 원인이면 slow_flash, 작은 조사창이나 반복 조사가 원인이면 small_window_passes, 광고나 기대, 면도와 비교하면 longer_than_expected, 자주 오래 해야 하는 일정이면 demanding_schedule
+        examples:
+          - {review_id: R2T3HFTC3IYYEJ, quote: "Time consuming treatments."}
+          - {review_id: R217CA2CSB1IWD, quote: "This takes forever to do a treatment."}
+        approx_count: 26
+      - id: large_area_slow
+        name_ko: 다리나 몸 전체 같은 넓은 부위가 오래 걸림
+        name_en: Large areas take too long
+        include: 다리, 몸 전체, 가슴과 등처럼 넓은 부위를 하는 데 오래 걸린다, 몇 시간 걸린다, 오래 걸려 다리는 포기했다는 말(원인은 말하지 않음)
+        exclude: 작은 조사창이나 여러 번 덧대야 해서라는 원인을 말하면 small_window_passes, 발광 간격 때문이라고 하면 slow_flash, 부위 언급 없이 오래 걸린다는 말은 long_session
+        examples:
+          - {review_id: R16RHLDXFP7HCJ, quote: "It took me an hour and a half to do both legs plus bikini line."}
+          - {review_id: RI2SISRQKM0M2, quote: "the device takes quite a while to treat larger areas like the legs"}
+        approx_count: 14
+      - id: slow_flash
+        name_ko: 발광 간격이 길거나 기기가 느림
+        name_en: Slow flash rate or recharge wait
+        include: 발광 속도가 느리다, 쏘고 나서 다음 발광까지 몇 초 기다려야 한다, 다시 데워지거나 식기를 기다려야 한다, 자동 모드가 빠르지 않다, 기기 자체가 느리다(slow, lenta)
+        exclude: 조사창 크기나 반복 조사가 원인이면 small_window_passes, 원인 없이 시술이 오래 걸린다는 말은 long_session
+        examples:
+          - {review_id: R2ZW83BMFS2C92, quote: "the flashing speed is slow"}
+          - {review_id: R3SYQQVFXZOBU4, quote: "It takes forever to reheat in between each time push the button!"}
+        approx_count: 10
+      - id: small_window_passes
+        name_ko: 작은 조사창이나 반복 조사 때문에 오래 걸림
+        name_en: Small window or repeat passes slow it down
+        include: 헤드나 조사창, 기기가 작아 오래 걸린다, 한 곳을 두세 번 덧대야 한다, 굴곡진 부위는 천천히 조심스럽게 지나가야 한다
+        exclude: 발광 사이 대기 시간은 slow_flash(둘 다 말하면 두 라벨), 원인 없이 넓은 부위가 오래 걸린다는 말은 large_area_slow, 큰 헤드가 있어야 한다는 요구만 있으면 이 주제가 아님(design)
+        examples:
+          - {review_id: RXBX1IOM03910, quote: "el cabezal pequeño hace que la depilación de zonas grandes sea demorado"}
+          - {review_id: RKY1PUP3AY62W, quote: "time consuming especially on large areas like legs since you have to go over the area two to three times"}
+        approx_count: 6
+      - id: demanding_schedule
+        name_ko: 자주, 오래 지켜야 하는 일정이 부담
+        name_en: Demanding treatment schedule
+        include: 이틀마다, 주 2~3회, 매일, 몇 달에서 1년, 평생 매주 해야 한다는 부담, 일정을 따를 시간이 없다, 계속 챙기기 힘들다, 세션이 많이 필요하다
+        exclude: 한 번 시술 시간만 말하면 long_session이나 large_area_slow, 효과가 보이기까지의 기간 자체나 꾸준함을 효과 조건으로만 말하면 이 주제가 아님(hair_reduction)
+        examples:
+          - {review_id: R2FA3ODX0DHYD8, quote: "Having to do this 2 times a week for 5 months"}
+          - {review_id: R2R2920RW4FYD8, quote: "It's definitely a time investment to have to use this every other day."}
+        approx_count: 19
+      - id: longer_than_expected
+        name_ko: 광고나 기대보다 오래 걸림
+        name_en: Takes longer than advertised or expected
+        include: 광고한 10분보다 오래 걸린다, 예상보다 오래 걸린다, 면도나 다른 기기보다 오래 걸리거나 시간이 줄지 않았다
+        exclude: 비교 대상 없이 오래 걸린다는 말은 long_session, 효과가 광고보다 늦게 나온다는 말은 이 주제가 아님(hair_reduction)
+        examples:
+          - {review_id: R3DS39VF4SYRUU, quote: "it takes way longer than 10 mins like advertised"}
+          - {review_id: R3TBTATZWLRUQN, quote: "much more time consuming than they advertise"}
+        approx_count: 6
+    other_approx_count: 2
+    notes: "\"This increases the amount of time\", \"drag my session from minutes to hours\"처럼 원인이 인용 밖(앞 문장)에 있어 보이는 말은 원인을 알 수 없어 long_session으로 셌다. \"se necesitan muchas sesiones\"는 일정 부담으로 셌지만 효과 기간(hair_reduction)과 경계가 가깝다."
+  positive:
+    labels:
+      - id: quick_session
+        name_ko: 시술이 빠르고 오래 안 걸림
+        name_en: Quick sessions
+        include: 빠르다, 금방 끝난다, 오래 안 걸린다, 시간이 많이 들지 않는다, 한 번에 2분, 5분, 10분이면 된다(부위 언급 없거나 겨드랑이처럼 작은 부위)
+        exclude: 다리나 몸 전체를 짧게 끝낸다는 말은 large_area_quick, 발광 속도나 자동 모드, 이중 발광 덕분이라고 하면 fast_flash_mode, 주당 횟수나 주 단위 시간은 light_schedule
+        examples:
+          - {review_id: R3I3HAIAL07C08, quote: "a full session only takes about 10 minutes"}
+          - {review_id: R6HJL2H1R3J9U, quote: "the process is quick and convenient"}
+        approx_count: 28
+      - id: fast_flash_mode
+        name_ko: 발광이 빠르거나 자동 모드, 이중 발광으로 빨라짐
+        name_en: Fast flash or auto and double flash modes
+        include: 발광 주기가 빠르다, 자동 모드(Auto-Glide)가 빠르다, 이중 발광 덕에 빨리 끝난다
+        exclude: 원인 없이 빠르다는 말은 quick_session, 자동 모드의 조작 편리함(버튼을 안 눌러도 된다)은 이 주제가 아님(ease_of_use)
+        examples:
+          - {review_id: R371G2D4TFMWP7, quote: "The double flash of the Ulike makes the process pretty quick."}
+          - {review_id: R45A68G8D9H22, quote: "Treatment sessions are super fast with the Auto-Glide mode"}
+        approx_count: 5
+      - id: large_area_quick
+        name_ko: 다리나 몸 전체도 짧게 끝남
+        name_en: Large areas done quickly
+        include: 다리, 종아리, 머리부터 발끝까지 같은 넓은 부위를 몇 분에서 30분 안에 끝낸다, 다리도 비교적 빨리 된다
+        exclude: 겨드랑이처럼 작은 부위나 부위 언급 없이 빠르다는 말은 quick_session
+        examples:
+          - {review_id: R1UMNQC5X9R7VI, quote: "It’s quick to use, and I can treat larger areas like my legs in about 10 minutes."}
+          - {review_id: R2IW5AKUW2LVDH, quote: "it only takes me about 10 minutes total to do the lower section of both legs"}
+        approx_count: 4
+      - id: light_schedule
+        name_ko: 일정이 가볍고 생활에 맞추기 쉬움
+        name_en: Light, easy-to-keep schedule
+        include: 주 2회, 몇 주에 한 번만 하면 된다, 일주일에 20분 이하, 주간 루틴에 넣기 쉽다, 일정을 지키기 쉬웠다
+        exclude: 한 번 시술이 빠르다는 말만 있으면 quick_session, 효과가 몇 주 만에 보였다는 말은 이 주제가 아님(hair_reduction)
+        examples:
+          - {review_id: R17Z3G31WY4J6A, quote: "you only have to use it 2 times a week to start seeing results"}
+          - {review_id: R2D5BIKVEMGFGD, quote: "I also love that you only need to use it every couple of weeks"}
+        approx_count: 6
+      - id: time_worth_it
+        name_ko: 시간이 들지만 견딜 만하거나 그만한 가치가 있음
+        name_en: Time is acceptable or worth it
+        include: 시간이 좀 들고 지루하지만 나쁘지 않다, 효과가 있으니 발광 간격도 신경 쓰이지 않는다, 시간이 들어도 결과가 그만한 가치가 있다(혼합 인용의 칭찬 부분)
+        exclude: 시간이 오래 걸린다는 불만만 있으면 negative 쪽 라벨, 빠르다는 칭찬은 quick_session
+        examples:
+          - {review_id: R380XCNEXZQ8JX, quote: "It is a little time consuming for the results have been worth it for me."}
+          - {review_id: R1KWW1ZMRJ0A1O, quote: "It will take a little time and feel tedious, but it isn't too bad."}
+        approx_count: 3
+    other_approx_count: 2
+    notes: "\"ahorra mucho tiempo y dinero\", \"It saves me time and salon trips\"처럼 살롱이나 면도 대비 시간을 아낀다는 말은 2개(5% 미만)라 기타로 셌다."

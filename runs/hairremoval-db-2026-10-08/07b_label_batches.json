@@ -1,0 +1,240 @@
+{
+  "made_at": "2026-10-08T22:58:31+09:00",
+  "size": 180,
+  "units": 2511,
+  "auto_other": 44,
+  "batches": [
+    {
+      "batch_id": "accessories_negative_01",
+      "topic": "accessories",
+      "direction": "negative",
+      "items": 20,
+      "input": "07b_label_input/accessories_negative_01.jsonl",
+      "output": "07b_labels_accessories_negative_01.jsonl"
+    },
+    {
+      "batch_id": "accessories_positive_01",
+      "topic": "accessories",
+      "direction": "positive",
+      "items": 41,
+      "input": "07b_label_input/accessories_positive_01.jsonl",
+      "output": "07b_labels_accessories_positive_01.jsonl"
+    },
+    {
+      "batch_id": "brand_experience_negative_01",
+      "topic": "brand_experience",
+      "direction": "negative",
+      "items": 64,
+      "input": "07b_label_input/brand_experience_negative_01.jsonl",
+      "output": "07b_labels_brand_experience_negative_01.jsonl"
+    },
+    {
+      "batch_id": "brand_experience_positive_01",
+      "topic": "brand_experience",
+      "direction": "positive",
+      "items": 118,
+      "input": "07b_label_input/brand_experience_positive_01.jsonl",
+      "output": "07b_labels_brand_experience_positive_01.jsonl"
+    },
+    {
+      "batch_id": "customer_service_negative_01",
+      "topic": "customer_service",
+      "direction": "negative",
+      "items": 52,
+      "input": "07b_label_input/customer_service_negative_01.jsonl",
+      "output": "07b_labels_customer_service_negative_01.jsonl"
+    },
+    {
+      "batch_id": "customer_service_positive_01",
+      "topic": "customer_service",
+      "direction": "positive",
+      "items": 20,
+      "input": "07b_label_input/customer_service_positive_01.jsonl",
+      "output": "07b_labels_customer_service_positive_01.jsonl"
+    },
+    {
+      "batch_id": "design_negative_01",
+      "topic": "design",
+      "direction": "negative",
+      "items": 47,
+      "input": "07b_label_input/design_negative_01.jsonl",
+      "output": "07b_labels_design_negative_01.jsonl"
+    },
+    {
+      "batch_id": "design_positive_01",
+      "topic": "design",
+      "direction": "positive",
+      "items": 55,
+      "input": "07b_label_input/design_positive_01.jsonl",
+      "output": "07b_labels_design_positive_01.jsonl"
+    },
+    {
+      "batch_id": "ease_of_use_negative_01",
+      "topic": "ease_of_use",
+      "direction": "negative",
+      "items": 44,
+      "input": "07b_label_input/ease_of_use_negative_01.jsonl",
+      "output": "07b_labels_ease_of_use_negative_01.jsonl"
+    },
+    {
+      "batch_id": "ease_of_use_positive_01",
+      "topic": "ease_of_use",
+      "direction": "positive",
+      "items": 176,
+      "input": "07b_label_input/ease_of_use_positive_01.jsonl",
+      "output": "07b_labels_ease_of_use_positive_01.jsonl"
+    },
+    {
+      "batch_id": "hair_reduction_negative_01",
+      "topic": "hair_reduction",
+      "direction": "negative",
+      "items": 180,
+      "input": "07b_label_input/hair_reduction_negative_01.jsonl",
+      "output": "07b_labels_hair_reduction_negative_01.jsonl"
+    },
+    {
+      "batch_id": "hair_reduction_negative_02",
+      "topic": "hair_reduction",
+      "direction": "negative",
+      "items": 106,
+      "input": "07b_label_input/hair_reduction_negative_02.jsonl",
+      "output": "07b_labels_hair_reduction_negative_02.jsonl"
+    },
+    {
+      "batch_id": "hair_reduction_positive_01",
+      "topic": "hair_reduction",
+      "direction": "positive",
+      "items": 180,
+      "input": "07b_label_input/hair_reduction_positive_01.jsonl",
+      "output": "07b_labels_hair_reduction_positive_01.jsonl"
+    },
+    {
+      "batch_id": "hair_reduction_positive_02",
+      "topic": "hair_reduction",
+      "direction": "positive",
+      "items": 180,
+      "input": "07b_label_input/hair_reduction_positive_02.jsonl",
+      "output": "07b_labels_hair_reduction_positive_02.jsonl"
+    },
+    {
+      "batch_id": "hair_reduction_positive_03",
+      "topic": "hair_reduction",
+      "direction": "positive",
+      "items": 84,
+      "input": "07b_label_input/hair_reduction_positive_03.jsonl",
+      "output": "07b_labels_hair_reduction_positive_03.jsonl"
+    },
+    {
+      "batch_id": "packaging_positive_01",
+      "topic": "packaging",
+      "direction": "positive",
+      "items": 26,
+      "input": "07b_label_input/packaging_positive_01.jsonl",
+      "output": "07b_labels_packaging_positive_01.jsonl"
+    },
+    {
+      "batch_id": "pain_comfort_negative_01",
+      "topic": "pain_comfort",
+      "direction": "negative",
+      "items": 64,
+      "input": "07b_label_input/pain_comfort_negative_01.jsonl",
+      "output": "07b_labels_pain_comfort_negative_01.jsonl"
+    },
+    {
+      "batch_id": "pain_comfort_positive_01",
+      "topic": "pain_comfort",
+      "direction": "positive",
+      "items": 180,
+      "input": "07b_label_input/pain_comfort_positive_01.jsonl",
+      "output": "07b_labels_pain_comfort_positive_01.jsonl"
+    },
+    {
+      "batch_id": "pain_comfort_positive_02",
+      "topic": "pain_comfort",
+      "direction": "positive",
+      "items": 21,
+      "input": "07b_label_input/pain_comfort_positive_02.jsonl",
+      "output": "07b_labels_pain_comfort_positive_02.jsonl"
+    },
+    {
+      "batch_id": "price_value_negative_01",
+      "topic": "price_value",
+      "direction": "negative",
+      "items": 125,
+      "input": "07b_label_input/price_value_negative_01.jsonl",
+      "output": "07b_labels_price_value_negative_01.jsonl"
+    },
+    {
+      "batch_id": "price_value_positive_01",
+      "topic": "price_value",
+      "direction": "positive",
+      "items": 111,
+      "input": "07b_label_input/price_value_positive_01.jsonl",
+      "output": "07b_labels_price_value_positive_01.jsonl"
+    },
+    {
+      "batch_id": "quality_negative_01",
+      "topic": "quality",
+      "direction": "negative",
+      "items": 156,
+      "input": "07b_label_input/quality_negative_01.jsonl",
+      "output": "07b_labels_quality_negative_01.jsonl"
+    },
+    {
+      "batch_id": "quality_positive_01",
+      "topic": "quality",
+      "direction": "positive",
+      "items": 65,
+      "input": "07b_label_input/quality_positive_01.jsonl",
+      "output": "07b_labels_quality_positive_01.jsonl"
+    },
+    {
+      "batch_id": "safety_negative_01",
+      "topic": "safety",
+      "direction": "negative",
+      "items": 84,
+      "input": "07b_label_input/safety_negative_01.jsonl",
+      "output": "07b_labels_safety_negative_01.jsonl"
+    },
+    {
+      "batch_id": "safety_positive_01",
+      "topic": "safety",
+      "direction": "positive",
+      "items": 37,
+      "input": "07b_label_input/safety_positive_01.jsonl",
+      "output": "07b_labels_safety_positive_01.jsonl"
+    },
+    {
+      "batch_id": "skin_hair_suitability_negative_01",
+      "topic": "skin_hair_suitability",
+      "direction": "negative",
+      "items": 65,
+      "input": "07b_label_input/skin_hair_suitability_negative_01.jsonl",
+      "output": "07b_labels_skin_hair_suitability_negative_01.jsonl"
+    },
+    {
+      "batch_id": "treatment_time_negative_01",
+      "topic": "treatment_time",
+      "direction": "negative",
+      "items": 79,
+      "input": "07b_label_input/treatment_time_negative_01.jsonl",
+      "output": "07b_labels_treatment_time_negative_01.jsonl"
+    },
+    {
+      "batch_id": "treatment_time_positive_01",
+      "topic": "treatment_time",
+      "direction": "positive",
+      "items": 47,
+      "input": "07b_label_input/treatment_time_positive_01.jsonl",
+      "output": "07b_labels_treatment_time_positive_01.jsonl"
+    },
+    {
+      "batch_id": "trust_negative_01",
+      "topic": "trust",
+      "direction": "negative",
+      "items": 40,
+      "input": "07b_label_input/trust_negative_01.jsonl",
+      "output": "07b_labels_trust_negative_01.jsonl"
+    }
+  ]
+}

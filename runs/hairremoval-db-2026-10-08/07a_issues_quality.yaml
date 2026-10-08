@@ -1,0 +1,100 @@
+topic: quality
+directions:
+  negative:
+    labels:
+      - id: early_failure
+        name_ko: 받자마자 또는 한 달 안에 고장
+        name_en: Defective on arrival or failed within a month
+        include: 받았을 때부터 켜지지 않거나 불량, 손상된 채 왔다는 말, 또는 몇 번 쓰고, 몇 주에서 한 달 안에 기기 전체가 멈췄다는 말(충전기나 케이블 때문에 처음부터 못 쓴 경우 포함)
+        exclude: 한 달 넘게 쓴 뒤 고장은 failed_after_months, 시기를 말하지 않은 고장은 failure_unspecified, 특정 모드나 버튼, 센서만 안 되면 partial_failure
+        examples:
+          - {review_id: RJLK2EL94UMYE, quote: "Stopped working after 3 uses. Won’t even turn on."}
+          - {review_id: R3806RF3C4GFDU, quote: "The machine I received is faulty"}
+        approx_count: 30
+      - id: failed_after_months
+        name_ko: 몇 달 쓴 뒤 고장이나 성능 저하
+        name_en: Failed or weakened after months of use
+        include: 한 달 넘게(몇 달에서 몇 년) 쓴 뒤 기기 전체가 멈췄다는 말, 수명이 짧다, 오래 못 쓴다, 발광 횟수를 다 쓰기 전에 끝났다는 평가, 쓸수록 발광이 약해지거나 예전만큼 안 된다는 말(시기와 무관)
+        exclude: 한 달 안의 고장은 early_failure, 시기를 말하지 않은 고장은 failure_unspecified, 털이 덜 줄었다는 효과 이야기는 이 주제가 아님(hair_reduction)
+        examples:
+          - {review_id: RTZ6KQ6T15U3J, quote: "Stopped working after 4 months."}
+          - {review_id: R2JM1I6ZLDWZ00, quote: "Barely works after a few months of use."}
+        approx_count: 36
+      - id: failure_unspecified
+        name_ko: 고장(시기 언급 없음)
+        name_en: Stopped working, timing not stated
+        include: 기기가 멈췄다, 켜지지 않는다, 발광이 안 된다, 오작동했다고만 하고 언제 그랬는지 말하지 않는 말
+        exclude: 시기를 말하면 early_failure 또는 failed_after_months, 가끔만 안 되면 intermittent_malfunction, 일부 기능만 안 되면 partial_failure
+        examples:
+          - {review_id: R2SZIVAO4SCY8R, quote: "it just stopped working"}
+          - {review_id: RPRSBLD7AE510, quote: "It turns on and cools, but the laser itself isn't working."}
+        approx_count: 17
+      - id: partial_failure
+        name_ko: 특정 모드나 버튼, 센서만 고장
+        name_en: Specific mode, button, or sensor failed
+        include: 얼굴 모드, 자동 모드, SHR 모드, 세기 버튼, 전원 버튼, 피부 센서처럼 기기의 일부 기능만 계속 안 된다는 말(센서가 피부를 더는 읽지 못함 포함)
+        exclude: 가끔 되다 안 되다 하면 intermittent_malfunction, 기기 전체가 멈추면 시기에 따라 early_failure, failed_after_months, failure_unspecified, 피부색 때문에 센서가 막는 것은 이 주제가 아님(skin_hair_suitability)
+        examples:
+          - {review_id: R11JTE4QJDAYQR, quote: "Face mode stopped functioning the 2nd time I used it"}
+          - {review_id: R97OX7XS8RVRJ, quote: "the sensor has stopped reading skin after less than a month of use"}
+        approx_count: 11
+      - id: intermittent_malfunction
+        name_ko: 가끔 발광 안 함이나 저절로 꺼짐
+        name_en: Misfires, freezes, or shuts off randomly
+        include: 피부에 닿아도 가끔 발광하지 않는다, 헛발사, 멈춰서 다시 꽂아야 한다, 이유 없이 저절로 꺼지거나 재시작된다는 말
+        exclude: 열 때문에 꺼진다고 하면 overheating, 한 기능이 계속 안 되면 partial_failure, 피부에 딱 붙여야 발광하는 사용 방식의 불편은 이 주제가 아님(ease_of_use)
+        examples:
+          - {review_id: R2C4TROJI0WAZI, quote: "it misfires literally like 90% of the time"}
+          - {review_id: RRJWFICVRDKH7, quote: "it just turns off automatically by itself for no reason"}
+        approx_count: 20
+      - id: overheating
+        name_ko: 기기 과열
+        name_en: Device overheats
+        include: 기기 몸체나 헤드가 뜨거워진다, 과열로 꺼진다, 식을 때까지 쉬어야 한다, 뜨거워지면서 냉각이 안 된다는 말
+        exclude: 쏠 때 피부에 닿는 열감이나 탈 것 같은 감각은 이 주제가 아님(pain_comfort), 탄내나 연기는 scorch_marks_smell
+        examples:
+          - {review_id: R3AHPS52Z6NIVG, quote: "It gets super hot after a few minutes of use, and we're worried it's going to overheat."}
+          - {review_id: R2OYIIRT8H081A, quote: "the unit gets hot and automatically powers off"}
+        approx_count: 16
+      - id: scorch_marks_smell
+        name_ko: 조사창 얼룩이나 탄내, 연기
+        name_en: Window scorch marks, burning smell, or smoke
+        include: 조사창이나 렌즈 안의 검은 얼룩과 그을음, 사파이어 창에 김이 서림, 탄내나 플라스틱 타는 냄새, 펑 소리와 불꽃, 연기가 났다는 말
+        exclude: 그 때문에 무섭다, 위험하다는 안전 우려는 이 주제가 아님(safety), 냄새나 연기 없이 그냥 멈춘 것은 고장 라벨
+        examples:
+          - {review_id: R1KNHD542ODN3O, quote: "The laser window has scorch marks on it"}
+          - {review_id: R1O1Y1AMTALTUT, quote: "weird, almost burning plastic like smell that comes from the top ventilation"}
+        approx_count: 14
+      - id: fragile_build
+        name_ko: 약한 만듦새나 부품 파손
+        name_en: Flimsy build or broken parts
+        include: 재질이 약하다, 깨지기 쉽다, 헤드나 캡이 깨지거나 부식됐다, 버튼 느낌이 싸다, 가격에 비해 만듦새가 못하다는 말
+        exclude: 작동이 멈춘 고장은 고장 라벨, 가격 대비 실망 자체는 이 주제가 아님(price_value), 무게나 모양은 design
+        examples:
+          - {review_id: RW52SEIQ8TX0B, quote: "it’s extremely fragile"}
+          - {review_id: RTQY6V0DQNOTE, quote: "Not even a year the big laser head shattered!!"}
+        approx_count: 9
+    other_approx_count: 3
+    notes: 완전 고장이 표본의 절반 넘게 차지해 시기(한 달 안, 한 달 넘게, 언급 없음)로 나눴다. 시기 언급 없는 고장이 어림 17개라 따로 두었고, 한 인용에 시기와 탄내가 함께 있으면 두 라벨을 단다.
+  positive:
+    labels:
+      - id: well_made
+        name_ko: 잘 만든 느낌, 고급스러움
+        name_en: Feels well made and premium
+        include: 품질이 좋다, 잘 만든 느낌이다, 고급스럽다, 비싸 보인다, 싸 보이지 않는다처럼 만듦새와 첫인상을 칭찬하는 말
+        exclude: 튼튼하다, 오래 간다, 아직 잘 작동한다, 과열이 없다는 durable, 모양이나 색이 예쁘다는 이 주제가 아님(design)
+        examples:
+          - {review_id: R2JRF62JGQA1TY, quote: "It feels well made"}
+          - {review_id: R18D1G0XPQQ91Y, quote: "The device feels very well made and has a much more premium feel"}
+        approx_count: 57
+      - id: durable
+        name_ko: 튼튼하고 오래 작동함
+        name_en: Sturdy and durable
+        include: 튼튼하다, 내구성이 좋다, 견고하다, 아직도 잘 작동한다, 남들이 말한 과열을 겪지 않았다는 말
+        exclude: 일반적인 품질 칭찬이나 고급스러운 느낌은 well_made
+        examples:
+          - {review_id: R2PH76S40PV5X1, quote: "very durable"}
+          - {review_id: R2SC0RZYQYFC7C, quote: "I have not experienced the overheating that some have reported"}
+        approx_count: 7
+    other_approx_count: 1
+    notes: 고급스러움(premium, looks expensive)은 어림 5개로 품질 칭찬과 경계가 흐려 well_made에 합쳤다. "build quality feels solid"처럼 solid는 느낌 칭찬이라 well_made, sturdy, durable, robustly built는 durable로 본다.

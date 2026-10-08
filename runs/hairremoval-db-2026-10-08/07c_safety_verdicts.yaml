@@ -1,0 +1,133 @@
+audit:
+  stage: safety
+  run: hairremoval-db-2026-10-08
+  verdicts:
+    - {review_id: R1B2B516LQUZCQ, verdict: none, reason: "중고품이 와서 비위생적이고 위험하다는 말뿐이고 몸 반응은 없음"}
+    - {review_id: R1EO3673L9E28J, verdict: symptom, symptom_type: 피부, reason: "가렵고 아픈 붉은 돌기와 심한 피부 자극이 생겼다고 함"}
+    - {review_id: R1JRAFD7P6L9RA, verdict: symptom, symptom_type: 피부, reason: "정강이에 검은 반점이 생겼다고 함"}
+    - {review_id: R1NZEC16D5FOP4, verdict: none, reason: "피부에 닿지 않았는데 섬광이 터졌다는 기기 문제이고 몸 반응은 없음"}
+    - {review_id: R1Q2O18BTENX2M, verdict: symptom, symptom_type: 피부, reason: "패치 테스트에서 화상 자국이 생겼다고 함"}
+    - {review_id: R1Q6A8KFOI7Z51, verdict: symptom, symptom_type: 피부, reason: "쓸 때 피부가 탄다(burns)고 함"}
+    - {review_id: R1QJ3XS7DRLDT5, verdict: UNVERIFIED, reason: "섬광에 눈이 아프다는 몸 반응이지만 눈 증상은 symptom_type 목록에 없음. 분류는 민재님 결정 필요"}
+    - {review_id: R1VXSN77DK26E4, verdict: symptom, symptom_type: 피부, reason: "설명서대로 썼는데 화상을 입었다고 함"}
+    - {review_id: R256O7P8XK4PQM, verdict: symptom, symptom_type: 피부, reason: "딱지 같은 검은 자국과 흰 반점, 흉터가 남았다고 함"}
+    - {review_id: R25E5FLOPWQISZ, verdict: none, reason: "상자에 연령 경고가 없다는 말뿐이고 몸 반응은 없음"}
+    - {review_id: R2822A4GNWEGMX, verdict: symptom, symptom_type: 피부, reason: "제목이 Discolor이고 다리에 큰 반점(gib pact)이 생겼다고 함"}
+    - {review_id: R29QKL19OQN0UI, verdict: none, reason: "기기에서 타는 냄새가 나 화상을 입을까 걱정했다는 말이고 실제 몸 반응은 없음"}
+    - {review_id: R2A2KTRD9JXJMV, verdict: symptom, symptom_type: 피부, reason: "코 밑 피부가 붉어졌다가 며칠 뒤 가라앉았다고 함"}
+    - {review_id: R2I0YYXZ7W388Z, verdict: symptom, symptom_type: 피부, reason: "계속 화상을 입었다고 함"}
+    - {review_id: R2MKZ0C3N2SVAC, verdict: symptom, symptom_type: 피부, reason: "벌레 물린 듯한 가려운 돌기가 온몸에 났다고 함"}
+    - {review_id: R2MM9933UJF71U, verdict: symptom, symptom_type: 피부, reason: "모낭 염증으로 가려웠고 색소 침착과 화상이 생겼다고 함"}
+    - {review_id: R2MQYYKYTPJRTZ, verdict: symptom, symptom_type: 피부, reason: "1년이 지나도 보이는 화상 자국이 남았다고 함"}
+    - {review_id: R2QV46JTGZRGAW, verdict: none, reason: "밝은 빛이 편두통을 부를 수 있어 조심한다는 말이고 지금까지는 괜찮았다고 함. 실제 두통은 없음"}
+    - {review_id: R2T2JDN7PVVK4G, verdict: symptom, symptom_type: 피부, reason: "다리에 붉은 사각형 화상이 생기고 다음 날 피부가 벗겨졌다고 함"}
+    - {review_id: R300NO6N06MI3R, verdict: none, reason: "빛이 눈에 해롭다는 의견이고 눈 반응을 겪었다는 말은 없음"}
+    - {review_id: R30MIFDD6J1ZO9, verdict: symptom, symptom_type: 두통, reason: "안경을 써도 섬광이 밝아 쓴 뒤 가끔 두통이 난다고 함"}
+    - {review_id: R34MDGSMXQ8YWH, verdict: symptom, symptom_type: 피부, reason: "문신 위에 써서 화상을 입었다고 함"}
+    - {review_id: R35TWH6AQKGH7Q, verdict: symptom, symptom_type: 피부, reason: "인용은 민감 피부에 권하지 않는다는 일반 경고지만 본문에 쓸 때 화끈거림(burn sensation)을 느꼈다고 함"}
+    - {review_id: R37V68YIP4AQI7, verdict: none, reason: "설명서상 민감 부위에 쓰면 안 된다는 말이고 몸 반응은 없음"}
+    - {review_id: R395GW5N4JJ51A, verdict: symptom, symptom_type: 피부, reason: "두 번째 사용 뒤 두드러기(hives) 반응이 났다고 직접 묘사함"}
+    - {review_id: R3AKBOZYED1PR5, verdict: symptom, symptom_type: 피부, reason: "처음 닿자마자 화상을 입었다고 함"}
+    - {review_id: R3FCCN4LLKDHW9, verdict: symptom, symptom_type: 피부, reason: "심한 모낭염이 생겼고 다시 썼을 때도 반복됐다고 함"}
+    - {review_id: R3JL1X6MGXLUXX, verdict: symptom, symptom_type: 피부, reason: "모낭 위에 이상한 점이 생겼고 화상 자국도 있었다고 함"}
+    - {review_id: R3K8ZTJYQXSZKQ, verdict: symptom, symptom_type: 피부, reason: "몸 곳곳에 작은 내성 털(ingrown hairs)이 생겼다고 함"}
+    - {review_id: R3PZ0KT5YYAYC8, verdict: symptom, symptom_type: 피부, reason: "심한 발진이 나고 매우 가렵다고 함"}
+    - {review_id: R7JZRDW4FU3Q4, verdict: symptom, symptom_type: 피부, reason: "화상과 딱지로 다리에 흉터가 남았다고 함"}
+    - {review_id: R7MKP02LZBEEJ, verdict: symptom, symptom_type: 피부, reason: "피부 색소가 빠졌다고 함"}
+    - {review_id: RCNZ801Z0AMDF, verdict: none, reason: "매번 터지는 빛이 단점이라는 말이고 몸 반응은 없음"}
+    - {review_id: RD0ZNS0BJ5RSM, verdict: symptom, symptom_type: 피부, reason: "처음 쓸 때 화상을 입었다고 함"}
+    - {review_id: RELGENLC93HHW, verdict: symptom, symptom_type: 피부, reason: "다음 날 다리가 1도 화상으로 덮였다고 함"}
+    - {review_id: RIE8UIL98LEGG, verdict: symptom, symptom_type: 피부, reason: "쓴 뒤 피부가 상해 흉터를 걱정한다고 함"}
+    - {review_id: RITH3PKTVCDLZ, verdict: none, reason: "섬광이 눈을 자극할 수 있다고 생각한다는 말이고 겪은 반응은 없음"}
+    - {review_id: RKE1KVSCKEGFQ, verdict: symptom, symptom_type: 피부, reason: "피부에 화상을 입었다고 함"}
+    - {review_id: RLFYC8A61CQ1, verdict: none, reason: "빛이 너무 밝아 걱정됐다는 말이고 몸 반응은 없음"}
+    - {review_id: RPHWSBC5W6ST2, verdict: symptom, symptom_type: 피부, reason: "화상 자국이 생겼다고 함"}
+    - {review_id: RQDP50FQH5O04, verdict: UNVERIFIED, reason: "쓴 다음 날 비문증과 시야 흐림이 생겨 안과에 간다는 몸 반응이지만 눈 증상은 symptom_type 목록에 없음. 분류는 민재님 결정 필요"}
+    - {review_id: RY0WX4DTSCVG, verdict: symptom, symptom_type: 피부, reason: "얼굴이 매우 자극받았다(muy irritada)고 함"}
+    - {review_id: R12B1GOLRDX47V, verdict: symptom, symptom_type: 피부, reason: "얼굴 피부가 하얗게 탈색됐다고 함"}
+    - {review_id: R15EFOBOTIF4I0, verdict: symptom, symptom_type: 피부, reason: "알레르기 반응 같은 피부 가려움이 생겼다고 직접 묘사함"}
+    - {review_id: R1GS66C9G3XIZ2, verdict: symptom, symptom_type: 피부, reason: "기기가 빨리 뜨거워져 피부가 탔다고 함"}
+    - {review_id: R1H37WGT6PO8X1, verdict: symptom, symptom_type: 피부, reason: "피부가 조금 자극받는다(me irrita la piel)고 함"}
+    - {review_id: R1MWQ2NTOUZHRX, verdict: symptom, symptom_type: 피부, reason: "피부가 불편하고 가렵다고 함"}
+    - {review_id: R1NE4QCL8NG603, verdict: none, reason: "광고에 보호 안경이 없다는 비판이고 몸 반응은 없음"}
+    - {review_id: R2IBA63SK8LQIJ, verdict: none, reason: "보호 안경을 믿기 어렵다는 말이고 몸 반응은 없음"}
+    - {review_id: R2JZND2LNQW1IF, verdict: symptom, symptom_type: 피부, reason: "2주째부터 가장 낮은 단계에서도 피부가 탔다고 함"}
+    - {review_id: R2KX7DW6F27XM5, verdict: symptom, symptom_type: 피부, reason: "아랫배에 큰 물집이 생겨 피가 차고 터져 상처가 남았다고 함"}
+    - {review_id: R2SB2V1D6IQSRH, verdict: symptom, symptom_type: 피부, reason: "갑자기 다리 전체에 자국이 생겼다고 함"}
+    - {review_id: R2WKT4WSARV4ZP, verdict: symptom, symptom_type: 피부, reason: "다리에 진한 반점과 화상이 생겼다고 함"}
+    - {review_id: R2ZKCTG5R8L6PV, verdict: symptom, symptom_type: 피부, reason: "손에 발진이 생겨 화끈거리고 아프다고 함"}
+    - {review_id: R30ODGD4OXKWUU, verdict: none, reason: "보호 안경 틈으로 빛이 들어와 걱정됐다는 말이고 몸 반응은 없음"}
+    - {review_id: R322PUE8YSOIFA, verdict: symptom, symptom_type: 피부, reason: "매우 가려운 발진이 생겼다고 함"}
+    - {review_id: R33AU9CUYNIANU, verdict: symptom, symptom_type: 피부, reason: "히스타민 반응으로 가려운 돌기와 발진이 생겼다고 함"}
+    - {review_id: R3FLHL10LKK79F, verdict: symptom, symptom_type: 피부, reason: "얼굴에 여드름 같은 붉고 가려운 돌기와 색소 침착이 생겼다고 함"}
+    - {review_id: RGRI74CC8ENT0, verdict: none, reason: "한 번 쏘고 겁이 났다는 말이고 몸 반응 묘사는 없음"}
+    - {review_id: RL9O9OQ9H76YI, verdict: none, reason: "안전한지 의심스럽다는 말이고 몸 반응은 없음. 가려움은 남편 수염 때문이라 기기 반응이 아님"}
+    - {review_id: R15K23WTCZ6Z2P, verdict: symptom, symptom_type: 피부, reason: "비키니 라인 피부가 변색됐다고 함"}
+    - {review_id: R1I1D2FD3QDINP, verdict: none, reason: "섬광이 눈에 너무 세다는 의견이고 겪은 눈 반응은 없음"}
+    - {review_id: R1TSFQ76KA7SGS, verdict: symptom, symptom_type: 피부, reason: "쓰고 나면 피부가 꽤 건조해진다고 함"}
+    - {review_id: R1VFPBIS4Y1VID, verdict: symptom, symptom_type: 피부, reason: "7단계로 허벅지 위쪽에 썼다가 데었다(me quemó)고 함"}
+    - {review_id: R25K2A8S4MLZQH, verdict: symptom, symptom_type: 피부, reason: "다리에 작고 진한 둥근 반점이 많이 생겼다고 함"}
+    - {review_id: R2AKAGKJM6BDEK, verdict: symptom, symptom_type: 피부, reason: "쓴 뒤 내성 털이 확실히 늘었다고 함"}
+    - {review_id: R2L8DPMBMY7WOZ, verdict: symptom, symptom_type: 피부, reason: "발목에 카펫 쓸림 같은 작은 화상이 생겼다고 함"}
+    - {review_id: R2U724P47TBIDT, verdict: symptom, symptom_type: 피부, reason: "발목 문신 위에 썼다가 물집이 생기고 심하게 데었다고 함"}
+    - {review_id: R2XB776KKIF8N9, verdict: symptom, symptom_type: 피부, reason: "다리에 물집이 생겼다고 함"}
+    - {review_id: R2Z9MITKBORPPL, verdict: symptom, symptom_type: 피부, reason: "함께 쓴 남편이 가벼운 화상을 입었다가 하루이틀 뒤 나았다고 함"}
+    - {review_id: R3B080I9EY7XEM, verdict: UNVERIFIED, reason: "피부를 꽤 자극할 수 있다는 일반론이라 본인이 반응을 겪었는지 원문만으로 정할 수 없음"}
+    - {review_id: R3I9GJ0OJ7522H, verdict: symptom, symptom_type: 피부, reason: "피부에 뭐가 돋았다(me brotaba la piel)고 하고 조금 탄다고 함"}
+    - {review_id: R3NAZRCF85EE92, verdict: symptom, symptom_type: 피부, reason: "겨드랑이와 다리에 화상과 진한 보라색 자국이 남았다고 함"}
+    - {review_id: R3Q7Z1O3M1F8SM, verdict: none, reason: "검은 얼룩은 닦아도 안 지워지는 기기 안쪽 얼룩이라 몸 반응이 아님"}
+    - {review_id: R6EKPQE2B12ZY, verdict: UNVERIFIED, reason: "피부를 태운다는 일반 경고라 본인이 화상을 입었는지 원문만으로 정할 수 없음"}
+    - {review_id: RUOAHQVG9XL2W, verdict: none, reason: "얼룩이 생긴 것은 기기(le salieron, usándola)로 읽힘. 탄 냄새가 나 겁난다는 말이고 몸 반응 묘사는 없음"}
+    - {review_id: R371G2D4TFMWP7, verdict: none, reason: "빛이 기기 가장자리로 새어 덜 안전하다는 평가이고 몸 반응은 없음"}
+    - {review_id: RWTBVMS6K6M9P, verdict: symptom, symptom_type: 피부, reason: "쓴 직후 피부가 조금 자극받는다고 함"}
+    - {review_id: RYYOMX94IOUX0, verdict: symptom, symptom_type: 피부, reason: "턱에 붉은 돌기, 가려움, 염증 같은 알레르기성 피부 반응을 직접 묘사함"}
+    - {review_id: R1CW4J5AG5XQYJ, verdict: symptom, symptom_type: 피부, reason: "비키니 부위에 가벼운 햇볕 화상 같은 자극이 하루 갔다고 함"}
+    - {review_id: R25H686ZWIWEWC, verdict: UNVERIFIED, reason: "보호 안경을 권하는 말이고 본문에 시험 뒤 눈을 깜빡이면 흰 섬광이 보였다고 함. 몸 반응인지 경계이고 눈 증상은 목록에 없음"}
+    - {review_id: R2SZDL813OQQ0C, verdict: none, reason: "아주 안전하다는 칭찬"}
+    - {review_id: R2W8VLAJW7Q7LS, verdict: none, reason: "피부에 완전히 닿을 때만 터져 안전하다는 칭찬"}
+    - {review_id: R2WKUP8YYFPU7F, verdict: symptom, symptom_type: 피부, reason: "가벼운 가려움이 있다고 함"}
+    - {review_id: R3AL97KPZJMJ8N, verdict: symptom, symptom_type: 피부, reason: "다리 뒤쪽에 오돌토돌한 자국(stippling)이 생겼다가 금방 나았다고 함"}
+    - {review_id: RBCDXUDNZDUVM, verdict: none, reason: "너무 밝아 안경 없이 쓰기 불편하다는 말이고 몸 반응은 없음"}
+    - {review_id: RHRYM4D0O0M6S, verdict: none, reason: "직접 보면 시력에 나쁠 것 같다는 추측이고 몸 반응은 없음"}
+    - {review_id: R15CPIXT574AA3, verdict: none, reason: "색소 침착을 겪지 않았다는 말"}
+    - {review_id: R1CKMAYZ81JWU, verdict: none, reason: "민감 피부에 좋다는 칭찬"}
+    - {review_id: R1E37CQXV0TSOA, verdict: none, reason: "피부 자극이 없었다는 말"}
+    - {review_id: R1FJKJ53PU9AIM, verdict: none, reason: "불편함, 붉어짐, 자극이 전혀 없었다는 말"}
+    - {review_id: R1KH3XGVPOMMSU, verdict: none, reason: "돌기나 다른 피부 문제가 없었다는 말"}
+    - {review_id: R26V8XP7OS8ZK0, verdict: none, reason: "자극이 없다는 말"}
+    - {review_id: R2JZ3KC3BU5VN8, verdict: none, reason: "안전하고 효과적이라는 칭찬"}
+    - {review_id: R2S0ZHOP5BJO0Q, verdict: none, reason: "피부에 순하다는 말"}
+    - {review_id: R3INSXQHFCICQI, verdict: none, reason: "안심하고 쓴다는 말"}
+    - {review_id: R3JUMWAIBYNJKM, verdict: none, reason: "문신 위에 쓰지 말라는 경고이고 몸 반응은 없음"}
+    - {review_id: R3KRQCTYFUT094, verdict: none, reason: "자극이나 부작용이 전혀 없었다는 말"}
+    - {review_id: R3O6K913ALP80R, verdict: none, reason: "얇은 피부 위 정맥이 줄어들 수 있다는 추측성 주의이고 몸 반응은 없음"}
+    - {review_id: ROHGXV7HZTP0Q, verdict: none, reason: "피부를 태우지 않게 조심하라는 주의이고 몸 반응은 없음"}
+    - {review_id: ROSVXO1TH1ANT, verdict: none, reason: "피부 자극이나 통증이 없다는 말"}
+    - {review_id: R1E8UGOQ0TAQSW, verdict: none, reason: "보호 안경을 쓰라는 권고이고 몸 반응은 없음"}
+    - {review_id: R1KWW1ZMRJ0A1O, verdict: none, reason: "보호 안경을 쓰라는 권고이고 몸 반응은 없음"}
+    - {review_id: R1NIHYH4SUBEOZ, verdict: none, reason: "안경을 쓰라는 권고"}
+    - {review_id: R20B18UJ8O3GYM, verdict: none, reason: "자극이 없었다는 말"}
+    - {review_id: R2EAVV0BSKGP5V, verdict: symptom, symptom_type: 피부, reason: "다리에 내성 털 때문에 가벼운 흉터가 생겼다고 함"}
+    - {review_id: R2PH76S40PV5X1, verdict: none, reason: "피부 자극이 전혀 없었다는 말"}
+    - {review_id: R2Q8K2P5CFBJB3, verdict: none, reason: "피부 자극이나 건조가 없다는 말"}
+    - {review_id: R2VNEBLNFNGTZ1, verdict: none, reason: "민감 피부인데 문제가 없었다는 말"}
+    - {review_id: R3CVPCV0EQPFAQ, verdict: UNVERIFIED, reason: "섬광에 눈이 아프다는 몸 반응이지만 눈 증상은 symptom_type 목록에 없음. 분류는 민재님 결정 필요"}
+    - {review_id: R3OHPHFT97EWOM, verdict: symptom, symptom_type: 피부, reason: "같은 곳을 두 번 넘게 지나갔을 때 가벼운 자극이 있었다고 함"}
+    - {review_id: RJ86SS9SV6XB0, verdict: none, reason: "피부 반응이 없었다는 말"}
+    - {review_id: RMQNDNZ0FACDR, verdict: none, reason: "화상을 피하려면 잘 면도하라는 조언이고 몸 반응은 없음"}
+    - {review_id: R12DL2XYKNVTLP, verdict: symptom, symptom_type: 피부, reason: "처음에 여드름과 자극(모낭염)이 생겼다가 줄었다고 함"}
+    - {review_id: R1Q2IRRDGT4OYT, verdict: none, reason: "반응이 없었다는 말"}
+    - {review_id: R2527CST84MMJT, verdict: none, reason: "피부 톤 센서 덕에 더 안전하게 느껴진다는 칭찬"}
+    - {review_id: R28XQXRI4LXP8S, verdict: none, reason: "세기를 자동으로 맞춰 더 안전하게 느껴진다는 칭찬"}
+    - {review_id: R2D6HBSD85YYWM, verdict: none, reason: "건조함이 전혀 없다는 말"}
+    - {review_id: R2IDRB9JD7AD7M, verdict: none, reason: "피부가 붉어지거나 예민해지지 않는다는 말"}
+    - {review_id: R2S5WD06YE4TMI, verdict: none, reason: "면도 하루 뒤에 쓰면 반응이 생길 수 있다는 일반 조언이고 본인 반응 묘사는 없음"}
+    - {review_id: R3CN60CV2FLN4G, verdict: none, reason: "세기 조절로 더 안전하다는 칭찬"}
+    - {review_id: R13FFPKEUHQJ4V, verdict: none, reason: "피부 센서가 안심된다는 칭찬. 피부가 아팠던 것은 예전 다른 기기 이야기"}
+    - {review_id: R189Y6KI3NJHWQ, verdict: none, reason: "통증과 피부 자극이 없다는 말"}
+    - {review_id: R35L0I0WG667PW, verdict: none, reason: "자극이나 통증이 전혀 없었다는 말"}
+    - {review_id: R3BL6AS4FEBLLB, verdict: none, reason: "피부 자극이 없다는 말"}
+    - {review_id: R3I3HAIAL07C08, verdict: none, reason: "피부 센서가 안심된다는 칭찬"}
+    - {review_id: R3OKWM306XWINV, verdict: none, reason: "이 기기를 쓴 뒤 피부 자극이 없어졌다는 말. 자극은 예전 면도 때 이야기"}
+    - {review_id: RLK89470RDJIH, verdict: none, reason: "민감 피부에도 안전하다는 칭찬"}
+    - {review_id: RYIW5Z71PYS6X, verdict: none, reason: "피부 자극이 없다는 말"}

@@ -34,6 +34,16 @@ def stage_hash(run, step):
     return (stage_plan.input_hash(run, st), stage_plan.code_hash(st)) if st else (None, None)
 
 
+def stage_files(run, step):
+    """시작 때 있던 입력 파일마다 해시(단계가 도는 동안 바뀌었는지 보는 데 씀)"""
+    try:
+        import stage_plan
+        st = stage_plan.stage_by_id(stage_plan.load_conf()).get(step)
+    except SystemExit:
+        return None
+    return stage_plan.input_files(run, st) if st else None
+
+
 def mark(run, edge, step, kind, calls=None, retries=None, workers=None):
     ts = now_iso()
     status = "needs_human" if edge == "start" and kind == "human" else STATUS[edge]
@@ -45,12 +55,16 @@ def mark(run, edge, step, kind, calls=None, retries=None, workers=None):
     path = run / "state.json"
     state = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"run": run.name, "steps": {}}
     prev = state["steps"].get(step) or {}
-    if edge == "end" and prev.get("input_hash_start") and ih and prev["input_hash_start"] != ih:
-        # 단계가 도는 동안 입력이 바뀌었으면 완료로 적지 않는다(새 결과가 어느 입력 기준인지 모름)
-        status = "needs_human"
-        ev["status"] = status
-        ev["input_changed"] = [prev["input_hash_start"], ih]
-        print(f"{step}: 단계가 도는 동안 입력이 바뀌었습니다({prev['input_hash_start']} -> {ih}). 완료로 적지 않습니다.")
+    if edge == "end" and prev.get("input_files_start") is not None:
+        # 시작 때 있던 입력 파일이 단계가 도는 동안 바뀌거나 없어졌으면 완료로 적지 않는다(새 결과가 어느 입력 기준인지 모름).
+        # 단계가 스스로 만든 입력(시작 때 없던 파일, 예: 12_market의 market/raw)은 보지 않는다.
+        now = stage_files(run, step) or {}
+        changed = sorted(f for f, h in prev["input_files_start"].items() if now.get(f) != h)
+        if changed:
+            status = "needs_human"
+            ev["status"] = status
+            ev["input_changed"] = changed[:20]
+            print(f"{step}: 단계가 도는 동안 입력 파일 {len(changed)}개가 바뀌었습니다(예: {changed[0]}). 완료로 적지 않습니다.")
     if edge == "end" and ih:
         ev["input_hash"] = ih
         if ch:
@@ -59,7 +73,7 @@ def mark(run, edge, step, kind, calls=None, retries=None, workers=None):
         f.write(json.dumps(ev, ensure_ascii=False) + "\n")
     rec = {"status": status, "kind": kind, "updated": ts, **{k: ev[k] for k in ("calls", "retries", "workers") if k in ev}}
     if edge == "start" and ih:
-        rec["input_hash_start"] = ih
+        rec["input_files_start"] = stage_files(run, step) or {}
     if edge == "end" and status == "done" and ih:
         rec["input_hash"] = ih
         if ch:

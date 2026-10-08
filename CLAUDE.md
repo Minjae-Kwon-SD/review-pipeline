@@ -84,7 +84,7 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | 07b_labels_<묶음>.jsonl | issue-tagger | 인용마다 세부 이슈 라벨(1~2개 또는 other) |
 | 07b_issue_labels.jsonl, 07b_issue_counts.json, 07b_issue_check.json | issues.py label-check | 합친 라벨, 라벨별 리뷰 수와 가중 비율과 ASIN별 수, 기타 비율, 겹침 |
 | 07b_issue_audit_sample.jsonl, 07b_issue_audit.yaml, 07b_issue_audit_summary.json | issues.py, evidence-auditor | 라벨 감사 표본, 판정, FAIL 비율 |
-| 07c_safety_input.jsonl, 07c_safety_verdicts.yaml, 07c_safety_check.md, 07c_safety_summary.json | issues.py, evidence-auditor | 안전 인용과 몸 증상 판정, 증상 종류(symptom_type)별 리뷰 수와 가중 비율(negative_text) |
+| 07c_safety_input.jsonl, 07c_safety_verdicts.yaml, 07c_safety_check.md, 07c_safety_summary.json | issues.py, evidence-auditor | 안전 인용과 이상 반응 판정, 증상 종류(symptom_type)별 리뷰 수와 가중 비율(negative_text) |
 | 07c_tagging_error_notes.md | 메인 세션 | 고치지 않고 남긴 의심 태그 메모 |
 | 06_report.md | report-writer | 한국어 리포트 |
 | market/raw/, market/calls.jsonl | market.py fetch | spd-amz-market 응답 원문과 호출 기록(무료, 40번 이하) |

@@ -1,0 +1,709 @@
+{
+  "checked_at": "2026-10-08T21:43:39+09:00",
+  "status": "PASS",
+  "by_asin": {
+    "B07WYY6KKC": {
+      "verified": 22,
+      "dropped": 0
+    },
+    "B0CV3ZJ2PN": {
+      "verified": 26,
+      "dropped": 0
+    },
+    "B0CWL9S4L1": {
+      "verified": 6,
+      "dropped": 0
+    },
+    "B0G39WBP1S": {
+      "verified": 17,
+      "dropped": 0
+    },
+    "B0FGB2NS3C": {
+      "verified": 26,
+      "dropped": 0
+    }
+  },
+  "verified": 97,
+  "dropped": 0,
+  "items": [
+    {
+      "asin": "B07WYY6KKC",
+      "item": "light_type",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "energy_levels",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "energy_levels",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "energy_levels",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "flash_count",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "flash_speed_window",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "skin_tone_range",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "skin_tone_range",
+      "url": "https://www.braunshop.co.uk/p/ipl-hair-removal/silk-expert-pro-5/silk-expert-pro-5-pl5137-ipl/12893150/",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "treatment_schedule",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "treatment_schedule",
+      "url": "https://www.braunshop.co.uk/p/ipl-hair-removal/silk-expert-pro-5/silk-expert-pro-5-pl5137-ipl/12893150/",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "power_source",
+      "url": "https://www.braunshop.co.uk/p/ipl-hair-removal/silk-expert-pro-5/silk-expert-pro-5-pl5137-ipl/12893150/",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "in_box",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "in_box",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "in_box",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "in_box",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "in_box",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "clearance_warranty",
+      "url": "https://us.braun.com/en-us/service/products/6031",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "clearance_warranty",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "clearance_warranty",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "clearance_warranty",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "clearance_warranty",
+      "url": "https://us.braun.com/en-us/female-hair-removal/ipls/silk-expert-pro-5-pl5137",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B07WYY6KKC",
+      "item": "list_price",
+      "url": "https://www.braunshop.co.uk/p/ipl-hair-removal/silk-expert-pro-5/silk-expert-pro-5-pl5137-ipl/12893150/",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "light_type",
+      "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "energy_levels",
+      "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "energy_levels",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "energy_levels",
+      "url": "https://au.ulike.com/products/ulike-air10",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "energy_levels",
+      "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "flash_count",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "flash_speed_window",
+      "url": "https://au.ulike.com/products/ulike-air10",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "flash_speed_window",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "flash_speed_window",
+      "url": "https://au.ulike.com/products/ulike-air10",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "cooling",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "cooling",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "skin_tone_range",
+      "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "skin_tone_range",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "skin_tone_range",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "treatment_schedule",
+      "url": "https://au.ulike.com/products/ulike-air10",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "treatment_schedule",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "treatment_schedule",
+      "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "treatment_schedule",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "in_box",
+      "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "in_box",
+      "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "clearance_warranty",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "clearance_warranty",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "clearance_warranty",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "clearance_warranty",
+      "url": "https://www.ulike.com/products/ulike-air-10",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "list_price",
+      "url": "https://www.ulike.com/products/ulike-air-10",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CV3ZJ2PN",
+      "item": "list_price",
+      "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CWL9S4L1",
+      "item": "light_type",
+      "url": "https://innzahairremoval.com/",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CWL9S4L1",
+      "item": "flash_count",
+      "url": "https://innzahairremoval.com/",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CWL9S4L1",
+      "item": "cooling",
+      "url": "https://innzahairremoval.com/",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CWL9S4L1",
+      "item": "skin_tone_range",
+      "url": "https://innzahairremoval.com/",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CWL9S4L1",
+      "item": "skin_tone_range",
+      "url": "https://innzahairremoval.com/",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0CWL9S4L1",
+      "item": "skin_tone_range",
+      "url": "https://innzahairremoval.com/",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "light_type",
+      "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "energy_levels",
+      "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "energy_levels",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "energy_levels",
+      "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "flash_count",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "flash_speed_window",
+      "url": "https://au.ulike.com/products/ulike-air10",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "flash_speed_window",
+      "url": "https://au.ulike.com/products/ulike-air10",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "cooling",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "cooling",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "skin_tone_range",
+      "url": "https://www.ulta.com/p/air10-ice-cooling-ipl-hair-removal-device-mkt77002910",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "skin_tone_range",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "skin_tone_range",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "treatment_schedule",
+      "url": "https://au.ulike.com/products/ulike-air10",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "treatment_schedule",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "clearance_warranty",
+      "url": "https://www.thebrick.com/products/ulike-air-10-ipl-laser-hair-removal-device-dual-lights-shr-mode-ice-cooling-pink",
+      "source_type": "retailer",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "clearance_warranty",
+      "url": "https://www.ulike.com/products/ulike-air-10",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0G39WBP1S",
+      "item": "list_price",
+      "url": "https://www.ulike.com/pages/ipl-hair-removal-device-for-men",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "light_type",
+      "url": "https://www.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "light_type",
+      "url": "https://www.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "energy_levels",
+      "url": "https://www.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "energy_levels",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "flash_count",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "flash_speed_window",
+      "url": "https://www.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "flash_speed_window",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "flash_speed_window",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "flash_speed_window",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "flash_speed_window",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "flash_speed_window",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "skin_tone_range",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "skin_tone_range",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "treatment_schedule",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "treatment_schedule",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "treatment_schedule",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "treatment_schedule",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "treatment_schedule",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "treatment_schedule",
+      "url": "https://www.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "power_source",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "in_box",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "in_box",
+      "url": "https://www.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "clearance_warranty",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "clearance_warranty",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "clearance_warranty",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    },
+    {
+      "asin": "B0FGB2NS3C",
+      "item": "clearance_warranty",
+      "url": "https://acc.usa.philips.com/c-p/BRI984_03/bri984-lumea-ipl-9000-series-ipl-hair-removal-device-with-se/overview",
+      "source_type": "official",
+      "status": "verified"
+    }
+  ]
+}

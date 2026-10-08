@@ -1,0 +1,20 @@
+{
+  "negative_symptom": 56,
+  "negative_no_symptom": 23,
+  "positive_symptom": 0,
+  "positive_no_symptom": 32,
+  "other_sentiment": 18,
+  "by_symptom": [
+    {
+      "name": "두통",
+      "reviews": 1,
+      "weighted_pct": 0.0
+    },
+    {
+      "name": "피부",
+      "reviews": 55,
+      "weighted_pct": 2.0
+    }
+  ],
+  "negative_text": "안전 부정 리뷰 79개: 두통 1개(가중 0.0%), 피부 55개(가중 2.0%), 이상 반응 없음 23개"
+}

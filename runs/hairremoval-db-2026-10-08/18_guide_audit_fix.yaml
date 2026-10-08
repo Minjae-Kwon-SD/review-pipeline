@@ -1,0 +1,12 @@
+audit:
+  stage: guide
+  run: hairremoval-db-2026-10-08
+  overall_status: PASS
+  summary: >-
+    바뀐 14줄(35, 36, 48, 69, 155, 187, 188, 212, 251, 252, 284, 334, 336, 340행)이 모두 지금의 16_guide_metrics.json과
+    15_research_check.json의 verified 주장에 맞고, 앞 판정의 required_action이 모두 반영됐습니다. 334행은 고친 caveats[3]과
+    점수표에 맞아 가이드 안의 모순이 풀렸습니다. 다시 만든 metrics에서 13줄이 쓰는 값은 바뀌지 않았습니다.
+    171행에는 [r:reg_11]이 없고 [r:tst_08]만 있습니다.
+  checked: 14
+  findings: []
+  next_action: PROCEED
