@@ -13,12 +13,12 @@
     정답 세트 리뷰는 스키마 예시로 쓰지 않는다(쓰면 점수가 부풀려진다).
 
   python scripts/eval_gold.py sheet [회차]
-    스키마 승인 뒤, 민재님이 정답 세트를 태깅하는 화면 gold/gold_tagging.html을 만든다(한 파일, 외부 라이브러리 없음).
+    스키마 승인 뒤, 담당자가 정답 세트를 태깅하는 화면 gold/gold_tagging.html을 만든다(한 파일, 외부 라이브러리 없음).
     고른 값은 브라우저 localStorage에 저장되고, "gold_tags.jsonl 내보내기"로 내려받아 gold/gold_tags.jsonl로 저장한다.
     태거 결과는 화면에 넣지 않는다.
 
   python scripts/eval_gold.py gold [회차]
-    민재님이 쓴 gold/gold_tags.jsonl의 형식을 본다: 정답 세트 리뷰인지, 승인 스키마의 주제인지,
+    담당자가 쓴 gold/gold_tags.jsonl의 형식을 본다: 정답 세트 리뷰인지, 승인 스키마의 주제인지,
     감성 네 값 중 하나인지, 같은 리뷰 같은 주제가 두 번인지, 태그가 하나도 없는 정답 세트 리뷰가 있는지.
     오류가 있으면 종료 코드 1.
 

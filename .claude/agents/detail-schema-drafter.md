@@ -2,7 +2,7 @@
 name: detail-schema-drafter
 description: |
   리뷰 표본을 읽고, 주제 태그와 별도로 리뷰마다 뽑을 "설계 정보" 항목 초안(13_detail_schema_draft.yaml, .md)을 쓴다. 제품 개발 가이드의 재료다.
-  Use when: 개발 가이드 13_detail_schema_draft 단계, 또는 민재님이 설계 정보 항목을 다시 제안해 달라고 할 때
+  Use when: 개발 가이드 13_detail_schema_draft 단계, 또는 담당자가 설계 정보 항목을 다시 제안해 달라고 할 때
   NOT for: 1,212개 전체 추출(승인 뒤 단계), 태깅, 숫자 집계, 리포트나 가이드 작성
 tools: Read, Write
 model: inherit

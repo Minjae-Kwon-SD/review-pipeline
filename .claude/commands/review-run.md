@@ -9,7 +9,7 @@ disable-model-invocation: true
 인자: $ARGUMENTS
 인자는 카테고리와 날짜 두 개다. 회차 이름은 `카테고리-날짜`(예: perfume-db 2026-10-07 → perfume-db-2026-10-07)이고, 회차 폴더는 `runs/<회차>/`다.
 카테고리 설정 이름은 카테고리 인자의 첫 부분이다(perfume-db → perfume, config/categories/perfume.yaml). 회차 폴더 이름은 인자 그대로 쓴다.
-너(메인 세션)는 지휘만 한다. CLAUDE.md의 원칙과 파일 계약을 따른다. 민재님에게 하는 말은 처음부터 끝까지 한국어로 쓴다.
+너(메인 세션)는 지휘만 한다. CLAUDE.md의 원칙과 파일 계약을 따른다. 담당자에게 하는 말은 처음부터 끝까지 한국어로 쓴다.
 
 ## 시작
 
@@ -21,11 +21,11 @@ disable-model-invocation: true
 ## 단계마다 지킬 것
 
 - 시작과 끝에 `python scripts/timing_report.py mark <회차> start <단계> --kind <종류>`와 `... end <단계> --kind <종류>`를 부른다. state.json도 이 명령이 바꾼다. 재시도를 다 써서 멈출 때는 `stop`.
-- 단계마다 민재님에게 한 줄로 무엇을 하는지, 끝나면 결과 한 줄을 알린다. 숫자는 스크립트 출력에서 그대로 옮긴다.
+- 단계마다 담당자에게 한 줄로 무엇을 하는지, 끝나면 결과 한 줄을 알린다. 숫자는 스크립트 출력에서 그대로 옮긴다.
 - 에이전트 결과 파일을 직접 고치지 않는다. 태그와 리포트는 해당 에이전트가 다시 쓴다. 예외는 evidence-auditor가 돌려준 YAML을 파일로 저장하는 것 하나.
 - 재시도는 6단계와 9단계에서 각각 최대 2번. 그래도 실패하면 stop하고 무엇이 남았는지 알린다.
 - Bash는 `python scripts/...` 한 명령씩 부른다. `&&`, `;`, `echo`, `cat`을 붙이면 허용 규칙에 맞지 않아 매번 묻는다. 결과는 스크립트가 찍는 PASS/FAIL 줄로 판단하고, 파일 내용은 Read로 본다. runs/CURRENT는 Write로 쓴다.
-- ⏸ 단계에서는 mark start로 needs_human을 남기고 턴을 끝낸다. 민재님의 답 없이 그 단계를 대신하지 않는다.
+- ⏸ 단계에서는 mark start로 needs_human을 남기고 턴을 끝낸다. 담당자의 답 없이 그 단계를 대신하지 않는다.
 
 ## 작업 방식과 상한(docs/multi_agent_design_v2.md, config/stages.yaml)
 
@@ -36,7 +36,7 @@ disable-model-invocation: true
 - **작업자 배정(v2 단계)**: 작업자 하나가 묶음 목록을 차례로 처리한다. 실제 묶음 크기를 차례로 더해 작업자당 4묶음이나 리뷰 200개를 넘기 직전에 다음 작업자로 넘긴다(stage_packet.py가 stage_plan.assign을 부름). 묶음 하나가 200개를 넘으면 멈춘다.
 - **실패한 묶음만 다시(v2 단계)**: `stage_packet.py detail <회차> --items ... --only <실패 묶음 id들>`. 묶음 계획에 없는 id가 있으면 멈춘다. 재시도 횟수는 스크립트가 막지 않으므로 메인 세션이 묶음마다 세고 상한에서 멈춘다.
 - **해시와 출력 확인**: `stage_plan.py plan`은 입력 해시와 함께 그 단계의 지시문과 코드(stages.yaml의 code)의 해시, 묶음 계획의 묶음 출력이 하나하나 있는지 본다. mark start와 end 사이에 입력이 바뀌면 mark end가 완료로 적지 않고 needs_human으로 둔다. 기존 회차를 처음 이 방식으로 볼 때 `baseline --with-code`는 지금 출력이 지금 지시문으로 만든 것일 때만 쓴다.
-- **상한(기본값, config/stages.yaml)**: 상한은 민재님이 숫자를 직접 적어 지시할 때만 바꾼다. "빨리"라는 말로 올리지 않는다. 상한에 닿으면 추가 호출을 멈추고 보고한다.
+- **상한(기본값, config/stages.yaml)**: 상한은 담당자가 숫자를 직접 적어 지시할 때만 바꾼다. "빨리"라는 말로 올리지 않는다. 상한에 닿으면 추가 호출을 멈추고 보고한다.
 
 | 항목 | 기본값 |
 |---|---|
@@ -48,19 +48,19 @@ disable-model-invocation: true
 
 - **같은 모델 작업자 먼저 하나**: 같은 정의와 같은 모델의 작업자 가운데 하나를 먼저 띄우고 첫 출력이 나오면 나머지를 띄운다(캐시 후보, 절감률 미확인). 사람 관문은 큰 묶음 앞에 끝낸다.
 - **감사**: 작성자와 다른 감사자 하나. 기계 검사를 통과한 결과의 표본과 바뀐 행 전부를 본다. 표본이 비면 PASS가 아니라 EMPTY로 따로 정한다.
-- **검토형**(같은 큰 자료를 여럿이 읽고 판단하는 일, 읽기 전용 렌즈 최대 4)은 **매번 민재님 허락을 받는다**. 결과는 문자열로 받고 파일은 메인 세션이 쓴다. 둘 이상 실패하면 합치지 않는다.
+- **검토형**(같은 큰 자료를 여럿이 읽고 판단하는 일, 읽기 전용 렌즈 최대 4)은 **매번 담당자 허락을 받는다**. 결과는 문자열로 받고 파일은 메인 세션이 쓴다. 둘 이상 실패하면 합치지 않는다.
 - **기록**: 단계 끝에 `timing_report.py mark <회차> end <단계> --kind <종류> --calls <호출 수> --retries <재시도 수> --workers <동시 수>`. 입력 해시는 mark end가 state.json에 적는다.
 
 ## 단계 (이름, 종류)
 
 0. **00_collect, script** (02 파일까지 다 있으면 건너뛰고 skip을 알린다):
    - 01_asins.csv가 없으면 차례로: `python scripts/collect.py candidates <회차> --category <카테고리 설정 이름>`, asin-selector를 부른다(프롬프트: 회차 이름, 카테고리). 그다음 ⏸ **00_asin_review, human**: 01_asins.csv의 selected와 excluded를 표로 보여 주고 "01_asins.csv를 확인하고 고칠 것이 있으면 고친 뒤 알려 주세요"라고 하고 턴을 끝낸다.
-   - 01_asins.csv가 있으면(또는 민재님이 확인을 알리면) `python scripts/collect.py pull <회차>`. 유료 수집(`--mode paid --confirm-paid`)은 민재님이 이번 회차에서 직접 하라고 할 때만 쓴다(config/pipeline.yaml의 paid.enabled도 true여야 함).
+   - 01_asins.csv가 있으면(또는 담당자가 확인을 알리면) `python scripts/collect.py pull <회차>`. 유료 수집(`--mode paid --confirm-paid`)은 담당자가 이번 회차에서 직접 하라고 할 때만 쓴다(config/pipeline.yaml의 paid.enabled도 true여야 함).
    - 출력의 ASIN별 리뷰 수, 별점별 건수, 언어별 건수, 뺀 리뷰를 그대로 알린다.
 1. **01_inputs, script**: `python scripts/check_inputs.py <회차>`. 실패면 오류를 보여 주고 stop. 통과하면 `python scripts/eval_gold.py pick <회차>`(정답 세트 30개: ASIN마다 5개, 영어, 본문 40자 이상. 스키마 표본 150개: ASIN마다 25개, 정답 세트 제외). 출력의 ASIN별, 별점별 건수 표를 그대로 알린다.
 2. **02_schema_draft, agents**: schema-drafter를 부른다(프롬프트: 회차 이름, 카테고리 설정 이름). 공통 주제(config/topics_common.yaml)에 카테고리 전용 주제는 표본에서 5번 이상 나온 것만 더한다. 끝나면 `python scripts/check_inputs.py <회차> --schema 03_schema_draft.yaml`. 예시 인용 오류가 있으면 schema-drafter에게 그 오류를 주고 한 번 고치게 한다. 주제 표(id, name_ko, side, common_id, evidence_count, 정의 한 줄), changes, questions를 그대로 보여 준다.
-3. **03_schema_approval, human** ⏸: "03_schema_draft.yaml을 고쳐 03_schema_approved.yaml로 저장한 뒤 알려 주세요"라고 하고 턴을 끝낸다. 민재님이 알리면 `python scripts/check_inputs.py <회차> --schema`. 오류가 있으면 보여 주고 다시 기다린다. 통과하면 end.
-4. **04_gold_tagging, human** ⏸: `python scripts/eval_gold.py sheet <회차>`를 부르고, 민재님에게 "runs/<회차>/gold/gold_tagging.html을 브라우저로 열어 30개를 태깅한 뒤, 'gold_tags.jsonl 내보내기'로 받은 파일을 runs/<회차>/gold/gold_tags.jsonl로 저장하고 알려 주세요"라고 하고 턴을 끝낸다. 주제나 감성을 제안하거나 고치지 않는다. 민재님이 알리면 `python scripts/eval_gold.py gold <회차>`. 오류가 있으면 보여 주고 다시 기다린다.
+3. **03_schema_approval, human** ⏸: "03_schema_draft.yaml을 고쳐 03_schema_approved.yaml로 저장한 뒤 알려 주세요"라고 하고 턴을 끝낸다. 담당자가 알리면 `python scripts/check_inputs.py <회차> --schema`. 오류가 있으면 보여 주고 다시 기다린다. 통과하면 end.
+4. **04_gold_tagging, human** ⏸: `python scripts/eval_gold.py sheet <회차>`를 부르고, 담당자에게 "runs/<회차>/gold/gold_tagging.html을 브라우저로 열어 30개를 태깅한 뒤, 'gold_tags.jsonl 내보내기'로 받은 파일을 runs/<회차>/gold/gold_tags.jsonl로 저장하고 알려 주세요"라고 하고 턴을 끝낸다. 주제나 감성을 제안하거나 고치지 않는다. 담당자가 알리면 `python scripts/eval_gold.py gold <회차>`. 오류가 있으면 보여 주고 다시 기다린다.
 5. **05_tagging, agents**:
    1. `python scripts/tag_batches.py plan <회차>`. 출력의 묶음 수와 시험 태깅 묶음을 알린다.
    2. 시험 태깅: 04_batches.json의 pilot_batches(리뷰가 가장 적은 ASIN의 묶음과 gold 묶음)만 review-tagger로 부른다(작업자 상한 안에서 동시).
@@ -68,20 +68,20 @@ disable-model-invocation: true
       - gold 묶음(상위 모델 비교): 모델을 따로 주지 않는다. 프롬프트 `회차: <회차>`, `묶음: gold`, `모델 표시: top`
       그다음 `python scripts/audit_quotes.py tags <회차> --model sonnet --batches <시험 ASIN 묶음들>,gold`, `python scripts/audit_quotes.py tags <회차> --model top`, `python scripts/eval_gold.py score <회차>`(04_tags.jsonl이 아직 없으니 gold 묶음의 sonnet 태그로 채점).
    3. ⏸ **05a_pilot, human**: 시험 태깅에 걸린 시간(timing.jsonl의 에이전트 시작과 끝), 묶음 수와 리뷰 수, 인용 검사 결과, 채점 한 줄 요약(summary_ko)을 알리고, 남은 묶음 수를 적은 뒤 "계속할까요?"라고 하고 턴을 끝낸다.
-   4. 민재님이 계속이라고 하면 시험 태깅 묶음(pilot_batches)을 뺀 나머지 sonnet 묶음을 묶음마다 review-tagger 하나로 부른다(per_batch, `model: sonnet`, 위 상한 표의 동시 수 안에서 차례로). 프롬프트는 시험 태깅과 같은 형식(`회차: <회차>`, `묶음: <batch_id>`, `모델 표시: sonnet`).
+   4. 담당자가 계속이라고 하면 시험 태깅 묶음(pilot_batches)을 뺀 나머지 sonnet 묶음을 묶음마다 review-tagger 하나로 부른다(per_batch, `model: sonnet`, 위 상한 표의 동시 수 안에서 차례로). 프롬프트는 시험 태깅과 같은 형식(`회차: <회차>`, `묶음: <batch_id>`, `모델 표시: sonnet`).
 6. **06_tag_check, agents**: 아래를 차례로 한다.
    1. `python scripts/audit_quotes.py tags <회차> --model sonnet`(모든 sonnet 묶음을 검사하고 통과하면 04_tags.jsonl로 합침, 인용 앞 부정어는 경고). 합친 뒤 `python scripts/audit_quotes.py negation <회차>`로 부정어 경고 개수를 04_negation_check.json에 남긴다. 실패한 묶음(04_quote_check_sonnet.json의 failed_batches)만 review-tagger(sonnet)를 다시 부른다. 그 묶음의 오류를 프롬프트에 그대로 붙인다.
    2. 통과하면 `python scripts/eval_gold.py audit-sample <회차>`, 그다음 evidence-auditor(프롬프트: `stage: tags`, 회차). 돌려준 YAML 블록만 runs/<회차>/04_tag_audit.yaml로 저장하고 `python scripts/eval_gold.py audit <회차>`.
    3. 감사가 FAIL이면 batches_with_findings의 묶음만 review-tagger(sonnet)를 다시 부른다. 그 묶음의 감사 지적을 프롬프트에 그대로 붙인다. 그다음 1, 2를 다시.
-   4. 다시 태깅은 sonnet으로 묶음마다 최대 2번. 그래도 실패한 묶음은 그 묶음만 상위 모델로 한 번 부르고(모델 표시는 sonnet 그대로, 파일 이름이 같아야 합쳐진다), 민재님에게 어느 묶음을 상위 모델로 다시 했는지 알린다.
-   5. `python scripts/eval_gold.py score <회차>`. 출력의 모델별 한 줄 요약(04_gold_eval.json의 summary_ko, 예: "sonnet: 주제 F1 0.90(기준 0.80, 통과), 감성 일치 88.6%(기준 90.0%, 1.4%p 모자람)")을 민재님에게 글자 그대로 옮긴다. 기준과의 차이를 따로 계산하지 않는다. 판정은 리포트에 쓰는 sonnet 기준이다. 기준 미달이면 04_gold_eval.md의 불일치 목록을 보여 주고 ⏸ `06_gold_review`(human)로 멈춘다. 고를 수 있는 것: 스키마를 고쳐 3단계부터 다시, 정답 태깅을 고쳐 다시 채점, 이대로 진행(리포트 부록에 적음).
+   4. 다시 태깅은 sonnet으로 묶음마다 최대 2번. 그래도 실패한 묶음은 그 묶음만 상위 모델로 한 번 부르고(모델 표시는 sonnet 그대로, 파일 이름이 같아야 합쳐진다), 담당자에게 어느 묶음을 상위 모델로 다시 했는지 알린다.
+   5. `python scripts/eval_gold.py score <회차>`. 출력의 모델별 한 줄 요약(04_gold_eval.json의 summary_ko, 예: "sonnet: 주제 F1 0.90(기준 0.80, 통과), 감성 일치 88.6%(기준 90.0%, 1.4%p 모자람)")을 담당자에게 글자 그대로 옮긴다. 기준과의 차이를 따로 계산하지 않는다. 판정은 리포트에 쓰는 sonnet 기준이다. 기준 미달이면 04_gold_eval.md의 불일치 목록을 보여 주고 ⏸ `06_gold_review`(human)로 멈춘다. 고를 수 있는 것: 스키마를 고쳐 3단계부터 다시, 정답 태깅을 고쳐 다시 채점, 이대로 진행(리포트 부록에 적음).
 6-1. **07a_issue_draft, agents** (세부 이슈 목록 초안):
    1. `python scripts/issues.py sample <회차>`: 주제(전체 만족도 제외)와 방향(부정 이슈: 부정과 혼합 인용, 긍정 이슈: 긍정과 혼합 인용)마다 인용을 최대 150개, ASIN과 별점 묶음이 고르게 섞이게 뽑는다. 인용 20개 미만인 주제와 방향은 기타만.
    2. issue-labeler를 주제마다 하나씩 부른다(모델은 따로 주지 않음, 상위 모델. 상위 모델 작성자 상한(4) 안에서 동시에). 프롬프트 `회차: <회차>`, `주제: <topic id>`. 출력은 07a_issues_<주제>.yaml.
-   3. `python scripts/issues.py merge <회차>`. 오류가 있으면 그 주제의 issue-labeler에게 오류를 주고 한 번 고치게 한다. 주제를 따로 동시에 썼으므로, 메인 세션이 주제끼리 뜻이 겹치는 라벨(같은 불만이 두 주제에 있음)을 확인해 민재님에게 보여 줄 표에 적는다. 07a_issues_draft.md의 주제별 표를 민재님에게 보여 준다.
+   3. `python scripts/issues.py merge <회차>`. 오류가 있으면 그 주제의 issue-labeler에게 오류를 주고 한 번 고치게 한다. 주제를 따로 동시에 썼으므로, 메인 세션이 주제끼리 뜻이 겹치는 라벨(같은 불만이 두 주제에 있음)을 확인해 담당자에게 보여 줄 표에 적는다. 07a_issues_draft.md의 주제별 표를 담당자에게 보여 준다.
 6-2. **07a_issue_approval, human** ⏸: "07a_issues_draft.yaml을 고쳐 07a_issues_approved.yaml로 저장한 뒤 알려 주세요"라고 하고 턴을 끝낸다.
    - 승인 기록: `python scripts/issues.py approve <회차> --approved-at <UTC 시각> --approved-by "<누가, 어떻게>"`가 초안을 07a_issues_approved.yaml로 복사하고 승인 시각과 승인자를 적는다.
-     perfume-db-2026-10-07: 2026-10-07T09:09Z, 민재님, 카드 "제안 반영 후 승인"(라벨 71개).
+     perfume-db-2026-10-07: 2026-10-07T09:09Z, 담당자, 카드 "제안 반영 후 승인"(라벨 71개).
 6-3. **07b_issue_labeling, agents**: 승인 목록으로 라벨을 붙인다. 주제와 감성 태그는 다시 하지 않는다.
    1. `python scripts/issues.py label-plan <회차>`: 전체 만족도와 중립을 뺀 태그 인용(혼합은 두 방향 모두)을 주제와 방향마다 최대 180개 묶음으로 나눈다(07b_label_batches.json, 07b_label_input/). 승인 라벨이 없는 주제와 방향은 스크립트가 기타로 채운다(07b_labels_auto.jsonl).
       `python scripts/issues.py safety-input <회차>`: 안전 주제 인용 전부와 리뷰 원문(07c_safety_input.jsonl).

@@ -1,7 +1,7 @@
 # 고치지 않고 남긴 의심 태그 (hairremoval-db-2026-10-08)
 
 출처: 04_tag_audit.yaml(stage: tags, 표본 150개 중 FAIL 23개).
-결정: 06_tag_check needs_human에서 민재님 위임(2026-10-08 21:54:40 KST "너가 판단가능한거는 일단해봐")에 따라 Claude가 "이대로 진행"으로 정함. 다시 태깅하지 않았고 재시도 상한은 바꾸지 않았다. 04_tags.jsonl은 그대로다.
+결정: 06_tag_check needs_human에서 담당자 위임(2026-10-08 21:54:40 KST "너가 판단가능한거는 일단해봐")에 따라 Claude가 "이대로 진행"으로 정함. 다시 태깅하지 않았고 재시도 상한은 바꾸지 않았다. 04_tags.jsonl은 그대로다.
 원인: 20개는 총평이 없는 리뷰에 overall을 단 것(이유 속성만 말하는 인용을 overall로 달아 이유 주제와 두 번 집계, 스키마 overall exclude와 confusions 충돌), 3개는 개별 실수(R2Z9MITKBORPPL, R3OKWM306XWINV, R12DL2XYKNVTLP).
 
 | review_id | 주제 | 이유 |

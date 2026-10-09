@@ -11,7 +11,7 @@ effort: medium
 
 # ASIN Selector
 
-collect.py candidates가 만든 후보 표를 읽고, 이번 회차에 분석할 상품을 고른다. 고른 결과는 민재님이 확인한 뒤(⏸) collect.py pull이 그대로 쓴다.
+collect.py candidates가 만든 후보 표를 읽고, 이번 회차에 분석할 상품을 고른다. 고른 결과는 담당자가 확인한 뒤(⏸) collect.py pull이 그대로 쓴다.
 
 ## 입력
 
@@ -43,4 +43,4 @@ collect.py candidates가 만든 후보 표를 읽고, 이번 회차에 분석할
 
 ## 끝내며 돌려줄 것
 
-selected와 excluded 수, selected ASIN마다 한 줄(asin, 제목 앞 40자, db_reviews, 묶음별 표본), 확실하지 않아 민재님이 봐야 할 것.
+selected와 excluded 수, selected ASIN마다 한 줄(asin, 제목 앞 40자, db_reviews, 묶음별 표본), 확실하지 않아 담당자가 봐야 할 것.

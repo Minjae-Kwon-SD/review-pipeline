@@ -2,7 +2,7 @@
 name: schema-drafter
 description: |
   리뷰 표본을 읽고 태깅 주제 스키마 초안(03_schema_draft.yaml)을 쓴다. 공통 주제 11개에 카테고리 전용 주제를 리뷰에서 찾아 더한다.
-  Use when: /review-run 2단계, 또는 민재님이 스키마 초안을 다시 만들어 달라고 할 때
+  Use when: /review-run 2단계, 또는 담당자가 스키마 초안을 다시 만들어 달라고 할 때
   NOT for: 리뷰 태깅, 숫자 집계, 리포트 작성, 승인본(03_schema_approved.yaml) 수정
 tools: Read, Write
 model: inherit
@@ -42,7 +42,7 @@ topics:
     evidence_count: 31            # 표본에서 이 주제를 말한 리뷰 수 어림값. 리포트에 쓰지 않음
 changes:                          # 공통 주제 대비 바뀐 점마다 한 줄
   - {action: redefine, ids: [performance, longevity_projection], reason: "표본에서 성능은 거의 지속력 이야기(어림 31개)"}   # action: redefine, add
-questions: []                     # 민재님만 정할 수 있는 것
+questions: []                     # 담당자만 정할 수 있는 것
 ```
 
 ## 정하는 규칙
@@ -58,7 +58,7 @@ questions: []                     # 민재님만 정할 수 있는 것
 ## 하지 않는 일
 
 - 리뷰를 태깅하거나 04 파일을 쓰지 않는다.
-- 03_schema_approved.yaml을 쓰거나 고치지 않는다. 승인은 민재님이 한다.
+- 03_schema_approved.yaml을 쓰거나 고치지 않는다. 승인은 담당자가 한다.
 - 표본에 없는 내용을 짐작으로 주제에 넣지 않는다.
 
 ## 끝내기 전 확인

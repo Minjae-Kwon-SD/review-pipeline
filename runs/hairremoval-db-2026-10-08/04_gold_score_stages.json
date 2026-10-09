@@ -1,10 +1,10 @@
 {
   "_note": "정답 세트 채점 세 단계(sonnet 시험 묶음 04_tags_sonnet_gold.jsonl 기준). eval_gold.py score 출력에서 옮김(2026-10-08). 정답 태그 원문은 gold 폴더에만 있다.",
   "stages": [
-    {"stage": "처음 정답(민재님 태깅 81개)", "at": "2026-10-08T21:19+09:00", "sonnet": {"topic_f1": 0.64, "sentiment_pct": 80.4}, "top": {"topic_f1": 0.64, "sentiment_pct": 75.4}},
+    {"stage": "처음 정답(담당자 태깅 81개)", "at": "2026-10-08T21:19+09:00", "sonnet": {"topic_f1": 0.64, "sentiment_pct": 80.4}, "top": {"topic_f1": 0.64, "sentiment_pct": 75.4}},
     {"stage": "빈 전체 만족도 12개를 내용 기준으로 채움(93개)", "at": "2026-10-08T21:23+09:00", "sonnet": {"topic_f1": 0.73, "sentiment_pct": 77.9}, "top": {"topic_f1": 0.73, "sentiment_pct": 75.4}},
     {"stage": "승인 정의 기준으로 다시 봄(시술 시간, 브랜드 경험 태그 전부와 25개 리뷰 전부의 제모 효과, 86개)", "at": "2026-10-08T21:53+09:00", "sonnet": {"topic_f1": 0.79, "sentiment_pct": 77.5}, "top": {"topic_f1": 0.80, "sentiment_pct": 74.0}}
   ],
   "full_tags_score": "eval_gold.py score(전체 04_tags.jsonl 기준): sonnet 주제 F1 0.81, 감성 74.0%",
-  "decision": "민재님 \"B\"(2026-10-08 21:54:40 KST): 기준 미달이어도 이대로 진행, 부록에 적음"
+  "decision": "담당자 \"B\"(2026-10-08 21:54:40 KST): 기준 미달이어도 이대로 진행, 부록에 적음"
 }

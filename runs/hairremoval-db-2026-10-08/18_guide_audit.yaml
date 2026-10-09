@@ -4,7 +4,7 @@ audit:
   overall_status: FAIL
   summary: >-
     A장 주의 사항 두 줄이 다시 만든 16_guide_metrics.json caveats와 어긋납니다(caveats[5] '사람이 확인'을
-    가이드는 '민재님 확인'으로, caveats[3] '대부분'을 가이드는 '모두'로 씀). 그 밖에 출처나 데이터보다 단정이 나간
+    가이드는 '담당자 확인'으로, caveats[3] '대부분'을 가이드는 '모두'로 씀). 그 밖에 출처나 데이터보다 단정이 나간
     문장이 있습니다: 왁스 검색어, DermRays 가격 비교, 레이저 경고 문구의 등급 범위, 상품 5개로 쓴 '값과 상관없이',
     보증을 진입 조건으로 단정, 확인된 시장 값 목록의 누락, 소비자 일반화.
     웹 조사 주의점 네 가지는 모두 지켜졌습니다.
@@ -13,9 +13,9 @@ audit:
     - where: "A장 데이터와 방법, 주의 사항 6번째 (336행)"
       status: FAIL
       finding: >-
-        가이드는 '(상품 확인 관문에서 민재님 확인)'인데 16_guide_metrics.json caveats[5]는
+        가이드는 '(상품 확인 관문에서 담당자 확인)'인데 16_guide_metrics.json caveats[5]는
         '(상품 확인 관문에서 사람이 확인)'으로 바뀌었습니다. 가이드 문장과 metrics가 다릅니다.
-      required_action: "'민재님 확인'을 '사람이 확인'으로 바꾸기"
+      required_action: "'담당자 확인'을 '사람이 확인'으로 바꾸기"
     - where: "A장 데이터와 방법, 주의 사항 4번째 (334행)"
       status: FAIL
       finding: >-

@@ -1,4 +1,4 @@
-# symptom_type은 2026-10-07 브리프(민재님 카드 "다듬고 HTML 설계", 09:59 UTC)의 증상 분류를 메인 세션이 옮겨 적은 것. 판정(verdict)과 이유는 evidence-auditor 그대로.
+# symptom_type은 2026-10-07 브리프(담당자 카드 "다듬고 HTML 설계", 09:59 UTC)의 증상 분류를 메인 세션이 옮겨 적은 것. 판정(verdict)과 이유는 evidence-auditor 그대로.
 audit:
   stage: safety
   run: perfume-db-2026-10-07

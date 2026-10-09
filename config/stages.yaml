@@ -2,7 +2,7 @@
 # 입력과 출력은 회차 폴더(runs/<회차>/) 기준 경로나 글롭이다. "config:"로 시작하면 저장소 맨 위 기준.
 # code는 그 단계 결과를 바꾸는 지시문, 코드, 설정(저장소 맨 위 기준). 바뀌면 stage_plan.py plan이 그 단계를 다시 할 단계로 고른다.
 # expect는 묶음 계획 파일. 계획의 묶음 출력이 하나라도 없으면 다시 할 단계로 고른다(output이 있으면 그 이름 틀로).
-# 상한은 민재님이 숫자를 직접 적어 지시할 때만 바꾼다("빨리"라는 말로 올리지 않는다).
+# 상한은 담당자가 숫자를 직접 적어 지시할 때만 바꾼다("빨리"라는 말로 올리지 않는다).
 
 # 대량 작업 방식(method): v2 = 작업 파일과 작업자 배정(scripts/stage_packet.py), per_batch = 묶음마다 에이전트 하나.
 # v2는 설계 정보 추출(14_detail_extract)에만 쓴다. 2026-10-08 다시 판정 비교에서, 두 실행 가운데 하나라도 확정값과 다른 같은 52칸으로
@@ -13,14 +13,14 @@
 
 limits:
   bulk_concurrency: 4          # 대량 작업자(sonnet) 동시 실행(이슈 라벨, 설계 정보 추출)
-  tagging_concurrency: 8       # 태깅(05_tagging) review-tagger 동시 실행. 2026-10-09 민재님 "상위 작성자 4, 태깅 8" 추천대로
+  tagging_concurrency: 8       # 태깅(05_tagging) review-tagger 동시 실행. 2026-10-09 담당자 "상위 작성자 4, 태깅 8" 추천대로
   worker_max_batches: 4        # 작업자 하나가 맡는 묶음
   worker_max_reviews: 200      # 작업자 하나가 맡는 리뷰
   retry_per_batch: 2           # 묶음마다 재시도
   retry_per_stage: 4           # 단계 전체 재시도 호출
   top_writers: 4               # 상위 모델 작성자 동시 실행(예: 주제별 issue-labeler). 2026-10-09 1에서 4로
   top_auditors: 1              # 상위 모델 감사자(작성이 끝난 뒤, 동시에 돌리지 않음)
-  review_lenses: 4             # 검토형(같은 큰 자료를 여럿이 봄) 읽기 전용 렌즈. 매번 민재님 허락
+  review_lenses: 4             # 검토형(같은 큰 자료를 여럿이 봄) 읽기 전용 렌즈. 매번 담당자 허락
 
 stages:
   - {id: 01_inputs, kind: script, inputs: [01_asins.csv, 02_reviews.csv, 02_star_distribution.csv],

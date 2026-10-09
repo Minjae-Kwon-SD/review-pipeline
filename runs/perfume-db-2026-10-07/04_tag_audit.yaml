@@ -19,7 +19,7 @@ audit:
       topic: quality
       status: UNVERIFIED
       finding: "원문은 'Sprayer was not working product box. Come damage product come damage.'다. 받았을 때 분사기가 작동하지 않았고 파손을 함께 말한다. 스키마는 쓰다가 생긴 고장과 제조 불량은 quality, 받았을 때의 파손은 shipping으로 나눈다. 이 리뷰는 분사기가 제조 불량인지 배송 중 파손인지 원문만으로 정할 수 없다."
-      required_action: "'받았을 때부터 작동하지 않는 분사기(파손 언급 동반)'를 quality와 shipping 중 어디로 볼지 민재님이 정한다. shipping으로 정하면 quality 태그를 지운다(shipping negative 태그는 이미 있음)."
+      required_action: "'받았을 때부터 작동하지 않는 분사기(파손 언급 동반)'를 quality와 shipping 중 어디로 볼지 담당자가 정한다. shipping으로 정하면 quality 태그를 지운다(shipping negative 태그는 이미 있음)."
   missed:
     - {review_id: R3K2UHY4603CRW, topic: longevity_projection, reason: "no se siente (향이 느껴지지 않음, 세기 불만 negative)"}
     - {review_id: R187EZAUQ8D32T, topic: trust, reason: "have bought it several times, but this bottle is weak (예전에 산 같은 제품보다 약하다는 비교, 스키마상 trust와 longevity_projection 둘 다)"}

@@ -39,9 +39,9 @@ runs/<회차>/raw/           MCP 응답 원문(reviews_<ASIN>.json, product_<ASI
 단계와 명령은 .claude/commands/review-run.md(`/review-run <카테고리> <회차>`), 작업 방식과 상한은 그 문서의 "작업 방식과 상한"과
 config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지 않는 규칙만 여기에 둔다.
 
-- ⏸ 표시(ASIN 확인, 스키마 승인, 정답 세트 태깅, 시험 태깅 뒤 계속, 세부 이슈 승인, 설계 정보 항목 승인)에서 멈추고 민재님을 기다린다.
+- ⏸ 표시(ASIN 확인, 스키마 승인, 정답 세트 태깅, 시험 태깅 뒤 계속, 세부 이슈 승인, 설계 정보 항목 승인)에서 멈추고 담당자를 기다린다.
 - 시작할 때 `scripts/stage_plan.py plan`으로 다시 할 단계만 고른다. 중간에 끊기면 state.json에서 done이 아닌 첫 단계부터 다시 한다.
-- 재시도와 동시 실행은 config/stages.yaml 상한 안에서만 한다. 상한에 닿으면 멈추고 민재님에게 넘긴다.
+- 재시도와 동시 실행은 config/stages.yaml 상한 안에서만 한다. 상한에 닿으면 멈추고 담당자에게 넘긴다.
 - 대량 작업 방식은 단계마다 config/stages.yaml의 method를 따른다. v2(scripts/stage_packet.py가 만든 작업 파일과 그 파일이 적은 묶음 입력만 넘김)는 설계 정보 추출에만, 태깅과 이슈 라벨은 묶음마다 에이전트 하나(per_batch).
 
 ## 파일 계약
@@ -51,18 +51,18 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | 00_candidates.csv | collect.py candidates | 후보 ASIN: asin,product_title,db_reviews,db_s1~db_s5,real_s1~real_s5,total_ratings,average_rating,date_min,date_max,kind_hint,asin_count |
 | raw/ | collect.py | MCP 응답 원문. 다시 받지 않고 변환만 하려면 `collect.py pull --offline` |
 | 02_collect_log.json | collect.py pull | 수집 기록. 본문이 비어 02_reviews.csv에서 뺀 리뷰(dropped, dropped_count) |
-| 01_asins.csv | asin-selector(민재님 확인) 또는 민재님 | asin,title,brand,price_usd,price_band,amazon_rating,status(selected/excluded),reason 뒤에 선택 칸 parent_asin. 빈 brand, title, amazon_rating, parent_asin은 pull이 products_byasin으로 채움 |
-| 02_reviews.csv | collect.py pull 또는 민재님 | review_id,asin,star,date,title,body,verified,vine 뒤에 선택 칸 helpful_votes,variant_asin,variant_text,brand,language,country (UTF-8, 본문은 HTML 엔티티만 풀고 고치지 않음). language 빈 값은 영어 |
-| 02_star_distribution.csv | collect.py pull 또는 민재님 | asin,s5,s4,s3,s2,s1,total_ratings 뒤에 선택 칸 average_rating,source,captured_at (상품 페이지 별점 막대의 퍼센트, DB는 rating_summary) |
+| 01_asins.csv | asin-selector(담당자 확인) 또는 담당자 | asin,title,brand,price_usd,price_band,amazon_rating,status(selected/excluded),reason 뒤에 선택 칸 parent_asin. 빈 brand, title, amazon_rating, parent_asin은 pull이 products_byasin으로 채움 |
+| 02_reviews.csv | collect.py pull 또는 담당자 | review_id,asin,star,date,title,body,verified,vine 뒤에 선택 칸 helpful_votes,variant_asin,variant_text,brand,language,country (UTF-8, 본문은 HTML 엔티티만 풀고 고치지 않음). language 빈 값은 영어 |
+| 02_star_distribution.csv | collect.py pull 또는 담당자 | asin,s5,s4,s3,s2,s1,total_ratings 뒤에 선택 칸 average_rating,source,captured_at (상품 페이지 별점 막대의 퍼센트, DB는 rating_summary) |
 | 00_input_check.json | check_inputs.py | 입력 검사 결과(ASIN별 group_coverage, missing_real_pct, 언어별 건수 포함) |
 | gold/gold_reviews.csv | eval_gold.py pick | 정답 세트 리뷰 |
 | gold/gold_pick_log.json | eval_gold.py pick | 정답 세트와 스키마 표본을 고른 조건, 시드, 모자라서 다른 ASIN에서 채운 기록 |
 | 03_schema_sample.csv | eval_gold.py pick | 스키마 표본 150개(정답 세트 제외, 02_reviews.csv와 같은 칸). schema-drafter가 읽는 파일 |
 | 03_schema_input.csv | eval_gold.py pick | 정답 세트를 뺀 리뷰 전부 |
 | gold/gold_tagging.html | eval_gold.py sheet | 정답 세트 태깅 화면(한 파일, 브라우저 localStorage에 저장) |
-| gold/gold_tags.jsonl | 민재님(태깅 화면에서 내보냄) | {"review_id","topic","sentiment"} 한 줄에 하나 |
+| gold/gold_tags.jsonl | 담당자(태깅 화면에서 내보냄) | {"review_id","topic","sentiment"} 한 줄에 하나 |
 | 03_schema_draft.yaml | schema-drafter | 주제 초안 |
-| 03_schema_approved.yaml | 민재님 | 승인된 스키마. 태깅과 집계의 기준 |
+| 03_schema_approved.yaml | 담당자 | 승인된 스키마. 태깅과 집계의 기준 |
 | 03_schema_check.json | check_inputs.py --schema | 스키마 검사 결과 |
 | 04_batches.json | tag_batches.py plan | 태깅 묶음(batch_id, asin, review_ids, models)과 시험 태깅 묶음 |
 | 04_tags_{sonnet|top}_{batch_id}.jsonl | review-tagger | 묶음 하나의 태그(gold 묶음은 04_tags_top_gold.jsonl) |
@@ -75,7 +75,7 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | 04_tag_audit_summary.json | eval_gold.py audit | 표본 FAIL 비율(전체, ASIN별)과 다시 태깅할 묶음(batches_with_findings) |
 | 07a_issue_plan.json, 07a_issue_samples/ | issues.py sample | 주제와 방향마다 인용 수와 표본(최대 150개, ASIN과 별점 묶음 고르게) |
 | 07a_issues_<주제>.yaml | issue-labeler | 주제 하나의 세부 이슈 목록 제안 |
-| 07a_issues_draft.yaml, .md | issues.py merge | 세부 이슈 목록 초안(검사 결과 포함). 민재님이 고쳐 07a_issues_approved.yaml로 승인 |
+| 07a_issues_draft.yaml, .md | issues.py merge | 세부 이슈 목록 초안(검사 결과 포함). 담당자가 고쳐 07a_issues_approved.yaml로 승인 |
 | 01_prices.json | collect.py prices | 변형별 현재 가격과 조회 날짜(7장 가격대, 11장 온스당 가격) |
 | 05_metrics.json, 05_tables.md | weight.py | 리포트에 쓰는 모든 숫자(정답 세트 정확도 accuracy와 표기 문자열, 별점 보정 weighting, 리포트 문구 notes 포함)와 리포트용 표 |
 | 05_weights_preview.md | weight.py --weights-only | 태그 없이 본 ASIN별 묶음, 표본 수, 실제 %, 방식, 가중치, 경고 |
@@ -91,7 +91,7 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | market/market.json, market/market_summary.md | market.py build | 하위 카테고리, 브랜드 상위 20, 검색어, 추이, 우리 상품, 광고 표(행마다 원본 파일), 받지 못한 것 |
 | 13_detail_sample.csv | detail.py sample | 설계 정보 항목을 찾을 표본 150개(정답 세트 제외) |
 | 13_detail_schema_draft.yaml, .md, 13_detail_schema_check.json | detail-schema-drafter, detail.py check | 설계 정보 항목 초안과 검사. ⏸ 승인 뒤 13_detail_schema_approved.yaml |
-| 13_detail_schema_edits.yaml, 13_detail_schema_approved.yaml | 민재님(고칠 곳), detail.py approve | 승인된 설계 정보 항목 |
+| 13_detail_schema_edits.yaml, 13_detail_schema_approved.yaml | 담당자(고칠 곳), detail.py approve | 승인된 설계 정보 항목 |
 | 14_detail_batches.json, 14_detail_input/, 14_details_<묶음>.jsonl | detail.py plan, detail-extractor | 설계 정보 추출 묶음과 묶음별 결과 |
 | 14_details.jsonl, 14_detail_counts.json, 14_detail_check.json | detail.py extract-check | 검사를 통과한 값(리뷰 id, 항목, 값, 인용), 항목과 값마다 리뷰 수와 가중 비율 |
 | 14b_detail_audit_sample.jsonl, 14b_detail_audit.yaml, 14b_detail_audit_summary.json | detail.py, evidence-auditor | 추출 감사 |
@@ -117,11 +117,11 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | timing.jsonl, 08_timing.md | Hook, timing_report.py | 단계별 시간 |
 | README.md, docs/walkthrough.md | 메인 세션 | 저장소 설명과 설명서. 숫자는 docs/doc_facts.json의 표기만 쓴다 |
 | docs/doc_facts.json, .md, docs/doc_check.json | doc_facts.py build, check | 문서 숫자와 출처(회차 파일에서 모음), 문서 속 숫자와 경로 대조 결과 |
-| docs/github_upload_plan.md, .gitignore | 메인 세션 | 저장소에 올릴 것과 뺄 것 초안(최종은 민재님) |
+| docs/github_upload_plan.md, .gitignore | 메인 세션 | 저장소에 올릴 것과 뺄 것 초안(최종은 담당자) |
 | state.json | timing_report.py mark, stage_plan.py baseline | 단계별 상태, 입력 해시(같으면 그 단계를 건너뜀), 호출과 재시도 수 |
 | packets/<종류>_w<번호>.md, packets/<종류>_plan.json | stage_packet.py | 작업자 하나의 작업 파일(필요한 기준 원문 필드, 대상, 출력 경로, 검사, 상한)과 배정 요약 |
-| config/detail_rules.yaml | 사람(민재님 결정) | 설계 정보 항목의 공통 경계 규칙(품목에 묶이지 않음). 작업 파일에는 맡은 항목이 걸린 규칙만 원문 그대로, 감사자도 함께 읽음 |
-| 14_known_exceptions.yaml | 메인 세션(민재님 결정) | 그 회차에만 적용하는 첫 추출 검사의 알려진 예외(review_id, item, 이유). extract-check가 KNOWN으로 따로 보임 |
+| config/detail_rules.yaml | 사람(담당자 결정) | 설계 정보 항목의 공통 경계 규칙(품목에 묶이지 않음). 작업 파일에는 맡은 항목이 걸린 규칙만 원문 그대로, 감사자도 함께 읽음 |
+| 14_known_exceptions.yaml | 메인 세션(담당자 결정) | 그 회차에만 적용하는 첫 추출 검사의 알려진 예외(review_id, item, 이유). extract-check가 KNOWN으로 따로 보임 |
 | 06_report_concl_packet.md, 06_report_conclusions.yaml | report_lines.py packet, report-writer | 장마다 한 줄 결론을 쓸 작은 입력, 결론 문장(report_lines.py insert가 06_report.md에 넣음) |
 
 태그 한 줄 예시:

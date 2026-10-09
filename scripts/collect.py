@@ -265,7 +265,7 @@ def pull(run, mode, offline, confirm_paid):
     conf = load_config()
     if mode == "paid":
         if not conf["paid"].get("enabled"):
-            die("유료 수집이 꺼져 있습니다(config/pipeline.yaml의 paid.enabled: false). 켜려면 민재님이 직접 바꿔 주세요.")
+            die("유료 수집이 꺼져 있습니다(config/pipeline.yaml의 paid.enabled: false). 켜려면 담당자가 직접 바꿔 주세요.")
         if not confirm_paid:
             die("유료 수집은 --confirm-paid를 함께 줘야 합니다(Apify 크레딧이 실제로 듭니다).")
         if offline:

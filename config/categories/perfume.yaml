@@ -59,7 +59,7 @@ guide:
     exclude_words: [bag, underwear, boxer, bra, socks, shoes, organizer, clearance]   # 브랜드 이름 규칙을 통과하지만 이 카테고리 상품이 아닌 검색어
   duration_bins: [1, 3, 6, 12]          # 말한 지속 시간 구간(시간)
   price_bands: 3
-  value_aliases:                        # 설계 정보 글 값의 다른 표기 묶기(2026-10-09 민재님 "전부 넘기기")
+  value_aliases:                        # 설계 정보 글 값의 다른 표기 묶기(2026-10-09 담당자 "전부 넘기기")
     comparison_named:
       Black Opium: ["black opium", "YSL Black Opium", "YSL black opium", "Black Opium YSL", "YSL’s Black Opium"]
       Lattafa: ["Lataffa"]                        # 시장 데이터 브랜드 표의 평균 가격으로 나눌 구간 수

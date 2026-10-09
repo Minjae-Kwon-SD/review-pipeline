@@ -1,6 +1,6 @@
 # 설명서: 리뷰 분석 파이프라인은 어떻게 짜여 있고, 어떻게 시키는가
 
-우진님께 드리는 설명이다. 결과물은 `runs/perfume-db-2026-10-07/`의 HTML 두 개(리뷰 리포트 한국어판, 개발 가이드 한국어판)이고(영어판은 제출 전 요청이 있을 때 한국어 최신판으로 다시 만듦), 실행 방법과 표는 저장소 맨 위 [README.md](../README.md)에 있다. 이 문서의 숫자는 `python scripts/doc_facts.py build`가 회차 파일에서 모은 값이고 출처는 [doc_facts.md](doc_facts.md)에 있다.
+검토자께 드리는 설명이다. 결과물은 `runs/perfume-db-2026-10-07/`의 HTML 두 개(리뷰 리포트 한국어판, 개발 가이드 한국어판)이고(영어판은 제출 전 요청이 있을 때 한국어 최신판으로 다시 만듦), 실행 방법과 표는 저장소 맨 위 [README.md](../README.md)에 있다. 이 문서의 숫자는 `python scripts/doc_facts.py build`가 회차 파일에서 모은 값이고 출처는 [doc_facts.md](doc_facts.md)에 있다.
 
 ## 1. 왜 이 구조인가
 

@@ -8,7 +8,7 @@ audit:
     - {review_id: R1NZEC16D5FOP4, verdict: none, reason: "피부에 닿지 않았는데 섬광이 터졌다는 기기 문제이고 몸 반응은 없음"}
     - {review_id: R1Q2O18BTENX2M, verdict: symptom, symptom_type: 피부, reason: "패치 테스트에서 화상 자국이 생겼다고 함"}
     - {review_id: R1Q6A8KFOI7Z51, verdict: symptom, symptom_type: 피부, reason: "쓸 때 피부가 탄다(burns)고 함"}
-    - {review_id: R1QJ3XS7DRLDT5, verdict: UNVERIFIED, reason: "섬광에 눈이 아프다는 몸 반응이지만 눈 증상은 symptom_type 목록에 없음. 분류는 민재님 결정 필요"}
+    - {review_id: R1QJ3XS7DRLDT5, verdict: UNVERIFIED, reason: "섬광에 눈이 아프다는 몸 반응이지만 눈 증상은 symptom_type 목록에 없음. 분류는 담당자 결정 필요"}
     - {review_id: R1VXSN77DK26E4, verdict: symptom, symptom_type: 피부, reason: "설명서대로 썼는데 화상을 입었다고 함"}
     - {review_id: R256O7P8XK4PQM, verdict: symptom, symptom_type: 피부, reason: "딱지 같은 검은 자국과 흰 반점, 흉터가 남았다고 함"}
     - {review_id: R25E5FLOPWQISZ, verdict: none, reason: "상자에 연령 경고가 없다는 말뿐이고 몸 반응은 없음"}
@@ -42,7 +42,7 @@ audit:
     - {review_id: RKE1KVSCKEGFQ, verdict: symptom, symptom_type: 피부, reason: "피부에 화상을 입었다고 함"}
     - {review_id: RLFYC8A61CQ1, verdict: none, reason: "빛이 너무 밝아 걱정됐다는 말이고 몸 반응은 없음"}
     - {review_id: RPHWSBC5W6ST2, verdict: symptom, symptom_type: 피부, reason: "화상 자국이 생겼다고 함"}
-    - {review_id: RQDP50FQH5O04, verdict: UNVERIFIED, reason: "쓴 다음 날 비문증과 시야 흐림이 생겨 안과에 간다는 몸 반응이지만 눈 증상은 symptom_type 목록에 없음. 분류는 민재님 결정 필요"}
+    - {review_id: RQDP50FQH5O04, verdict: UNVERIFIED, reason: "쓴 다음 날 비문증과 시야 흐림이 생겨 안과에 간다는 몸 반응이지만 눈 증상은 symptom_type 목록에 없음. 분류는 담당자 결정 필요"}
     - {review_id: RY0WX4DTSCVG, verdict: symptom, symptom_type: 피부, reason: "얼굴이 매우 자극받았다(muy irritada)고 함"}
     - {review_id: R12B1GOLRDX47V, verdict: symptom, symptom_type: 피부, reason: "얼굴 피부가 하얗게 탈색됐다고 함"}
     - {review_id: R15EFOBOTIF4I0, verdict: symptom, symptom_type: 피부, reason: "알레르기 반응 같은 피부 가려움이 생겼다고 직접 묘사함"}
@@ -111,7 +111,7 @@ audit:
     - {review_id: R2PH76S40PV5X1, verdict: none, reason: "피부 자극이 전혀 없었다는 말"}
     - {review_id: R2Q8K2P5CFBJB3, verdict: none, reason: "피부 자극이나 건조가 없다는 말"}
     - {review_id: R2VNEBLNFNGTZ1, verdict: none, reason: "민감 피부인데 문제가 없었다는 말"}
-    - {review_id: R3CVPCV0EQPFAQ, verdict: UNVERIFIED, reason: "섬광에 눈이 아프다는 몸 반응이지만 눈 증상은 symptom_type 목록에 없음. 분류는 민재님 결정 필요"}
+    - {review_id: R3CVPCV0EQPFAQ, verdict: UNVERIFIED, reason: "섬광에 눈이 아프다는 몸 반응이지만 눈 증상은 symptom_type 목록에 없음. 분류는 담당자 결정 필요"}
     - {review_id: R3OHPHFT97EWOM, verdict: symptom, symptom_type: 피부, reason: "같은 곳을 두 번 넘게 지나갔을 때 가벼운 자극이 있었다고 함"}
     - {review_id: RJ86SS9SV6XB0, verdict: none, reason: "피부 반응이 없었다는 말"}
     - {review_id: RMQNDNZ0FACDR, verdict: none, reason: "화상을 피하려면 잘 면도하라는 조언이고 몸 반응은 없음"}

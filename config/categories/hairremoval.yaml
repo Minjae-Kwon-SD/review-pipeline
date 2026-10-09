@@ -1,5 +1,5 @@
 # 가정용 IPL, 레이저 제모기 카테고리. collect.py candidates와 asin-selector가 읽는다.
-# 2026-10-08 민재님 "레이저 가정용 제모기"로 범위를 정함(제모 크림, 왁스, 에필레이터, 면도기, 트리머는 뺌).
+# 2026-10-08 담당자 "레이저 가정용 제모기"로 범위를 정함(제모 크림, 왁스, 에필레이터, 면도기, 트리머는 뺌).
 category: hairremoval
 name_ko: 가정용 IPL 레이저 제모기
 
@@ -86,7 +86,7 @@ issues:
   # 같은 리뷰에 함께 붙는지 셀 두 라벨(주제, 라벨 id)
   overlap: [[hair_reduction, no_effect], [skin_hair_suitability, light_fine_hair]]
 
-# 제품 개발 가이드(guide_metrics.py가 읽음). 2026-10-08 세부 이슈와 설계 정보 항목 승인 뒤 Claude가 정함(민재님 위임).
+# 제품 개발 가이드(guide_metrics.py가 읽음). 2026-10-08 세부 이슈와 설계 정보 항목 승인 뒤 Claude가 정함(담당자 위임).
 guide:
   title: 아마존 미국 가정용 IPL, 레이저 제모기 제품 개발 가이드
   market_node_head: "13406780011"       # 머리 숫자의 시장 노드(Laser, Light & Electrolysis Hair Removal)

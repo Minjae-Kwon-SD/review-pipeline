@@ -545,7 +545,7 @@ discarded:
   sample_count: 3
   reason: 5개 미만(RWR04SZ6V3HXE, R2SQZU7D4PAVAD, R3A9R3RZ8V4MPU)이고 overall이 담음
 approved_at: 2026-10-07T12:27Z
-approved_by: '민재님: 스레드 글 ''승인''(10/7 21:27), 카드 ''두 곳 고쳐 승인''(10/7 21:16)'
+approved_by: '담당자: 스레드 글 ''승인''(10/7 21:27), 카드 ''두 곳 고쳐 승인''(10/7 21:16)'
 edits:
   split_values:
   - item: purchase_context

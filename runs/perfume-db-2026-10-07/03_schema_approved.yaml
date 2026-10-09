@@ -1,19 +1,19 @@
 category: perfume
 version: approved
 approval:
-  approved_by: 권민재
+  approved_by: 담당자
   approved_on: 2026-10-07
   changes_from_draft:
     - "노트 불일치의 trust 기준: 노트가 설명과 다르다는 말만 있으면 scent만, 가짜나 정품 의심, 전에 산 같은 제품이나 매장 테스터와 다르다고 하면 trust와 scent 둘 다"
     - "관용 표현 기준: waste of money, not worth it 등은 가격이나 용량 이야기가 있을 때만 price_value. 이유가 함께 있으면 그 이유의 주제만, 이유가 없으면 overall"
   amendments:
-    - approved_by: 권민재
+    - approved_by: 담당자
       approved_at: "2026-10-07 06:56 UTC"
       summary: 정답 세트 기준 13개 추가(정답 세트 태깅 중 정한 기준). 이전 승인본은 03_schema_approved_v1.yaml
-    - approved_by: 권민재
+    - approved_by: 담당자
       approved_at: "2026-10-07 07:09 UTC"
       summary: 기준 14, 15 추가(애용 신호는 brand_experience, 짧은 실망 표현만으로 overall negative 아님). 이전 승인본은 03_schema_approved_v2.yaml
-    - approved_by: 권민재
+    - approved_by: 담당자
       approved_at: "2026-10-07 07:33 UTC"
       summary: 기준 14 예외 2줄, 분사기 기준(16). 이전 승인본은 03_schema_approved_v3.yaml
 sample_reviews: 150
@@ -395,10 +395,10 @@ changes:
   - {action: redefine, ids: [performance, longevity_projection], reason: "표본에서 성능 언급은 거의 모두 지속 시간과 향의 세기, 확산력 이야기(어림 60개). 비영어 리뷰도 fijación, fixação, duración으로 같은 내용"}
   - {action: redefine, ids: [design, bottle_design], reason: "표본의 디자인 언급은 병 모양, 자석 뚜껑, 분사, 병 크기와 휴대성(어림 18개). 색이나 모양 일반보다 병과 용량 이야기라 이름과 정의를 좁힘"}
   - {action: add, ids: [scent], reason: "향 자체의 호불호와 묘사(노트, 나이 이미지, 설명과 다른 노트)가 표본에서 가장 많은 내용(어림 90개)이고 공통 11개 어디에도 담기지 않음"}
-  - {action: approve, ids: [trust, scent, price_value, overall], reason: "승인자 권민재, 승인일 2026-10-07. 초안에서 바뀐 점: 노트 불일치의 trust 기준(정품 의심이나 예전 제품, 매장 테스터와 비교하면 trust와 scent 둘 다, 노트가 설명과 다르다는 말만 있으면 scent만), 관용 표현 기준(가격이나 용량을 직접 말할 때만 price_value, 이유가 있으면 그 주제, 없으면 overall)"}
-  - {action: amend, ids: [shipping, scent, overall, quality, price_value, customer_service, packaging, bottle_design, trust, brand_experience, longevity_projection, safety], reason: "승인자 권민재, 2026-10-07 06:56 UTC. 정답 세트 기준 13개 추가: 시점 없는 누출은 shipping(여행 중 누출은 bottle_design), 엉뚱한 상품과 제대로 온 상품은 shipping, 예전 다른 판매자 구매는 태깅 안 함, 묘사 없는 fragrance 호감은 scent, overall은 내용 기준으로 모든 리뷰에, 제조 단계 부품 누락은 quality, 약한 가격 칭찬은 positive, 호감 뒤 교체나 반품 문의는 customer_service neutral, 병을 가리키는 packaging은 bottle_design, 판매자 비추천은 trust만, 독하지 않다는 세기 칭찬은 longevity_projection(safety 아님), 긍정 관용 표현은 price_value positive"}
-  - {action: amend, ids: [brand_experience, overall], reason: "승인자 권민재, 2026-10-07 07:09 UTC. 기준 14, 15 추가: 오래 써 왔다, 여러 번 샀다, 예비로 하나 더 산다 같은 애용 신호는 brand_experience positive. 짧은 실망 표현만으로 overall negative로 보지 않고, 좋은 점과 나쁜 점이 함께 있으면 mixed"}
-  - {action: amend, ids: [brand_experience, trust, quality, shipping], reason: "승인자 권민재, 2026-10-07 07:33 UTC. 기준 14 예외 2줄(가짜나 변질 의심의 근거로 쓰인 오래 써 옴은 trust, 같은 브랜드 다른 제품 여러 개 구매는 애용 신호 아님), 기준 16(받았을 때 작동하지 않는 분사기나 펌프는 quality, 겉이 부서진 경우만 shipping)"}
+  - {action: approve, ids: [trust, scent, price_value, overall], reason: "승인자 담당자, 승인일 2026-10-07. 초안에서 바뀐 점: 노트 불일치의 trust 기준(정품 의심이나 예전 제품, 매장 테스터와 비교하면 trust와 scent 둘 다, 노트가 설명과 다르다는 말만 있으면 scent만), 관용 표현 기준(가격이나 용량을 직접 말할 때만 price_value, 이유가 있으면 그 주제, 없으면 overall)"}
+  - {action: amend, ids: [shipping, scent, overall, quality, price_value, customer_service, packaging, bottle_design, trust, brand_experience, longevity_projection, safety], reason: "승인자 담당자, 2026-10-07 06:56 UTC. 정답 세트 기준 13개 추가: 시점 없는 누출은 shipping(여행 중 누출은 bottle_design), 엉뚱한 상품과 제대로 온 상품은 shipping, 예전 다른 판매자 구매는 태깅 안 함, 묘사 없는 fragrance 호감은 scent, overall은 내용 기준으로 모든 리뷰에, 제조 단계 부품 누락은 quality, 약한 가격 칭찬은 positive, 호감 뒤 교체나 반품 문의는 customer_service neutral, 병을 가리키는 packaging은 bottle_design, 판매자 비추천은 trust만, 독하지 않다는 세기 칭찬은 longevity_projection(safety 아님), 긍정 관용 표현은 price_value positive"}
+  - {action: amend, ids: [brand_experience, overall], reason: "승인자 담당자, 2026-10-07 07:09 UTC. 기준 14, 15 추가: 오래 써 왔다, 여러 번 샀다, 예비로 하나 더 산다 같은 애용 신호는 brand_experience positive. 짧은 실망 표현만으로 overall negative로 보지 않고, 좋은 점과 나쁜 점이 함께 있으면 mixed"}
+  - {action: amend, ids: [brand_experience, trust, quality, shipping], reason: "승인자 담당자, 2026-10-07 07:33 UTC. 기준 14 예외 2줄(가짜나 변질 의심의 근거로 쓰인 오래 써 옴은 trust, 같은 브랜드 다른 제품 여러 개 구매는 애용 신호 아님), 기준 16(받았을 때 작동하지 않는 분사기나 펌프는 quality, 겉이 부서진 경우만 shipping)"}
 
 questions:
   - "향 노트가 상품 설명이나 광고와 다르다(바닐라가 안 난다, 꿀이 안 느껴진다, 어림 9개)를 scent로 보냈습니다. 공통 trust 정의('리스팅과 실물 차이')로 보낼지 정해 주세요. 정답지 태깅과 같은 기준이어야 합니다."
