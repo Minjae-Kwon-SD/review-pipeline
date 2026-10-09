@@ -13,7 +13,7 @@
 
 limits:
   bulk_concurrency: 4          # 대량 작업자(sonnet) 동시 실행(이슈 라벨, 설계 정보 추출)
-  tagging_concurrency: 8       # 태깅(05_tagging) review-tagger 동시 실행. 2026-10-09 담당자 "상위 작성자 4, 태깅 8" 추천대로
+  tagging_concurrency: 8       # 태깅(05_tagging) review-tagger 동시 실행. 2026-10-09 담당자 결정(추천안)
   worker_max_batches: 4        # 작업자 하나가 맡는 묶음
   worker_max_reviews: 200      # 작업자 하나가 맡는 리뷰
   retry_per_batch: 2           # 묶음마다 재시도

@@ -557,7 +557,7 @@ discarded:
   sample_count: 2
   reason: 5개 미만
 approved_at: 2026-10-08T14:22Z
-approved_by: Claude(담당자 위임 2026-10-08 21:54:40 KST '너가 판단가능한거는 일단해봐'). 초안 그대로, 표본 0인 비교 값 4개는 공통 경계 규칙과 맞추려고 남김
+approved_by: Claude(담당자 위임 2026-10-08 21:54:40 KST). 초안 그대로, 표본 0인 비교 값 4개는 공통 경계 규칙과 맞추려고 남김
 edits:
   split_values: []
   extra: []

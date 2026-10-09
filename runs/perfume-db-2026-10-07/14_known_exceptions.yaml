@@ -1,7 +1,7 @@
 # 이 회차(perfume-db-2026-10-07)에만 적용하는 설계 정보 첫 추출 검사의 알려진 예외. 다른 회차에는 적용되지 않는다.
 # detail.py extract-check는 아래 (review_id, item)의 '원문에 없는 인용'만 KNOWN으로 따로 보이고(숨기지 않음), 그 밖의 원문 없는 인용은 묶음 실패로 둔다.
 # 2026-10-08 G9에서 고친 검사가 찾음. 인용이 원문에 없어 G9 전 검사가 값을 버렸고, 공식 결과물(14_details.jsonl)에는 없다.
-# 다시 뽑지 않음: 담당자 "추천대로"(2026-10-08 16:22 KST, 추천안 "기록만").
+# 다시 뽑지 않음: 담당자 결정(2026-10-08 16:22 KST, 추천안 "기록만").
 exceptions:
   - {review_id: RLI9E523HGVOC, item: desired_state, batch: B00021AJ5I_08, reason: "인용이 원문에 없음. G9 전 검사가 값을 버림, 공식 결과물에 없음, 다시 뽑지 않음"}
   - {review_id: RW9B7F2AP5A3C, item: comparison_reference, batch: B00021AJ5I_08, reason: "인용이 원문에 없음. G9 전 검사가 값을 버림, 공식 결과물에 없음, 다시 뽑지 않음"}
