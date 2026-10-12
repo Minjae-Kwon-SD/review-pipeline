@@ -454,6 +454,23 @@ def test_collect_rank_paid(tmp):
     calls.clear()
     collect.paid_scrape(r, ["B0R3", "B0R4"], conf)
     eq("다시 돌리면 성공한 호출은 다시 부르지 않음", [t for t, a in calls if t == "scrape_reviews"], [])
+    # 동시 호출(paid.concurrency 4): 호출 수와 상한은 같고 기록 줄도 호출마다 하나
+    r2 = Path(tmp) / "rank-par"
+    (r2 / "raw").mkdir(parents=True)
+    collect.call_fresh = fake
+    calls.clear()
+    collect.paid_scrape(r2, ["B0R3", "B0R4"], {"paid": {**conf["paid"], "concurrency": 4}})
+    lines = [json.loads(l) for l in open(r2 / "raw" / "paid_calls.jsonl", encoding="utf-8")]
+    eq("동시 호출: 호출 10번, 기록 10줄, 같은 조합", (len([t for t, a in calls if t == "scrape_reviews"]), len(lines),
+       sorted((x["asin"], x["arguments"]["ratings"][0]) for x in lines)), (10, 10, sorted((a, s) for a in ("B0R3", "B0R4") for s in range(1, 6))))
+    calls.clear()
+    (Path(tmp) / "rank-par2" / "raw").mkdir(parents=True)
+    try:
+        collect.paid_scrape(Path(tmp) / "rank-par2", ["B0R3", "B0R4"], {"paid": {**conf["paid"], "concurrency": 4, "max_scrape_calls": 3}})
+        stopped = False
+    except SystemExit:
+        stopped = True
+    eq("동시 호출도 상한(3번)을 넘겨 부르지 않음", (stopped, len([t for t, a in calls if t == "scrape_reviews"])), (True, 3))
     try:
         collect.paid_scrape(r, ["B0R1", "B0R3", "B0R4"], conf)
         stopped = False

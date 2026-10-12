@@ -48,11 +48,13 @@ import html
 import json
 import re
 import sys
+import threading
 import time
 from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from mcp_http import MCPError, call_tool
+from mcp_http import MCPError, Session, call_tool
 from pipeline_io import (ASIN_COLS, ASIN_OPT, DIST_COLS, DIST_OPT, REVIEW_COLS, REVIEW_OPT, ROOT, STARS, die,
                          load_config, load_yaml, now_iso, read_csv, write_json)
 
@@ -75,6 +77,14 @@ def run_dir(name, create=False):
 def call(server, tool, args):
     try:
         return call_tool(server, tool, args)
+    except MCPError as e:
+        die(str(e))
+
+
+def call_fresh(server, tool, args):
+    """동시 호출용: 호출마다 세션을 새로 연다(세션 하나를 여러 스레드가 함께 쓰지 않게)."""
+    try:
+        return Session(server).call(tool, args)
     except MCPError as e:
         die(str(e))
 
@@ -384,23 +394,37 @@ def paid_scrape(run, asins, conf, test=False):
         plan = [(a, [s]) for a in asins for s in STARS]
     else:
         plan = [(a, list(STARS)) for a in asins]
+    todo = []
     for a, ratings in plan:
         if not test and (a, tuple(ratings), pages) in ok_pairs:
             print(f"  유료 수집 {a} {ratings}: 이미 받음(raw/paid_calls.jsonl), 건너뜀", flush=True)
             continue
-        if done >= limit:
-            die(f"유료 호출이 paid.max_scrape_calls({limit}번)에 닿아 멈춥니다. 남은 호출은 부르지 않았습니다.")
+        todo.append((a, ratings))
+    over = len(todo) > limit - done          # 상한을 넘는 호출은 처음부터 부르지 않는다(동시에 불러도 상한은 그대로)
+    todo = todo[:max(0, limit - done)]
+    # 동시 호출 수(paid.concurrency, 기본 1). 호출 수와 비용은 같고 걸리는 시간만 준다. 동시에 부를 때는 호출마다 세션을 따로 연다
+    workers = 1 if test else max(1, int(paid.get("concurrency", 1)))
+    lock = threading.Lock()
+
+    def one(job):
+        a, ratings = job
         args = {"asins": [a], "ratings": ratings, "regions": ["com"], "max_pages": pages, "sort": "recent", "limit": 1}
         t = time.time()
-        _, res = call(REVIEW_SERVER, "scrape_reviews", args)
+        _, res = (call if workers == 1 else call_fresh)(REVIEW_SERVER, "scrape_reviews", args)
         sec = round(time.time() - t, 1)
-        done += 1
-        with open(log, "a", encoding="utf-8") as f:
-            f.write(json.dumps({"ts": now_iso(), "asin": a, "arguments": args, "seconds": sec, "test": test,
-                                **{k: res.get(k) for k in ("collected", "inserted", "skipped")}},
-                               ensure_ascii=False) + "\n")
-        print(f"  유료 수집 {a} {ratings}: 수집 {res.get('collected')}, 새로 저장 {res.get('inserted')}, 중복 {res.get('skipped')}, "
-              f"{sec}초", flush=True)
+        with lock:
+            with open(log, "a", encoding="utf-8") as f:
+                f.write(json.dumps({"ts": now_iso(), "asin": a, "arguments": args, "seconds": sec, "test": test,
+                                    **{k: res.get(k) for k in ("collected", "inserted", "skipped")}},
+                                   ensure_ascii=False) + "\n")
+            print(f"  유료 수집 {a} {ratings}: 수집 {res.get('collected')}, 새로 저장 {res.get('inserted')}, 중복 {res.get('skipped')}, "
+                  f"{sec}초", flush=True)
+
+    # 한 호출이 실패하면 멈춘다. 이미 받은 호출은 raw/paid_calls.jsonl에 남아 다시 돌리면 건너뛴다
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        list(ex.map(one, todo))
+    if over:
+        die(f"유료 호출이 paid.max_scrape_calls({limit}번)에 닿아 멈춥니다. 남은 호출은 부르지 않았습니다.")
     if test:
         _, one = call(REVIEW_SERVER, "search_reviews", {"asin": asins[0], "ratings": [STARS[0]], "limit": 1})
         r1 = next((x for x in one.get("reviews") or [] if x.get("asin") == asins[0]), {})

@@ -6,6 +6,7 @@ paid:
   max_pages_per_star: 1     # ASIN과 별점 조합마다 받을 페이지 수(1~10)
   max_scrape_calls: 10      # 이 회차 raw/paid_calls.jsonl 전체의 scrape_reviews 최대 횟수(시험 호출 포함, 별점마다 부르면 ASIN당 5번)
   max_asins: 10             # 유료로 받을 ASIN 수 상한(2026-10-10 담당자 결정 "허용(10개까지)")
+  concurrency: 4            # 동시 호출 수(호출 수와 비용은 같고 시간만 줄어듦). 2026-10-12 담당자 결정 1에서 4로
   split_by_star: true       # ASIN x 별점마다 한 번씩 부름(다섯 별점을 한 번에 부르면 시간 초과 위험, mcp_tools.md 경고)
   scrape_below_db_reviews: 100   # --paid-asins가 없을 때 공유 DB 리뷰가 이보다 적은 selected만 유료로 받음(0이면 selected 전부)
 
