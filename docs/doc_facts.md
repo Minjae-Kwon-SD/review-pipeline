@@ -1,6 +1,10 @@
 # 문서 숫자 출처
 
-회차 perfume-db-2026-10-07, 2026-10-08T23:17 기준. `python scripts/doc_facts.py build`가 만든다.
+`python scripts/doc_facts.py build <회차>`가 회차마다 만든다. 마지막으로 만든 회차: hairremovalcream-2026-10-10.
+
+## perfume-db-2026-10-07
+
+2026-10-08T23:17 기준.
 
 | 키 | 표기 | 출처 |
 |---|---|---|
@@ -121,3 +125,95 @@
 | ref.guide.reviews | 12,380개, 리스팅 37개, 카테고리 9개 | 정답지 Coolmate_Scrubs_Product_Dev_Guide_v1.html 머리 문장 |
 | ref.guide.specs | 리스팅 사양 37개, 사이즈표 31개 | 정답지 Coolmate_Scrubs_Product_Dev_Guide_v1.html 머리 문장 |
 | ref.guide.terms | 7,346개 | 정답지 Coolmate_Scrubs_Product_Dev_Guide_v1.html 머리 문장 |
+
+## hairremovalcream-2026-10-10
+
+2026-10-12T15:03 기준.
+
+| 키 | 표기 | 출처 |
+|---|---|---|
+| gold.reviews | 32개 | 05_metrics.json accuracy.gold_reviews |
+| gold.f1 | 0.87 | 05_metrics.json accuracy.sonnet.topic_f1_text |
+| gold.sent | 77.5% | 05_metrics.json accuracy.sonnet.sentiment_text |
+| gold.top_sent | 82.2% | 05_metrics.json accuracy.top.sentiment_text |
+| gold.dir | 97.0%(67개 중 65개) | 05_metrics.json accuracy.sonnet.direction_* |
+| gold.mixed | 18.2%(22개 중 4개) | 05_metrics.json accuracy.sonnet.mixed_* |
+| gold.status | PASS | 05_metrics.json accuracy.status |
+| data.asins | 8개 | 01_asins.csv status=selected |
+| data.tags | 6,288개 | 04_tags.jsonl 줄 수 |
+| data.reviews | 2,002개 | 02_reviews.csv 행 수 |
+| data.dropped | 1개 | 02_collect_log.json dropped_count |
+| paid.calls | 41번 | raw/paid_calls.jsonl 줄 수(시험 호출 포함) |
+| paid.minutes | 27.6분 | raw/paid_calls.jsonl seconds 합 |
+| data.topics | 14개 | 03_schema_approved.yaml topics |
+| data.labels | 80개 | 07a_issues_approved.yaml 라벨 수(other 빼고) |
+| gold.tags | 104개 | gold/gold_tags.jsonl 줄 수(내용은 읽지 않고 줄만 셈) |
+| audit.tags | 144개 중 FAIL 1개(0.7%) | 04_tag_audit_summary.json |
+| audit.tags_cons | 12.3% | 04_tag_audit_summary.json conservative_rate(FAIL + UNVERIFIED + missed) |
+| audit.tags_parts | UNVERIFIED 1개, 빠진 태그 18개, 뺀 정답 세트 태그 0개 | 04_tag_audit_summary.json |
+| audit.labels | 150개 중 FAIL 2개(1.3%) | 07b_issue_audit_summary.json |
+| audit.details | 150개 중 FAIL 1개(0.7%) | 14b_detail_audit_summary.json |
+| html.report_numbers | 900개 | 06_report_html_check.json numbers_checked |
+| html.report_drill | 378개 | 06_report_html_check.json drilldowns_checked |
+| html.report_kb | 1260KB | 06_report_html_check.json size_kb |
+| html.guide_numbers | 155개 | 07_guide_html_check.json numbers_checked |
+| html.guide_bundles | 187개 | 07_guide_html_check.json evidence_bundles |
+| html.guide_links | 124개 | 07_guide_html_check.json source_links |
+| html.guide_kb | 1277KB | 07_guide_html_check.json size_kb |
+| detail.values | 2,593개 | 14_detail_check.json values |
+| detail.items | 15개 | 13_detail_schema_approved.yaml items |
+| research | 51개 중 39개 | 15_research_check.json claims, verified |
+| market.calls | 40번 | market/calls.jsonl 줄 수 |
+| specs.verified | 116개 | 23_specs_check.json verified |
+| specs.products | 9개 | 23_specs_check.json by_asin |
+| robust.n | 2,000번 | 05_robustness.json bootstrap.n |
+| robust.head_first | 99.9% | 05_robustness.json texts.head_first |
+| robust.head_neg_ci | 12.4%~15.5% | 05_robustness.json texts.head_neg_ci |
+| robust.loo_flips | 8번 중 4번 | 05_robustness.json texts.loo_flips |
+| robust.weakest | 8개 중 4개(리뷰를 다시 뽑아 보면 3~6개) | 05_robustness.json texts.weakest |
+| agent.calls | 174번 | timing.jsonl SubagentStart와 SubagentStop 짝 |
+| agent.sum | 435분 | timing.jsonl 에이전트마다 걸린 시간 합 |
+| agent.union | 202분 | timing.jsonl 에이전트가 하나라도 돌던 시간(겹친 구간은 한 번만) |
+| time.review.first | 443.8분 | timing.jsonl 리뷰 리포트 단계 모든 시도 합(사람 대기 빼고) |
+| time.review.rerun | 443.8분 | timing.jsonl 리뷰 리포트 단계 마지막 시도 합(고치기 단계 11_report_polish, 11b_polish_audit, 18b_guide_fix, 20_head_growth, 20b_head_text, 23c_specs_cleanup, 24_report_fix, 24b_report_en_fix, 25_guide_g5, 25b_guide_consistency, 26_claim_strength, 26b_source_drop, 27_rejudge, 27b_rejudge_audit, 27c_rejudge_guide 빼고) |
+| time.review.human | 0.0분 | timing.jsonl 리뷰 리포트 사람 대기(⏸) 단계 |
+| time.guide.first | 141.6분 | timing.jsonl 개발 가이드 단계 모든 시도 합(사람 대기 빼고) |
+| time.guide.rerun | 141.6분 | timing.jsonl 개발 가이드 단계 마지막 시도 합(고치기 단계 11_report_polish, 11b_polish_audit, 18b_guide_fix, 20_head_growth, 20b_head_text, 23c_specs_cleanup, 24_report_fix, 24b_report_en_fix, 25_guide_g5, 25b_guide_consistency, 26_claim_strength, 26b_source_drop, 27_rejudge, 27b_rejudge_audit, 27c_rejudge_guide 빼고) |
+| time.guide.human | 0.0분 | timing.jsonl 개발 가이드 사람 대기(⏸) 단계 |
+| time.en.first | 17.2분 | timing.jsonl 영어판과 보강(G3 이후) 단계 모든 시도 합(사람 대기 빼고) |
+| time.en.rerun | 17.2분 | timing.jsonl 영어판과 보강(G3 이후) 단계 마지막 시도 합(고치기 단계 11_report_polish, 11b_polish_audit, 18b_guide_fix, 20_head_growth, 20b_head_text, 23c_specs_cleanup, 24_report_fix, 24b_report_en_fix, 25_guide_g5, 25b_guide_consistency, 26_claim_strength, 26b_source_drop, 27_rejudge, 27b_rejudge_audit, 27c_rejudge_guide 빼고) |
+| time.en.human | 0.0분 | timing.jsonl 영어판과 보강(G3 이후) 사람 대기(⏸) 단계 |
+| time.total.first | 602.6분 | time.<영역>.first 세 영역 합 |
+| time.total.rerun | 602.6분 | time.<영역>.rerun 세 영역 합 |
+| time.total.human | 0.0분 | time.<영역>.human 세 영역 합 |
+| html.report_chapters | 13개 장 | scripts/render_html.py CHAPTERS |
+| topics.common | 11개 | config/topics_common.yaml topics |
+| step.23_specs | 17.2분 | timing.jsonl 23_specs 마지막 시도 |
+| step.00_collect | 347.2분 | timing.jsonl 00_collect 마지막 시도 |
+| step.01_inputs | 0.1분 | timing.jsonl 01_inputs 마지막 시도 |
+| step.12_market | 5.9분 | timing.jsonl 12_market 마지막 시도 |
+| step.02_schema_draft | 8.1분 | timing.jsonl 02_schema_draft 마지막 시도 |
+| step.15_research | 1.3분 | timing.jsonl 15_research 마지막 시도 |
+| step.13_detail_schema_draft | 11.8분 | timing.jsonl 13_detail_schema_draft 마지막 시도 |
+| step.05_tagging | 29.6분 | timing.jsonl 05_tagging 마지막 시도 |
+| step.06_tag_check | 11.2분 | timing.jsonl 06_tag_check 마지막 시도 |
+| step.14_detail_extract | 23.6분 | timing.jsonl 14_detail_extract 마지막 시도 |
+| step.07a_issue_draft | 8.2분 | timing.jsonl 07a_issue_draft 마지막 시도 |
+| step.14b_detail_check | 57.7분 | timing.jsonl 14b_detail_check 마지막 시도 |
+| step.07b_issue_labeling | 8.8분 | timing.jsonl 07b_issue_labeling 마지막 시도 |
+| step.07_weight | 0.5분 | timing.jsonl 07_weight 마지막 시도 |
+| step.16_guide_metrics | 0.1분 | timing.jsonl 16_guide_metrics 마지막 시도 |
+| step.08_report | 7.9분 | timing.jsonl 08_report 마지막 시도 |
+| step.17_guide_write | 19.8분 | timing.jsonl 17_guide_write 마지막 시도 |
+| step.09_report_check | 21.9분 | timing.jsonl 09_report_check 마지막 시도 |
+| step.11_html | 0.1분 | timing.jsonl 11_html 마지막 시도 |
+| step.18_guide_check | 21.4분 | timing.jsonl 18_guide_check 마지막 시도 |
+| step.19_guide_html | 0.0분 | timing.jsonl 19_guide_html 마지막 시도 |
+| step.10_timing | 0.0분 | timing.jsonl 10_timing 마지막 시도 |
+| tests | 378개 | tests/test_scripts.py 실행 결과의 확인 개수 |
+| ref.report.reviews | 3,488개, ASIN 10개 | 정답지 review_analysis_report_en.html 머리 문장 |
+| ref.report.tags | 10,066개 | 정답지 review_analysis_report_en.html 머리 문장 |
+| ref.guide.reviews | 12,380개, 리스팅 37개, 카테고리 9개 | 정답지 Coolmate_Scrubs_Product_Dev_Guide_v1.html 머리 문장 |
+| ref.guide.specs | 리스팅 사양 37개, 사이즈표 31개 | 정답지 Coolmate_Scrubs_Product_Dev_Guide_v1.html 머리 문장 |
+| ref.guide.terms | 7,346개 | 정답지 Coolmate_Scrubs_Product_Dev_Guide_v1.html 머리 문장 |
+

@@ -76,6 +76,11 @@ def build(run):
     put("gold.f1", acc["sonnet"]["topic_f1_text"], "05_metrics.json accuracy.sonnet.topic_f1_text")
     put("gold.sent", acc["sonnet"]["sentiment_text"], "05_metrics.json accuracy.sonnet.sentiment_text")
     put("gold.top_sent", acc["top"]["sentiment_text"], "05_metrics.json accuracy.top.sentiment_text")
+    if "direction_text" in acc["sonnet"]:      # 감성 판정을 방향 일치와 mixed 일치로 나눈 뒤(2026-10-12)
+        s_ = acc["sonnet"]
+        put("gold.dir", f"{s_['direction_text']}({s_['direction_pairs']}개 중 {s_['direction_same']}개)", "05_metrics.json accuracy.sonnet.direction_*")
+        put("gold.mixed", f"{s_['mixed_text']}({s_['mixed_pairs']}개 중 {s_['mixed_same']}개)", "05_metrics.json accuracy.sonnet.mixed_*")
+        put("gold.status", acc.get("status"), "05_metrics.json accuracy.status")
     asins = [r for r in (run / "01_asins.csv").read_text(encoding="utf-8").splitlines()[1:] if ",selected," in r]
     put("data.asins", f"{len(asins)}개", "01_asins.csv status=selected")
     reviews = sum(1 for _ in open(run / "04_tags.jsonl", encoding="utf-8"))
@@ -87,6 +92,10 @@ def build(run):
     put("data.reviews", f"{nrev:,}개", "02_reviews.csv 행 수")
     col = j(run, "02_collect_log.json")
     put("data.dropped", f"{col.get('dropped_count', 0)}개", "02_collect_log.json dropped_count")
+    if (run / "raw" / "paid_calls.jsonl").exists():
+        pc = [json.loads(l) for l in (run / "raw" / "paid_calls.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
+        put("paid.calls", f"{len(pc)}번", "raw/paid_calls.jsonl 줄 수(시험 호출 포함)")
+        put("paid.minutes", f"{fmt(sum(x.get('seconds') or 0 for x in pc) / 60)}분", "raw/paid_calls.jsonl seconds 합")
     sch = load_yaml(run / "03_schema_approved.yaml")
     put("data.topics", f"{len(sch['topics'])}개", "03_schema_approved.yaml topics")
     iss = load_yaml(run / "07a_issues_approved.yaml")
@@ -105,17 +114,19 @@ def build(run):
     put("audit.labels", f"{a['sample']}개 중 FAIL {a['fail']}개({a['fail_rate'] * 100:.1f}%)", "07b_issue_audit_summary.json")
     a = j(run, "14b_detail_audit_summary.json")
     put("audit.details", f"{a['sample']}개 중 FAIL {a['fail']}개({a['fail_rate'] * 100:.1f}%)", "14b_detail_audit_summary.json")
-    tr = load_yaml(run / "06_report_en_audit.yaml")["audit"]
-    nf = sum(1 for x in tr.get("findings") or [] if x.get("status") == "FAIL")
-    put("audit.translation", f"{tr['checked']}쌍 중 FAIL {nf}개({nf / tr['checked'] * 100:.1f}%)", "06_report_en_audit.yaml")
+    if (run / "06_report_en_audit.yaml").exists():      # 영어판은 요청이 있을 때만 만든다
+        tr = load_yaml(run / "06_report_en_audit.yaml")["audit"]
+        nf = sum(1 for x in tr.get("findings") or [] if x.get("status") == "FAIL")
+        put("audit.translation", f"{tr['checked']}쌍 중 FAIL {nf}개({nf / tr['checked'] * 100:.1f}%)", "06_report_en_audit.yaml")
     h = j(run, "06_report_html_check.json")
     put("html.report_numbers", f"{h['numbers_checked']}개", "06_report_html_check.json numbers_checked")
     put("html.report_drill", f"{h['drilldowns_checked']}개", "06_report_html_check.json drilldowns_checked")
     put("html.report_kb", f"{h['size_kb']}KB", "06_report_html_check.json size_kb")
-    h = j(run, "06_report_en_html_check.json")
-    put("html.en_numbers", f"{h['numbers_checked']}개", "06_report_en_html_check.json")
-    put("html.en_drill", f"{h['drilldowns_checked']}개", "06_report_en_html_check.json")
-    put("html.en_kb", f"{h['size_kb']}KB", "06_report_en_html_check.json size_kb")
+    if (run / "06_report_en_html_check.json").exists():
+        h = j(run, "06_report_en_html_check.json")
+        put("html.en_numbers", f"{h['numbers_checked']}개", "06_report_en_html_check.json")
+        put("html.en_drill", f"{h['drilldowns_checked']}개", "06_report_en_html_check.json")
+        put("html.en_kb", f"{h['size_kb']}KB", "06_report_en_html_check.json size_kb")
     h = j(run, "07_guide_html_check.json")
     put("html.guide_numbers", f"{h['numbers_checked']}개", "07_guide_html_check.json numbers_checked")
     put("html.guide_bundles", f"{h['evidence_bundles']}개", "07_guide_html_check.json evidence_bundles")
@@ -139,10 +150,30 @@ def build(run):
         for k in ("head_first", "head_neg_ci", "loo_flips", "weakest"):
             put(f"robust.{k}", rb["texts"][k], f"05_robustness.json texts.{k}")
     g = j(run, "16_guide_metrics.json")["values"]
-    put("guide.growth", g["head.fastest_term"]["text"], "16_guide_metrics.json values.head.fastest_term")
+    if "head.fastest_term" in g:
+        put("guide.growth", g["head.fastest_term"]["text"], "16_guide_metrics.json values.head.fastest_term")
 
     # 시간
     ev, st = steps(run)
+    # 에이전트 시간: 호출 수, 하나씩 더한 합, 동시에 돈 것을 한 번만 센 시간(사람 대기 표시가 없어도 잴 수 있는 값)
+    op, iv = {}, []
+    for e in ev:
+        if e["event"] == "SubagentStart":
+            op[e.get("agent_id")] = ts(e["ts"])
+        elif e["event"] == "SubagentStop" and e.get("agent_id") in op:
+            iv.append((op.pop(e["agent_id"]), ts(e["ts"])))
+    if iv:
+        un, cur = 0.0, None
+        for s0, e0 in sorted(iv):
+            if cur and s0 <= cur[1]:
+                cur = (cur[0], max(cur[1], e0))
+            else:
+                un += (cur[1] - cur[0]).total_seconds() if cur else 0
+                cur = (s0, e0)
+        un += (cur[1] - cur[0]).total_seconds()
+        put("agent.calls", f"{len(iv)}번", "timing.jsonl SubagentStart와 SubagentStop 짝")
+        put("agent.sum", f"{fmt(sum((b - a).total_seconds() for a, b in iv) / 60, 0)}분", "timing.jsonl 에이전트마다 걸린 시간 합")
+        put("agent.union", f"{fmt(un / 60, 0)}분", "timing.jsonl 에이전트가 하나라도 돌던 시간(겹친 구간은 한 번만)")
     for p, name in PHASES.items():
         mach_all = mach_last = human = 0.0
         for s, d in st.items():
@@ -168,7 +199,7 @@ def build(run):
         put(f"step.{s}", f"{fmt(d['tries'][-1][2])}분", f"timing.jsonl {s} 마지막 시도")
     # 비용: 실행 기록을 그 직전에 끝난 단계의 영역으로 나눈다
     ends = [(ts(e["ts"]), e["step"]) for e in ev if e["event"] == "step_end"]
-    costs = [json.loads(l) for l in (run / "costs.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
+    costs = [json.loads(l) for l in (run / "costs.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]         if (run / "costs.jsonl").exists() else []            # 대화 세션으로만 돌린 회차는 비용 기록이 없다
     tot = OrderedDict((p, [0, 0.0, 0.0]) for p in PHASES)
     for c in costs:
         t = ts(c["logged_at"])
@@ -177,19 +208,25 @@ def build(run):
         tot[p][0] += 1
         tot[p][1] += c["total_cost_usd"]
         tot[p][2] += c["duration_ms"] / 60000
-    for p, (n, usd, mins) in tot.items():
+    for p, (n, usd, mins) in (tot.items() if costs else []):
         put(f"cost.{p}", f"${usd:.2f}", f"costs.jsonl {PHASES[p]} 실행 {n}번 합")
         put(f"cost.{p}.runs", f"{n}번", "costs.jsonl")
-    put("cost.total", f"${sum(v[1] for v in tot.values()):.2f}", "costs.jsonl 전체 합")
-    put("cost.runs", f"{len(costs)}번", "costs.jsonl 줄 수")
+    if costs:
+        put("cost.total", f"${sum(v[1] for v in tot.values()):.2f}", "costs.jsonl 전체 합")
+        put("cost.runs", f"{len(costs)}번", "costs.jsonl 줄 수")
     put("tests", f"{count_tests()}개", "tests/test_scripts.py 실행 결과의 확인 개수")
     ref_facts(put)
 
+    # 회차마다 따로 둔다(README와 설명서가 서로 다른 회차를 예시로 쓸 수 있음). facts는 마지막으로 만든 회차
     out = ROOT / "docs" / "doc_facts.json"
-    write_json(out, {"made_at": now_iso(), "run": run.name, "facts": F})
-    md = ["# 문서 숫자 출처", "", f"회차 {run.name}, {now_iso()[:16]} 기준. `python scripts/doc_facts.py build`가 만든다.", "",
-          "| 키 | 표기 | 출처 |", "|---|---|---|"]
-    md += [f"| {k} | {v['text']} | {v['source']} |" for k, v in F.items()]
+    old = json.loads(out.read_text(encoding="utf-8")) if out.exists() else {}
+    runs = old.get("runs") or ({old["run"]: {"made_at": old.get("made_at"), "facts": old["facts"]}} if old.get("facts") else {})
+    runs[run.name] = {"made_at": now_iso(), "facts": F}
+    write_json(out, {"made_at": now_iso(), "run": run.name, "facts": F, "runs": runs})
+    md = ["# 문서 숫자 출처", "", f"`python scripts/doc_facts.py build <회차>`가 회차마다 만든다. 마지막으로 만든 회차: {run.name}.", ""]
+    for name, r in runs.items():
+        md += [f"## {name}", "", f"{(r.get('made_at') or '')[:16]} 기준.", "", "| 키 | 표기 | 출처 |", "|---|---|---|"]
+        md += [f"| {k} | {v['text']} | {v['source']} |" for k, v in r["facts"].items()] + [""]
     (ROOT / "docs" / "doc_facts.md").write_text("\n".join(md) + "\n", encoding="utf-8")
     print(f"문서 숫자 {len(F)}개 → docs/doc_facts.json, docs/doc_facts.md")
     return 0
@@ -236,10 +273,11 @@ PLACEHOLDER = re.compile(r"<[^>]+>|\*|\{[^}]+\}")
 
 
 def check(run, docs):
-    facts = j(ROOT / "docs", "doc_facts.json")["facts"]
+    dj = j(ROOT / "docs", "doc_facts.json")
     known = set()
-    for v in facts.values():
-        known.update(NUM.findall(v["text"]))
+    for r in (dj.get("runs") or {"-": {"facts": dj["facts"]}}).values():   # 어느 회차의 숫자든 출처가 있으면 된다
+        for v in r["facts"].values():
+            known.update(NUM.findall(v["text"]))
     al = load_yaml(ROOT / "docs" / "doc_numbers_allow.yaml") or {}
     allow = {str(x) for g in (al.get("allow") or {}).values() for x in g}
     example_paths = set(al.get("example_paths") or [])
@@ -270,7 +308,7 @@ def check(run, docs):
                 continue
             if "/" not in path and not re.search(r"\.(py|md|ya?ml|jsonl?|html|csv|txt)$", path):
                 continue                                                               # 설정 키(paid.enabled 등)
-            cand = [ROOT / path, run / path, ROOT / "scripts" / path, ROOT / "docs" / path, ROOT / "config" / path]
+            cand = [ROOT / path, run / path, ROOT / "scripts" / path, ROOT / "docs" / path, ROOT / "config" / path] +                 [ROOT / "runs" / name / path for name in (dj.get("runs") or {})]       # 문서마다 예시 회차가 다를 수 있음
             if not any(x.exists() for x in cand):
                 missing.append(path)
         dots = text.count("·")

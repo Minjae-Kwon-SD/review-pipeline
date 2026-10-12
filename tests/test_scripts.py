@@ -1241,7 +1241,7 @@ def test_stage_plan_packet(tmp):
     eq("출력 겹침과 상한 오류를 잡음", (any("출력 겹침" in e for e in errs), any("retry_per_stage" in e for e in errs)), (True, True))
     eq("실제 단계 정의는 통과", sp.check(sp.load_conf()), [])
     a = sp.assign(sp.load_conf(), 28, 1242)
-    eq("태깅 28묶음 배정", (a["workers"], a["concurrency"], max(len(g) for g in a["groups"])), (7, 4, 4))
+    eq("태깅 28묶음 배정(대량 작업 동시 8, 2026-10-12)", (a["workers"], a["concurrency"], max(len(g) for g in a["groups"])), (7, 7, 4))
     a = sp.assign(sp.load_conf(), 6, 276)
     eq("리뷰 상한으로 작업자당 묶음이 줄어듦", (a["per_worker"] * 276 / 6 <= 200, a["workers"]), (True, 2))
     real = HERE.parent / "runs" / "perfume-db-2026-10-07"
