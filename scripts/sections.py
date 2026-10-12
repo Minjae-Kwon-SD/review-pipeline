@@ -163,6 +163,47 @@ def brand_deep(reviews, tags, weight, schema, brand_of_asin, topic_stats, exclud
     return out
 
 
+def brand_compare(reviews, tags, weight, schema, brand_of_asin, topic_stats, exclude, strength_min):
+    """9장 브랜드 행(정답지처럼 브랜드 단위). 브랜드마다 ASIN 수, 표본 리뷰, 태그, 가중 긍정과 가중 부정(태그 가중치 기준),
+    가장 큰 강점, 2위 강점, 가장 큰 약점(그 브랜드 언급 strength_min개 이상 주제 중 긍정 또는 부정 언급 리뷰어 비율(가중)이 높은 순).
+    가중치는 ASIN마다 합이 표본 수라, ASIN이 둘 이상인 브랜드는 ASIN 표본 수만큼 섞인다."""
+    asin_of = {r["review_id"]: r["asin"] for r in reviews}
+    topics = [t for t in schema if t not in exclude]
+    out = []
+    for brand in sorted({b for b in brand_of_asin.values() if b}):
+        asins = {a for a, b in brand_of_asin.items() if b == brand}
+        ids = [r["review_id"] for r in reviews if r["asin"] in asins]
+        bts = [t for t in tags if asin_of[t["review_id"]] in asins]
+        tw = sum(weight[t["review_id"]] for t in bts)
+        eligible = [s for s in topic_stats(bts, topics, weight, ids) if s["mentions"] >= strength_min]
+        pos = sorted([s for s in eligible if s["pos_reviewer_pct"] > 0], key=lambda s: (-s["pos_reviewer_pct"], -s["positive"], s["id"]))
+        neg = sorted([s for s in eligible if s["neg_reviewer_pct"] > 0], key=lambda s: (-s["neg_reviewer_pct"], -s["negative"], s["id"]))
+
+        def one(s, key):
+            return {"id": s["id"], "name_ko": schema[s["id"]]["name_ko"], key: s[key], "mentions": s["mentions"]} if s else None
+        out.append({"brand": brand, "asins": sorted(asins), "asin_count": len(asins), "sample_reviews": len(ids), "tags": len(bts),
+                    "weighted_pos_pct": pct(sum(weight[t["review_id"]] for t in bts if t["sentiment"] == "positive"), tw),
+                    "weighted_neg_pct": pct(sum(weight[t["review_id"]] for t in bts if t["sentiment"] == "negative"), tw),
+                    "strength": one(pos[0] if pos else None, "pos_reviewer_pct"),
+                    "strength2": one(pos[1] if len(pos) > 1 else None, "pos_reviewer_pct"),
+                    "weakness": one(neg[0] if neg else None, "neg_reviewer_pct")})
+    return out
+
+
+def render_brand_compare(bc, strength_min):
+    def sw(x, key):
+        return f"{x['name_ko']}({fmt_pct(x[key])})" if x else "없음"
+    lines = ["| 브랜드 | ASIN 수 | 표본 리뷰 | 태그 | 긍정/부정(가중) | 가장 큰 강점* | 2위 강점* | 가장 큰 약점* |",
+             "|---|---|---|---|---|---|---|---|"]
+    lines += [f"| {b['brand']} | {b['asin_count']} | {b['sample_reviews']} | {b['tags']} | "
+              f"{fmt_pct(b['weighted_pos_pct'])} / {fmt_pct(b['weighted_neg_pct'])} | {sw(b['strength'], 'pos_reviewer_pct')} | "
+              f"{sw(b['strength2'], 'pos_reviewer_pct')} | {sw(b['weakness'], 'neg_reviewer_pct')} |" for b in bc]
+    lines += ["", f"\\* 그 브랜드에서 언급 {strength_min}개 이상인 주제(전체 만족도 제외) 중 그 브랜드 리뷰어가 가장 많이 칭찬한 주제 두 개와 "
+                  "가장 많이 비판한 주제. 괄호는 그 브랜드 리뷰어 중 해당 주제를 칭찬 또는 비판한 비율(가중). "
+                  "브랜드의 ASIN이 둘 이상이면 ASIN마다 표본 수만큼 섞어 셉니다. ASIN마다의 값은 아래 ASIN별 비교 표에 있습니다."]
+    return lines
+
+
 # ---------------------------------------------------------------- 변형(용량) 신호
 
 ML_PER_OZ = 29.5735
@@ -402,8 +443,8 @@ def render_time(tt, schema):
         lines.append(f"| {name(tp)} | " + " | ".join(fmt_pct(p["neg_topic_share"].get(tp, 0.0)) if p["negative_tags"] else "-"
                                                 for p in pers) + " |")
     lines += ["", f"기간은 {tt['as_of']} 기준. 최근 분기는 끝난 분기({pers[-1]['period']})이고, 진행 중인 분기({tt['in_progress_from']}부터)의 "
-                  f"리뷰 {tt['in_progress_reviews']}개는 뺐습니다. 리뷰는 공유 DB에 모인 표본이라, 오래된 기간일수록 별점을 골라 모은 "
-                  "리뷰(낮은 별점 위주)만 남았을 수 있어 기간 사이 비교는 참고용입니다. 가중 비율은 각 ASIN의 실제 별점 분포로 되돌린 값입니다."]
+                  f"리뷰 {tt['in_progress_reviews']}개는 뺐습니다. 리뷰는 별점마다 골라 모은 표본이라 기간마다 별점 구성이 달라, "
+                  "기간별 가중 비중은 실제 변화가 아니라 표본 구성 차이일 수 있어 기간 사이 비교는 참고용입니다. 가중 비율은 각 ASIN의 실제 별점 분포로 되돌린 값입니다."]
     return lines
 
 

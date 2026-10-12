@@ -31,6 +31,8 @@ effort: high
 입력: 02_reviews.csv, 03_schema_approved.yaml, 04_audit_sample.jsonl(감사할 태그 표본, eval_gold.py audit-sample이 고름), 04_quote_check_sonnet.json. gold 폴더, 04_tags_top_gold.jsonl, 04_gold_eval*은 보지 않는다.
 04_audit_sample.jsonl의 태그만 리뷰 원문과 스키마 정의에 대조한다(04_tags.jsonl 전부가 아님). 주제가 정의와 include, exclude에 맞는가, 감성이 그 주제에 대한 말과 맞는가, quote가 그 주제를 실제로 말하는가. checked는 04_audit_sample.jsonl의 태그 수다.
 missed(리뷰에 분명히 있는데 빠진 주제)는 04_audit_sample.jsonl에 들어간 리뷰에 대해서만 적는다. 그 리뷰의 태그는 04_tags.jsonl에서 같은 review_id 줄로 확인한다.
+overall은 스키마 overall의 tagging_rule(없으면 config/topics_common.yaml의 overall tagging_rule)로 판정한다. 총평 문장이 없는 리뷰의 overall은
+감성이 그 리뷰의 다른 주제 감성에서 규칙대로 나왔는지만 본다. 인용이 다른 주제 인용과 같거나 겹친다는 이유, 인용이 속성 이야기라는 이유만으로 FAIL을 주지 않는다.
 
 ## stage: report (9단계)
 

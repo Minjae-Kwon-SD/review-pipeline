@@ -158,60 +158,148 @@ class R:
                 if x["review_id"] == rid:
                     orig = x["quote"]
         i = self.rid(rid)
-        return (f'<span class="chip clk" data-drill="rev" data-ri="{i}" data-q="{esc(orig or "")}" tabindex="0">“{esc(text)}”'
+        tone = "r" if int(star) <= 2 else ("n" if int(star) == 3 else "g")      # 템플릿처럼 별점에 따라 칩 색
+        return (f'<span class="chip {tone} clk" data-drill="rev" data-ri="{i}" data-q="{esc(orig or "")}" tabindex="0">“{esc(text)}”'
                 f'<em>{esc(brand)} {star}★ {rid}</em></span>')
 
-    def block(self, lines):
-        """문단, 목록, 인용, ####를 HTML로."""
-        out, lst, ltype = [], [], None
+    def block(self, lines, ctx=("", "")):
+        """문단, 목록, 인용, ####를 HTML로. ctx는 (장 번호, 소제목)이고 목록을 어떤 카드로 그릴지 고를 때 쓴다."""
+        out, lst, ltype = [], [], None          # lst: [항목 HTML, 그 항목 아래 인용 칩]
 
         def flush():
             nonlocal lst, ltype
             if lst:
-                tag = "ol" if ltype == "ol" else "ul"
-                out.append(f"<{tag} class='gl'>" + "".join(f"<li>{x}</li>" for x in lst) + f"</{tag}>")
+                out.append(self.list_html(lst, ltype, ctx))
             lst, ltype = [], None
-        for raw in lines:
-            s = raw.strip()
+        i = 0
+        while i < len(lines):
+            s = lines[i].strip()
+            i += 1
             if not s:
                 flush()
                 continue
             if s.startswith("#### "):
                 flush()
-                out.append(f"<h4>{self.inline(s[5:])}</h4>")
-                mstd = re.match(r"기준\s*(\d+)", s[5:].strip())
-                if mstd:
-                    out.append(self.std_card(int(mstd.group(1))))
+                h = s[5:].strip()
+                mstd = re.match(r"기준\s*(\d+)\s*[:：]?\s*(.*)$", h)
+                if mstd:                         # 기준 하나는 다음 #### 전까지를 카드 하나로
+                    j = i
+                    while j < len(lines) and not lines[j].strip().startswith("#"):
+                        j += 1
+                    out.append(self.std_block(int(mstd.group(1)), mstd.group(2) or h, lines[i:j]))
+                    i = j
+                else:
+                    out.append(f"<h4>{self.inline(h)}</h4>")
             elif s.startswith(">"):
                 q = QUOTE.search(s)
                 if q:
                     if lst:
-                        lst[-1] += f"<div class='chips'>{self.chip(q.groups())}</div>"
+                        lst[-1][1].append(self.chip(q.groups()))
                     else:
                         out.append(f"<div class='chips'>{self.chip(q.groups())}</div>")
                 else:
                     flush()
-                    out.append(f"<p class='sub2'>{self.inline(s.lstrip('> '))}</p>")
+                    out.append(f"<p class='fn'>{self.inline(s.lstrip('> '))}</p>")
             elif re.match(r"^- ", s):
                 if ltype not in (None, "ul"):
                     flush()
                 ltype = "ul"
-                lst.append(self.inline(s[2:]))
+                lst.append([self.inline(s[2:]), []])
             elif re.match(r"^\d+\.\s", s):
                 if ltype not in (None, "ol"):
                     flush()
                 ltype = "ol"
-                lst.append(self.inline(re.sub(r"^\d+\.\s", "", s)))
+                lst.append([self.inline(re.sub(r"^\d+\.\s", "", s)), []])
             elif s.startswith("**TL;DR**"):
                 flush()
-                out.append(f"<div class='tldr'><b>TL;DR</b> {self.inline(s[len('**TL;DR**'):].strip())}</div>")
+                out.append(f"<div class='tldr'><span class='tt'>{self.T('요약')}</span><span>{self.inline(s[len('**TL;DR**'):].strip())}</span></div>")
             elif s.startswith("|"):
                 continue                     # 표는 스크립트가 그린다
             else:
                 flush()
-                out.append(f"<p>{self.inline(s)}</p>")
+                if "한 줄 포지션" in ctx[1]:
+                    out.append(f"<div class='posit'><div class='ps'>{self.inline(s)}</div></div>")
+                else:
+                    out.append(f"<p class='lead'>{self.inline(s)}</p>")
         flush()
-        return "".join(out)
+        return "".join(out).replace("</span></div><div class='chips'><span", "</span><span")    # 이어진 인용은 칩 한 줄로
+
+    def list_html(self, lst, ltype, ctx):
+        """목록을 템플릿 부품으로. 모든 항목이 굵은 머리로 시작하면 카드(판정은 verdict, 05장은 pre, 나머지는 번호 카드),
+        아니면 점 목록. 번호 목록은 늘 번호 카드. A장은 점 목록."""
+        c, sub = ctx
+        heads = [re.match(r"^<b>(.*?)</b>\s*[:：]?\s*(.*)$", h, re.S) for h, _ in lst]
+        chips = lambda ch: f"<div class='chips'>{''.join(ch)}</div>" if ch else ""
+        if c != "A" and len(lst) >= 2 and all(heads):
+            if "판정" in sub:
+                cards = []
+                for k, (m, (_, ch)) in enumerate(zip(heads, lst), 1):
+                    lead = m.group(1).rstrip(".")
+                    t, g = lead.split(":", 1) if ":" in lead.split("<")[0] else (self.T("판정 {n}", n=k), lead)
+                    cards.append(f"<div class='verdict'><div class='t'>{t.strip()}</div><div class='g'>{g.strip()}</div>"
+                                 f"<p>{m.group(2)}</p>{chips(ch)}</div>")
+                return f"<div class='verdicts'>{''.join(cards)}</div>"
+            if c == "05":
+                return "<div class='pre'>" + "".join(
+                    f"<div class='p'><div class='k'>{k:02d}</div><div class='v'>{m.group(1).rstrip('.')}</div><div class='e'>{m.group(2)}</div>{chips(ch)}</div>"
+                    for k, (m, (_, ch)) in enumerate(zip(heads, lst), 1)) + "</div>"
+        if ltype == "ol" or (c != "A" and len(lst) >= 2 and all(heads)):
+            cards = []
+            for k, (m, (h, ch)) in enumerate(zip(heads, lst), 1):
+                body = f"<b>{m.group(1).rstrip('.')}</b><p>{m.group(2)}</p>" if m else f"<p style='margin:2px 0 0'>{h}</p>"
+                cards.append(f"<div class='stgy'><span class='n'>{k}</span><div>{body}{chips(ch)}</div></div>")
+            return "".join(cards)
+        return "<ul class='bl'>" + "".join(f"<li>{h}{chips(ch)}</li>" for h, ch in lst) + "</ul>"
+
+    def std_block(self, n, title, lines):
+        """'#### 기준 n' 아래 목록을 템플릿의 기준 카드로: 감점(redline), 만족(bar), 개발(spec), 문구(claim) 네 칸.
+        카드 위에는 스크립트 숫자(불만 리뷰, 만족 리뷰, 부정이 가장 적은 상품), 아래에는 설계 정보와 검색어, 인용, 사양 표."""
+        board = self.M["tables"].get("std.board", [])
+        s = board[n - 1] if 1 <= n <= len(board) else None
+        kinds = (("감점", "redline"), ("만족", "bar"), ("개발", "spec"), ("문구", "claim"), ("상세", "claim"))
+        cells, chips, notes = [], [], []
+        for raw in lines:
+            t = raw.strip()
+            if not t:
+                continue
+            if t.startswith(">"):
+                q = QUOTE.search(t)
+                if q:
+                    chips.append(self.chip(q.groups()))
+                else:
+                    notes.append(f"<div class='fn'>{self.inline(t.lstrip('> '))}</div>")
+                continue
+            m = re.match(r"^-\s+([^:：\[]{1,20})[:：]\s*(.*)$", t)
+            if not m:
+                rest = re.sub(r"^-\s+", "", t)
+                notes.append(f"<div class='fn'>{self.inline(rest)}</div>")
+                continue
+            lab, body = m.group(1).strip(), m.group(2)
+            cls = next((v for k, v in kinds if k in lab), "spec")
+            mq = re.match(r'^\s*"([^"]+)"\s*(.*)$', body) if cls == "claim" else None
+            if mq:
+                inner = f"<div class='claimline'>“{esc(mq.group(1))}”</div>" + (f"<div class='fn'>{self.inline(mq.group(2))}</div>" if mq.group(2).strip() else "")
+            else:                                # 긴 칸은 문장마다 점 하나
+                sents = [x for x in re.split(r"(?<=[다요음]\.)\s+|(?<=\]\.)\s+|(?<=\)\.)\s+", body) if x.strip()]
+                inner = "<ul class='bl'>" + "".join(f"<li>{self.inline(x)}</li>" for x in sents) + "</ul>"
+            cells.append(f"<div class='std-cell {cls}'><div class='ct1'>{esc(lab)}</div>{inner}</div>")
+        data = ""
+        if s:
+            neg = self.tnum(f"{s['neg_reviews']:,}개", s["ev"]["neg"])
+            pos = self.tnum(f"{s['pos_reviews']:,}개", s["ev"]["pos"])
+            wpc = f"{s['neg_weighted_pct']:.1f}%"
+            best = f"{esc(s['best']['brand'])} {self.pc(s['best']['neg_pct'])}"
+            labs = ", ".join(f"{esc(x['name'])} {x['reviews']}" for x in s["neg_labels"] if x["reviews"]) or "-"
+            items = ", ".join(esc(x.get("text") or f"{x['ko']} {x['reviews']}") for x in s["items"][:4]) or "-"
+            terms = ", ".join(f"{esc(x['term'])} {x['volume']:,}" for x in s["terms"][:3]) or "-"
+            data = (f"<div class='kpis'><div class='kpi'><div class='v'>{neg}</div><div class='l'>불만 리뷰(가중 {wpc})</div><div class='s'>{labs}</div></div>"
+                    f"<div class='kpi'><div class='v'>{pos}</div><div class='l'>만족 리뷰</div></div>"
+                    f"<div class='kpi'><div class='v'>{best}</div><div class='l'>부정이 가장 적은 상품</div></div></div>"
+                    f"<div class='fn std-fn'><b>설계 정보</b> {items}<br><b>관련 검색어(30일 검색량)</b> {terms}</div>")
+        return (f"<div class='std'><div class='std-h'><div class='n'>{n}</div><b>{self.inline(title)}</b></div>{data}"
+                f"<div class='std-grid'>{''.join(cells)}</div>"
+                + (f"<div class='chips'>{''.join(chips)}</div>" if chips else "") + "".join(notes)
+                + (self.spec_table(s["id"]) if s else "") + "</div>")
 
     # ------------------------------------------------ 스크립트가 그리는 표
     def bars(self, rows, label, value, text, ev, mx=None, color="neg"):
@@ -221,10 +309,13 @@ class R:
             f'<span style="width:100%;background:var(--{color})"></span></span></span><span class="bn">{self.tnum(r[text], r.get(ev) if ev else None)}</span></div>'
             for r in rows)
 
-    def table(self, head, rows):
-        return ('<div class="tscroll"><table class="ct"><thead><tr>' + "".join(f"<th>{esc(h)}</th>" for h in head) + "</tr></thead><tbody>"
-                + "".join("<tr>" + "".join(f"<td{' class=tl' if i == 0 else ''}>{c}</td>" for i, c in enumerate(r)) + "</tr>" for r in rows)
-                + "</tbody></table></div>")
+    def table(self, head, rows, fold=8):
+        t = ('<div class="tscroll"><table class="ct"><thead><tr>' + "".join(f"<th>{esc(h)}</th>" for h in head) + "</tr></thead><tbody>"
+             + "".join("<tr>" + "".join(f"<td{' class=tl' if i == 0 else ''}>{c}</td>" for i, c in enumerate(r)) + "</tr>" for r in rows)
+             + "</tbody></table></div>")
+        if fold and len(rows) > fold:            # 긴 표는 접어 두고 제목만 보인다(글 비중 줄이기)
+            return f"<details class='fold'><summary>{self.T('표 펼치기, {n}행', n=len(rows))}</summary>{t}</details>"
+        return t
 
     def srcs(self, lst):
         """사양 값의 출처 링크(공식, 소매점, 커뮤니티)"""
@@ -296,6 +387,23 @@ class R:
                     + self.table(["구간", "가격 범위", "브랜드 수", "평균 별점", "매출 비중"],
                                  [[esc(r["band"]), esc(r["price_range"]), esc(r["brands"]), esc("-" if r["avg_rating"] is None else f"{r['avg_rating']:.2f}"),
                                    esc(f"{r['revenue_share']:.1f}%")] for r in pb]))
+        if "가격 구조" in t and T.get("price.bands"):
+            # 온스당 가격 묶음별 불만(guide_metrics.py price_complaints). 숫자는 values의 표기 그대로
+            V = self.M["values"]
+            tp = (T.get("meta.price_bands") or {}).get("topics") or {}
+            keys = [k for k in ("skin_neg", "head_neg", "eff_neg") if k in tp]
+            seen, cols = set(), []
+            for k in keys:                    # head_topic이 피부 반응과 같으면 한 칸만
+                if tp[k]["id"] not in seen:
+                    seen.add(tp[k]["id"])
+                    cols.append(k)
+            def cell(b, k):
+                v = V.get(f"price.band{b['band']}.{k}") or {}
+                return self.tnum(v.get("text", "-"), v.get("ev"))
+            rows = [[esc(b["name"]), cell(b, "range"), cell(b, "n"), esc(", ".join(b.get("brands") or []))]
+                    + [cell(b, k) for k in cols] + [cell(b, "star")] for b in T["price.bands"]]
+            return ("<div class='coltitle'>온스당 가격 묶음별 불만(상품 순위로 나눈 묶음, 부정 언급 리뷰어 가중 비율)</div>"
+                    + self.table(["묶음", "온스당 가격", "상품", "브랜드"] + [f"{tp[k]['name']} 부정(가중)" for k in cols] + ["가중 평균 별점"], rows))
         if "점수표" in t:
             sb = T.get("meta.scoreboard") or {}      # 카테고리 이름(없으면 향수 때 문구)
             tn, hi, lo = sb.get("topic_name"), sb.get("dir_high", "너무 셈"), sb.get("dir_low", "약함")
@@ -491,21 +599,21 @@ class R:
             if key not in self.V:
                 continue
             cap = heads.get(key, "")
-            kp.append(f"<div class='hkpi'><div class='v'>{self.num(key)}</div><div class='l'>{self.inline(cap) if cap else ''}</div></div>")
-        parts = [f"<h1>{esc(title)}</h1>", f"<p class='sub'>{self.inline(subtitle)}</p>" if subtitle else "",
-                 '<div class="toci">' + "".join(f'<a href="#sec{c}"><b>{c}</b>{esc(t)}</a>' for c, t in chapters_t) + "</div>",
-                 f"<div class='callout'><div class='cb'><b>{T('안내')}</b><ul><li>{T('밑줄 친 숫자와 인용을 누르면 그 근거 리뷰 원문이 열립니다(숫자마다 미리 묶은 최대 80개, 1~3★과 4~5★로 다시 거를 수 있음).')}</li>"
-                 f"<li>{T('[mkt_01] 같은 위첨자는 웹 조사 출처 링크입니다(다시 열어 원문 문장을 확인한 것만).')}</li></ul></div></div>",
-                 f"<div class='hkpis'>{''.join(kp)}</div>"]
+            long = " long" if len(self.V[key]["text"]) > 14 else ""        # 긴 머리 숫자는 글자를 줄인다
+            kp.append(f"<div class='hkpi'><div class='v{long}'>{self.num(key)}</div><div class='l'>{self.inline(cap) if cap else ''}</div></div>")
+        # 머리(hero)는 템플릿처럼 어두운 띠 안에 제목, 한 줄 설명, 머리 숫자
+        hero = (f"<div class='hero'><div class='hero-in'><div class='eyebrow'>{T('제품 개발 가이드')}</div><h1>{esc(title)}</h1>"
+                + (f"<p>{self.inline(subtitle)}</p>" if subtitle else "") + f"<div class='hkpis'>{''.join(kp)}</div></div></div>")
+        parts = [f"<div class='hintbar'>{T('근거 보기: 밑줄 친 숫자와 인용을 누르면 근거 리뷰 원문이 열립니다(묶음마다 최대 80개, 1~3★과 4~5★로 거를 수 있음). [mkt_01] 같은 위첨자는 다시 열어 확인한 웹 조사 출처입니다. 장 제목을 누르면 접고 펼칩니다.')}</div>"]
         for c, t in chapters_t:
             body = chapters.get(c, [])
             out, sub, buf = [], None, []
 
             def flush_sub():
                 if sub is not None:
-                    out.append(f"<h3>{self.inline(sub)}</h3>" + self.insert_for(sub) + self.block(buf))
+                    out.append(f"<h3>{self.inline(sub)}</h3>" + self.insert_for(sub) + self.block(buf, (c, sub)))
                 else:
-                    out.append(self.block(buf))
+                    out.append(self.block(buf, (c, "")))
             for l in body:
                 m = re.match(r"^### (.+)$", l)
                 if m:
@@ -514,19 +622,22 @@ class R:
                 else:
                     buf.append(l)
             flush_sub()
-            parts.append(f'<section id="sec{c}"><h2><span class="num">{c}</span>{esc(t)}</h2>{"".join(out)}</section>')
+            core = "<span class='coretag'>CORE</span>" if c == "04" else ""
+            fold = " class='secfold'" if c == "A" else ""          # 데이터와 방법은 접어 둔 채로 시작
+            parts.append(f'<section id="sec{c}"{fold}><h2><span class="num">{c}</span>{esc(t)}{core}</h2>{"".join(out)}</section>')
         cav = "".join(f"<li>{esc(x)}</li>" for x in self.M.get("caveats", []))
-        parts.append(f"<div class='caveat'><b>{T('주의 사항(metrics의 한계 목록)')}</b><ul>{cav}</ul></div>")
+        parts.append(f"<details class='fold'><summary>{T('주의 사항(metrics의 한계 목록), {n}개', n=len(self.M.get('caveats', [])))}</summary>"
+                     f"<div class='caveat'><ul>{cav}</ul></div></details>")
         parts.append(f"<div class='fn' style='text-align:center;margin:20px 0 40px'>{T('만든 날 {d}, 회차 {r}. ', d=esc(now_iso()[:10]), r=esc(self.run.name))}"
                      f"{T('원본: {f}, 16_guide_metrics.json, 15_research.yaml', f=f'17_guide{self.sfx}.md')}</div>")
         dd = {"rv": None, "ev": self.ev_json()}
         dd["rv"] = self.rv
-        css = re.search(r"<style>(.*?)</style>", render_html.TEMPLATE, re.S).group(1)
-        toc = "".join(f'<a href="#sec{c}" id="nav{c}"><span class="tn">{c}</span>{esc(t)}</a>' for c, t in chapters_t)
+        css = STYLE_FILE.read_text(encoding="utf-8") + GUIDE_CSS_EXTRA     # 템플릿 CSS 그대로 + 이 화면에만 필요한 몇 줄
+        toc = "".join(f'<a href="#sec{c}" id="nav{c}"><b>{c}</b> {esc(t)}</a>' for c, t in chapters_t)
         ui = {"close": T("닫기"), "more": T("더 보기"), "all": T("전체"), "full": T("리뷰 전문"), "toc": T("목차")}
         page = (GUIDE_TEMPLATE.replace("%LANG%", self.lang).replace("%UI_CLOSE%", ui["close"]).replace("%UI_MORE%", ui["more"])
                 .replace("%UI_ALL%", ui["all"]).replace("%UI_FULL%", ui["full"]).replace("%UI_TOC%", ui["toc"])
-                .replace("%TITLE%", esc(title)).replace("%CSS%", css + GUIDE_CSS).replace("%TOC%", toc)
+                .replace("%TITLE%", esc(title)).replace("%CSS%", css).replace("%TOC%", toc).replace("%HERO%", hero)
                 .replace("%BODY%", "\n".join(parts)).replace("%DD%", json.dumps(dd, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")))
         out = f"07_guide{self.sfx}.html"
         (self.run / out).write_text(page, encoding="utf-8")
@@ -617,37 +728,31 @@ def check(run, lang="ko"):
     return 1 if errors else 0
 
 
-GUIDE_CSS = """
-.hkpis{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 6px}
-.hkpi{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;flex:1;min-width:min(170px,100%)}
-.hkpi .v{font-size:15px;font-weight:800;line-height:1.35;word-break:keep-all}.hkpi .l{font-size:11.5px;color:var(--mut);margin-top:4px;line-height:1.5}
-h3{font-size:14.5px;margin:20px 0 8px}h4{font-size:13.5px;margin:14px 0 6px}
-section p{font-size:13px;line-height:1.75;color:var(--fg)}
-ul.gl,ol.gl{font-size:13px;line-height:1.75;padding-left:20px}
-.tldr{background:var(--read-bg);border-left:3px solid var(--read-line);border-radius:0 8px 8px 0;padding:10px 14px;margin:10px 0;font-size:13px;line-height:1.7}
-.numlink{cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px;font-weight:700;color:var(--accent)}
-.numlink:hover{background:var(--hover)}
-sup a.src{font-size:10px;color:var(--accent);text-decoration:none}.srcbad{color:var(--neg-fg);font-size:10px}
-.std{border:1px solid var(--line);border-radius:9px;padding:12px 14px;margin:10px 0;background:var(--card)}
-.std-h{font-weight:800;font-size:13.5px;display:flex;gap:8px;align-items:center;margin-bottom:8px}
-.std-h .n{background:var(--fg);color:var(--card);border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:11px}
-.std-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;font-size:12.5px}
+STYLE_FILE = Path(__file__).resolve().parent.parent / "config" / "guide_style.css"     # 템플릿 CSS(고치지 않음)
+
+GUIDE_CSS_EXTRA = """
+/* 템플릿에 없는 것만: 막대 색 이름, 출처 위첨자, 접는 표, 기준 카드 안 숫자 줄, 어두운 머리 위 링크 색 */
+:root{--neg:#e16470;--neg2:#e9a0a8;--prod:#5b6b8f;--mix:#e0a33a;--pos:#3e9e63;--soft:#f1f1ef;--sub:#5a5852;--accent:#5b4bc4;--card:#fff}
+.toc a.on{background:#37352f;border-color:#37352f;color:#fff}.toc a.on b{color:#cbd5e1}
+section p.lead{font-size:12.5px;line-height:1.7;color:#4b4a45;margin:6px 0 8px}
+h4{font-size:13px;margin:14px 0 6px}
+.tscroll{overflow-x:auto}
+.ct td,.ct th{word-break:keep-all}.ct td.tl{min-width:110px}
+.mut{color:var(--mute)}.small{font-size:11px}.mono{font-family:ui-monospace,Consolas,monospace;font-size:10.5px;color:var(--faint)}
+sup a.src{text-decoration:none;color:#7a8db0;font-weight:600}.srcbad{color:var(--red);font-size:10px}
+.verdict .g{font-size:15px;line-height:1.45}
+.stgy>div{flex:1;min-width:0}
+.std>.kpis{margin:12px 16px 4px}.std>.std-fn,.std>.chips,.std>.fn,.std>.tscroll,.std>.coltitle,.std>details{margin-left:16px;margin-right:16px}
+.std>.std-fn{margin-bottom:10px}.std>.chips{margin-bottom:12px}.std-cell .fn{margin-top:6px}
+details.fold{margin:8px 0}
+details.fold>summary{cursor:pointer;font-size:11.5px;font-weight:700;color:#5a5852;background:#fbfbfa;border:1px dashed #d6d6d2;border-radius:8px;padding:6px 12px;list-style:none;display:inline-block}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::before{content:"▸ "}details.fold[open]>summary::before{content:"▾ "}details.fold[open]>summary{margin-bottom:8px}
 .anatwrap{display:flex;flex-direction:column;align-items:center}svg.anat{width:100%;max-width:300px;height:auto}
-#dbk{position:fixed;inset:0;background:rgba(20,20,18,.45);display:none;z-index:50}#dbk.open{display:block}
-#dpanel{position:fixed;top:0;right:0;bottom:0;width:min(640px,100%);background:var(--card);z-index:51;transform:translateX(100%);transition:transform .2s;display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.2)}
-#dpanel.open{transform:none}
-.dhead{padding:14px 16px;border-bottom:1px solid var(--line)}#dtit{font-weight:800;font-size:14px}#dsub{font-size:11.5px;color:var(--mut);margin-top:3px}
-#dfil{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.dfb{font-size:11.5px;border:1px solid var(--line);border-radius:12px;padding:2px 10px;background:var(--card);color:var(--fg);cursor:pointer;font-family:inherit}
-.dfb.on{background:var(--fg);color:var(--card)}#dclose{float:right;border:none;background:var(--line2);color:var(--fg);border-radius:6px;padding:4px 10px;cursor:pointer;font-family:inherit}
-#dlist{overflow:auto;padding:12px 16px;flex:1}
-.rvc{border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin-bottom:9px}
-.rvtop{display:flex;gap:8px;align-items:center;font-size:11.5px;color:var(--mut);flex-wrap:wrap}
-.rvstar{font-weight:800;border-radius:8px;padding:1px 7px}.rvstar.lo{background:var(--neg-bg);color:var(--neg-fg)}.rvstar.mid{background:var(--mix-bg);color:var(--mix-fg)}.rvstar.hi{background:var(--pos-bg);color:var(--pos-fg)}
-.rvti{font-weight:700;font-size:13px;margin:5px 0 3px}.rvbody{font-size:12.5px;color:var(--sub);line-height:1.6}
-.rvc mark{background:var(--mark);color:inherit;border-radius:2px}
-.dmore{display:block;margin:8px auto;padding:6px 18px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--fg);cursor:pointer;font-family:inherit}
-.ct td,.ct th{overflow-wrap:normal;word-break:keep-all}.ct td.tl{min-width:110px}
-@media(max-width:640px){.hkpi{min-width:100%}}
+.dhead{position:relative}
+.hero .numlink{color:#fff;text-decoration-color:#a5b4fc}.hero .numlink:hover{background:rgba(255,255,255,.12)}
+.hkpi .v{line-height:1.3}.hkpi .v.long{font-size:14.5px}
+.posit .numlink,.bottom .numlink{color:#8ee6b0}
 """
 
 GUIDE_TEMPLATE = r"""<!doctype html>
@@ -659,12 +764,13 @@ GUIDE_TEMPLATE = r"""<!doctype html>
 <style>%CSS%</style>
 </head>
 <body>
-<nav id="toc" aria-label="%UI_TOC%"><div class="tt">%UI_TOC%</div>%TOC%</nav>
+%HERO%
 <div class="page">
+<nav class="toc" id="toc" aria-label="%UI_TOC%">%TOC%</nav>
 %BODY%
 </div>
 <div id="dbk"></div>
-<div id="dpanel" role="dialog" aria-modal="true" aria-labelledby="dtit"><div class="dhead"><button id="dclose">%UI_CLOSE% ✕</button><div id="dtit"></div><div id="dsub"></div><div id="dfil"></div></div><div id="dlist"></div></div>
+<div id="dpanel" role="dialog" aria-modal="true" aria-labelledby="dtit"><div class="dhead"><button id="dclose" class="dclose" aria-label="%UI_CLOSE%">✕</button><div id="dtit" class="dtit"></div><div id="dsub" class="dsub"></div><div id="dfil" class="dfil"></div></div><div id="dlist"></div></div>
 <script type="application/json" id="dd">%DD%</script>
 <script>
 (function(){
@@ -707,6 +813,11 @@ var secs=Array.prototype.slice.call(document.querySelectorAll("section[id^='sec'
 function spy(){var c=secs[0].id;var y=window.scrollY+100;secs.forEach(function(s){if(s.offsetTop<=y)c=s.id;});
   secs.forEach(function(s){var a=document.getElementById('nav'+s.id.slice(3));if(a)a.classList.toggle('on',s.id===c);});}
 document.addEventListener('scroll',spy,{passive:true});spy();
+document.querySelectorAll('section > h2').forEach(function(h){var a=document.createElement('span');a.className='tgl';
+  a.textContent=h.parentElement.classList.contains('secfold')?'▸':'▾';h.appendChild(a);
+  h.addEventListener('click',function(){var f=h.parentElement.classList.toggle('secfold');a.textContent=f?'▸':'▾';});});
+document.querySelectorAll('.toc a').forEach(function(a){a.addEventListener('click',function(){var s=document.querySelector(a.getAttribute('href'));
+  if(s&&s.classList.contains('secfold')){s.classList.remove('secfold');var g=s.querySelector('h2 .tgl');if(g)g.textContent='▾';}});});
 window.openEv=openEv;window.openRev=openRev;
 })();
 </script>

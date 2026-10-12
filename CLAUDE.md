@@ -65,6 +65,7 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | 03_schema_approved.yaml | 담당자 | 승인된 스키마. 태깅과 집계의 기준 |
 | 03_schema_check.json | check_inputs.py --schema | 스키마 검사 결과 |
 | 04_batches.json | tag_batches.py plan | 태깅 묶음(batch_id, asin, review_ids, models)과 시험 태깅 묶음 |
+| 04_tag_input/<묶음>.csv | tag_batches.py plan | 묶음 하나의 리뷰만 담은 태깅 입력(02_reviews.csv와 같은 칸). review-tagger는 이 파일만 읽음 |
 | 04_tags_{sonnet|top}_{batch_id}.jsonl | review-tagger | 묶음 하나의 태그(gold 묶음은 04_tags_top_gold.jsonl) |
 | 04_tags.jsonl | audit_quotes.py tags --model sonnet | 검사를 통과한 sonnet 묶음 태그를 합친 것. 리포트가 쓰는 태그 |
 | 04_quote_check_{model}.json | audit_quotes.py tags | 태그 기계 검사 결과(failed_batches, 인용 앞 부정어 경고) |

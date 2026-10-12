@@ -19,6 +19,16 @@ collect.py candidates가 만든 후보 표를 읽고, 이번 회차에 분석할
 - config/categories/<카테고리>.yaml: 카테고리 이름, 제목 규칙(title_include, title_exclude), kind_rules
 - config/pipeline.yaml: weighting.groups(부정 1,2★ / 중립 3★ / 긍정 4,5★), weighting.min_group_sample
 
+## 순위로 고른 후보일 때(00_candidates.csv에 rank_pick 칸이 있음, collect.py rank)
+
+2026-10-10(H2)부터 쓰는 방식이다. 검색 순위와 매출로 이미 순서가 정해져 있으므로 아래 기준을 이렇게 바꿔 적용한다.
+
+1. rank_pick이 있는 줄(매출 순 앞쪽)을 차례로 본다. 기준 1(카테고리 상품인가)과 기준 4(같은 부모)는 그대로 적용하고, 빠진 자리는 rank_pick이 없는 줄 가운데 monthly_revenue가 큰 순으로 채운다.
+2. need_paid가 no인 줄은 기준 2, 3(별점 묶음)을 그대로 적용한다.
+3. need_paid가 yes인 줄은 유료 수집으로 받을 상품이라 기준 2, 3을 보지 않고 고른다. reason에 "유료 수집 대상(DB 리뷰 n개)"를 적는다.
+   need_paid가 yes인 selected는 config/pipeline.yaml의 paid.max_asins를 넘지 않게 한다. 넘으면 monthly_revenue가 작은 것부터 뺀다.
+4. 최대 10개. 끝내며 돌려줄 것에 유료 수집 대상 수와 그 ASIN을 따로 적는다.
+
 ## 고르는 기준 (위에서부터 차례로 적용)
 
 1. 제목이 카테고리 상품이어야 한다. 제목 규칙에 걸렸어도 다른 상품(바디워시, 세트 구성품만 다른 묶음 상품 등)이면 뺀다.

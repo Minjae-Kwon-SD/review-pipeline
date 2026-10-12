@@ -27,8 +27,8 @@ stages:
      outputs: [00_input_check.json, 03_schema_sample.csv, 03_schema_input.csv], after: [02_schema_draft]}
   - {id: 02_schema_draft, kind: agents, inputs: [03_schema_sample.csv, "config:config/topics_common.yaml"],
      code: [.claude/agents/schema-drafter.md], outputs: [03_schema_draft.yaml], after: [03_schema_approval]}
-  - {id: 03_schema_approval, kind: human, inputs: [03_schema_draft.yaml], outputs: [03_schema_approved.yaml], after: [05_tagging]}
-  - {id: 05_tagging, kind: agents, bulk: true, method: per_batch, inputs: [03_schema_approved.yaml, 02_reviews.csv, 04_batches.json],
+  - {id: 03_schema_approval, kind: human, inputs: [03_schema_draft.yaml], outputs: [03_schema_approved.yaml], after: [05_tagging, 13_detail_schema_draft, 15_research]}
+  - {id: 05_tagging, kind: agents, bulk: true, method: per_batch, inputs: [03_schema_approved.yaml, 04_batches.json, "04_tag_input/*.csv"],
      code: [.claude/agents/review-tagger.md], expect: {batches: 04_batches.json, output: "04_tags_{model}_{batch_id}.jsonl"},
      outputs: ["04_tags_sonnet_*.jsonl", "04_tags_top_*.jsonl"], after: [06_tag_check]}
   - {id: 06_tag_check, kind: agents, inputs: ["04_tags_sonnet_*.jsonl", 04_audit_sample.jsonl], code: [.claude/agents/evidence-auditor.md],
@@ -52,8 +52,9 @@ stages:
      outputs: [07_quote_check.json, 07_audit.yaml], after: [11_html]}
   - {id: 11_html, kind: script, inputs: [06_report.md, 05_metrics.json, 07b_issue_counts.json],
      outputs: [06_report.html, 06_report_html_numbers.json, 06_report_html_check.json], after: []}
-  - {id: 12_market, kind: script, inputs: ["market/raw/*.json"], outputs: [market/market.json, market/market_summary.md], after: [16_guide_metrics]}
-  - {id: 13_detail_schema_draft, kind: agents, inputs: [13_detail_sample.csv], code: [.claude/agents/detail-schema-drafter.md, config/detail_rules.yaml],
+  - {id: 12_market, kind: script, inputs: ["market/raw/*.json"], outputs: [market/market.json, market/market_summary.md], after: [16_guide_metrics, 15_research]}
+  # 2026-10-10 앞당기기: 13_detail_schema_draft와 15_research는 03 스키마 승인(과 12_market) 뒤 바로, 태깅과 같은 때 돌린다(review-run.md "앞당겨 돌리는 단계").
+  - {id: 13_detail_schema_draft, kind: agents, inputs: [13_detail_sample.csv, 03_schema_approved.yaml], code: [.claude/agents/detail-schema-drafter.md, config/detail_rules.yaml],
      outputs: [13_detail_schema_draft.yaml], after: [13a_detail_schema_approval]}
   - {id: 13a_detail_schema_approval, kind: human, inputs: [13_detail_schema_draft.yaml], outputs: [13_detail_schema_approved.yaml], after: [14_detail_extract]}
   - {id: 14_detail_extract, kind: agents, bulk: true, method: v2, inputs: [13_detail_schema_approved.yaml, 14_detail_batches.json, "14_detail_input/*.jsonl"],
@@ -62,7 +63,7 @@ stages:
   - {id: 14b_detail_check, kind: agents, inputs: ["14_details_B*.jsonl", 14b_detail_audit_sample.jsonl, 14_known_exceptions.yaml],
      code: [.claude/agents/evidence-auditor.md, config/detail_rules.yaml],
      outputs: [14_details.jsonl, 14_detail_counts.json, 14b_detail_audit.yaml, 14b_detail_audit_summary.json], after: [16_guide_metrics]}
-  - {id: 15_research, kind: agents, inputs: [16_guide_metrics.json], code: [.claude/agents/benchmark-researcher.md],
+  - {id: 15_research, kind: agents, inputs: [03_schema_approved.yaml, market/market.json], code: [.claude/agents/benchmark-researcher.md],
      outputs: [15_research.yaml, 15_research_check.json], after: [17_guide_write]}
   - {id: 23_specs, kind: agents, inputs: [23_spec_input.json], code: [.claude/agents/product-spec-collector.md],
      outputs: [23_specs.yaml, 23_specs_check.json, 23_specs_verified.json], after: [16_guide_metrics]}

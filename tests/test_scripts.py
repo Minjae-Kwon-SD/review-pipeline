@@ -18,6 +18,7 @@
 - 유효 별점: 경우1 부정 1.217391, 긍정 4.884058, 가중 평균 3.967391(= 3.65 / 0.92). 경우3 긍정 4.833333, 가중 평균 3.6
 - 리뷰 한 개 비중 경고: 18개 중 1★ 1개 가중치 3.41 → 18.9%(기준 2%). 경우2의 w5 3.0 / 400 = 0.75%는 경고 아님
 """
+import csv
 import json
 from collections import Counter
 import os
@@ -371,6 +372,112 @@ def test_price_band():
     eq("가격 없음", price_band([{"size": "1 Fl Oz"}]), "")
 
 
+def test_collect_rank_paid(tmp):
+    """collect.py rank(검색 순위와 매출로 후보)와 유료 수집 대상, 별점마다 호출, 다시 돌려도 두 번 부르지 않음(2026-10-10)."""
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import yaml
+    collect = importlib.import_module("collect")
+    cfg = HERE.parent / "config" / "categories" / "rankcat.yaml"
+    cfg.write_text(yaml.safe_dump({"category": "rankcat", "name_ko": "순위 시험", "title_include": ["Cream"], "title_exclude": ["Wax"],
+                                   "kind_rules": {"face": ["Face"]},
+                                   "selection": {"seeds": ["hair cream", "depilatory"], "pick": 2, "min_db_reviews": 100,
+                                                 "max_product_calls": 3}},
+                                  allow_unicode=True), encoding="utf-8")
+    calls = []
+    top = {"hair cream": [{"asin": "B0R1", "title": "A Cream", "brandName": "A", "avgRank": 3.0, "latestRank": 2},
+                          {"asin": "B0R2", "title": "B Wax Cream", "brandName": "B", "avgRank": 1.0, "latestRank": 1},
+                          {"asin": "B0R3", "title": "C Face Cream", "brandName": "C", "avgRank": 5.0, "latestRank": 5}],
+           "depilatory": {"payload": [{"asin": "B0R1", "title": "A Cream", "brandName": "A", "avgRank": 2.0, "latestRank": 4},
+                                      {"asin": "B0R4", "title": "D Cream", "brandName": "D", "avgRank": 4.0, "latestRank": 4},
+                                      {"asin": "B0R5", "title": "E Cream", "brandName": "E", "avgRank": 9.0, "latestRank": 9}]}}
+    prod = {"B0R1": {"asin": "B0R1", "title": "A Cream 2 pack", "brandName": "A", "monthlyRevenueEstimate": 500.0, "parentAsin": "P1",
+                     "reviewCount": 900, "reviewRating": 4.1, "buyBoxPrice": 9.5, "monthlyUnitsSold": 50},
+            "B0R3": {"asin": "B0R3", "title": "C Face Cream", "brandName": "C", "monthlyRevenueEstimate": 800.0, "parentAsin": "P3",
+                     "reviewCount": 50, "reviewRating": 3.9},
+            "B0R4": {"asin": "B0R4", "title": "D Cream", "brandName": "D", "monthlyRevenueEstimate": 600.0, "parentAsin": "P1",
+                     "reviewCount": 70, "reviewRating": 4.0}}
+    stats = {"B0R1": 300, "B0R3": 0, "B0R4": 20}
+    summary = {"fiveStar": {"percentage": 60}, "fourStar": {"percentage": 20}, "threeStar": {"percentage": 10},
+               "twoStar": {"percentage": 5}, "oneStar": {"percentage": 5}}
+
+    def fake(server, tool, args):
+        calls.append((tool, json.dumps(args, sort_keys=True)))
+        if tool == "search_terms_trends_top_products":
+            d = top[args["search_term"]]
+        elif tool == "products_byasin":
+            d = [prod[args["asin"]]]
+        elif tool == "get_review_stats":
+            n = stats.get(args["asin"], 0)
+            d = {"total_reviews": n, "rating_distribution": {"5": n}, "asin_count": 1 if n else 0, "date_range": {}}
+        elif tool == "search_reviews":
+            d = {"reviews": [{"asin": args["asin"], "rating_summary": summary, "total_ratings": 999, "average_rating": 4.2}]
+                 if stats.get(args["asin"]) else []}
+        elif tool == "scrape_reviews":
+            d = {"collected": 10 * args["max_pages"], "inserted": 10, "skipped": 0}
+        else:
+            raise AssertionError(tool)
+        return json.dumps(d), d
+    collect.call = fake
+    try:
+        r = Path(tmp) / "rank-2026-10-10"
+        collect.rank_candidates(r, "rankcat")
+    finally:
+        cfg.unlink()
+    rows = list(__import__("csv").DictReader(open(r / "00_candidates.csv", encoding="utf-8-sig")))
+    eq("rank: 제목 규칙, 같은 부모는 매출 큰 것, 매출 순", [(x["asin"], x["rank_pick"], x["need_paid"]) for x in rows],
+       [("B0R3", "1", "yes"), ("B0R4", "2", "yes")])
+    eq("rank: products_byasin은 평균 순위 앞쪽 3개만", sorted(json.loads(a)["asin"] for t, a in calls if t == "products_byasin"),
+       ["B0R1", "B0R3", "B0R4"])
+    log = json.loads((r / "00_candidates_log.json").read_text(encoding="utf-8"))
+    eq("rank 기록: 제목 규칙으로 뺀 것, 상한 밖, 같은 부모", ([x["asin"] for x in log["title_rule_out"]], log["over_call_limit"],
+                                                  log["same_parent"]), (["B0R2"], ["B0R5"], [{"asin": "B0R1", "kept": "B0R4", "parent_asin": "P1"}]))
+    eq("rank 칸", (rows[0]["kind_hint"], rows[0]["total_ratings"], rows[0]["monthly_revenue"], rows[1]["search_avg_rank"]),
+       ("face", "50", "800", "4"))
+
+
+    # 유료 수집 대상: DB 리뷰 100개 미만만, 별점마다, 다시 돌리면 성공한 호출은 건너뜀
+    (r / "raw").mkdir(exist_ok=True)
+    conf = {"paid": {"enabled": True, "max_pages_per_star": 10, "max_scrape_calls": 11, "max_asins": 2, "split_by_star": True,
+                     "scrape_below_db_reviews": 100}}
+    eq("유료 대상", collect.paid_targets(r, ["B0R1", "B0R3", "B0R4"], conf, None), ["B0R3", "B0R4"])
+    eq("--paid-asins가 먼저", collect.paid_targets(r, ["B0R1", "B0R3"], conf, ["B0R1"]), ["B0R1"])
+    calls.clear()
+    collect.paid_scrape(r, ["B0R3"], conf, test=True)
+    eq("시험 호출: 하나, 1★, 1페이지", [json.loads(a)["ratings"] + [json.loads(a)["max_pages"]] for t, a in calls if t == "scrape_reviews"], [[1, 1]])
+    calls.clear()
+    collect.paid_scrape(r, ["B0R3", "B0R4"], conf)
+
+    sc = [json.loads(a) for t, a in calls if t == "scrape_reviews"]
+    eq("별점마다 10페이지", [(x["asins"][0], x["ratings"], x["max_pages"]) for x in sc][:2], [("B0R3", [1], 10), ("B0R3", [2], 10)])
+    eq("호출 수(B0R3 5 + B0R4 5)", len(sc), 10)
+    calls.clear()
+    collect.paid_scrape(r, ["B0R3", "B0R4"], conf)
+    eq("다시 돌리면 성공한 호출은 다시 부르지 않음", [t for t, a in calls if t == "scrape_reviews"], [])
+    try:
+        collect.paid_scrape(r, ["B0R1", "B0R3", "B0R4"], conf)
+        stopped = False
+    except SystemExit:
+        stopped = True
+    eq("max_asins를 넘으면 부르지 않고 멈춤", stopped, True)
+    # 제모 크림 설정(H2): 제목 규칙과 채운 시장 노드
+    cc = yaml.safe_load((HERE.parent / "config" / "categories" / "hairremovalcream.yaml").read_text(encoding="utf-8"))
+    titles = ["Nair Hair Remover Lotion with Baby Oil", "Sally Hansen Cream Hair Remover Kit for Face", "Magic Razorless Shaving Cream for Men",
+              "Veet Ready-to-Use Wax Strips", "Ulike Laser Hair Removal Device", "Gillette Venus Razors for Women"]
+    eq("제모 크림 제목 규칙", [collect.has_any(t, cc["title_include"]) and not collect.has_any(t, cc["title_exclude"]) for t in titles],
+       [True, True, True, False, False, False])
+    eq("제모 크림 종류 힌트(women에 men이 걸리지 않음)", [collect.kind_hint(t, cc["kind_rules"]) for t in
+       ("Flamingo Body Hair Removal Cream for Women", "Nair Men Hair Removal Body Cream", "Veet Facial Hair Removal Cream")],
+       ["body_cream", "men", "face"])
+    import market_build
+    try:
+        market_build.market_conf(Path(tmp) / "hairremovalcream-2026-10-10")
+        stopped = False
+    except SystemExit:
+        stopped = True
+    eq("시장 노드를 채운 뒤에는 시장 설정을 읽음(Depilatories 3779081)", (stopped, cc["market"]["parent_node"]), (False, 3779081))
+
+
 def test_collect(tmp):
     """collect.py: 유료 모드는 꺼져 있으면 거부, pull --offline은 raw 파일로 02 파일을 만든다."""
     run_ = tmp / "collect"
@@ -564,6 +671,76 @@ process.stdout.write(out);
     else:
         FAILS.append("node가 없어 내보내기 형식을 시험하지 못함")
 
+    # 한 화면(2026-10-10): 승인본이 없으면 초안으로 화면을 만들고 스키마 확인을 함께, 필수 주제(전체 만족도, 효과)
+    one = synth_run(tmp, "one-2026-10-10", {"B0ONE00001": [(1, 12), (2, 10), (3, 8), (4, 10), (5, 14)]})
+    run("eval_gold.py", "pick", one, "--per-asin", "5")
+    (one / "03_schema_draft.yaml").write_text("""topics:
+  - id: overall
+    name_ko: 전체 만족도
+    side: P
+    definition: 총평
+  - id: removal_effect
+    name_ko: 제거 효과
+    side: P
+    common_id: performance
+    definition: 털이 잘 지워지나
+    evidence_count: 40
+  - id: smell
+    name_ko: 냄새
+    side: P
+    definition: 냄새
+  - id: price_value
+    name_ko: 가격 대비 가치
+    side: B
+    definition: 가격
+""", encoding="utf-8")
+    out = run("eval_gold.py", "sheet", one)
+    h1 = (one / "gold" / "gold_tagging.html").read_text(encoding="utf-8")
+    d1 = json.loads(h1.split('<script type="application/json" id="data">')[1].split("</script>")[0].replace("<\\/", "</"))
+    eq("초안 화면: 기준 파일, 모드, 필수 주제", (d1["schema_file"], d1["schema_mode"], d1["required"]),
+       ("03_schema_draft.yaml", "draft", ["overall", "removal_effect"]))
+    node = shutil.which("node")
+    if node:
+        js1 = h1.split("// toJsonl:start")[1].split("// toJsonl:end")[0] + h1.split("// schemaReview:start")[1].split("// schemaReview:end")[0]
+        test_js = js1 + """
+const a = toJsonl({"R1": {"overall": "positive", "removal_effect": "none", "smell": "negative"}}, [{review_id: "R1"}],
+  [{id: "overall"}, {id: "removal_effect"}, {id: "smell"}]);
+const b = schemaReview({"smell": {decision: "edit", note: "냄새와 향을 나눔"}}, [{id: "overall"}, {id: "smell"}], "one", "03_schema_draft.yaml");
+process.stdout.write(JSON.stringify([a, b.topics]));
+"""
+        p = subprocess.run([node, "-e", test_js], capture_output=True, text=True, encoding="utf-8")
+        got = json.loads(p.stdout)
+        eq("언급 없음(none)은 내보내지 않음", [json.loads(l) for l in got[0].splitlines()],
+           [{"review_id": "R1", "topic": "overall", "sentiment": "positive"}, {"review_id": "R1", "topic": "smell", "sentiment": "negative"}])
+        eq("스키마 확인 내보내기(기본값 승인)", got[1], [{"id": "overall", "decision": "approve", "note": ""},
+                                                  {"id": "smell", "decision": "edit", "note": "냄새와 향을 나눔"}])
+    rv = {"run": "one", "topics": [{"id": t, "decision": "approve", "note": ""} for t in ("overall", "removal_effect", "smell", "price_value")]}
+    rv["topics"][2] = {"id": "smell", "decision": "drop", "note": "다른 주제와 겹침"}
+    (one / "03_schema_review.json").write_text(json.dumps(rv, ensure_ascii=False), encoding="utf-8")
+    out = run("eval_gold.py", "schema-approve", one, "--approved-at", "2026-10-10T10:00Z", "--approved-by", "시험", expect=1)
+    eq("고칠 곳이 있으면 승인본을 만들지 않음", ((one / "03_schema_approved.yaml").exists(), "smell: 빼기" in out), (False, True))
+    rv["topics"][2] = {"id": "smell", "decision": "approve", "note": ""}
+    (one / "03_schema_review.json").write_text(json.dumps(rv, ensure_ascii=False), encoding="utf-8")
+    run("eval_gold.py", "schema-approve", one, "--approved-at", "2026-10-10T10:00Z", "--approved-by", "시험")
+    import yaml
+    ap_ = yaml.safe_load((one / "03_schema_approved.yaml").read_text(encoding="utf-8"))
+    eq("모두 승인이면 초안 그대로 승인본", (ap_["approved_by"], [t["id"] for t in ap_["topics"]]),
+       ("시험", ["overall", "removal_effect", "smell", "price_value"]))
+    # 승인 때 smell을 빼고 removal_effect를 effect로 바꿨다면: 정답 태그를 맞춤
+    ap_["topics"] = [t for t in ap_["topics"] if t["id"] != "smell"]
+    ap_["topics"][1]["id"] = "effect"
+    (one / "03_schema_approved.yaml").write_text(yaml.safe_dump(ap_, allow_unicode=True, sort_keys=False), encoding="utf-8")
+    gids = [g["review_id"] for g in _csv.DictReader((one / "gold" / "gold_reviews.csv").read_text(encoding="utf-8-sig").splitlines())]
+    (one / "gold" / "gold_tags.jsonl").write_text("".join(json.dumps(x) + "\n" for x in (
+        [{"review_id": g, "topic": "overall", "sentiment": "positive"} for g in gids]
+        + [{"review_id": gids[0], "topic": "removal_effect", "sentiment": "negative"}, {"review_id": gids[1], "topic": "smell", "sentiment": "negative"}])),
+        encoding="utf-8")
+    run("eval_gold.py", "gold", one, expect=1)
+    out = run("eval_gold.py", "gold", one, "--rename", "removal_effect:effect", "--drop-unknown")
+    fixed = [json.loads(l) for l in (one / "gold" / "gold_tags.jsonl").read_text(encoding="utf-8").splitlines()]
+    eq("정답 태그 맞춤(이름 바꿈 1, 뺀 주제 1)", (sorted({t["topic"] for t in fixed}), len(fixed), (one / "gold" / "gold_tags.before_fix.jsonl").exists()),
+       (["effect", "overall"], len(gids) + 1, True))
+
     # 정답 세트 묶음과 묶음 크기
     run("tag_batches.py", "plan", run_, "--size", "20")
     bp = json.loads((run_ / "04_batches.json").read_text(encoding="utf-8"))
@@ -576,6 +753,15 @@ process.stdout.write(out);
     first = [reviews[x] for x in bp["batches"][0]["review_ids"]]
     eq("묶음 안은 날짜, review_id 순", [(x["date"], x["review_id"]) for x in first],
        sorted((x["date"], x["review_id"]) for x in first))
+    with open(run_ / "04_tag_input" / f"{bp['batches'][0]['batch_id']}.csv", encoding="utf-8-sig", newline="") as f:
+        inp = list(csv.DictReader(f))
+    with open(run_ / "04_tag_input" / "gold.csv", encoding="utf-8-sig", newline="") as f:
+        ginp = list(csv.DictReader(f))
+    eq("묶음 입력 파일은 그 묶음 리뷰만, 같은 순서, 같은 본문",
+       ([x["review_id"] for x in inp], [x["body"] for x in inp], sorted(x["review_id"] for x in ginp),
+        len(list((run_ / "04_tag_input").glob("*.csv")))),
+       (bp["batches"][0]["review_ids"], [reviews[x]["body"] for x in bp["batches"][0]["review_ids"]], sorted(gold_ids),
+        len(bp["batches"])))
 
 
 def test_audit_sample(tmp):
@@ -896,8 +1082,8 @@ def test_off_category(tmp):
     eq("off_category와 스키마 밖 주제 거르기", ([r["review_id"] for r in rv], [t["topic"] for t in tg], info),
        (["B"], ["scent"], {"off_category_reviews": ["A"], "unknown_topic_tags": 1}))
     real = HERE.parent / "runs" / "perfume-db-2026-10-07"
-    if not (real / "06_report.md").exists():
-        print("  (off_category 시험: 실제 회차가 없어 건너뜀)")
+    if not (real / "06_report.md").exists() or not (real / "02_reviews.csv").exists():
+        print("  (off_category 시험: 실제 회차나 그 리뷰 원문(공개 저장소에서는 뺌)이 없어 건너뜀)")
         return
     r = Path(tmp) / "perfume-off-2026-10-07"
     r.mkdir()
@@ -922,8 +1108,8 @@ def test_off_category(tmp):
 def test_fake_category(tmp):
     """카테고리 전용 설정(제목, 겹침 라벨, 짝 항목, 사양 연결, 해부도, 회차 주의 사항)이 없는 가짜 카테고리로도 두 HTML이 만들어진다"""
     real = HERE.parent / "runs" / "perfume-db-2026-10-07"
-    if not (real / "17_guide.md").exists():
-        print("  (가짜 카테고리 시험: 실제 회차가 없어 건너뜀)")
+    if not (real / "17_guide.md").exists() or not (real / "02_reviews.csv").exists():
+        print("  (가짜 카테고리 시험: 실제 회차나 그 리뷰 원문(공개 저장소에서는 뺌)이 없어 건너뜀)")
         return
     import yaml
     cfg = HERE.parent / "config" / "categories" / "fakecat.yaml"
@@ -964,6 +1150,30 @@ def test_fake_category(tmp):
                                                  t0["positive"] + t0["negative"] + t0["mixed"] + t0["neutral"] == t0["mentions"]), (True, True))
     finally:
         cfg.unlink(missing_ok=True)
+
+
+def test_common_topic():
+    """공통 주제를 다시 정의해 id가 바뀌어도(safety → skin_reaction) common_id로 같은 주제를 찾는다"""
+    sys.path.insert(0, str(SCRIPTS))
+    from pipeline_io import common_topic
+    eq("공통 주제 id 찾기", (common_topic({"safety": {}}, "safety"), common_topic({"skin_reaction": {"common_id": "safety"}}, "safety"),
+                          common_topic({"scent": {}}, "safety")), ("safety", "skin_reaction", "safety"))
+
+
+def test_sentiment_split():
+    """감성 일치를 방향(어느 쪽도 mixed가 아닌 짝)과 mixed(한쪽이라도 mixed인 짝)로 나눠 잰다. 판정은 방향 일치로"""
+    sys.path.insert(0, str(SCRIPTS))
+    from eval_gold import score_one
+    gold = [{"review_id": f"r{i}", "topic": "t", "sentiment": s} for i, s in enumerate(
+        ["positive", "negative", "neutral", "negative", "mixed", "mixed", "negative", "positive"])]
+    pred = [{"review_id": f"r{i}", "topic": "t", "sentiment": s} for i, s in enumerate(
+        ["positive", "negative", "neutral", "positive", "mixed", "negative", "mixed", "positive"])]
+    r = score_one(gold, pred, {f"r{i}" for i in range(8)})
+    # 방향 짝: r0~r3, r7(5개) 중 같음 4개(r3 부정→긍정만 다름). mixed 짝: r4~r6(3개) 중 둘 다 mixed 1개(r4)
+    eq("방향과 mixed 일치", (r["direction_pairs"], r["direction_same"], r["direction_agreement"],
+                           r["mixed_pairs"], r["mixed_same"], r["mixed_agreement"], r["sentiment_agreement"]),
+       (5, 4, 0.8, 3, 1, 0.333, 0.625))
+    eq("mixed 짝이 없으면 None", score_one(gold[:2], pred[:2], {"r0", "r1"})["mixed_agreement"], None)
 
 
 def test_helpful_provisional():
@@ -1238,6 +1448,76 @@ def test_g10_rules_known(tmp):
            [("RLI9E523HGVOC", "desired_state"), ("RW9B7F2AP5A3C", "comparison_reference")])
 
 
+def test_brand_compare():
+    """9장 브랜드 행(sections.brand_compare): 브랜드 X는 ASIN 둘(A1, A2), Y는 B1 하나. 가중치 r1 2, 나머지 1.
+    X: 태그 가중치 합 8(전체 만족도 포함), 긍정 r1 향 2 + r2 향 1 + r2 전체 1 = 4 -> 50.0%, 부정 4 -> 50.0%.
+    향 긍정 리뷰어 (2 + 1) / 4 = 75.0%, 지속력 부정 리뷰어 (2 + 1) / 4 = 75.0%, 향 부정 리뷰어 1 / 4 = 25.0%.
+    강점 향, 2위 강점 없음(전체 만족도는 뺌), 약점 지속력. Y: 향 긍정 하나뿐 -> 긍정 100.0%, 약점 없음."""
+    sys.path.insert(0, str(SCRIPTS))
+    import sections
+    from weight import topic_stats
+    reviews = [{"review_id": "r1", "asin": "A1"}, {"review_id": "r2", "asin": "A1"}, {"review_id": "r3", "asin": "A2"},
+               {"review_id": "r4", "asin": "B1"}]
+    weight = {"r1": 2.0, "r2": 1.0, "r3": 1.0, "r4": 1.0}
+    tags = [{"review_id": "r1", "topic": "scent", "sentiment": "positive"},
+            {"review_id": "r1", "topic": "longevity_projection", "sentiment": "negative"},
+            {"review_id": "r2", "topic": "scent", "sentiment": "positive"},
+            {"review_id": "r2", "topic": "overall", "sentiment": "positive"},
+            {"review_id": "r3", "topic": "longevity_projection", "sentiment": "negative"},
+            {"review_id": "r3", "topic": "scent", "sentiment": "negative"},
+            {"review_id": "r4", "topic": "scent", "sentiment": "positive"}]
+    schema = {"scent": {"name_ko": "향"}, "longevity_projection": {"name_ko": "지속력"}, "overall": {"name_ko": "전체 만족도"}}
+    bc = sections.brand_compare(reviews, tags, weight, schema, {"A1": "X", "A2": "X", "B1": "Y"}, topic_stats, ("overall",), 1)
+    x, y = bc
+    eq("브랜드 행 X", (x["brand"], x["asins"], x["asin_count"], x["sample_reviews"], x["tags"], x["weighted_pos_pct"], x["weighted_neg_pct"],
+                     x["strength"]["id"], x["strength"]["pos_reviewer_pct"], x["strength2"], x["weakness"]["id"], x["weakness"]["neg_reviewer_pct"]),
+       ("X", ["A1", "A2"], 2, 3, 6, 50.0, 50.0, "scent", 75.0, None, "longevity_projection", 75.0))
+    eq("브랜드 행 Y", (y["asin_count"], y["weighted_pos_pct"], y["weighted_neg_pct"], y["strength"]["pos_reviewer_pct"], y["weakness"]),
+       (1, 100.0, 0.0, 100.0, None))
+    lines = sections.render_brand_compare(bc, 1)
+    eq("브랜드 행 표 한 줄", lines[2], "| X | 2 | 3 | 6 | 50.0% / 50.0% | 향(75.0%) | 없음 | 지속력(75.0%) |")
+    # 2위 강점: Y에 지속력 긍정을 더하면 향 100.0%, 지속력 100.0%(같으면 긍정 수, 다음 id 순)
+    bc = sections.brand_compare(reviews, tags + [{"review_id": "r4", "topic": "longevity_projection", "sentiment": "positive"}], weight, schema,
+                                {"A1": "X", "A2": "X", "B1": "Y"}, topic_stats, ("overall",), 1)
+    eq("2위 강점", (bc[1]["strength"]["id"], bc[1]["strength2"]["id"], bc[1]["strength2"]["pos_reviewer_pct"]),
+       ("longevity_projection", "scent", 100.0))
+
+
+def test_price_complaints():
+    """guide_metrics.price_complaints: 온스당 가격 1.0, 1.5, 2.0, 3.0인 상품 넷과 가격 없는 상품 하나. 순위 i x 3 // 4 -> 묶음 0, 0, 1, 2.
+    묶음 0(P1 a 2, b 1, P2 c 1): 피부 부정 a 2 / 4 = 50.0%, 효과 부정 c 1 / 4 = 25.0%, 별점 (3 x 4.0 + 1 x 3.0) / 4 = 3.75.
+    묶음 1(P3 d, e): 피부 부정 d 1 / 2 = 50.0%, 효과 0.0%, 별점 4.50. 묶음 2(P4 f): 0.0%, 5.00. 가격 없는 상품 1개."""
+    sys.path.insert(0, str(SCRIPTS))
+    import guide_metrics as gm
+    g = object.__new__(gm.G)
+    g.conf = {"price_bands": 3, "head_topic": "skin", "direction_index": {"topic": "skin"}, "focus": [{"id": "efficacy", "topics": ["eff"]}]}
+    g.schema = {"skin": {"name_ko": "피부 반응"}, "eff": {"name_ko": "털 제거 효과"}}
+    asin_of = {"a": "P1", "b": "P1", "c": "P2", "d": "P3", "e": "P3", "f": "P4", "z": "P5"}
+    g.reviews = [{"review_id": r, "asin": a, "star": "3", "date": "2026-09-01", "helpful_votes": "0"} for r, a in asin_of.items()]
+    g.rev = {r["review_id"]: r for r in g.reviews}
+    g.weight = {"a": 2.0, "b": 1.0, "c": 1.0, "d": 1.0, "e": 1.0, "f": 1.0, "z": 1.0}
+    g.tags = [{"review_id": "a", "topic": "skin", "sentiment": "negative", "quote": "burned"},
+              {"review_id": "b", "topic": "skin", "sentiment": "positive", "quote": "gentle"},
+              {"review_id": "c", "topic": "eff", "sentiment": "negative", "quote": "did not work"},
+              {"review_id": "d", "topic": "skin", "sentiment": "negative", "quote": "rash"}]
+    g.tag = {(t["review_id"], t["topic"]): t for t in g.tags}
+    g.brand = {"P1": "B1", "P2": "B2", "P3": "B3", "P4": "B4", "P5": "B5"}
+    g.m = {"asins": [{"asin": "P1", "weighted_mean_star": 4.0}, {"asin": "P2", "weighted_mean_star": 3.0}, {"asin": "P3", "weighted_mean_star": 4.5},
+                     {"asin": "P4", "weighted_mean_star": 5.0}, {"asin": "P5", "weighted_mean_star": 2.0}]}
+    g.values, g.ev, g.quotes = {}, {}, {}
+    g.tables = {"s.scoreboard": [{"asin": a, "brand": g.brand[a], "price_per_oz": p} for a, p in
+                                 (("P4", 3.0), ("P1", 1.0), ("P5", None), ("P3", 2.0), ("P2", 1.5))]}
+    g.price_complaints()
+    V = g.values
+    eq("가격 묶음 상품", [b["asins"] for b in g.tables["price.bands"]], [["P1", "P2"], ["P3"], ["P4"]])
+    eq("가격 묶음 값", [(V[f"price.band{i}.n"]["value"], V[f"price.band{i}.skin_neg"]["value"], V[f"price.band{i}.eff_neg"]["value"],
+                       V[f"price.band{i}.star"]["value"]) for i in range(3)],
+       [(2, 50.0, 25.0, 3.75), (1, 50.0, 0.0, 4.5), (1, 0.0, 0.0, 5.0)])
+    eq("가격 묶음 표기", (V["price.band0.range"]["text"], V["price.band0.skin_neg"]["text"], V["price.band0.star"]["text"],
+                       V["price.band0.head_neg"]["value"], V["price.unpriced"]["value"], g.ev["ev.price.band0.skin_neg"]["n"]),
+       ("1.00~1.50달러/oz", "50.0%", "3.75★", 50.0, 1, 1))
+
+
 def main():
     with tempfile.TemporaryDirectory() as tmp:
         r = fresh(tmp, "ok")
@@ -1313,6 +1593,10 @@ def main():
                           a["B0TESTAAA1"]["weakness"]["id"], a["B0TESTAAA1"]["weakness"]["neg_reviewer_pct"]),
            ("scent", 80.0, "longevity_projection", 10.0))
         eq("A2 긍정/부정", (a["B0TESTBBB2"]["weighted_pos_pct"], a["B0TESTBBB2"]["weighted_neg_pct"]), (71.4, 21.4))
+        bcm = {x["brand"]: x for x in m["brand_compare"]}
+        eq("브랜드 행(ASIN 하나면 ASIN 행과 같음)", (bcm["BrandB"]["asin_count"], bcm["BrandB"]["weighted_pos_pct"], bcm["BrandB"]["weighted_neg_pct"],
+                                               bcm["BrandA"]["strength"]["id"], bcm["BrandA"]["weakness"]["neg_reviewer_pct"]),
+           (1, 71.4, 21.4, "scent", 10.0))
 
         # 채점(v1): 리포트에 쓰는 sonnet(04_tags.jsonl의 정답 세트 리뷰)으로 판정하고, top(gold 묶음)은 비교
         run("eval_gold.py", "score", r)
@@ -1325,14 +1609,16 @@ def main():
         run("weight.py", r, "--impact-min", "3", "--strength-min", "2")  # 손계산은 v0 기준값으로
         acc = json.loads((r / "05_metrics.json").read_text(encoding="utf-8"))["accuracy"]
         eq("리포트용 정확도", (acc["gold_reviews"], acc["sonnet"], acc["top"]["sentiment_pct"]),
-           (10, {"topic_f1": 0.96, "sentiment_pct": 100.0, "topic_f1_text": "0.96", "sentiment_text": "100.0%"}, 90.9))
+           (10, {"topic_f1": 0.96, "sentiment_pct": 100.0, "topic_f1_text": "0.96", "sentiment_text": "100.0%",
+                "direction_pct": 100.0, "direction_text": "100.0%", "direction_pairs": 11, "direction_same": 11,
+                "mixed_pct": 100.0, "mixed_text": "100.0%", "mixed_pairs": 1, "mixed_same": 1}, 90.9))
         eq("채점 한 줄 요약", g["summary_ko"],
-           ["sonnet: 주제 F1 0.96(기준 0.80, 통과), 감성 일치 100.0%(기준 90.0%, 통과)",
-            "top: 주제 F1 0.88(기준 0.80, 통과), 감성 일치 90.9%(기준 90.0%, 통과)"])
+           ["sonnet: 주제 F1 0.96(기준 0.80, 통과), 감성 방향 일치 100.0%(기준 90.0%, 통과), mixed 일치 100.0%(짝 1개, 기준 없음), 감성 전체 일치 100.0%",
+            "top: 주제 F1 0.88(기준 0.80, 통과), 감성 방향 일치 100.0%(기준 90.0%, 통과), mixed 일치 0.0%(짝 1개, 기준 없음), 감성 전체 일치 90.9%"])
         run("eval_gold.py", "score", r, "--f1", "0.90", "--sentiment", "0.95")  # 판정은 sonnet 기준이라 통과
         g = json.loads((r / "04_gold_eval.json").read_text(encoding="utf-8"))
         eq("기준 미달 한 줄 요약", g["models"]["top"]["summary_ko"],
-           "top: 주제 F1 0.88(기준 0.90, 0.02 모자람), 감성 일치 90.9%(기준 95.0%, 4.1%p 모자람)")
+           "top: 주제 F1 0.88(기준 0.90, 0.02 모자람), 감성 방향 일치 100.0%(기준 95.0%, 통과), mixed 일치 0.0%(짝 1개, 기준 없음), 감성 전체 일치 90.9%")
         run("eval_gold.py", "score", r, "--f1", "0.97", expect=1)  # sonnet 0.96 < 0.97이면 실패
         # 시험 태깅: 04_tags.jsonl이 아직 없으면 gold 묶음의 sonnet 태그(04_tags_sonnet_gold.jsonl)로 채점
         pilot = fresh(tmp, "pilot")
@@ -1432,7 +1718,21 @@ def main():
                 FAILS.append(f"시간 표에 '{want}'가 없음:\n{out}")
 
         # 스키마 검사: 예시 인용이 원문에 없거나 정답 세트 리뷰면 실패
-        run("check_inputs.py", r, "--schema")
+        out = run("check_inputs.py", r, "--schema")
+        # overall 공통 태깅 규칙(2026-10-10): 픽스처 스키마에 tagging_rule이 없으면 주의, 공통 문장을 넣으면 주의 없음
+        eq("overall tagging_rule 없음 주의", "overall의 tagging_rule이 없거나" in out, True)
+        import yaml
+        ov_rule = next(t["tagging_rule"] for t in yaml.safe_load((HERE.parent / "config" / "topics_common.yaml").read_text(encoding="utf-8"))["topics"]
+                       if t["id"] == "overall")
+        ok_schema = fresh(tmp, "ok_schema")
+        osp = ok_schema / "03_schema_approved.yaml"
+        sch = yaml.safe_load(osp.read_text(encoding="utf-8"))
+        for t in sch["topics"]:
+            if t["id"] == "overall" or t.get("common_id") == "overall":
+                t["tagging_rule"] = ov_rule
+        osp.write_text(yaml.safe_dump(sch, allow_unicode=True, sort_keys=False), encoding="utf-8")
+        out = run("check_inputs.py", ok_schema, "--schema")
+        eq("overall tagging_rule 공통 문장이면 주의 없음", "overall의 tagging_rule이 없거나" in out, False)
         bad_schema = fresh(tmp, "bad_schema")
         sp = bad_schema / "03_schema_approved.yaml"
         sp.write_text(sp.read_text(encoding="utf-8").replace("Does not last at all", "Does not last long"), encoding="utf-8")
@@ -1563,10 +1863,13 @@ def main():
 
         test_star_groups()
         test_price_band()
+        test_brand_compare()
+        test_price_complaints()
         test_sections()
         test_variant()
         test_issues(Path(tmp))
         test_collect(Path(tmp))
+        test_collect_rank_paid(Path(tmp))
         test_pick_and_sheet(Path(tmp))
         test_audit_sample(Path(tmp))
         test_render_html(Path(tmp))
@@ -1576,7 +1879,9 @@ def main():
         test_robustness_specs(Path(tmp))
         test_off_category(Path(tmp))
         test_fake_category(Path(tmp))
+        test_sentiment_split()
         test_helpful_provisional()
+        test_common_topic()
         test_stage_plan_packet(Path(tmp))
         try:
             test_g9_review_fixes(Path(tmp))

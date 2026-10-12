@@ -182,6 +182,13 @@ def check_schema(run, name):
         lost = [c for c in common if c not in kept]
         if lost:
             warns.append(f"공통 주제가 빠졌습니다(id나 common_id로 남겨야 함): {', '.join(lost)}")
+        # 2026-10-10: overall 공통 태깅 규칙(config/topics_common.yaml overall tagging_rule)이 스키마에 그대로 있는지(주의만)
+        rule = next((str(t.get("tagging_rule") or "").strip() for t in (load_yaml(common_path) or {}).get("topics", [])
+                     if str(t.get("id")) == "overall"), "")
+        ov = next((t for tid, t in schema.items() if tid == "overall" or t.get("common_id") == "overall"), None)
+        if rule and ov is not None and " ".join(str(ov.get("tagging_rule") or "").split()) != " ".join(rule.split()):
+            warns.append("overall의 tagging_rule이 없거나 config/topics_common.yaml의 공통 문장과 다릅니다"
+                         "(총평 없는 리뷰의 overall 인용 규칙, H1 감사 FAIL 원인). 공통 문장을 그대로 옮겨 주세요.")
     sample_path = run / "03_schema_sample.csv"
     if sample_path.exists():
         with open(sample_path, encoding="utf-8-sig", newline="") as f:

@@ -1,0 +1,198 @@
+# 제모 크림(바르고 몇 분 뒤 닦아 내는 제모제) 카테고리. collect.py rank, candidates와 asin-selector가 읽는다.
+# 2026-10-10 범위를 정함(H2 계획서 2-1, 담당자가 바꿀 수 있음): 크림, 로션, 젤 크림, 같은 방식의 스프레이와 무스.
+# 여성용, 남성용, 얼굴용, 비키니용 모두. IPL과 레이저 기기, 면도기, 에필레이터, 왁스와 스트립, 슈가링, 제모 후 진정 제품,
+# 털 억제 세럼(바르지만 제거하지 않음), 털 탈색제는 뺀다.
+category: hairremovalcream
+name_ko: 제모 크림
+
+# H2부터 후보는 검색 순위와 매출로 고른다(collect.py rank). 검색어마다 상위 상품을 받고 매출 순으로 pick개.
+selection:
+  seeds: ["hair removal cream", "depilatory cream", "hair remover cream", "hair removal cream for men"]
+  pick: 10                  # 매출 순 앞 10개에 rank_pick
+  min_db_reviews: 100       # 공유 DB 리뷰가 이보다 적으면 need_paid=yes(유료 수집 대상 후보)
+  max_product_calls: 25     # products_byasin(무료) 호출 상한
+
+# 공유 DB의 search_reviews keyword(리뷰 제목과 본문 부분일치). collect.py candidates(DB로 고르는 예전 방식)에서만 쓴다.
+keywords: [hair removal cream, depilatory, hair remover cream, Nair, Veet]
+
+# 상품 제목(대소문자 무시, 부분일치)에 하나라도 있으면 후보, title_exclude가 하나라도 있으면 뺀다.
+# 부분일치라 "Razor"를 넣으면 "Razorless Shaving Cream"(바르는 제모제)도 빠져서 면도기는 "Razors", "Razor Blade" 등으로 뺀다.
+# 같은 이유로 "Epilator"는 "Depilatory" 안에도 들어 있어 앞에 빈칸을 붙인 " Epilator"로 뺀다.
+title_include: [Hair Removal Cream, Hair Remover Cream, Cream Hair Remover, Creme Hair Remover, Crème Hair Remover,
+                Hair Removal Lotion, Hair Remover Lotion, Lotion Hair Remover, Spray Hair Remover, Depilatory,
+                Hair Removal Gel, Hair Remover Gel, Gel Cream, Hair Removal Spray, Hair Remover Spray,
+                Hair Removal Mousse, Hair Remover Mousse, Hair Removal Foam, Razorless Shaving, Nair, Veet]
+title_exclude: [IPL, Laser, Device, Wax, Strips, Sugaring, " Epilator", Trimmer, Shaver, Razors, Razor Blade, Safety Razor,
+                Disposable Razor, Inhibitor, Bleach, Eraser, Crystal, Dermaplaning, Threading, Aftercare,
+                After Care, Post Hair Removal, Numbing, Replacement]
+
+# kind_hint 규칙: 먼저 맞는 것(부분일치라 "men"은 "women"에도 걸려 앞뒤 공백을 넣음)
+kind_rules:
+  face: [Face, Facial, Upper Lip, Chin, Eyebrow]
+  bikini: [Bikini, Intimate, Private, Pubic, Brazilian, Sensitive Area]
+  men: [" for men", " men ", " men's", Male, Beard, Chest]
+  spray_mousse: [Spray, Mousse, Foam]
+  in_shower: [Shower]
+  body_cream: [Cream, Lotion, Gel, Depilatory]
+
+# 리뷰 리포트(render_html.py, issues.py가 읽음)
+report:
+  title: {ko: "아마존 리뷰 분석: 제모 크림", en: "Amazon Review Analysis: Hair Removal Creams"}
+  helpful_min_voted_reviews: 30
+
+# 시장 데이터(market.py, market_build.py, guide_metrics.py가 읽음).
+# 노드 id와 이름(subcategoryContextName)은 PC에서 채운다: H1의 runs/hairremoval-db-2026-10-08/market/raw/subcategories_search_all.json에서
+# 이름에 Depilator가 든 노드와 그 부모를 찾는다(H2 PC 지시문 Block 0-b). 채우기 전에는 market.py가 "market 절이 없습니다"로 멈춘다.
+market:
+  seed: "hair removal cream"
+  parent_node: 3779081                  # Depilatories(Women's 아래 level 4, 자식 노드 없음, 남성용 노드는 따로 없음)
+  context_nodes: [3778591, 13269990011, 3779081]   # Shave & Hair Removal, Women's, Depilatories
+  max_nodes: 15
+  nodes:
+    DEP: "Face & Body Hair Depilatories"
+  term_words: [cream, depilator, "hair removal", "hair remover", nair, veet, lotion, mousse, "removal spray", "remover spray"]
+
+# 상품 사양 수집(specs.py, product-spec-collector가 읽음). 항목 이름과 뜻은 카테고리마다 여기에만 적는다.
+# links(기준표와 사양 잇기)는 세부 이슈와 설계 정보 항목이 승인된 뒤 guide 절과 함께 정한다.
+specs:
+  items:
+    - id: active_ingredient
+      name_ko: 제거 성분과 함량
+      ask: "털을 녹이는 성분(티오글리콜산 칼슘, 티오글리콜산 칼륨 등)과 함량(%)이 적혀 있으면 그 값. pH가 적혀 있으면 함께"
+      format: text
+    - id: contact_time
+      name_ko: 권장 도포 시간
+      ask: "바르고 기다리라는 시간(분)과 넘기지 말라는 최대 시간. 부위별로 다르면 부위별로"
+      format: text
+    - id: body_areas
+      name_ko: 쓸 수 있는 부위
+      ask: "쓸 수 있다고 적힌 부위(다리, 팔, 겨드랑이, 비키니 라인, 얼굴, 윗입술 등)와 쓰지 말라고 적힌 부위"
+      format: list
+    - id: skin_type
+      name_ko: 피부 타입 표시
+      ask: "민감성, 일반, 건성 같은 피부 타입 표시와 피부과 테스트, 저자극 같은 표시"
+      format: text
+    - id: soothing_ingredients
+      name_ko: 진정과 보습 성분
+      ask: "진정, 보습 성분으로 내세운 것(알로에, 시어버터, 비타민 E, 오일 등)"
+      format: list
+    - id: scent
+      name_ko: 향과 냄새 표시
+      ask: "향 이름, 무향 여부, 냄새를 줄였다는 표시"
+      format: text
+    - id: format_size
+      name_ko: 제형과 용량
+      ask: "제형(크림, 로션, 젤 크림, 스프레이, 무스)과 용량(oz, ml), 묶음 수"
+      format: text
+    - id: in_box
+      name_ko: 구성품
+      ask: "상자에 든 구성품(스패출러, 스펀지, 장갑, 사후 진정 크림 등)"
+      format: list
+    - id: usage_warnings
+      name_ko: 패치 테스트와 다시 쓰기 간격
+      ask: "패치 테스트 권고(몇 시간 전), 다시 쓰기까지 기다릴 시간(예: 72시간), 바른 뒤 피하라는 것(햇볕, 향수 등)"
+      format: text
+    - id: result_claims
+      name_ko: 효과 표시
+      ask: "작용 시간 표시(예: 3분), 매끈함이 며칠 간다는 표시, 굵은 털에도 된다는 표시 등 제조사가 내세운 효과 문구"
+      format: text
+    - id: list_price
+      name_ko: 정가
+      ask: "출처 사이트에 적힌 가격(통화 포함). 여러 구성이면 모두"
+      format: list
+
+issues:
+  # 같은 리뷰에 함께 붙는지 셀 두 라벨(주제, 라벨 id): 많이 발라야 효과가 난다는 말과 금방 다 쓴다는 말
+  overlap: [[removal_effect, needs_more_product], [price_value, used_up_fast]]
+
+# 제품 개발 가이드(guide_metrics.py가 읽음). 2026-10-11 세부 이슈와 설계 정보 항목 승인 뒤 Claude가 정함(담당자 위임).
+# 라벨 id는 주제를 가리지 않고 모이므로(guide_metrics.label_reviews), 두 주제에 같은 id가 있는 better_than_others(scent, brand_experience)는 쓰지 않는다.
+guide:
+  title: 아마존 미국 제모 크림 제품 개발 가이드
+  market_node_head: "3779081"           # 머리 숫자의 시장 노드(Face & Body Hair Depilatories)
+  market_nodes_brand_share: ["Face & Body Hair Depilatories"]
+  head_topic: skin_reaction             # 머리 숫자: 이 주제의 부정 리뷰 비율(가중), 가장 큰 약점이 이 주제인 상품 수. 견고성 점검에서 불만 1위가 피부 반응(13.9%, 털 제거 효과 11.0%)이라 피부 반응으로 정함
+  direction_index:                      # 방향 지수 = (high - low) / (high + low): 자극 쪽과 순한 쪽
+    topic: skin_reaction
+    high: {name: 자극, labels: [chemical_burn_damage, rash_bumps_ingrown, irritation_redness_itch, burning_sting]}
+    low: {name: 순함, labels: [no_reaction, sensitive_skin_area_ok, gentler_than_others, mild_tolerable]}
+    min_reviews: 15
+  duration_item: wait_minutes           # 숫자 항목(바르고 둔 시간, 분)
+  duration_min_values: 3
+  duration_bins: [3, 5, 10, 15]         # 바르고 둔 시간 구간(분)
+  number_names: {wait_minutes: 바르고 둔 시간, burn_onset_minutes: 자극이 시작된 시간}
+  gender_words:
+    male: [" for men", " men ", " men's", "mens", "beard", "chest"]
+    female: ["women", "womens", "women's", "for her", "bikini"]
+  fastest_term_min_volume: 10000
+  growth:
+    window_weeks: 4
+    min_volume: 10000
+    exclude_words: [laser, ipl, device, wax, strips, razor, epilator, trimmer, shaver, dermaplaning, sugar, threading, inhibitor, bleach]   # 다른 제모 방식의 검색어
+  price_bands: 3
+  caveat_subcategory: "Face & Body Hair Depilatories"
+  caveats_extra:
+    - "검색어 4개의 매출 상위 상품 9개 중 8개를 썼다(월 매출이 아주 작은 B0HHFLWD6K는 담당자가 뺌). 리뷰는 유료 수집으로 상품마다 별점별 약 50개씩 받았다."
+    - "정답 세트 32개로 잰 sonnet 태그 정확도는 주제 F1 0.87, 감성 일치 77.5%(기준 90% 미달, 주로 혼합과 부정의 경계)다."
+  focus:                                # 03장 집중 분석 4개
+    - id: efficacy
+      title: 제모 효과
+      topics: [removal_effect, regrowth]
+      items: [hair_type_result, body_area, removal_followup, amount_needed]
+      split_label: not_effective        # 털 종류, 부위별 효과 없음 비율
+    - id: skin
+      title: 피부 자극과 화상
+      topics: [skin_reaction]
+      items: [irritation_area, burn_onset_minutes, reaction_duration, skin_sensitivity, user_person]
+    - id: scent_feel
+      title: 냄새와 사용감
+      topics: [scent, application]
+      items: [scent_persistence, cream_texture, part_issue]
+    - id: time_value
+      title: 작용 시간과 양
+      topics: [wait_time, price_value]
+      items: [wait_minutes, amount_needed, desired_feature, comparison_reference]
+  standards:                            # 04장 소비자 기준표 후보
+    - id: efficacy
+      title: 제모 효과
+      neg_labels: [not_effective, partial_removal, coarse_or_short_hair, needs_more_product, body_area_varies, worse_than_alternatives]
+      pos_labels: [works_well, partial_works, works_on_areas, complete_smooth]
+      items: [hair_type_result, removal_followup]
+      search_words: ["coarse hair", "thick hair"]
+    - id: skin_safety
+      title: 피부 자극과 화상
+      neg_labels: [chemical_burn_damage, rash_bumps_ingrown, irritation_redness_itch, burning_sting]
+      pos_labels: [no_reaction, sensitive_skin_area_ok, gentler_than_others, no_ingrown_bumps, mild_tolerable]
+      safety: true                      # 07c 이상 반응 판정을 쓴다
+      items: [irritation_area, burn_onset_minutes]
+      search_words: ["sensitive skin", "bikini"]
+    - id: scent
+      title: 냄새
+      neg_labels: [bad_smell, strong_smell, chemical_or_rotten_odor, lingering_smell, smell_during_reaction, still_smells_despite_claim]
+      pos_labels: [pleasant_scent, mild_or_no_smell, tolerable_smell, smell_fades_quickly]
+      items: [scent_persistence]
+      search_words: ["no smell", "odor"]
+    - id: wait_time
+      title: 작용 시간
+      neg_labels: [longer_than_stated, takes_long, slower_than_alternatives]
+      pos_labels: [works_fast, within_stated_time, faster_than_alternatives]
+      items: [wait_minutes]
+      search_words: ["minutes", "fast"]
+    - id: application
+      title: 바르기와 닦아 내기
+      neg_labels: [spatula_tool_bad, hard_to_wipe_off, messy_process, residue_on_hands_skin, product_stuck_in_bottle, dispenser_clogs_or_hard_to_control, hard_to_use_hassle, hard_to_spread]
+      pos_labels: [easy_to_use, spreads_easily, convenient_container, spatula_helpful, easy_wipe_off, mess_free]
+      items: [cream_texture, part_issue]
+      search_words: ["spatula", "shower"]
+    - id: regrowth
+      title: 다시 자라는 털
+      neg_labels: [grows_back_fast, no_better_than_shaving, coarser_regrowth]
+      pos_labels: [stays_hair_free_long, longer_than_shaving, finer_regrowth]
+      items: []
+      search_words: ["long lasting", "smooth"]
+    - id: value
+      title: 양과 가격
+      neg_labels: [waste_of_money, too_expensive, small_amount, used_up_fast]
+      pos_labels: [good_price, worth_for_price, generous_amount, saves_vs_alternatives]
+      items: [amount_needed]
+      search_words: ["oz", "value"]

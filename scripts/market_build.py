@@ -45,6 +45,10 @@ def market_conf(run):
     c = category_conf(run).get("market") or {}
     if not c:
         die("config/categories/<카테고리>.yaml에 market 절(seed, parent_node, nodes, term_words)이 없습니다.")
+    miss = [k for k in ("seed", "parent_node", "nodes", "term_words") if not c.get(k)]
+    if miss:
+        die(f"config/categories/<카테고리>.yaml의 market 절에 {', '.join(miss)}이(가) 비어 있습니다. "
+            "노드 id와 이름은 subcategories_search 응답(market/raw/subcategories_search_all.json)에서 찾아 채워 주세요.")
     return c
 
 

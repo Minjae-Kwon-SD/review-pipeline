@@ -12,12 +12,23 @@
           03_schema_input.csv(정답 세트를 뺀 전부).
     정답 세트 리뷰는 스키마 예시로 쓰지 않는다(쓰면 점수가 부풀려진다).
 
-  python scripts/eval_gold.py sheet [회차]
-    스키마 승인 뒤, 담당자가 정답 세트를 태깅하는 화면 gold/gold_tagging.html을 만든다(한 파일, 외부 라이브러리 없음).
+  python scripts/eval_gold.py sheet [회차] [--schema 03_schema_draft.yaml]
+    담당자가 정답 세트를 태깅하는 화면 gold/gold_tagging.html을 만든다(한 파일, 외부 라이브러리 없음).
+    2026-10-10부터: 승인본(03_schema_approved.yaml)이 없으면 초안(03_schema_draft.yaml)으로 만들고, 화면 맨 위에
+    "스키마 확인"(주제마다 승인, 고침, 빼기와 메모)을 함께 넣는다. 스키마 승인과 정답 세트 태깅을 한 화면에서 한다.
+    "스키마 확인 내보내기"로 받은 파일은 runs/<회차>/03_schema_review.json으로 저장한다.
+    필수 주제(id나 common_id가 overall, performance인 주제)는 리뷰마다 값을 골라야 "다 봤음"이 체크된다
+    (overall은 감성 넷 중 하나, 효과 주제는 감성 또는 "언급 없음"). H1에서 이 칸을 비워 다시 본 시간(29분)을 없앤다.
     고른 값은 브라우저 localStorage에 저장되고, "gold_tags.jsonl 내보내기"로 내려받아 gold/gold_tags.jsonl로 저장한다.
     태거 결과는 화면에 넣지 않는다.
 
-  python scripts/eval_gold.py gold [회차]
+  python scripts/eval_gold.py schema-approve [회차] [--review 03_schema_review.json] --approved-at <UTC> --approved-by "<누가, 어떻게>"
+    한 화면에서 받은 스키마 확인 파일을 읽는다. 모든 주제가 승인이면 03_schema_draft.yaml을 03_schema_approved.yaml로 복사하고
+    승인 시각과 승인자를 적는다. 고침이나 빼기가 하나라도 있으면 그 주제와 메모를 찍고 종료 코드 1(메인 세션이 초안을 고쳐 승인본으로 저장).
+
+  python scripts/eval_gold.py gold [회차] [--rename old:new,...] [--drop-unknown]
+    --rename: 승인 때 id가 바뀐 주제의 정답 태그 주제를 바꾼다. --drop-unknown: 승인 스키마에 없는 주제(뺀 주제)의 정답 태그를 뺀다.
+    둘 다 원래 파일을 gold/gold_tags.before_fix.jsonl로 남기고 바꾼 개수를 찍는다(초안 화면에서 태깅했을 때만 쓴다).
     담당자가 쓴 gold/gold_tags.jsonl의 형식을 본다: 정답 세트 리뷰인지, 승인 스키마의 주제인지,
     감성 네 값 중 하나인지, 같은 리뷰 같은 주제가 두 번인지, 태그가 하나도 없는 정답 세트 리뷰가 있는지.
     오류가 있으면 종료 코드 1.
@@ -177,8 +188,21 @@ def pick(run, per_asin, min_chars, sample_per_asin):
 
 # ---------------------------------------------------------------- sheet
 
-def sheet(run, translations=None):
-    schema = load_schema(run)
+REQUIRED_COMMON = ("overall", "performance")    # 정답 세트 화면에서 리뷰마다 꼭 고르는 주제(id나 common_id)
+
+
+def required_topics(schema):
+    return [tid for tid, t in schema.items() if tid in REQUIRED_COMMON or str(t.get("common_id") or "") in REQUIRED_COMMON]
+
+
+def sheet(run, translations=None, schema_name=None):
+    if schema_name is None:
+        schema_name = "03_schema_approved.yaml" if (run / "03_schema_approved.yaml").exists() else "03_schema_draft.yaml"
+    if not (run / schema_name).exists():
+        die(f"{schema_name}이(가) 없습니다. 스키마 초안이나 승인본이 있어야 화면을 만듭니다.")
+    schema = load_schema(run, schema_name)
+    draft_mode = schema_name != "03_schema_approved.yaml"
+    required = required_topics(schema)
     picked = run / "gold" / "gold_reviews.csv"
     if not picked.exists():
         die("gold/gold_reviews.csv가 없습니다. eval_gold.py pick을 먼저 돌려 주세요.")
@@ -192,6 +216,9 @@ def sheet(run, translations=None):
     tr = json.loads(tr_path.read_text(encoding="utf-8")) if tr_path.exists() else {}
     data = {
         "run": run.name,
+        "schema_file": schema_name,
+        "schema_mode": "draft" if draft_mode else "approved",
+        "required": required,
         "reviews": [{"review_id": g["review_id"], "asin": g["asin"], "star": int(g["star"]),
                      "brand": brands.get(g["asin"]) or reviews.get(g["review_id"], {}).get("brand", ""),
                      "date": reviews.get(g["review_id"], {}).get("date", ""),
@@ -199,6 +226,7 @@ def sheet(run, translations=None):
                      "title_ko": (tr.get(g["review_id"]) or {}).get("title_ko", ""),
                      "body_ko": (tr.get(g["review_id"]) or {}).get("body_ko", "")} for g in gold],
         "topics": [{"id": t["id"], "name_ko": t["name_ko"], "side": t["side"],
+                    "common_id": str(t.get("common_id") or ""), "evidence_count": t.get("evidence_count"),
                     "definition": str(t.get("definition") or ""),
                     "include": [str(x) for x in (t.get("include") or [])],
                     "exclude": [str(x) for x in (t.get("exclude") or [])],
@@ -214,8 +242,45 @@ def sheet(run, translations=None):
     out = run / "gold" / "gold_tagging.html"
     out.write_text(html, encoding="utf-8")
     n_tr = sum(1 for r in data["reviews"] if r["title_ko"] or r["body_ko"])
-    print(f"정답 세트 태깅 화면을 만들었습니다: {out} (리뷰 {len(gold)}개, 주제 {len(schema)}개, 한국어 번역 {n_tr}개)")
+    print(f"정답 세트 태깅 화면을 만들었습니다: {out} (리뷰 {len(gold)}개, 주제 {len(schema)}개, 한국어 번역 {n_tr}개, "
+          f"기준 {schema_name}, 필수 주제 {', '.join(required) or '없음'})")
     print("  브라우저로 열어 태깅하고, 'gold_tags.jsonl 내보내기'로 받은 파일을 gold/gold_tags.jsonl로 저장해 주세요.")
+    if draft_mode:
+        print("  초안 화면입니다. 맨 위 '스키마 확인'을 마치고 '스키마 확인 내보내기'로 받은 파일을 "
+              f"runs/{run.name}/03_schema_review.json으로 저장해 주세요.")
+    return 0
+
+
+def schema_approve(run, review_name, approved_at, approved_by):
+    """한 화면의 스키마 확인 파일로 승인본을 만든다. 고침이나 빼기가 있으면 만들지 않고 목록을 찍는다."""
+    draft_path, review_path = run / "03_schema_draft.yaml", run / review_name
+    if not draft_path.exists():
+        die("03_schema_draft.yaml이 없습니다.")
+    if not review_path.exists():
+        die(f"{review_name}이(가) 없습니다. 화면의 '스키마 확인 내보내기'로 받은 파일을 저장해 주세요.")
+    if not approved_at or not approved_by:
+        die("--approved-at과 --approved-by를 함께 주세요.")
+    draft = load_schema(run, "03_schema_draft.yaml")
+    rv = json.loads(review_path.read_text(encoding="utf-8"))
+    dec = {str(x.get("id")): x for x in rv.get("topics") or []}
+    missing = [t for t in draft if t not in dec]
+    unknown = [t for t in dec if t not in draft]
+    if missing or unknown:
+        die(f"스키마 확인 파일이 초안과 맞지 않습니다. 결정이 없는 주제: {', '.join(missing) or '없음'}, "
+            f"초안에 없는 주제: {', '.join(unknown) or '없음'}(다른 초안으로 만든 화면일 수 있음).")
+    changes = [(t, dec[t].get("decision"), str(dec[t].get("note") or "").strip()) for t in draft
+               if dec[t].get("decision") != "approve" or str(dec[t].get("note") or "").strip()]
+    if changes:
+        print(f"스키마 확인: 고칠 곳 {len(changes)}개. 승인본을 만들지 않았습니다(초안을 고쳐 03_schema_approved.yaml로 저장).")
+        for t, d, note in changes:
+            print(f"  {t}: {({'edit': '고침', 'drop': '빼기', 'approve': '승인(메모 있음)'}).get(d, d)} {note}")
+        return 1
+    text = draft_path.read_text(encoding="utf-8")
+    head = (f"# 담당자 승인: {approved_at}, {approved_by}. 한 화면 스키마 확인({review_name})에서 모든 주제 승인, 초안 그대로.\n"
+            f"approved_at: \"{approved_at}\"\napproved_by: \"{approved_by}\"\n")
+    (run / "03_schema_approved.yaml").write_text(head + text, encoding="utf-8")
+    print(f"모든 주제 {len(draft)}개 승인: 03_schema_draft.yaml을 03_schema_approved.yaml로 복사했습니다. "
+          "다음: check_inputs.py --schema, eval_gold.py gold")
     return 0
 
 
@@ -229,10 +294,19 @@ def score_one(gold, pred, gold_ids):
     recall = len(tp) / len(g) if g else 0.0
     f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
     same = [k for k in tp if p[k]["sentiment"] == g[k]]
+    # 방향 일치: 정답과 모델 어느 쪽도 mixed가 아닌 짝에서 감성이 같은 비율(긍정, 부정, 중립의 방향)
+    # mixed 일치: 어느 한쪽이라도 mixed인 짝에서 둘 다 mixed인 비율(엇갈림 경계)
+    plain = [k for k in tp if "mixed" not in (g[k], p[k]["sentiment"])]
+    mixed = [k for k in tp if "mixed" in (g[k], p[k]["sentiment"])]
+    both_mixed = [k for k in mixed if g[k] == p[k]["sentiment"]]
     return {
         "gold_pairs": len(g), "pred_pairs": len(p), "matched_pairs": len(tp),
         "precision": round(precision, 3), "recall": round(recall, 3), "topic_f1": round(f1, 3),
         "sentiment_agreement": round(len(same) / len(tp), 3) if tp else 0.0,
+        "direction_pairs": len(plain), "direction_same": sum(1 for k in plain if p[k]["sentiment"] == g[k]),
+        "direction_agreement": round(sum(1 for k in plain if p[k]["sentiment"] == g[k]) / len(plain), 3) if plain else 0.0,
+        "mixed_pairs": len(mixed), "mixed_same": len(both_mixed),
+        "mixed_agreement": round(len(both_mixed) / len(mixed), 3) if mixed else None,
         "missed": [{"review_id": r, "topic": t, "gold_sentiment": g[(r, t)]} for r, t in sorted(set(g) - tp)],
         "extra": [{"review_id": r, "topic": t, "sentiment": p[(r, t)]["sentiment"], "quote": p[(r, t)].get("quote", "")}
                   for r, t in sorted(set(p) - tp)],
@@ -247,9 +321,12 @@ def summary_ko(model, r, f1_min, sent_min):
     f1, f1_min_r = round(r["topic_f1"], 2), round(f1_min, 2)
     sp, smin = round(100 * r["sentiment_agreement"], 1), round(100 * sent_min, 1)
     f1_judge = "통과" if r["topic_f1"] >= f1_min else f"{f1_min_r - f1:.2f} 모자람"
-    s_judge = "통과" if r["sentiment_agreement"] >= sent_min else f"{smin - sp:.1f}%p 모자람"
+    dp = round(100 * r["direction_agreement"], 1)
+    d_judge = "통과" if r["direction_agreement"] >= sent_min else f"{smin - dp:.1f}%p 모자람"
+    mx = "-" if r["mixed_agreement"] is None else f"{100 * r['mixed_agreement']:.1f}%"
     return (f"{model}: 주제 F1 {f1:.2f}(기준 {f1_min_r:.2f}, {f1_judge}), "
-            f"감성 일치 {sp:.1f}%(기준 {smin:.1f}%, {s_judge})")
+            f"감성 방향 일치 {dp:.1f}%(기준 {smin:.1f}%, {d_judge}), "
+            f"mixed 일치 {mx}(짝 {r['mixed_pairs']}개, 기준 없음), 감성 전체 일치 {sp:.1f}%")
 
 
 def score(run, f1_min, sent_min):
@@ -282,7 +359,7 @@ def score(run, f1_min, sent_min):
         if (run / name).exists():
             result["models"][model] = score_one(gold, read_jsonl(run / name), gold_ids)
     judged = result["models"]["sonnet"]
-    result["status"] = "PASS" if judged["topic_f1"] >= f1_min and judged["sentiment_agreement"] >= sent_min else "FAIL"
+    result["status"] = "PASS" if judged["topic_f1"] >= f1_min and judged["direction_agreement"] >= sent_min else "FAIL"
     for model, r in result["models"].items():
         r["summary_ko"] = summary_ko(model, r, f1_min, sent_min)
     result["summary_ko"] = [r["summary_ko"] for r in result["models"].values()]
@@ -321,7 +398,33 @@ def render(result, schema):
 
 # ---------------------------------------------------------------- gold 형식
 
-def check_gold(run):
+def fix_gold_topics(gold_path, schema, rename, drop_unknown):
+    """초안 화면으로 태깅한 정답 태그를 승인 스키마에 맞춘다(id 바꾸기, 뺀 주제 지우기). 원래 파일은 남긴다."""
+    errors = []
+    tags = read_jsonl(gold_path, errors)
+    if errors:
+        die("gold_tags.jsonl을 읽지 못했습니다: " + "; ".join(errors[:3]))
+    bad = [f"{o}->{n}" for o, n in rename.items() if n not in schema]
+    if bad:
+        die(f"--rename의 새 주제가 승인 스키마에 없습니다: {', '.join(bad)}")
+    out, renamed, dropped = [], 0, Counter()
+    for t in tags:
+        if t.get("topic") in rename:
+            t = {**t, "topic": rename[t["topic"]]}
+            renamed += 1
+        if drop_unknown and t.get("topic") not in schema:
+            dropped[t.get("topic")] += 1
+            continue
+        out.append(t)
+    backup = gold_path.with_name("gold_tags.before_fix.jsonl")
+    if not backup.exists():
+        backup.write_text(gold_path.read_text(encoding="utf-8"), encoding="utf-8")
+    write_jsonl(gold_path, out)
+    print(f"정답 태그를 승인 스키마에 맞췄습니다: 주제 이름 바꿈 {renamed}개, 뺀 주제의 태그 지움 "
+          f"{sum(dropped.values())}개({', '.join(f'{k} {v}' for k, v in dropped.items()) or '없음'}). 원래 파일: {backup.name}")
+
+
+def check_gold(run, rename=None, drop_unknown=False):
     schema = load_schema(run)
     picked_path = run / "gold" / "gold_reviews.csv"
     gold_path = run / "gold" / "gold_tags.jsonl"
@@ -329,6 +432,8 @@ def check_gold(run):
         die("gold/gold_reviews.csv가 없습니다. eval_gold.py pick을 먼저 돌려 주세요.")
     if not gold_path.exists():
         die("gold/gold_tags.jsonl이 없습니다.")
+    if rename or drop_unknown:
+        fix_gold_topics(gold_path, schema, rename or {}, drop_unknown)
     with open(picked_path, encoding="utf-8-sig", newline="") as f:
         picked = [r["review_id"] for r in csv.DictReader(f)]
     errors, seen = [], set()
@@ -345,6 +450,10 @@ def check_gold(run):
             errors.append(f"{n}번째 줄: {rid}에 {topic}가 두 번 있습니다.")
         seen.add((rid, topic))
     empty = [rid for rid in picked if rid not in {k[0] for k in seen}]
+    ov_ids = [t for t in schema if t == "overall" or schema[t].get("common_id") == "overall"]
+    no_ov = [rid for rid in picked if ov_ids and not any((rid, t) in seen for t in ov_ids)]
+    if no_ov:
+        print(f"  주의: 전체 만족도 태그가 없는 정답 세트 리뷰 {len(no_ov)}개: {', '.join(no_ov[:10])}(태거는 모든 리뷰에 단다)")
     print(f"정답 세트 형식 검사: {'FAIL' if errors else 'PASS'}  (리뷰 {len(picked)}개, 태그 {len(tags)}개)")
     for e in errors:
         print(f"  오류: {e}")
@@ -511,7 +620,7 @@ def audit(run, max_fail):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=["pick", "sheet", "gold", "score", "audit-sample", "audit"])
+    ap.add_argument("mode", choices=["pick", "sheet", "schema-approve", "gold", "score", "audit-sample", "audit"])
     ap.add_argument("run", nargs="?")
     ap.add_argument("--per-asin", type=int, default=5)
     ap.add_argument("--min-chars", type=int, default=40)
@@ -521,14 +630,23 @@ def main():
     ap.add_argument("--n", type=int, default=150, help="audit-sample 전체 표본 태그 수(ASIN마다 n / ASIN 수)")
     ap.add_argument("--max-fail", type=float, default=0.05)
     ap.add_argument("--translations", default=None, help="sheet: 한국어 번역 JSON 경로(기본 gold/gold_translations_ko.json)")
+    ap.add_argument("--schema", default=None, help="sheet: 화면 기준 스키마 파일(기본: 승인본, 없으면 초안)")
+    ap.add_argument("--review", default="03_schema_review.json", help="schema-approve: 스키마 확인 파일")
+    ap.add_argument("--approved-at", default=None)
+    ap.add_argument("--approved-by", default=None)
+    ap.add_argument("--rename", default="", help="gold: 승인 때 바뀐 주제 id, old:new를 쉼표로")
+    ap.add_argument("--drop-unknown", action="store_true", help="gold: 승인 스키마에 없는 주제의 정답 태그를 뺀다")
     args = ap.parse_args()
     run = resolve_run(args.run)
     if args.mode == "pick":
         sys.exit(pick(run, args.per_asin, args.min_chars, args.sample_per_asin))
     if args.mode == "sheet":
-        sys.exit(sheet(run, args.translations))
+        sys.exit(sheet(run, args.translations, args.schema))
+    if args.mode == "schema-approve":
+        sys.exit(schema_approve(run, args.review, args.approved_at, args.approved_by))
     if args.mode == "gold":
-        sys.exit(check_gold(run))
+        rename = dict(x.split(":", 1) for x in args.rename.split(",") if ":" in x)
+        sys.exit(check_gold(run, rename, args.drop_unknown))
     if args.mode == "score":
         sys.exit(score(run, args.f1, args.sentiment))
     if args.mode == "audit-sample":

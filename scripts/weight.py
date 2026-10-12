@@ -64,13 +64,20 @@ def gold_accuracy(g):
         f1, sp = round(m["topic_f1"], 2), pct(m["sentiment_agreement"], 1)
         out[label] = {"topic_f1": f1, "sentiment_pct": sp,
                       "topic_f1_text": f"{f1:.2f}", "sentiment_text": fmt_pct(sp)}
+        if "direction_agreement" in m:      # 방향 일치(mixed가 아닌 짝)와 mixed 일치(한쪽이라도 mixed인 짝)를 따로
+            dp = pct(m["direction_agreement"], 1)
+            mp = None if m.get("mixed_agreement") is None else pct(m["mixed_agreement"], 1)
+            out[label].update({"direction_pct": dp, "direction_text": fmt_pct(dp),
+                               "direction_pairs": m["direction_pairs"], "direction_same": m["direction_same"],
+                               "mixed_pct": mp, "mixed_text": "-" if mp is None else fmt_pct(mp),
+                               "mixed_pairs": m["mixed_pairs"], "mixed_same": m["mixed_same"]})
     return out
 
 
 def data_notes(run, dist, asin_info, summary, weighting):
     """리포트 머리말과 7장에 쓰는 고정 문구 대신 데이터로 만든 문장."""
     if (run / "raw" / "paid_calls.jsonl").exists():
-        source = "아마존에서 새로 수집한 뒤 공유 리뷰 DB에서 받음"
+        source = "아마존에서 별점마다 고르게 새로 수집함(유료 수집, 공유 리뷰 DB를 거쳐 받음)"
     elif any(d.get("source") for d in dist.values()):
         source = "공유 리뷰 DB에서 받음"
     else:
@@ -418,6 +425,9 @@ def main():
     brand_of_asin = {a: (asins.get(a, {}).get("brand") or "") for a in asin_info}
     brand_deep = sections.brand_deep(reviews, tags, weight, schema, brand_of_asin, topic_stats, COMPARE_EXCLUDE,
                                      args.strength_min)
+    # 9장 브랜드 행(정답지처럼 브랜드 단위, ASIN 행 표는 그 아래)
+    brand_compare = sections.brand_compare(reviews, tags, weight, schema, brand_of_asin, topic_stats, COMPARE_EXCLUDE,
+                                           args.strength_min)
 
     for t in topics:
         del t["_neg_reviews"]
@@ -448,6 +458,7 @@ def main():
         "cooccurrence": cooc,
         "trust_signals": trust,
         "brand_deep": brand_deep,
+        "brand_compare": brand_compare,
     }
     metrics["notes"] = data_notes(run, dist, asin_info, metrics["summary"], weighting)
     if off:
@@ -556,6 +567,7 @@ def render_tables(m):
     def sw(x, key):
         return f"{x['name_ko']}({fmt_pct(x[key])})" if x else "없음"
 
+    block("브랜드별 비교", sections.render_brand_compare(m.get("brand_compare") or [], m["rules"]["strength_min_mentions"]))
     block("ASIN별 비교", ["| ASIN | 브랜드 | 가격대 | 표본 리뷰 | 아마존 평균 별점 | 태그 | 긍정/부정(가중) | 가장 큰 강점* | 가장 큰 약점* |",
                         "|---|---|---|---|---|---|---|---|---|"]
           + [f"| {a['asin']} | {a['brand']} | {a['price_band']} | {a['sample_reviews']} | {a['amazon_rating'] or '-'} | {a['tags']} | "

@@ -134,7 +134,10 @@ def leave_one_out(D):
         remain = len(D.by_asin) - (out is not None)
         weakest = sum(1 for a, w in weak_of.items() if a != out and w == D.head)
         low, high = len(D.low & idset), len(D.high & idset)
-        share = r1(100.0 * low / (low + high)) if low + high else None
+        # 순함 쪽 비중은 가중합으로 낸다(원본 수는 낮은 별점이 많은 표본이라 흔한 정도가 아님). low, high는 원본 수로 그대로 보인다
+        wl = sum(D.weight[i] for i in D.low & idset)
+        wh = sum(D.weight[i] for i in D.high & idset)
+        share = r1(100.0 * wl / (wl + wh)) if wl + wh else None
         flips = []
         if order[0] != D.head:
             flips.append(f"불만 1위가 {D.name[order[0]]}로 바뀜")

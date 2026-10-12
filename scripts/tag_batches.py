@@ -7,6 +7,8 @@
   점수용)과 상위 모델(04_tags_top_gold.jsonl, 비교용)이 태깅한다. gold 묶음은 04_tags.jsonl에 합치지 않는다.
   정답 세트 리뷰도 ASIN 묶음에 그대로 들어 있어 전체 태깅 뒤에는 04_tags.jsonl에도 있다.
   시험 태깅(pilot)은 리뷰가 가장 적은 ASIN의 묶음과 gold 묶음이다(pilot_batches).
+  묶음마다 그 묶음 리뷰만 담은 입력 파일 04_tag_input/<묶음>.csv(02_reviews.csv와 같은 칸, 같은 순서)를 쓴다.
+  review-tagger는 02_reviews.csv 전체 대신 이 파일만 읽는다(2026-10-11, 결정 기록 F11 태그 입력 파일 나누기).
 """
 import argparse
 import csv
@@ -14,6 +16,24 @@ import sys
 from collections import defaultdict
 
 from pipeline_io import REVIEW_COLS, load_csv_or_die, now_iso, resolve_run, write_json
+
+
+def write_inputs(run, reviews, batches):
+    """묶음마다 04_tag_input/<묶음>.csv. 이전 계획의 파일은 지우고 다시 쓴다."""
+    out = run / "04_tag_input"
+    out.mkdir(exist_ok=True)
+    for old in out.glob("*.csv"):
+        old.unlink()
+    by_id = {r["review_id"]: r for r in reviews}
+    cols = list(reviews[0].keys()) if reviews else list(REVIEW_COLS)
+    for b in batches:
+        missing = [x for x in b["review_ids"] if x not in by_id]
+        if missing:
+            sys.exit(f"묶음 {b['batch_id']}의 리뷰 {len(missing)}개가 02_reviews.csv에 없습니다: {', '.join(missing[:5])}")
+        with open(out / f"{b['batch_id']}.csv", "w", encoding="utf-8-sig", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=cols)
+            w.writeheader()
+            w.writerows(by_id[x] for x in b["review_ids"])
 
 
 def plan(run, size):
@@ -37,6 +57,7 @@ def plan(run, size):
                         "review_ids": gold_ids})
     else:
         print("  주의: gold/gold_reviews.csv가 없어 gold 묶음을 만들지 않았습니다(eval_gold.py pick 먼저).")
+    write_inputs(run, reviews, batches)
     pilot_asin = min(by_asin, key=lambda a: (len(by_asin[a]), a)) if by_asin else None
     pilot = [b["batch_id"] for b in batches if b["asin"] == pilot_asin] + (["gold"] if gold_ids else [])
     write_json(run / "04_batches.json", {"planned_at": now_iso(), "size": size, "reviews": len(reviews),
@@ -48,6 +69,7 @@ def plan(run, size):
         bs = [b for b in sonnet if b["asin"] == asin]
         print(f"  {asin}: 리뷰 {len(by_asin[asin])}개, 묶음 {len(bs)}개 ({', '.join(str(len(b['review_ids'])) for b in bs)})")
     print(f"  시험 태깅: {', '.join(pilot)} (리뷰가 가장 적은 ASIN {pilot_asin})")
+    print(f"  묶음 입력 파일 {len(batches)}개를 04_tag_input/에 적었습니다(묶음 리뷰만, 02_reviews.csv와 같은 칸).")
     return 0
 
 

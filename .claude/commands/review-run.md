@@ -51,14 +51,36 @@ disable-model-invocation: true
 - **검토형**(같은 큰 자료를 여럿이 읽고 판단하는 일, 읽기 전용 렌즈 최대 4)은 **매번 담당자 허락을 받는다**. 결과는 문자열로 받고 파일은 메인 세션이 쓴다. 둘 이상 실패하면 합치지 않는다.
 - **기록**: 단계 끝에 `timing_report.py mark <회차> end <단계> --kind <종류> --calls <호출 수> --retries <재시도 수> --workers <동시 수>`. 입력 해시는 mark end가 state.json에 적는다.
 
+## 앞당겨 돌리는 단계 (2026-10-10, H1 시간 측정에서 나온 것)
+
+사람 관문을 기다리는 동안 기계가 놀지 않게, 서로 기대지 않는 단계는 아래처럼 앞당겨 같은 때 돌린다. 단계 번호와 산출물은 그대로이고 순서만 바뀐다.
+
+- 00_collect가 끝나면 바로 12_market(스크립트, 무료). 01_asins.csv의 부모 ASIN과 브랜드만 쓴다.
+- 03_schema_approval이 끝나면 04_gold_tagging(사람)을 기다리는 동안 13_detail_schema_draft(detail.py sample과 detail-schema-drafter)와 15_research(benchmark-researcher, 12_market 끝난 뒤)를 백그라운드로 부른다.
+  둘 다 상위 모델 작성자라 top_writers 상한 안에서 센다. 13a_detail_schema_approval(사람)은 담당자가 정답 세트를 마친 뒤 이어서 받는다.
+- 13a 승인이 07a 세부 이슈 승인보다 먼저면, 07a 승인 뒤 메인 세션이 13_detail_schema_approved.yaml과 07a_issues_approved.yaml을 함께 읽고
+  뜻이 겹치는 항목과 라벨을 13_detail_overlap_note.md에 적는다(승인본은 고치지 않음, 가이드 작성자가 같은 내용을 두 번 쓰지 않게 하는 메모).
+- 23_specs(상품 사양)는 01_asins.csv가 정해지면 바로(수집 직후, 정답 세트 태깅을 기다리는 동안) 백그라운드로 돌린다. 14_detail_extract는 13a와 05_tagging 사이 순서와 무관하다.
+- 16_guide_metrics부터는 그대로 07_weight, 14b, 15, 23이 끝난 뒤. 16~19(가이드 쪽)는 08_report와 09_report_check를 기다리지 않고 같이 돈다
+  (가이드 단계의 입력에 리포트 파일이 없음). 리포트 작성자와 가이드 작성자는 모두 top_writers 상한 안에서 센다.
+- 03_schema_approval을 다시 하면 13_detail_schema_draft와 15_research도 다시 할 단계로 잡히고(config/stages.yaml의 after), 12_market을 다시 하면 15_research도 잡힌다.
+
 ## 단계 (이름, 종류)
 
 0. **00_collect, script** (02 파일까지 다 있으면 건너뛰고 skip을 알린다):
-   - 01_asins.csv가 없으면 차례로: `python scripts/collect.py candidates <회차> --category <카테고리 설정 이름>`, asin-selector를 부른다(프롬프트: 회차 이름, 카테고리). 그다음 ⏸ **00_asin_review, human**: 01_asins.csv의 selected와 excluded를 표로 보여 주고 "01_asins.csv를 확인하고 고칠 것이 있으면 고친 뒤 알려 주세요"라고 하고 턴을 끝낸다.
+   - 01_asins.csv가 없으면 차례로: 카테고리 설정에 selection 절이 있으면 `python scripts/collect.py rank <회차> --category <카테고리 설정 이름>`(검색 순위와 매출, 2026-10-10부터), 없으면 `python scripts/collect.py candidates <회차> --category <카테고리 설정 이름>`(DB에 있는 상품), 그다음 asin-selector를 부른다(프롬프트: 회차 이름, 카테고리). 그다음 ⏸ **00_asin_review, human**: 01_asins.csv의 selected와 excluded를 표로 보여 주고 "01_asins.csv를 확인하고 고칠 것이 있으면 고친 뒤 알려 주세요"라고 하고 턴을 끝낸다.
    - 01_asins.csv가 있으면(또는 담당자가 확인을 알리면) `python scripts/collect.py pull <회차>`. 유료 수집(`--mode paid --confirm-paid`)은 담당자가 이번 회차에서 직접 하라고 할 때만 쓴다(config/pipeline.yaml의 paid.enabled도 true여야 함).
+     유료 수집은 DB 리뷰가 paid.scrape_below_db_reviews보다 적은 selected만(또는 `--paid-asins`), ASIN x 별점마다 부르고, 성공한 호출은 다시 부르지 않는다. 처음에는 `--paid-test`로 한 번만 불러 시간과 rating_summary를 확인하고 알린다(응답에 비용 칸은 없음).
    - 출력의 ASIN별 리뷰 수, 별점별 건수, 언어별 건수, 뺀 리뷰를 그대로 알린다.
 1. **01_inputs, script**: `python scripts/check_inputs.py <회차>`. 실패면 오류를 보여 주고 stop. 통과하면 `python scripts/eval_gold.py pick <회차>`(정답 세트 30개: ASIN마다 5개, 영어, 본문 40자 이상. 스키마 표본 150개: ASIN마다 25개, 정답 세트 제외). 출력의 ASIN별, 별점별 건수 표를 그대로 알린다.
 2. **02_schema_draft, agents**: schema-drafter를 부른다(프롬프트: 회차 이름, 카테고리 설정 이름). 공통 주제(config/topics_common.yaml)에 카테고리 전용 주제는 표본에서 5번 이상 나온 것만 더한다. 끝나면 `python scripts/check_inputs.py <회차> --schema 03_schema_draft.yaml`. 예시 인용 오류가 있으면 schema-drafter에게 그 오류를 주고 한 번 고치게 한다. 주제 표(id, name_ko, side, common_id, evidence_count, 정의 한 줄), changes, questions를 그대로 보여 준다.
+   - **한 화면(2026-10-10부터 기본)**: 초안 검사를 통과하면 바로 `python scripts/eval_gold.py sheet <회차>`(승인본이 없으면 초안으로 만듦). 담당자는 gold/gold_tagging.html 한 화면에서
+     맨 위 "스키마 확인"(주제마다 승인, 고침, 빼기와 메모)과 정답 세트 태깅을 함께 하고, 03_schema_review.json과 gold/gold_tags.jsonl 두 파일을 저장한다.
+     전체 만족도와 효과 주제(common_id performance)는 필수 칸이라 고르지 않으면 "다 봤음"이 체크되지 않는다.
+     그다음 `python scripts/eval_gold.py schema-approve <회차> --approved-at <UTC> --approved-by "<누가, 어떻게>"`. 모두 승인이면 승인본이 생긴다.
+     고칠 곳이 있으면 찍힌 메모대로 초안을 고쳐 03_schema_approved.yaml로 저장하고 담당자에게 바뀐 점을 한 줄씩 알린다.
+     승인본에서 주제 id가 바뀌었거나 빠졌으면 `python scripts/eval_gold.py gold <회차> --rename old:new --drop-unknown`, 아니면 `python scripts/eval_gold.py gold <회차>`.
+     이 길로 오면 3, 4단계를 따로 기다리지 않는다(아래 3, 4는 화면을 나눠 할 때).
 3. **03_schema_approval, human** ⏸: "03_schema_draft.yaml을 고쳐 03_schema_approved.yaml로 저장한 뒤 알려 주세요"라고 하고 턴을 끝낸다. 담당자가 알리면 `python scripts/check_inputs.py <회차> --schema`. 오류가 있으면 보여 주고 다시 기다린다. 통과하면 end.
 4. **04_gold_tagging, human** ⏸: `python scripts/eval_gold.py sheet <회차>`를 부르고, 담당자에게 "runs/<회차>/gold/gold_tagging.html을 브라우저로 열어 30개를 태깅한 뒤, 'gold_tags.jsonl 내보내기'로 받은 파일을 runs/<회차>/gold/gold_tags.jsonl로 저장하고 알려 주세요"라고 하고 턴을 끝낸다. 주제나 감성을 제안하거나 고치지 않는다. 담당자가 알리면 `python scripts/eval_gold.py gold <회차>`. 오류가 있으면 보여 주고 다시 기다린다.
 5. **05_tagging, agents**:
@@ -109,14 +131,14 @@ disable-model-invocation: true
    - 입력: 01_asins.csv(부모 ASIN, 브랜드), raw/product_*.json, raw/variations_*.json(같은 날 받은 응답을 복사해 씀).
    - 출력: market/raw/<도구>_<입력>.json(원문), market/calls.jsonl(호출 기록), market/market.json(표의 숫자와 행마다 원본 파일), market/market_summary.md(호출 목록, 하위 카테고리, 브랜드 상위 20, 검색어 상위 50, 검색어 추이, 우리 상품, 광고와 상위 상품, 받지 못한 것, 응답 칸 이름).
    - 주의: 하위 카테고리 도구는 노드 이름만("Eau de Parfum")으로 부르면 다른 카테고리 결과가 온다. subcategoryContextName("Women's Eau de Parfum")으로 부른다.
-13. **13_detail_schema_draft, agents**: `python scripts/detail.py sample <회차>`(13_detail_sample.csv, 150개, ASIN과 별점 묶음 고르게, 정답 세트 제외), detail-schema-drafter(모델 따로 주지 않음, 프롬프트 `회차: <회차>`), `python scripts/detail.py check <회차>`(FAIL이면 오류를 주고 최대 2번 다시).
-   - 입력: 13_detail_sample.csv, config/categories/<카테고리>.yaml, 03_schema_approved.yaml, 07a_issues_approved.yaml.
+13. **13_detail_schema_draft, agents** (03 승인 뒤 바로, "앞당겨 돌리는 단계"): `python scripts/detail.py sample <회차>`(13_detail_sample.csv, 150개, ASIN과 별점 묶음 고르게, 정답 세트 제외), detail-schema-drafter(모델 따로 주지 않음, 프롬프트 `회차: <회차>`), `python scripts/detail.py check <회차>`(FAIL이면 오류를 주고 최대 2번 다시).
+   - 입력: 13_detail_sample.csv, config/categories/<카테고리>.yaml, 03_schema_approved.yaml, 07a_issues_approved.yaml(있을 때만. 없으면 출력에 labels_checked: false).
    - 출력: 13_detail_schema_draft.yaml, 13_detail_schema_draft.md, 13_detail_schema_check.json.
 13a. **13a_detail_schema_approval, human** ⏸: "13_detail_schema_draft.yaml을 고칠 곳을 알려 주시거나 승인해 주세요"라고 하고 멈춘다. 고칠 곳은 13_detail_schema_edits.yaml(split_values, extra)에 적고 `python scripts/detail.py approve <회차> --approved-at <UTC> --approved-by "<누가, 어떻게>"`로 13_detail_schema_approved.yaml을 만든다. 승인 전에는 전체 추출을 하지 않는다.
 14. **14_detail_extract, agents**: `python scripts/detail.py plan <회차>`(ASIN마다 50개씩 묶음), `python scripts/stage_packet.py detail <회차> --items <항목들>`로 작업자별 작업 파일을 만들고 detail-extractor를 작업자마다 하나씩(Agent 호출에 model: sonnet, 상한 표의 동시 수 안에서), `python scripts/detail.py extract-check <회차>`(형식, extra 조건, 빠진 리뷰, JSON으로 읽지 못한 줄, 원문에 없는 인용은 모두 묶음 실패. 그 회차의 14_known_exceptions.yaml에 있는 칸만 KNOWN으로 따로 보임). 작업 파일에는 config/detail_rules.yaml의 공통 경계 규칙 가운데 맡은 항목이 걸린 것이 원문 그대로 들어간다. 실패한 묶음만 `--only`로 최대 2번 다시.
     - 출력: 14_details_<묶음>.jsonl, 14_details.jsonl, 14_detail_counts.json(항목과 값마다 리뷰 수, 가중 비율, ASIN별 수, 숫자 항목 중앙값), 14_detail_check.json
 14b. **14b_detail_check, agents**: `python scripts/detail.py audit-sample <회차>`(항목과 ASIN 고르게 150개), evidence-auditor(`stage: details`)의 YAML 블록만 14b_detail_audit.yaml로 저장, `python scripts/detail.py audit <회차>`. FAIL 5%를 넘으면 멈추고 보고한다.
-15. **15_research, agents**: benchmark-researcher(모델 따로 주지 않음, 헤드리스면 --allowedTools에 WebSearch, WebFetch를 더함)가 15_research.yaml을 쓴다. amazon.com은 열지 않는다. `python scripts/research.py check <회차>`가 출처를 다시 열어 원문 문장을 확인한다(15_research_check.json, verified만 가이드에 씀). 확인된 주장이 2개 미만인 분야만 한 번 더 조사.
+15. **15_research, agents** (03 승인과 12_market 뒤 바로, "앞당겨 돌리는 단계"): benchmark-researcher(모델 따로 주지 않음, 헤드리스면 --allowedTools에 WebSearch, WebFetch를 더함)가 15_research.yaml을 쓴다. amazon.com은 열지 않는다. `python scripts/research.py check <회차>`가 출처를 다시 열어 원문 문장을 확인한다(15_research_check.json, verified만 가이드에 씀). 확인된 주장이 2개 미만인 분야만 한 번 더 조사.
 16. **16_guide_metrics, script**: `python scripts/guide_metrics.py <회차>`. 카테고리마다 다른 것(머리 숫자 노드, 방향 지수 라벨, 기준표 후보, 검색어 성별 낱말, 집중 분석)은 config/categories/<카테고리>.yaml의 guide 절에서 읽는다. 출력: 16_guide_metrics.json(values, tables, ev 근거 묶음 최대 80개, quotes, caveats).
 17. **17_guide_write, agents**: guide-writer(모델 따로 주지 않음)가 16_guide_metrics.json과 확인된 15_research만 보고 17_guide.md를 쓴다. 숫자 뒤에 [m:키], 사양과 규제 뒤에 [r:id]. 표는 쓰지 않는다(HTML 스크립트가 그림).
 18. **18_guide_check, script와 agents**: `python scripts/guide_check.py <회차>`(18_guide_quote_check.json), evidence-auditor(`stage: guide`)의 YAML 블록만 18_guide_audit.yaml로 저장. 기계 검사 FAIL이나 감사 FAIL이 확인 수의 5%를 넘으면 guide-writer가 고치고 다시. 두 번째도 넘으면 멈추고 보고.

@@ -6,6 +6,7 @@ description: |
   NOT for: 항목을 만들거나 고치는 일, 주제 태깅, 숫자 집계, 가이드 작성
 tools: Read, Write
 model: inherit
+effort: medium
 ---
 
 # Detail Extractor

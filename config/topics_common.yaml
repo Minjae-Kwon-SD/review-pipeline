@@ -45,6 +45,14 @@ topics:
     redefine: true
     definition: 특정 속성 없이 제품이 좋다, 나쁘다
     source: Overall Satisfaction
+    # 2026-10-10 공통 규칙(H1 태그 감사 FAIL 23개 중 20개가 이 규칙 충돌). schema-drafter는 이 문장을 overall의 tagging_rule에 그대로 옮기고,
+    # exclude에 "이유가 붙은 평가는 overall이 아니다"처럼 이 규칙과 부딪치는 문장을 쓰지 않는다.
+    tagging_rule: >-
+      overall은 off_category가 아닌 모든 리뷰에 하나씩 단다(리뷰 단위 총평이라 비교, 세부 이슈, 가이드 집계에서는 빠지고 1~3장 분포에만 쓴다).
+      총평 문장(이유 없이 좋다, 나쁘다, 추천한다가 아닌 만족 표현)이 있으면 그 문장을 인용하고 그 감성으로 정한다.
+      총평 문장이 없으면 감성은 그 리뷰에 단 다른 주제들의 감성으로 정한다(긍정과 부정이 섞이면 mixed, 한쪽뿐이면 그쪽, 모두 neutral이면 neutral).
+      이때 인용은 리뷰에서 가장 핵심적인 평가 부분(제목도 됨)을 원문 그대로 쓰고, 그 인용이 다른 주제의 인용과 같거나 겹쳐도 된다.
+      이유가 붙은 평가("Works but it hurts")는 이유 주제(효과, 통증 등)에도 따로 단다. overall 대신이 아니라 함께다.
   - id: quality
     name_ko: 품질
     side: P

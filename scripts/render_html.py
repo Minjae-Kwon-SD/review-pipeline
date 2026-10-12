@@ -22,7 +22,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import sections  # noqa: E402
-from pipeline_io import (split_tags, category_conf, ROOT, ASIN_COLS, DIST_COLS, REVIEW_COLS, die, load_config, load_csv_or_die, load_schema, load_yaml,  # noqa: E402
+from pipeline_io import (split_tags, category_conf, common_topic, ROOT, ASIN_COLS, DIST_COLS, REVIEW_COLS, die, load_config, load_csv_or_die, load_schema, load_yaml,  # noqa: E402
                          now_iso, read_jsonl, resolve_run, write_json)
 from weight import build_weights  # noqa: E402
 
@@ -49,11 +49,11 @@ def f_int(v):
 
 
 def f_pct(v):
-    return f"{float(v):.1f}%"
+    return "-" if v is None else f"{float(v):.1f}%"
 
 
 def f_star(v):
-    return f"{float(v):.2f}★"
+    return "-" if v is None else f"{float(v):.2f}★"     # 리뷰가 0개인 묶음(예: Vine 0개)의 평균은 None
 
 
 def f_gap(v):
@@ -215,13 +215,13 @@ def build_data(m, counts, safety, verdicts, schema, reviews, weight, tags, label
                 continue
             L.append([tidx[(row["review_id"], row["topic"])], lidx[(row["topic"], row["direction"], lab)]])
     sym = defaultdict(list)
-    neg_safety = {t["review_id"] for t in tags if t["topic"] == "safety" and t["sentiment"] == "negative"}
+    neg_safety = {t["review_id"] for t in tags if t["topic"] == common_topic(schema, "safety") and t["sentiment"] == "negative"}
     for v in verdicts:
         if v.get("symptom_type") and str(v.get("review_id")) in neg_safety:
             if str(v["review_id"]) in ridx:
                 sym[v["symptom_type"]].append(ridx[str(v["review_id"])])
     periods = [[p["period"], p["start"], p["end"]] for p in m["time_trend"]["periods"]]
-    return {"subs": [schema[s]["name_ko"] for s in subs], "sid": subs, "side": [schema[s]["side"] for s in subs],
+    return {"subs": [schema[s]["name_ko"] for s in subs], "sid": subs, "ssid": common_topic(schema, "safety"), "side": [schema[s]["side"] for s in subs],
             "brands": brands, "R": R, "T": T, "labels": labels, "L": L, "total": len(R), "periods": periods,
             "sym": {k: sorted(v) for k, v in sym.items()}}, sidx, bidx, lidx
 
@@ -735,10 +735,44 @@ def build_html(run, lang="ko"):
     heads9 = [T("브랜드, ASIN"), T("가격대(현재)"), T("아마존 별점"), T("표본 리뷰"), T("가중 평균"), T("가중 긍정 / 부정"),
               T("가장 큰 강점(긍정 언급 리뷰어, 가중)"), T("가장 큰 약점(부정 언급 리뷰어, 가중)")]
     asin_note = LG.note(m["notes"]["asin_sample_text"])
-    body = ('<div class="tscroll"><table class="ct"><thead><tr>' + "".join(f'<th{" class=tl" if j in (0, 1, 6, 7) else ""}>{esc(h)}</th>' for j, h in enumerate(heads9))
+    # 브랜드 행(05_metrics.json brand_compare, weight.py가 만듦). 없으면(옛 회차) ASIN 표만
+    bc_html = ""
+    bc = m.get("brand_compare") or []
+    if bc:
+        btrs = ""
+
+        def swcell(i, b, key, pkey, sent, cls):
+            x = b.get(key)
+            if not x:
+                return f'<td class="tl small">{esc(T("없음"))}</td>'
+            tn = name[x["id"]]
+            f = {"sub": sidx[x["id"]], "sent": sent}
+            if b["brand"] in bidx:
+                f["brand"] = bidx[b["brand"]]
+            return (f'<td class="tl {cls} small clk"{drill_attr(f, T("{b}: {t} " + ("긍정" if sent == 0 else "부정"), b=b["brand"], t=tn))}>'
+                    f'{esc(tn)} {o.num("metrics", ["brand_compare", i, key, pkey], "pct")}</td>')
+        for i, b in enumerate(bc):
+            wp, wn = b["weighted_pos_pct"], b["weighted_neg_pct"]
+            bf = {"brand": bidx[b["brand"]]} if b["brand"] in bidx else None
+            cnt = (f'<td class="clk"{drill_attr(bf, b["brand"], b["sample_reviews"])}>' if bf else "<td>")
+            btrs += (f'<tr><td class="tl"><b>{esc(b["brand"])}</b><div class="mono mut">{" / ".join(b["asins"])}</div></td>'
+                     f'<td>{o.num("metrics", ["brand_compare", i, "asin_count"], "int")}</td>'
+                     f'{cnt}{o.num("metrics", ["brand_compare", i, "sample_reviews"], "int")}</td>'
+                     f'<td><div class="minibar"><span style="width:{wp:.1f}%;background:var(--pos)"></span><span style="width:{wn:.1f}%;background:var(--neg)"></span></div>'
+                     f'<span class="cpos small">{o.num("metrics", ["brand_compare", i, "weighted_pos_pct"], "pct")}</span> / <span class="cneg small">{o.num("metrics", ["brand_compare", i, "weighted_neg_pct"], "pct")}</span></td>'
+                     + swcell(i, b, "strength", "pos_reviewer_pct", 0, "cpos") + swcell(i, b, "strength2", "pos_reviewer_pct", 0, "cpos")
+                     + swcell(i, b, "weakness", "neg_reviewer_pct", 1, "cneg") + "</tr>")
+        headsb = [T("브랜드, ASIN"), T("ASIN 수"), T("표본 리뷰"), T("가중 긍정 / 부정"), T("가장 큰 강점(긍정 언급 리뷰어, 가중)"),
+                  T("2위 강점(긍정 언급 리뷰어, 가중)"), T("가장 큰 약점(부정 언급 리뷰어, 가중)")]
+        bc_html = ('<div class="coltitle">' + esc(T("브랜드별")) + '</div><div class="tscroll"><table class="ct"><thead><tr>'
+                   + "".join(f'<th{" class=tl" if j in (0, 4, 5, 6) else ""}>{esc(h)}</th>' for j, h in enumerate(headsb))
+                   + f'</tr></thead><tbody>{btrs}</tbody></table></div>'
+                   + '<div class="coltitle" style="margin-top:14px">' + esc(T("ASIN별")) + '</div>')
+    body = (bc_html + '<div class="tscroll"><table class="ct"><thead><tr>' + "".join(f'<th{" class=tl" if j in (0, 1, 6, 7) else ""}>{esc(h)}</th>' for j, h in enumerate(heads9))
             + f'</tr></thead><tbody>{trs}</tbody></table></div><div class="fn">{T("{t}라 브랜드끼리의 비교는 참고용입니다.", t=md(asin_note))}</div>'
             + reading_html(readings(ch[9]), link))
-    parts.append(section(9, CH[9], T("ASIN {n}개, 브랜드마다 하나", n=len(m["asins"])), body))
+    sub9 = (T("브랜드 {b}개, ASIN {n}개", b=len(bc), n=len(m["asins"])) if bc else T("ASIN {n}개, 브랜드마다 하나", n=len(m["asins"])))
+    parts.append(section(9, CH[9], sub9, body))
 
     # 10장 브랜드 심층
     per_brand, cur = defaultdict(list), None
@@ -994,7 +1028,7 @@ def check(run, lang="ko"):
     asins_of_brand = {i: b["asins"] for i, b in enumerate(src["metrics"]["brand_deep"])}
     verdicts = ((load_yaml(run / "07c_safety_verdicts.yaml") or {}).get("audit") or {}).get("verdicts") or []
     rid = {r[0]: i for i, r in enumerate(D["R"])}
-    neg_safety = {D["R"][t[0]][0] for t in D["T"] if D["sid"][t[1]] == "safety" and t[2] == 1}
+    neg_safety = {D["R"][t[0]][0] for t in D["T"] if D["sid"][t[1]] == D.get("ssid", "safety") and t[2] == 1}
     for mt in re.finditer(r'data-f="([^"]*)" data-t="([^"]*)" onclick="drillEl\(this\)" tabindex="0" data-n="(\d+)"', page):
         f = json.loads(html.unescape(mt.group(1)))
         title, n = html.unescape(mt.group(2)), int(mt.group(3))
@@ -1272,7 +1306,7 @@ function hlText(s,ri,f){
       if(f.sub!=null&&t[1]!==f.sub)return;
       if(f.label!=null&&!(LBYT[ti]||[]).includes(f.label))return;
       if(f.labels&&!(LBYT[ti]||[]).some(x=>f.labels.includes(x)))return;
-      if(f.rids&&D.subs[t[1]]!==D.subs[D.sid.indexOf('safety')])return;
+      if(f.rids&&D.subs[t[1]]!==D.subs[D.sid.indexOf(D.ssid||'safety')])return;
     }
     const q=escH(t[3]);if(!q||seen.has(q))return;seen.add(q);
     const i=e.indexOf(q);if(i>=0)e=e.slice(0,i)+"<mark class='hlt'>"+q+"</mark>"+e.slice(i+q.length);

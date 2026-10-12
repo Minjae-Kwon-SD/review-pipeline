@@ -54,6 +54,9 @@ questions: []                     # 담당자만 정할 수 있는 것
 5. evidence_count는 표본에서 그 주제를 말한 리뷰 수를 센 어림값이다. 주제를 정하는 근거로만 쓴다.
 6. 예시는 가능하면 긍정 하나, 부정 하나. 03_schema_sample.csv의 제목이나 본문의 연속된 부분을 글자 그대로 옮긴다.
 7. 하나의 문장이 두 주제에 걸칠 수 있으면 confusions에 어느 쪽으로 보내는지 적는다.
+8. overall에는 config/topics_common.yaml의 overall tagging_rule을 tagging_rule 칸에 글자 그대로 옮긴다. overall의 exclude와 confusions에
+   "이유가 붙은 평가는 overall이 아니다", "이유가 하나도 없을 때만 overall"처럼 이 규칙과 부딪치는 문장을 쓰지 않는다
+   (H1에서 이 충돌로 태그 감사 FAIL 23개 중 20개가 났다). 이유 주제로 보낼 것은 "이유 주제에도 함께 단다"로 적는다.
 
 ## 하지 않는 일
 

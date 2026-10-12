@@ -30,7 +30,7 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from pipeline_io import (REVIEW_COLS, die, load_csv_or_die, load_schema, load_yaml, now_iso, pct, read_jsonl,
+from pipeline_io import (REVIEW_COLS, common_topic, die, load_csv_or_die, load_schema, load_yaml, now_iso, pct, read_jsonl,
                          resolve_run, write_json, write_jsonl)
 
 EXCLUDE = ("overall", "off_category")       # 리뷰 단위 총평이라 세부 이슈를 나누지 않는다(weight.py COMPARE_EXCLUDE와 같은 원칙)
@@ -439,7 +439,8 @@ def audit(run, max_fail):
 
 def safety_input(run):
     """안전 주제 인용 전부(라벨 없음)를 판정용 표로. 인용과 리뷰 원문을 줄이지 않는다."""
-    tags = [t for t in read_jsonl(run / "04_tags.jsonl") if t["topic"] == "safety"]
+    sid = common_topic(load_schema(run), "safety")
+    tags = [t for t in read_jsonl(run / "04_tags.jsonl") if t["topic"] == sid]
     reviews = {r["review_id"]: r for r in load_csv_or_die(run / "02_reviews.csv", REVIEW_COLS)}
     rows = [{"review_id": t["review_id"], "asin": reviews[t["review_id"]]["asin"], "star": int(reviews[t["review_id"]]["star"]),
              "sentiment": t["sentiment"], "quote": t["quote"], "title": reviews[t["review_id"]]["title"],

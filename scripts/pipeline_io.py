@@ -162,6 +162,14 @@ def load_schema(run, name="03_schema_approved.yaml"):
     return out
 
 
+def common_topic(schema, cid):
+    """공통 주제(config/topics_common.yaml) cid를 맡은 스키마 주제 id. id가 같으면 그것, 없으면 common_id가 같은 주제, 그것도 없으면 cid.
+    카테고리 스키마가 공통 주제를 다시 정의해 이름을 바꿔도(예: safety → skin_reaction) 같은 주제를 찾는다."""
+    if cid in schema:
+        return cid
+    return next((tid for tid, t in schema.items() if str(t.get("common_id") or "") == cid), cid)
+
+
 def read_jsonl(path, errors=None):
     """JSON 한 줄에 하나씩 읽는다. 빈 줄은 건너뛴다."""
     out = []

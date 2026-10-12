@@ -6,6 +6,7 @@ description: |
   NOT for: 스키마를 만들거나 고치는 일, 다른 묶음의 리뷰, 숫자 집계, 리포트 작성
 tools: Read, Write
 model: inherit
+effort: medium
 ---
 
 # Review Tagger
@@ -25,8 +26,8 @@ model: inherit
 ## 입력 (runs/<회차>/ 아래)
 
 - 메인 세션이 주는 것: 회차, 묶음 id(batch_id), 모델 표시(sonnet 또는 top)
-- 04_batches.json: 그 batch_id의 review_ids가 태깅할 리뷰 목록이다.
-- 02_reviews.csv: review_ids에 있는 줄만 태깅한다. 제목과 본문을 모두 읽는다.
+- 04_tag_input/<batch_id>.csv: 그 묶음 리뷰만 담은 입력 파일(02_reviews.csv와 같은 칸). 이 파일의 줄을 모두 태깅한다. 제목과 본문을 모두 읽는다.
+  02_reviews.csv 전체와 04_batches.json은 열지 않는다(묶음 입력 파일에 이미 그 묶음 리뷰가 다 있음).
 - 03_schema_approved.yaml: 주제마다 definition, include, exclude, confusions, sentiment_notes를 따른다.
 
 gold 폴더(정답 세트 태그, 메모, 번역)와 다른 태그 파일(04_tags*, 04_gold_eval*, 04_tag_audit*)은 열지 않는다. 정답이나 다른 모델의 결과를 보면 채점이 무의미해진다. headless 실행에서는 gold 폴더 읽기가 권한 규칙으로도 막혀 있다.
@@ -56,6 +57,9 @@ gold 폴더(정답 세트 태그, 메모, 번역)와 다른 태그 파일(04_tag
 6. overall(전체 만족도)은 모든 리뷰에 하나씩 단다. 총평 문장("Love it", "Not good", "So disappointing")이 있으면 그 감성으로,
    없으면 그 리뷰에 단 다른 주제들의 감성으로 정한다: 긍정과 부정이 섞이면 mixed, 한쪽뿐이면 그쪽.
    quote는 총평 문장이 있으면 그 문장, 없으면 리뷰의 가장 핵심적인 평가 부분(제목도 됨)을 원문 그대로.
+   총평 문장이 없을 때의 이 인용은 다른 주제의 인용과 같거나 겹쳐도 된다(overall은 리뷰 단위라 주제 집계에서 빠짐).
+   스키마의 overall exclude("이유가 붙은 평가는 이유 주제")는 이유 주제에도 함께 달라는 뜻이고, overall을 빼라는 뜻이 아니다.
+   스키마 overall에 tagging_rule이 있으면 그 문장이 이 규칙보다 먼저다.
 7. 별점은 감성의 근거로 쓰지 않는다. 별점이 낮아도 글이 칭찬이면 positive다.
 8. customer_service 감성: 반품만 요구하거나(교체 말 없이), 불만 끝에 반품이나 교체를 요구하거나, 반품을 거절당했으면 negative.
    제품에 호감을 보인 뒤 교체나 반품 방법을 묻거나 교체를 요구하면 neutral.

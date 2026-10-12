@@ -24,7 +24,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from issues import review_weights  # noqa: E402
-from pipeline_io import (ASIN_COLS, ROOT, die, split_tags, category_conf, load_csv_or_die, load_schema, load_yaml, now_iso, pct, read_jsonl,  # noqa: E402
+from pipeline_io import (ASIN_COLS, ROOT, common_topic, die, split_tags, category_conf, load_csv_or_die, load_schema, load_yaml, now_iso, pct, read_jsonl,  # noqa: E402
                          resolve_run, write_json)
 
 for _s in (sys.stdout, sys.stderr):
@@ -82,6 +82,7 @@ class G:
         cat = run.name.split("-")[0]
         self.conf = (load_yaml(ROOT / "config" / "categories" / f"{cat}.yaml") or {})["guide"]
         self.schema = load_schema(run)
+        self.safety_tid = common_topic(self.schema, "safety")    # 안전 공통 주제를 맡은 주제 id(예: skin_reaction)
         self.reviews, self.weight = review_weights(run)
         self.rev = {r["review_id"]: r for r in self.reviews}
         self.total_w = sum(self.weight.values())
@@ -179,6 +180,10 @@ class G:
                             self.tag_quote(di["topic"]))
         self.put("head.dir_low", len(low), f"{f_int(len(low))}개", evl)
         self.put("head.dir_high", len(high), f"{f_int(len(high))}개", evh)
+        # 가중 비율: 원본 수는 낮은 별점이 많은 표본이라 흔한 정도로 읽지 않는다(CLAUDE.md). 흔한 정도는 이 두 값으로 말한다
+        wl, wh = self.wpct(low), self.wpct(high)
+        self.put("head.dir_low_w", wl, f_pct(wl), evl, note=f"{di['low']['name']} 쪽 라벨 리뷰의 가중 비율(전체 리뷰어 대비)")
+        self.put("head.dir_high_w", wh, f_pct(wh), evh, note=f"{di['high']['name']} 쪽 라벨 리뷰의 가중 비율(전체 리뷰어 대비)")
         ratio = round(len(low) / len(high), 2) if high else None
         self.put("head.dir_ratio", ratio, f"{di['low']['name']} {f_int(len(low))}개 대 {di['high']['name']} {f_int(len(high))}개"
                  + (f"({ratio:.2f}배)" if ratio else ""), evl)
@@ -267,6 +272,9 @@ class G:
                                              "avg_price": r["avgPrice"], "rating": r["reviewRating"]} for i, r in enumerate(rows)]
             self.put(f"m.top10_share_{k}", round(100 * top10, 1), f_pct(100 * top10), note=f"{node} 상위 10개 브랜드 marketshare 합(단위 미확인 값을 %로 읽음)")
             self.put(f"m.top1_{k}", rows[0]["brandName"], f"{rows[0]['brandName']} {f_pct(100 * rows[0]['marketshare'])}")
+            # 01장 경쟁 집중: 1위 브랜드 점유율 숫자만(top1은 이름과 함께 쓴 표기). marketshare 단위는 top10과 같이 미확인
+            self.put(f"m.top1_share_{k}", round(100 * (rows[0]["marketshare"] or 0), 1), f_pct(100 * (rows[0]["marketshare"] or 0)),
+                     note=f"{node} 1위 브랜드({rows[0]['brandName']}) marketshare(단위 미확인 값을 %로 읽음)")
         gw = self.conf["gender_words"]
         def gender(t):
             tl = f" {t.lower()} "
@@ -329,7 +337,9 @@ class G:
             low = [r for r in ids if any(r in self.label_reviews[l] for l in di["low"]["labels"])]
             high = [r for r in ids if any(r in self.label_reviews[l] for l in di["high"]["labels"])]
             n_dir = len(set(low) | set(high))
-            idx = round((len(high) - len(low)) / (len(high) + len(low)), 2) if n_dir >= di["min_reviews"] and (len(high) + len(low)) else None
+            # 방향 지수는 가중합으로 낸다(표본은 낮은 별점이 많아 원본 수로는 자극 쪽으로 기운다). 최소 리뷰 수 조건만 원본 수로 본다
+            wl_, wh_ = sum(self.weight.get(r, 0) for r in set(low)), sum(self.weight.get(r, 0) for r in set(high))
+            idx = round((wh_ - wl_) / (wh_ + wl_), 2) if n_dir >= di["min_reviews"] and (wh_ + wl_) else None
             vals = (dur.get("numbers_by_asin") or {}).get(asin) or []
             med = median(vals) if len(vals) >= c["duration_min_values"] else None
             k = f"s.{asin}"
@@ -354,6 +364,58 @@ class G:
             self.put(f"{k}.dir_index", idx, "-" if idx is None else f"{idx:+.2f}", evl)
             self.put(f"{k}.duration_median", med, "-" if med is None else self.dur(med, c['duration_item']), evd)
         self.tables["s.scoreboard"] = rows
+
+    # ------------------------------------------------ 가격과 불만(04장 가격 구조)
+    def price_complaints(self):
+        """상품을 온스당 가격(점수표의 price_per_oz) 순으로 낮음, 중간, 높음(guide.price_bands개) 묶음으로 나누고 묶음마다
+        상품 수, 피부 반응(direction_index.topic), head_topic, 효과(focus efficacy 첫 주제)의 부정 언급 리뷰어 비율(가중)과
+        가중 평균 별점. 나누기는 순위 기준(i번째 상품 -> i x 묶음 수 // 상품 수)이라 묶음 크기가 많아야 1개 차이.
+        가중은 리뷰 리포트와 같은 별점 묶음 가중이고, 상품끼리는 상품 표본 수만큼 섞인다(점수표와 같음)."""
+        c = self.conf
+        nb = c.get("price_bands", 3)
+        rows = sorted([r for r in self.tables.get("s.scoreboard", []) if r.get("price_per_oz")], key=lambda r: (r["price_per_oz"], r["asin"]))
+        unpriced = [r["asin"] for r in self.tables.get("s.scoreboard", []) if not r.get("price_per_oz")]
+        skin_tp = c["direction_index"]["topic"]
+        head_tp = c["head_topic"]
+        eff = next((f for f in c.get("focus") or [] if f.get("id") == "efficacy" and f.get("topics")), None) \
+            or next((f for f in c.get("focus") or [] if f.get("topics")), None)
+        eff_tp = eff["topics"][0] if eff else None
+        topics = [("skin_neg", skin_tp), ("head_neg", head_tp)] + ([("eff_neg", eff_tp)] if eff_tp else [])
+        neg = {tp: self.neg_reviews(tp) for _, tp in topics}
+        star_of = {a["asin"]: a["weighted_mean_star"] for a in self.m["asins"]}
+        names = ["낮음", "중간", "높음"] if nb == 3 else [f"{i + 1}구간" for i in range(nb)]
+        bands = defaultdict(list)
+        for i, r in enumerate(rows):
+            bands[i * nb // len(rows)].append(r)
+        out = []
+        for b in range(nb):
+            rs = bands[b]
+            asins = [r["asin"] for r in rs]
+            ids = [x["review_id"] for x in self.reviews if x["asin"] in set(asins)]
+            k = f"price.band{b}"
+            row = {"band": b, "name": names[b], "asins": asins, "brands": [r["brand"] for r in rs], "products": len(rs), "reviews": len(ids),
+                   "ppo_min": min((r["price_per_oz"] for r in rs), default=None), "ppo_max": max((r["price_per_oz"] for r in rs), default=None)}
+            row["range_text"] = f"{row['ppo_min']:.2f}~{row['ppo_max']:.2f}달러/oz" if rs else "-"
+            self.put(f"{k}.n", len(rs), f"{len(rs)}개", note=f"온스당 가격 {names[b]} 묶음의 상품 수")
+            self.put(f"{k}.range", [row["ppo_min"], row["ppo_max"]], row["range_text"], note="온스당 가격(점수표 buyBoxPrice / unitValue) 범위")
+            for key, tp in topics:
+                hit = [x for x in ids if x in neg[tp]]
+                v = self.wpct(hit, ids) if ids else None
+                ev = self.evidence(f"ev.{k}.{key}", f"온스당 가격 {names[b]}: {self.schema[tp]['name_ko']} 부정",
+                                   f"온스당 가격 {names[b]} 상품의 {self.schema[tp]['name_ko']} 부정 언급", hit, self.tag_quote(tp)) if ids else None
+                row[key] = v
+                self.put(f"{k}.{key}", v, f_pct(v) if v is not None else "-", ev,
+                         note=f"온스당 가격 {names[b]} 묶음 리뷰어 중 {self.schema[tp]['name_ko']} 부정 언급 리뷰어(가중)")
+            wsum = {a: sum(self.weight.get(x["review_id"], 0) for x in self.reviews if x["asin"] == a) for a in asins}
+            tw = sum(wsum.values())
+            st = round(sum(wsum[a] * star_of[a] for a in asins if a in star_of) / tw, 2) if tw and all(a in star_of for a in asins) else None
+            row["star"] = st
+            self.put(f"{k}.star", st, f_star(st) if st is not None else "-", note=f"온스당 가격 {names[b]} 묶음의 가중 평균 별점(상품별 가중 평균을 표본 가중치 합으로 섞음)")
+            out.append(row)
+        self.tables["price.bands"] = out
+        self.tables["meta.price_bands"] = {"topics": {key: {"id": tp, "name": self.schema[tp]["name_ko"]} for key, tp in topics},
+                                          "unpriced": unpriced}
+        self.put("price.unpriced", len(unpriced), f"{len(unpriced)}개", note="온스당 가격이 없어 가격 묶음에서 뺀 상품 수")
 
     # ------------------------------------------------ 03 문제
     def problems(self):
@@ -388,7 +450,7 @@ class G:
         st = []
         for x in sc.get("by_symptom") or []:
             ev = self.evidence(f"ev.safety.{x['name']}", f"안전 부정: {x['name']}", "07c에서 이 증상으로 판정한", symp.get(x["name"], []),
-                               self.tag_quote("safety"))
+                               self.tag_quote(self.safety_tid))
             st.append({**x, "ev": ev})
             self.put(f"p.safety.{x['name']}", x["reviews"], f"{x['reviews']}개", ev)
         self.tables["p.safety"] = st
@@ -406,6 +468,9 @@ class G:
                                self.detail_reviews(item, v["value"]), self.detail_quote(item, v["value"]))
             rows.append({"value": v["value"], "ko": v["ko"], "reviews": v["reviews"], "weighted_pct": v["weighted_pct"], "ev": ev})
             self.put(f"{key}.{item}.{v['value']}", v["reviews"], f"{v['reviews']}개", ev)
+            if v.get("weighted_pct") is not None:      # 가중 비율(얼마나 흔한가). 원본 수(무엇을 말하나)와 따로 쓴다
+                self.put(f"{key}.{item}.{v['value']}.w", v["weighted_pct"], f_pct(v["weighted_pct"]), ev,
+                         note=f"{it['name_ko']} {v['ko']} 리뷰의 가중 비율(전체 리뷰어 대비)")
         rows.sort(key=lambda r: -r["reviews"])
         self.tables[f"{key}.{item}"] = rows
         self.put(f"{key}.{item}.total", it["reviews"], f"{it['reviews']}개")
@@ -506,7 +571,7 @@ class G:
             if s.get("safety"):
                 neg |= symp_ids
             pos = set().union(*[self.label_reviews[l] for l in s.get("pos_labels") or []]) if s.get("pos_labels") else set()
-            qf = (lambda r: (self.tag.get((r, "safety")) or {}).get("quote")) if s.get("safety") else \
+            qf = (lambda r: (self.tag.get((r, self.safety_tid)) or {}).get("quote")) if s.get("safety") else \
                 (lambda r, s=s: next((self.label_quote(l)(r) for l in s.get("neg_labels") or [] if r in self.label_reviews[l]), None))
             evn = self.evidence(f"ev.std.{s['id']}.neg", f"{s['title']}: 불만 리뷰", s["title"] + " 부정 라벨이 붙은", neg, qf)
             qp = lambda r, s=s: next((self.label_quote(l)(r) for l in s.get("pos_labels") or [] if r in self.label_reviews[l]), None)
@@ -699,8 +764,8 @@ class G:
                              "ingredients": "있음" if vals(asin, "ingredients") else "확인 못 함", "src": src(asin, "allergens") + src(asin, "ingredients")})
                 self.put(f"std.spec.{b6['id']}.{asin}.symptoms", sum(sym[asin].values()), f"{sum(sym[asin].values())}개")
             self.tables[f"std.spec.{b6['id']}"] = rows
-            pos = {t["review_id"] for t in self.tags if t["topic"] == "safety" and t["sentiment"] == "positive"}
-            ev = self.evidence(f"ev.std.{b6['id']}.pos_tags", "몸 반응이 없었다는 리뷰", "안전 주제 긍정 태그가 붙은", pos, self.tag_quote("safety"))
+            pos = {t["review_id"] for t in self.tags if t["topic"] == self.safety_tid and t["sentiment"] == "positive"}
+            ev = self.evidence(f"ev.std.{b6['id']}.pos_tags", "몸 반응이 없었다는 리뷰", "안전 주제 긍정 태그가 붙은", pos, self.tag_quote(self.safety_tid))
             self.put(f"std.{b6['id']}.pos_tags", len(pos), f"{len(pos)}개" if pos else "근거 없음", ev if pos else None,
                      note="안전 주제 긍정 태그(몸 반응이 없었다는 말)가 붙은 리뷰")
             al_n = sum(1 for r in rows if r["allergens"] != "표시 확인 못 함")
@@ -761,19 +826,38 @@ class G:
             self.put(f"{k}.weakest", r["weakest"], f"{r['remain']}개 중 {r['weakest']}개")
             self.put(f"{k}.low_share", r["low_share"], f_pct(r["low_share"]))
 
+    def accuracy(self):
+        """정답 세트 정확도(05_metrics.json accuracy.sonnet)를 A장 문장용 키로. 감성은 방향 일치와 mixed 일치를 따로 적는다."""
+        a = (self.m.get("accuracy") or {}).get("sonnet") or {}
+        if not a:
+            return
+        self.put("acc.topic_f1", a["topic_f1"], a["topic_f1_text"])
+        self.put("acc.sentiment", a["sentiment_pct"], a["sentiment_text"])
+        if "direction_pct" in a:
+            self.put("acc.direction", a["direction_pct"], a["direction_text"],
+                     note=f"mixed가 아닌 짝 {a['direction_pairs']}개 중 {a['direction_same']}개")
+            self.put("acc.mixed", a["mixed_pct"], a["mixed_text"],
+                     note=f"한쪽이라도 mixed인 짝 {a['mixed_pairs']}개 중 둘 다 mixed {a['mixed_same']}개")
+
     def caveats(self):
         n = self.m["summary"]
         subs = [r.get("subcategory") for r in self.tables.get("s.scoreboard", [])]
         most = "모두" if subs and all(s == self.conf.get("caveat_subcategory") for s in subs) else "대부분"
+        log_p = self.run / "02_collect_log.json"
+        mode = (json.loads(log_p.read_text(encoding="utf-8")).get("mode") if log_p.exists() else None) or "db"
+        src = "유료 수집 표본(별점마다 고르게 받음)" if mode == "paid" else "공유 리뷰 DB 표본"
+        by_rank = bool((category_conf(self.run) or {}).get("selection"))     # collect.py rank(검색 순위와 매출)로 후보를 골랐는지
+        pick = (f"ASIN은 카테고리 검색어의 매출 상위 후보 가운데 고른 {len(self.asins)}개다(상품 확인 관문에서 사람이 확인)." if by_rank else
+                f"ASIN은 매출 순위가 아니라 공유 DB에 리뷰가 많은 후보 가운데 고른 {len(self.asins)}개다(상품 확인 관문에서 사람이 확인).")
         return [
-            f"리뷰는 공유 리뷰 DB 표본(리뷰 {n['reviews']:,}개, ASIN {n['asins']}개)이라 낮은 별점이 실제보다 많다(표본 평균 {n['sample_mean_star']:.2f}★, "
+            f"리뷰는 {src}(리뷰 {n['reviews']:,}개, ASIN {n['asins']}개)이라 낮은 별점이 실제보다 많다(표본 평균 {n['sample_mean_star']:.2f}★, "
             f"가중 평균 {n['weighted_mean_star']:.2f}★). 비율은 별점 묶음 가중으로 되돌렸다.",
             f"자유 서술에서 뽑은 수치({self.item_name(self.conf['duration_item'])} 등)는 리뷰어가 적은 값이라 측정값이 아니다. 방향과 분포로만 읽는다.",
             "개발 기준의 사양 숫자는 웹 조사 출처를 근거로 한 시작점이고 시험으로 확인해야 한다.",
             f"상품 {n['asins']}개, {most} 한 하위 카테고리({self.conf.get('caveat_subcategory', '-')})라 상품끼리, 하위 카테고리끼리의 비교가 약하다."
             if self.conf.get("caveat_subcategory") else f"상품 {n['asins']}개라 상품끼리, 하위 카테고리끼리의 비교가 약하다.",
             "시장 데이터(spd-amz-market)의 매출, 점유율, 증감, 승률 칸은 문서에 단위가 없어 단위 미확인으로 적었다.",
-            f"ASIN은 매출 순위가 아니라 공유 DB에 리뷰가 많은 후보 가운데 고른 {len(self.asins) if hasattr(self, 'asins') else ''}개다(상품 확인 관문에서 사람이 확인).",
+            pick,
             f"머리 숫자 5번(성장 배수)은 30일 검색량 {self.conf['growth']['min_volume']:,} 이상 카테고리 검색어 "
             f"{self.values.get('m.growth_candidates', {}).get('value', '-')}개 중 2년 주간 이력을 받은 "
             f"{self.values.get('m.growth_ranked', {}).get('value', '-')}개에서 골랐다. 나머지는 이력이 없어 순위에서 빠졌다. "
@@ -786,10 +870,12 @@ def build(run):
     g.head()
     g.market_ch()
     g.scoreboard()
+    g.price_complaints()
     g.problems()
     g.standards()
     g.specs_link()
     g.robustness()
+    g.accuracy()
     g.tables["meta.focus"] = [{"id": f["id"], "title": f.get("title"), "split_label": f.get("split_label"),
                                "split_label_name": g.label_name.get(f.get("split_label"), f.get("split_label"))} for f in g.conf.get("focus") or []]
     g.tables["meta.brand_nodes"] = list(g.conf.get("market_nodes_brand_share") or [])

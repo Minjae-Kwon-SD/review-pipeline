@@ -49,6 +49,13 @@
   .donebox { margin-top: 10px; font-weight: 600; }
   .count { color: var(--muted); font-weight: 400; font-size: 13px; margin-left: 6px; }
   #out { width: 100%; height: 120px; display: none; margin-top: 8px; }
+  .req { display: inline-block; font-size: 11px; font-weight: 700; color: #fff; background: var(--warn); border-radius: 4px; padding: 0 5px; margin-left: 6px; }
+  .review.missing { border-left: 5px solid var(--warn); }
+  #schema { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; display: none; }
+  #schema h2 { font-size: 16px; margin: 0 0 6px; }
+  #schema select, #schema input[type=text] { font: inherit; padding: 4px 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--text); }
+  #schema input[type=text] { width: 100%; margin-top: 4px; }
+  #schema td.dec { width: 38%; }
   @media (max-width: 640px) { td.topic { width: auto; display: block; } td { display: block; border-top: 0; } tr { border-top: 1px solid var(--line); display: block; } }
 </style>
 </head>
@@ -58,11 +65,13 @@
   <span id="progress">0/0 완료</span>
   <button class="primary" id="export">gold_tags.jsonl 내보내기</button>
   <button id="copy">복사</button>
+  <button id="schemaExport" style="display:none">스키마 확인 내보내기</button>
   <span id="msg" class="count"></span>
 </header>
 <main>
   <p class="help">리뷰마다 주제별로 없음, 긍정, 부정, 혼합, 중립 중 하나를 고릅니다(기본값 없음). 감성은 그 주제에 대한 말로만 정하고 별점으로 짐작하지 않습니다.
     다 보면 "다 봤음"을 체크합니다. 고른 값은 이 브라우저에 자동 저장됩니다. 끝나면 내보낸 파일을 runs/__RUN__/gold/gold_tags.jsonl로 저장해 주세요.</p>
+  <section id="schema"></section>
   <div id="list"></div>
   <textarea id="out" readonly></textarea>
 </main>
@@ -71,6 +80,18 @@
 const DATA = JSON.parse(document.getElementById("data").textContent);
 const KEY = "gold_tagging:" + DATA.run;
 const OPTS = [["", "없음"], ["positive", "긍정"], ["negative", "부정"], ["mixed", "혼합"], ["neutral", "중립"]];
+// 필수 주제(2026-10-10): 전체 만족도는 감성 넷 중 하나, 효과 주제는 감성 또는 "언급 없음"(none, 내보내지 않음)을 꼭 고른다
+const REQUIRED = new Set(DATA.required || []);
+function isOverall(t) { return t.id === "overall" || t.common_id === "overall"; }
+function optsFor(t) {
+  if (!REQUIRED.has(t.id)) return OPTS;
+  const sents = OPTS.slice(1);
+  return isOverall(t) ? sents : sents.concat([["none", "언급 없음"]]);
+}
+function missingRequired(rid) {
+  const s = state.sel[rid] || {};
+  return DATA.topics.filter(t => REQUIRED.has(t.id) && !s[t.id]).map(t => t.name_ko);
+}
 
 // toJsonl:start
 function toJsonl(sel, reviews, topics) {
@@ -79,15 +100,16 @@ function toJsonl(sel, reviews, topics) {
     const s = sel[r.review_id] || {};
     for (const t of topics) {
       const v = s[t.id];
-      if (v) lines.push(JSON.stringify({ review_id: r.review_id, topic: t.id, sentiment: v }));
+      if (v && v !== "none") lines.push(JSON.stringify({ review_id: r.review_id, topic: t.id, sentiment: v }));
     }
   }
   return lines.length ? lines.join("\n") + "\n" : "";
 }
 // toJsonl:end
 
-let state = { sel: {}, done: {} };
-try { const saved = JSON.parse(localStorage.getItem(KEY) || "null"); if (saved) state = saved; } catch (e) {}
+let state = { sel: {}, done: {}, schema: {} };
+try { const saved = JSON.parse(localStorage.getItem(KEY) || "null"); if (saved) state = Object.assign(state, saved); } catch (e) {}
+state.schema = state.schema || {};
 function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
 
 function el(tag, attrs, text) {
@@ -152,6 +174,7 @@ function render() {
       const td1 = el("td", { class: "topic" });
       const name = el("span", { class: "tname" }, t.name_ko);
       td1.appendChild(name);
+      if (REQUIRED.has(t.id)) td1.appendChild(el("span", { class: "req" }, "필수"));
       td1.appendChild(el("span", { class: "side" }, (t.side === "B" ? "브랜드" : "제품") + " | " + t.id));
       td1.appendChild(el("div", { class: "def" }, t.definition));
       glossLine(td1, t.definition, t.id);
@@ -172,7 +195,7 @@ function render() {
       td1.appendChild(d);
       const td2 = el("td", { class: "opts" });
       const cur = (state.sel[r.review_id] || {})[t.id] || "";
-      OPTS.forEach(([v, label]) => {
+      optsFor(t).forEach(([v, label]) => {
         const lab = el("label");
         const inp = el("input", { type: "radio", name: r.review_id + "|" + t.id, value: v });
         if (v === cur) inp.checked = true;
@@ -192,6 +215,15 @@ function render() {
     const cb = el("input", { type: "checkbox" });
     cb.checked = !!state.done[r.review_id];
     cb.addEventListener("change", () => {
+      const miss = cb.checked ? missingRequired(r.review_id) : [];
+      if (miss.length) {
+        cb.checked = false;
+        card.classList.add("missing");
+        document.getElementById("msg").textContent = (i + 1) + "번 리뷰: 필수 칸(" + miss.join(", ") + ")을 먼저 골라 주세요.";
+        return;
+      }
+      card.classList.remove("missing");
+      document.getElementById("msg").textContent = "";
       state.done[r.review_id] = cb.checked;
       card.classList.toggle("is-done", cb.checked);
       save(); progress();
@@ -213,6 +245,8 @@ function count(rid) {
 }
 
 function exportText() {
+  const miss = DATA.reviews.filter(r => missingRequired(r.review_id).length).length;
+  if (miss && !confirm("필수 칸을 고르지 않은 리뷰가 " + miss + "개 있습니다. 그래도 내보낼까요?")) return null;
   const done = progress();
   if (done < DATA.reviews.length &&
       !confirm("아직 " + (DATA.reviews.length - done) + "개 리뷰를 '다 봤음'으로 체크하지 않았습니다. 그래도 내보낼까요?")) return null;
@@ -237,6 +271,51 @@ document.getElementById("copy").addEventListener("click", () => {
   } else { out.style.display = "block"; out.value = text; out.select(); document.execCommand("copy"); done(); }
 });
 
+// 스키마 확인(초안 화면일 때만): 주제마다 승인, 고침, 빼기와 메모. 03_schema_review.json으로 내보낸다.
+const DECS = [["approve", "승인"], ["edit", "고침"], ["drop", "빼기"]];
+function renderSchema() {
+  if (DATA.schema_mode !== "draft") return;
+  const box = document.getElementById("schema");
+  box.style.display = "block";
+  document.getElementById("schemaExport").style.display = "inline-block";
+  box.appendChild(el("h2", {}, "스키마 확인 (" + DATA.schema_file + ", 주제 " + DATA.topics.length + "개)"));
+  box.appendChild(el("p", { class: "help" }, "주제마다 승인, 고침, 빼기를 고르고, 고침이면 무엇을 어떻게 고칠지 메모합니다(기본값 승인). " +
+    "아래 정답 세트는 이 주제들로 태깅하고, 고침을 고른 주제는 고친 뜻으로 태깅합니다. 끝나면 '스키마 확인 내보내기'로 받은 파일을 runs/" + DATA.run + "/03_schema_review.json으로 저장해 주세요."));
+  const table = el("table");
+  DATA.topics.forEach(t => {
+    const cur = state.schema[t.id] || { decision: "approve", note: "" };
+    const tr = el("tr");
+    const td1 = el("td", { class: "topic" });
+    td1.appendChild(el("span", { class: "tname" }, t.name_ko));
+    td1.appendChild(el("span", { class: "side" }, (t.side === "B" ? "브랜드" : "제품") + " | " + t.id + (t.common_id && t.common_id !== t.id ? " (공통 " + t.common_id + ")" : "") +
+      (t.evidence_count !== null && t.evidence_count !== undefined ? " | 표본 언급 약 " + t.evidence_count + "개" : "")));
+    td1.appendChild(el("div", { class: "def" }, t.definition));
+    const td2 = el("td", { class: "dec" });
+    const sel = el("select");
+    DECS.forEach(([v, label]) => { const o = el("option", { value: v }, label); if (v === cur.decision) o.selected = true; sel.appendChild(o); });
+    const note = el("input", { type: "text", placeholder: "고칠 곳 메모(고침, 빼기일 때)" });
+    note.value = cur.note || "";
+    const upd = () => { state.schema[t.id] = { decision: sel.value, note: note.value }; save(); };
+    sel.addEventListener("change", upd); note.addEventListener("input", upd);
+    td2.appendChild(sel); td2.appendChild(note);
+    tr.appendChild(td1); tr.appendChild(td2); table.appendChild(tr);
+  });
+  box.appendChild(table);
+}
+// schemaReview:start
+function schemaReview(stateSchema, topics, run, file) {
+  return { run: run, schema_file: file, decided_at: new Date().toISOString(),
+           topics: topics.map(t => { const c = stateSchema[t.id] || {}; return { id: t.id, decision: c.decision || "approve", note: c.note || "" }; }) };
+}
+// schemaReview:end
+document.getElementById("schemaExport").addEventListener("click", () => {
+  const text = JSON.stringify(schemaReview(state.schema, DATA.topics, DATA.run, DATA.schema_file), null, 1) + "\n";
+  const a = el("a", { href: URL.createObjectURL(new Blob([text], { type: "application/json" })), download: "03_schema_review.json" });
+  document.body.appendChild(a); a.click(); a.remove();
+  document.getElementById("msg").textContent = "내려받았습니다. runs/" + DATA.run + "/03_schema_review.json으로 저장해 주세요.";
+});
+
+renderSchema();
 render();
 </script>
 </body>
