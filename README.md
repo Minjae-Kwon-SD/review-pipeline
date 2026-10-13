@@ -65,7 +65,7 @@ claude -p --model opus --allowedTools "Bash(python scripts/*)" "Edit(/runs/**)" 
 | 7 집계 | 별점 보정 가중 집계, 리포트의 모든 숫자와 표 | `weight.py` |
 | 8~9 리포트 | 문장 쓰기, 기계 검사와 감사 | report-writer, `audit_quotes.py`, evidence-auditor |
 | 10~11 시간과 HTML | 시간 표, 리포트 HTML 만들기와 검사 | `timing_report.py`, `render_html.py` |
-| 12~16 가이드 재료 | 시장 데이터, 설계 정보 항목 제안과 승인, 추출과 감사, 웹 조사와 출처 확인, 가이드 숫자 | `market.py`, detail-schema-drafter, ⏸ 사람, detail-extractor(sonnet), evidence-auditor, benchmark-researcher, `research.py`, `guide_metrics.py` |
+| 12~16 가이드 재료 | 시장 데이터, 설계 정보 항목 제안과 승인, 추출과 감사, 웹 조사와 출처 확인, 상품 사양 수집과 확인, 가이드 숫자 | `market.py`, detail-schema-drafter, ⏸ 사람, detail-extractor(sonnet), evidence-auditor, benchmark-researcher, `research.py`, product-spec-collector, `specs.py`, `guide_metrics.py` |
 | 17~19 가이드 | 문장 쓰기, 검사와 감사, HTML | guide-writer, `guide_check.py`, evidence-auditor, `render_guide_html.py` |
 | 20~22 다른 언어판 | 번역 준비, 줄마다 번역, 기계 검사, 뜻 감사, HTML | `translate_prep.py`, report-translator, evidence-auditor, `render_html.py --lang en` |
 
@@ -125,21 +125,21 @@ runs/
 
 모든 에이전트는 자기 출력 파일만 쓰고, 다음 단계는 그 파일 경로를 받아 읽는다. 에이전트 정의는 모두 `model: inherit`라 메인 세션의 모델을 따르고, 태깅과 추출처럼 양이 많은 일만 호출할 때 sonnet을 준다. effort는 에이전트 정의 파일 머리말(frontmatter)에 적혀 있다.
 
-| 에이전트 | 하는 일 | 모델 | effort | 도구 | 왜 스크립트가 아니라 에이전트인가 |
+| 에이전트 | 하는 일 | 모델 | effort | 도구 | 에이전트가 맡는 이유 |
 |---|---|---|---|---|---|
-| asin-selector | 후보 표에서 카테고리에 맞는 상품을 골라 `01_asins.csv` | 상위 | medium | Read, Write | 상품 제목만으로 같은 카테고리인지(바디 미스트, 세트 등) 가려야 함 |
-| schema-drafter | 표본 리뷰를 읽고 공통 주제에 카테고리 전용 주제를 더한 스키마 초안 | 상위 | high | Read, Write | 리뷰에서 반복되는 불만과 칭찬의 범주를 찾는 일은 규칙으로 못 함 |
-| review-tagger | 묶음 하나(약 50개)의 리뷰마다 주제, 감성, 원문 인용 | sonnet | medium | Read, Write | 문장의 뜻을 읽고 승인된 주제에 맞추는 일. 양이 많아 빠른 모델로 동시에 |
-| issue-labeler | 주제 하나의 표본 인용으로 세부 이슈 목록 제안 | 상위 | high | Read, Write | "금방 날아감", "처음부터 약함"처럼 주제 안의 하위 범주를 찾는 판단 |
-| issue-tagger | 승인된 세부 이슈 목록으로 인용마다 라벨 | sonnet | medium | Read, Write | 인용의 뜻을 라벨 정의에 맞추는 일 |
-| report-writer | 스크립트가 만든 숫자와 표, 태그 인용으로 리포트 문장 | 상위 | high | Read, Write | 숫자를 읽고 해석하는 문장. 숫자는 새로 계산하지 않고 옮기기만 |
-| evidence-auditor | 태그, 라벨, 추출 값, 리포트와 가이드 문장, 번역을 원문과 대조해 판정 | 상위 | high | Read, Grep, Glob(**읽기 전용**) | 뜻이 맞는지 보는 판단. 만든 쪽과 분리해 고치지 못하게 함 |
-| detail-schema-drafter | 리뷰에서 뽑을 설계 정보 항목(바른 부위, 둔 시간 등) 초안 | 상위 | high | Read, Write | 제품 설계에 쓸 정보가 무엇인지 리뷰에서 찾는 판단 |
-| detail-extractor | 승인된 항목으로 리뷰마다 값과 원문 인용 | sonnet | medium | Read, Write | 자유롭게 쓴 문장에서 값을 뽑는 일 |
-| benchmark-researcher | 공개 웹 자료로 시장 규모, 업계 구성, 규제, 시험 기준 조사(주장마다 출처 URL과 원문 문장) | 상위 | high | WebSearch, WebFetch, Read, Write | 검색과 출처 읽기. 출처는 `research.py`가 다시 열어 확인 |
-| guide-writer | 가이드 숫자와 확인된 웹 주장만 보고 가이드 문장 | 상위 | high | Read, Write | 기준과 권고를 문장으로 쓰는 일 |
-| report-translator | 감사를 통과한 한국어 리포트 문장을 줄마다 다른 언어로 | 상위 | high | Read, Write | 뜻을 지키는 번역. 숫자와 구조 표시는 그대로 |
-| product-spec-collector | 상품마다 브랜드 사이트와 소매점 상품 페이지에서 사양을 출처 문장과 함께 모음 | 상위 | high | WebSearch, WebFetch, Read, Write | 같은 상품 페이지를 찾아 맞추는 일. 값은 `specs.py`가 다시 열어 확인 |
+| asin-selector | 후보 표에서 카테고리에 맞는 상품을 골라 `01_asins.csv` | 상위 | medium | Read, Write | 상품 제목만 보고 같은 종류인지(바디 미스트나 세트 상품은 아닌지) 가려야 해서 |
+| schema-drafter | 표본 리뷰를 읽고 공통 주제에 카테고리 전용 주제를 더한 스키마 초안 | 상위 | high | Read, Write | 리뷰에서 되풀이되는 불만과 칭찬을 묶어 주제를 정하는 일은 정해진 규칙으로 할 수 없어서 |
+| review-tagger | 묶음 하나(약 50개)의 리뷰마다 주제, 감성, 원문 인용 | sonnet | medium | Read, Write | 문장의 뜻을 읽고 승인된 주제에 맞춰야 해서. 양이 많아 빠른 모델로 여러 개를 동시에 돌림 |
+| issue-labeler | 주제 하나의 표본 인용으로 세부 이슈 목록 제안 | 상위 | high | Read, Write | 한 주제 안에서 "금방 날아감", "처음부터 약함" 같은 세부 갈래를 찾아야 해서 |
+| issue-tagger | 승인된 세부 이슈 목록으로 인용마다 라벨 | sonnet | medium | Read, Write | 인용의 뜻을 읽고 라벨 정의에 맞춰야 해서 |
+| report-writer | 스크립트가 만든 숫자와 표, 태그 인용으로 리포트 문장 | 상위 | high | Read, Write | 숫자를 읽고 해석하는 문장을 써야 해서. 숫자는 새로 계산하지 않고 옮기기만 함 |
+| evidence-auditor | 태그, 라벨, 추출 값, 리포트와 가이드 문장, 번역을 원문과 대조해 판정 | 상위 | high | Read, Grep, Glob(**읽기 전용**) | 뜻이 맞는지 판단해야 해서. 만든 쪽과 떼어 놓고, 고치지는 못하게 함 |
+| detail-schema-drafter | 리뷰에서 뽑을 설계 정보 항목(바른 부위, 둔 시간 등) 초안 | 상위 | high | Read, Write | 리뷰에서 제품 설계에 쓸 정보가 무엇인지 찾아야 해서 |
+| detail-extractor | 승인된 항목으로 리뷰마다 값과 원문 인용 | sonnet | medium | Read, Write | 자유롭게 쓴 문장에서 값을 골라내야 해서 |
+| benchmark-researcher | 공개 웹 자료로 시장 규모, 업계 구성, 규제, 시험 기준 조사(주장마다 출처 URL과 원문 문장) | 상위 | high | WebSearch, WebFetch, Read, Write | 검색하고 출처를 읽어야 해서. 출처는 `research.py`가 다시 열어 확인함 |
+| guide-writer | 가이드 숫자와 확인된 웹 주장만 보고 가이드 문장 | 상위 | high | Read, Write | 개발 기준과 권고를 문장으로 써야 해서 |
+| report-translator | 감사를 통과한 한국어 리포트 문장을 줄마다 다른 언어로 | 상위 | high | Read, Write | 뜻을 지키며 번역해야 해서. 숫자와 구조 표시는 그대로 둠 |
+| product-spec-collector | 상품마다 브랜드 사이트와 소매점 상품 페이지에서 사양을 출처 문장과 함께 모음 | 상위 | high | WebSearch, WebFetch, Read, Write | 같은 상품의 페이지를 찾아 맞춰 봐야 해서. 값은 `specs.py`가 다시 열어 확인함 |
 
 메인 세션은 지휘만 한다. 단계 순서를 정하고, 스크립트를 실행하고, 에이전트를 부르고, 감사 결과를 저장하고, 관문에서 멈춘다.
 
