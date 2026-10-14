@@ -231,7 +231,7 @@
 
 ## medicalscrubs-2026-10-14
 
-2026-10-14T21:33 기준.
+2026-10-14T21:41 기준.
 
 | 키 | 표기 | 출처 |
 |---|---|---|
@@ -327,6 +327,7 @@
 | time.split.label | 43.6분 | 08_timing.md 시간 나눔 |
 | time.split.wait | 64.6분 | 08_timing.md 시간 나눔 |
 | time.split.pause | 87.9분 | 08_timing.md 시간 나눔 |
+| time.owner_total | 118분 | 08_time_owner.yaml(담당자 판단): AI 작업(08_timing.md) + 라벨링 약 15분 + 관문 검토 5분, 멈춤 뺌. 담당자가 118분으로 정함 |
 | tests | 413개 | tests/test_scripts.py 실행 결과의 확인 개수 |
 | ref.report.reviews | 3,488개, ASIN 10개 | 정답지 review_analysis_report_en.html 머리 문장 |
 | ref.report.tags | 10,066개 | 정답지 review_analysis_report_en.html 머리 문장 |

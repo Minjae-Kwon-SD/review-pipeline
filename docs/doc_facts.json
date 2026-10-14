@@ -1,5 +1,5 @@
 {
-  "made_at": "2026-10-14T21:33:35+09:00",
+  "made_at": "2026-10-14T21:41:03+09:00",
   "run": "medicalscrubs-2026-10-14",
   "facts": {
     "gold.reviews": {
@@ -369,6 +369,10 @@
     "time.split.pause": {
       "text": "87.9분",
       "source": "08_timing.md 시간 나눔"
+    },
+    "time.owner_total": {
+      "text": "118분",
+      "source": "08_time_owner.yaml(담당자 판단): AI 작업(08_timing.md) + 라벨링 약 15분 + 관문 검토 5분, 멈춤 뺌. 담당자가 118분으로 정함"
     },
     "tests": {
       "text": "413개",
@@ -1259,7 +1263,7 @@
       }
     },
     "medicalscrubs-2026-10-14": {
-      "made_at": "2026-10-14T21:33:35+09:00",
+      "made_at": "2026-10-14T21:41:03+09:00",
       "facts": {
         "gold.reviews": {
           "text": "40개",
@@ -1628,6 +1632,10 @@
         "time.split.pause": {
           "text": "87.9분",
           "source": "08_timing.md 시간 나눔"
+        },
+        "time.owner_total": {
+          "text": "118분",
+          "source": "08_time_owner.yaml(담당자 판단): AI 작업(08_timing.md) + 라벨링 약 15분 + 관문 검토 5분, 멈춤 뺌. 담당자가 118분으로 정함"
         },
         "tests": {
           "text": "413개",
