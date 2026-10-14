@@ -525,6 +525,16 @@ def pull(run, mode, offline, confirm_paid, paid_asins=None, paid_test=False):
         exact = [r for r in revs if r.get("asin") == a]
         if len(exact) != len(revs):
             notes.append(f"{a}: asin 부분일치로 딸려 온 다른 ASIN 리뷰 {len(revs) - len(exact)}개를 뺐습니다.")
+        # 같은 ASIN 안에서 review_id가 같은 줄은 하나만 둔다(2026-10-14: offset으로 나눠 받을 때 페이지 경계에서 같은 리뷰가 두 번 온 일이 있음)
+        uniq, seen_ids = [], set()
+        for r in exact:
+            rid = r.get("review_id")
+            if rid in seen_ids:
+                dropped.append({"review_id": rid, "asin": a, "star": int(float(r.get("rating") or 0)), "reason": "같은 ASIN 안 중복(같은 리뷰가 두 번 옴)"})
+                continue
+            seen_ids.add(rid)
+            uniq.append(r)
+        exact = uniq
         product = fetch_product(run, a, offline)
         row = by_asin[a]
         filled = {"brand": product.get("brandName"), "title": product.get("title"),

@@ -31,7 +31,7 @@ import sys
 from collections import Counter, defaultdict
 
 from pipeline_io import (ASIN_COLS, REVIEW_COLS, SENTIMENTS, die, load_csv_or_die, load_schema, load_yaml,
-                         norm_text, now_iso, read_jsonl, resolve_run, write_json, write_jsonl)
+                         norm_text, now_iso, read_jsonl, resolve_run, write_json, write_jsonl, category_conf, leftover_problems)
 
 TAG_KEYS = ("review_id", "topic", "sentiment", "quote")
 OFF_CATEGORY = "off_category"   # 카테고리 밖 리뷰 표시. 그 리뷰의 유일한 태그여야 하고 감성은 neutral
@@ -190,7 +190,8 @@ def check_tags(run, model, only=None):
 
 
 # review_id는 v0 꼴(B0XXXXXXX1-03)과 아마존 리뷰 ID(R로 시작하는 대문자 영숫자, 숫자 포함) 둘 다 받는다
-AMAZON_RID = r"R(?=[0-9A-Z]*\d)[0-9A-Z]{9,}"
+# 숫자 없는 아마존 리뷰 id(예: RHVOMUMTUJYAC)도 있어 대문자만 12~14자도 받는다(2026-10-14)
+AMAZON_RID = r"R(?:(?=[0-9A-Z]*\d)[0-9A-Z]{9,}|[A-Z]{11,13}(?![0-9A-Z]))"
 QUOTE_TAIL = re.compile(r"\(([^()]+?),\s*([1-5])★,\s*([A-Za-z0-9]+-\d+|" + AMAZON_RID + r")\)")
 ID_LIKE = re.compile(r"\b(?:[A-Z0-9]{10}-\d{1,3}|" + AMAZON_RID + r")\b")
 CHAPTERS = [f"## {i}." for i in range(1, 13)] + ["## 부록"]   # 정답지 순서 12개 장과 부록
@@ -202,6 +203,29 @@ SAMPLE_LABEL = ("customer_service", "negative", "not_returnable")   # 12장 샘�
 def chapter(text, n):
     m = re.search(rf"^## {n}\..*?(?=^## |\Z)", text, re.M | re.S)
     return m.group(0) if m else ""
+
+
+def check_must_cover(run, report):
+    """05_metrics.json must_cover: 부정 언급 리뷰어(가중) 상위 주제가 8장 약점 카드 제목줄과 12장 전략에 있는지(주제 이름이나 그 주제 부정 세부 이슈 이름)."""
+    p = run / "05_metrics.json"
+    mc = (json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}).get("must_cover")
+    if not mc:
+        return []
+    errors = []
+    ch8 = chapter(report, 8)
+    weak = ch8.split("### 약점", 1)[1] if "### 약점" in ch8 else ""
+    cards = [l for l in weak.splitlines() if re.match(r"^\d+\.\s", l)]
+    for t in mc["weakness"]:
+        if not any(t["name_ko"] in l for l in cards):
+            errors.append(f"8장 약점 카드에 '{t['name_ko']}'이 없음(부정 언급 리뷰어 가중 {t['neg_reviewer_pct']}%, must_cover)")
+    counts_p = run / "07b_issue_counts.json"
+    counts = json.loads(counts_p.read_text(encoding="utf-8")) if counts_p.exists() else {"topics": {}}
+    ch12 = chapter(report, 12)
+    for t in mc["strategy"]:
+        names = [t["name_ko"]] + [l["name_ko"] for l in (counts["topics"].get(f"{t['id']}.negative") or {}).get("labels", []) if l["id"] != "other"]
+        if not any(n in ch12 for n in names):
+            errors.append(f"12장 전략에 '{t['name_ko']}'(또는 그 부정 세부 이슈)이 없음(must_cover)")
+    return errors
 
 
 def check_issue_counts(run, report, brands):
@@ -261,7 +285,8 @@ def check_issue_counts(run, report, brands):
                               f"{s['negative_symptom']}개, {s['negative_no_symptom']}개")
     t, d, lid = SAMPLE_LABEL
     lab = next((l for l in counts["topics"].get(f"{t}.{d}", {}).get("labels", []) if l["id"] == lid), None)
-    if lab and lab["reviews"] > 0 and "샘플" not in chapter(text, 12):
+    need = (category_conf(run).get("report") or {}).get("require_sample_offer")     # 향수처럼 체험 샘플이 맞는 품목만(카테고리 설정)
+    if need and lab and lab["reviews"] > 0 and "샘플" not in chapter(text, 12):
         errors.append(f"12장에 샘플(시향) 제공이 없습니다(근거 라벨 {lab['name_ko']} 리뷰 {lab['reviews']}개).")
     return errors
 
@@ -298,6 +323,8 @@ def check_report(run):
         if not re.search(rf"^{re.escape(ch)}", report, re.M):
             errors.append(f"'{ch}'로 시작하는 장이 없습니다.")
     errors += check_issue_counts(run, report, brands)
+    errors += leftover_problems(run, report)
+    errors += check_must_cover(run, report)
     for n, line in enumerate(report.splitlines(), 1):
         if "·" in line:
             errors.append(f"{n}번째 줄에 가운뎃점(·)이 있습니다: {line.strip()[:60]}")

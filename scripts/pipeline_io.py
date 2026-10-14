@@ -236,6 +236,57 @@ def split_tags(reviews, tags, schema=None):
     return reviews, kept, {"off_category_reviews": sorted(off), "unknown_topic_tags": unknown}
 
 
+SNAKE_KEY = re.compile(r"(?<![\w.])[a-z]+(?:_[a-z0-9]+)+(?!\w)")
+OZ_WORD = re.compile(r"온스|(?<![A-Za-z])oz(?![A-Za-z])", re.I)
+
+
+def prose_lines(text):
+    """문장만(줄 번호, 줄): 표 블록(<!-- 표:... --> ~ <!-- /표:... -->), 주석, 표 줄(|로 시작), [m:키], [r:id]를 뺀다."""
+    out, in_table = [], False
+    for n, line in enumerate(text.splitlines(), 1):
+        if re.match(r"\s*<!-- 표:", line):
+            in_table = True
+        if in_table:
+            if re.search(r"<!-- /표:[^>]*-->", line):
+                in_table = False
+            continue
+        if line.lstrip().startswith("|"):
+            continue
+        line = re.sub(r"<!--.*?-->", "", line)
+        out.append((n, line))
+    return out
+
+
+def run_has_oz(run):
+    """이 회차에 온스 단위 데이터가 있는지: 리포트 변형 신호에 용량(oz) 행이 있거나, 가이드 단위 가격 기준이 온스 계열."""
+    run = Path(run)
+    m = run / "05_metrics.json"
+    if m.exists():
+        mm = json.loads(m.read_text(encoding="utf-8"))
+        for vs in mm.get("variant_signals") or [mm.get("variant_signal") or {}]:
+            if any(r.get("oz") for a in vs.get("asins") or [] for r in a.get("rows") or []):
+                return True
+    g = run / "16_guide_metrics.json"
+    if g.exists():
+        if ((json.loads(g.read_text(encoding="utf-8")).get("tables") or {}).get("meta.unit_price") or {}).get("basis") == "oz":
+            return True
+    return False
+
+
+def leftover_problems(run, text):
+    """다른 품목에서 남은 말(품목과 상관없는 규칙). 문장(표, 주석, [m:], [r:] 뺀 것)에 (1) 내부 키 이름(snake_case)이 있거나
+    (2) 온스 단위 데이터가 없는 회차인데 온스나 oz가 있으면 오류. 출처 [r:id]가 붙은 줄의 온스는 조사 원문의 단위라 본다."""
+    errors, oz_ok = [], run_has_oz(run)
+    for n, line in prose_lines(text):
+        cited = "[r:" in line
+        bare = re.sub(r"\[[mr]:[^\]]+\]", "", line)
+        for k in sorted(set(SNAKE_KEY.findall(bare))):
+            errors.append(f"{n}번째 줄: 내부 키 이름 '{k}'이 문장에 있음(이름으로 바꾸기)")
+        if not oz_ok and not cited and OZ_WORD.search(bare):
+            errors.append(f"{n}번째 줄: 온스 단위 데이터가 없는 회차인데 '{OZ_WORD.search(bare).group(0)}'이 있음(다른 품목에서 남은 말): {bare.strip()[:50]}")
+    return errors
+
+
 def category_conf(run):
     """회차 이름의 첫 부분(perfume-db-... -> perfume)으로 config/categories/<카테고리>.yaml을 읽는다. 없으면 빈 dict."""
     cat = Path(run).name.split("-")[0]

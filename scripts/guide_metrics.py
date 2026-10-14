@@ -13,6 +13,8 @@
   ev: {키: {t 제목, s 설명, i 리뷰 id(관련 높은 순, 최대 80개), q {리뷰 id: 노랗게 표시할 인용}}}
   quotes: 근거 묶음마다 인용 후보(리뷰 id, 별점, 브랜드, 원문)
   caveats: A장에 적을 한계
+출력 16_guide_writer_input.json(2026-10-14): 위와 같고 ev에서 리뷰 id 목록(i)과 표시 인용(q)만 뺀 것(제목 t, 설명 s, 수 n은 남김).
+  guide-writer만 이 파일을 읽는다(ev의 리뷰 id 목록은 HTML 펼침용이라 문장 쓰기에 필요 없음). 검사와 HTML은 16_guide_metrics.json을 쓴다.
 가중은 리뷰 리포트와 같은 별점 묶음 가중(weight.build_weights).
 """
 import argparse
@@ -24,6 +26,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from issues import review_weights  # noqa: E402
+import sections  # noqa: E402
 from pipeline_io import (ASIN_COLS, ROOT, common_topic, die, split_tags, category_conf, load_csv_or_die, load_schema, load_yaml, now_iso, pct, read_jsonl,  # noqa: E402
                          resolve_run, write_json)
 
@@ -319,10 +322,33 @@ class G:
             self.put(f"m.price_band{r['band']}_range", r["price_range"], r["price_range"])
 
     # ------------------------------------------------ 02 경쟁사 점수표
+    OZ_UNITS = ("fl oz", "fluid ounce", "fluid ounces", "ounce", "ounces", "oz")
+
+    def unit_basis(self, prod):
+        """가격 묶음과 점수표의 단위 가격 기준(품목과 상관없는 규칙). 가격 있는 상품의 unitType이 모두 온스 계열이면 온스당 가격,
+        모두 같은 다른 단위(예: Count)면 그 단위당 가격, 섞였거나 없으면 단위로 나누지 않은 가격."""
+        types = {str(p.get("unitType") or "").strip().lower() for p in prod.values() if p.get("buyBoxPrice")}
+        if types and all(t in self.OZ_UNITS for t in types):
+            return {"basis": "oz", "name": "온스당 가격", "short": "온스당", "suffix": "달러/oz"}
+        if len(types) == 1 and "" not in types:
+            t = next(iter(types))
+            ko = {"count": "개", "set": "세트", "piece": "개", "pack": "팩"}.get(t, t)
+            return {"basis": "unit", "name": f"{ko}당 가격", "short": f"{ko}당", "suffix": f"달러/{ko}"}
+        return {"basis": "price", "name": "가격", "short": "가격", "suffix": "달러"}
+
+    def unit_price(self, basis, price, value):
+        if not price:
+            return None
+        if basis["basis"] == "price":
+            return round(price, 2)
+        return round(price / value, 2) if value else None
+
     def scoreboard(self):
         c = self.conf
         di = c["direction_index"]
         prod = {p["asin"]: p for p in self.market["tables"]["our_products"]}
+        self.ubasis = self.unit_basis(prod)
+        self.tables["meta.unit_price"] = self.ubasis
         dur = self.dcounts["items"].get(c["duration_item"], {})
         rows = []
         tp = c["head_topic"]
@@ -351,7 +377,9 @@ class G:
                                 {d["review_id"] for d in self.details if d["item"] == c["duration_item"] and d["asin"] == asin},
                                 self.detail_quote(c["duration_item"]))
             row = {"asin": asin, "brand": a["brand"], "subcategory": p.get("subcategory"), "price": price,
-                   "size": p.get("size"), "oz": oz, "price_per_oz": round(price / oz, 2) if price and oz else None,
+                   "size": p.get("size") if self.ubasis["basis"] == "oz" else None, "oz": oz,
+                   "price_per_oz": round(price / oz, 2) if price and oz and self.ubasis["basis"] == "oz" else None,
+                   "unit_price": self.unit_price(self.ubasis, price, oz),
                    "weighted_star": a["weighted_mean_star"], "topic_neg_pct": self.wpct(neg, ids), "dir_low": len(low), "dir_high": len(high),
                    "dir_n": n_dir, "dir_index": idx, "duration_values": len(vals), "duration_median": med,
                    "strength": (a.get("strength") or {}).get("name_ko"), "weakness": (a.get("weakness") or {}).get("name_ko"),
@@ -359,6 +387,8 @@ class G:
             rows.append(row)
             self.put(f"{k}.price", price, f"{price:.2f}달러" if price else "-")
             self.put(f"{k}.price_per_oz", row["price_per_oz"], f"{row['price_per_oz']:.2f}달러" if row["price_per_oz"] else "-")
+            self.put(f"{k}.unit_price", row["unit_price"], f"{row['unit_price']:.2f}{self.ubasis['suffix']}" if row["unit_price"] else "-",
+                     note=f"{self.ubasis['name']}(점수표 단위 가격 기준)")
             self.put(f"{k}.star", row["weighted_star"], f_star(row["weighted_star"]))
             self.put(f"{k}.topic_neg", row["topic_neg_pct"], f_pct(row["topic_neg_pct"]), evn)
             self.put(f"{k}.dir_index", idx, "-" if idx is None else f"{idx:+.2f}", evl)
@@ -373,8 +403,10 @@ class G:
         가중은 리뷰 리포트와 같은 별점 묶음 가중이고, 상품끼리는 상품 표본 수만큼 섞인다(점수표와 같음)."""
         c = self.conf
         nb = c.get("price_bands", 3)
-        rows = sorted([r for r in self.tables.get("s.scoreboard", []) if r.get("price_per_oz")], key=lambda r: (r["price_per_oz"], r["asin"]))
-        unpriced = [r["asin"] for r in self.tables.get("s.scoreboard", []) if not r.get("price_per_oz")]
+        up = lambda r: r.get("unit_price", r.get("price_per_oz"))           # 단위 가격(unit_basis), 예전 점수표는 온스당 가격
+        U = getattr(self, "ubasis", None) or {"name": "온스당 가격", "suffix": "달러/oz"}
+        rows = sorted([r for r in self.tables.get("s.scoreboard", []) if up(r)], key=lambda r: (up(r), r["asin"]))
+        unpriced = [r["asin"] for r in self.tables.get("s.scoreboard", []) if not up(r)]
         skin_tp = c["direction_index"]["topic"]
         head_tp = c["head_topic"]
         eff = next((f for f in c.get("focus") or [] if f.get("id") == "efficacy" and f.get("topics")), None) \
@@ -394,28 +426,28 @@ class G:
             ids = [x["review_id"] for x in self.reviews if x["asin"] in set(asins)]
             k = f"price.band{b}"
             row = {"band": b, "name": names[b], "asins": asins, "brands": [r["brand"] for r in rs], "products": len(rs), "reviews": len(ids),
-                   "ppo_min": min((r["price_per_oz"] for r in rs), default=None), "ppo_max": max((r["price_per_oz"] for r in rs), default=None)}
-            row["range_text"] = f"{row['ppo_min']:.2f}~{row['ppo_max']:.2f}달러/oz" if rs else "-"
-            self.put(f"{k}.n", len(rs), f"{len(rs)}개", note=f"온스당 가격 {names[b]} 묶음의 상품 수")
-            self.put(f"{k}.range", [row["ppo_min"], row["ppo_max"]], row["range_text"], note="온스당 가격(점수표 buyBoxPrice / unitValue) 범위")
+                   "ppo_min": min((up(r) for r in rs), default=None), "ppo_max": max((up(r) for r in rs), default=None)}
+            row["range_text"] = f"{row['ppo_min']:.2f}~{row['ppo_max']:.2f}{U['suffix']}" if rs else "-"
+            self.put(f"{k}.n", len(rs), f"{len(rs)}개", note=f"{U['name']} {names[b]} 묶음의 상품 수")
+            self.put(f"{k}.range", [row["ppo_min"], row["ppo_max"]], row["range_text"], note=f"{U['name']}(점수표 단위 가격) 범위")
             for key, tp in topics:
                 hit = [x for x in ids if x in neg[tp]]
                 v = self.wpct(hit, ids) if ids else None
-                ev = self.evidence(f"ev.{k}.{key}", f"온스당 가격 {names[b]}: {self.schema[tp]['name_ko']} 부정",
-                                   f"온스당 가격 {names[b]} 상품의 {self.schema[tp]['name_ko']} 부정 언급", hit, self.tag_quote(tp)) if ids else None
+                ev = self.evidence(f"ev.{k}.{key}", f"{U['name']} {names[b]}: {self.schema[tp]['name_ko']} 부정",
+                                   f"{U['name']} {names[b]} 상품의 {self.schema[tp]['name_ko']} 부정 언급", hit, self.tag_quote(tp)) if ids else None
                 row[key] = v
                 self.put(f"{k}.{key}", v, f_pct(v) if v is not None else "-", ev,
-                         note=f"온스당 가격 {names[b]} 묶음 리뷰어 중 {self.schema[tp]['name_ko']} 부정 언급 리뷰어(가중)")
+                         note=f"{U['name']} {names[b]} 묶음 리뷰어 중 {self.schema[tp]['name_ko']} 부정 언급 리뷰어(가중)")
             wsum = {a: sum(self.weight.get(x["review_id"], 0) for x in self.reviews if x["asin"] == a) for a in asins}
             tw = sum(wsum.values())
             st = round(sum(wsum[a] * star_of[a] for a in asins if a in star_of) / tw, 2) if tw and all(a in star_of for a in asins) else None
             row["star"] = st
-            self.put(f"{k}.star", st, f_star(st) if st is not None else "-", note=f"온스당 가격 {names[b]} 묶음의 가중 평균 별점(상품별 가중 평균을 표본 가중치 합으로 섞음)")
+            self.put(f"{k}.star", st, f_star(st) if st is not None else "-", note=f"{U['name']} {names[b]} 묶음의 가중 평균 별점(상품별 가중 평균을 표본 가중치 합으로 섞음)")
             out.append(row)
         self.tables["price.bands"] = out
         self.tables["meta.price_bands"] = {"topics": {key: {"id": tp, "name": self.schema[tp]["name_ko"]} for key, tp in topics},
                                           "unpriced": unpriced}
-        self.put("price.unpriced", len(unpriced), f"{len(unpriced)}개", note="온스당 가격이 없어 가격 묶음에서 뺀 상품 수")
+        self.put("price.unpriced", len(unpriced), f"{len(unpriced)}개", note=f"{U['name']}이 없어 가격 묶음에서 뺀 상품 수")
 
     # ------------------------------------------------ 03 문제
     def problems(self):
@@ -615,7 +647,39 @@ class G:
                     f"ev.label.{x['id']}", x["name"], x["name"] + " 라벨이 붙은", self.label_reviews[x["id"]], self.label_quote(x["id"])))
             for t in row["terms"]:
                 self.put(f"{k}.term.{t['term']}", t["volume"], f"{f_int(t['volume'] or 0)}")
+            self.variant_direction(s, row, k)
         self.tables["std.board"] = rows
+
+    def variant_direction(self, s, row, k):
+        """기준의 부정 라벨에 방향 지수 라벨(guide.direction_index high, low)이 들면, 리뷰 리포트 11장의 상품을 합친 변형별 방향
+        (05_metrics.json variant_signals[].pooled, 예: 옷 사이즈마다 작게 나옴 대 크게 나옴)을 그 기준의 근거로 붙인다. 품목과 상관없는 규칙."""
+        di = self.conf.get("direction_index") or {}
+        dl = set((di.get("high") or {}).get("labels") or []) | set((di.get("low") or {}).get("labels") or [])
+        if not dl or not dl & set(s.get("neg_labels") or []):
+            return
+        for vs in self.m.get("variant_signals") or []:
+            if not vs.get("pooled") or not vs.get("direction"):
+                continue
+            # 순서가 있는 변형(용량, 옷 글자 사이즈)만. 색처럼 순서가 없는 키는 바뀌는 자리가 뜻이 없어 붙이지 않는다
+            if not all(r.get("oz") or sections.letter_size(r["variant"])[0] for r in vs["pooled"]):
+                continue
+            d = vs["direction"]
+            rows = [{"variant": r["variant"], "reviews": r["reviews"], "asins": r["asins"], "high": r["high"], "low": r["low"], "index": r["index"]}
+                    for r in vs["pooled"]]
+            row.setdefault("variant_direction", []).append({"key": vs["key"], "high": d["high"], "low": d["low"], "rows": rows})
+            kk = f"{k}.vdir.{vs['key']}"
+            for r in rows:
+                self.put(f"{kk}.{r['variant']}", r["index"], "-" if r["index"] is None else f"{r['index']:+.2f}",
+                         note=f"{vs['key']} {r['variant']} 리뷰 {r['reviews']}개 중 {d['high']} {r['high']}개, {d['low']} {r['low']}개의 방향 지수(상품 {r['asins']}개 합침)")
+            # 방향이 바뀌는 곳: 지수가 있는 변형을 순서대로 보아 부호가 처음 바뀌는 자리
+            signed = [r for r in rows if r["index"] not in (None, 0)]
+            flip = next((i for i in range(1, len(signed)) if (signed[i]["index"] > 0) != (signed[i - 1]["index"] > 0)), None)
+            if flip is not None:
+                a, b = signed[:flip], signed[flip:]
+                side = lambda x: d["high"] if x["index"] > 0 else d["low"]
+                txt = (f"{a[0]['variant']}~{a[-1]['variant']} {side(a[0])}, {b[0]['variant']}~{b[-1]['variant']} {side(b[0])}")
+                self.put(f"{kk}.flip", [a[-1]["variant"], b[0]["variant"]], txt,
+                         note=f"상품을 합친 {vs['key']}별 방향 지수의 부호가 바뀌는 자리(리뷰 리포트 11장 표)")
 
     # ------------------------------------------------ 상품 사양과 기준 1, 2, 4, 6 연결
     def specs_link(self):
@@ -900,6 +964,9 @@ def build(run):
                        "market": "market/market.json(spd-amz-market, 2026-10-07)", "research": "15_research.yaml",
                        **({"specs": "23_specs_verified.json(브랜드 사이트와 소매점 상품 페이지, 다시 열어 확인한 값만)"} if (run / "23_specs_verified.json").exists() else {})}}
     write_json(run / "16_guide_metrics.json", out)
+    slim = {**out, "ev": {k: {x: e[x] for x in ("t", "s", "n") if x in e} for k, e in g.ev.items()},
+            "note": "16_guide_metrics.json에서 ev의 리뷰 id 목록(i)과 표시 인용(q)만 뺀 작성자용 파일. 값, 표, 인용은 같음"}
+    write_json(run / "16_guide_writer_input.json", slim)
     print(f"16_guide_metrics.json: 값 {len(g.values)}개, 표 {len(g.tables)}개, 근거 묶음 {len(g.ev)}개"
           f"(리뷰 id {sum(len(e['i']) for e in g.ev.values()):,}개)")
     return 0

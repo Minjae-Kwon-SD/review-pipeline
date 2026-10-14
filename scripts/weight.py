@@ -5,7 +5,8 @@
       04_tags.jsonl(sonnet 묶음 태그를 합친 것, 리포트가 쓰는 태그),
       config/pipeline.yaml(별점 묶음과 경고 기준),
       04_gold_eval.json(있으면 부록의 정확도 숫자를 리포트 표기로 옮겨 accuracy에 넣는다)
-출력: 05_metrics.json(리포트 문장에 쓰는 모든 숫자), 05_tables.md(리포트에 그대로 붙일 표)
+출력: 05_metrics.json(리포트 문장에 쓰는 모든 숫자), 05_tables.md(리포트에 그대로 붙일 표),
+      05_quote_pool.json(리포트 작성자용 인용 후보: 주제와 감성마다 최대 10개를 브랜드와 별점 고르게, 2026-10-14)
 
 사용: python scripts/weight.py [회차] --weights-only
   태그와 스키마 없이 가중치만 계산해 05_weights_preview.md(ASIN별 묶음, 표본 수, 실제 %, 방식, 가중치, 경고)를 쓴다.
@@ -31,7 +32,9 @@
   리뷰 한 개의 비중 w(s) / n이 max_review_share보다 큼(적은 리뷰가 큰 비중을 대표함).
 """
 import argparse
+import hashlib
 import json
+import random
 import sys
 from collections import Counter, defaultdict
 from itertools import combinations
@@ -316,6 +319,64 @@ def topic_stats(tags, topic_ids, weight, review_ids):
     return out
 
 
+QUOTE_POOL_PER = 10
+QUOTE_MIN_CHARS = 15
+
+
+def quote_pool(run, reviews, tags, brand_of_asin, metrics, per=QUOTE_POOL_PER):
+    """리포트 작성자가 04_tags.jsonl과 02_reviews.csv를 통째로 읽지 않게, 인용 후보만 모은 작은 파일(05_quote_pool.json).
+    주제와 감성마다 최대 per개: 별점을 돌아가며 하나씩, 같은 별점 안에서는 지금까지 덜 뽑힌 브랜드부터(시드 고정).
+    짧은 인용(QUOTE_MIN_CHARS 미만)은 긴 것이 모자랄 때만. 05_metrics.json의 quote_candidates에 있는 리뷰의 브랜드도 함께 적는다."""
+    rng = random.Random(int(hashlib.sha256(f"{run.name}:quote_pool".encode()).hexdigest()[:12], 16))
+    rv = {r["review_id"]: r for r in reviews}
+    brand = lambda rid: brand_of_asin.get(rv[rid]["asin"], "") if rid in rv else ""  # noqa: E731
+    pairs = defaultdict(list)
+    for t in tags:
+        if t.get("topic") != OFF_CATEGORY and t["review_id"] in rv and t.get("quote"):
+            pairs[(t["topic"], t["sentiment"])].append(t)
+    out = {}
+    for (topic, sent), ts in sorted(pairs.items()):
+        ts = sorted(ts, key=lambda t: t["review_id"])
+        rng.shuffle(ts)
+        ts.sort(key=lambda t: len(t["quote"]) < QUOTE_MIN_CHARS)          # 긴 인용 먼저(안정 정렬이라 섞인 순서는 유지)
+        by_star = defaultdict(list)
+        for t in ts:
+            by_star[int(rv[t["review_id"]]["star"])].append(t)
+        used, picked = Counter(), []
+        stars = sorted(by_star)
+        while len(picked) < per and any(by_star[x] for x in stars):
+            for x in stars:
+                if len(picked) >= per or not by_star[x]:
+                    continue
+                pool = by_star[x]
+                short = all(len(t["quote"]) < QUOTE_MIN_CHARS for t in pool)
+                cand = [t for t in pool if short or len(t["quote"]) >= QUOTE_MIN_CHARS]
+                t = min(cand, key=lambda t: (used[brand(t["review_id"])], pool.index(t)))
+                pool.remove(t)
+                used[brand(t["review_id"])] += 1
+                picked.append({"review_id": t["review_id"], "brand": brand(t["review_id"]), "star": int(rv[t["review_id"]]["star"]),
+                               "quote": t["quote"]})
+        out[f"{topic}.{sent}"] = {"tags": len(ts), "quotes": picked}
+    cand_ids = set()
+
+    def walk(o):
+        if isinstance(o, dict):
+            if "review_id" in o and "quote" in o:
+                cand_ids.add(o["review_id"])
+            for v in o.values():
+                walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v)
+    walk(metrics)
+    write_json(run / "05_quote_pool.json", {
+        "note": "리포트 작성자용 인용 후보. 04_tags.jsonl의 quote와 02_reviews.csv의 별점, 01_asins.csv의 브랜드를 그대로 옮긴 것. "
+                "주제.감성마다 최대 10개(별점을 돌아가며, 브랜드 고르게). tags는 그 주제와 감성의 전체 태그 수",
+        "per_pair": per, "pairs": out,
+        "candidate_brands": {r: brand(r) for r in sorted(cand_ids)}})
+    return sum(len(v["quotes"]) for v in out.values()), len(out)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("run", nargs="?")
@@ -461,6 +522,13 @@ def main():
         "brand_compare": brand_compare,
     }
     metrics["notes"] = data_notes(run, dist, asin_info, metrics["summary"], weighting)
+    # 8장 약점 카드와 12장 전략에 꼭 넣을 주제(품목과 상관없는 규칙): 부정 언급 리뷰어(가중) 상위 3개는 약점 카드,
+    # 그중 상위 2개는 전략. 같은 주제가 강점이기도 하면 양쪽을 함께 쓴다. 전체 만족도와 부정 언급 리뷰 impact_min개 미만은 뺀다
+    ranked = sorted([t for t in metrics["topics"] if t["id"] not in COMPARE_EXCLUDE and t["negative"] >= args.impact_min],
+                    key=lambda t: (-t["neg_reviewer_pct"], t["id"]))
+    metrics["must_cover"] = {"rule": f"부정 언급 리뷰어(가중) 상위 3개 주제는 8장 약점 카드에, 상위 2개는 12장 전략에(부정 태그 {args.impact_min}개 이상)",
+                             "weakness": [{"id": t["id"], "name_ko": t["name_ko"], "neg_reviewer_pct": t["neg_reviewer_pct"]} for t in ranked[:3]],
+                             "strategy": [{"id": t["id"], "name_ko": t["name_ko"]} for t in ranked[:2]]}
     if off:
         metrics["off_category"] = {"reviews": len(off), "by_asin": off_by_asin, "review_ids": off}
         metrics["notes"]["off_category_text"] = (
@@ -469,8 +537,15 @@ def main():
     prices = run / "01_prices.json"
     if prices.exists():
         metrics["prices"] = json.loads(prices.read_text(encoding="utf-8"))
-    # 11장: 변형(용량) 신호. 변형 키는 데이터로 고른다(카테고리와 상관없음)
-    metrics["variant_signal"] = sections.variant_signal(reviews, tags, weight, schema, metrics.get("prices"), COMPARE_EXCLUDE)
+    # 11장: 변형 신호. 변형 키는 데이터로 고른다(카테고리와 상관없음). 키가 여럿이면 앞선 키부터 모두(variant_signals),
+    # variant_signal은 그 첫째. 카테고리 설정에 방향 지수(guide.direction_index)가 있고 세부 이슈 라벨이 있으면 변형마다 방향도 센다
+    labels_path = run / "07b_issue_labels.jsonl"
+    var_labels = [json.loads(x) for x in labels_path.read_text(encoding="utf-8").splitlines() if x.strip()] \
+        if labels_path.exists() else []
+    direction = (category_conf(run).get("guide") or {}).get("direction_index")
+    metrics["variant_signals"] = sections.variant_signals(reviews, tags, weight, schema, metrics.get("prices"), COMPARE_EXCLUDE,
+                                                          direction=direction, labels=var_labels)
+    metrics["variant_signal"] = metrics["variant_signals"][0]
     metrics["brand_of_asin"] = brand_of_asin
     # 8장과 10장: 세부 이슈 개수(있으면). 숫자는 issues.py label-check가 만든 07b_issue_counts.json 그대로 옮긴다
     counts_path = run / "07b_issue_counts.json"
@@ -501,10 +576,12 @@ def main():
                                  "leave_one_out_head_neg_text": f"{min(x['head_neg'] for x in r['leave_one_out'][1:]):.1f}%~"
                                                                 f"{max(x['head_neg'] for x in r['leave_one_out'][1:]):.1f}%"}
     write_json(run / "05_metrics.json", metrics)
+    n_q, n_p = quote_pool(run, reviews, tags, brand_of_asin, metrics)
     (run / "05_tables.md").write_text(render_tables({**metrics, "_schema_names": schema}), encoding="utf-8")
     s = metrics["summary"]
     print(f"집계 완료: 리뷰 {s['reviews']}개, 태그 {s['tags']}개, 표본 평균 {s['sample_mean_star']}★, "
           f"가중 평균 {s['weighted_mean_star']}★. 자체 검사 통과(ASIN {s['asins']}개).")
+    print(f"  리포트 작성자용 인용 후보: 주제와 감성 {n_p}칸, 인용 {n_q}개 → 05_quote_pool.json")
     for w in weighting["warnings"]:
         print(f"  주의: {w}")
 
@@ -562,7 +639,7 @@ def render_tables(m):
     block("브랜드 심층", sections.render_brand(m["brand_deep"]))
     block("세부 이슈", sections.render_issues(m["issues"], m["_schema_names"], m.get("issue_overlap"), m.get("safety_check"))
           if m.get("issues") else ["세부 이슈 라벨이 아직 없습니다(07b_issue_counts.json 없음)."])
-    block("변형 신호", sections.render_variant(m["variant_signal"], m["_schema_names"], m.get("brand_of_asin", {})))
+    block("변형 신호", [x for vs in m["variant_signals"] for x in sections.render_variant(vs, m["_schema_names"], m.get("brand_of_asin", {})) + [""]][:-1])
 
     def sw(x, key):
         return f"{x['name_ko']}({fmt_pct(x[key])})" if x else "없음"

@@ -40,6 +40,7 @@ runs/<회차>/raw/           MCP 응답 원문(reviews_<ASIN>.json, product_<ASI
 config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지 않는 규칙만 여기에 둔다.
 
 - ⏸ 표시(ASIN 확인, 스키마 승인, 정답 세트 태깅, 시험 태깅 뒤 계속, 세부 이슈 승인, 설계 정보 항목 승인)에서 멈추고 담당자를 기다린다.
+- 관문 5개(상품 확인, 주제 승인과 정답 세트, 시험 태깅 확인, 설계 정보 항목 승인, 세부 이슈 승인)에서만 묻는다. 그 밖의 갈림길은 추천안으로 정하고 docs/decisions_log.md에 한 줄 남긴 뒤 다음 관문에서 "정한 것"으로 보여 준다. 관문 밖에서도 묻는 것은 유료 수집 켜기, 권한 파일의 막는 줄 지우기, 유리님께 보내는 것뿐(review-run.md "사람에게 묻는 것"). 시간은 AI 작업, 담당자 라벨링, 담당자 기다림, 멈춤으로 나눠 잰다.
 - 시작할 때 `scripts/stage_plan.py plan`으로 다시 할 단계만 고른다. 중간에 끊기면 state.json에서 done이 아닌 첫 단계부터 다시 한다.
 - 재시도와 동시 실행은 config/stages.yaml 상한 안에서만 한다. 상한에 닿으면 멈추고 담당자에게 넘긴다.
 - 대량 작업 방식은 단계마다 config/stages.yaml의 method를 따른다. v2(scripts/stage_packet.py가 만든 작업 파일과 그 파일이 적은 묶음 입력만 넘김)는 설계 정보 추출에만, 태깅과 이슈 라벨은 묶음마다 에이전트 하나(per_batch).
@@ -70,7 +71,7 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | 04_tags.jsonl | audit_quotes.py tags --model sonnet | 검사를 통과한 sonnet 묶음 태그를 합친 것. 리포트가 쓰는 태그 |
 | 04_quote_check_{model}.json | audit_quotes.py tags | 태그 기계 검사 결과(failed_batches, 인용 앞 부정어 경고) |
 | 04_negation_check.json | audit_quotes.py negation | 인용 바로 앞 세 단어(같은 문장) 안에 부정어가 있는 태그(경고만) |
-| 04_audit_sample.jsonl | eval_gold.py audit-sample | evidence-auditor가 판정할 태그 표본(ASIN마다 25개, 감성 비율대로, 부정 최소 3개) |
+| 04_audit_sample.jsonl(+ _p1, _p2) | eval_gold.py audit-sample | evidence-auditor가 판정할 태그 표본(ASIN마다 25개, 감성 비율대로, 부정 최소 3개)과 감사자 둘 몫으로 리뷰 단위로 나눈 반쪽(판정은 04_tag_audit_p1.yaml, _p2.yaml, audit가 합침) |
 | 04_gold_eval.json, .md | eval_gold.py score | 정답 세트 점수와 불일치 목록 |
 | 04_tag_audit.yaml | evidence-auditor (메인 세션이 저장) | 표본 태그 재판정 |
 | 04_tag_audit_summary.json | eval_gold.py audit | 표본 FAIL 비율(전체, ASIN별)과 다시 태깅할 묶음(batches_with_findings) |
@@ -79,12 +80,13 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | 07a_issues_draft.yaml, .md | issues.py merge | 세부 이슈 목록 초안(검사 결과 포함). 담당자가 고쳐 07a_issues_approved.yaml로 승인 |
 | 01_prices.json | collect.py prices | 변형별 현재 가격과 조회 날짜(7장 가격대, 11장 온스당 가격) |
 | 05_metrics.json, 05_tables.md | weight.py | 리포트에 쓰는 모든 숫자(정답 세트 정확도 accuracy와 표기 문자열, 별점 보정 weighting, 리포트 문구 notes 포함)와 리포트용 표 |
+| 05_quote_pool.json | weight.py | 리포트 작성자용 인용 후보(주제와 감성마다 최대 10개, 별점과 브랜드 고르게, 리뷰 id, 브랜드, 별점, 원문). report-writer는 04_tags.jsonl, 02_reviews.csv 대신 이것과 05_metrics.json의 quote_candidates만 읽음 |
 | 05_weights_preview.md | weight.py --weights-only | 태그 없이 본 ASIN별 묶음, 표본 수, 실제 %, 방식, 가중치, 경고 |
 | 07a_issues_approved.yaml | issues.py approve | 승인된 세부 이슈 목록(승인 시각, 승인자) |
 | 07b_label_batches.json, 07b_label_input/, 07b_labels_auto.jsonl | issues.py label-plan | 라벨 묶음, 기타만 있는 주제와 방향의 자동 기타 |
 | 07b_labels_<묶음>.jsonl | issue-tagger | 인용마다 세부 이슈 라벨(1~2개 또는 other) |
 | 07b_issue_labels.jsonl, 07b_issue_counts.json, 07b_issue_check.json | issues.py label-check | 합친 라벨, 라벨별 리뷰 수와 가중 비율과 ASIN별 수, 기타 비율, 겹침 |
-| 07b_issue_audit_sample.jsonl, 07b_issue_audit.yaml, 07b_issue_audit_summary.json | issues.py, evidence-auditor | 라벨 감사 표본, 판정, FAIL 비율 |
+| 07b_issue_audit_sample.jsonl(+ _p1, _p2), 07b_issue_audit_p1.yaml, _p2.yaml, 07b_issue_audit.yaml, 07b_issue_audit_summary.json | issues.py, evidence-auditor 둘 | 라벨 감사 표본과 감사자마다 반쪽, 반쪽 판정, 합친 판정, 반쪽마다와 전체 FAIL 비율 |
 | 07c_safety_input.jsonl, 07c_safety_verdicts.yaml, 07c_safety_check.md, 07c_safety_summary.json | issues.py, evidence-auditor | 안전 인용과 이상 반응 판정, 증상 종류(symptom_type)별 리뷰 수와 가중 비율(negative_text) |
 | 07c_tagging_error_notes.md | 메인 세션 | 고치지 않고 남긴 의심 태그 메모 |
 | 06_report.md | report-writer | 한국어 리포트 |
@@ -100,7 +102,7 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | 05_robustness.json | robustness.py | 견고성 점검: 다시 뽑기(씨앗 고정)와 상품 하나씩 빼기. metrics의 robustness와 가이드 A장 표의 원본 |
 | 23_spec_input.json, 23_specs.yaml | specs.py prep, product-spec-collector | 상품마다 모을 사양 항목, 모은 값(출처 주소, 원문 문장, 같은 상품인지 확인한 정도) |
 | 23_specs_check.json, 23_specs_verified.json | specs.py check | 사양 값마다 다시 열어 확인한 결과, 확인된 값만(가이드가 씀) |
-| 16_guide_metrics.json | guide_metrics.py | 가이드의 모든 숫자, 표, 근거 리뷰 묶음 |
+| 16_guide_metrics.json, 16_guide_writer_input.json | guide_metrics.py | 가이드의 모든 숫자, 표, 근거 리뷰 묶음. 작성자용은 근거 묶음의 리뷰 id 목록만 뺀 것(guide-writer와 가이드 감사자가 읽음) |
 | 17_guide.md | guide-writer | 개발 가이드 문장([m:키], [r:id]) |
 | 18_guide_quote_check.json, 18_guide_audit.yaml | guide_check.py, evidence-auditor | 가이드 문장 검사 |
 | 07_guide.html, 07_guide_html_numbers.json, 07_guide_html_check.json | render_guide_html.py build, check | 개발 가이드 HTML과 검사 |

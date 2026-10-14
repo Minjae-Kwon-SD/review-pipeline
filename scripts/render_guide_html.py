@@ -299,7 +299,17 @@ class R:
         return (f"<div class='std'><div class='std-h'><div class='n'>{n}</div><b>{self.inline(title)}</b></div>{data}"
                 f"<div class='std-grid'>{''.join(cells)}</div>"
                 + (f"<div class='chips'>{''.join(chips)}</div>" if chips else "") + "".join(notes)
-                + (self.spec_table(s["id"]) if s else "") + "</div>")
+                + (self.vdir_table(s) + self.spec_table(s["id"]) if s else "") + "</div>")
+
+    def vdir_table(self, s):
+        """기준에 붙은 변형별 방향(guide_metrics.variant_direction): 상품을 합친 변형마다 리뷰 수, 두 방향 라벨 수, 방향 지수."""
+        out = ""
+        for v in s.get("variant_direction") or []:
+            rows = [[esc(r["variant"]), f"{r['reviews']:,}", str(r["asins"]), str(r["high"]), str(r["low"]),
+                     "-" if r["index"] is None else f"{r['index']:+.2f}"] for r in v["rows"]]
+            out += (f"<div class='coltitle' style='margin-top:12px'>{esc(v['key'])}별 방향(상품 합침, {esc(v['high'])} 대 {esc(v['low'])}, 리뷰 리포트 11장)</div>"
+                    + self.table([v["key"], "리뷰", "상품 수", v["high"], v["low"], "방향 지수"], rows))
+        return out
 
     # ------------------------------------------------ 스크립트가 그리는 표
     def bars(self, rows, label, value, text, ev, mx=None, color="neg"):
@@ -388,8 +398,9 @@ class R:
                                  [[esc(r["band"]), esc(r["price_range"]), esc(r["brands"]), esc("-" if r["avg_rating"] is None else f"{r['avg_rating']:.2f}"),
                                    esc(f"{r['revenue_share']:.1f}%")] for r in pb]))
         if "가격 구조" in t and T.get("price.bands"):
-            # 온스당 가격 묶음별 불만(guide_metrics.py price_complaints). 숫자는 values의 표기 그대로
+            # 단위 가격 묶음별 불만(guide_metrics.py price_complaints, 단위는 meta.unit_price). 숫자는 values의 표기 그대로
             V = self.M["values"]
+            un = (T.get("meta.unit_price") or {}).get("name", "온스당 가격")
             tp = (T.get("meta.price_bands") or {}).get("topics") or {}
             keys = [k for k in ("skin_neg", "head_neg", "eff_neg") if k in tp]
             seen, cols = set(), []
@@ -402,13 +413,14 @@ class R:
                 return self.tnum(v.get("text", "-"), v.get("ev"))
             rows = [[esc(b["name"]), cell(b, "range"), cell(b, "n"), esc(", ".join(b.get("brands") or []))]
                     + [cell(b, k) for k in cols] + [cell(b, "star")] for b in T["price.bands"]]
-            return ("<div class='coltitle'>온스당 가격 묶음별 불만(상품 순위로 나눈 묶음, 부정 언급 리뷰어 가중 비율)</div>"
-                    + self.table(["묶음", "온스당 가격", "상품", "브랜드"] + [f"{tp[k]['name']} 부정(가중)" for k in cols] + ["가중 평균 별점"], rows))
+            return (f"<div class='coltitle'>{esc(un)} 묶음별 불만(상품 순위로 나눈 묶음, 부정 언급 리뷰어 가중 비율)</div>"
+                    + self.table(["묶음", un, "상품", "브랜드"] + [f"{tp[k]['name']} 부정(가중)" for k in cols] + ["가중 평균 별점"], rows))
         if "점수표" in t:
             sb = T.get("meta.scoreboard") or {}      # 카테고리 이름(없으면 향수 때 문구)
             tn, hi, lo = sb.get("topic_name"), sb.get("dir_high", "너무 셈"), sb.get("dir_low", "약함")
             du, dn = sb.get("duration_unit", "시간"), sb.get("duration_name", "말한 지속 시간")
-            show_size = (not sb) or any(r.get("size") or r.get("price_per_oz") for r in T.get("s.scoreboard", []))
+            ub = (T.get("meta.unit_price") or {}).get("basis")       # 용량과 온스당 칸은 단위가 온스 계열인 품목만(예전 파일은 값으로 판단)
+            show_size = ub == "oz" if ub else ((not sb) or any(r.get("size") or r.get("price_per_oz") for r in T.get("s.scoreboard", [])))
             rows = []
             for r in T.get("s.scoreboard", []):
                 rows.append([f"<b>{esc(r['brand'])}</b><div class='mono mut'>{esc(r['asin'])}</div>", esc(r["subcategory"] or "-"),
@@ -553,7 +565,7 @@ class R:
                 f"<div><b>불만 리뷰</b> {neg}(가중 {s['neg_weighted_pct']:.1f}%)<div class='mut small'>{labs}</div></div>"
                 f"<div><b>만족 리뷰</b> {pos}<div class='mut small'>부정이 가장 적은 상품: {esc(s['best']['brand'])} {self.pc(s['best']['neg_pct'])}</div></div>"
                 f"<div><b>설계 정보</b><div class='mut small'>{items}</div></div><div><b>관련 검색어(30일 검색량)</b><div class='mut small'>{terms}</div></div></div></div>"
-                + self.spec_table(s["id"]))
+                + self.vdir_table(s) + self.spec_table(s["id"]))
 
     def anatomy(self):
         """제품 해부도(카테고리 설정 guide.anatomy: viewbox, shapes, points). 설정이 없으면 그림을 넣지 않는다."""

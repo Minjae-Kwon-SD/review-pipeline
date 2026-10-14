@@ -61,11 +61,14 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from pipeline_io import (ASIN_COLS, REVIEW_COLS, SENTIMENTS, STARS, die, load_config, load_csv_or_die,
+from pipeline_io import (ASIN_COLS, REVIEW_COLS, ROOT, SENTIMENTS, STARS, die, load_config, load_csv_or_die,
                          load_schema, load_yaml, now_iso, read_jsonl, resolve_run, write_json, write_jsonl)
 
 SHEET_TEMPLATE = Path(__file__).resolve().parent / "gold_sheet.html"
 GOLD_COLS = ["review_id", "asin", "star", "title", "body"]
+# 정답 세트 두 벌(2026-10-13): rules = 규칙을 다듬는 데 쓴 세트(gold/), score = 채점만 하는 세트(gold_score/, 규칙을 만들 때 보지 않음)
+GOLD_DIRS = {"rules": "gold", "score": "gold_score"}
+GOLD_DIR = "gold"
 
 
 def seeded(run, salt):
@@ -186,6 +189,73 @@ def pick(run, per_asin, min_chars, sample_per_asin):
     return 0
 
 
+def pick_score(run, per_asin, min_chars):
+    """채점용 정답 세트(gold_score/)를 스크립트가 상품과 별점으로 고르게 뽑는다(2026-10-13 담당자 지정).
+    - 02_reviews.csv에서 규칙용 정답 세트(gold/), 스키마 표본(03_schema_sample.csv), 스키마 예시 리뷰를 뺀 나머지에서 뽑는다
+      (2026-10-14: 스키마를 만든 에이전트가 본 리뷰로 채점하면 점수가 부푼다). 본문 min_chars자 미만은 뺀다.
+    - per_asin이 4보다 적으면 남은 별점 4개 중 쓰는 별점도 상품마다 돌린다(앞 별점에 몰리지 않게).
+    - 상품마다 per_asin개(기본 4개), 한 상품 안에서는 별점이 겹치지 않게. 상품마다 빠지는 별점을 돌려
+      (상품 i는 별점 (i mod 5)+1을 뺌, 상품은 ASIN 순서) 전체로 별점마다 고르게 나오게 한다.
+    - 시드는 회차 이름과 "gold_score"로 고정. 시드와 뽑은 목록을 gold_pick_log.json에 남긴다."""
+    reviews = load_csv_or_die(run / "02_reviews.csv", REVIEW_COLS)
+    asins = sorted({r["asin"] for r in reviews})
+    rules = set()
+    p = run / GOLD_DIRS["rules"] / "gold_reviews.csv"
+    if p.exists():
+        with open(p, encoding="utf-8-sig", newline="") as f:
+            rules = {r["review_id"] for r in csv.DictReader(f)}
+    seen_by_drafter = set()
+    sp = run / "03_schema_sample.csv"
+    if sp.exists():
+        with open(sp, encoding="utf-8-sig", newline="") as f:
+            seen_by_drafter = {r["review_id"] for r in csv.DictReader(f)}
+    for name in ("03_schema_approved.yaml", "03_schema_draft.yaml"):
+        if (run / name).exists():
+            seen_by_drafter |= {str(e.get("review_id")) for t in load_schema(run, name).values() for e in t["examples"] if isinstance(e, dict)}
+            break
+    rules |= seen_by_drafter
+    rng = seeded(run, "gold_score")
+    chosen_all, short, plan = [], {}, {}
+    for i, a in enumerate(asins):
+        skip = STARS[i % len(STARS)]
+        rest = [s for s in STARS if s != skip]
+        stars = sorted((rest[i % len(rest):] + rest[:i % len(rest)])[:per_asin]) if per_asin < len(rest) else rest
+        plan[a] = {"skipped_star": skip, "stars": stars}
+        for s in stars:
+            pool = shuffled([r for r in reviews if r["asin"] == a and int(r["star"]) == s and r["review_id"] not in rules
+                             and len(r["body"].strip()) >= min_chars], rng)
+            if pool:
+                chosen_all.append(pool[0])
+            else:
+                short.setdefault(a, []).append(s)
+        for s in [x for x in STARS if x not in stars]:      # 모자란 만큼 그 상품의 안 쓴 별점에서 채운다(2026-10-14)
+            if len(short.get(a, [])) <= sum(1 for r in chosen_all if r["asin"] == a and int(r["star"]) not in stars):
+                break
+            pool = shuffled([r for r in reviews if r["asin"] == a and int(r["star"]) == s and r["review_id"] not in rules
+                             and len(r["body"].strip()) >= min_chars], rng)
+            if pool:
+                chosen_all.append(pool[0])
+                plan[a].setdefault("filled_from", []).append(s)
+    out = run / GOLD_DIRS["score"]
+    out.mkdir(exist_ok=True)
+    write_rows(out / "gold_reviews.csv", GOLD_COLS, chosen_all)
+    star_count = Counter(int(r["star"]) for r in chosen_all)
+    write_json(out / "gold_pick_log.json", {
+        "picked_at": now_iso(), "seed": f"{run.name}:gold_score", "purpose": "채점만(틀린 것을 보고 규칙을 고치지 않음)",
+        "method": f"스크립트가 상품과 별점으로 고르게 뽑았다(상품마다 {per_asin}개, 한 상품 안 별점 겹치지 않음, 빠지는 별점을 상품마다 돌림)",
+        "criteria": {"per_asin": per_asin, "min_body_chars": min_chars,
+                     "excluded": f"규칙용 정답 세트와 스키마 표본과 예시 리뷰 {len(rules)}개(스키마 쪽 {len(seen_by_drafter)}개)"},
+        "plan": plan, "star_counts": {str(s): star_count[s] for s in STARS}, "short": short,
+        "picked": [{"review_id": r["review_id"], "asin": r["asin"], "star": int(r["star"])} for r in chosen_all]})
+    print(f"채점용 정답 세트 {len(chosen_all)}개를 {GOLD_DIRS['score']}/gold_reviews.csv에 적었습니다. "
+          f"스크립트가 상품과 별점으로 고르게 뽑았습니다(상품마다 {per_asin}개, 한 상품 안 별점 겹치지 않음, 본문 {min_chars}자 이상, "
+          f"규칙용 정답 세트와 스키마 표본과 예시 {len(rules)}개 뺌, 시드 {run.name}:gold_score).")
+    print(star_table(chosen_all, asins))
+    if short:
+        print("  주의: 그 별점에 뽑을 리뷰가 없음 " + ", ".join(f"{a} {v}" for a, v in short.items()))
+    return 0
+
+
 # ---------------------------------------------------------------- sheet
 
 REQUIRED_COMMON = ("overall", "performance")    # 정답 세트 화면에서 리뷰마다 꼭 고르는 주제(id나 common_id)
@@ -193,6 +263,14 @@ REQUIRED_COMMON = ("overall", "performance")    # 정답 세트 화면에서 리
 
 def required_topics(schema):
     return [tid for tid, t in schema.items() if tid in REQUIRED_COMMON or str(t.get("common_id") or "") in REQUIRED_COMMON]
+
+
+def sheet_order(schema, required):
+    """정답 화면의 주제 칸 순서(2026-10-14 담당자 결정, 품목과 상관없음): 필수 주제를 맨 앞에, 그다음 제품 주제, 브랜드 주제.
+    같은 묶음 안에서는 스키마 표본에서 근거가 많은 주제(evidence_count)부터, 같으면 스키마 순서."""
+    idx = {tid: i for i, tid in enumerate(schema)}
+    return sorted(schema.values(), key=lambda t: (t["id"] not in required, t.get("side") != "P",
+                                                  -(t.get("evidence_count") or 0), idx[t["id"]]))
 
 
 def sheet(run, translations=None, schema_name=None):
@@ -203,7 +281,7 @@ def sheet(run, translations=None, schema_name=None):
     schema = load_schema(run, schema_name)
     draft_mode = schema_name != "03_schema_approved.yaml"
     required = required_topics(schema)
-    picked = run / "gold" / "gold_reviews.csv"
+    picked = run / GOLD_DIR / "gold_reviews.csv"
     if not picked.exists():
         die("gold/gold_reviews.csv가 없습니다. eval_gold.py pick을 먼저 돌려 주세요.")
     with open(picked, encoding="utf-8-sig", newline="") as f:
@@ -212,10 +290,20 @@ def sheet(run, translations=None, schema_name=None):
     brands = {r["asin"]: r["brand"] for r in load_csv_or_die(run / "01_asins.csv", ASIN_COLS)}
     # 있으면 원문 아래에 한국어 번역을 참고용으로 보여 준다(태깅은 원문 기준, 리포트와 인용 검사에는 쓰지 않음)
     # 번역 파일은 gold 폴더(기본)나 --translations로 준 경로(gold 폴더 쓰기가 막힌 세션에서 메인 세션이 쓴 파일)
-    tr_path = Path(translations) if translations else run / "gold" / "gold_translations_ko.json"
+    tr_path = Path(translations) if translations else run / GOLD_DIR / "gold_translations_ko.json"
     tr = json.loads(tr_path.read_text(encoding="utf-8")) if tr_path.exists() else {}
+    rules_tr = run / GOLD_DIRS["rules"] / "gold_translations_ko.json"
+    if GOLD_DIR != GOLD_DIRS["rules"] and not (tr.get("terms") or tr.get("topics")) and rules_tr.exists():
+        base = json.loads(rules_tr.read_text(encoding="utf-8"))      # 스키마 용어 번역은 규칙용 세트 것을 같이 씀(리뷰 번역은 섞지 않음)
+        tr = {**tr, "terms": base.get("terms") or {}, "topics": base.get("topics") or {}}
     data = {
         "run": run.name,
+        "store_key": run.name if GOLD_DIR == GOLD_DIRS["rules"] else f"{run.name}:{GOLD_DIR}:" + hashlib.sha256(
+            ",".join(g["review_id"] for g in gold).encode("utf-8")).hexdigest()[:8],   # 뽑은 목록이 바뀌면 브라우저 저장도 새로
+        "gold_dir": GOLD_DIR,
+        # 화면 위에 늘 띄우는 것: 감성 판정 순서(config/topics_common.yaml tagging_rule)와 주제 설명
+        "rules_panel": {"sentiment_order": [str(x) for x in (load_yaml(ROOT / "config" / "topics_common.yaml") or {}).get("tagging_rule") or []],
+                        "topics": [{"name_ko": t["name_ko"], "definition": str(t.get("definition") or "")} for t in schema.values()]},
         "schema_file": schema_name,
         "schema_mode": "draft" if draft_mode else "approved",
         "required": required,
@@ -233,18 +321,19 @@ def sheet(run, translations=None, schema_name=None):
                     "confusions": str(t.get("confusions") or "").strip(),
                     "sentiment_notes": str(t.get("sentiment_notes") or "").strip(),
                     "examples": [str(e.get("quote") or "") for e in t["examples"] if isinstance(e, dict)]}
-                   for t in schema.values()],
+                   for t in sheet_order(schema, required)],
         # 스키마 안 영어, 외국어 표현의 한국어 번역(화면 보기용). terms는 모든 주제에 공통
         "gloss": {"terms": tr.get("terms") or {}, "topics": tr.get("topics") or {}},
     }
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
-    html = SHEET_TEMPLATE.read_text(encoding="utf-8").replace("__RUN__", run.name).replace("__DATA__", payload)
-    out = run / "gold" / "gold_tagging.html"
+    html = SHEET_TEMPLATE.read_text(encoding="utf-8").replace("__RUN__", run.name).replace("__GOLDDIR__", GOLD_DIR)
+    html = html.replace("__TITLE__", "정답 세트 태깅" if GOLD_DIR == GOLD_DIRS["rules"] else "채점용 정답 세트 태깅").replace("__DATA__", payload)
+    out = run / GOLD_DIR / "gold_tagging.html"
     out.write_text(html, encoding="utf-8")
     n_tr = sum(1 for r in data["reviews"] if r["title_ko"] or r["body_ko"])
     print(f"정답 세트 태깅 화면을 만들었습니다: {out} (리뷰 {len(gold)}개, 주제 {len(schema)}개, 한국어 번역 {n_tr}개, "
           f"기준 {schema_name}, 필수 주제 {', '.join(required) or '없음'})")
-    print("  브라우저로 열어 태깅하고, 'gold_tags.jsonl 내보내기'로 받은 파일을 gold/gold_tags.jsonl로 저장해 주세요.")
+    print(f"  브라우저로 열어 태깅하고, 'gold_tags.jsonl 내보내기'로 받은 파일을 {GOLD_DIR}/gold_tags.jsonl로 저장해 주세요.")
     if draft_mode:
         print("  초안 화면입니다. 맨 위 '스키마 확인'을 마치고 '스키마 확인 내보내기'로 받은 파일을 "
               f"runs/{run.name}/03_schema_review.json으로 저장해 주세요.")
@@ -329,9 +418,9 @@ def summary_ko(model, r, f1_min, sent_min):
             f"mixed 일치 {mx}(짝 {r['mixed_pairs']}개, 기준 없음), 감성 전체 일치 {sp:.1f}%")
 
 
-def score(run, f1_min, sent_min):
+def score(run, f1_min, sent_min, tags=None):
     schema = load_schema(run)
-    gold_path = run / "gold" / "gold_tags.jsonl"
+    gold_path = run / GOLD_DIR / "gold_tags.jsonl"
     if not gold_path.exists():
         die("gold/gold_tags.jsonl이 없습니다. 정답 세트 태깅을 먼저 해 주세요.")
     gold = read_jsonl(gold_path)
@@ -340,7 +429,7 @@ def score(run, f1_min, sent_min):
             die(f"정답 세트 {n}번째 줄: 승인 스키마에 없는 주제 {t.get('topic')}")
         if t.get("sentiment") not in SENTIMENTS:
             die(f"정답 세트 {n}번째 줄: 감성 값 {t.get('sentiment')}")
-    picked_path = run / "gold" / "gold_reviews.csv"
+    picked_path = run / GOLD_DIR / "gold_reviews.csv"
     gold_ids = {t["review_id"] for t in gold}
     if picked_path.exists():
         with open(picked_path, encoding="utf-8-sig", newline="") as f:
@@ -351,11 +440,16 @@ def score(run, f1_min, sent_min):
     result = {"scored_at": now_iso(), "gold_reviews": len(gold_ids), "thresholds": {"topic_f1": f1_min, "sentiment": sent_min},
               "judged_model": "sonnet", "gold_used_as_schema_example": leaked, "models": {}}
     # sonnet: 전체 태깅 뒤에는 04_tags.jsonl(리포트가 쓰는 태그), 시험 태깅 때는 gold 묶음 태그(04_tags_sonnet_gold.jsonl)
-    sonnet_file = next((n for n in ("04_tags.jsonl", "04_tags_sonnet_gold.jsonl") if (run / n).exists()), None)
+    sonnet_file = tags or next((n for n in ("04_tags.jsonl", "04_tags_sonnet_gold.jsonl") if (run / n).exists()), None)
     if sonnet_file is None:
         die("04_tags.jsonl도 04_tags_sonnet_gold.jsonl도 없습니다. audit_quotes.py tags --model sonnet을 먼저 통과시켜 주세요.")
     result["sonnet_source"] = sonnet_file
-    for model, name in (("sonnet", sonnet_file), ("top", "04_tags_top_gold.jsonl")):
+    # --tags로 다시 태깅한 파일을 주면 그 파일로 판정하고, 리포트 태그(04_tags.jsonl)는 before로 나란히 적는다
+    for model, name in (("sonnet", sonnet_file), ("before", "04_tags.jsonl" if tags else None), ("top", "04_tags_top_gold.jsonl")):
+        if name is None:
+            continue
+        if model == "top" and GOLD_DIR != "gold":
+            continue                                            # 상위 모델 비교 태그는 규칙용 세트에만 있음
         if (run / name).exists():
             result["models"][model] = score_one(gold, read_jsonl(run / name), gold_ids)
     judged = result["models"]["sonnet"]
@@ -363,8 +457,10 @@ def score(run, f1_min, sent_min):
     for model, r in result["models"].items():
         r["summary_ko"] = summary_ko(model, r, f1_min, sent_min)
     result["summary_ko"] = [r["summary_ko"] for r in result["models"].values()]
-    write_json(run / "04_gold_eval.json", result)
-    (run / "04_gold_eval.md").write_text(render(result, schema), encoding="utf-8")
+    out_name = "04_gold_eval" if GOLD_DIR == "gold" else "04_gold_eval_score"   # 채점용 세트는 리포트 숫자(04_gold_eval.json)를 바꾸지 않음
+    result["gold_set"] = GOLD_DIR
+    write_json(run / f"{out_name}.json", result)
+    (run / f"{out_name}.md").write_text(render(result, schema), encoding="utf-8")
 
     print(f"정답 세트 채점: {result['status']}  (판정은 리포트에 쓰는 sonnet 기준, sonnet 태그 {sonnet_file}. "
           f"리뷰 {len(gold_ids)}개, 정답 태그 {judged['gold_pairs']}개)")
@@ -374,7 +470,7 @@ def score(run, f1_min, sent_min):
               f"빠짐 {len(r['missed'])}, 더함 {len(r['extra'])}, 감성 다름 {len(r['sentiment_diff'])}")
     if leaked:
         print(f"  주의: 정답 세트 리뷰가 스키마 예시로 쓰였습니다: {', '.join(leaked)}")
-    print("  불일치 목록: 04_gold_eval.md")
+    print(f"  불일치 목록: {out_name}.md")
     return 0 if result["status"] == "PASS" else 1
 
 
@@ -426,8 +522,8 @@ def fix_gold_topics(gold_path, schema, rename, drop_unknown):
 
 def check_gold(run, rename=None, drop_unknown=False):
     schema = load_schema(run)
-    picked_path = run / "gold" / "gold_reviews.csv"
-    gold_path = run / "gold" / "gold_tags.jsonl"
+    picked_path = run / GOLD_DIR / "gold_reviews.csv"
+    gold_path = run / GOLD_DIR / "gold_tags.jsonl"
     if not picked_path.exists():
         die("gold/gold_reviews.csv가 없습니다. eval_gold.py pick을 먼저 돌려 주세요.")
     if not gold_path.exists():
@@ -483,15 +579,17 @@ def sentiment_quotas(counts, k, neg_min):
 
 
 def gold_ids_of(run):
-    """정답 세트 리뷰 id(스크립트만 읽는다)"""
-    p = run / "gold" / "gold_reviews.csv"
-    if not p.exists():
-        return set()
-    with open(p, encoding="utf-8-sig", newline="") as f:
-        return {r["review_id"] for r in csv.DictReader(f)}
+    """정답 세트 리뷰 id, 두 벌 모두(스크립트만 읽는다)"""
+    ids = set()
+    for d in GOLD_DIRS.values():
+        p = run / d / "gold_reviews.csv"
+        if p.exists():
+            with open(p, encoding="utf-8-sig", newline="") as f:
+                ids |= {r["review_id"] for r in csv.DictReader(f)}
+    return ids
 
 
-def audit_sample(run, n_total, neg_min=3):
+def audit_sample(run, n_total, neg_min=3, parts=2):
     gold = gold_ids_of(run)
     tags = [t for t in read_jsonl(run / "04_tags.jsonl") if t["review_id"] not in gold]
     reviews = load_csv_or_die(run / "02_reviews.csv", REVIEW_COLS)
@@ -522,10 +620,76 @@ def audit_sample(run, n_total, neg_min=3):
     print(f"감사 표본 {len(sample)}개를 04_audit_sample.jsonl에 적었습니다(정답 세트를 뺀 태그 {len(tags)}개 중, ASIN마다 {per_asin}개).")
     for a in asins:
         print(f"  {a}: {sum(report[a].values())}개 (" + ", ".join(f"{s} {report[a][s]}" for s in SENTIMENTS) + ")")
+    for old in list(run.glob("04_audit_sample_p*.jsonl")) + list(run.glob("04_tag_audit_p*.yaml")):
+        old.unlink()                    # 옛 반쪽 판정이 새 표본과 섞이지 않게
+    if parts > 1:
+        # 감사자마다 반쪽(2026-10-14 담당자 결정). 빠진 태그(missed)를 리뷰 단위로 보므로 한 리뷰의 태그는 한 반쪽에만 넣는다.
+        # 리뷰를 표본 순서(ASIN 순)대로 태그가 적은 반쪽에 넣어 수와 ASIN이 고르게 한다.
+        halves = [[] for _ in range(parts)]
+        by_review = defaultdict(list)
+        for t in sample:
+            by_review[t["review_id"]].append(t)
+        for rid in sorted(by_review, key=lambda r: order[r]):
+            min(halves, key=len).extend(by_review[rid])
+        for k, h in enumerate(halves, 1):
+            write_jsonl(run / f"04_audit_sample_p{k}.jsonl", h)
+        print(f"  감사자 {parts}명 몫(리뷰 단위로 나눔): " + ", ".join(f"p{k} {len(h)}개" for k, h in enumerate(halves, 1)))
     return 0
 
 
+def merge_tag_audit_parts(run, sample):
+    """반쪽 판정을 04_tag_audit.yaml로 합친다. 반쪽 표본을 합치면 전체 표본과 정확히 같아야 하고(빠짐, 겹침 없음),
+    반쪽마다 checked가 그 반쪽 수와 같고, 판정과 빠진 태그는 자기 반쪽 것이어야 한다. 반쪽 파일이 없으면 None."""
+    part_files = sorted(run.glob("04_audit_sample_p*.jsonl"))
+    if not part_files:
+        return None
+    key = lambda t: (str(t.get("review_id", "")), str(t.get("topic", "")))  # noqa: E731
+    seen, problems, parts, findings, missed = {}, [], [], [], []
+    for pf in part_files:
+        tag = pf.stem.rsplit("_", 1)[1]
+        half = read_jsonl(pf)
+        for t in half:
+            seen.setdefault(key(t), []).append(tag)
+        yp = run / f"04_tag_audit_{tag}.yaml"
+        if not yp.exists():
+            die(f"{yp.name}이 없습니다. 반쪽 감사가 다 끝난 뒤 합칩니다.")
+        a = ((load_yaml(yp) or {}).get("audit") or {})
+        keys, rids = {key(t) for t in half}, {t["review_id"] for t in half}
+        if a.get("checked") != len(half):
+            problems.append(f"{tag}: 감사자가 {a.get('checked')}개를 봤다고 적었지만 반쪽 표본은 {len(half)}개")
+        fs = [f for f in a.get("findings") or [] if isinstance(f, dict)]
+        own = [f for f in fs if key(f) in keys]
+        if len(own) != len(fs):
+            problems.append(f"{tag}: 자기 반쪽에 없는 태그를 판정함 {len(fs) - len(own)}개")
+        ms = [m for m in a.get("missed") or [] if isinstance(m, dict)]
+        own_m = [m for m in ms if str(m.get("review_id")) in rids]
+        if len(own_m) != len(ms):
+            problems.append(f"{tag}: 자기 반쪽에 없는 리뷰의 빠진 태그를 적음 {len(ms) - len(own_m)}개")
+        fail = sum(1 for f in own if str(f.get("status", "")).upper() == "FAIL")
+        parts.append({"part": tag, "sample": len(half), "auditor_checked": a.get("checked"), "fail": fail,
+                      "fail_rate": round(fail / len(half), 3) if half else 0.0, "missed": len(own_m)})
+        findings += own
+        missed += own_m
+    all_keys = {key(t) for t in sample}
+    lost = sorted(all_keys - set(seen))
+    dup = sorted(k for k, v in seen.items() if len(v) > 1)
+    extra = sorted(set(seen) - all_keys)
+    if lost:
+        problems.append(f"반쪽 어디에도 없는 표본 {len(lost)}개(예: {lost[0]})")
+    if dup:
+        problems.append(f"두 반쪽에 겹친 표본 {len(dup)}개(예: {dup[0]})")
+    if extra:
+        problems.append(f"전체 표본에 없는 반쪽 항목 {len(extra)}개(예: {extra[0]})")
+    checked = len(sample) if not problems else sum(p_["auditor_checked"] or 0 for p_ in parts)
+    import yaml
+    (run / "04_tag_audit.yaml").write_text(yaml.safe_dump(
+        {"audit": {"stage": "tags", "run": run.name, "checked": checked, "merged_from": [p_["part"] for p_ in parts],
+                   "findings": findings, "missed": missed}}, allow_unicode=True, sort_keys=False), encoding="utf-8")
+    return {"parts": parts, "problems": problems}
+
+
 def audit(run, max_fail):
+    merged = merge_tag_audit_parts(run, read_jsonl(run / "04_audit_sample.jsonl")) if (run / "04_audit_sample.jsonl").exists() else None
     data = load_yaml(run / "04_tag_audit.yaml") or {}
     a = data.get("audit") if isinstance(data, dict) else None
     if not isinstance(a, dict):
@@ -594,8 +758,8 @@ def audit(run, max_fail):
                for x in sorted(per_asin_n)}
     if not tags:
         status = "EMPTY"
-    elif checked != len(tags) + len(gold_tags):
-        status = "INCOMPLETE"       # 감사자가 표본을 다 보지 않았으면 PASS로 넘기지 않음
+    elif checked != len(tags) + len(gold_tags) or (merged and merged["problems"]):
+        status = "INCOMPLETE"       # 감사자가 표본을 다 보지 않았거나 반쪽을 합치다 문제가 있으면 PASS로 넘기지 않음
     else:
         status = "PASS" if rate <= max_fail else "FAIL"
     out = {"checked_at": now_iso(), "status": status, "sample_tags": len(tags), "auditor_checked": checked,
@@ -605,10 +769,17 @@ def audit(run, max_fail):
            "conservative_rule": "(FAIL + UNVERIFIED + missed) / (표본 태그 + missed)", "max_fail_rate": max_fail, "by_asin": by_asin,
            "asins_with_findings": sorted(retry - {"?"}), "batches_with_findings": sorted(batches - {"?"}),
            "warnings": warns}
+    if merged:
+        out["parts"], out["merge_problems"] = merged["parts"], merged["problems"]
     write_json(run / "04_tag_audit_summary.json", out)
     print(f"태그 검수 집계: {status}  (감사 표본 {len(tags)}개 중 FAIL {counts['FAIL']}개 = {rate:.1%}, "
           f"기준 {max_fail:.0%} 이하. UNVERIFIED {counts['UNVERIFIED']}개, 빠진 태그 {len(missed)}개, "
           f"판정 못 받은 것을 FAIL로 센 보수적 비율 {cons:.1%})")
+    if merged:
+        print("  반쪽마다: " + ", ".join(f"{p_['part']} {p_['fail']}/{p_['sample']}개 = {p_['fail_rate']:.1%}" for p_ in merged["parts"])
+              + (". 합치기 확인: 표본 빠짐과 겹침 없음" if not merged["problems"] else ""))
+        for pr in merged["problems"]:
+            print(f"  합치기 문제: {pr}")
     for x, v in by_asin.items():
         print(f"  {x}: 표본 {v['sample']}개, FAIL {v['fail']}개({v['fail_rate']:.1%})")
     if out["batches_with_findings"]:
@@ -620,15 +791,19 @@ def audit(run, max_fail):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=["pick", "sheet", "schema-approve", "gold", "score", "audit-sample", "audit"])
+    ap.add_argument("mode", choices=["pick", "pick-score", "sheet", "schema-approve", "gold", "score", "audit-sample", "audit"])
+    ap.add_argument("--set", default="rules", choices=list(GOLD_DIRS),
+                    help="sheet, gold, score: rules(규칙을 다듬는 정답 세트, gold/) 또는 score(채점만 하는 정답 세트, gold_score/)")
     ap.add_argument("run", nargs="?")
     ap.add_argument("--per-asin", type=int, default=5)
     ap.add_argument("--min-chars", type=int, default=40)
     ap.add_argument("--sample-per-asin", type=int, default=25)
     ap.add_argument("--f1", type=float, default=0.80)
+    ap.add_argument("--tags", default=None, help="score: 판정할 sonnet 태그 파일(회차 폴더 기준, 기본 04_tags.jsonl)")
     ap.add_argument("--sentiment", type=float, default=0.90)
     ap.add_argument("--n", type=int, default=150, help="audit-sample 전체 표본 태그 수(ASIN마다 n / ASIN 수)")
     ap.add_argument("--max-fail", type=float, default=0.05)
+    ap.add_argument("--parts", type=int, default=2, help="audit-sample: 감사자 수만큼 표본을 리뷰 단위로 나눔(1이면 나누지 않음)")
     ap.add_argument("--translations", default=None, help="sheet: 한국어 번역 JSON 경로(기본 gold/gold_translations_ko.json)")
     ap.add_argument("--schema", default=None, help="sheet: 화면 기준 스키마 파일(기본: 승인본, 없으면 초안)")
     ap.add_argument("--review", default="03_schema_review.json", help="schema-approve: 스키마 확인 파일")
@@ -638,6 +813,10 @@ def main():
     ap.add_argument("--drop-unknown", action="store_true", help="gold: 승인 스키마에 없는 주제의 정답 태그를 뺀다")
     args = ap.parse_args()
     run = resolve_run(args.run)
+    global GOLD_DIR
+    GOLD_DIR = GOLD_DIRS["score" if args.mode == "pick-score" else args.set]
+    if args.mode == "pick-score":
+        sys.exit(pick_score(run, 4 if args.per_asin == 5 else args.per_asin, 20 if args.min_chars == 40 else args.min_chars))
     if args.mode == "pick":
         sys.exit(pick(run, args.per_asin, args.min_chars, args.sample_per_asin))
     if args.mode == "sheet":
@@ -648,9 +827,9 @@ def main():
         rename = dict(x.split(":", 1) for x in args.rename.split(",") if ":" in x)
         sys.exit(check_gold(run, rename, args.drop_unknown))
     if args.mode == "score":
-        sys.exit(score(run, args.f1, args.sentiment))
+        sys.exit(score(run, args.f1, args.sentiment, args.tags))
     if args.mode == "audit-sample":
-        sys.exit(audit_sample(run, args.n))
+        sys.exit(audit_sample(run, args.n, parts=args.parts))
     sys.exit(audit(run, args.max_fail))
 
 

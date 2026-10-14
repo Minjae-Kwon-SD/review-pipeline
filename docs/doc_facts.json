@@ -1,5 +1,5 @@
 {
-  "made_at": "2026-10-12T15:03:15+09:00",
+  "made_at": "2026-10-14T14:02:11+09:00",
   "run": "hairremovalcream-2026-10-10",
   "facts": {
     "gold.reviews": {
@@ -63,8 +63,56 @@
       "source": "07a_issues_approved.yaml 라벨 수(other 빼고)"
     },
     "gold.tags": {
-      "text": "104개",
+      "text": "103개",
       "source": "gold/gold_tags.jsonl 줄 수(내용은 읽지 않고 줄만 셈)"
+    },
+    "gold.tags_before": {
+      "text": "104개",
+      "source": "gold/gold_tags.before_2026-10-13.jsonl 줄 수(내용은 읽지 않고 줄만 셈)"
+    },
+    "score.f1": {
+      "text": "0.80",
+      "source": "04_gold_eval_score.json models.sonnet.topic_f1"
+    },
+    "score.dir": {
+      "text": "95.2%(63개 중 60개)",
+      "source": "04_gold_eval_score.json models.sonnet.direction_*"
+    },
+    "score.mixed": {
+      "text": "33.3%(15개 중 5개)",
+      "source": "04_gold_eval_score.json models.sonnet.mixed_*"
+    },
+    "score.all": {
+      "text": "83.3%",
+      "source": "04_gold_eval_score.json models.sonnet.sentiment_agreement"
+    },
+    "score_before.f1": {
+      "text": "0.79",
+      "source": "04_gold_eval_score.json models.before.topic_f1"
+    },
+    "score_before.dir": {
+      "text": "93.7%(63개 중 59개)",
+      "source": "04_gold_eval_score.json models.before.direction_*"
+    },
+    "score_before.mixed": {
+      "text": "33.3%(12개 중 4개)",
+      "source": "04_gold_eval_score.json models.before.mixed_*"
+    },
+    "score_before.all": {
+      "text": "84.0%",
+      "source": "04_gold_eval_score.json models.before.sentiment_agreement"
+    },
+    "score.reviews": {
+      "text": "32개",
+      "source": "04_gold_eval_score.json gold_reviews"
+    },
+    "score.tags": {
+      "text": "91개",
+      "source": "04_gold_eval_score.json models.sonnet.gold_pairs"
+    },
+    "score.label_min": {
+      "text": "143.7분",
+      "source": "gold_score/gold_label_times.json 처음 연 때부터 제출까지"
     },
     "audit.tags": {
       "text": "144개 중 FAIL 1개(0.7%)",
@@ -315,7 +363,7 @@
       "source": "timing.jsonl 10_timing 마지막 시도"
     },
     "tests": {
-      "text": "378개",
+      "text": "404개",
       "source": "tests/test_scripts.py 실행 결과의 확인 개수"
     },
     "ref.report.reviews": {
@@ -814,7 +862,7 @@
       }
     },
     "hairremovalcream-2026-10-10": {
-      "made_at": "2026-10-12T15:03:15+09:00",
+      "made_at": "2026-10-14T14:02:11+09:00",
       "facts": {
         "gold.reviews": {
           "text": "32개",
@@ -877,8 +925,56 @@
           "source": "07a_issues_approved.yaml 라벨 수(other 빼고)"
         },
         "gold.tags": {
-          "text": "104개",
+          "text": "103개",
           "source": "gold/gold_tags.jsonl 줄 수(내용은 읽지 않고 줄만 셈)"
+        },
+        "gold.tags_before": {
+          "text": "104개",
+          "source": "gold/gold_tags.before_2026-10-13.jsonl 줄 수(내용은 읽지 않고 줄만 셈)"
+        },
+        "score.f1": {
+          "text": "0.80",
+          "source": "04_gold_eval_score.json models.sonnet.topic_f1"
+        },
+        "score.dir": {
+          "text": "95.2%(63개 중 60개)",
+          "source": "04_gold_eval_score.json models.sonnet.direction_*"
+        },
+        "score.mixed": {
+          "text": "33.3%(15개 중 5개)",
+          "source": "04_gold_eval_score.json models.sonnet.mixed_*"
+        },
+        "score.all": {
+          "text": "83.3%",
+          "source": "04_gold_eval_score.json models.sonnet.sentiment_agreement"
+        },
+        "score_before.f1": {
+          "text": "0.79",
+          "source": "04_gold_eval_score.json models.before.topic_f1"
+        },
+        "score_before.dir": {
+          "text": "93.7%(63개 중 59개)",
+          "source": "04_gold_eval_score.json models.before.direction_*"
+        },
+        "score_before.mixed": {
+          "text": "33.3%(12개 중 4개)",
+          "source": "04_gold_eval_score.json models.before.mixed_*"
+        },
+        "score_before.all": {
+          "text": "84.0%",
+          "source": "04_gold_eval_score.json models.before.sentiment_agreement"
+        },
+        "score.reviews": {
+          "text": "32개",
+          "source": "04_gold_eval_score.json gold_reviews"
+        },
+        "score.tags": {
+          "text": "91개",
+          "source": "04_gold_eval_score.json models.sonnet.gold_pairs"
+        },
+        "score.label_min": {
+          "text": "143.7분",
+          "source": "gold_score/gold_label_times.json 처음 연 때부터 제출까지"
         },
         "audit.tags": {
           "text": "144개 중 FAIL 1개(0.7%)",
@@ -1129,7 +1225,7 @@
           "source": "timing.jsonl 10_timing 마지막 시도"
         },
         "tests": {
-          "text": "378개",
+          "text": "404개",
           "source": "tests/test_scripts.py 실행 결과의 확인 개수"
         },
         "ref.report.reviews": {

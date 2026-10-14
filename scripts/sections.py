@@ -204,7 +204,7 @@ def render_brand_compare(bc, strength_min):
     return lines
 
 
-# ---------------------------------------------------------------- 변형(용량) 신호
+# ---------------------------------------------------------------- 변형 신호(용량, 옷 사이즈, 색 등)
 
 ML_PER_OZ = 29.5735
 
@@ -241,35 +241,99 @@ def is_size_key(key):
     return str(key).lower() in ("size", "volume", "capacity")
 
 
+LETTER_SUFFIX = re.compile(r"(?:petite|tall|plus|short|long|regular)*")
+
+
+def letter_size(value):
+    """옷 글자 사이즈를 기본 사이즈와 순서로: 'XX-Large Plus' -> ('XXL', 6), 'Medium-Tall' -> ('M', 3), 'X-Small' -> ('XS', 1).
+    기장과 체형 꼬리(Petite, Tall, Plus 등)는 떼어 같은 기본 사이즈로 묶는다. 글자 사이즈가 아니면 (None, None)."""
+    compact = re.sub(r"[\s\-_]", "", str(value or "").lower())
+    m = re.match(r"(\d)?(x*)(small|medium|large|s|m|l)", compact)
+    if not m or not LETTER_SUFFIX.fullmatch(compact[m.end():]):
+        return None, None
+    n = int(m.group(1)) if m.group(1) else len(m.group(2))
+    base = m.group(3)[0]
+    if base == "m":
+        return ("M", 3) if n == 0 else (None, None)
+    if base == "s":
+        return ("X" * n + "S" if n < 3 else f"{n}XS"), 2 - n
+    return ("X" * n + "L" if n < 3 else f"{n}XL"), 4 + n
+
+
 def norm_variant(key, value):
-    """변형 값을 비교용 이름으로. 용량 키면 같은 용량의 다른 표기를 합친다. (이름, fl oz, 묶음 수)"""
+    """변형 값을 비교용 이름으로. 용량 키면 같은 용량의 다른 표기를 합치고, 옷 글자 사이즈면 기본 사이즈로 합친다. (이름, fl oz, 묶음 수)"""
     if is_size_key(key):
         oz, pack = parse_size(value)
         if oz:
             return size_label(oz, pack), oz, pack
+        lab, _ = letter_size(value)
+        if lab:
+            return lab, None, 1
     return value, None, 1
 
 
-def choose_variant_key(reviews, min_reviews):
-    """변형 텍스트의 키마다 '리뷰 min_reviews개 이상인 변형이 2개 이상인 ASIN 수'를 세어 가장 많은 키를 고른다.
-    카테고리와 상관없이 동작한다(향수면 Size, 옷이면 Size나 Color 등). 돌려주는 값: (키, {키: ASIN 수})"""
+def variant_order(row):
+    """표 순서: 용량은 작은 것부터, 옷 사이즈는 작은 것부터, 나머지는 이름순."""
+    order = letter_size(row["variant"])[1]
+    return (row.get("oz") is None, row.get("oz") or 0, order is None, order if order is not None else 0, str(row["variant"]))
+
+
+def variant_key_scores(reviews, min_reviews):
+    """변형 텍스트의 키마다 '리뷰 min_reviews개 이상인 변형이 2개 이상인 ASIN 수'. 돌려주는 값: {키: ASIN 수}"""
     counts = defaultdict(lambda: defaultdict(Counter))
     for r in reviews:
         for k, v in variant_parts(r.get("variant_text")).items():
             counts[k][r["asin"]][norm_variant(k, v)[0]] += 1
-    score = {k: sum(1 for c in by_asin.values() if sum(1 for n in c.values() if n >= min_reviews) >= 2)
-             for k, by_asin in counts.items()}
-    if not score or max(score.values()) == 0:
-        return None, score
-    return sorted(score, key=lambda k: (-score[k], k))[0], score
+    return {k: sum(1 for c in by_asin.values() if sum(1 for n in c.values() if n >= min_reviews) >= 2)
+            for k, by_asin in counts.items()}
 
 
-def variant_signal(reviews, tags, weight, schema, prices, exclude, min_reviews=15, min_tags=12, topic_min=10):
-    key, score = choose_variant_key(reviews, min_reviews)
+def rank_variant_keys(score):
+    """ASIN 수가 많은 키부터. 같으면 사이즈(용량) 키를 먼저, 그다음 이름순(카테고리와 상관없는 규칙)."""
+    return sorted([k for k, n in score.items() if n > 0], key=lambda k: (-score[k], not is_size_key(k), k))
+
+
+def choose_variant_key(reviews, min_reviews):
+    """가장 앞선 키 하나(rank_variant_keys 첫째). 카테고리와 상관없이 동작한다. 돌려주는 값: (키, {키: ASIN 수})"""
+    score = variant_key_scores(reviews, min_reviews)
+    keys = rank_variant_keys(score)
+    return (keys[0] if keys else None), score
+
+
+def direction_counts(ids, high_ids, low_ids, min_n=5):
+    """리뷰 묶음에서 방향 라벨(high, low)이 붙은 리뷰 수와 방향 지수 (high - low) / (high + low). 둘을 합쳐 min_n개 미만이면 지수 없음."""
+    h = sum(1 for i in ids if i in high_ids)
+    lo = sum(1 for i in ids if i in low_ids)
+    return {"high": h, "low": lo, "index": round((h - lo) / (h + lo), 2) if h + lo >= min_n else None}
+
+
+def variant_signals(reviews, tags, weight, schema, prices, exclude, direction=None, labels=None, max_keys=3, **kw):
+    """변형 키마다 variant_signal. 키는 rank_variant_keys 순서로, ASIN 수가 가장 많은 키의 절반 이상인 것만 많아야 max_keys개."""
+    score = variant_key_scores(reviews, kw.get("min_reviews", 15))
+    keys = rank_variant_keys(score)
+    keys = [k for k in keys if score[k] * 2 >= score[keys[0]]][:max_keys] if keys else []
+    return [variant_signal(reviews, tags, weight, schema, prices, exclude, key=k, direction=direction, labels=labels, **kw)
+            for k in keys] or [variant_signal(reviews, tags, weight, schema, prices, exclude, **kw)]
+
+
+def variant_signal(reviews, tags, weight, schema, prices, exclude, min_reviews=15, min_tags=12, topic_min=10,
+                   key=None, direction=None, labels=None):
+    """같은 ASIN 안 변형마다 주제 부정 비율. direction({"topic", "high": {"name", "labels"}, "low": {...}})과 세부 이슈 라벨이 있으면
+    변형마다 두 방향 라벨이 붙은 리뷰 수와 방향 지수, 상품을 합친 변형별 표(pooled)도 만든다(카테고리 설정 guide.direction_index)."""
+    score = variant_key_scores(reviews, min_reviews)
+    if key is None:
+        key, score = choose_variant_key(reviews, min_reviews)
     out = {"key": key, "key_scores": score, "rules": {"min_reviews": min_reviews, "min_tags": min_tags, "topic_min": topic_min},
            "checked_on": (prices or {}).get("checked_on"), "asins": []}
     if not key:
         return out
+    high_ids = low_ids = None
+    if direction and labels:
+        hl, ll = set(direction["high"]["labels"]), set(direction["low"]["labels"])
+        high_ids = {x["review_id"] for x in labels if set(x.get("labels") or []) & hl}
+        low_ids = {x["review_id"] for x in labels if set(x.get("labels") or []) & ll}
+        out["direction"] = {"topic": direction.get("topic"), "high": direction["high"]["name"], "low": direction["low"]["name"],
+                            "high_labels": sorted(hl), "low_labels": sorted(ll)}
     price_by_variant = {}
     for a, p in ((prices or {}).get("asins") or {}).items():
         for v in p.get("variants") or []:
@@ -308,37 +372,71 @@ def variant_signal(reviews, tags, weight, schema, prices, exclude, min_reviews=1
                 negw = sum(weight[i] for i in ids if any(t["topic"] == tp and t["sentiment"] == "negative"
                                                          for t in tags_by_review[i]))
                 neg[tp] = pct(negw, wsum)
-            rows.append({"variant": lab, "variant_asin": vasin, "oz": oz, "pack": pack, "reviews": len(ids), "tags": n_tags,
-                         "price": price, "price_per_oz": round(price / (oz * pack), 2) if price and oz else None,
-                         "neg_reviewer_pct": neg})
-        rows.sort(key=lambda x: (x["oz"] is None, x["oz"] or 0, x["variant"]))
+            row = {"variant": lab, "variant_asin": vasin, "oz": oz, "pack": pack, "reviews": len(ids), "tags": n_tags,
+                   "price": price, "price_per_oz": round(price / (oz * pack), 2) if price and oz else None,
+                   "neg_reviewer_pct": neg}
+            if high_ids is not None:
+                row["direction"] = direction_counts(ids, high_ids, low_ids)
+            rows.append(row)
+        rows.sort(key=variant_order)
         out["asins"].append({"asin": asin, "variants_total": len(groups), "variants_shown": len(rows),
                              "hidden_low_tags": hidden, "topics": topics, "rows": rows})
+    if high_ids is not None:
+        # 상품을 합친 변형별 방향(예: 옷 사이즈마다 작게 나옴과 크게 나옴). 그 변형 리뷰 min_reviews개 이상만
+        pooled = defaultdict(list)
+        for r in reviews:
+            v = variant_parts(r.get("variant_text")).get(key)
+            if v:
+                pooled[norm_variant(key, v)[0]].append(r)
+        prow = [{"variant": lab, "reviews": len(rs), "asins": len({r["asin"] for r in rs}), "oz": norm_variant(key, lab)[1],
+                 "review_ids": sorted(r["review_id"] for r in rs), **direction_counts([r["review_id"] for r in rs], high_ids, low_ids)}
+                for lab, rs in pooled.items() if len(rs) >= min_reviews]
+        prow.sort(key=variant_order)
+        out["pooled"] = prow
     return out
+
+
+def fmt_index(x):
+    return "-" if x is None else f"{x:+.2f}"
 
 
 def render_variant(vs, schema, brand_of_asin):
     if not vs["key"]:
         return ["변형으로 나눌 수 있는 상품이 없습니다(리뷰 15개 이상인 변형이 2개 이상인 ASIN 없음)."]
-    lines = []
+    lines = [f"### 변형 키: {vs['key']}", ""]
+    d = vs.get("direction")
+    has_oz = any(r.get("oz") for a in vs["asins"] for r in a["rows"])     # 용량이 있는 품목만 단위당 가격 칸
+    if d and vs.get("pooled"):
+        lines += [f"상품을 합친 {vs['key']}별 방향({d['high']} 대 {d['low']}, 방향 지수 = ({d['high']} - {d['low']}) / 합)", "",
+                  f"| {vs['key']} | 리뷰 | 상품 수 | {d['high']} | {d['low']} | 방향 지수 |", "|---|---|---|---|---|---|"]
+        for r in vs["pooled"]:
+            lines.append(f"| {r['variant']} | {r['reviews']} | {r['asins']} | {r['high']} | {r['low']} | {fmt_index(r['index'])} |")
+        lines.append("")
     for a in vs["asins"]:
         if not a["rows"]:
             continue
         names = [schema[tp]["name_ko"] for tp in a["topics"]]
+        extra = ([d["high"], d["low"], "방향 지수"] if d else [])
         lines += [f"**{brand_of_asin.get(a['asin'], '')}** ({a['asin']}, {vs['key']} 변형 {a['variants_total']}개 중 {a['variants_shown']}개)", "",
-                  "| 변형 | 리뷰 | 태그 | 현재 가격 | 온스당 가격 | " + " | ".join(names) + " |",
-                  "|---|---|---|---|---|" + "---|" * len(names)]
+                  "| 변형 | 리뷰 | 태그 | 현재 가격 | " + ("온스당 가격 | " if has_oz else "") + " | ".join(names + extra) + " |",
+                  "|---|---|---|---|" + ("---|" if has_oz else "") + "---|" * (len(names) + len(extra))]
         for r in a["rows"]:
             price = f"{r['price']:.2f}달러" if r["price"] else "가격 없음"
-            per = f"{r['price_per_oz']:.2f}달러" if r["price_per_oz"] else "-"
-            lines.append(f"| {r['variant']} | {r['reviews']} | {r['tags']} | {price} | {per} | "
-                         + " | ".join(fmt_pct(r["neg_reviewer_pct"][tp]) for tp in a["topics"]) + " |")
+            per = (f"{r['price_per_oz']:.2f}달러 | " if r["price_per_oz"] else "- | ") if has_oz else ""
+            dd = r.get("direction")
+            ex = [str(dd["high"]), str(dd["low"]), fmt_index(dd["index"])] if d and dd else []
+            lines.append(f"| {r['variant']} | {r['reviews']} | {r['tags']} | {price} | {per}"
+                         + " | ".join([fmt_pct(r["neg_reviewer_pct"][tp]) for tp in a["topics"]] + ex) + " |")
         lines.append("")
     rl = vs["rules"]
-    lines.append(f"변형 키는 {vs['key']}(리뷰 {rl['min_reviews']}개 이상인 변형이 2개 이상인 ASIN 수가 가장 많은 키). "
-                 f"리뷰 {rl['min_reviews']}개 이상인 변형만, 태그 {rl['min_tags']}개 미만인 변형은 숨김. 주제는 그 ASIN에서 언급 {rl['topic_min']}개 이상"
+    lines.append(f"변형 키 {vs['key']}: 리뷰 {rl['min_reviews']}개 이상인 변형이 2개 이상인 ASIN {vs['key_scores'].get(vs['key'], 0)}개"
+                 "(그런 ASIN 수가 가장 많은 키의 절반 이상인 키를 모두 보이고, 같으면 사이즈 키를 먼저). "
+                 + ("옷 글자 사이즈는 기장과 체형 꼬리(Petite, Tall, Plus)를 떼어 기본 사이즈로 묶었습니다. " if any(letter_size(r["variant"])[0] for a in vs["asins"] for r in a["rows"]) else "")
+                 + f"리뷰 {rl['min_reviews']}개 이상인 변형만, 태그 {rl['min_tags']}개 미만인 변형은 숨김. 주제는 그 ASIN에서 언급 {rl['topic_min']}개 이상"
                  "(전체 만족도 제외)이고, 값은 그 변형 리뷰 중 그 주제를 부정으로 말한 리뷰의 비율(가중)입니다. "
-                 f"가격은 현재 바이박스 가격(spd-amz-market, {vs['checked_on'] or '날짜 없음'} 조회)이라 리뷰 시점 가격과 다를 수 있습니다. "
+                 + (f"방향 칸은 그 변형 리뷰 중 세부 이슈 라벨 {', '.join(d['high_labels'])}(={d['high']})와 {', '.join(d['low_labels'])}(={d['low']})가 붙은 리뷰 수(원본)이고, "
+                    "방향 지수는 둘을 합쳐 5개 이상일 때만 냅니다. " if d else "")
+                 + f"가격은 현재 바이박스 가격(spd-amz-market, {vs['checked_on'] or '날짜 없음'} 조회)이라 리뷰 시점 가격과 다를 수 있습니다. "
                  "같은 ASIN 안에서만 비교하고, 리뷰 수가 적은 변형은 순위로 읽지 않습니다.")
     return lines
 
@@ -397,7 +495,9 @@ def render_issues(summary, schema, overlap, safety):
     lines.append("")
     if overlap:
         na, nb = overlap.get("names") or ["원래 알던 향과 다름", "정품과 향이 다름"]
-        lines.append(f"향 부정 \"{na}\"과 신뢰 부정 \"{nb}\"이 함께 붙은 리뷰 {overlap['reviews']}개"
+        # 주제 이름은 겹침 라벨 id(주제.방향.라벨)에서 찾는다(없으면 향수 때의 향, 신뢰)
+        ta, tb = [(schema.get(str(x).split(".")[0]) or {}).get("name_ko") for x in (overlap.get("labels") or [None, None])]
+        lines.append(f"{ta or '향'} 부정 \"{na}\"과 {tb or '신뢰'} 부정 \"{nb}\"이 함께 붙은 리뷰 {overlap['reviews']}개"
                      f"({fmt_pct(overlap['weighted_pct'])}, 가중).")
     if safety and safety.get("negative_text"):
         lines.append(f"{safety['negative_text']}(07c_safety_check.md, 알레르기 언급은 본인 반응을 직접 묘사하지 않은 리뷰).")

@@ -1,6 +1,6 @@
 # 리뷰 리포트 HTML(render_html.py)의 화면 문구 영어판. 키는 한국어 원문(스크립트 안 문구 그대로), 값은 영어.
 # {이름} 자리는 스크립트가 숫자나 이름을 넣는 곳이라 영어에도 같은 이름으로 둔다. 빠진 키가 있으면 영어판 만들기가 실패한다.
-title: "Amazon Review Analysis: Perfume (EDP/EDT)"
+title: "Amazon Review Analysis"      # 품목 이름은 카테고리 설정(report.title.en 또는 name_en)에서
 chapters:
   1: Distribution Overview
   2: Mentions and Sentiment by Topic
@@ -12,7 +12,7 @@ chapters:
   8: Key Insights
   9: Brand (ASIN) Comparison
   10: Brand Deep Dive
-  11: Variant (Size) Signals
+  11: Variant Signals
   12: Review Explorer
   13: Strategy Direction
 md_markers:
@@ -150,6 +150,15 @@ strings:
   "온스당 가격": "Price per oz"
   "부정 비율은 그 용량 리뷰 가운데 그 주제를 부정으로 말한 리뷰의 가중 비율입니다. 같은 ASIN 안에서만 비교하고, 가격은 {d}에 조회한 현재 가격입니다. 리뷰 수가 적은 용량은 순위로 읽지 않습니다.": "Negative rate = weighted share of that size's reviews with a negative mention of the topic. Compare within the same ASIN only; prices are current prices checked on {d}. Do not rank sizes with few reviews."
   "같은 ASIN 안 용량별 부정 비율과 온스당 가격(리뷰 15개 이상인 용량)": "Negative rates and price per ounce by size within each ASIN (sizes with 15+ reviews)"
+  "같은 ASIN 안 변형별 부정 비율(리뷰 15개 이상인 변형)": "Negative rates by variant within each ASIN (variants with 15+ reviews)"
+  "부정 비율은 그 변형 리뷰 가운데 그 주제를 부정으로 말한 리뷰의 가중 비율입니다. 같은 ASIN 안에서만 비교하고, 가격은 {d}에 조회한 현재 가격입니다. 리뷰 수가 적은 변형은 순위로 읽지 않습니다.": "Negative rate = weighted share of that variant's reviews with a negative mention of the topic. Compare within the same ASIN only; prices are current prices checked on {d}. Do not rank variants with few reviews."
+  "변형 키: {k}": "Variant key: {k}"
+  "상품을 합친 {k}별 방향({h} 대 {l})": "Direction by {k}, all products pooled ({h} vs {l})"
+  "상품 수": "Products"
+  "방향 지수": "Direction index"
+  "방향 지수 = ({h} - {l}) / 둘의 합, 둘을 합쳐 5개 미만이면 내지 않음. 리뷰 수는 원본입니다.": "Direction index = ({h} - {l}) / their sum, not shown when the two total fewer than 5. Review counts are raw."
+  "{k} {v}": "{k} {v}"
+  "{v}: {d}": "{v}: {d}"
   "{t} {d}: {l}": "{t} {d}: {l}"
   "브랜드 전체": "All brands"
   "주제 전체": "All topics"

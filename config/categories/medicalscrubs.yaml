@@ -1,0 +1,180 @@
+# 의료용 스크럽(간호복, 의료 유니폼 상하의) 카테고리. collect.py candidates와 asin-selector가 읽는다.
+# 2026-10-14 초안. 담당자 결정: 정답지(유리님 스크럽 리포트)와 같은 상품으로 "블라인드" 회차를 돌려 파이프라인을 객관적으로 잰다.
+# 정답지에서는 목차와 섹션 구성만 보고, 숫자와 인용과 결론은 회차가 끝날 때까지 보지 않는다(docs/blind_run_medicalscrubs.md).
+# 범위: 의료용 스크럽 세트, 상의, 바지(여성, 남성). 속에 입는 티, 의료용 신발, 양말, 모자, 청진기 같은 소품은 뺀다.
+category: medicalscrubs
+name_ko: 의료용 스크럽
+
+# selection 절은 두지 않는다. 이번 회차의 ASIN은 담당자 결정으로 01_asins.csv에 직접 적었다(정답지 상품 10개가 모두 팀 DB에 있음).
+
+# 공유 DB의 search_reviews keyword(리뷰 제목과 본문 부분일치). collect.py candidates가 쓴다.
+keywords: [scrubs, scrub pants, scrub top, scrub set]
+
+# 상품 제목(대소문자 무시, 부분일치)에 하나라도 있으면 후보, title_exclude가 하나라도 있으면 뺀다.
+title_include: [Scrubs, Scrub Set, Scrub Top, Scrub Pant, Scrub Jogger, Medical Uniform, Nurse Uniform]
+title_exclude: [Underscrub, Under Scrub, Shoe, Clog, Sock, Compression, Cap, Hat, Stethoscope, Badge, Lanyard,
+                Body Scrub, Face Scrub, Exfoliat, Scrubber, Sponge]
+
+# kind_hint 규칙: 먼저 맞는 것
+kind_rules:
+  men_set: ["Men Scrubs Set", "Scrubs for Men Set", "Men's Scrub Set"]
+  women_set: ["Scrubs for Women Set", "Women Scrubs Set", "Scrub Set", "Scrubs Set", "Top & ", "Top and "]
+  top: ["Scrub Top", "Scrubs Top"]
+  pants: ["Scrub Pant", "Scrub Jogger", "Pants"]
+
+# 리뷰 리포트(render_html.py, issues.py가 읽음)
+report:
+  title: {ko: "아마존 리뷰 분석: 의료용 스크럽", en: "Amazon Review Analysis: Medical Scrubs"}
+  helpful_min_voted_reviews: 30
+
+# 상품 사양 수집(specs.py, product-spec-collector가 읽음). 초안이고, 세부 이슈와 설계 정보 항목 승인 뒤 다시 본다.
+specs:
+  items:
+    - id: fabric
+      name_ko: 원단 구성
+      ask: "원단 혼용률(폴리에스터, 레이온, 스판덱스, 면 등 %)과 원단 이름"
+      format: text
+    - id: stretch
+      name_ko: 신축성 표시
+      ask: "2-way, 4-way 스트레치 같은 신축성 표시"
+      format: text
+    - id: pockets
+      name_ko: 주머니
+      ask: "상의와 바지의 주머니 수와 종류(카고, 펜 꽂이, 휴대폰 주머니 등)"
+      format: text
+    - id: fit_cut
+      name_ko: 핏과 기장
+      ask: "핏(슬림, 클래식 등), 바지 모양(조거, 스트레이트, 플레어, 와이드), 허리(고무줄, 끈, 요가 밴드)"
+      format: text
+    - id: size_range
+      name_ko: 사이즈 범위
+      ask: "사이즈 범위(XXS~5XL 등)와 쁘띠, 톨 같은 기장 선택지"
+      format: text
+    - id: care
+      name_ko: 세탁과 관리
+      ask: "세탁 방법과 주름, 보풀, 색 빠짐 방지 같은 관리 표시"
+      format: text
+    - id: colors
+      name_ko: 색상 수
+      ask: "고를 수 있는 색상 수"
+      format: text
+    - id: list_price
+      name_ko: 정가
+      ask: "출처 사이트에 적힌 가격(통화 포함). 여러 구성이면 모두"
+      format: list
+
+# 시장 데이터(market.py, market_build.py, guide_metrics.py가 읽음). 노드는 runs/hairremoval-db-2026-10-08/market/raw/subcategories_search_all.json에서
+# 이름에 Scrub이 든 노드와 부모를 찾았다(2026-10-14). 고른 상품은 여성 세트 7, 여성 상의 1, 남성 세트 2라 여성 의료 유니폼 노드를 부모로 둔다.
+market:
+  seed: "scrubs for women"
+  parent_node: 6567206011               # Women's Medical Uniforms & Scrubs(자식: 상의, 세트, 재킷, 바지)
+  context_nodes: [6567206011, 6567198011]   # 여성, 남성 의료 유니폼
+  max_nodes: 15
+  nodes:
+    WSET: "Women's Medical Scrub Sets"
+    WTOP: "Women's Medical Scrub Shirts"
+    WPANT: "Women's Medical Scrub Pants"
+    MSET: "Men's Medical Scrub Sets"
+  term_words: [scrub, scrubs, nurse, nursing, medical uniform, "jogger scrub", figs, cherokee]
+
+
+issues:
+  # 같은 리뷰에 함께 붙는지 셀 두 라벨(주제, 라벨 id). issues.py는 한 쌍만 센다. 담당자가 리포트에서 함께 읽으라고 한 세 쌍(2026-10-14) 가운데
+  # 세트인데 한 벌만 온 것과 세트 한 벌이 빠진 것을 센다. 나머지 두 쌍(뜯긴 포장과 쓰던 물건, 상하의 사이즈 다르게 옴과 상하의 핏 차이)은 리포트 작성자에게 문장으로만 함께 읽게 한다.
+  overlap: [[trust, set_but_single_piece], [shipping, missing_set_piece]]
+
+# 제품 개발 가이드(guide_metrics.py, robustness.py가 읽음). 2026-10-14 세부 이슈와 설계 정보 항목 승인 뒤 Claude가 정함(블라인드 회차, 관문 밖 결정).
+guide:
+  title: 아마존 미국 의료용 스크럽 제품 개발 가이드
+  market_node_head: "6567206011"        # 머리 숫자의 시장 노드(Women's Medical Uniforms & Scrubs, 고른 상품 10개 중 8개가 여성)
+  market_nodes_brand_share: ["Women's Medical Scrub Sets", "Women's Medical Scrub Shirts", "Women's Medical Scrub Pants", "Men's Medical Scrub Sets"]   # market.nodes 순서(WSET, WTOP, WPANT, MSET)
+  head_topic: fit_sizing                # 부정 언급 리뷰어(가중) 22.1%로 2위(원단과 착용감 7.5%)의 세 배라 사이즈와 핏으로 정함
+  direction_index:                      # 방향 지수 = (high - low) / (high + low): 작게 나온다와 크게 나온다
+    topic: fit_sizing
+    high: {name: 작게 나옴, labels: [runs_small]}
+    low: {name: 크게 나옴, labels: [runs_large]}
+    min_reviews: 15
+  duration_item: reviewer_height        # 숫자 항목(입는 사람 키, 인치). 점수표의 숫자 칸
+  duration_min_values: 3
+  duration_bins: [60, 63, 66, 69]       # 키 구간(인치): 5피트 미만, 5피트~5피트 3, 5피트 3~6, 5피트 6~9, 5피트 9 이상
+  number_names: {reviewer_height: 입는 사람 키, reviewer_weight: 입는 사람 몸무게}
+  gender_words:
+    male: [" for men", " men ", " men's", "mens", "male"]
+    female: ["women", "womens", "women's", "for her", "female", "ladies"]
+  fastest_term_min_volume: 10000
+  growth:
+    window_weeks: 4
+    min_volume: 10000
+    exclude_words: [shoes, clogs, socks, compression, stethoscope, badge, cap, hat, underscrub, costume]   # 스크럽이 아닌 의료 용품 검색어
+  price_bands: 3
+  caveat_subcategory: "Women's Medical Scrub Sets"
+  caveats_extra:
+    - "블라인드 회차다. 답지 상품 10개를 팀 DB에서 같은 상품으로 골랐고, 유료 수집은 켜지 않았다(팀 DB 리뷰만)."
+  focus:                                # 03장 집중 분석 4개
+    - id: fit
+      title: 사이즈와 핏
+      topics: [fit_sizing]
+      items: [size_vs_label, fit_part_direction, body_type, reviewer_height, cross_order_variation]
+      split_label: runs_small           # 체형, 부위 값마다 작게 나온다 비율
+    - id: fabric
+      title: 원단과 착용감
+      topics: [fabric_comfort]
+      items: [fabric_property, use_context]
+    - id: durability
+      title: 만듦새와 세탁
+      topics: [build_quality, wash_care, color_fastness]
+      items: [defect_part_type, wash_change, problem_color]
+    - id: design_value
+      title: 디자인, 주머니, 가격
+      topics: [design_color, pockets, price_value]
+      items: [desired_feature, comparison_reference, purchase_context]
+  standards:                            # 04장 소비자 기준표 후보
+    - id: sizing
+      title: 사이즈 표기와 핏
+      neg_labels: [runs_small, runs_large, length_off, top_bottom_mismatch, area_fit, fit_off_unspecified]
+      pos_labels: [fits_well, true_to_size, one_part_fits, good_length]
+      items: [size_vs_label, ordered_size, reviewer_height, reviewer_weight]
+      search_words: ["petite", "tall", "plus size"]
+    - id: fabric
+      title: 원단과 착용감
+      neg_labels: [no_stretch, thin_see_through, low_quality_fabric, stiff_rough, runs_hot, plastic_feel, noisy_static, fabric_inconsistent]
+      pos_labels: [good_fabric, comfortable, soft, breathable_light, stretchy, thick_opaque]
+      items: [fabric_property]
+      search_words: ["stretch", "soft", "jogger"]
+    - id: durability
+      title: 만듦새와 내구성
+      neg_labels: [rips_holes, loose_threads_stitching, pilling, drawstring_parts, arrival_construction_defect, arrival_stains, chemical_smell, poor_quality_general]
+      pos_labels: [good_quality_general, well_made_stitching, held_up_over_time, feels_durable]
+      items: [defect_part_type]
+      search_words: ["durable"]
+    - id: wash
+      title: 세탁과 물빠짐
+      neg_labels: [wrinkles_easily, shrinks, attracts_lint_hair, stains_hard_to_remove, no_dryer_or_heat, dye_on_skin, dye_on_worn_items, bleeds_in_wash, fades_after_wash]
+      pos_labels: [wrinkle_free, washes_well, no_shrink, color_holds, no_bleeding]
+      items: [wash_change]
+      search_words: ["wrinkle", "fade"]
+    - id: skin_safety
+      title: 피부 반응
+      neg_labels: []
+      pos_labels: []
+      safety: true                      # 07c 이상 반응 판정을 쓴다
+      items: []
+      search_words: ["hypoallergenic"]
+    - id: pockets
+      title: 주머니
+      neg_labels: [shallow_or_small, odd_placement, missing_pockets, torn_or_bad_sewing]
+      pos_labels: [plenty_of_pockets, likes_pockets, deep_and_roomy, good_layout_and_zip]
+      items: []
+      search_words: ["pocket", "cargo"]
+    - id: set_delivery
+      title: 세트 구성과 배송
+      neg_labels: [set_but_single_piece, missing_set_piece, mismatched_set_sizes, wrong_size_sent, wrong_color_or_item, received_used_item, opened_or_resealed]
+      pos_labels: [arrived_as_ordered, fast_delivery, on_time_delivery, sealed_and_protected]
+      items: [cross_order_variation]
+      search_words: ["set"]
+    - id: value
+      title: 가격 대비 가치
+      neg_labels: [waste_of_money, get_what_you_pay_for, not_worth_price, pricey_for_top_only, too_expensive, cheaper_elsewhere]
+      pos_labels: [good_value_for_price, low_price, cheaper_than_others, decent_for_budget]
+      items: [comparison_reference]
+      search_words: ["cheap", "affordable"]

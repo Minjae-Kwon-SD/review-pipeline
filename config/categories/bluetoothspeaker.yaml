@@ -1,0 +1,66 @@
+# 블루투스 스피커(들고 다니는 무선 스피커) 카테고리. collect.py candidates와 asin-selector가 읽는다.
+# 2026-10-14 초안(담당자 결정: 화장품이 아닌 제품에도 파이프라인이 맞는지 빨리 보려고 고름. 팀 리뷰 DB에서 리뷰가 두 번째로 많은 상품 종류).
+# 범위: 배터리로 도는 블루투스 스피커(손바닥 크기, 샤워용, 몸에 다는 것, 중간 크기, 큰 야외용과 파티용).
+# 사운드바, 컴퓨터 스피커, 스마트 디스플레이, 헤드폰과 이어폰, 차량용, 노래방 기계, 마이크는 뺀다.
+category: bluetoothspeaker
+name_ko: 블루투스 스피커
+
+# selection 절이 없으면 /review-run 0단계는 collect.py candidates(공유 DB에 리뷰가 있는 상품을 리뷰 많은 순)로 고른다.
+# 이번 회차는 담당자 결정으로 공유 DB에서 리뷰가 많은 상품 10개, 유료 수집 없음.
+
+# 공유 DB의 search_reviews keyword(리뷰 제목과 본문 부분일치). collect.py candidates가 쓴다.
+keywords: [bluetooth speaker, portable speaker, wireless speaker, speaker, JBL, Soundcore]
+
+# 상품 제목(대소문자 무시, 부분일치)에 하나라도 있으면 후보, title_exclude가 하나라도 있으면 뺀다.
+title_include: [Bluetooth Speaker, Portable Speaker, Wireless Speaker, Shower Speaker, Outdoor Speaker, Party Speaker,
+                Waterproof Speaker, Speaker]
+title_exclude: [Soundbar, Sound Bar, Computer Speaker, PC Speaker, Desktop Speaker, Smart Display, Echo Show, Echo Dot,
+                Headphone, Earbud, Earphone, Car Speaker, Karaoke, Microphone, Monitor, Bookshelf, Subwoofer, Turntable, Piano, Keyboard]
+
+# kind_hint 규칙: 먼저 맞는 것(제품 이름이 먼저, "Small"처럼 색이나 크기 선택지에 붙는 말은 쓰지 않음)
+kind_rules:
+  wearable_shower: [Wearable, Shower Speaker]
+  mini: [Go 4, Go 5, Clip 5, Micro, Mini, Ranger]
+  mid: [Flip, Charge, Roam, Move 2, SoundLink Flex, SoundLink Plus]
+  large_outdoor: [Boom 2, Boombox, Party, PA Speaker, SoundLink Max, Grande, Original Gen]
+
+# 리뷰 리포트(render_html.py, issues.py가 읽음)
+report:
+  title: {ko: "아마존 리뷰 분석: 블루투스 스피커", en: "Amazon Review Analysis: Bluetooth Speakers"}
+  helpful_min_voted_reviews: 30
+
+# 상품 사양 수집(specs.py, product-spec-collector가 읽음). 초안이고, 세부 이슈와 설계 정보 항목 승인 뒤 다시 본다.
+specs:
+  items:
+    - id: battery_hours
+      name_ko: 배터리 재생 시간
+      ask: "제조사가 적은 재생 시간(시간)과 그 조건(음량 등). 충전 시간이 있으면 함께"
+      format: text
+    - id: water_dust_rating
+      name_ko: 방수 방진 등급
+      ask: "IP 등급(IPX5, IP67 등)과 물에 뜨는지 같은 표시"
+      format: text
+    - id: output_power
+      name_ko: 출력
+      ask: "출력(W)과 스피커 구성(드라이버 수, 패시브 라디에이터 등)이 적혀 있으면 그 값"
+      format: text
+    - id: size_weight
+      name_ko: 크기와 무게
+      ask: "크기(가로, 세로, 높이)와 무게"
+      format: text
+    - id: connectivity
+      name_ko: 연결 방식
+      ask: "블루투스 버전, 두 대 묶기(스테레오 짝, 파티 모드), 앱, AUX 입력, 충전 단자(USB-C 등)"
+      format: list
+    - id: extra_features
+      name_ko: 그 밖의 기능
+      ask: "마이크(통화), 보조 배터리 기능, 조명, 고리나 끈, 음량 키우기(Bass) 같은 제조사가 내세운 기능"
+      format: list
+    - id: list_price
+      name_ko: 정가
+      ask: "출처 사이트에 적힌 가격(통화 포함). 여러 구성이면 모두"
+      format: list
+
+# market(시장 노드), issues(겹침 라벨), guide(가이드 설정) 절은 아직 없다.
+# market은 12_market 전에 spd-amz-market subcategories_search로 블루투스 스피커 노드를 찾아 채우고(채우기 전에는 market.py가 멈춤),
+# issues와 guide는 세부 이슈와 설계 정보 항목이 승인된 뒤 정한다(제모 크림과 같은 순서).

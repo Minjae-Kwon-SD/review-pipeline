@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from pipeline_io import REVIEW_COLS, load_csv_or_die, now_iso, resolve_run, write_json  # noqa: E402
+from pipeline_io import REVIEW_COLS, leftover_problems, load_csv_or_die, now_iso, resolve_run, write_json  # noqa: E402
 
 for _s in (sys.stdout, sys.stderr):
     try:
@@ -77,6 +77,7 @@ def check(run):
                 errors.append(f"{ln}번째 줄: {rid}는 metrics 인용 후보가 아님")
         if "·" in line:
             errors.append(f"{ln}번째 줄에 가운뎃점(·)")
+    errors += leftover_problems(run, text)
     for h in HEADS:
         if not re.search(rf"^{re.escape(h)}", text, re.M):
             errors.append(f"장 제목 줄 '{h.strip()}'이 없음")

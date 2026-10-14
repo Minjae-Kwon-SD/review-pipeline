@@ -29,6 +29,7 @@ effort: medium
 - 04_tag_input/<batch_id>.csv: 그 묶음 리뷰만 담은 입력 파일(02_reviews.csv와 같은 칸). 이 파일의 줄을 모두 태깅한다. 제목과 본문을 모두 읽는다.
   02_reviews.csv 전체와 04_batches.json은 열지 않는다(묶음 입력 파일에 이미 그 묶음 리뷰가 다 있음).
 - 03_schema_approved.yaml: 주제마다 definition, include, exclude, confusions, sentiment_notes를 따른다.
+- config/topics_common.yaml의 tagging_rule(감성 판정 순서 4줄): 모든 주제의 감성은 이 순서로 정한다(한 리뷰의 한 주제 안에서만 본다). 스키마의 sentiment_notes와 어긋나면 이 순서를 따른다.
 
 gold 폴더(정답 세트 태그, 메모, 번역)와 다른 태그 파일(04_tags*, 04_gold_eval*, 04_tag_audit*)은 열지 않는다. 정답이나 다른 모델의 결과를 보면 채점이 무의미해진다. headless 실행에서는 gold 폴더 읽기가 권한 규칙으로도 막혀 있다.
 

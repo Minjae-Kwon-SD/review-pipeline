@@ -191,6 +191,28 @@ def test_variant():
     eq("변형이 하나인 ASIN은 빠짐", [a["asin"] for a in vs["asins"]], ["A"])
     vs = sections.variant_signal(reviews, tags, weight, schema, prices, ("overall",), min_tags=21)
     eq("태그 적은 변형 숨김", vs["asins"][0]["hidden_low_tags"], ["1 fl oz", "3.3 fl oz"])
+    # 옷 글자 사이즈: 꼬리(Tall, Petite, Plus)를 떼고 기본 사이즈와 순서로. 글자 사이즈가 아니면 None
+    eq("옷 사이즈 읽기", [sections.letter_size(v) for v in ("XX-Large Plus", "Medium-Tall", "X-Small Petite", "3X-Large", "2XL", "Rose", "mens")],
+       [("XXL", 6), ("M", 3), ("XS", 1), ("3XL", 7), ("XXL", 6), (None, None), (None, None)])
+    # 키 점수가 같으면 사이즈 키를 먼저, 방향 라벨(작게, 크게)로 변형마다 수와 지수, 상품을 합친 표
+    reviews, tags, weight, labels = [], [], {}, []
+    for asin in ("A", "B"):
+        for size, color, small in (("Small", "Red", 0), ("Small-Tall", "Blue", 0), ("X-Large", "Red", 1), ("X-Large Plus", "Blue", 1)):
+            for i in range(8):
+                rid = f"{asin}{size}{color}{i}"
+                reviews.append({"review_id": rid, "asin": asin, "variant_asin": asin + size, "variant_text": f"Size: {size}; Color: {color}"})
+                weight[rid] = 1.0
+                tags.append({"review_id": rid, "topic": "fit_sizing", "sentiment": "negative"})
+                if i < 3:
+                    labels.append({"review_id": rid, "labels": ["runs_small" if small else "runs_large"]})
+    eq("같은 점수면 사이즈 키 먼저", sections.rank_variant_keys({"Color": 2, "Size": 2, "Style": 0}), ["Size", "Color"])
+    di = {"topic": "fit_sizing", "high": {"name": "작게", "labels": ["runs_small"]}, "low": {"name": "크게", "labels": ["runs_large"]}}
+    sigs = sections.variant_signals(reviews, tags, weight, {"fit_sizing": {"name_ko": "핏"}}, None, ("overall",), direction=di, labels=labels)
+    eq("변형 키 둘(사이즈 먼저)", [x["key"] for x in sigs], ["Size", "Color"])
+    eq("상품 합친 사이즈별 방향", [(r["variant"], r["reviews"], r["asins"], r["high"], r["low"], r["index"]) for r in sigs[0]["pooled"]],
+       [("S", 32, 2, 0, 12, -1.0), ("XL", 32, 2, 12, 0, 1.0)])
+    eq("ASIN 안 사이즈 행 방향", [(r["variant"], r["direction"]) for r in sigs[0]["asins"][0]["rows"]],
+       [("S", {"high": 0, "low": 6, "index": -1.0}), ("XL", {"high": 6, "low": 0, "index": 1.0})])
 
 
 def test_issues(tmp):
@@ -297,7 +319,7 @@ def test_issues(tmp):
     eq("브랜드 안 세부 이슈", sections.brand_issues(counts, ["B0ISSUE001"], "longevity_projection", "negative"),
        [{"id": "fades_fast", "name_ko": "금방 날아감", "reviews": 5}])
     # 감사: 표본 10개 중 FAIL 1개 = 10%(기준 5% 초과), 표본에 없는 FAIL은 세지 않고 경고
-    run("issues.py", "audit-sample", run_, "--n", "10")
+    run("issues.py", "audit-sample", run_, "--n", "10", "--parts", "1")
     smp = [json.loads(l) for l in (run_ / "07b_issue_audit_sample.jsonl").read_text(encoding="utf-8").splitlines()]
     eq("감사 표본 수", len(smp), 10)
     f0 = smp[0]
@@ -310,6 +332,26 @@ def test_issues(tmp):
     au = json.loads((run_ / "07b_issue_audit_summary.json").read_text(encoding="utf-8"))
     eq("감사 집계", (au["status"], au["fail"], au["fail_rate"], len(au["warnings"])), ("FAIL", 1, 0.1, 1))
     run("issues.py", "audit", run_, "--max-fail", "0.2")
+    # 감사자 둘로 나누기(2026-10-14): 반쪽 5개씩, 반쪽마다 FAIL 비율, 합칠 때 빠짐과 겹침 확인
+    run("issues.py", "audit-sample", run_, "--n", "10")
+    halves = [[json.loads(l) for l in (run_ / f"07b_issue_audit_sample_p{k}.jsonl").read_text(encoding="utf-8").splitlines()] for k in (1, 2)]
+    eq("반쪽 표본 수와 합", (len(halves[0]), len(halves[1]), sorted(json.dumps(x, sort_keys=True) for x in halves[0] + halves[1]) ==
+       sorted(json.dumps(x, sort_keys=True) for x in smp)), (5, 5, True))
+    h0 = halves[0][0]
+    (run_ / "07b_issue_audit_p1.yaml").write_text(yaml.safe_dump({"audit": {"stage": "issues", "checked": 5, "findings": [
+        {"review_id": h0["review_id"], "topic": h0["topic"], "direction": h0["direction"], "status": "FAIL"}]}}), encoding="utf-8")
+    run("issues.py", "audit", run_, expect=2)                      # p2 판정이 아직 없으면 합치지 않음(중단)
+    (run_ / "07b_issue_audit_p2.yaml").write_text(yaml.safe_dump({"audit": {"stage": "issues", "checked": 5, "findings": []}}), encoding="utf-8")
+    out = run("issues.py", "audit", run_, "--max-fail", "0.2")
+    au = json.loads((run_ / "07b_issue_audit_summary.json").read_text(encoding="utf-8"))
+    eq("반쪽 합친 집계", (au["status"], au["fail"], [(p_["part"], p_["fail"], p_["fail_rate"]) for p_ in au["parts"]], au["merge_problems"]),
+       ("PASS", 1, [("p1", 1, 0.2), ("p2", 0, 0.0)], []))
+    eq("합치기 확인 문구", "표본 빠짐과 겹침 없음" in out, True)
+    p2 = run_ / "07b_issue_audit_sample_p2.jsonl"
+    p2.write_text(chr(10).join(p2.read_text(encoding="utf-8").splitlines()[1:]) + chr(10), encoding="utf-8")
+    (run_ / "07b_issue_audit_p2.yaml").write_text(yaml.safe_dump({"audit": {"stage": "issues", "checked": 4, "findings": []}}), encoding="utf-8")
+    out = run("issues.py", "audit", run_, "--max-fail", "0.2", expect=1)
+    eq("반쪽에서 빠진 표본을 잡음", ("INCOMPLETE" in out, "반쪽 어디에도 없는 표본 1개" in out), (True, True))
     # 안전: 부정 2(이상 반응 1, 없음 1), 긍정 1(없음)
     extra = [{"review_id": "R00ISSUEXYZ", "topic": "safety", "sentiment": "negative", "quote": "Body 0"},
              {"review_id": "R01ISSUEXYZ", "topic": "safety", "sentiment": "negative", "quote": "Body 1"},
@@ -809,6 +851,27 @@ def test_audit_sample(tmp):
     first = (run_ / "04_audit_sample.jsonl").read_text(encoding="utf-8")
     run("eval_gold.py", "audit-sample", run_, "--n", "50")
     eq("감사 표본 시드 고정", (run_ / "04_audit_sample.jsonl").read_text(encoding="utf-8"), first)
+    # 감사자 둘로 나누기(2026-10-14): 리뷰 단위로 반쪽, 반쪽마다 FAIL 비율, 합칠 때 빠짐과 겹침, 자기 반쪽 밖 판정을 잡음
+    halves = [[json.loads(l) for l in (run_ / f"04_audit_sample_p{k}.jsonl").read_text(encoding="utf-8").splitlines()] for k in (1, 2)]
+    eq("태그 반쪽 수와 합", (len(halves[0]), len(halves[1]), sorted(json.dumps(x, sort_keys=True) for x in halves[0] + halves[1]) ==
+       sorted(json.dumps(x, sort_keys=True) for x in sample)), (23, 22, True))
+    eq("한 리뷰는 한 반쪽에만", {t["review_id"] for t in halves[0]} & {t["review_id"] for t in halves[1]}, set())
+    import yaml
+    h0, h1 = halves[0][0], halves[1][0]
+    (run_ / "04_tag_audit_p1.yaml").write_text(yaml.safe_dump({"audit": {"stage": "tags", "checked": 23, "findings": [
+        {"review_id": h0["review_id"], "topic": "scent", "status": "FAIL"}]}}), encoding="utf-8")
+    run("eval_gold.py", "audit", run_, expect=2)                   # p2 판정이 아직 없으면 합치지 않음(중단)
+    (run_ / "04_tag_audit_p2.yaml").write_text(yaml.safe_dump({"audit": {"stage": "tags", "checked": 22, "findings": [],
+        "missed": [{"review_id": h1["review_id"], "topic": "price_value", "reason": "시험"}]}}), encoding="utf-8")
+    out = run("eval_gold.py", "audit", run_, "--max-fail", "0.10")
+    au = json.loads((run_ / "04_tag_audit_summary.json").read_text(encoding="utf-8"))
+    eq("태그 반쪽 합친 집계", (au["status"], au["fail"], au["missed"], [(p_["part"], p_["fail"], p_["fail_rate"], p_["missed"]) for p_ in au["parts"]],
+       au["merge_problems"]), ("PASS", 1, 1, [("p1", 1, 0.043, 0), ("p2", 0, 0.0, 1)], []))
+    eq("태그 합치기 확인 문구", "표본 빠짐과 겹침 없음" in out, True)
+    (run_ / "04_tag_audit_p2.yaml").write_text(yaml.safe_dump({"audit": {"stage": "tags", "checked": 22, "findings": [
+        {"review_id": h0["review_id"], "topic": "scent", "status": "FAIL"}]}}), encoding="utf-8")
+    out = run("eval_gold.py", "audit", run_, "--max-fail", "0.10", expect=1)
+    eq("자기 반쪽 밖 판정을 잡음", ("INCOMPLETE" in out, "자기 반쪽에 없는 태그를 판정함 1개" in out), (True, True))
 
 
 def test_render_html(tmp):
@@ -817,10 +880,10 @@ def test_render_html(tmp):
     import render_html as rh
     eq("표기", (rh.f_int(1212), rh.f_pct(5.0), rh.f_star(4.476), rh.f_gap(-3.27), rh.f_usd(35.0)),
        ("1,212", "5.0%", "4.48★", "-3.27", "35.00달러"))
-    # 리뷰 3개: [id, asin, 변형, 별점, 제목, 본문, 날짜, 확인, 도움돼요, 브랜드, 가중치, 변형 텍스트, Vine, 용량]
-    D = {"R": [["R1", "A", "", 1, "t", "b", "2025-03-01", 1, 2, 0, 1.0, "", 0, "1 fl oz"],
-               ["R2", "A", "", 5, "t", "b", "2026-08-01", 0, 0, 0, 1.0, "", 1, "3.3 fl oz"],
-               ["R3", "B", "", 2, "t", "headache", "2026-09-01", 1, 0, 1, 1.0, "", 0, ""]],
+    # 리뷰 3개: [id, asin, 변형, 별점, 제목, 본문, 날짜, 확인, 도움돼요, 브랜드, 가중치, 변형 텍스트, Vine, 변형 키마다 변형 이름]
+    D = {"R": [["R1", "A", "", 1, "t", "b", "2025-03-01", 1, 2, 0, 1.0, "", 0, ["1 fl oz"]],
+               ["R2", "A", "", 5, "t", "b", "2026-08-01", 0, 0, 0, 1.0, "", 1, ["3.3 fl oz"]],
+               ["R3", "B", "", 2, "t", "headache", "2026-09-01", 1, 0, 1, 1.0, "", 0, [""]]],
          "T": [[0, 0, 1, "q"], [0, 1, 1, "q"], [1, 0, 0, "q"], [2, 0, 2, "q"], [2, 1, 1, "q"]],
          "L": [[0, 0], [1, 1], [4, 1]], "labels": [[0, 1, "금방 날아감", "fades_fast"], [1, 1, "가짜", "fake"]],
          "sid": ["longevity_projection", "trust"]}
@@ -1145,6 +1208,10 @@ def test_fake_category(tmp):
         shutil.copytree(real, r, ignore=lambda d, names: [n for n in names if n in skip or (Path(d).name == "market" and n == "raw")])
         run("guide_metrics.py", r)
         M = json.loads((r / "16_guide_metrics.json").read_text(encoding="utf-8"))
+        W = json.loads((r / "16_guide_writer_input.json").read_text(encoding="utf-8"))
+        eq("작성자용 입력: 값, 표, 인용은 같고 ev의 리뷰 id 목록만 빠짐",
+           (W["values"] == M["values"], W["tables"] == M["tables"], W["quotes"] == M["quotes"], sorted(W["ev"]) == sorted(M["ev"]),
+            any("i" in e or "q" in e for e in W["ev"].values())), (True, True, True, True, False))
         eq("설정 없는 표는 만들지 않음", (any(k.startswith("std.spec.") for k in M["tables"]), "meta.anatomy" in M["tables"],
                                      "f.scent_accuracy.note_x_direction" in M["tables"]), (False, False, False))
         run("render_guide_html.py", "build", r)
@@ -1500,6 +1567,31 @@ def test_brand_compare():
        ("longevity_projection", "scent", 100.0))
 
 
+def test_leftover_and_unit(tmp):
+    """다른 품목에서 남은 말 검사(leftover_problems)와 가이드 단위 가격 기준(unit_basis): 품목과 상관없는 규칙"""
+    sys.path.insert(0, str(SCRIPTS))
+    import pipeline_io as pio
+    import guide_metrics as gm
+    run_ = Path(tmp) / "leftover-2026-10-14"
+    run_.mkdir()
+    (run_ / "05_metrics.json").write_text(json.dumps({"variant_signals": [{"asins": [{"rows": [{"oz": None}]}]}]}), encoding="utf-8")
+    text = chr(10).join(["## 11. 변형 신호", "<!-- 표:변형 신호 -->", "| 온스당 가격 | checked_on |", "<!-- /표:변형 신호 -->",
+                      "가격은 checked_on 기준이고 온스당 가격은 없습니다.", "원단은 평방야드당 2.6온스 이상이면 면제된다 [r:tst_01].",
+                      "CozyFit은 1위다 [m:m.top1_WSET]."])
+    errs = pio.leftover_problems(run_, text)
+    eq("남은 말 검사(표와 출처 줄은 뺌)", [e.split(":")[0] for e in errs], ["5번째 줄", "5번째 줄"])
+    (run_ / "05_metrics.json").write_text(json.dumps({"variant_signals": [{"asins": [{"rows": [{"oz": 1.0}]}]}]}), encoding="utf-8")
+    eq("온스 데이터가 있으면 온스는 통과", len(pio.leftover_problems(run_, text)), 1)
+    g = gm.G.__new__(gm.G)
+    basis = lambda types: g.unit_basis({str(i): {"buyBoxPrice": 10.0, "unitType": t} for i, t in enumerate(types)})["basis"]
+    eq("단위 가격 기준", (basis(["Fl Oz", "Ounce"]), basis(["Count", "Count"]), basis(["Count", "Set"]), basis([None])),
+       ("oz", "unit", "price", "price"))
+    import eval_gold as eg      # 정답 화면 주제 순서: 필수 먼저, 제품, 브랜드, 근거 많은 순
+    sc = {"price_value": {"id": "price_value", "side": "B", "evidence_count": 40}, "fit": {"id": "fit", "side": "P", "evidence_count": 10},
+          "overall": {"id": "overall", "side": "P", "evidence_count": 5}, "fabric": {"id": "fabric", "side": "P", "evidence_count": 30}}
+    eq("정답 화면 주제 순서", [t["id"] for t in eg.sheet_order(sc, ["overall"])], ["overall", "fabric", "fit", "price_value"])
+
+
 def test_price_complaints():
     """guide_metrics.price_complaints: 온스당 가격 1.0, 1.5, 2.0, 3.0인 상품 넷과 가격 없는 상품 하나. 순위 i x 3 // 4 -> 묶음 0, 0, 1, 2.
     묶음 0(P1 a 2, b 1, P2 c 1): 피부 부정 a 2 / 4 = 50.0%, 효과 부정 c 1 / 4 = 25.0%, 별점 (3 x 4.0 + 1 x 3.0) / 4 = 3.75.
@@ -1590,6 +1682,20 @@ def main():
 
         run("weight.py", r, "--impact-min", "3", "--strength-min", "2")  # 손계산은 v0 기준값으로
         m = json.loads((r / "05_metrics.json").read_text(encoding="utf-8"))
+        # 리포트 작성자용 인용 후보(2026-10-14): 칸마다 10개 이하, 인용과 별점과 브랜드가 원본과 같고, 앞쪽은 별점을 돌아가며 뽑음
+        qp = json.loads((r / "05_quote_pool.json").read_text(encoding="utf-8"))
+        tq = {(t["review_id"], t["topic"], t["sentiment"]): t["quote"] for t in (json.loads(l) for l in (r / "04_tags.jsonl").read_text(encoding="utf-8").splitlines() if l.strip())}
+        rs = {x["review_id"]: x for x in csv.DictReader(open(r / "02_reviews.csv", encoding="utf-8-sig", newline=""))}
+        bad = [(k, q["review_id"]) for k, v in qp["pairs"].items() for q in v["quotes"]
+               if tq.get((q["review_id"], *k.split("."))) != q["quote"] or int(rs[q["review_id"]]["star"]) != q["star"]
+               or q["brand"] != m["brand_of_asin"].get(rs[q["review_id"]]["asin"], "")]
+        rot = []
+        for k, v in qp["pairs"].items():
+            stars_avail = len({int(rs[t[0]]["star"]) for t in tq if f"{t[1]}.{t[2]}" == k and t[0] in rs})
+            head = [q["star"] for q in v["quotes"][:stars_avail]]
+            if len(set(head)) != len(head):
+                rot.append(k)
+        eq("인용 후보: 원본과 같음, 칸마다 10개 이하, 별점 돌아가며", (bad, max(len(v["quotes"]) for v in qp["pairs"].values()) <= 10, rot), ([], True, []))
         s = m["summary"]
         eq("가중 평균", s["weighted_mean_star"], 3.84)
         eq("표본 평균", s["sample_mean_star"], 2.82)
@@ -1704,7 +1810,10 @@ def main():
         template = (HERE.parent / "config" / "report_template_ko.md").read_text(encoding="utf-8")
         eq("틀의 표 이름과 05_tables.md 블록 이름", sorted(re.findall(r"\{\{표: (.+?)\}\}", template)),
            sorted(re.findall(r"<!-- 표:(.+?) -->", tables)))
-        chapters = "\n\n".join(f"## {i}. 장\n\n**데이터 읽기** 내용" for i in range(1, 13))
+        mc = json.loads((r / "05_metrics.json").read_text(encoding="utf-8"))["must_cover"]     # 8장 약점과 12장 전략에 꼭 넣을 주제
+        extra = {8: "\n\n### 약점\n\n" + "\n".join(f"{j}. **{t['name_ko']}이 약점이다** 내용" for j, t in enumerate(mc["weakness"], 1)),
+                 12: "\n\n### 제품\n\n" + "\n".join(f"{j}. **{t['name_ko']} 고치기** 근거(8장). 실행: 내용." for j, t in enumerate(mc["strategy"], 1))}
+        chapters = "\n\n".join(f"## {i}. 장\n\n**데이터 읽기** 내용" + extra.get(i, "") for i in range(1, 13))
         report = (f"# 아마존 리뷰 분석: 향수\n\n{tables}\n\n{chapters}\n\n"
                   '> "한 시간 정도 간다" (BrandA, 1★, B0TESTAAA1-01)\n\n## 부록: 방법과 한계\n')
         (r / "06_report.md").write_text(report, encoding="utf-8")
@@ -1778,7 +1887,7 @@ def main():
         gold_full = gcsv.read_text(encoding="utf-8-sig")
         head_ = gold_full.splitlines()[0]
         gcsv.write_text(head_ + chr(10) + next(l for l in gold_full.splitlines() if l.startswith("B0TESTBBB2-06")) + chr(10), encoding="utf-8")
-        run("eval_gold.py", "audit-sample", r)
+        run("eval_gold.py", "audit-sample", r, "--parts", "1")
         smp = [json.loads(l) for l in (r / "04_audit_sample.jsonl").read_text(encoding="utf-8").splitlines()]
         n06 = sum(1 for l in (r / "04_tags.jsonl").read_text(encoding="utf-8").splitlines() if '"B0TESTBBB2-06"' in l)
         eq("감사 표본에서 정답 세트 리뷰 빠짐", (len(smp), any(t["review_id"] == "B0TESTBBB2-06" for t in smp)), (13 - n06, False))
@@ -1830,7 +1939,8 @@ def main():
         run("timing_report.py", "mark", r, "start", "03_schema_approval", "--kind", "human")
         st = json.loads((r / "state.json").read_text(encoding="utf-8"))
         eq("사람 대기 상태", st["steps"]["03_schema_approval"]["status"], "needs_human")
-        run("timing_report.py", "mark", r, "end", "03_schema_approval", "--kind", "human")
+        run("timing_report.py", "mark", r, "end", "03_schema_approval", "--kind", "human", expect=1)   # 30초 안에 끝: 답 받기 전에 찍은 것으로 보고 거절
+        run("timing_report.py", "mark", r, "end", "03_schema_approval", "--kind", "human", "--force")
         run("timing_report.py", "mark", r, "start", "05_tagging", "--kind", "agents")
         run("timing_report.py", "mark", r, "stop", "05_tagging", "--kind", "agents")
         st = json.loads((r / "state.json").read_text(encoding="utf-8"))
@@ -1857,6 +1967,42 @@ def main():
         out = run("timing_report.py", "report", r)
         if "08_report 2번. 단계마다 마지막 시도만 더한 기계 시간은 2.5분" not in out:
             FAILS.append(f"다시 돌린 단계를 따로 적지 않음:\n{out}")
+        # 시간 나눔(2026-10-13): AI 작업(벽시계, 기다림과 라벨링과 멈춤 뺌), 라벨링(화면 기록), 기다림(라벨링 뺌), 멈춤, 끝 없는 에이전트
+        hook.write_text("\n".join(json.dumps(x) for x in [
+            {"ts": "2026-10-07T10:00:00+09:00", "event": "step_start", "step": "02_schema_draft", "kind": "agents"},
+            {"ts": "2026-10-07T10:02:00+09:00", "event": "SubagentStart", "agent_type": "schema-drafter", "agent_id": "s1"},
+            {"ts": "2026-10-07T10:08:00+09:00", "event": "SubagentStop", "agent_type": "schema-drafter", "agent_id": "s1"},
+            {"ts": "2026-10-07T10:10:00+09:00", "event": "step_end", "step": "02_schema_draft", "kind": "agents"},
+            {"ts": "2026-10-07T10:10:00+09:00", "event": "wait_start", "gate": "03_schema_approval"},
+            {"ts": "2026-10-07T10:20:00+09:00", "event": "SubagentStart", "agent_type": "benchmark-researcher", "agent_id": "b1"},
+            {"ts": "2026-10-07T10:25:00+09:00", "event": "SubagentStop", "agent_type": "benchmark-researcher", "agent_id": "b1"},
+            {"ts": "2026-10-07T11:00:00+09:00", "event": "wait_end", "gate": "03_schema_approval"},
+            {"ts": "2026-10-07T11:00:00+09:00", "event": "SubagentStart", "agent_type": "review-tagger", "agent_id": "t1"},
+            {"ts": "2026-10-07T11:20:00+09:00", "event": "pause", "from": "2026-10-07T11:05:00+09:00", "reason": "limit"},
+        ]) + "\n", encoding="utf-8")
+        out = run("timing_report.py", "report", r)
+        for want in ("AI 작업(벽시계, 겹친 시간은 한 번): 10.0분", "담당자 라벨링: 기록 없음", "담당자 기다림(라벨링과 멈춤 뺌): 50.0분(관문 1번)",
+                     "멈춤: 15.0분(사용량 한도 1번)", "끝 기록 없는 에이전트 실행: 1개", "schema-drafter 6.0분(1번)"):
+            if want not in out:
+                FAILS.append(f"시간 나눔에 '{want}'가 없음:\n{out}")
+        (r / "gold").mkdir(exist_ok=True)
+        (r / "gold" / "gold_label_times.json").write_text(json.dumps({"events": [
+            {"event": "open", "ts": "2026-10-07T01:15:00.000Z"}, {"event": "save", "ts": "2026-10-07T01:25:00.000Z"},
+            {"event": "open", "ts": "2026-10-07T01:40:00.000Z"}, {"event": "submit", "ts": "2026-10-07T01:50:00.000Z"},
+            {"event": "open", "ts": "2026-10-07T01:55:00.000Z"}]}), encoding="utf-8")
+        out = run("timing_report.py", "report", r)
+        for want in ("담당자 라벨링: 20.0분(화면을 연 구간 2개, 끝을 모르는 구간 1개는 시간에 넣지 않음)",
+                     "담당자 기다림(라벨링과 멈춤 뺌): 30.0분(관문 1번)", "AI 작업(벽시계, 겹친 시간은 한 번): 10.0분"):
+            if want not in out:
+                FAILS.append(f"라벨링 시간에 '{want}'가 없음:\n{out}")
+        (r / "gold" / "gold_label_times.json").unlink()
+        hook.write_text("", encoding="utf-8")
+        run("timing_report.py", "wait", r, "start", "07a_issue_approval")
+        run("timing_report.py", "wait", r, "end", "07a_issue_approval", expect=1)   # 30초 안 end는 거절
+        run("timing_report.py", "wait", r, "end", "07a_issue_approval", "--force")
+        run("timing_report.py", "pause", r, "--reason", "pc_off")
+        evs = [json.loads(l)["event"] for l in hook.read_text(encoding="utf-8").splitlines()]
+        eq("wait와 pause 기록", evs, ["wait_start", "wait_end", "pause"])
 
         # 시간 기록 Hook: runs/CURRENT의 회차에 한 줄을 덧붙이고, 늘 종료 코드 0
         proj = Path(tmp) / "proj"
@@ -1882,6 +2028,7 @@ def main():
         test_price_band()
         test_brand_compare()
         test_price_complaints()
+        test_leftover_and_unit(tmp)
         test_sections()
         test_variant()
         test_issues(Path(tmp))

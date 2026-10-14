@@ -28,10 +28,10 @@ stages:
   - {id: 02_schema_draft, kind: agents, inputs: [03_schema_sample.csv, "config:config/topics_common.yaml"],
      code: [.claude/agents/schema-drafter.md], outputs: [03_schema_draft.yaml], after: [03_schema_approval]}
   - {id: 03_schema_approval, kind: human, inputs: [03_schema_draft.yaml], outputs: [03_schema_approved.yaml], after: [05_tagging, 13_detail_schema_draft, 15_research]}
-  - {id: 05_tagging, kind: agents, bulk: true, method: per_batch, inputs: [03_schema_approved.yaml, 04_batches.json, "04_tag_input/*.csv"],
+  - {id: 05_tagging, kind: agents, bulk: true, method: per_batch, inputs: [03_schema_approved.yaml, "config:config/topics_common.yaml", 04_batches.json, "04_tag_input/*.csv"],
      code: [.claude/agents/review-tagger.md], expect: {batches: 04_batches.json, output: "04_tags_{model}_{batch_id}.jsonl"},
      outputs: ["04_tags_sonnet_*.jsonl", "04_tags_top_*.jsonl"], after: [06_tag_check]}
-  - {id: 06_tag_check, kind: agents, inputs: ["04_tags_sonnet_*.jsonl", 04_audit_sample.jsonl], code: [.claude/agents/evidence-auditor.md],
+  - {id: 06_tag_check, kind: agents, inputs: ["04_tags_sonnet_*.jsonl", 04_audit_sample.jsonl, "config:config/topics_common.yaml"], code: [.claude/agents/evidence-auditor.md],
      outputs: [04_tags.jsonl, 04_quote_check_sonnet.json, 04_tag_audit.yaml, 04_tag_audit_summary.json], after: [07a_issue_draft, 22_robustness]}
   - {id: 07a_issue_draft, kind: agents, inputs: [04_tags.jsonl], code: [.claude/agents/issue-labeler.md], outputs: [07a_issues_draft.yaml],
      after: [07a_issue_approval]}
@@ -45,8 +45,8 @@ stages:
      outputs: [05_robustness.json], after: [07_weight]}
   - {id: 07_weight, kind: script, inputs: [04_tags.jsonl, 07b_issue_counts.json, 07c_safety_summary.json, 05_robustness.json, 01_prices.json],
      code: [config/pipeline.yaml],
-     outputs: [05_metrics.json, 05_tables.md], after: [08_report, 16_guide_metrics]}
-  - {id: 08_report, kind: agents, inputs: [05_metrics.json, 05_tables.md], code: [.claude/agents/report-writer.md, config/report_template_ko.md],
+     outputs: [05_metrics.json, 05_tables.md, 05_quote_pool.json], after: [08_report, 16_guide_metrics]}
+  - {id: 08_report, kind: agents, inputs: [05_metrics.json, 05_tables.md, 05_quote_pool.json], code: [.claude/agents/report-writer.md, config/report_template_ko.md],
      outputs: [06_report.md], after: [09_report_check]}
   - {id: 09_report_check, kind: agents, inputs: [06_report.md, 05_metrics.json], code: [.claude/agents/evidence-auditor.md],
      outputs: [07_quote_check.json, 07_audit.yaml], after: [11_html]}
@@ -68,10 +68,10 @@ stages:
   - {id: 23_specs, kind: agents, inputs: [23_spec_input.json], code: [.claude/agents/product-spec-collector.md],
      outputs: [23_specs.yaml, 23_specs_check.json, 23_specs_verified.json], after: [16_guide_metrics]}
   - {id: 16_guide_metrics, kind: script, inputs: [05_metrics.json, 14_details.jsonl, market/market.json, 23_specs_verified.json, 05_robustness.json],
-     outputs: [16_guide_metrics.json], after: [17_guide_write]}
-  - {id: 17_guide_write, kind: agents, inputs: [16_guide_metrics.json, 15_research_check.json], code: [.claude/agents/guide-writer.md],
+     outputs: [16_guide_metrics.json, 16_guide_writer_input.json], after: [17_guide_write]}
+  - {id: 17_guide_write, kind: agents, inputs: [16_guide_writer_input.json, 15_research_check.json], code: [.claude/agents/guide-writer.md],
      outputs: [17_guide.md], after: [18_guide_check]}
-  - {id: 18_guide_check, kind: agents, inputs: [17_guide.md, 16_guide_metrics.json], code: [.claude/agents/evidence-auditor.md],
+  - {id: 18_guide_check, kind: agents, inputs: [17_guide.md, 16_guide_metrics.json, 16_guide_writer_input.json], code: [.claude/agents/evidence-auditor.md],
      outputs: [18_guide_quote_check.json, 18_guide_audit.yaml], after: [19_guide_html]}
   - {id: 19_guide_html, kind: script, inputs: [17_guide.md, 16_guide_metrics.json, 15_research_check.json],
      outputs: [07_guide.html, 07_guide_html_numbers.json, 07_guide_html_check.json], after: []}

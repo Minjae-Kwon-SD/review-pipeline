@@ -19,7 +19,8 @@
                                     기타만 있는 주제와 방향은 스크립트가 기타로 채운다(07b_labels_auto.jsonl).
   label-check [회차]               issue-tagger 출력(07b_labels_<묶음>.jsonl) 검사, 합치기(07b_issue_labels.jsonl),
                                     개수(07b_issue_counts.json: 라벨마다 리뷰 수, 가중 비율, ASIN별, 기타 비율, 향과 신뢰 겹침).
-  audit-sample [회차] [--n 150]    라벨 감사 표본(ASIN과 주제 칸을 고르게). audit [회차]: 07b_issue_audit.yaml의 FAIL 비율.
+  audit-sample [회차] [--n 150] [--parts 2]    라벨 감사 표본(ASIN과 주제 칸을 고르게)과 감사자마다 나눈 반쪽(07b_issue_audit_sample_p<k>.jsonl).
+  audit [회차]: 반쪽 판정(07b_issue_audit_p<k>.yaml)이 다 있으면 표본이 빠짐없이 한 번씩 판정됐는지 확인해 07b_issue_audit.yaml로 합치고, 반쪽마다와 전체 FAIL 비율.
   safety-input, safety-render      안전 주제 인용 전부와 evidence-auditor 판정을 합친 07c_safety_check.md.
 """
 import argparse
@@ -379,7 +380,7 @@ def count_labels(run, merged, ids, labs):
     return {"labels": sum(len(v["labels"]) for v in out["topics"].values()), "overlap": out.get("overlap", {}).get("reviews")}
 
 
-def audit_sample(run, n):
+def audit_sample(run, n, parts=2):
     """라벨 감사 표본: (ASIN, 주제) 칸을 돌아가며 n개. 기타도 포함. 시드 고정."""
     merged = read_jsonl(run / "07b_issue_labels.jsonl")
     reviews = {r["review_id"]: r for r in load_csv_or_die(run / "02_reviews.csv", REVIEW_COLS)}
@@ -401,11 +402,68 @@ def audit_sample(run, n):
                 t = tags[(m["review_id"], m["topic"])]
                 out.append({**m, "asin": reviews[m["review_id"]]["asin"], "sentiment": t["sentiment"], "quote": t["quote"]})
     write_jsonl(run / "07b_issue_audit_sample.jsonl", out)
-    print(f"라벨 감사 표본 {len(out)}개 → 07b_issue_audit_sample.jsonl")
+    for old in run.glob("07b_issue_audit_sample_p*.jsonl"):
+        old.unlink()
+    for old in run.glob("07b_issue_audit_p*.yaml"):
+        old.unlink()                    # 옛 반쪽 판정이 새 표본과 섞이지 않게
+    if parts > 1:
+        # 감사자마다 반쪽(2026-10-14 담당자 결정). 표본 순서가 (ASIN, 주제) 칸을 돌아가므로 번갈아 나누면 반쪽도 고르다
+        for k in range(parts):
+            write_jsonl(run / f"07b_issue_audit_sample_p{k + 1}.jsonl", out[k::parts])
+        print(f"라벨 감사 표본 {len(out)}개 → 07b_issue_audit_sample.jsonl, 감사자 {parts}명 몫 "
+              + ", ".join(f"p{k + 1} {len(out[k::parts])}개" for k in range(parts)))
+    else:
+        print(f"라벨 감사 표본 {len(out)}개 → 07b_issue_audit_sample.jsonl")
     return 0
 
 
+def merge_audit_parts(run, sample):
+    """반쪽 판정을 합친다. 반쪽 표본을 합치면 전체 표본과 정확히 같아야 하고(빠짐, 겹침 없음), 반쪽마다 checked가 그 반쪽 수와 같아야 한다."""
+    part_samples = sorted(run.glob("07b_issue_audit_sample_p*.jsonl"))
+    if not part_samples:
+        return None
+    key = lambda s: (str(s["review_id"]), str(s["topic"]), str(s["direction"]))  # noqa: E731
+    seen, problems, parts, findings = {}, [], [], []
+    for ps in part_samples:
+        tag = ps.stem.rsplit("_", 1)[1]
+        for s_ in read_jsonl(ps):
+            seen.setdefault(key(s_), []).append(tag)
+        yp = run / f"07b_issue_audit_{tag}.yaml"
+        if not yp.exists():
+            die(f"{yp.name}이 없습니다. 반쪽 감사가 다 끝난 뒤 합칩니다.")
+        a = ((load_yaml(yp) or {}).get("audit") or {})
+        n_part = len(read_jsonl(ps))
+        if a.get("checked") != n_part:
+            problems.append(f"{tag}: 감사자가 {a.get('checked')}개를 봤다고 적었지만 반쪽 표본은 {n_part}개")
+        keys = {key(x) for x in read_jsonl(ps)}
+        own = [f for f in a.get("findings") or [] if key(f) in keys]
+        out_ = [f for f in a.get("findings") or [] if key(f) not in keys]
+        if out_:
+            problems.append(f"{tag}: 자기 반쪽에 없는 항목을 판정함 {len(out_)}개")
+        fail = sum(1 for f in own if str(f.get("status", "")).upper() == "FAIL")
+        parts.append({"part": tag, "sample": n_part, "auditor_checked": a.get("checked"), "fail": fail,
+                      "fail_rate": round(fail / n_part, 3) if n_part else 0.0})
+        findings += own
+    all_keys = {key(s_) for s_ in sample}
+    missing = sorted(all_keys - set(seen))
+    dup = sorted(k for k, v in seen.items() if len(v) > 1)
+    extra = sorted(set(seen) - all_keys)
+    if missing:
+        problems.append(f"반쪽 어디에도 없는 표본 {len(missing)}개(예: {missing[0]})")
+    if dup:
+        problems.append(f"두 반쪽에 겹친 표본 {len(dup)}개(예: {dup[0]})")
+    if extra:
+        problems.append(f"전체 표본에 없는 반쪽 항목 {len(extra)}개(예: {extra[0]})")
+    checked = len(sample) if not problems else sum(p_["auditor_checked"] or 0 for p_ in parts)
+    import yaml
+    (run / "07b_issue_audit.yaml").write_text(yaml.safe_dump(
+        {"audit": {"stage": "issues", "run": run.name, "checked": checked, "merged_from": [p_["part"] for p_ in parts],
+                   "findings": findings}}, allow_unicode=True, sort_keys=False), encoding="utf-8")
+    return {"parts": parts, "problems": problems}
+
+
 def audit(run, max_fail):
+    merged = merge_audit_parts(run, read_jsonl(run / "07b_issue_audit_sample.jsonl"))
     data = load_yaml(run / "07b_issue_audit.yaml") or {}
     a = data.get("audit") if isinstance(data, dict) else None
     if not isinstance(a, dict):
@@ -425,15 +483,21 @@ def audit(run, max_fail):
     checked = a.get("checked")
     if not sample:
         status = "EMPTY"
-    elif checked != len(sample):
+    elif checked != len(sample) or (merged and merged["problems"]):
         status = "INCOMPLETE"       # 감사자가 표본을 다 보지 않았으면 PASS로 넘기지 않음
     else:
         status = "PASS" if rate <= max_fail else "FAIL"
     write_json(run / "07b_issue_audit_summary.json", {"checked_at": now_iso(), "status": status, "sample": len(sample),
                                                       "auditor_checked": checked,
                                                       "fail": len(fails), "fail_rate": round(rate, 3), "max_fail_rate": max_fail,
-                                                      "warnings": warns})
+                                                      "warnings": warns,
+                                                      **({"parts": merged["parts"], "merge_problems": merged["problems"]} if merged else {})})
     print(f"라벨 감사 집계: {status}  (표본 {len(sample)}개 중 FAIL {len(fails)}개 = {rate:.1%}, 기준 {max_fail:.0%} 이하)")
+    if merged:
+        print("  반쪽마다: " + ", ".join(f"{p_['part']} {p_['fail']}/{p_['sample']}개 = {p_['fail_rate']:.1%}" for p_ in merged["parts"])
+              + (". 합치기 확인: 표본 빠짐과 겹침 없음" if not merged["problems"] else ""))
+        for pr in merged["problems"]:
+            print(f"  합치기 문제: {pr}")
     return 0 if status == "PASS" else 1
 
 
@@ -516,6 +580,7 @@ def main():
     ap.add_argument("--min", type=int, default=20)
     ap.add_argument("--size", type=int, default=180, help="label-plan 묶음 크기")
     ap.add_argument("--n", type=int, default=150, help="audit-sample 표본 수")
+    ap.add_argument("--parts", type=int, default=2, help="audit-sample: 감사자 수만큼 표본을 나눔(1이면 나누지 않음)")
     ap.add_argument("--max-fail", type=float, default=0.05)
     ap.add_argument("--approved-at", default=None)
     ap.add_argument("--approved-by", default=None)
@@ -527,7 +592,7 @@ def main():
         sys.exit(approve(run, args.approved_at, args.approved_by))
     fn = {"sample": lambda: sample(run, args.per, args.min), "merge": lambda: merge(run),
           "label-plan": lambda: label_plan(run, args.size), "label-check": lambda: label_check(run),
-          "audit-sample": lambda: audit_sample(run, args.n), "audit": lambda: audit(run, args.max_fail),
+          "audit-sample": lambda: audit_sample(run, args.n, args.parts), "audit": lambda: audit(run, args.max_fail),
           "safety-input": lambda: safety_input(run), "safety-render": lambda: safety_render(run)}[args.mode]
     sys.exit(fn())
 

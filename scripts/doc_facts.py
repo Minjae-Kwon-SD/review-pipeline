@@ -103,6 +103,29 @@ def build(run):
     put("data.labels", f"{nlab}개", "07a_issues_approved.yaml 라벨 수(other 빼고)")
     gold_tags = sum(1 for l in (run / "gold" / "gold_tags.jsonl").read_text(encoding="utf-8").splitlines() if l.strip())
     put("gold.tags", f"{gold_tags}개", "gold/gold_tags.jsonl 줄 수(내용은 읽지 않고 줄만 셈)")
+    before = sorted((run / "gold").glob("gold_tags.before_*.jsonl"))
+    if before:          # 담당자 고침 목록을 적용하기 전 정답 태그 수(처음 채점은 이 파일로 했음)
+        n_b = sum(1 for l in before[0].read_text(encoding="utf-8").splitlines() if l.strip())
+        put("gold.tags_before", f"{n_b}개", f"gold/{before[0].name} 줄 수(내용은 읽지 않고 줄만 셈)")
+    if (run / "04_gold_eval_score.json").exists():      # 채점용 정답 세트(gold_score/, 2026-10-13)
+        sc = j(run, "04_gold_eval_score.json")
+        def pct(x):
+            return f"{x * 100:.1f}%"
+        for name, m in sc["models"].items():
+            k = "score" if name == "sonnet" else f"score_{name}"
+            put(f"{k}.f1", f"{m['topic_f1']:.2f}", f"04_gold_eval_score.json models.{name}.topic_f1")
+            put(f"{k}.dir", f"{pct(m['direction_agreement'])}({m['direction_pairs']}개 중 {m['direction_same']}개)", f"04_gold_eval_score.json models.{name}.direction_*")
+            put(f"{k}.mixed", f"{pct(m['mixed_agreement'])}({m['mixed_pairs']}개 중 {m['mixed_same']}개)", f"04_gold_eval_score.json models.{name}.mixed_*")
+            put(f"{k}.all", pct(m["sentiment_agreement"]), f"04_gold_eval_score.json models.{name}.sentiment_agreement")
+        put("score.reviews", f"{sc['gold_reviews']}개", "04_gold_eval_score.json gold_reviews")
+        put("score.tags", f"{sc['models']['sonnet']['gold_pairs']}개", "04_gold_eval_score.json models.sonnet.gold_pairs")
+    lt = run / "gold_score" / "gold_label_times.json"
+    if lt.exists():     # 정답 세트 화면이 적은 시각만 읽음(라벨은 읽지 않음)
+        ev = [e for e in json.loads(lt.read_text(encoding="utf-8"))["events"]]
+        o = [e for e in ev if e["event"] == "open"][0]["ts"]
+        sb = [e for e in ev if e["event"] == "submit"][-1]["ts"]
+        mins = (datetime.fromisoformat(sb.replace("Z", "+00:00")) - datetime.fromisoformat(o.replace("Z", "+00:00"))).total_seconds() / 60
+        put("score.label_min", f"{mins:.1f}분", "gold_score/gold_label_times.json 처음 연 때부터 제출까지")
 
     a = j(run, "04_tag_audit_summary.json")
     put("audit.tags", f"{a['sample_tags']}개 중 FAIL {a['fail']}개({a['fail_rate'] * 100:.1f}%)", "04_tag_audit_summary.json")

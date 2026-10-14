@@ -56,21 +56,35 @@
   #schema select, #schema input[type=text] { font: inherit; padding: 4px 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--text); }
   #schema input[type=text] { width: 100%; margin-top: 4px; }
   #schema td.dec { width: 38%; }
+  /* 판정 순서와 주제 설명(늘 보이게): 넓은 화면은 오른쪽에 붙박이, 좁은 화면은 위에 붙박이(접기 가능) */
+  #rules { display: none; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 13px; }
+  #rules h3 { font-size: 13px; margin: 0 0 4px; }
+  #rules ol, #rules dl { margin: 0 0 8px; padding-left: 18px; }
+  #rules li { margin-bottom: 3px; }
+  #rules dt { font-weight: 600; margin-top: 4px; }
+  #rules dd { margin: 0 0 2px 0; color: var(--muted); }
+  @media (min-width: 1280px) { body.has-rules main { margin-right: 400px; }
+    #rules { position: fixed; right: 12px; top: 64px; bottom: 12px; width: 376px; overflow: auto; } }
+  @media (max-width: 1279px) { #rules { position: sticky; top: 52px; z-index: 1; max-height: 38vh; overflow: auto; margin: 0 0 12px; } }
+  #nudge { display: none; background: var(--warn); color: #fff; border-radius: 6px; padding: 4px 10px; font-weight: 600; }
   @media (max-width: 640px) { td.topic { width: auto; display: block; } td { display: block; border-top: 0; } tr { border-top: 1px solid var(--line); display: block; } }
 </style>
 </head>
 <body>
 <header>
-  <h1>정답 세트 태깅 (__RUN__)</h1>
+  <h1>__TITLE__ (__RUN__)</h1>
   <span id="progress">0/0 완료</span>
-  <button class="primary" id="export">gold_tags.jsonl 내보내기</button>
+  <button id="midsave">중간 저장</button>
+  <button class="primary" id="export">제출(gold_tags.jsonl 내보내기)</button>
+  <span id="nudge"></span>
   <button id="copy">복사</button>
   <button id="schemaExport" style="display:none">스키마 확인 내보내기</button>
   <span id="msg" class="count"></span>
 </header>
 <main>
   <p class="help">리뷰마다 주제별로 없음, 긍정, 부정, 혼합, 중립 중 하나를 고릅니다(기본값 없음). 감성은 그 주제에 대한 말로만 정하고 별점으로 짐작하지 않습니다.
-    다 보면 "다 봤음"을 체크합니다. 고른 값은 이 브라우저에 자동 저장됩니다. 끝나면 내보낸 파일을 runs/__RUN__/gold/gold_tags.jsonl로 저장해 주세요.</p>
+    다 보면 "다 봤음"을 체크합니다. 고른 값은 이 브라우저에 자동 저장됩니다. 끝나면 내보낸 파일을 runs/__RUN__/__GOLDDIR__/gold_tags.jsonl로 저장해 주세요.</p>
+  <aside id="rules"></aside>
   <section id="schema"></section>
   <div id="list"></div>
   <textarea id="out" readonly></textarea>
@@ -78,7 +92,7 @@
 <script type="application/json" id="data">__DATA__</script>
 <script>
 const DATA = JSON.parse(document.getElementById("data").textContent);
-const KEY = "gold_tagging:" + DATA.run;
+const KEY = "gold_tagging:" + (DATA.store_key || DATA.run);   // 채점용 세트는 따로 저장(규칙용 세트 답과 섞이지 않게)
 const OPTS = [["", "없음"], ["positive", "긍정"], ["negative", "부정"], ["mixed", "혼합"], ["neutral", "중립"]];
 // 필수 주제(2026-10-10): 전체 만족도는 감성 넷 중 하나, 효과 주제는 감성 또는 "언급 없음"(none, 내보내지 않음)을 꼭 고른다
 const REQUIRED = new Set(DATA.required || []);
@@ -107,10 +121,19 @@ function toJsonl(sel, reviews, topics) {
 }
 // toJsonl:end
 
-let state = { sel: {}, done: {}, schema: {} };
+let state = { sel: {}, done: {}, schema: {}, times: [] };
 try { const saved = JSON.parse(localStorage.getItem(KEY) || "null"); if (saved) state = Object.assign(state, saved); } catch (e) {}
 state.schema = state.schema || {};
+state.times = state.times || [];
 function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+// 라벨링 시간 기록(2026-10-13): 화면을 연 때, 중간 저장, 제출 시각. 내보낼 때 gold_label_times.json으로 함께 내려받는다.
+function logTime(ev) { state.times.push({ event: ev, ts: new Date().toISOString(), done: DATA.reviews.filter(r => state.done[r.review_id]).length }); save(); }
+logTime("open");
+function timesFile() { return JSON.stringify({ run: DATA.run, set: DATA.gold_dir, events: state.times }, null, 1) + "\n"; }
+function download(name, text, type) {
+  const a = el("a", { href: URL.createObjectURL(new Blob([text], { type: type })), download: name });
+  document.body.appendChild(a); a.click(); a.remove();
+}
 
 function el(tag, attrs, text) {
   const e = document.createElement(tag);
@@ -151,6 +174,10 @@ function glossLine(parent, text, topicId) {
 function progress() {
   const n = DATA.reviews.filter(r => state.done[r.review_id]).length;
   document.getElementById("progress").textContent = n + "/" + DATA.reviews.length + " 완료";
+  // 8개마다 중간 저장 알림(마지막으로 저장한 뒤 8개 이상 더 했으면)
+  const lastSaved = state.times.filter(t => t.event === "save" || t.event === "submit").map(t => t.done || 0).pop() || 0;
+  const nudge = document.getElementById("nudge");
+  if (nudge) { const due = n - lastSaved >= 8; nudge.style.display = due ? "inline-block" : "none"; nudge.textContent = due ? "8개 했어요. 중간 저장을 눌러 주세요" : ""; }
   return n;
 }
 
@@ -256,10 +283,36 @@ function exportText() {
 document.getElementById("export").addEventListener("click", () => {
   const text = exportText();
   if (text === null) return;
-  const a = el("a", { href: URL.createObjectURL(new Blob([text], { type: "application/x-ndjson" })), download: "gold_tags.jsonl" });
-  document.body.appendChild(a); a.click(); a.remove();
-  document.getElementById("msg").textContent = "내려받았습니다. runs/" + DATA.run + "/gold/gold_tags.jsonl로 저장해 주세요.";
+  logTime("submit");
+  download("gold_tags.jsonl", text, "application/x-ndjson");
+  download("gold_label_times.json", timesFile(), "application/json");
+  progress();
+  document.getElementById("msg").textContent = "내려받은 두 파일(gold_tags.jsonl, gold_label_times.json)을 runs/" + DATA.run + "/" + DATA.gold_dir + "/에 저장해 주세요.";
 });
+document.getElementById("midsave").addEventListener("click", () => {
+  logTime("save");
+  download("gold_tags.jsonl", toJsonl(state.sel, DATA.reviews, DATA.topics), "application/x-ndjson");
+  download("gold_label_times.json", timesFile(), "application/json");
+  progress();
+  document.getElementById("msg").textContent = "중간 저장: 두 파일을 runs/" + DATA.run + "/" + DATA.gold_dir + "/에 덮어써 주세요(이 브라우저에도 저장돼 있음).";
+});
+// 판정 순서와 주제 설명(늘 보이게)
+function renderRules() {
+  const R = DATA.rules_panel;
+  if (!R) return;
+  document.body.classList.add("has-rules");
+  const box = document.getElementById("rules");
+  box.style.display = "block";
+  box.appendChild(el("h3", {}, "감성 판정 순서(한 리뷰의 한 주제 안에서만)"));
+  const ol = el("ol");
+  (R.sentiment_order || []).forEach(x => ol.appendChild(el("li", {}, x.replace(/^\d+\.\s*/, ""))));
+  box.appendChild(ol);
+  box.appendChild(el("h3", {}, "주제 " + (R.topics || []).length + "개"));
+  const dl = el("dl");
+  (R.topics || []).forEach(t => { dl.appendChild(el("dt", {}, t.name_ko)); dl.appendChild(el("dd", {}, t.definition)); });
+  box.appendChild(dl);
+}
+renderRules();
 
 document.getElementById("copy").addEventListener("click", () => {
   const text = exportText();

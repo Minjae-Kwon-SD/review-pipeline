@@ -128,7 +128,7 @@
 
 ## hairremovalcream-2026-10-10
 
-2026-10-12T15:03 기준.
+2026-10-14T14:02 기준.
 
 | 키 | 표기 | 출처 |
 |---|---|---|
@@ -147,7 +147,19 @@
 | paid.minutes | 27.6분 | raw/paid_calls.jsonl seconds 합 |
 | data.topics | 14개 | 03_schema_approved.yaml topics |
 | data.labels | 80개 | 07a_issues_approved.yaml 라벨 수(other 빼고) |
-| gold.tags | 104개 | gold/gold_tags.jsonl 줄 수(내용은 읽지 않고 줄만 셈) |
+| gold.tags | 103개 | gold/gold_tags.jsonl 줄 수(내용은 읽지 않고 줄만 셈) |
+| gold.tags_before | 104개 | gold/gold_tags.before_2026-10-13.jsonl 줄 수(내용은 읽지 않고 줄만 셈) |
+| score.f1 | 0.80 | 04_gold_eval_score.json models.sonnet.topic_f1 |
+| score.dir | 95.2%(63개 중 60개) | 04_gold_eval_score.json models.sonnet.direction_* |
+| score.mixed | 33.3%(15개 중 5개) | 04_gold_eval_score.json models.sonnet.mixed_* |
+| score.all | 83.3% | 04_gold_eval_score.json models.sonnet.sentiment_agreement |
+| score_before.f1 | 0.79 | 04_gold_eval_score.json models.before.topic_f1 |
+| score_before.dir | 93.7%(63개 중 59개) | 04_gold_eval_score.json models.before.direction_* |
+| score_before.mixed | 33.3%(12개 중 4개) | 04_gold_eval_score.json models.before.mixed_* |
+| score_before.all | 84.0% | 04_gold_eval_score.json models.before.sentiment_agreement |
+| score.reviews | 32개 | 04_gold_eval_score.json gold_reviews |
+| score.tags | 91개 | 04_gold_eval_score.json models.sonnet.gold_pairs |
+| score.label_min | 143.7분 | gold_score/gold_label_times.json 처음 연 때부터 제출까지 |
 | audit.tags | 144개 중 FAIL 1개(0.7%) | 04_tag_audit_summary.json |
 | audit.tags_cons | 12.3% | 04_tag_audit_summary.json conservative_rate(FAIL + UNVERIFIED + missed) |
 | audit.tags_parts | UNVERIFIED 1개, 빠진 태그 18개, 뺀 정답 세트 태그 0개 | 04_tag_audit_summary.json |
@@ -210,7 +222,7 @@
 | step.18_guide_check | 21.4분 | timing.jsonl 18_guide_check 마지막 시도 |
 | step.19_guide_html | 0.0분 | timing.jsonl 19_guide_html 마지막 시도 |
 | step.10_timing | 0.0분 | timing.jsonl 10_timing 마지막 시도 |
-| tests | 378개 | tests/test_scripts.py 실행 결과의 확인 개수 |
+| tests | 404개 | tests/test_scripts.py 실행 결과의 확인 개수 |
 | ref.report.reviews | 3,488개, ASIN 10개 | 정답지 review_analysis_report_en.html 머리 문장 |
 | ref.report.tags | 10,066개 | 정답지 review_analysis_report_en.html 머리 문장 |
 | ref.guide.reviews | 12,380개, 리스팅 37개, 카테고리 9개 | 정답지 Coolmate_Scrubs_Product_Dev_Guide_v1.html 머리 문장 |

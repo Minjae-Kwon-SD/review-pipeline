@@ -38,7 +38,7 @@ SIDE_KO = {"P": "제품", "B": "브랜드"}
 TITLE = "아마존 리뷰 분석"            # 카테고리 설정(report.title)이 없을 때
 CHAPTERS = [(1, "분포 개요"), (2, "주제별 언급과 감성"), (3, "주제 평가"), (4, "영향 분석"), (5, "시간 추이"),
             (6, "함께 나오는 주제"), (7, "신뢰 신호"), (8, "핵심 인사이트"), (9, "브랜드(ASIN)별 비교"), (10, "브랜드 심층"),
-            (11, "변형(용량) 신호"), (12, "리뷰 탐색기"), (13, "전략 방향")]
+            (11, "변형 신호"), (12, "리뷰 탐색기"), (13, "전략 방향")]
 QUOTE = re.compile(r'"(.+?)"\s*\(([^()]+?),\s*([1-5])★,\s*(R[0-9A-Z]+)\)')
 
 
@@ -183,14 +183,12 @@ def build_data(m, counts, safety, verdicts, schema, reviews, weight, tags, label
     brands = [b["brand"] for b in m["brand_deep"]]
     bidx = {b: i for i, b in enumerate(brands)}
     brand_of_asin = m["brand_of_asin"]
-    vkey = (m.get("variant_signal") or {}).get("key")
+    # 변형 키마다(11장 variant_signals 순서) 그 리뷰의 변형 이름. 드릴다운은 vk(키 순번)와 vlabel로 거른다
+    vkeys = [x["key"] for x in (m.get("variant_signals") or [m.get("variant_signal") or {}]) if x.get("key")]
     R = []
     for r in reviews:
-        vlabel = ""
-        if vkey:
-            v = sections.variant_parts(r.get("variant_text")).get(vkey)
-            if v:
-                vlabel = sections.norm_variant(vkey, v)[0]
+        parts = sections.variant_parts(r.get("variant_text"))
+        vlabel = [sections.norm_variant(k, parts[k])[0] if parts.get(k) else "" for k in vkeys]
         R.append([r["review_id"], r["asin"], r.get("variant_asin") or "", int(r["star"]), r["title"], r["body"], r["date"],
                   1 if r["verified"] == "true" else 0, int(r.get("helpful_votes") or 0),
                   bidx.get(brand_of_asin.get(r["asin"], ""), -1), round(weight[r["review_id"]], 4),
@@ -289,7 +287,8 @@ class Lang:
             return t
         if self.code == "ko":
             return f"{TITLE}: {self.conf['name_ko']}" if self.conf.get("name_ko") else TITLE
-        return self.cat["title"]
+        # 화면 문구 파일의 제목은 품목 없는 기본 제목. 카테고리 설정에 name_en이 있으면 붙인다(다른 품목 이름이 남지 않게)
+        return f"{self.cat['title']}: {self.conf['name_en']}" if self.conf.get("name_en") else self.cat["title"]
 
     def marker(self, k):
         if self.code == "ko":
@@ -824,28 +823,63 @@ def build_html(run, lang="ko"):
     body = f'<div class="btabs">{tabs}</div>{panes}'
     parts.append(section(10, CH[10], T("브랜드 버튼을 누르면 그 브랜드의 주제 평가와 강점, 약점(세부 이슈 개수는 그 브랜드 안 리뷰 수)"), body))
 
-    # 11장 변형 신호
-    vs = m["variant_signal"]
+    # 11장 변형 신호(변형 키마다 한 묶음. 용량이 있는 품목만 온스당 가격 칸, 방향 지수가 있으면 상품을 합친 방향 표와 방향 칸)
     blocks = ""
-    for ai, a in enumerate(vs["asins"]):
-        bn = m["brand_of_asin"].get(a["asin"], a["asin"])
-        heads = "".join(f"<th>{esc(T('{t} 부정 비율', t=name[t]))}</th>" for t in a["topics"])
-        trs = ""
-        for ri, r in enumerate(a["rows"]):
-            f = {"asin": a["asin"], "vlabel": r["variant"]}
-            tds = "".join(f'<td>{o.num("metrics", ["variant_signal", "asins", ai, "rows", ri, "neg_reviewer_pct", t], "pct")}</td>' for t in a["topics"])
-            price = (o.num("metrics", ["variant_signal", "asins", ai, "rows", ri, "price"], "usd") if r["price"] is not None else "-")
-            ppo = (o.num("metrics", ["variant_signal", "asins", ai, "rows", ri, "price_per_oz"], "usd") if r["price_per_oz"] is not None else "-")
-            trs += (f'<tr><td class="tl"><b>{esc(r["variant"])}</b><div class="mono mut">{r["variant_asin"]}</div></td>'
-                    f'<td class="clk"{drill_attr(f, T("{b} {v}", b=bn, v=r["variant"]), r["reviews"])}>{o.num("metrics", ["variant_signal", "asins", ai, "rows", ri, "reviews"], "int")}</td>'
-                    f'<td>{price}</td><td>{ppo}</td>{tds}</tr>')
-        hidden = f'<div class="fn">{esc(T("태그가 적어 숨긴 변형: {v}", v=", ".join(a["hidden_low_tags"])))}</div>' if a["hidden_low_tags"] else ""
-        blocks += (f'<div class="coltitle" style="margin-top:14px">{esc(bn)} <span class="mono mut">{a["asin"]}</span></div><div class="tscroll"><table class="ct">'
-                   f'<thead><tr><th class="tl">{esc(T("용량"))}</th><th>{esc(T("리뷰"))}</th><th>{esc(T("현재 가격"))}</th><th>{esc(T("온스당 가격"))}</th>{heads}</tr></thead><tbody>{trs}</tbody></table></div>{hidden}')
-    body = (blocks + '<div class="fn">' + T("부정 비율은 그 용량 리뷰 가운데 그 주제를 부정으로 말한 리뷰의 가중 비율입니다. 같은 ASIN 안에서만 비교하고, 가격은 {d}에 조회한 현재 가격입니다. 리뷰 수가 적은 용량은 순위로 읽지 않습니다.",
+    sigs = m.get("variant_signals") or [m["variant_signal"]]
+    for vk, vs in enumerate(sigs):
+        if not vs.get("key"):
+            continue
+        P = ["variant_signals", vk] if m.get("variant_signals") else ["variant_signal"]     # 예전 metrics(키 하나)도 읽음
+        d = vs.get("direction")
+        has_oz = any(r.get("oz") for a in vs["asins"] for r in a["rows"])
+        blocks += f'<h3 style="margin-top:18px">{esc(T("변형 키: {k}", k=vs["key"]))}</h3>'
+        if d and vs.get("pooled"):
+            hl = lidx.get((d["topic"], "negative", d["high_labels"][0])) if len(d["high_labels"]) == 1 else None
+            ll = lidx.get((d["topic"], "negative", d["low_labels"][0])) if len(d["low_labels"]) == 1 else None
+            trs = ""
+            for ri, r in enumerate(vs["pooled"]):
+                f = {"vk": vk, "vlabel": r["variant"]}
+                hc = o.num("metrics", P + ["pooled", ri, "high"], "int")
+                lc = o.num("metrics", P + ["pooled", ri, "low"], "int")
+                trs += (f'<tr><td class="tl"><b>{esc(r["variant"])}</b></td>'
+                        f'<td class="clk"{drill_attr(f, T("{k} {v}", k=vs["key"], v=r["variant"]), r["reviews"])}>{o.num("metrics", P + ["pooled", ri, "reviews"], "int")}</td>'
+                        f'<td>{o.num("metrics", P + ["pooled", ri, "asins"], "int")}</td>'
+                        + (f'<td class="clk"{drill_attr({**f, "label": hl}, T("{v}: {d}", v=r["variant"], d=d["high"]), r["high"])}>{hc}</td>' if hl is not None else f"<td>{hc}</td>")
+                        + (f'<td class="clk"{drill_attr({**f, "label": ll}, T("{v}: {d}", v=r["variant"], d=d["low"]), r["low"])}>{lc}</td>' if ll is not None else f"<td>{lc}</td>")
+                        + f'<td>{o.num("metrics", P + ["pooled", ri, "index"], "gap") if r["index"] is not None else "-"}</td></tr>')
+            blocks += (f'<div class="coltitle" style="margin-top:10px">{esc(T("상품을 합친 {k}별 방향({h} 대 {l})", k=vs["key"], h=d["high"], l=d["low"]))}</div>'
+                       f'<div class="tscroll"><table class="ct"><thead><tr><th class="tl">{esc(vs["key"])}</th><th>{esc(T("리뷰"))}</th><th>{esc(T("상품 수"))}</th>'
+                       f'<th>{esc(d["high"])}</th><th>{esc(d["low"])}</th><th>{esc(T("방향 지수"))}</th></tr></thead><tbody>{trs}</tbody></table></div>'
+                       f'<div class="fn">{esc(T("방향 지수 = ({h} - {l}) / 둘의 합, 둘을 합쳐 5개 미만이면 내지 않음. 리뷰 수는 원본입니다.", h=d["high"], l=d["low"]))}</div>')
+        for ai, a in enumerate(vs["asins"]):
+            if not a["rows"]:
+                continue
+            bn = m["brand_of_asin"].get(a["asin"], a["asin"])
+            heads = "".join(f"<th>{esc(T('{t} 부정 비율', t=name[t]))}</th>" for t in a["topics"])
+            if d:
+                heads += f'<th>{esc(d["high"])}</th><th>{esc(d["low"])}</th><th>{esc(T("방향 지수"))}</th>'
+            trs = ""
+            for ri, r in enumerate(a["rows"]):
+                f = {"asin": a["asin"], "vk": vk, "vlabel": r["variant"]}
+                Q = P + ["asins", ai, "rows", ri]
+                tds = "".join(f'<td>{o.num("metrics", Q + ["neg_reviewer_pct", t], "pct")}</td>' for t in a["topics"])
+                if d and r.get("direction"):
+                    dd = r["direction"]
+                    tds += (f'<td>{o.num("metrics", Q + ["direction", "high"], "int")}</td><td>{o.num("metrics", Q + ["direction", "low"], "int")}</td>'
+                            f'<td>{o.num("metrics", Q + ["direction", "index"], "gap") if dd["index"] is not None else "-"}</td>')
+                price = (o.num("metrics", Q + ["price"], "usd") if r["price"] is not None else "-")
+                ppo = (f'<td>{o.num("metrics", Q + ["price_per_oz"], "usd") if r["price_per_oz"] is not None else "-"}</td>' if has_oz else "")
+                trs += (f'<tr><td class="tl"><b>{esc(r["variant"])}</b><div class="mono mut">{r["variant_asin"]}</div></td>'
+                        f'<td class="clk"{drill_attr(f, T("{b} {v}", b=bn, v=r["variant"]), r["reviews"])}>{o.num("metrics", Q + ["reviews"], "int")}</td>'
+                        f'<td>{price}</td>{ppo}{tds}</tr>')
+            hidden = f'<div class="fn">{esc(T("태그가 적어 숨긴 변형: {v}", v=", ".join(a["hidden_low_tags"])))}</div>' if a["hidden_low_tags"] else ""
+            blocks += (f'<div class="coltitle" style="margin-top:14px">{esc(bn)} <span class="mono mut">{a["asin"]}</span></div><div class="tscroll"><table class="ct">'
+                       f'<thead><tr><th class="tl">{esc(vs["key"])}</th><th>{esc(T("리뷰"))}</th><th>{esc(T("현재 가격"))}</th>'
+                       + (f'<th>{esc(T("온스당 가격"))}</th>' if has_oz else "") + f'{heads}</tr></thead><tbody>{trs}</tbody></table></div>{hidden}')
+    body = (blocks + '<div class="fn">' + T("부정 비율은 그 변형 리뷰 가운데 그 주제를 부정으로 말한 리뷰의 가중 비율입니다. 같은 ASIN 안에서만 비교하고, 가격은 {d}에 조회한 현재 가격입니다. 리뷰 수가 적은 변형은 순위로 읽지 않습니다.",
                                             d=o.num("metrics", ["variant_signal", "checked_on"], "raw")) + '</div>'
             + reading_html(readings(ch[11]), link))
-    parts.append(section(11, CH[11], T("같은 ASIN 안 용량별 부정 비율과 온스당 가격(리뷰 15개 이상인 용량)"), body, new=True))
+    parts.append(section(11, CH[11], T("같은 ASIN 안 변형별 부정 비율(리뷰 15개 이상인 변형)"), body, new=True))
 
     # 12장 리뷰 탐색기
     opt = lambda pairs_: "".join(f'<option value="{esc(v)}">{esc(t)}</option>' for v, t in pairs_)
@@ -962,7 +996,8 @@ def py_match(D, f):
             continue
         if "asin" in f and r[1] != f["asin"]:
             continue
-        if "vlabel" in f and r[13] != f["vlabel"]:
+        vl = [r[13]] if isinstance(r[13], str) else (r[13] or [""])        # 예전 페이지는 변형 이름 하나(문자열)
+        if "vlabel" in f and vl[f.get("vk", 0)] != f["vlabel"]:
             continue
         if "label" in f and f["label"] not in lby[ri]:
             continue
@@ -1036,7 +1071,7 @@ def check(run, lang="ko"):
         got = len(py_match(D, f))
         if got != n:
             errors.append(f"드릴다운 '{title}' {f}: 화면 {n}개, 필터 결과 {got}개")
-        if "label" in f:
+        if "label" in f and "vlabel" not in f:          # 변형과 겹친 라벨 드릴다운은 07b에 변형별 수가 없어 필터 결과 대조만
             lab = D["labels"][f["label"]]
             key = f"{D['sid'][lab[0]]}.{'negative' if lab[1] else 'positive'}"
             row = next(l for l in counts["topics"][key]["labels"] if l["id"] == lab[3])
@@ -1282,7 +1317,7 @@ function matchReviews(f){
     if(f.vine!=null&&r[12]!==f.vine)continue;
     if(f.hv!=null&&r[8]<f.hv)continue;
     if(f.asin!=null&&r[1]!==f.asin)continue;
-    if(f.vlabel!=null&&r[13]!==f.vlabel)continue;
+    if(f.vlabel!=null&&((typeof r[13]==="string"?[r[13]]:(r[13]||[]))[f.vk||0]||"")!==f.vlabel)continue;
     const ls=LBYR[ri];
     if(f.label!=null&&!(ls&&ls.has(f.label)))continue;
     if(f.labels&&!f.labels.every(x=>ls&&ls.has(x)))continue;

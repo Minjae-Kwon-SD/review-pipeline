@@ -28,9 +28,10 @@ effort: high
 
 ## stage: tags (6단계)
 
-입력: 02_reviews.csv, 03_schema_approved.yaml, 04_audit_sample.jsonl(감사할 태그 표본, eval_gold.py audit-sample이 고름), 04_quote_check_sonnet.json. gold 폴더, 04_tags_top_gold.jsonl, 04_gold_eval*은 보지 않는다.
+입력: 02_reviews.csv, 03_schema_approved.yaml, config/topics_common.yaml의 tagging_rule(감성 판정 순서, 스키마 sentiment_notes와 어긋나면 이것이 우선), 04_audit_sample.jsonl(감사할 태그 표본, eval_gold.py audit-sample이 고름), 04_quote_check_sonnet.json. gold 폴더, 04_tags_top_gold.jsonl, 04_gold_eval*은 보지 않는다.
 04_audit_sample.jsonl의 태그만 리뷰 원문과 스키마 정의에 대조한다(04_tags.jsonl 전부가 아님). 주제가 정의와 include, exclude에 맞는가, 감성이 그 주제에 대한 말과 맞는가, quote가 그 주제를 실제로 말하는가. checked는 04_audit_sample.jsonl의 태그 수다.
 missed(리뷰에 분명히 있는데 빠진 주제)는 04_audit_sample.jsonl에 들어간 리뷰에 대해서만 적는다. 그 리뷰의 태그는 04_tags.jsonl에서 같은 review_id 줄로 확인한다.
+메인 세션이 반쪽 파일(04_audit_sample_p1.jsonl 또는 _p2.jsonl)을 주면 위의 04_audit_sample.jsonl 대신 그 파일만 판정하고, checked는 그 반쪽 태그 수, missed는 그 반쪽 리뷰에 대해서만 적는다. 다른 반쪽은 열지 않는다.
 overall은 스키마 overall의 tagging_rule(없으면 config/topics_common.yaml의 overall tagging_rule)로 판정한다. 총평 문장이 없는 리뷰의 overall은
 감성이 그 리뷰의 다른 주제 감성에서 규칙대로 나왔는지만 본다. 인용이 다른 주제 인용과 같거나 겹친다는 이유, 인용이 속성 이야기라는 이유만으로 FAIL을 주지 않는다.
 
@@ -57,6 +58,7 @@ audit:
 ## stage: issues (6-3단계, 세부 이슈 라벨 감사)
 
 입력: 07b_issue_audit_sample.jsonl(라벨 표본: review_id, topic, direction, sentiment, quote, labels), 07a_issues_approved.yaml(라벨 정의).
+메인 세션이 반쪽 파일(07b_issue_audit_sample_p1.jsonl 또는 _p2.jsonl)을 주면 그 파일만 판정하고, checked는 그 반쪽 수로 적는다. 다른 반쪽은 열지 않는다.
 표본마다 라벨이 인용과 그 라벨의 include, exclude에 맞는지 판정한다. 맞지 않으면 FAIL, 정할 수 없으면 UNVERIFIED. "other"가 맞는 라벨이 있는데 붙었으면 FAIL.
 출력은 아래 형식이고, 메인 세션이 07b_issue_audit.yaml로 저장한다. PASS는 적지 않고 checked에 센다.
 
@@ -93,8 +95,8 @@ audit:
 
 ## stage: guide (개발 가이드 문장 검증)
 
-입력: 17_guide.md, 16_guide_metrics.json, 15_research.yaml, 15_research_check.json, 18_guide_quote_check.json, 02_reviews.csv, 23_specs_verified.json(상품 사양, 있으면).
-표 블록 밖 문장을 본다. 숫자마다 16_guide_metrics.json의 어느 키 값인지 찾고 같은 대상과 같은 지표인지 확인한다. research id로 인용한 사양과 규제는 15_research.yaml의 그 주장(15_research_check.json에서 확인된 것)이 실제로 그 말을 하는지 본다. 상품 사양(spec., std.spec. 키)을 쓴 문장은 23_specs_verified.json의 그 값과 원문 문장(quote)이 그 말을 하는지, 같은 상품인지 확인한 정도(match)가 "이름만 일치"인데 단서 없이 단정하지 않았는지 본다. 상품 수가 적은데 사양과 불만의 관계를 원인처럼 쓰면 FAIL. 인용 번역은 원문과 뜻이 같은지 본다. 데이터나 출처가 말하지 않는 단정, 출처 없는 숫자는 FAIL. 출력 형식은 아래 "출력"의 report와 같고(stage: guide, where에 장과 문단), 메인 세션이 18_guide_audit.yaml로 저장한다.
+입력: 17_guide.md, 16_guide_writer_input.json(16_guide_metrics.json에서 근거 묶음의 리뷰 id 목록만 뺀 작성자용 파일, 값과 표와 인용은 같음. 16_guide_metrics.json은 열지 않는다), 15_research.yaml, 15_research_check.json, 18_guide_quote_check.json, 02_reviews.csv, 23_specs_verified.json(상품 사양, 있으면).
+표 블록 밖 문장을 본다. 숫자마다 16_guide_writer_input.json의 어느 키 값인지 찾고 같은 대상과 같은 지표인지 확인한다. research id로 인용한 사양과 규제는 15_research.yaml의 그 주장(15_research_check.json에서 확인된 것)이 실제로 그 말을 하는지 본다. 상품 사양(spec., std.spec. 키)을 쓴 문장은 23_specs_verified.json의 그 값과 원문 문장(quote)이 그 말을 하는지, 같은 상품인지 확인한 정도(match)가 "이름만 일치"인데 단서 없이 단정하지 않았는지 본다. 상품 수가 적은데 사양과 불만의 관계를 원인처럼 쓰면 FAIL. 인용 번역은 원문과 뜻이 같은지 본다. 데이터나 출처가 말하지 않는 단정, 출처 없는 숫자는 FAIL. 출력 형식은 아래 "출력"의 report와 같고(stage: guide, where에 장과 문단), 메인 세션이 18_guide_audit.yaml로 저장한다.
 
 ## stage: translation (번역 뜻 감사)
 

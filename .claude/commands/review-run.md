@@ -26,6 +26,29 @@ disable-model-invocation: true
 - 재시도는 6단계와 9단계에서 각각 최대 2번. 그래도 실패하면 stop하고 무엇이 남았는지 알린다.
 - Bash는 `python scripts/...` 한 명령씩 부른다. `&&`, `;`, `echo`, `cat`을 붙이면 허용 규칙에 맞지 않아 매번 묻는다. 결과는 스크립트가 찍는 PASS/FAIL 줄로 판단하고, 파일 내용은 Read로 본다. runs/CURRENT는 Write로 쓴다.
 - ⏸ 단계에서는 mark start로 needs_human을 남기고 턴을 끝낸다. 담당자의 답 없이 그 단계를 대신하지 않는다.
+- **시간 기록(2026-10-13)**: 세 갈래로 잰다. AI 작업, 담당자 라벨링, 담당자 기다림. 사용량 한도나 PC 꺼짐으로 멈춘 시간은 "멈춤"으로 따로.
+  - 관문마다: 질문을 보내고 턴을 끝내기 직전에 `python scripts/timing_report.py wait <회차> start <관문>`, **담당자 답을 받은 턴의 맨 처음에** `... wait <회차> end <관문>`. 초안을 낸 직후에 end를 찍지 않는다(30초 안 end는 스크립트가 거절, 정말 그랬으면 --force).
+  - 정답 세트 라벨링: 정답 세트 화면이 연 시각, 중간 저장, 제출 시각을 gold_label_times.json으로 내보낸다(담당자가 gold_tags.jsonl과 같은 폴더에 저장). 시간 표가 그 파일을 읽는다.
+  - 멈춤: 사용량 한도나 PC 꺼짐에서 다시 시작한 턴의 맨 처음에 `python scripts/timing_report.py pause <회차> --reason limit|pc_off`(직전 기록 시각부터 지금까지를 멈춤으로 적음).
+  - `python scripts/timing_report.py report <회차>`가 AI 작업(벽시계, 겹친 시간은 한 번), 에이전트별 합, 라벨링, 기다림(라벨링 뺌), 멈춤, 끝 기록 없는 에이전트 실행 수를 한 화면에 낸다. 기록이 없는 값은 "기록 없음"으로 적는다.
+
+## 사람에게 묻는 것(질문 줄이기, 2026-10-13 담당자 결정)
+
+- **관문 5개에서만 묻는다**: 상품 확인, 주제 승인과 정답 세트, 시험 태깅 확인, 설계 정보 항목 승인, 세부 이슈 승인.
+- **그 밖의 갈림길은 추천안으로 정하고** docs/decisions_log.md에 한 줄 남긴다(무엇을, 무엇으로, 왜). 다음 관문 메시지에 "정한 것" 목록으로 보여 주고, 담당자가 바꾸라고 하면 그때 되돌린다.
+- **관문 밖에서도 꼭 묻는 것**: 유료 수집 켜기, 권한 파일의 막는 줄 지우기.
+- **묻지 않고 바로 하는 것**: 수집이 끝나면 유료 수집 끄기와 막는 줄 되돌리기. 설정 파일을 스스로 못 고치게 막히면 담당자가 칠 한 줄만 알려 준다.
+- **회사 저장소 push**: 리포트가 다 되고 담당자가 "올려"라고 할 때만. 그 전에는 묻지도 않는다.
+- **메인 세션 /effort**: 바꿔야 할 때만 알린다.
+- **유리님께 보내는 것**: 언제나 묻는다.
+- **기본값**(정하고 다음 관문에서 "정한 것"으로 보여 줌):
+  - 별점당 페이지 수: 승인된 유료 한도 안에서 별점마다 고르게.
+  - 에이전트 노력과 입력 나누기: 기록된 기준(판단은 Opus, 반복은 Sonnet, max 금지).
+  - 시험 태깅 점수 미달: 규칙을 더 고치지 않고 진행하고 부록에 밝힌다.
+  - 감사가 낸 문구로 바로 고친다.
+  - 검토 뒤 고칠 범위: 높음과 보통은 다 고치고, 작은 것은 목록으로 남긴다(정답지 비교 뒤도 같음).
+  - 동시 작업: 기록된 상한(태깅 12, 묶음 8, 감사 2, 수집 4) 안에서.
+- PC 오프라인 알림은 그대로 둔다.
 
 ## 작업 방식과 상한(docs/multi_agent_design_v2.md, config/stages.yaml)
 
@@ -82,7 +105,7 @@ disable-model-invocation: true
      승인본에서 주제 id가 바뀌었거나 빠졌으면 `python scripts/eval_gold.py gold <회차> --rename old:new --drop-unknown`, 아니면 `python scripts/eval_gold.py gold <회차>`.
      이 길로 오면 3, 4단계를 따로 기다리지 않는다(아래 3, 4는 화면을 나눠 할 때).
 3. **03_schema_approval, human** ⏸: "03_schema_draft.yaml을 고쳐 03_schema_approved.yaml로 저장한 뒤 알려 주세요"라고 하고 턴을 끝낸다. 담당자가 알리면 `python scripts/check_inputs.py <회차> --schema`. 오류가 있으면 보여 주고 다시 기다린다. 통과하면 end.
-4. **04_gold_tagging, human** ⏸: `python scripts/eval_gold.py sheet <회차>`를 부르고, 담당자에게 "runs/<회차>/gold/gold_tagging.html을 브라우저로 열어 30개를 태깅한 뒤, 'gold_tags.jsonl 내보내기'로 받은 파일을 runs/<회차>/gold/gold_tags.jsonl로 저장하고 알려 주세요"라고 하고 턴을 끝낸다. 주제나 감성을 제안하거나 고치지 않는다. 담당자가 알리면 `python scripts/eval_gold.py gold <회차>`. 오류가 있으면 보여 주고 다시 기다린다.
+4. **04_gold_tagging, human** ⏸(관문 기다림은 wait start/end, 라벨링 시간은 화면의 gold_label_times.json): `python scripts/eval_gold.py sheet <회차>`를 부르고, 담당자에게 "runs/<회차>/gold/gold_tagging.html을 브라우저로 열어 30개를 태깅한 뒤, '제출'로 받은 두 파일(gold_tags.jsonl, gold_label_times.json)을 runs/<회차>/gold/에 저장하고 알려 주세요"라고 하고 턴을 끝낸다. 주제나 감성을 제안하거나 고치지 않는다. 담당자가 알리면 `python scripts/eval_gold.py gold <회차>`. 오류가 있으면 보여 주고 다시 기다린다.
 5. **05_tagging, agents**:
    1. `python scripts/tag_batches.py plan <회차>`. 출력의 묶음 수와 시험 태깅 묶음을 알린다.
    2. 시험 태깅: 04_batches.json의 pilot_batches(리뷰가 가장 적은 ASIN의 묶음과 gold 묶음)만 review-tagger로 부른다(작업자 상한 안에서 동시).
@@ -93,7 +116,7 @@ disable-model-invocation: true
    4. 담당자가 계속이라고 하면 시험 태깅 묶음(pilot_batches)을 뺀 나머지 sonnet 묶음을 묶음마다 review-tagger 하나로 부른다(per_batch, `model: sonnet`, 위 상한 표의 동시 수 안에서 차례로). 프롬프트는 시험 태깅과 같은 형식(`회차: <회차>`, `묶음: <batch_id>`, `모델 표시: sonnet`).
 6. **06_tag_check, agents**: 아래를 차례로 한다.
    1. `python scripts/audit_quotes.py tags <회차> --model sonnet`(모든 sonnet 묶음을 검사하고 통과하면 04_tags.jsonl로 합침, 인용 앞 부정어는 경고). 합친 뒤 `python scripts/audit_quotes.py negation <회차>`로 부정어 경고 개수를 04_negation_check.json에 남긴다. 실패한 묶음(04_quote_check_sonnet.json의 failed_batches)만 review-tagger(sonnet)를 다시 부른다. 그 묶음의 오류를 프롬프트에 그대로 붙인다.
-   2. 통과하면 `python scripts/eval_gold.py audit-sample <회차>`, 그다음 evidence-auditor(프롬프트: `stage: tags`, 회차). 돌려준 YAML 블록만 runs/<회차>/04_tag_audit.yaml로 저장하고 `python scripts/eval_gold.py audit <회차>`.
+   2. 통과하면 `python scripts/eval_gold.py audit-sample <회차>`(감사자 둘 몫으로 리뷰 단위로 나눈 04_audit_sample_p1.jsonl, _p2.jsonl도 씀), 그다음 evidence-auditor(프롬프트: `stage: tags`, 회차, 자기 반쪽 파일 이름) 둘을 동시에 부른다. 돌려준 YAML 블록을 각각 04_tag_audit_p1.yaml, 04_tag_audit_p2.yaml로 저장하고 `python scripts/eval_gold.py audit <회차>`(두 반쪽이 표본을 빠짐없이 한 번씩 판정했는지 확인하고 04_tag_audit.yaml로 합침, 반쪽마다와 전체 FAIL 비율을 04_tag_audit_summary.json에 적음, 합치기 문제가 있으면 INCOMPLETE).
    3. 감사가 FAIL이면 batches_with_findings의 묶음만 review-tagger(sonnet)를 다시 부른다. 그 묶음의 감사 지적을 프롬프트에 그대로 붙인다. 그다음 1, 2를 다시.
    4. 다시 태깅은 sonnet으로 묶음마다 최대 2번. 그래도 실패한 묶음은 그 묶음만 상위 모델로 한 번 부르고(모델 표시는 sonnet 그대로, 파일 이름이 같아야 합쳐진다), 담당자에게 어느 묶음을 상위 모델로 다시 했는지 알린다.
    5. `python scripts/eval_gold.py score <회차>`. 출력의 모델별 한 줄 요약(04_gold_eval.json의 summary_ko, 예: "sonnet: 주제 F1 0.90(기준 0.80, 통과), 감성 일치 88.6%(기준 90.0%, 1.4%p 모자람)")을 담당자에게 글자 그대로 옮긴다. 기준과의 차이를 따로 계산하지 않는다. 판정은 리포트에 쓰는 sonnet 기준이다. 기준 미달이면 04_gold_eval.md의 불일치 목록을 보여 주고 ⏸ `06_gold_review`(human)로 멈춘다. 고를 수 있는 것: 스키마를 고쳐 3단계부터 다시, 정답 태깅을 고쳐 다시 채점, 이대로 진행(리포트 부록에 적음).
@@ -110,12 +133,12 @@ disable-model-invocation: true
    2. issue-tagger를 묶음마다 하나씩 부른다(per_batch, Agent 호출에 model: sonnet, 상한 표의 동시 수 안에서 차례로). 프롬프트 `회차: <회차>`, `묶음: <batch_id>`. 같은 때 evidence-auditor(`stage: safety`)를 부르고 돌려준 YAML 블록만 07c_safety_verdicts.yaml로 저장한다.
    3. `python scripts/issues.py label-check <회차>`: 승인 라벨이나 other, 1~2개, other 단독, 입력 인용 빠짐 없음. 통과하면 07b_issue_labels.jsonl과 07b_issue_counts.json(라벨마다 리뷰 수, 가중 비율, ASIN별 수, 기타 비율, 향과 신뢰의 향 차이 라벨 겹침)을 쓴다. 실패한 묶음(failed_batches)만 오류를 붙여 다시 부른다. 최대 2번, 그래도 실패하면 stop.
    4. `python scripts/issues.py safety-render <회차>`: 07c_safety_check.md(인용, 원문, 판정, 이유)와 07c_safety_summary.json.
-6-4. **07c_issue_check, script와 agents**: `python scripts/issues.py audit-sample <회차>`(ASIN과 주제를 고르게 150개), evidence-auditor(`stage: issues`)의 YAML 블록만 07b_issue_audit.yaml로 저장, `python scripts/issues.py audit <회차>`(FAIL 5% 이하면 PASS). FAIL이면 stop하고 리포트로 넘어가지 않는다.
+6-4. **07c_issue_check, script와 agents**: `python scripts/issues.py audit-sample <회차>`(ASIN과 주제를 고르게 150개, 감사자 둘 몫으로 07b_issue_audit_sample_p1.jsonl과 _p2.jsonl 75개씩), evidence-auditor(`stage: issues`) 둘을 동시에 부르고(프롬프트에 자기 반쪽 파일 이름) 돌려준 YAML 블록을 각각 07b_issue_audit_p1.yaml, 07b_issue_audit_p2.yaml로 저장, `python scripts/issues.py audit <회차>`(두 반쪽이 표본 150개를 빠짐없이 한 번씩 판정했는지 확인하고 07b_issue_audit.yaml로 합침, 반쪽마다와 전체 FAIL 비율을 07b_issue_audit_summary.json에 적음, 전체 FAIL 5% 이하면 PASS, 합치기 문제가 있으면 INCOMPLETE). FAIL이면 stop하고 리포트로 넘어가지 않는다.
    - 의심 태그(주제나 감성이 틀려 보이는 인용)는 고치지 않고 07c_tagging_error_notes.md에 review_id와 이유를 적는다.
    - 7단계 weight.py가 07b_issue_counts.json, 07b_issue_labels.jsonl, 07c_safety_summary.json을 읽어 05_metrics.json의 issues, issue_overlap, safety_check, brand_deep[].strengths/weaknesses[].top_issues와 05_tables.md의 세부 이슈 표를 만든다.
 7. **07_weight, script**: `python scripts/weight.py <회차>`. 실패하면(자체 검사 포함) 계산 문제이니 stop하고 출력을 그대로 보여 준다.
-8. **08_report, agents**: report-writer를 부른다(프롬프트: 회차 이름).
-9. **09_report_check, agents**: `python scripts/audit_quotes.py report <회차>`, 그다음 evidence-auditor(`stage: report`, 회차). 돌려준 YAML 블록만 07_audit.yaml로 저장한다. 둘 중 하나라도 FAIL이면 report-writer에게 07_quote_check.json과 07_audit.yaml을 주고 고치게 한 뒤 9단계를 다시. next_action이 HUMAN_REVIEW_REQUIRED면 그 항목을 보여 주고 ⏸ 기다린다.
+8. **08_report, agents**: report-writer를 부른다(프롬프트: 회차 이름). 인용은 05_quote_pool.json과 05_metrics.json의 quote_candidates에서만 고른다(04_tags.jsonl, 02_reviews.csv는 읽지 않음).
+9. **09_report_check, agents**: `python scripts/audit_quotes.py report <회차>`, 그다음 evidence-auditor(`stage: report`, 회차). 돌려준 YAML 블록만 07_audit.yaml로 저장한다. 둘 중 하나라도 FAIL이면 다시 쓰기 줄이기(2026-10-14)대로 고친다: 06_report.md를 06_report_v<N>.md로 복사해 두고, report-writer에게 FAIL 항목(07_quote_check.json의 실패 줄, 07_audit.yaml의 FAIL과 고칠 문구)만 주고 그 줄만 고치게 한다(나머지 문장은 그대로, 처음부터 다시 쓰지 않음). 그다음 audit_quotes.py report는 전체로, 감사는 `python scripts/guide_diff.py <회차> 06_report_v<N>.md 06_report.md --out 06_report_changed.md`의 바뀐 줄만 본다. 고치기는 한 번까지, 두 번째도 FAIL이면 멈추고 보고. next_action이 HUMAN_REVIEW_REQUIRED면 그 항목을 보여 주고 ⏸ 기다린다.
 10. **10_timing, script**: 이 단계만 start와 end mark를 먼저 부르고 `python scripts/timing_report.py report <회차>`를 부른다. 그래야 시간 표에 이 단계가 "끝 기록 없음"으로 남지 않는다. 출력에 "두 번 이상 시작한 단계"가 있으면 그 줄도 그대로 알린다.
 11. **11_html, script**: HTML 리포트 만들기. 모델을 부르지 않는다(HTML을 쓰는 에이전트 없음).
    - 명령: mark start 11_html, `python scripts/render_html.py build <회차>`, `python scripts/render_html.py check <회차>`, mark end 11_html, 그다음 `python scripts/timing_report.py report <회차>`로 시간 표를 다시 만든다.
@@ -139,9 +162,9 @@ disable-model-invocation: true
     - 출력: 14_details_<묶음>.jsonl, 14_details.jsonl, 14_detail_counts.json(항목과 값마다 리뷰 수, 가중 비율, ASIN별 수, 숫자 항목 중앙값), 14_detail_check.json
 14b. **14b_detail_check, agents**: `python scripts/detail.py audit-sample <회차>`(항목과 ASIN 고르게 150개), evidence-auditor(`stage: details`)의 YAML 블록만 14b_detail_audit.yaml로 저장, `python scripts/detail.py audit <회차>`. FAIL 5%를 넘으면 멈추고 보고한다.
 15. **15_research, agents** (03 승인과 12_market 뒤 바로, "앞당겨 돌리는 단계"): benchmark-researcher(모델 따로 주지 않음, 헤드리스면 --allowedTools에 WebSearch, WebFetch를 더함)가 15_research.yaml을 쓴다. amazon.com은 열지 않는다. `python scripts/research.py check <회차>`가 출처를 다시 열어 원문 문장을 확인한다(15_research_check.json, verified만 가이드에 씀). 확인된 주장이 2개 미만인 분야만 한 번 더 조사.
-16. **16_guide_metrics, script**: `python scripts/guide_metrics.py <회차>`. 카테고리마다 다른 것(머리 숫자 노드, 방향 지수 라벨, 기준표 후보, 검색어 성별 낱말, 집중 분석)은 config/categories/<카테고리>.yaml의 guide 절에서 읽는다. 출력: 16_guide_metrics.json(values, tables, ev 근거 묶음 최대 80개, quotes, caveats).
-17. **17_guide_write, agents**: guide-writer(모델 따로 주지 않음)가 16_guide_metrics.json과 확인된 15_research만 보고 17_guide.md를 쓴다. 숫자 뒤에 [m:키], 사양과 규제 뒤에 [r:id]. 표는 쓰지 않는다(HTML 스크립트가 그림).
-18. **18_guide_check, script와 agents**: `python scripts/guide_check.py <회차>`(18_guide_quote_check.json), evidence-auditor(`stage: guide`)의 YAML 블록만 18_guide_audit.yaml로 저장. 기계 검사 FAIL이나 감사 FAIL이 확인 수의 5%를 넘으면 guide-writer가 고치고 다시. 두 번째도 넘으면 멈추고 보고.
+16. **16_guide_metrics, script**: `python scripts/guide_metrics.py <회차>`. 카테고리마다 다른 것(머리 숫자 노드, 방향 지수 라벨, 기준표 후보, 검색어 성별 낱말, 집중 분석)은 config/categories/<카테고리>.yaml의 guide 절에서 읽는다. 출력: 16_guide_metrics.json(values, tables, ev 근거 묶음 최대 80개, quotes, caveats)과 작성자용 16_guide_writer_input.json(ev의 리뷰 id 목록만 뺌).
+17. **17_guide_write, agents**: guide-writer(모델 따로 주지 않음)가 16_guide_writer_input.json과 확인된 15_research만 보고 17_guide.md를 쓴다(고칠 때도 같은 파일). 숫자 뒤에 [m:키], 사양과 규제 뒤에 [r:id]. 표는 쓰지 않는다(HTML 스크립트가 그림).
+18. **18_guide_check, script와 agents**: `python scripts/guide_check.py <회차>`(18_guide_quote_check.json), evidence-auditor(`stage: guide`, 작성자와 같은 16_guide_writer_input.json을 읽음)의 YAML 블록만 18_guide_audit.yaml로 저장. 기계 검사 FAIL이나 감사 FAIL이 확인 수의 5%를 넘으면 다시 쓰기 줄이기(2026-10-14)대로 고친다: 17_guide.md를 17_guide_v<N>.md로 복사해 두고, guide-writer에게 FAIL 항목과 고칠 문구만 주고 그 줄만 고치게 한다(처음부터 다시 쓰지 않음). 다시 감사는 guide_diff.py로 뽑은 바뀐 줄(18_guide_changed.md)만, 기계 검사는 전체로. 고치기는 한 번까지, 두 번째도 넘으면 멈추고 보고.
 19. **19_guide_html, script**: `python scripts/render_guide_html.py build <회차>`와 `check <회차>`(화면 숫자와 metrics, 문장 속 [m:키], 근거 묶음 리뷰 수, 확인된 출처만 링크, 외부 참조 0, 가운뎃점 0, 리뷰 0개인 근거 묶음은 링크로 만들지 않음). 출력: 07_guide.html, 07_guide_html_numbers.json, 07_guide_html_check.json.
    - 머리 숫자 5번(가장 빨리 크는 검색어)은 성장 배수 = 최근 4주 검색량 합 ÷ 1년 전 같은 4주(52주 앞) 합이다. 후보는 30일 검색량 guide.growth.min_volume 이상이고 guide.growth.exclude_words가 없는 카테고리 검색어, 순위는 8주 이력이 모두 있는 것만. 주간 이력이 모자라면 `python scripts/market.py fetch-trends <회차> --months 24 --seeds "a,b" --max-calls N`(무료, 받은 것은 다시 부르지 않음).
    - 문장 일부만 바꿨으면 `python scripts/guide_diff.py <회차> 17_guide_vN.md`(18_guide_changed.md)로 바뀐 줄을 뽑아 evidence-auditor는 그 줄만 본다.

@@ -14,6 +14,7 @@ docs/mcp_samples/
 
 # 정답 세트(채점 기준, 태거와 감사관에게도 숨기는 폴더)
 runs/*/gold/
+runs/*/gold_score/
 
 # 리뷰 원문 덤프와 그 표본, 묶음 입력
 runs/*/02_reviews.csv
