@@ -237,6 +237,15 @@ def build(run):
     if costs:
         put("cost.total", f"${sum(v[1] for v in tot.values()):.2f}", "costs.jsonl 전체 합")
         put("cost.runs", f"{len(costs)}번", "costs.jsonl 줄 수")
+    # 시간 나눔(timing_report.py가 쓴 08_timing.md의 "시간 나눔" 줄): AI 작업, 담당자 라벨링, 담당자 기다림, 멈춤
+    tm = run / "08_timing.md"
+    if tm.exists():
+        tt = tm.read_text(encoding="utf-8")
+        for key, pat in (("split.ai", r"AI 작업\(벽시계[^)]*\): ([\d.]+분)"), ("split.label", r"담당자 라벨링: ([\d.]+분)"),
+                         ("split.wait", r"담당자 기다림\([^)]*\): ([\d.]+분)"), ("split.pause", r"멈춤: ([\d.]+분)")):
+            mm = re.search(pat, tt)
+            if mm:
+                put(f"time.{key}", mm.group(1), "08_timing.md 시간 나눔")
     put("tests", f"{count_tests()}개", "tests/test_scripts.py 실행 결과의 확인 개수")
     ref_facts(put)
 
