@@ -246,7 +246,7 @@ def build(run):
             mm = re.search(pat, tt)
             if mm:
                 put(f"time.{key}", mm.group(1), "08_timing.md 시간 나눔")
-    ot = load_yaml(run / "08_time_owner.yaml") or {}          # 담당자가 정한 회차 시간 읽기(있을 때만)
+    ot = (load_yaml(run / "08_time_owner.yaml") or {}) if (run / "08_time_owner.yaml").exists() else {}   # 담당자가 정한 회차 시간(있을 때만)
     if ot.get("total_minutes") is not None:
         put("time.owner_total", f"{ot['total_minutes']}분", "08_time_owner.yaml(담당자 판단): " + str(ot.get("basis") or ""))
     put("tests", f"{count_tests()}개", "tests/test_scripts.py 실행 결과의 확인 개수")

@@ -435,8 +435,12 @@ class R:
                              esc(r["strength"] or "-"), esc(r["weakness"] or "-")]
                             + ([esc(r.get("spec_concentration") or "-") + ("" if r.get("spec_match") in (None, "일치 확인") else
                                                                          f"<div class='mut small'>{esc(r['spec_match'])}</div>"),
-                                esc(r.get("spec_notes") or "-") + " " + self.srcs(r.get("spec_src"))] if "spec_concentration" in r else []))
-            spec_head = ["농도(사양)", "노트 구성(사양)"] if any("spec_concentration" in r for r in T.get("s.scoreboard", [])) else []
+                                esc(r.get("spec_notes") or "-") + " " + self.srcs(r.get("spec_src"))] if "spec_concentration" in r else [])
+                            + ([esc(v) for v in r["spec_items"][:-1]] + [esc(r["spec_items"][-1]) + " " + self.srcs(r.get("spec_src"))
+                               + ("" if r.get("spec_match") in (None, "일치 확인") else f"<div class='mut small'>{esc(r['spec_match'])}</div>")]
+                               if r.get("spec_items") else []))
+            spec_head = (["농도(사양)", "노트 구성(사양)"] if any("spec_concentration" in r for r in T.get("s.scoreboard", [])) else
+                         [f"{n}(사양)" for n in T.get("meta.spec_items") or []] if any(r.get("spec_items") for r in T.get("s.scoreboard", [])) else [])
             if not sb:      # 향수 회차(이전 metrics)와 같은 화면
                 head = ["상품", "하위 카테고리", "가격", "용량", "온스당", "가중 별점", "지속력 부정(가중)", "세기 방향 지수", "말한 지속 시간 중앙값"]
                 fn = "세기 방향 지수 = (너무 셈 − 약함) ÷ (너무 셈 + 약함), 방향 언급 25개 이상인 상품만. 지속 시간 중앙값은 값 5개 이상일 때만."

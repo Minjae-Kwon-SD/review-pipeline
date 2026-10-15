@@ -1,6 +1,6 @@
 # 문서 숫자 출처
 
-`python scripts/doc_facts.py build <회차>`가 회차마다 만든다. 마지막으로 만든 회차: medicalscrubs-2026-10-14.
+`python scripts/doc_facts.py build <회차>`가 회차마다 만든다. 마지막으로 만든 회차: bluetoothspeaker-2026-10-14.
 
 ## perfume-db-2026-10-07
 
@@ -328,6 +328,112 @@
 | time.split.wait | 64.6분 | 08_timing.md 시간 나눔 |
 | time.split.pause | 87.9분 | 08_timing.md 시간 나눔 |
 | time.owner_total | 118분 | 08_time_owner.yaml(담당자 판단): AI 작업(08_timing.md) + 라벨링 약 15분 + 관문 검토 5분, 멈춤 뺌. 담당자가 118분으로 정함 |
+| tests | 413개 | tests/test_scripts.py 실행 결과의 확인 개수 |
+| ref.report.reviews | 3,488개, ASIN 10개 | 정답지 review_analysis_report_en.html 머리 문장 |
+| ref.report.tags | 10,066개 | 정답지 review_analysis_report_en.html 머리 문장 |
+| ref.guide.reviews | 12,380개, 리스팅 37개, 카테고리 9개 | 정답지 Coolmate_Scrubs_Product_Dev_Guide_v1.html 머리 문장 |
+| ref.guide.specs | 리스팅 사양 37개, 사이즈표 31개 | 정답지 Coolmate_Scrubs_Product_Dev_Guide_v1.html 머리 문장 |
+| ref.guide.terms | 7,346개 | 정답지 Coolmate_Scrubs_Product_Dev_Guide_v1.html 머리 문장 |
+
+## bluetoothspeaker-2026-10-14
+
+2026-10-15T10:20 기준.
+
+| 키 | 표기 | 출처 |
+|---|---|---|
+| gold.reviews | 40개 | 05_metrics.json accuracy.gold_reviews |
+| gold.f1 | 0.83 | 05_metrics.json accuracy.sonnet.topic_f1_text |
+| gold.sent | 87.7% | 05_metrics.json accuracy.sonnet.sentiment_text |
+| gold.top_sent | 87.9% | 05_metrics.json accuracy.top.sentiment_text |
+| gold.dir | 98.9%(94개 중 93개) | 05_metrics.json accuracy.sonnet.direction_* |
+| gold.mixed | 35.0%(20개 중 7개) | 05_metrics.json accuracy.sonnet.mixed_* |
+| gold.status | PASS | 05_metrics.json accuracy.status |
+| data.asins | 10개 | 01_asins.csv status=selected |
+| data.tags | 14,612개 | 04_tags.jsonl 줄 수 |
+| data.reviews | 4,427개 | 02_reviews.csv 행 수 |
+| data.dropped | 3개 | 02_collect_log.json dropped_count |
+| data.topics | 16개 | 03_schema_approved.yaml topics |
+| data.labels | 148개 | 07a_issues_approved.yaml 라벨 수(other 빼고) |
+| gold.tags | 130개 | gold/gold_tags.jsonl 줄 수(내용은 읽지 않고 줄만 셈) |
+| score.f1 | 0.86 | 04_gold_eval_score.json models.sonnet.topic_f1 |
+| score.dir | 98.4%(61개 중 60개) | 04_gold_eval_score.json models.sonnet.direction_* |
+| score.mixed | 40.0%(20개 중 8개) | 04_gold_eval_score.json models.sonnet.mixed_* |
+| score.all | 84.0% | 04_gold_eval_score.json models.sonnet.sentiment_agreement |
+| score.reviews | 30개 | 04_gold_eval_score.json gold_reviews |
+| score.tags | 89개 | 04_gold_eval_score.json models.sonnet.gold_pairs |
+| score.label_min | 12.2분 | gold_score/gold_label_times.json 처음 연 때부터 제출까지 |
+| audit.tags | 150개 중 FAIL 4개(2.7%) | 04_tag_audit_summary.json |
+| audit.tags_cons | 7.6% | 04_tag_audit_summary.json conservative_rate(FAIL + UNVERIFIED + missed) |
+| audit.tags_parts | UNVERIFIED 1개, 빠진 태그 7개, 뺀 정답 세트 태그 0개 | 04_tag_audit_summary.json |
+| audit.labels | 150개 중 FAIL 4개(2.7%) | 07b_issue_audit_summary.json |
+| audit.details | 150개 중 FAIL 6개(4.0%) | 14b_detail_audit_summary.json |
+| html.report_numbers | 2170개 | 06_report_html_check.json numbers_checked |
+| html.report_drill | 647개 | 06_report_html_check.json drilldowns_checked |
+| html.report_kb | 2731KB | 06_report_html_check.json size_kb |
+| html.guide_numbers | 306개 | 07_guide_html_check.json numbers_checked |
+| html.guide_bundles | 219개 | 07_guide_html_check.json evidence_bundles |
+| html.guide_links | 201개 | 07_guide_html_check.json source_links |
+| html.guide_kb | 2130KB | 07_guide_html_check.json size_kb |
+| detail.values | 5,313개 | 14_detail_check.json values |
+| detail.items | 15개 | 13_detail_schema_approved.yaml items |
+| research | 76개 중 74개 | 15_research_check.json claims, verified |
+| market.calls | 48번 | market/calls.jsonl 줄 수 |
+| specs.verified | 94개 | 23_specs_check.json verified |
+| specs.products | 10개 | 23_specs_check.json by_asin |
+| robust.n | 2,000번 | 05_robustness.json bootstrap.n |
+| robust.head_first | 51.6% | 05_robustness.json texts.head_first |
+| robust.head_neg_ci | 2.8%~3.5% | 05_robustness.json texts.head_neg_ci |
+| robust.loo_flips | 10번 중 10번 | 05_robustness.json texts.loo_flips |
+| robust.weakest | 10개 중 3개(리뷰를 다시 뽑아 보면 2~4개) | 05_robustness.json texts.weakest |
+| agent.calls | 209번 | timing.jsonl SubagentStart와 SubagentStop 짝 |
+| agent.sum | 461분 | timing.jsonl 에이전트마다 걸린 시간 합 |
+| agent.union | 112분 | timing.jsonl 에이전트가 하나라도 돌던 시간(겹친 구간은 한 번만) |
+| time.review.first | 1,103.1분 | timing.jsonl 리뷰 리포트 단계 모든 시도 합(사람 대기 빼고) |
+| time.review.rerun | 1,103.1분 | timing.jsonl 리뷰 리포트 단계 마지막 시도 합(고치기 단계 11_report_polish, 11b_polish_audit, 18b_guide_fix, 20_head_growth, 20b_head_text, 23c_specs_cleanup, 24_report_fix, 24b_report_en_fix, 25_guide_g5, 25b_guide_consistency, 26_claim_strength, 26b_source_drop, 27_rejudge, 27b_rejudge_audit, 27c_rejudge_guide 빼고) |
+| time.review.human | 612.6분 | timing.jsonl 리뷰 리포트 사람 대기(⏸) 단계 |
+| time.guide.first | 95.6분 | timing.jsonl 개발 가이드 단계 모든 시도 합(사람 대기 빼고) |
+| time.guide.rerun | 95.6분 | timing.jsonl 개발 가이드 단계 마지막 시도 합(고치기 단계 11_report_polish, 11b_polish_audit, 18b_guide_fix, 20_head_growth, 20b_head_text, 23c_specs_cleanup, 24_report_fix, 24b_report_en_fix, 25_guide_g5, 25b_guide_consistency, 26_claim_strength, 26b_source_drop, 27_rejudge, 27b_rejudge_audit, 27c_rejudge_guide 빼고) |
+| time.guide.human | 4.7분 | timing.jsonl 개발 가이드 사람 대기(⏸) 단계 |
+| time.en.first | 15.1분 | timing.jsonl 영어판과 보강(G3 이후) 단계 모든 시도 합(사람 대기 빼고) |
+| time.en.rerun | 15.1분 | timing.jsonl 영어판과 보강(G3 이후) 단계 마지막 시도 합(고치기 단계 11_report_polish, 11b_polish_audit, 18b_guide_fix, 20_head_growth, 20b_head_text, 23c_specs_cleanup, 24_report_fix, 24b_report_en_fix, 25_guide_g5, 25b_guide_consistency, 26_claim_strength, 26b_source_drop, 27_rejudge, 27b_rejudge_audit, 27c_rejudge_guide 빼고) |
+| time.en.human | 0.0분 | timing.jsonl 영어판과 보강(G3 이후) 사람 대기(⏸) 단계 |
+| time.total.first | 1,213.8분 | time.<영역>.first 세 영역 합 |
+| time.total.rerun | 1,213.8분 | time.<영역>.rerun 세 영역 합 |
+| time.total.human | 617.3분 | time.<영역>.human 세 영역 합 |
+| html.report_chapters | 13개 장 | scripts/render_html.py CHAPTERS |
+| topics.common | 11개 | config/topics_common.yaml topics |
+| step.00_asin_review | 558.7분 | timing.jsonl 00_asin_review 마지막 시도 |
+| step.00_collect | 565.0분 | timing.jsonl 00_collect 마지막 시도 |
+| step.01_inputs | 0.2분 | timing.jsonl 01_inputs 마지막 시도 |
+| step.02_schema_draft | 7.6분 | timing.jsonl 02_schema_draft 마지막 시도 |
+| step.12_market | 15.2분 | timing.jsonl 12_market 마지막 시도 |
+| step.23_specs | 15.1분 | timing.jsonl 23_specs 마지막 시도 |
+| step.15_research | 15.3분 | timing.jsonl 15_research 마지막 시도 |
+| step.03_schema_approval | 24.1분 | timing.jsonl 03_schema_approval 마지막 시도 |
+| step.04_gold_tagging | 24.1분 | timing.jsonl 04_gold_tagging 마지막 시도 |
+| step.05a_pilot | 2.2분 | timing.jsonl 05a_pilot 마지막 시도 |
+| step.13_detail_schema_draft | 12.2분 | timing.jsonl 13_detail_schema_draft 마지막 시도 |
+| step.13a_detail_schema_approval | 4.7분 | timing.jsonl 13a_detail_schema_approval 마지막 시도 |
+| step.05_tagging | 23.6분 | timing.jsonl 05_tagging 마지막 시도 |
+| step.06_tag_check | 5.7분 | timing.jsonl 06_tag_check 마지막 시도 |
+| step.14_detail_extract | 14.2분 | timing.jsonl 14_detail_extract 마지막 시도 |
+| step.14b_detail_check | 5.2분 | timing.jsonl 14b_detail_check 마지막 시도 |
+| step.07a_issue_draft | 9.0분 | timing.jsonl 07a_issue_draft 마지막 시도 |
+| step.07a_issue_approval | 3.5분 | timing.jsonl 07a_issue_approval 마지막 시도 |
+| step.07b_issue_labeling | 454.3분 | timing.jsonl 07b_issue_labeling 마지막 시도 |
+| step.07c_issue_check | 2.2분 | timing.jsonl 07c_issue_check 마지막 시도 |
+| step.07_weight | 1.9분 | timing.jsonl 07_weight 마지막 시도 |
+| step.17_guide_write | 14.5분 | timing.jsonl 17_guide_write 마지막 시도 |
+| step.08_report | 20.3분 | timing.jsonl 08_report 마지막 시도 |
+| step.09_report_check | 13.2분 | timing.jsonl 09_report_check 마지막 시도 |
+| step.18_guide_check | 19.1분 | timing.jsonl 18_guide_check 마지막 시도 |
+| step.11_html | 0.0분 | timing.jsonl 11_html 마지막 시도 |
+| step.19_guide_html | 0.0분 | timing.jsonl 19_guide_html 마지막 시도 |
+| step.10_timing | 0.0분 | timing.jsonl 10_timing 마지막 시도 |
+| time.split.ai | 98.2분 | 08_timing.md 시간 나눔 |
+| time.split.label | 22.1분 | 08_timing.md 시간 나눔 |
+| time.split.wait | 571.2분 | 08_timing.md 시간 나눔 |
+| time.split.pause | 439.5분 | 08_timing.md 시간 나눔 |
 | tests | 413개 | tests/test_scripts.py 실행 결과의 확인 개수 |
 | ref.report.reviews | 3,488개, ASIN 10개 | 정답지 review_analysis_report_en.html 머리 문장 |
 | ref.report.tags | 10,066개 | 정답지 review_analysis_report_en.html 머리 문장 |

@@ -516,7 +516,7 @@ def safety_input(run):
     return 0
 
 
-SYMPTOMS = ("두통", "메스꺼움", "호흡", "어지럼", "피부", "알레르기 언급")   # 안전 판정의 증상 분류(symptom_type), 이 순서로 적는다
+SYMPTOMS = ("두통", "메스꺼움", "호흡", "어지럼", "피부", "귀", "알레르기 언급")   # 안전 판정의 증상 분류(symptom_type), 이 순서로 적는다. 귀(귀 통증, 이명)는 2026-10-15 스피커 회차에서 더함
 
 
 def safety_render(run):

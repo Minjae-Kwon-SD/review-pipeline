@@ -371,8 +371,8 @@ class G:
             k = f"s.{asin}"
             evn = self.evidence(f"ev.{asin}.topic_neg", f"{a['brand']}: {self.schema[tp]['name_ko']} 부정", "이 상품의 " + self.schema[tp]["name_ko"]
                                 + " 부정 언급", neg, self.tag_quote(tp))
-            evl = self.evidence(f"ev.{asin}.dir_low", f"{a['brand']}: {di['low']['name']}", di["low"]["name"] + " 쪽 라벨이 붙은", low, self.tag_quote(tp))
-            evh = self.evidence(f"ev.{asin}.dir_high", f"{a['brand']}: {di['high']['name']}", di["high"]["name"] + " 쪽 라벨이 붙은", high, self.tag_quote(tp))
+            evl = self.evidence(f"ev.{asin}.dir_low", f"{a['brand']}: {di['low']['name']}", di["low"]["name"] + " 쪽 라벨이 붙은", low, self.tag_quote(di["topic"]))
+            evh = self.evidence(f"ev.{asin}.dir_high", f"{a['brand']}: {di['high']['name']}", di["high"]["name"] + " 쪽 라벨이 붙은", high, self.tag_quote(di["topic"]))
             evd = self.evidence(f"ev.{asin}.duration", f"{a['brand']}: {self.item_name(c['duration_item'])}", f"{self.item_name(c['duration_item'])}(숫자)",
                                 {d["review_id"] for d in self.details if d["item"] == c["duration_item"] and d["asin"] == asin},
                                 self.detail_quote(c["duration_item"]))
@@ -713,16 +713,29 @@ class G:
             return [n for k in ("notes_top", "notes_middle", "notes_base", "notes_all") for n in vals(asin, k)]
 
         conc = {a["asin"]: ", ".join(vals(a["asin"], "concentration")) or "-" for a in self.asins}
+        # 점수표에 나란히 놓을 사양 항목(카테고리 설정 specs.scoreboard_items). 없으면 향수 때의 농도와 노트 칸(2026-10-15 스피커 회차에서 일반화)
+        names = {i["id"]: i.get("name_ko", i["id"]) for i in sc.get("items") or []}
+        board_items = sc.get("scoreboard_items") or []
+        self.tables["meta.spec_items"] = [names.get(it, it) for it in board_items]
         # 점수표 칸
         for a in self.asins:
-            r = score.get(a["asin"])
+            asin = a["asin"]
+            r = score.get(asin)
             if r is not None:
-                r["spec_concentration"] = conc[a["asin"]]
-                r["spec_notes"] = ", ".join(notes(a["asin"])) or "-"
-                r["spec_match"] = match(a["asin"])
-                r["spec_src"] = src(a["asin"], "concentration") + src(a["asin"], "notes_top") + src(a["asin"], "notes_all")
-            self.put(f"spec.{a['asin']}.concentration", conc[a["asin"]], conc[a["asin"]], note=f"상품 사양({match(a['asin'])})")
-            self.put(f"spec.{a['asin']}.match", match(a["asin"]), match(a["asin"]))
+                r["spec_match"] = match(asin)
+                if board_items:
+                    r["spec_items"] = [", ".join(map(str, vals(asin, it))) or "-" for it in board_items]
+                    r["spec_src"] = [x for it in board_items for x in src(asin, it)]
+                else:
+                    r["spec_concentration"] = conc[asin]
+                    r["spec_notes"] = ", ".join(notes(asin)) or "-"
+                    r["spec_src"] = src(asin, "concentration") + src(asin, "notes_top") + src(asin, "notes_all")
+            for it in board_items:
+                v = ", ".join(map(str, vals(asin, it))) or "-"
+                self.put(f"spec.{asin}.{it}", v, v, note=f"{names.get(it, it)}, 상품 사양({match(asin)})")
+            if not board_items:
+                self.put(f"spec.{asin}.concentration", conc[asin], conc[asin], note=f"상품 사양({match(asin)})")
+            self.put(f"spec.{asin}.match", match(asin), match(asin))
         n_match = Counter(match(a["asin"]) for a in self.asins)
         self.put("spec.match_summary", dict(n_match), ", ".join(f"{k} {v}개" for k, v in sorted(n_match.items())))
 

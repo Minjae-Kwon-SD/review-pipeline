@@ -31,6 +31,8 @@ report:
 
 # 상품 사양 수집(specs.py, product-spec-collector가 읽음). 초안이고, 세부 이슈와 설계 정보 항목 승인 뒤 다시 본다.
 specs:
+  scoreboard_items: [battery_hours, water_dust_rating, size_weight]   # 가이드 점수표에 나란히 놓을 사양(확인된 값만)
+  scoreboard_items: [battery_hours, water_dust_rating, size_weight]   # 가이드 점수표에 나란히 놓을 사양(확인된 값만, guide_metrics.py)
   items:
     - id: battery_hours
       name_ko: 배터리 재생 시간
@@ -61,6 +63,133 @@ specs:
       ask: "출처 사이트에 적힌 가격(통화 포함). 여러 구성이면 모두"
       format: list
 
-# market(시장 노드), issues(겹침 라벨), guide(가이드 설정) 절은 아직 없다.
-# market은 12_market 전에 spd-amz-market subcategories_search로 블루투스 스피커 노드를 찾아 채우고(채우기 전에는 market.py가 멈춤),
-# issues와 guide는 세부 이슈와 설계 정보 항목이 승인된 뒤 정한다(제모 크림과 같은 순서).
+# 시장 데이터(market.py, market_build.py, guide_metrics.py가 읽음). 노드는 runs/hairremoval-db-2026-10-08/market/raw/subcategories_search_all.json에서
+# 이름에 Speaker가 든 노드를 찾았다(2026-10-15). 고른 상품 10개가 모두 들고 다니는 블루투스 스피커라 Portable Speakers & Docks를 부모로 둔다.
+market:
+  seed: "bluetooth speaker"
+  parent_node: 689637011                # Portable Speakers & Docks(자식: Portable Bluetooth Speakers, Portable Line-In Speakers)
+  context_nodes: [689637011, 172563]    # 들고 다니는 스피커, 집 오디오 스피커(Outdoor Speakers의 부모)
+  max_nodes: 15
+  nodes:
+    PBT: "Portable Bluetooth Speakers"
+    OUT: "Outdoor Speakers"
+  term_words: [speaker, speakers, bluetooth, portable, jbl, soundcore, bose, "shower speaker", "waterproof speaker"]
+
+issues:
+  # 같은 리뷰에 함께 붙는지 셀 두 라벨(주제, 라벨 id). issues.py는 한 쌍만 센다. 세부 이슈 초안의 겹침 세 쌍 가운데 배터리 광고보다 짧음과
+  # 배터리 광고가 거짓을 센다. 나머지 두 쌍(다른 모델과 짝 맞추기와 블루투스 버전 다름, 색이 사진과 다름과 사진과 다르게 생김)은 리포트 작성자에게 문장으로만 함께 읽게 한다.
+  overlap: [[battery_life, below_advertised], [trust, battery_claim_false]]
+
+# 제품 개발 가이드(guide_metrics.py, robustness.py가 읽음). 2026-10-15 세부 이슈와 설계 정보 항목 승인 뒤 Claude가 정함(관문 밖 결정).
+guide:
+  title: 아마존 미국 블루투스 스피커 제품 개발 가이드
+  market_node_head: "7073956011"        # 머리 숫자의 시장 노드(Portable Bluetooth Speakers, 고른 상품 10개가 모두 여기)
+  market_nodes_brand_share: ["Portable Bluetooth Speakers", "Outdoor Speakers"]   # market.nodes 순서(PBT, OUT)
+  head_topic: battery_life              # 부정 언급 리뷰어(가중) 1위 배터리와 충전 3.2%, 2위 품질과 내구성 3.1%. 견고성 점검에서 1위 유지 51.6%라 셋(배터리, 품질, 음질)이 거의 같다고 함께 적는다
+  direction_index:                      # 방향 지수 = (high - low) / (high + low): 저음이 모자람과 저음이 넘침
+    topic: sound_quality
+    high: {name: 저음 부족, labels: [weak_bass]}
+    low: {name: 저음 과다, labels: [bass_overpowering]}
+    min_reviews: 15
+  duration_item: battery_runtime_hours  # 숫자 항목(리뷰어가 말한 재생 시간, 시간). 점수표의 숫자 칸
+  duration_min_values: 3
+  duration_bins: [4, 8, 12, 20]         # 재생 시간 구간(시간)
+  number_names: {battery_runtime_hours: 말한 재생 시간, time_to_problem_days: 문제까지 걸린 날, price_paid_usd: 낸 가격}
+  gender_words:
+    male: [" for men", " men ", " men's", "mens", "guys"]
+    female: ["women", "womens", "women's", "for her", "girls"]
+  fastest_term_min_volume: 10000
+  growth:
+    window_weeks: 4
+    min_volume: 10000
+    exclude_words: [soundbar, sound bar, headphones, earbuds, earphones, computer, pc, car, karaoke, microphone, alexa, echo, turntable, record player, subwoofer]   # 들고 다니는 스피커가 아닌 검색어
+  price_bands: 3
+  caveat_subcategory: "Portable Bluetooth Speakers"
+  caveats_extra:
+    - "팀 DB에서 리뷰가 많은 상품 10개를 골랐고, 유료 수집은 켜지 않았다(팀 DB 리뷰만)."
+  focus:                                # 03장 집중 분석 4개
+    - id: sound
+      title: 음질과 음량
+      topics: [sound_quality, loudness]
+      items: [sound_band_direction, audio_use, usage_location, comparison_reference]
+      split_label: weak_bass            # 쓰는 곳, 용도 값마다 저음 부족 비율
+    - id: battery
+      title: 배터리와 충전
+      topics: [battery_life]
+      items: [battery_runtime_hours, battery_indicator_issue, time_to_problem_days]
+    - id: durability
+      title: 고장과 방수
+      topics: [quality, water_resistance]
+      items: [failure_type, time_to_problem_days, usage_location]
+    - id: controls
+      title: 연결과 조작
+      topics: [connectivity, features_controls]
+      items: [button_control_issue, app_dependency, desired_feature]
+  standards:                            # 04장 소비자 기준표 후보
+    - id: sound
+      title: 음질과 저음
+      neg_labels: [poor_sound_overall, worse_than_others, weak_bass, static_noise, lacks_clarity, bass_overpowering, distorts_at_high_volume]
+      pos_labels: [great_sound_overall, clear_crisp, good_bass, good_for_size]
+      items: [sound_band_direction]
+      search_words: ["bass", "loud"]
+    - id: loudness
+      title: 음량
+      neg_labels: [too_quiet, wish_bit_louder, weak_in_space, drowned_by_noise, quieter_than_others]
+      pos_labels: [loud_powerful, loud_for_size_price, loud_enough_for_use]
+      items: [usage_location]
+      search_words: ["loud", "outdoor"]
+    - id: battery
+      title: 배터리 재생 시간과 충전
+      neg_labels: [short_runtime, below_advertised, drains_at_high_volume, wont_hold_charge, stopped_charging]
+      pos_labels: [long_runtime, adequate_runtime, holds_charge, charging_convenient]
+      items: [battery_runtime_hours, battery_indicator_issue]
+      search_words: ["battery", "long battery"]
+    - id: connectivity
+      title: 연결
+      neg_labels: [connection_drops, audio_cuts_out, pairing_trouble, model_incompatible, speaker_link_trouble, no_aux_input, multi_device_handling, range_or_latency]
+      pos_labels: [easy_pairing, reliable_connection, multi_speaker_link]
+      items: [app_dependency]
+      search_words: ["stereo", "aux"]
+    - id: water
+      title: 방수와 야외 사용
+      neg_labels: [not_waterproof, water_damage, port_cover_missing, dust_sweat_sand, rust_mold_stain]
+      pos_labels: [waterproof_feature, survived_water, shower_ok, floats, worry_free_outdoor, water_dust_rugged]
+      items: [usage_location]
+      search_words: ["waterproof", "shower"]
+    - id: durability
+      title: 고장과 내구성
+      neg_labels: [stopped_working, random_power_cycling, defective_on_arrival, speaker_blown, parts_broken, button_volume_malfunction, flimsy_build]
+      pos_labels: [solid_build, good_quality, proven_durability]
+      items: [failure_type, time_to_problem_days]
+      search_words: ["rugged", "durable"]
+    - id: controls
+      title: 버튼, 앱, 통화
+      neg_labels: [awkward_buttons, no_eq_control, poor_mic_calls, lights_annoying, app_problems, confusing_operation, annoying_prompts, auto_off_issue]
+      pos_labels: [easy_to_use, lights_fun, app_eq_custom, intuitive_controls, good_calls]
+      items: [button_control_issue, app_dependency, desired_feature]
+      search_words: ["with light", "microphone"]
+    - id: portability
+      title: 크기와 휴대
+      neg_labels: [too_small, too_big_heavy, cant_stand_rolls, clip_weak_awkward, no_magnet, carry_attachment_lacking]
+      pos_labels: [size_right, portable, lightweight, attachment_handy]
+      items: [attachment_clip_strap]
+      search_words: ["mini", "small", "clip"]
+    - id: safety
+      title: 발열과 안전
+      neg_labels: []
+      pos_labels: []
+      safety: true                      # 07c 이상 반응 판정을 쓴다
+      items: []
+      search_words: []
+    - id: box_claims
+      title: 구성품과 광고
+      neg_labels: [charger_not_included_by_design, missing_from_box, wrong_cable_type, battery_claim_false, spec_overstated, missing_part, feature_missing, pairing_version_mismatch, used_or_not_genuine]
+      pos_labels: [matches_description, works_as_advertised, genuine_product]
+      items: []
+      search_words: ["charger"]
+    - id: value
+      title: 가격 대비 가치
+      neg_labels: [not_worth_money, overpriced, below_expectation_for_price, short_life_for_price, better_options_same_price, cheap_get_what_you_pay, only_worth_on_sale]
+      pos_labels: [worth_the_money, low_price, good_for_price, sound_for_price, beats_alternatives]
+      items: [comparison_reference, price_paid_usd]
+      search_words: ["cheap", "best"]

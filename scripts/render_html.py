@@ -152,7 +152,7 @@ def numbered_items(lines):
             claim, body = split_claim(m.group(1))
             items.append({"claim": claim, "body": body, "quotes": []})
         elif s.startswith(">") and items and QUOTE.search(s):
-            items[-1]["quotes"].append(QUOTE.search(s).groups())
+            items[-1].setdefault("quotes", []).append(QUOTE.search(s).groups())   # 목록 밖 문단 뒤 인용도 그 문단에 붙인다
         elif not s.startswith("#") and not s.startswith("<!--"):
             items.append({"para": s})
     return items
@@ -707,7 +707,9 @@ def build_html(run, lang="ko"):
             cards[cur].append(l)
     sw = ""
     for kind, cls in (("강점", "g"), ("약점", "r")):
-        items = [x for x in numbered_items(cards[kind]) if "claim" in x]
+        # 목록 밖 문단(예: 약점 카드 뒤 '**안전과 포장 부정** ...')도 카드로 보인다. 굵은 머리가 있으면 주장, 없으면 본문만
+        items = [x if "claim" in x else dict(zip(("claim", "body"), split_claim(x["para"])), quotes=x.get("quotes", []))
+                 for x in numbered_items(cards[kind])]
         inner = "".join(
             f'<div class="icard"><span class="iclaim {cls}">{md(x["claim"])}</span><div class="ibody">{link(md(x["body"]))}</div>'
             f'<div class="chips">{"".join(quote_chip(q, cls) for q in x["quotes"])}</div></div>' for x in items)
