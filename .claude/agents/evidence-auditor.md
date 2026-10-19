@@ -19,6 +19,8 @@ effort: high
 
 메인 세션이 stage와 회차를 알려 준다. 파일은 모두 runs/<회차>/ 아래에 있다.
 
+- **다른 회차는 열지 않는다(2026-10-17)**: 읽는 파일은 이 회차 폴더(runs/<회차>/)와 이 지시문이 이름을 적은 파일(config/, .claude/agents/ 등)뿐이다. runs/ 아래 다른 회차의 리포트, 가이드, 태그, 라벨, 감사 파일은 형식이나 문체 참고로도 열지 않는다(rt 시험에서 작성자와 감사자가 원본 회차 결과를 열어 보고 써서 비교가 흐려짐). 형식은 이 지시문과 config/report_template_ko.md만 따른다.
+
 ## 작업 파일로 받을 때(docs/multi_agent_design_v2.md)
 
 - 메인 세션이 감사용 작업 파일이나 바뀐 줄 파일(예: 06_report_changed.md, 18_guide_changed.md, 14b_rejudge_audit_sample.jsonl)을 주면
@@ -97,6 +99,7 @@ audit:
 
 입력: 17_guide.md, 16_guide_writer_input.json(16_guide_metrics.json에서 근거 묶음의 리뷰 id 목록만 뺀 작성자용 파일, 값과 표와 인용은 같음. 16_guide_metrics.json은 열지 않는다), 15_research.yaml, 15_research_check.json, 18_guide_quote_check.json, 02_reviews.csv, 23_specs_verified.json(상품 사양, 있으면).
 표 블록 밖 문장을 본다. 숫자마다 16_guide_writer_input.json의 어느 키 값인지 찾고 같은 대상과 같은 지표인지 확인한다. research id로 인용한 사양과 규제는 15_research.yaml의 그 주장(15_research_check.json에서 확인된 것)이 실제로 그 말을 하는지 본다. 상품 사양(spec., std.spec. 키)을 쓴 문장은 23_specs_verified.json의 그 값과 원문 문장(quote)이 그 말을 하는지, 같은 상품인지 확인한 정도(match)가 "이름만 일치"인데 단서 없이 단정하지 않았는지 본다. 상품 수가 적은데 사양과 불만의 관계를 원인처럼 쓰면 FAIL. 인용 번역은 원문과 뜻이 같은지 본다. 데이터나 출처가 말하지 않는 단정, 출처 없는 숫자는 FAIL. 출력 형식은 아래 "출력"의 report와 같고(stage: guide, where에 장과 문단), 메인 세션이 18_guide_audit.yaml로 저장한다.
+장 묶음 감사(2026-10-17 안 B): 메인 세션이 묶음을 정해 주면 그 장만 본다. 라벨 전 미리 감사(17_guide_part_01-02-A.md)는 17_guide.md 대신 그 묶음 파일을, 16_guide_writer_input.json 대신 16_guide_writer_input_early.json을 읽고 판정을 18_guide_audit_early.yaml로 돌려준다. 라벨 뒤 감사는 17_guide.md의 03, 04, 05, 머리 숫자 장과 바뀐 줄 파일(18_guide_changed.md, 01-02-A 보강으로 바뀐 줄)만 본다. 03 원인 줄과 04 기준 제목의 원인 번호는 guide_parts.py가 tables p.causes와 대조하므로 번호 자체는 다시 세지 않고, 원인 이름이 그 라벨들을 맞게 부르는지만 본다.
 
 ## stage: translation (번역 뜻 감사)
 

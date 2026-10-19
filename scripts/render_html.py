@@ -380,15 +380,18 @@ class Linker:
 
             def rep(mt, name=name):
                 n = int(mt.group(1))
-                for topic, direction, l in self.by_name[name]:
-                    want = l["reviews"] if brand is None else sum(l["by_asin"].get(a, 0) for a in self.asins_of_brand[brand])
-                    if want == n:
-                        f = {"label": self.lidx[(topic, direction, l["id"])]}
-                        title = LG("{t}({d})", t=name, d=LG("부정") if direction == "negative" else LG("긍정"))
-                        if brand is not None:
-                            f["brand"] = self.bidx[brand]
-                            title = LG("{b}: {t}", b=brand, t=title)
-                        return slot(f'<span class="lnk"{drill_attr(f, title, n)}>{mt.group(0)}</span>')
+                # 2026-10-17 E2: 10장 밖이라도 같은 문단에 브랜드 이름이 있고 그 브랜드 값이면 브랜드 안 수로 연결(audit_quotes.py와 같은 규칙)
+                tries = [brand] if brand is not None else [None] + [b for b in self.asins_of_brand if b in h]
+                for br in tries:
+                    for topic, direction, l in self.by_name[name]:
+                        want = l["reviews"] if br is None else sum(l["by_asin"].get(a, 0) for a in self.asins_of_brand[br])
+                        if want == n:
+                            f = {"label": self.lidx[(topic, direction, l["id"])]}
+                            title = LG("{t}({d})", t=name, d=LG("부정") if direction == "negative" else LG("긍정"))
+                            if br is not None:
+                                f["brand"] = self.bidx[br]
+                                title = LG("{b}: {t}", b=br, t=title)
+                            return slot(f'<span class="lnk"{drill_attr(f, title, n)}>{mt.group(0)}</span>')
                 self.misses.append(f"{brand or '전체'}: {name} {n}(07b 값과 다름)")
                 return mt.group(0)
             h = pat.sub(rep, h)
@@ -572,7 +575,7 @@ def build_html(run, lang="ko"):
             + f'</div><div class="tscroll"><table class="ct"><thead><tr><th class="tl">{esc(T("주제"))}</th><th>{esc(T("부정 언급 리뷰"))}</th>'
             f'<th>{esc(T("부정 리뷰 평균"))}</th><th>{esc(T("나머지 평균"))}</th><th>{esc(T("격차"))}</th></tr></thead><tbody>{trs}</tbody></table></div>'
             + reading_html(readings(ch[4]), link))
-    parts.append(section(4, T("영향 분석: 별점을 가장 많이 깎는 불만"), T("그 주제를 부정으로 말한 리뷰와 나머지 리뷰의 가중 평균 별점 비교"), body, new=True))
+    parts.append(section(4, T("영향 분석: 낮은 별점과 함께 나오는 불만"), T("그 주제를 부정으로 말한 리뷰와 나머지 리뷰의 가중 평균 별점 비교"), body, new=True))
 
     # 5장 시간 추이
     tt = m["time_trend"]
@@ -633,7 +636,7 @@ def build_html(run, lang="ko"):
         kp += (f'<div class="kpi clk"{drill_attr(f, T("{l} 리뷰", l=label), ts[key]["reviews"])}><div class="v">{o.num("metrics", ["trust_signals", key, "reviews"], "int")}</div>'
                f'<div class="l">{T("{l}, 평균 {s}, 1~2★ {p}", l=esc(label), s=o.num("metrics", ["trust_signals", key, "mean_star"], "star"), p=o.num("metrics", ["trust_signals", key, "negative_pct"], "pct"))}</div></div>')
     kp += (f'<div class="kpi clk"{drill_attr({"hv": 1}, T("도움돼요가 있는 리뷰"), ts["helpful_reviews"])}><div class="v">{o.num("metrics", ["trust_signals", "helpful_reviews"], "int")}</div>'
-           f'<div class="l">{T("도움돼요가 있는 리뷰(표 {t}개), 1~2★ 쪽 {n}, 4~5★ 쪽 {p}", t=o.num("metrics", ["trust_signals", "helpful_total"], "int"), n=o.num("metrics", ["trust_signals", "helpful_negative_pct"], "pct"), p=o.num("metrics", ["trust_signals", "helpful_positive_pct"], "pct"))}</div></div>')
+           f'<div class="l">{T("도움돼요가 있는 리뷰(표 {t}개), 표 중 1~2★ 쪽 {n}, 3★ 쪽 {m}, 4~5★ 쪽 {p}", t=o.num("metrics", ["trust_signals", "helpful_total"], "int"), n=o.num("metrics", ["trust_signals", "helpful_negative_pct"], "pct"), m=o.num("metrics", ["trust_signals", "helpful_mid_pct"], "pct") if "helpful_mid_pct" in ts else "-", p=o.num("metrics", ["trust_signals", "helpful_positive_pct"], "pct"))}</div></div>')
     hw = "".join(
         f'<tr class="clk"{drill_attr({"sub": sidx[x["topic"]], "sent": 1}, T("{t} 부정", t=name[x["topic"]]))}><td class="tl">{esc(name[x["topic"]])}</td>'
         f'<td>{o.num("metrics", ["trust_signals", "helpful_weighted_complaints", i, "votes"], "int")}</td>'
@@ -649,6 +652,8 @@ def build_html(run, lang="ko"):
             f'<div class="col"><div class="coltitle">{esc(T("도움돼요가 가장 많은 리뷰"))}</div><div class="tscroll"><table class="ct"><thead><tr><th>{esc(T("리뷰"))}</th><th>{esc(T("브랜드"))}</th>'
             f'<th>{esc(T("별점"))}</th><th class="tl">{esc(T("제목(원문)"))}</th><th>{esc(T("표"))}</th></tr></thead><tbody>{th}</tbody></table></div></div></div>'
             f'<div class="fn">{esc(T("이 장의 숫자는 모두 원본(가중 안 함)입니다."))}'
+            + (esc(T(" 불만 주제 비중은 불만 주제를 하나라도 부정으로 말한 리뷰가 받은 표 {b}개 대비이고, 리뷰 하나가 여러 주제를 말하면 합이 100%를 넘습니다.",
+                     b=ts["helpful_complaint_base"])) if "helpful_complaint_base" in ts else "")
             + (esc(T(" 도움돼요 표를 받은 리뷰가 {n}개로 기준 {k}개보다 적어 순위는 잠정이고 해석하지 않습니다.", n=ts["helpful_reviews"], k=ts["helpful_min_voted"]))
                if ts.get("helpful_provisional") else "") + '</div>' + reading_html(readings(ch[7]), link))
     parts.append(section(7, CH[7], T("확인된 구매, Vine, 도움돼요로 리뷰 데이터 자체를 점검"), body, new=True))

@@ -1,7 +1,9 @@
 """무료 시장 데이터(spd-amz-market)를 받아 개발 가이드용 표를 만든다. 모델을 부르지 않는다.
 
 사용:
-  python scripts/market.py fetch [회차] [--max-calls 40]
+  python scripts/market.py fetch [회차] [--max-calls 40] [--concurrency 4]
+    서로 기대지 않는 호출(상품별, 하위 카테고리 노드별, 검색어별)은 --concurrency개씩 동시에 부른다(2026-10-16, 기본 4.
+    48번을 하나씩 부르던 것을 줄임. 호출 한도와 기록은 잠금으로 지키고, 결과 파일은 순서와 무관하게 같다).
     spd-amz-market만 부른다(amz-review, 유료 수집은 부르지 않음). 응답 원문은 market/raw/<도구>_<입력>.json에 저장하고,
     이미 저장된 파일이 있으면 다시 부르지 않는다(다시 돌려도 호출이 늘지 않음). 오류는 한 번만 다시 부르고 기록한 뒤 넘어간다.
     호출 기록: market/calls.jsonl(도구, 입력, 성공 여부, 행 수, 파일). 회차의 raw/에 이미 받은 products_byasin,
@@ -19,6 +21,8 @@ import json
 import re
 import shutil
 import sys
+import threading
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -47,22 +51,27 @@ class Fetcher:
         self.log = run / "market" / "calls.jsonl"
         self.max = max_calls
         self.calls = sum(1 for l in self.log.read_text(encoding="utf-8").splitlines() if '"called": true' in l) if self.log.exists() else 0
+        self.lock = threading.RLock()      # 동시 호출에서 호출 수와 기록 파일을 지킨다(2026-10-16)
 
     def record(self, row):
-        with self.log.open("a", encoding="utf-8") as f:
+        with self.lock, self.log.open("a", encoding="utf-8") as f:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
     def get(self, tool, args, key):
         path = self.dir / f"{tool}_{safe(key)}.json"
         if path.exists():
             return json.loads(path.read_text(encoding="utf-8"))
-        if self.calls >= self.max:
-            print(f"  호출 한도 {self.max}번에 닿아 부르지 않음: {tool} {key}")
-            self.record({"at": now_iso(), "tool": tool, "args": args, "called": False, "ok": False, "error": "호출 한도"})
-            return None
+        with self.lock:                      # 한도 확인과 호출 수 올리기를 한 번에(동시 호출이 한도를 넘지 않게)
+            if self.calls >= self.max:
+                print(f"  호출 한도 {self.max}번에 닿아 부르지 않음: {tool} {key}")
+                self.record({"at": now_iso(), "tool": tool, "args": args, "called": False, "ok": False, "error": "호출 한도"})
+                return None
+            self.calls += 1
         err = None
         for attempt in (1, 2):
-            self.calls += 1
+            if attempt > 1:
+                with self.lock:
+                    self.calls += 1
             try:
                 text, data = call_tool(SERVER, tool, {**args, "marketplace": MP})
                 path.write_text(text, encoding="utf-8")
@@ -104,14 +113,35 @@ def our_asins(run):
     return [r for r in load_csv_or_die(run / "01_asins.csv", ASIN_COLS) if r["status"] == "selected"]
 
 
-def fetch(run, max_calls):
+def run_all(jobs, pool):
+    """서로 기대지 않는 호출을 동시에 부른다. pool은 동시 수(1이면 차례로) 또는 fetch가 한 번 만든 ThreadPoolExecutor
+    (스레드를 다시 써서 MCP 세션 initialize가 스레드 수만큼만 생김). 결과 파일은 순서와 무관하게 같다."""
+    if isinstance(pool, int):
+        if pool <= 1 or len(jobs) <= 1:
+            for j in jobs:
+                j()
+            return
+        with ThreadPoolExecutor(max_workers=pool) as ex:
+            list(ex.map(lambda j: j(), jobs))
+        return
+    list(pool.map(lambda j: j(), jobs))
+
+
+def fetch(run, max_calls, concurrency=4):
+    if concurrency <= 1:
+        return _fetch(run, max_calls, 1)
+    with ThreadPoolExecutor(max_workers=concurrency) as ex:
+        return _fetch(run, max_calls, ex)
+
+
+def _fetch(run, max_calls, concurrency):
     from market_build import use_conf
     c = use_conf(run)
     NODES, SEED = tuple(c["nodes"].values()), c["seed"]
     f = Fetcher(run, max_calls)
     asins = our_asins(run)
-    # 1. 우리 상품과 변형(하위 카테고리): 회차 raw/에 이미 받은 응답을 복사해 쓴다
-    for a in asins:
+    # 1. 우리 상품과 변형(하위 카테고리): 회차 raw/에 이미 받은 응답을 복사해 쓴다. 상품별로 동시에
+    def our_product(a):
         for src, tool, key in ((run / "raw" / f"product_{a['asin']}.json", "products_byasin", a["asin"]),
                                (run / "raw" / f"variations_{a.get('parent_asin')}.json", "products_variations", a.get("parent_asin"))):
             dst = f.dir / f"{tool}_{safe(key)}.json"
@@ -121,26 +151,29 @@ def fetch(run, max_calls):
                           "reused_from": str(src.relative_to(run)), "file": str(dst.relative_to(run))})
             elif not dst.exists():
                 f.get(tool, {"asin": key}, key)
+    run_all([lambda a=a: our_product(a) for a in asins], concurrency)
     # 2. 하위 카테고리 목록(한 번)
     f.get("subcategories_search", {}, "all")
     # 3. EDP, EDT 노드: 경쟁 브랜드, 관련 검색어
     # 노드 이름만("Eau de Parfum")으로 부르면 다른 카테고리(전자제품) 결과가 와서, 하위 카테고리 목록의 subcategoryContextName으로 부른다
-    for node in NODES:
+    #    노드별로 동시에(한 노드 안의 세 호출은 앞 결과를 보므로 차례로)
+    def node_calls(node):
         d = f.get("subcategories_category_competitors", {"sub_category_name": node, "start_row": 0, "end_row": 20}, node)
         if d is None or not records(d):
             f.get("subcategories_brand_category_performance", {"brand_name": node}, node)
         f.get("subcategories_relevant_search_terms", {"subcategory_name": node}, node)
-    # 4. 우리 상품 가격과 순위 이력
-    for a in asins:
-        f.get("products_history", {"asin": a["asin"]}, a["asin"])
-    # 5. 광고와 상위 상품
-    f.get("search_terms_advertised_brands", {"search_term": SEED, "start_row": 0, "end_row": 20}, SEED)
-    f.get("search_terms_trends_top_products", {"search_term": SEED}, SEED)
-    f.get("search_terms_ad_spy", {"brand_name": asins[0]["brand"], "start_row": 0, "end_row": 20}, asins[0]["brand"])
+    run_all([lambda n=n: node_calls(n) for n in NODES], concurrency)
+    # 4. 우리 상품 가격과 순위 이력(상품별로 동시에)
+    run_all([lambda a=a: f.get("products_history", {"asin": a["asin"]}, a["asin"]) for a in asins], concurrency)
+    # 5. 광고와 상위 상품(세 호출 동시에)
+    run_all([lambda: f.get("search_terms_advertised_brands", {"search_term": SEED, "start_row": 0, "end_row": 20}, SEED),
+             lambda: f.get("search_terms_trends_top_products", {"search_term": SEED}, SEED),
+             lambda: f.get("search_terms_ad_spy", {"brand_name": asins[0]["brand"], "start_row": 0, "end_row": 20}, asins[0]["brand"])],
+            concurrency)
     # 6. 검색어 추이: 관련 검색어 검색량 상위 10개 + SEED
     terms = top_terms(f.dir, 10, NODES, tuple(str(w).lower() for w in c.get("term_words") or ()))
-    for t in [SEED] + [t for t in terms if t.lower() != SEED]:
-        f.get("search_terms_trends", {"keyword": t, "months": 12}, t)
+    run_all([lambda t=t: f.get("search_terms_trends", {"keyword": t, "months": 12}, t)
+             for t in [SEED] + [t for t in terms if t.lower() != SEED]], concurrency)
     print(f"호출 {f.calls}번(한도 {max_calls}). 기록: market/calls.jsonl")
     return 0
 
@@ -196,10 +229,11 @@ def main():
     ap.add_argument("--seeds", default="")
     ap.add_argument("run", nargs="?")
     ap.add_argument("--max-calls", type=int, default=40)
+    ap.add_argument("--concurrency", type=int, default=4, help="fetch: 서로 기대지 않는 호출을 동시에 부르는 수(2026-10-16 기본 4, 1이면 차례로)")
     args = ap.parse_args()
     run = resolve_run(args.run)
     if args.mode == "fetch":
-        sys.exit(fetch(run, args.max_calls))
+        sys.exit(fetch(run, args.max_calls, args.concurrency))
     if args.mode == "fetch-trends":
         sys.exit(fetch_trends(run, args.months, [x.strip() for x in args.seeds.split(",") if x.strip()], args.max_calls))
     import market_build

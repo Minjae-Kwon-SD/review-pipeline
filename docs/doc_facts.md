@@ -337,7 +337,7 @@
 
 ## bluetoothspeaker-2026-10-14
 
-2026-10-15T10:20 기준.
+2026-10-15T22:32 기준.
 
 | 키 | 표기 | 출처 |
 |---|---|---|
@@ -367,13 +367,13 @@
 | audit.tags_parts | UNVERIFIED 1개, 빠진 태그 7개, 뺀 정답 세트 태그 0개 | 04_tag_audit_summary.json |
 | audit.labels | 150개 중 FAIL 4개(2.7%) | 07b_issue_audit_summary.json |
 | audit.details | 150개 중 FAIL 6개(4.0%) | 14b_detail_audit_summary.json |
-| html.report_numbers | 2170개 | 06_report_html_check.json numbers_checked |
+| html.report_numbers | 2171개 | 06_report_html_check.json numbers_checked |
 | html.report_drill | 647개 | 06_report_html_check.json drilldowns_checked |
 | html.report_kb | 2731KB | 06_report_html_check.json size_kb |
 | html.guide_numbers | 306개 | 07_guide_html_check.json numbers_checked |
-| html.guide_bundles | 219개 | 07_guide_html_check.json evidence_bundles |
+| html.guide_bundles | 224개 | 07_guide_html_check.json evidence_bundles |
 | html.guide_links | 201개 | 07_guide_html_check.json source_links |
-| html.guide_kb | 2130KB | 07_guide_html_check.json size_kb |
+| html.guide_kb | 2132KB | 07_guide_html_check.json size_kb |
 | detail.values | 5,313개 | 14_detail_check.json values |
 | detail.items | 15개 | 13_detail_schema_approved.yaml items |
 | research | 76개 중 74개 | 15_research_check.json claims, verified |
@@ -383,7 +383,7 @@
 | robust.n | 2,000번 | 05_robustness.json bootstrap.n |
 | robust.head_first | 51.6% | 05_robustness.json texts.head_first |
 | robust.head_neg_ci | 2.8%~3.5% | 05_robustness.json texts.head_neg_ci |
-| robust.loo_flips | 10번 중 10번 | 05_robustness.json texts.loo_flips |
+| robust.loo_flips | 10번 중 5번 | 05_robustness.json texts.loo_flips |
 | robust.weakest | 10개 중 3개(리뷰를 다시 뽑아 보면 2~4개) | 05_robustness.json texts.weakest |
 | agent.calls | 209번 | timing.jsonl SubagentStart와 SubagentStop 짝 |
 | agent.sum | 461분 | timing.jsonl 에이전트마다 걸린 시간 합 |
@@ -434,7 +434,7 @@
 | time.split.label | 22.1분 | 08_timing.md 시간 나눔 |
 | time.split.wait | 571.2분 | 08_timing.md 시간 나눔 |
 | time.split.pause | 439.5분 | 08_timing.md 시간 나눔 |
-| tests | 413개 | tests/test_scripts.py 실행 결과의 확인 개수 |
+| tests | 414개 | tests/test_scripts.py 실행 결과의 확인 개수 |
 | ref.report.reviews | 3,488개, ASIN 10개 | 정답지 review_analysis_report_en.html 머리 문장 |
 | ref.report.tags | 10,066개 | 정답지 review_analysis_report_en.html 머리 문장 |
 | ref.guide.reviews | 12,380개, 리스팅 37개, 카테고리 9개 | 정답지 Coolmate_Scrubs_Product_Dev_Guide_v1.html 머리 문장 |

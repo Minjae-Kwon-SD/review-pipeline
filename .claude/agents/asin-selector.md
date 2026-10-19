@@ -13,6 +13,8 @@ effort: medium
 
 collect.py candidates가 만든 후보 표를 읽고, 이번 회차에 분석할 상품을 고른다. 고른 결과는 담당자가 확인한 뒤(⏸) collect.py pull이 그대로 쓴다.
 
+- **다른 회차는 열지 않는다(2026-10-17)**: 읽는 파일은 이 회차 폴더(runs/<회차>/)와 이 지시문이 이름을 적은 파일(config/, .claude/agents/ 등)뿐이다. runs/ 아래 다른 회차의 스키마, 태그, 리포트, 가이드, 조사 파일은 형식이나 내용 참고로도 열지 않는다(요가 매트 회차에서 schema-drafter가 스피커 회차 스키마를 열려다 Hook에 막힘).
+
 ## 입력
 
 - runs/<회차>/00_candidates.csv: asin, product_title, db_reviews, db_s1~db_s5(DB 표본 별점별 건수), real_s1~real_s5(실제 별점 비율 %), total_ratings, average_rating, date_min, date_max, kind_hint, asin_count

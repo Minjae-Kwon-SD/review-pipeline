@@ -5,11 +5,45 @@
 (SubagentStop에서 종료 코드 2는 에이전트를 멈추지 못하게 막는다).
 """
 import json
+import os
 import sys
 from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+
+
+def append_locked(path, line):
+    """여러 에이전트가 같은 때 시작하면 Windows의 덧붙이기가 서로 덮어써 줄이 빠지거나 깨진다(2026-10-17 요가 매트 r2).
+    옆 잠금 파일을 잡은 동안에만 쓴다. 잠금은 10초까지 기다린다."""
+    import time
+    lock = path.with_name(path.name + ".lock")
+    fd = os.open(lock, os.O_RDWR | os.O_CREAT)
+    try:
+        if os.name == "nt":
+            import msvcrt
+            for _ in range(200):
+                try:
+                    msvcrt.locking(fd, msvcrt.LK_NBLCK, 1)
+                    break
+                except OSError:
+                    time.sleep(0.05)
+        else:
+            import fcntl
+            fcntl.flock(fd, fcntl.LOCK_EX)
+        with open(path, "a", encoding="utf-8", newline="\n") as f:
+            f.write(line)
+            f.flush()
+            os.fsync(f.fileno())
+    finally:
+        if os.name == "nt":
+            import msvcrt
+            try:
+                os.lseek(fd, 0, 0)
+                msvcrt.locking(fd, msvcrt.LK_UNLCK, 1)
+            except OSError:
+                pass
+        os.close(fd)
 
 
 def main():
@@ -28,8 +62,7 @@ def main():
             "agent_id": data.get("agent_id"),
             "session_id": data.get("session_id"),
         }
-        with open(run / "timing.jsonl", "a", encoding="utf-8", newline="\n") as f:
-            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+        append_locked(run / "timing.jsonl", json.dumps(row, ensure_ascii=False) + "\n")
     except Exception as e:  # 기록 실패는 알리기만 한다
         print(f"timing hook: {e}", file=sys.stderr)
 

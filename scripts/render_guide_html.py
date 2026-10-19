@@ -382,13 +382,17 @@ class R:
             return ("<div class='coltitle'>하위 카테고리(시장 데이터, 월 매출 칸과 증감, azRevenuePct 단위 미확인)</div>"
                     + self.table(["노드", "월 매출", "브랜드", "ASIN", "평균 가격", "평균 별점", "12개월 증감(momGrowth12)", "아마존 직판 비중(azRevenuePct)"], rows)
                     + "".join(f"<div class='coltitle' style='margin-top:12px'>브랜드 점유율 상위 10: {esc(n)}</div>"
-                              + self.table(["순위", "브랜드", "점유율(marketshare, %로 읽음)", "평균 가격", "평균 별점"],
+                              + self.table(["순위", "브랜드", "매출 점유율(브랜드 매출 ÷ 노드 매출, 확인)" if ((T.get("meta.share_unit") or {}).get(k) or {}).get("confirmed")
+                                            else "점유율(marketshare, %로 읽음)", "평균 가격", "평균 별점"],
                                            [[esc(r["rank"]), esc(r["brand"]), esc(r["share_text"]), esc(f"{r['avg_price']:.2f}"),
                                              esc("-" if r.get('rating') is None else f"{r['rating']:.2f}")] for r in T.get(f"m.brands_{k}", [])])   # 빈 값은 -
                               for k, n in zip(T.get("meta.market_keys") or [], T.get("meta.brand_nodes") or [])))
         if "검색 수요" in t:
             parts = []
-            for g, n in (("female", "여성 검색어"), ("male", "남성 검색어"), ("common", "공통 검색어")):
+            # 성별로 나뉜 검색어가 하나도 없으면(성별과 상관없는 품목) 성별 칸을 비워 두지 않고 검색어 표 하나만 보인다(2026-10-15)
+            gendered = bool(T.get("m.terms_female") or T.get("m.terms_male"))
+            for g, n in ((("female", "여성 검색어"), ("male", "남성 검색어"), ("common", "공통 검색어")) if gendered
+                         else (("common", "검색어(성별 구분 없음)"),)):
                 parts.append(f"<div class='col'><div class='coltitle'>{n}(30일 검색량, 전년 대비 증감)</div>"
                              + self.table(["검색어", "검색량", "전년 대비"], [[esc(r["term"]), esc(r["volume_text"]), esc(r["yoy_text"])]
                                                                     for r in T.get(f"m.terms_{g}", [])]) + "</div>")
@@ -538,8 +542,8 @@ class R:
             V = self.M["values"]
             bs = (f"<div class='coltitle' style='margin-top:12px'>리뷰 다시 뽑기({esc(V['a.robust.n']['text'])}, 난수 씨앗 고정)</div>"
                   + self.table(["무엇", "결과"], [["불만 1위가 1위로 남은 비율", esc(V["a.robust.head_first"]["text"])],
-                                                  ["머리 숫자 2의 95% 구간", esc(V["a.robust.head_neg_ci"]["text"])],
-                                                  ["머리 숫자 3(최대 약점 상품 수) 분포", esc(V["a.robust.weakest_dist"]["text"])]])) \
+                                                  ["머리 주제 부정 언급 리뷰어 비율의 95% 구간", esc(V["a.robust.head_neg_ci"]["text"])],
+                                                  ["최대 약점이 머리 주제인 상품 수 분포", esc(V["a.robust.weakest_dist"]["text"])]])) \
                 if "a.robust.n" in V else ""
             return ("<div class='coltitle'>상품 하나씩 빼고 다시 계산</div>"
                     + self.table(["뺀 상품", "남은 리뷰", "머리 2", "불만 1위", "불만 2위", "머리 3", "머리 4(약함 대 너무 셈)", "불만 지도 상위 3", "뒤집힘"], body)
@@ -612,7 +616,7 @@ class R:
         kp = []
         # 머리 숫자는 문장에 적힌 순서대로(키를 바꿔 쓸 수 있게). 문장에 없으면 기본 다섯
         for key in (list(heads) or ["head.market_year", "head.topic_neg", "head.topic_weakest", "head.dir_ratio", "head.fastest_term"]):
-            if key not in self.V:
+            if key not in self.V or self.V[key].get("assumption"):     # 가정으로 만든 값은 머리 숫자로 올리지 않음(guide_check도 FAIL)
                 continue
             cap = heads.get(key, "")
             long = " long" if len(self.V[key]["text"]) > 14 else ""        # 긴 머리 숫자는 글자를 줄인다

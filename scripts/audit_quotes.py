@@ -225,6 +225,62 @@ def check_must_cover(run, report):
         names = [t["name_ko"]] + [l["name_ko"] for l in (counts["topics"].get(f"{t['id']}.negative") or {}).get("labels", []) if l["id"] != "other"]
         if not any(n in ch12 for n in names):
             errors.append(f"12장 전략에 '{t['name_ko']}'(또는 그 부정 세부 이슈)이 없음(must_cover)")
+    # 2026-10-17 E2: 안전 부정 라벨이 있으면 12장에 안전 실행 항목(라벨 이름 하나 이상)
+    sa = mc.get("safety_action")
+    if sa and not any(n in ch12 for n in sa["labels"]):
+        errors.append("12장 전략에 안전 실행 항목(안전 부정 라벨 이름)이 없음(must_cover.safety_action)")
+    return errors
+
+
+NL = chr(10)
+
+
+def _nums(o, acc):
+    """05_metrics.json(과 05_tables.md 글)에 있는 모든 숫자(소수 둘째 자리, 부호 뗀 값도)"""
+    if isinstance(o, dict):
+        for v in o.values():
+            _nums(v, acc)
+    elif isinstance(o, list):
+        for v in o:
+            _nums(v, acc)
+    elif isinstance(o, bool):
+        return
+    elif isinstance(o, (int, float)):
+        acc.update({round(float(o), 2), round(abs(float(o)), 2)})
+    elif isinstance(o, str):
+        for m in re.finditer(r"[+-]?\d[\d,]*(?:\.\d+)?", o):
+            x = float(m.group(0).replace(",", ""))
+            acc.update({round(x, 2), round(abs(x), 2)})
+
+
+METHOD_CONSTANTS = {1.96}       # sections.direction_unclear의 95% 기준(1.96 / sqrt(n))
+
+
+def check_prose_numbers(run, report):
+    """2026-10-17 E3: 표 블록 밖 문장의 단위 붙은 숫자(%, ★, 개, 표, 번)와 소수(예: -2.42)가 05_metrics.json이나 05_tables.md 어딘가에 있는지.
+    없으면 계산하거나 잘못 옮긴 숫자라 FAIL. 값이 다른 자리에 우연히 있으면 못 잡으므로 감사를 대신하지 않는다.
+    인용 출처, 리뷰 id, ASIN, 장 번호, 연도와 달, 단위 없는 정수는 보지 않는다."""
+    mp, tp = run / "05_metrics.json", run / "05_tables.md"
+    if not mp.exists():
+        return []
+    acc = set()
+    _nums(json.loads(mp.read_text(encoding="utf-8")), acc)
+    if tp.exists():
+        _nums(tp.read_text(encoding="utf-8"), acc)
+    acc |= METHOD_CONSTANTS     # 부록이 계산 규칙을 설명할 때 쓰는 상수(2026-10-17 rt7)
+    text = re.sub(r"<!-- 표:(.+?) -->.*?<!-- /표:\1 -->", "", report, flags=re.S)
+    errors = []
+    for ln, line in enumerate(text.splitlines(), 1):
+        if line.startswith("#") or line.lstrip().startswith(">"):
+            continue
+        s = re.sub(r"\(([^()]*?),\s*[1-5]★,\s*R[0-9A-Z]+\)", "", line)
+        s = re.sub(r"\bR[0-9A-Z]{9,}\b|\bB0[0-9A-Z]{8}\b|\d+장|20\d\d년|\d+~\d+월|\d+월", "", s)
+        for m in re.finditer(r"(?<![\w.])([+-]?\d[\d,]*(?:\.\d+)?)(%|★|개|표|번)?", s):
+            if not m.group(2) and "." not in m.group(1):
+                continue
+            x = round(float(m.group(1).replace(",", "")), 2)
+            if x not in acc:
+                errors.append(f"문장 속 숫자 '{m.group(0)}'가 05_metrics.json과 05_tables.md에 없음: {s[max(0, m.start() - 30):m.end() + 10].strip()}")
     return errors
 
 
@@ -234,7 +290,7 @@ def check_issue_counts(run, report, brands):
     if not path.exists():
         return []
     counts = json.loads(path.read_text(encoding="utf-8"))
-    text = re.sub(r"<!-- 표:(.+?) -->.*?<!-- /표: -->", "", report, flags=re.S)   # 표 블록은 따로 검사함
+    text = re.sub(r"<!-- 표:(.+?) -->.*?<!-- /표:\1 -->", "", report, flags=re.S)   # 표 블록은 따로 검사함
     labels = defaultdict(list)                       # name_ko -> [(전체 리뷰 수, by_asin)]
     for v in counts["topics"].values():
         for l in v["labels"]:
@@ -249,21 +305,30 @@ def check_issue_counts(run, report, brands):
                 if any(a <= m.start() < b for a, b in taken):
                     continue
                 taken.append(m.span())
-                yield name, int(m.group(1).replace(",", ""))
+                yield name, int(m.group(1).replace(",", "")), m.start()
 
-    ch10 = chapter(text, 10)
-    rest = text.replace(ch10, "") if ch10 else text
-    for name, n in found(rest):
-        if n not in {r for r, _ in labels[name]}:
-            errors.append(f"세부 이슈 '{name} 리뷰 {n}개': 07b_issue_counts.json은 {sorted({r for r, _ in labels[name]})}")
     asins_of = defaultdict(set)
     for a, b in brands.items():
         asins_of[b].add(a)
+    ch10 = chapter(text, 10)
+    rest = text.replace(ch10, "") if ch10 else text
+    for name, n, pos in found(rest):
+        if n in {r for r, _ in labels[name]}:
+            continue
+        # 2026-10-17 E2: 10장 밖에서도 같은 문장에 브랜드 이름이 있고 그 브랜드 값(ASIN별 수의 합)과 같으면 브랜드 안 수로 본다
+        # 소수점(24.9%)은 문장 끝이 아님(2026-10-17 E4)
+        ends = [m.start() for m in re.finditer(r"\.(?!\d)|" + NL, rest)]
+        s0 = max([x for x in ends if x < pos] or [-1]) + 1
+        e0 = min([x for x in ends if x >= pos] or [len(rest)])
+        sent = rest[s0:e0]
+        if any(br in sent and n in {sum(by.get(a, 0) for a in asins_of[br]) for _, by in labels[name]} for br in asins_of):
+            continue
+        errors.append(f"세부 이슈 '{name} 리뷰 {n}개': 07b_issue_counts.json은 {sorted({r for r, _ in labels[name]})}")
     for m in re.finditer(r"^### (.+?)\s*$(.*?)(?=^### |\Z)", ch10, re.M | re.S):
         brand = m.group(1).strip()
         if brand not in asins_of:
             continue
-        for name, n in found(m.group(2)):
+        for name, n, _ in found(m.group(2)):
             ok = {sum(by.get(a, 0) for a in asins_of[brand]) for _, by in labels[name]}
             if n not in ok:
                 errors.append(f"10장 {brand} 세부 이슈 '{name} 리뷰 {n}개': 07b_issue_counts.json의 그 브랜드 값은 {sorted(ok)}")
@@ -323,6 +388,7 @@ def check_report(run):
         if not re.search(rf"^{re.escape(ch)}", report, re.M):
             errors.append(f"'{ch}'로 시작하는 장이 없습니다.")
     errors += check_issue_counts(run, report, brands)
+    errors += check_prose_numbers(run, report)
     errors += leftover_problems(run, report)
     errors += check_must_cover(run, report)
     for n, line in enumerate(report.splitlines(), 1):

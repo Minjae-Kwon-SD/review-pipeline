@@ -1,0 +1,17 @@
+{
+  "made_at": "2026-10-17T13:43:24+09:00",
+  "source_run": "medicalscrubs-2026-10-14",
+  "files": {
+    "report_exemplar.md": {
+      "lines": 145,
+      "leaks": [],
+      "status": "PASS"
+    },
+    "guide_exemplar.md": {
+      "lines": 196,
+      "leaks": [],
+      "status": "PASS"
+    }
+  },
+  "status": "PASS"
+}

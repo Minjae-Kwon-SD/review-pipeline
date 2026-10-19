@@ -12,13 +12,13 @@
 # 근거와 한계: docs/compare_v2_result.md, docs/decisions_log.md.
 
 limits:
-  bulk_concurrency: 8          # 대량 작업자(sonnet) 동시 실행(이슈 라벨, 설계 정보 추출). 2026-10-12 담당자 결정 4에서 8로
-  tagging_concurrency: 12      # 태깅(05_tagging) review-tagger 동시 실행. 2026-10-09 담당자 결정(추천안) 8, 2026-10-12 12로
+  bulk_concurrency: 16         # 대량 작업자(sonnet) 동시 실행(이슈 라벨, 설계 정보 추출). 2026-10-12 담당자 결정 4에서 8로, 2026-10-16 16으로(추천 숫자대로)
+  tagging_concurrency: 20      # 태깅(05_tagging) review-tagger 동시 실행. 2026-10-09 담당자 결정(추천안) 8, 2026-10-12 12로, 2026-10-16 20으로(추천 숫자대로)
   worker_max_batches: 4        # 작업자 하나가 맡는 묶음
   worker_max_reviews: 200      # 작업자 하나가 맡는 리뷰
   retry_per_batch: 2           # 묶음마다 재시도
   retry_per_stage: 4           # 단계 전체 재시도 호출
-  top_writers: 4               # 상위 모델 작성자 동시 실행(예: 주제별 issue-labeler). 2026-10-09 1에서 4로
+  top_writers: 15              # 상위 모델 작성자 동시 실행(예: 주제별 issue-labeler 15개, 장 묶음별 report-writer). 2026-10-09 1에서 4로, 2026-10-16 15로(추천 숫자대로)
   top_auditors: 2              # 상위 모델 감사자. 문서 하나에는 감사자 하나(같은 문서를 나눠 감사하지 않음), 리포트 감사와 가이드 감사는 동시에. 2026-10-12 1에서 2로
   review_lenses: 4             # 검토형(같은 큰 자료를 여럿이 봄) 읽기 전용 렌즈. 매번 담당자 허락
 
@@ -32,7 +32,7 @@ stages:
      code: [.claude/agents/review-tagger.md], expect: {batches: 04_batches.json, output: "04_tags_{model}_{batch_id}.jsonl"},
      outputs: ["04_tags_sonnet_*.jsonl", "04_tags_top_*.jsonl"], after: [06_tag_check]}
   - {id: 06_tag_check, kind: agents, inputs: ["04_tags_sonnet_*.jsonl", 04_audit_sample.jsonl, "config:config/topics_common.yaml"], code: [.claude/agents/evidence-auditor.md],
-     outputs: [04_tags.jsonl, 04_quote_check_sonnet.json, 04_tag_audit.yaml, 04_tag_audit_summary.json], after: [07a_issue_draft, 22_robustness]}
+     outputs: [04_tags.jsonl, 04_quote_check_sonnet.json, 04_tag_audit.yaml, 04_tag_audit_summary.json], after: [07a_issue_draft, 22_robustness, 08a_report_early, 16a_guide_metrics_early]}
   - {id: 07a_issue_draft, kind: agents, inputs: [04_tags.jsonl], code: [.claude/agents/issue-labeler.md], outputs: [07a_issues_draft.yaml],
      after: [07a_issue_approval]}
   - {id: 07a_issue_approval, kind: human, inputs: [07a_issues_draft.yaml], outputs: [07a_issues_approved.yaml], after: [07b_issue_labeling]}
@@ -46,13 +46,21 @@ stages:
   - {id: 07_weight, kind: script, inputs: [04_tags.jsonl, 07b_issue_counts.json, 07c_safety_summary.json, 05_robustness.json, 01_prices.json],
      code: [config/pipeline.yaml],
      outputs: [05_metrics.json, 05_tables.md, 05_quote_pool.json], after: [08_report, 16_guide_metrics]}
-  - {id: 08_report, kind: agents, inputs: [05_metrics.json, 05_tables.md, 05_quote_pool.json], code: [.claude/agents/report-writer.md, config/report_template_ko.md],
-     outputs: [06_report.md], after: [09_report_check]}
+  # 2026-10-16 리포트 장 묶음: 세부 이슈 라벨이 필요 없는 1~7장과 9장은 06_tag_check 뒤 weight.py --early 값으로 바로 쓰고(08a),
+  # 8, 10, 11, 12장과 부록은 07_weight 뒤에 쓴다(08, 11장 변형 신호의 방향 표는 라벨로 셈). 08에서 미리 쓴 장에 라벨, 안전, 견고성 근거를 더한다(보강). report_parts.py assemble이 묶음을 틀 순서로 이어 붙이고 {{표: 이름}} 자리에 05_tables.md 블록을 끼워 06_report.md를 만든다.
+  - {id: 08a_report_early, kind: agents, inputs: [05_metrics_early.json, 05_tables_early.md, 05_quote_pool_early.json],
+     code: [.claude/agents/report-writer.md, config/report_template_ko.md],
+     outputs: [06_report_part_1-7.md, 06_report_part_9.md], after: [08_report]}
+  - {id: 08_report, kind: agents, inputs: [05_metrics.json, 05_tables.md, 05_quote_pool.json, 05_tables_early.md, 05_metrics_early.json],
+     code: [.claude/agents/report-writer.md, config/report_template_ko.md, scripts/report_parts.py],
+     outputs: [06_report.md, 06_report_part_8.md, 06_report_part_10.md, 06_report_part_11.md, 06_report_part_12.md, 06_report_part_appendix.md,
+               06_report_parts_check.json],
+     after: [09_report_check]}
   - {id: 09_report_check, kind: agents, inputs: [06_report.md, 05_metrics.json], code: [.claude/agents/evidence-auditor.md],
-     outputs: [07_quote_check.json, 07_audit.yaml], after: [11_html]}
+     outputs: [07_quote_check.json, 07_audit.yaml], edits: [06_report.md], after: [11_html]}
   - {id: 11_html, kind: script, inputs: [06_report.md, 05_metrics.json, 07b_issue_counts.json],
      outputs: [06_report.html, 06_report_html_numbers.json, 06_report_html_check.json], after: []}
-  - {id: 12_market, kind: script, inputs: ["market/raw/*.json"], outputs: [market/market.json, market/market_summary.md], after: [16_guide_metrics, 15_research]}
+  - {id: 12_market, kind: script, inputs: ["market/raw/*.json"], outputs: [market/market.json, market/market_summary.md], after: [16a_guide_metrics_early, 16_guide_metrics, 15_research]}
   # 2026-10-10 앞당기기: 13_detail_schema_draft와 15_research는 03 스키마 승인(과 12_market) 뒤 바로, 태깅과 같은 때 돌린다(review-run.md "앞당겨 돌리는 단계").
   - {id: 13_detail_schema_draft, kind: agents, inputs: [13_detail_sample.csv, 03_schema_approved.yaml], code: [.claude/agents/detail-schema-drafter.md, config/detail_rules.yaml],
      outputs: [13_detail_schema_draft.yaml], after: [13a_detail_schema_approval]}
@@ -62,16 +70,24 @@ stages:
      outputs: ["14_details_B*.jsonl"], after: [14b_detail_check]}
   - {id: 14b_detail_check, kind: agents, inputs: ["14_details_B*.jsonl", 14b_detail_audit_sample.jsonl, 14_known_exceptions.yaml],
      code: [.claude/agents/evidence-auditor.md, config/detail_rules.yaml],
-     outputs: [14_details.jsonl, 14_detail_counts.json, 14b_detail_audit.yaml, 14b_detail_audit_summary.json], after: [16_guide_metrics]}
+     outputs: [14_details.jsonl, 14_detail_counts.json, 14b_detail_audit.yaml, 14b_detail_audit_summary.json], after: [16a_guide_metrics_early, 16_guide_metrics]}
   - {id: 15_research, kind: agents, inputs: [03_schema_approved.yaml, market/market.json], code: [.claude/agents/benchmark-researcher.md],
-     outputs: [15_research.yaml, 15_research_check.json], after: [17_guide_write]}
+     outputs: [15_research.yaml, 15_research_check.json], after: [17a_guide_early, 17_guide_write]}
   - {id: 23_specs, kind: agents, inputs: [23_spec_input.json], code: [.claude/agents/product-spec-collector.md],
-     outputs: [23_specs.yaml, 23_specs_check.json, 23_specs_verified.json], after: [16_guide_metrics]}
+     outputs: [23_specs.yaml, 23_specs_check.json, 23_specs_verified.json], after: [16a_guide_metrics_early, 16_guide_metrics]}
+  # 2026-10-17 가이드 장 묶음(안 B): 01, 02, A장은 세부 이슈 라벨 전에 guide_metrics.py --early 값으로 미리 쓰고 미리 감사한다(16a, 17a).
+  # 라벨 뒤 17에서 03과 04를 같은 때(원인 번호는 guide_metrics.py의 p.causes), 그다음 머리 숫자와 05, 01-02-A 보강, guide_parts.py assemble.
+  - {id: 16a_guide_metrics_early, kind: script, inputs: [05_metrics_early.json, 14_details.jsonl, market/market.json, 23_specs_verified.json],
+     code: [scripts/guide_metrics.py], outputs: [16_guide_metrics_early.json, 16_guide_writer_input_early.json], after: [17a_guide_early]}
+  - {id: 17a_guide_early, kind: agents, inputs: [16_guide_writer_input_early.json, 15_research_check.json],
+     code: [.claude/agents/guide-writer.md, .claude/agents/evidence-auditor.md], outputs: [17_guide_part_01-02-A_early.md, 18_guide_audit_early.yaml],
+     after: [17_guide_write]}
   - {id: 16_guide_metrics, kind: script, inputs: [05_metrics.json, 14_details.jsonl, market/market.json, 23_specs_verified.json, 05_robustness.json],
-     outputs: [16_guide_metrics.json, 16_guide_writer_input.json], after: [17_guide_write]}
-  - {id: 17_guide_write, kind: agents, inputs: [16_guide_writer_input.json, 15_research_check.json], code: [.claude/agents/guide-writer.md],
-     outputs: [17_guide.md], after: [18_guide_check]}
+     code: [scripts/guide_metrics.py], outputs: [16_guide_metrics.json, 16_guide_writer_input.json], after: [17_guide_write]}
+  - {id: 17_guide_write, kind: agents, inputs: [16_guide_writer_input.json, 15_research_check.json],
+     code: [.claude/agents/guide-writer.md, scripts/guide_parts.py],
+     outputs: [17_guide_part_01-02-A.md, 17_guide_part_03.md, 17_guide_part_04.md, 17_guide_part_head-05.md, 17_guide.md, 17_guide_parts_check.json], after: [18_guide_check]}
   - {id: 18_guide_check, kind: agents, inputs: [17_guide.md, 16_guide_metrics.json, 16_guide_writer_input.json], code: [.claude/agents/evidence-auditor.md],
-     outputs: [18_guide_quote_check.json, 18_guide_audit.yaml], after: [19_guide_html]}
+     outputs: [18_guide_quote_check.json, 18_guide_audit.yaml], edits: [17_guide.md], after: [19_guide_html]}
   - {id: 19_guide_html, kind: script, inputs: [17_guide.md, 16_guide_metrics.json, 15_research_check.json],
      outputs: [07_guide.html, 07_guide_html_numbers.json, 07_guide_html_check.json], after: []}

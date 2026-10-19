@@ -29,6 +29,9 @@
     paid.split_by_star가 true면 ASIN x 별점마다 한 번씩 부른다(한 번에 다섯 별점을 부르면 시간 초과 위험, 문서 경고).
     호출마다 raw/paid_calls.jsonl에 적고(걸린 초 포함), 이미 성공한 (ASIN, 별점) 호출은 다시 부르지 않는다(다시 돌려도 돈이 두 번 들지 않음).
     paid.max_scrape_calls는 이 로그의 전체 호출 수 한도다.
+    (2026-10-19) 유료 수집은 회차 시작 때 담당자 답을 적은 00_collect_plan.yaml이 있어야 부른다. source가 paid_below나 paid_all이고
+    max_paid_calls가 1 이상이어야 하고, 호출 상한은 max_paid_calls와 paid.max_scrape_calls 중 작은 값, 정렬(sort), 별점마다 페이지 수
+    (pages_per_star), DB 리뷰 기준(paid_below_db_reviews)은 이 파일 값을 쓴다. paid_all이면 --paid-asins가 없을 때 selected 전부.
     --paid-test: 첫 대상 ASIN 하나, 1★ 하나, 1페이지만 부르고 걸린 시간, 받은 수, DB에 rating_summary가 붙는지 찍고 끝낸다(수집 안 함).
     응답에 비용 칸은 없다. 실제 금액은 Apify 계정에서만 보인다.
   본문이 공백뿐인 리뷰는 02_reviews.csv에서 뺀다(인용을 본문에서 확인하므로). 뺀 목록은 02_collect_log.json.
@@ -408,7 +411,7 @@ def paid_scrape(run, asins, conf, test=False):
 
     def one(job):
         a, ratings = job
-        args = {"asins": [a], "ratings": ratings, "regions": ["com"], "max_pages": pages, "sort": "recent", "limit": 1}
+        args = {"asins": [a], "ratings": ratings, "regions": ["com"], "max_pages": pages, "sort": paid.get("sort", "recent"), "limit": 1}
         t = time.time()
         _, res = (call if workers == 1 else call_fresh)(REVIEW_SERVER, "scrape_reviews", args)
         sec = round(time.time() - t, 1)
@@ -491,6 +494,29 @@ def write_csv(path, cols, rows):
         w.writerows(rows)
 
 
+def collect_plan_paid(run, paid):
+    """회차 시작 때 담당자 답(00_collect_plan.yaml)으로 이번 회차 유료 설정을 만든다. 허용이 없으면 멈춘다(2026-10-19)."""
+    path = run / "00_collect_plan.yaml"
+    if not path.exists():
+        die("유료 수집은 00_collect_plan.yaml(회차 시작 때 담당자가 답한 수집 계획) 없이는 부르지 않습니다.")
+    plan = load_yaml(path) or {}
+    source, n = plan.get("source"), int(plan.get("max_paid_calls") or 0)
+    if source not in ("paid_below", "paid_all") or n < 1:
+        die(f"00_collect_plan.yaml이 유료 수집을 허용하지 않습니다(source {source}, max_paid_calls {n}).")
+    sort = plan.get("sort") or "recent"
+    if sort not in ("recent", "helpful"):
+        die(f"00_collect_plan.yaml의 sort는 recent나 helpful이어야 합니다: {sort}")
+    pages = int(plan.get("pages_per_star") or paid.get("max_pages_per_star", 1))
+    if not 1 <= pages <= 10:
+        die(f"00_collect_plan.yaml의 pages_per_star는 1~10이어야 합니다: {pages}")
+    out = {**paid, "max_scrape_calls": min(n, int(paid.get("max_scrape_calls", n))), "max_pages_per_star": pages, "sort": sort}
+    if source == "paid_all":
+        out["scrape_below_db_reviews"] = 0
+    elif plan.get("paid_below_db_reviews") is not None:
+        out["scrape_below_db_reviews"] = int(plan["paid_below_db_reviews"])
+    return out
+
+
 def pull(run, mode, offline, confirm_paid, paid_asins=None, paid_test=False):
     conf = load_config()
     if mode == "paid":
@@ -500,6 +526,9 @@ def pull(run, mode, offline, confirm_paid, paid_asins=None, paid_test=False):
             die("유료 수집은 --confirm-paid를 함께 줘야 합니다(Apify 크레딧이 실제로 듭니다).")
         if offline:
             die("유료 수집과 --offline은 함께 쓸 수 없습니다.")
+        conf = {**conf, "paid": collect_plan_paid(run, conf["paid"])}
+        print(f"  수집 계획: 유료 호출 상한 {conf['paid']['max_scrape_calls']}번, 정렬 {conf['paid']['sort']}, "
+              f"별점마다 {conf['paid']['max_pages_per_star']}페이지", flush=True)
     elif paid_asins or paid_test:
         die("--paid-asins와 --paid-test는 --mode paid --confirm-paid와 함께만 씁니다.")
     errors = []

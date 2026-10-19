@@ -21,12 +21,12 @@ v0는 향수 한 카테고리, 손으로 모은 리뷰 20~30개로 처음부터 
 CLAUDE.md                  이 파일
 .claude/agents/            asin-selector, schema-drafter, review-tagger, issue-labeler, issue-tagger, report-writer, evidence-auditor, detail-schema-drafter, detail-extractor, benchmark-researcher, guide-writer, report-translator, product-spec-collector
 .claude/commands/          review-run.md (/review-run <카테고리> <회차>)
-.claude/hooks/timing.py    에이전트 시작과 끝을 timing.jsonl에 기록
-.claude/settings.json      Hook 등록
+.claude/hooks/timing.py    에이전트 시작과 끝을 timing.jsonl에 기록, guard_runs.py 하위 에이전트가 다른 회차를 못 열게 막음
+.claude/settings.json      Hook 등록, env(한 줄 실행이 뒤 작업을 기다리는 한도 60분)
 config/                    stages.yaml(단계마다 입력, 출력, 뒤 단계, 상한), pipeline.yaml(유료 수집 스위치, 별점 묶음과 경고 기준), categories/<카테고리>.yaml(검색어와 제목 규칙),
                            topics_common.yaml(공통 주제 11개), report_template_ko.md,
                            topics_perfume_candidates.yaml(v0 손 시험용, v1에서는 읽지 않음)
-scripts/                   collect, check_inputs, eval_gold(+ gold_sheet.html), tag_batches, audit_quotes, issues, weight(+ sections), render_html, market(+ market_build), detail, research, guide_metrics, guide_check, guide_diff, render_guide_html, translate_prep, robustness, specs, report_lines, stage_plan, stage_packet, timing_report, doc_facts
+scripts/                   collect, check_inputs, eval_gold(+ gold_sheet.html), tag_batches, audit_quotes, issues, weight(+ sections), render_html, market(+ market_build), detail, research, guide_metrics, guide_parts, guide_check, guide_diff, render_guide_html, exemplar, copy_check, cross_check, translate_prep, robustness, specs, report_lines, report_parts, stage_plan, stage_packet, timing_report, doc_facts
                            (+ pipeline_io, mcp_http 도우미. mcp_http는 .mcp.json의 서버를 HTTP로 부르고 토큰은 환경 변수에서만 읽음)
 tests/                     가짜 회차로 스크립트를 손계산과 맞춰 보는 시험(python tests/test_scripts.py)
 runs/CURRENT               지금 회차 이름 한 줄
@@ -39,8 +39,8 @@ runs/<회차>/raw/           MCP 응답 원문(reviews_<ASIN>.json, product_<ASI
 단계와 명령은 .claude/commands/review-run.md(`/review-run <카테고리> <회차>`), 작업 방식과 상한은 그 문서의 "작업 방식과 상한"과
 config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지 않는 규칙만 여기에 둔다.
 
-- ⏸ 표시(ASIN 확인, 스키마 승인, 정답 세트 태깅, 시험 태깅 뒤 계속, 세부 이슈 승인, 설계 정보 항목 승인)에서 멈추고 담당자를 기다린다.
-- 관문 5개(상품 확인, 주제 승인과 정답 세트, 시험 태깅 확인, 설계 정보 항목 승인, 세부 이슈 승인)에서만 묻는다. 그 밖의 갈림길은 추천안으로 정하고 docs/decisions_log.md에 한 줄 남긴 뒤 다음 관문에서 "정한 것"으로 보여 준다. 관문 밖에서도 묻는 것은 유료 수집 켜기, 권한 파일의 막는 줄 지우기, 다른 사람에게 보내는 것뿐(review-run.md "사람에게 묻는 것"). 시간은 AI 작업, 담당자 라벨링, 담당자 기다림, 멈춤으로 나눠 잰다.
+- 담당자를 기다리는 곳은 회차 시작 때 수집 계획 질문(00_collect_plan.yaml: 상품 고르는 기준, DB냐 유료냐, 유료 정렬, 페이지, 최대 호출 수)과 정답 세트 태깅(스키마 확인과 한 화면) 둘뿐이다(2026-10-19 담당자 결정).
+- 나머지 관문(상품 확인, 시험 태깅 뒤 계속, 설계 정보 항목 승인, 세부 이슈 승인)은 메인 세션이 추천안대로 스스로 승인하고 "정한 것"을 알린 뒤 기다리지 않고 이어서 한다. 담당자가 채팅으로 지적하면 그 관문만 되돌려 다시 돌린다. 그 밖의 갈림길도 추천안으로 정하고 docs/decisions_log.md에 한 줄 남긴다. 관문 밖에서도 묻는 것은 권한 파일의 막는 줄 지우기, 수집 계획 상한을 넘는 유료 호출, 다른 사람에게 보내는 것뿐(review-run.md "사람에게 묻는 것"). 시간은 AI 작업, 담당자 라벨링, 담당자 기다림, 멈춤으로 나눠 잰다.
 - 시작할 때 `scripts/stage_plan.py plan`으로 다시 할 단계만 고른다. 중간에 끊기면 state.json에서 done이 아닌 첫 단계부터 다시 한다.
 - 재시도와 동시 실행은 config/stages.yaml 상한 안에서만 한다. 상한에 닿으면 멈추고 담당자에게 넘긴다.
 - 대량 작업 방식은 단계마다 config/stages.yaml의 method를 따른다. v2(scripts/stage_packet.py가 만든 작업 파일과 그 파일이 적은 묶음 입력만 넘김)는 설계 정보 추출에만, 태깅과 이슈 라벨은 묶음마다 에이전트 하나(per_batch).
@@ -52,7 +52,8 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | 00_candidates.csv | collect.py candidates | 후보 ASIN: asin,product_title,db_reviews,db_s1~db_s5,real_s1~real_s5,total_ratings,average_rating,date_min,date_max,kind_hint,asin_count |
 | raw/ | collect.py | MCP 응답 원문. 다시 받지 않고 변환만 하려면 `collect.py pull --offline` |
 | 02_collect_log.json | collect.py pull | 수집 기록. 본문이 비어 02_reviews.csv에서 뺀 리뷰(dropped, dropped_count) |
-| 01_asins.csv | asin-selector(담당자 확인) 또는 담당자 | asin,title,brand,price_usd,price_band,amazon_rating,status(selected/excluded),reason 뒤에 선택 칸 parent_asin. 빈 brand, title, amazon_rating, parent_asin은 pull이 products_byasin으로 채움 |
+| 00_collect_plan.yaml | 메인 세션(담당자 답 그대로) | 회차 시작 때 수집 계획: answered_at, answer_text, pick(rank/db/manual), pick_n, asins, source(db/paid_below/paid_all), paid_below_db_reviews, sort, pages_per_star, max_paid_calls. collect.py 유료 수집은 이 파일 없이는 멈춤 |
+| 01_asins.csv | asin-selector(자동 진행으로 확인) 또는 담당자 | asin,title,brand,price_usd,price_band,amazon_rating,status(selected/excluded),reason 뒤에 선택 칸 parent_asin. 빈 brand, title, amazon_rating, parent_asin은 pull이 products_byasin으로 채움 |
 | 02_reviews.csv | collect.py pull 또는 담당자 | review_id,asin,star,date,title,body,verified,vine 뒤에 선택 칸 helpful_votes,variant_asin,variant_text,brand,language,country (UTF-8, 본문은 HTML 엔티티만 풀고 고치지 않음). language 빈 값은 영어 |
 | 02_star_distribution.csv | collect.py pull 또는 담당자 | asin,s5,s4,s3,s2,s1,total_ratings 뒤에 선택 칸 average_rating,source,captured_at (상품 페이지 별점 막대의 퍼센트, DB는 rating_summary) |
 | 00_input_check.json | check_inputs.py | 입력 검사 결과(ASIN별 group_coverage, missing_real_pct, 언어별 건수 포함) |
@@ -81,6 +82,7 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | 01_prices.json | collect.py prices | 변형별 현재 가격과 조회 날짜(7장 가격대, 11장 온스당 가격) |
 | 05_metrics.json, 05_tables.md | weight.py | 리포트에 쓰는 모든 숫자(정답 세트 정확도 accuracy와 표기 문자열, 별점 보정 weighting, 리포트 문구 notes 포함)와 리포트용 표 |
 | 05_quote_pool.json | weight.py | 리포트 작성자용 인용 후보(주제와 감성마다 최대 10개, 별점과 브랜드 고르게, 리뷰 id, 브랜드, 별점, 원문). report-writer는 04_tags.jsonl, 02_reviews.csv 대신 이것과 05_metrics.json의 quote_candidates만 읽음 |
+| 05_metrics_early.json, 05_tables_early.md, 05_quote_pool_early.json | weight.py --early | 세부 이슈 라벨 전에 같은 계산으로 만든 미리 쓰기용 파일(1~7장과 9장 작성자가 읽음). 세부 이슈, 안전, 견고성, 변형 신호 말고는 05_metrics.json과 같다(report_parts.py가 대조) |
 | 05_weights_preview.md | weight.py --weights-only | 태그 없이 본 ASIN별 묶음, 표본 수, 실제 %, 방식, 가중치, 경고 |
 | 07a_issues_approved.yaml | issues.py approve | 승인된 세부 이슈 목록(승인 시각, 승인자) |
 | 07b_label_batches.json, 07b_label_input/, 07b_labels_auto.jsonl | issues.py label-plan | 라벨 묶음, 기타만 있는 주제와 방향의 자동 기타 |
@@ -89,7 +91,8 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | 07b_issue_audit_sample.jsonl(+ _p1, _p2), 07b_issue_audit_p1.yaml, _p2.yaml, 07b_issue_audit.yaml, 07b_issue_audit_summary.json | issues.py, evidence-auditor 둘 | 라벨 감사 표본과 감사자마다 반쪽, 반쪽 판정, 합친 판정, 반쪽마다와 전체 FAIL 비율 |
 | 07c_safety_input.jsonl, 07c_safety_verdicts.yaml, 07c_safety_check.md, 07c_safety_summary.json | issues.py, evidence-auditor | 안전 인용과 이상 반응 판정, 증상 종류(symptom_type)별 리뷰 수와 가중 비율(negative_text) |
 | 07c_tagging_error_notes.md | 메인 세션 | 고치지 않고 남긴 의심 태그 메모 |
-| 06_report.md | report-writer | 한국어 리포트 |
+| 06_report_part_<묶음>.md | report-writer | 장 묶음(1-7, 8, 9, 10, 11, 12, appendix)별 리포트 문장. 1-7과 9는 라벨 전(early 입력)에 쓰고 라벨 뒤 보강에서 라벨, 안전, 견고성 근거를 더함. 나머지는 라벨 뒤에 씀(11장 변형 신호의 방향 표는 라벨로 셈). 표 자리 {{표: 이름}}는 그대로 둠 |
+| 06_report.md, 06_report_parts_check.json | report_parts.py assemble | 한국어 리포트(묶음을 틀 순서로 이어 붙이고 {{표: 이름}} 자리에 05_tables.md 표를 끼움)와 합치기 검사 |
 | market/raw/, market/calls.jsonl | market.py fetch | spd-amz-market 응답 원문과 호출 기록(무료, 40번 이하) |
 | market/market.json, market/market_summary.md | market.py build | 하위 카테고리, 브랜드 상위 20, 검색어, 추이, 우리 상품, 광고 표(행마다 원본 파일), 받지 못한 것 |
 | 13_detail_sample.csv | detail.py sample | 설계 정보 항목을 찾을 표본 150개(정답 세트 제외) |
@@ -103,7 +106,9 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | 23_spec_input.json, 23_specs.yaml | specs.py prep, product-spec-collector | 상품마다 모을 사양 항목, 모은 값(출처 주소, 원문 문장, 같은 상품인지 확인한 정도) |
 | 23_specs_check.json, 23_specs_verified.json | specs.py check | 사양 값마다 다시 열어 확인한 결과, 확인된 값만(가이드가 씀) |
 | 16_guide_metrics.json, 16_guide_writer_input.json | guide_metrics.py | 가이드의 모든 숫자, 표, 근거 리뷰 묶음. 작성자용은 근거 묶음의 리뷰 id 목록만 뺀 것(guide-writer와 가이드 감사자가 읽음) |
-| 17_guide.md | guide-writer | 개발 가이드 문장([m:키], [r:id]) |
+| 16_guide_metrics_early.json, 16_guide_writer_input_early.json | guide_metrics.py --early | 라벨 전 미리 쓰기용 가이드 값(01, 02, A장). 라벨, 안전, 견고성에 기대는 값은 빼고 late_keys에 이름만. 남은 값은 라벨 뒤 값과 같다 |
+| 17_guide_part_<묶음>.md, 17_guide_part_01-02-A_early.md, 18_guide_audit_early.yaml | guide-writer, evidence-auditor | 장 묶음(01-02-A, 03, 04, head-05)별 가이드 문장, 보강 전 미리 쓴 판, 미리 감사 판정 |
+| 17_guide.md, 17_guide_parts_check.json | guide_parts.py assemble(언제나 장 묶음, 2026-10-19부터 한 명이 전체를 쓰지 않음) | 개발 가이드 문장([m:키], [r:id])과 합치기 검사(원인 번호 p.causes 대조, 방향 부호) |
 | 18_guide_quote_check.json, 18_guide_audit.yaml | guide_check.py, evidence-auditor | 가이드 문장 검사 |
 | 07_guide.html, 07_guide_html_numbers.json, 07_guide_html_check.json | render_guide_html.py build, check | 개발 가이드 HTML과 검사 |
 | 06_report.html, 06_report_html_numbers.json, 06_report_html_check.json | render_html.py build, check | HTML 리포트 한 파일(데이터는 const D), 화면 숫자의 JSON 경로, 검사 결과 |
@@ -126,6 +131,9 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | config/detail_rules.yaml | 사람(담당자 결정) | 설계 정보 항목의 공통 경계 규칙(품목에 묶이지 않음). 작업 파일에는 맡은 항목이 걸린 규칙만 원문 그대로, 감사자도 함께 읽음 |
 | 14_known_exceptions.yaml | 메인 세션(담당자 결정) | 그 회차에만 적용하는 첫 추출 검사의 알려진 예외(review_id, item, 이유). extract-check가 KNOWN으로 따로 보임 |
 | 06_report_concl_packet.md, 06_report_conclusions.yaml | report_lines.py packet, report-writer | 장마다 한 줄 결론을 쓸 작은 입력, 결론 문장(report_lines.py insert가 06_report.md에 넣음) |
+| config/exemplars/<품목>/report_exemplar.md, guide_exemplar.md, exemplar_check.json | exemplar.py build | 형식 견본(다른 회차 문서의 내용을 자리표로 바꾼 것)과 남은 내용 검사. 작성자는 회차와 다른 품목의 견본만 읽음 |
+| 19_copy_check.json | copy_check.py | 견본 원본 회차와 같은 낱말 8개 조각의 비율(스크립트 문장 뺌), 가장 긴 같은 구간 |
+| .claude/hooks/guard_runs.py | 사람(한 번) | PreToolUse Hook. 하위 에이전트가 runs/CURRENT 밖의 회차 폴더와 시험 기록을 열지 못하게 막음 |
 
 태그 한 줄 예시:
 

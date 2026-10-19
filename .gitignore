@@ -66,3 +66,19 @@ runs/*/*_g[0-9]p[0-9]*.*
 
 # 회사 참고 자료에서 뽑은 가이드 형식 메모(회차마다)
 runs/*/guide_reference.md
+
+# 2026-10-18 담당자 결정(올릴 때 뺌): 시험 사본 회차, 정답지와 채점 파일, 태깅 입력(리뷰 원문), 실험 트리 사본, 백업과 잠금 파일
+runs/*-rt*-*/
+runs/*/04_tag_input/
+runs/**/*gold*
+runs/*/experiments/
+_experiments/
+runs/*/*.bak
+runs/*/*.lock
+runs/**/02_reviews.csv
+runs/**/03_schema_input.csv
+runs/**/03_schema_sample.csv
+runs/**/13_detail_sample.csv
+runs/**/raw/
+runs/**/07b_label_input/
+runs/**/14_detail_input/

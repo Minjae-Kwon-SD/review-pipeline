@@ -5,3 +5,4 @@ allow:
   없음을_뜻하는_0: [0]
 example_paths:
   - config/categories/hair_removal.yaml   # 새 카테고리 예시(아직 없는 파일)
+  - 00_collect_plan.yaml   # 회차 시작 질문의 답(2026-10-19부터 생기는 회차 파일, 아직 그 뒤 회차가 없음)

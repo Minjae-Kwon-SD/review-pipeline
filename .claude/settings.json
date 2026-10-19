@@ -1,4 +1,7 @@
 {
+  "env": {
+    "CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS": "3600000"
+  },
   "permissions": {
     "allow": [
       "Bash(python scripts/*)",
@@ -9,6 +12,21 @@
     ]
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read|Grep|Glob|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.claude/hooks/guard_runs.py"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
     "SubagentStart": [
       {
         "matcher": "asin-selector|schema-drafter|detail-schema-drafter|detail-extractor|benchmark-researcher|guide-writer|report-translator|product-spec-collector|review-tagger|issue-labeler|issue-tagger|report-writer|evidence-auditor",

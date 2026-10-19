@@ -25,6 +25,8 @@ effort: medium
 
 ## 입력 (runs/<회차>/ 아래)
 
+- **다른 회차는 열지 않는다(2026-10-17)**: 읽는 파일은 이 회차 폴더(runs/<회차>/)와 이 지시문이 이름을 적은 파일(config/, .claude/agents/ 등)뿐이다. runs/ 아래 다른 회차의 리포트, 가이드, 태그, 라벨, 감사 파일은 형식이나 문체 참고로도 열지 않는다(rt 시험에서 작성자가 원본 회차 결과를 열어 보고 써서 비교가 흐려짐). 형식은 이 지시문과 config/report_template_ko.md만 따른다.
+
 - 메인 세션이 주는 것: 회차, 묶음 id
 - 07b_label_batches.json: 그 묶음의 topic, direction, input(입력 파일), output(출력 파일 이름)
 - 07a_issues_approved.yaml: 그 topic과 direction의 승인 라벨(id, name_ko, include, exclude, examples). 이 목록만 쓴다.

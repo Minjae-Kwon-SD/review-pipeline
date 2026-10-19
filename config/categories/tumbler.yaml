@@ -1,0 +1,81 @@
+# 보온 텀블러(보온 보냉 컵, 손잡이와 빨대 달린 텀블러, 여행용 머그) 카테고리. collect.py candidates와 asin-selector가 읽는다.
+# 2026-10-17 초안(담당자 결정: 처음 보는 품목이 들어왔다고 보고 수집부터 끝까지, 빠르게 하되 정확도 유지. 메인 세션 추천 "보온 텀블러").
+# 범위: 들고 다니며 마시는 보온 보냉 텀블러와 여행용 머그(손잡이, 빨대, 뚜껑 포함 상품).
+# 물병(병 모양), 보온 도시락과 음식 통, 보온병(플라스크), 와인잔, 아이용 빨대컵, 뚜껑이나 빨대만 파는 부품, 텀블러 꾸미기 용품, 커피 머신은 뺀다.
+category: tumbler
+name_ko: 보온 텀블러
+
+# 공유 DB에 제목 규칙에 맞는 텀블러가 2개뿐이라(2026-10-17 collect.py candidates) 크림 회차처럼 매출 순으로 고른다(collect.py rank, 무료).
+# DB 리뷰가 모자란 상품은 유료 수집 대상 후보(need_paid)이고, 켤지는 담당자에게 묻는다.
+selection:
+  seeds: ["insulated tumbler", "tumbler with handle and straw", "stanley tumbler", "travel mug insulated"]
+  pick: 10                  # 매출 순 앞 10개에 rank_pick
+  min_db_reviews: 100       # 공유 DB 리뷰가 이보다 적으면 need_paid=yes
+  max_product_calls: 25     # products_byasin(무료) 호출 상한
+
+# 공유 DB의 search_reviews keyword(리뷰 제목과 본문 부분일치). collect.py candidates가 쓴다.
+keywords: [tumbler, travel mug, insulated cup, Stanley, YETI, Owala, Simple Modern, straw lid, keeps ice]
+
+# 상품 제목(대소문자 무시, 부분일치)에 하나라도 있으면 후보, title_exclude가 하나라도 있으면 뺀다.
+title_include: [Tumbler, Travel Mug, Insulated Cup, Insulated Mug, Quencher, Coffee Mug]
+title_exclude: [Water Bottle, Bottle, Flask, Food Jar, Lunch, Wine Glass, Wine Tumbler, Kids, Toddler, Sippy, Replacement, Straw Cover,
+                Straw Topper, Lid Only, Boot, Sleeve, Accessor, Sticker, Decal, Coffee Maker, Shaker, Bathroom, Toothbrush, Composting]
+
+# kind_hint 규칙: 먼저 맞는 것(제품 이름이 먼저, 색 이름은 쓰지 않음)
+kind_rules:
+  handle_straw: [Quencher, Handle, Straw Lid, Flowstate, Trek]
+  travel_mug: [Travel Mug, Coffee Mug, Commuter, Trigger, Slider Lid]
+  small: [12 oz, 14 oz, 16 oz, 20 oz]
+  large: [30 oz, 40 oz, 64 oz]
+
+# 리뷰 리포트(render_html.py, issues.py가 읽음)
+report:
+  title: {ko: "아마존 리뷰 분석: 보온 텀블러", en: "Amazon Review Analysis: Insulated Tumblers"}
+  helpful_min_voted_reviews: 30
+
+# 상품 사양 수집(specs.py, product-spec-collector가 읽음). 초안이고, 세부 이슈와 설계 정보 항목 승인 뒤 다시 본다.
+specs:
+  scoreboard_items: [capacity, insulation_claim, leakproof_claim]   # 가이드 점수표에 나란히 놓을 사양(확인된 값만, guide_metrics.py)
+  items:
+    - id: capacity
+      name_ko: 용량
+      ask: "용량(oz, ml). 여러 용량이면 모두"
+      format: list
+    - id: insulation_claim
+      name_ko: 보온 보냉 표시
+      ask: "제조사가 적은 보냉, 보온 시간(예: 얼음 2일, 뜨거움 7시간)과 그 조건"
+      format: text
+    - id: lid_type
+      name_ko: 뚜껑과 빨대
+      ask: "뚜껑 종류(빨대, 회전 덮개, 밀어 여는 뚜껑 등)와 빨대 재질, 뚜껑을 바꿀 수 있는지"
+      format: list
+    - id: leakproof_claim
+      name_ko: 새지 않음 표시
+      ask: "새지 않는다(leakproof, spill resistant)는 표시와 그 범위(어느 뚜껑 위치에서, 뒤집어도 되는지)"
+      format: text
+    - id: dishwasher_cupholder
+      name_ko: 식기세척기와 컵 홀더
+      ask: "식기세척기 사용 가능 여부(몸체, 뚜껑 따로), 차 컵 홀더에 들어가는지"
+      format: list
+    - id: material_coating
+      name_ko: 재질과 겉면
+      ask: "몸체 재질(스테인리스 등급 등), 겉면 칠(분체 도장 등), 납이나 BPA 관련 표시"
+      format: list
+    - id: list_price
+      name_ko: 정가
+      ask: "출처 사이트에 적힌 가격(통화 포함). 여러 구성이면 모두"
+      format: list
+
+# 시장 데이터(market.py, market_build.py, guide_metrics.py가 읽음). 노드는 runs/hairremoval-db-2026-10-08/market/raw/subcategories_search_all.json에서
+# 이름에 Tumbler가 든 노드를 찾았다(2026-10-17): Insulated Tumblers 21613423011, 부모 Insulated Beverage Containers 21613420011, 그 부모 Thermoses 21613418011.
+market:
+  seed: "insulated tumbler"
+  parent_node: 21613420011               # Insulated Beverage Containers(자식: Insulated Tumblers 등)
+  context_nodes: [21613420011, 21613418011]
+  max_nodes: 15
+  nodes:
+    TUM: "Insulated Tumblers"
+    IBC: "Insulated Beverage Containers"
+  term_words: [tumbler, tumblers, "travel mug", insulated, cup, stanley, yeti, owala, "simple modern", quencher, "straw lid"]
+
+# guide 절(머리 숫자 노드, 방향 지수, 집중 분석, 기준표 후보)은 세부 이슈 승인(07a) 뒤에 메인 세션이 채운다(16단계 전).

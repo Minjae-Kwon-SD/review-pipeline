@@ -16,6 +16,14 @@
 출력 16_guide_writer_input.json(2026-10-14): 위와 같고 ev에서 리뷰 id 목록(i)과 표시 인용(q)만 뺀 것(제목 t, 설명 s, 수 n은 남김).
   guide-writer만 이 파일을 읽는다(ev의 리뷰 id 목록은 HTML 펼침용이라 문장 쓰기에 필요 없음). 검사와 HTML은 16_guide_metrics.json을 쓴다.
 가중은 리뷰 리포트와 같은 별점 묶음 가중(weight.build_weights).
+
+사용: python scripts/guide_metrics.py [회차] --early (2026-10-17 가이드 장 묶음, 안 B)
+  세부 이슈 라벨(07b)과 안전 판정(07c), 견고성(05_robustness.json) 전에 01, 02, A장을 미리 쓰기 위한 값.
+  입력은 05_metrics_early.json(없으면 05_metrics.json)이고 07b, 07c, 05_robustness.json은 읽지 않는다.
+  라벨에 기대는 값은 빼고(라벨이 하나도 없다고 본 계산과 모든 리뷰에 라벨이 붙었다고 본 계산이 다른 값, 안전 기준, 견고성에 기대는 값)
+  뺀 키 이름을 late_keys로 적는다. 출력: 16_guide_metrics_early.json, 16_guide_writer_input_early.json.
+원인 번호(tables p.causes, 2026-10-17 안 B): 03장 원인과 04장 기준표의 "원인 N 대응"을 스크립트가 정한다(make_causes).
+  03과 04 작성자가 같은 번호를 따르므로 둘을 같은 때 쓸 수 있다. std.board 행마다 causes(원인 번호 목록)를 붙인다.
 """
 import argparse
 import json
@@ -65,6 +73,43 @@ def median(v):
     return v[n // 2] if n % 2 else round((v[n // 2 - 1] + v[n // 2]) / 2, 3)
 
 
+def share_basis(brand_rows, node_revenue=None, tol=0.005):
+    """marketshare 단위 확인(모든 품목). 브랜드마다 revenue ÷ marketshare가 같은 값이면(그리고 노드 월 매출 칸이 있으면 그 값과도 같으면)
+    marketshare는 브랜드 매출 ÷ 노드 매출인 매출 점유율이다. 확인되면 (True, 매출 점유율 표기), 아니면 (False, 단위 미확인 표기)."""
+    imp = [r["revenue"] / r["marketshare"] for r in brand_rows if r.get("marketshare") and r.get("revenue")]
+    ok = len(imp) >= 2 and (max(imp) - min(imp)) / max(imp) < tol and (node_revenue is None or abs(node_revenue - imp[0]) / node_revenue < tol)
+    return ok, ("매출 점유율(브랜드 매출 ÷ 노드 매출, 응답 값으로 확인)" if ok else "단위 미확인 값을 %로 읽음")
+
+
+def safety_complaints(tags, safety_tid, symptom_ids):
+    """안전 기준의 불만 리뷰(모든 품목): 07c 몸 반응 판정 리뷰와 안전 주제 부정 태그가 붙은 리뷰 전부(과열, 녹음 같은 제품 위험과
+    세부 이슈가 기타인 것 포함). 리뷰 리포트의 '안전 부정 리뷰 n개'와 같은 범위(2026-10-15 스피커 검토: 전에는 몸 반응 3개만 셈)."""
+    return set(symptom_ids) | {t["review_id"] for t in tags if t["topic"] == safety_tid and t["sentiment"] == "negative"}
+
+
+def make_causes(focus, standards, label_topic, label_reviews, label_name, preference=(), min_reviews=10, per_cause=2):
+    """03장 원인 번호(2026-10-17 안 B, 모든 품목). 작성자가 묶던 것을 정해진 규칙으로 바꾼 것이라 03과 04를 같은 때 쓸 수 있다.
+    집중 분석(focus) 순서대로, 그 분석의 주제(topics)에 속한 부정 라벨을 기준표(standards) 순서로 기준마다 모으고,
+    설계 결함(제품을 고치면 줄어드는 불만)과 선호 차이(카테고리 설정 guide.preference_labels)로 나눈 뒤,
+    리뷰 수가 많은 순으로 per_cause개씩 원인 하나로 묶는다(항목마다 숫자 2개 이하 규칙에 맞춤). 리뷰 min_reviews개 미만인 라벨은 뺀다.
+    원인 번호는 1부터 이어 매긴다. 원인 번호는 불만의 분류이지 인과가 아니다."""
+    causes = []
+    std_n = {s["id"]: i for i, s in enumerate(standards, 1)}
+    pref = set(preference or ())
+    for f in focus:
+        tps = set(f.get("topics") or [])
+        for s in standards:
+            labs = [l for l in s.get("neg_labels") or [] if label_topic.get(l) in tps and len(label_reviews.get(l) or ()) >= min_reviews]
+            for typ in ("설계 결함", "선호 차이"):
+                grp = sorted((l for l in labs if (l in pref) == (typ == "선호 차이")), key=lambda l: (-len(label_reviews[l]), l))
+                for i in range(0, len(grp), per_cause):
+                    causes.append({"n": len(causes) + 1, "focus": f["id"], "focus_title": f.get("title"), "standard": s["id"],
+                                   "standard_n": std_n[s["id"]], "standard_title": s.get("title"), "type": typ,
+                                   "labels": [{"id": l, "name": label_name.get(l, l), "reviews": len(label_reviews[l]),
+                                               "key": f"std.{s['id']}.label.{l}"} for l in grp[i:i + per_cause]]})
+    return causes
+
+
 class G:
     def unit(self, item):
         """숫자 항목의 단위(승인 스키마 unit). 없으면 향수 때의 기본값 시간"""
@@ -79,11 +124,18 @@ class G:
         """숫자 항목의 짧은 이름(카테고리 설정 guide.number_names, 없으면 향수 때의 '말한 지속 시간')"""
         return (self.conf.get("number_names") or {}).get(item) or "말한 지속 시간"
 
-    def __init__(self, run):
+    def __init__(self, run, early=False, all_labels=False):
+        """early: 라벨 전 미리 쓰기용(07b, 07c, 05_robustness.json을 읽지 않음). all_labels: early 값 가운데 라벨에 기대는 것을 가려내려고
+        모든 리뷰에 모든 라벨이 붙었다고 보는 계산(build_early가 두 계산을 견준다)."""
         self.run = run
-        self.m = json.loads((run / "05_metrics.json").read_text(encoding="utf-8"))
+        self.early = early
+        mp = run / "05_metrics_early.json" if early else run / "05_metrics.json"
+        if early and not mp.exists():
+            print("  --early: 05_metrics_early.json이 없어 05_metrics.json을 읽습니다(라벨에 기대는 값은 아래 규칙으로 뺌).")
+            mp = run / "05_metrics.json"
+        self.m = json.loads(mp.read_text(encoding="utf-8"))
         cat = run.name.split("-")[0]
-        self.conf = (load_yaml(ROOT / "config" / "categories" / f"{cat}.yaml") or {})["guide"]
+        self.conf = category_conf(run)["guide"]
         self.schema = load_schema(run)
         self.safety_tid = common_topic(self.schema, "safety")    # 안전 공통 주제를 맡은 주제 id(예: skin_reaction)
         self.reviews, self.weight = review_weights(run)
@@ -91,19 +143,19 @@ class G:
         self.total_w = sum(self.weight.values())
         _, self.tags, self.dropped = split_tags(self.reviews, read_jsonl(run / "04_tags.jsonl"), self.schema)
         self.tag = {(t["review_id"], t["topic"]): t for t in self.tags}
-        self.labels = read_jsonl(run / "07b_issue_labels.jsonl")
-        self.counts = json.loads((run / "07b_issue_counts.json").read_text(encoding="utf-8"))
+        self.labels = [] if early else read_jsonl(run / "07b_issue_labels.jsonl")
+        self.counts = {"topics": {}} if early else json.loads((run / "07b_issue_counts.json").read_text(encoding="utf-8"))
         self.details = read_jsonl(run / "14_details.jsonl")
         self.dcounts = json.loads((run / "14_detail_counts.json").read_text(encoding="utf-8"))
         self.detail_units = {i["id"]: i.get("unit") for i in (load_yaml(run / "13_detail_schema_approved.yaml") or {}).get("items") or []}
         self.market = json.loads((run / "market" / "market.json").read_text(encoding="utf-8"))
         self.detail_names = {i["id"]: i.get("name_ko") for i in (load_yaml(run / "13_detail_schema_approved.yaml") or {}).get("items") or []}
         self.mkeys = list(((category_conf(run).get("market") or {}).get("nodes") or {}).keys())    # 시장 표 이름 키
-        self.safety = json.loads((run / "07c_safety_summary.json").read_text(encoding="utf-8"))
-        self.verdicts = ((load_yaml(run / "07c_safety_verdicts.yaml") or {}).get("audit") or {}).get("verdicts") or []
+        self.safety = {} if early else json.loads((run / "07c_safety_summary.json").read_text(encoding="utf-8"))
+        self.verdicts = [] if early else ((load_yaml(run / "07c_safety_verdicts.yaml") or {}).get("audit") or {}).get("verdicts") or []
         self.asins = [r for r in load_csv_or_die(run / "01_asins.csv", ASIN_COLS) if r["status"] == "selected"]
         self.brand = {a["asin"]: a["brand"] for a in self.asins}
-        self.label_reviews = defaultdict(set)          # 라벨 id -> 리뷰
+        self.label_reviews = defaultdict((lambda: set(self.rev)) if all_labels else set)          # 라벨 id -> 리뷰
         self.label_topic = {}
         for row in self.labels:
             for lab in row["labels"]:
@@ -122,8 +174,9 @@ class G:
     def neg_reviews(self, topic):
         return {t["review_id"] for t in self.tags if t["topic"] == topic and t["sentiment"] == "negative"}
 
-    def put(self, key, value, text, ev=None, note=None):
-        self.values[key] = {"value": value, "text": text, "ev": ev, **({"note": note} if note else {})}
+    def put(self, key, value, text, ev=None, note=None, assumption=False):
+        """assumption: 확인된 값이 아니라 가정으로 만든 값(머리 숫자로 쓰지 않음, render_guide_html과 guide_check가 봄)"""
+        self.values[key] = {"value": value, "text": text, "ev": ev, **({"note": note} if note else {}), **({"assumption": True} if assumption else {})}
         return key
 
     def evidence(self, key, title, sub, rids, quote_of=None, sort_low_first=False):
@@ -163,8 +216,11 @@ class G:
         c = self.conf
         node = next(r for r in self.market["tables"]["subcategories"] if str(r["id"]) == str(c["market_node_head"]))
         mv = node["totalMonthlyRevenue"]
-        self.put("head.market_month", mv, f"{f_int(mv)}(월 매출 칸, 단위 미확인)", note=f"{node['subcategoryContextName']} 노드, spd-amz-market")
-        self.put("head.market_year", mv * 12, f"{f_int(mv * 12)}(월 매출을 달러로 읽을 때 연 환산)", note="월 매출 칸 x 12, 단위 미확인")
+        # 월 매출 칸은 기간(월)만 칸 이름으로 알고 통화는 문서에 없다. 연 환산은 확인된 값이 아니라 가정(통화를 마켓 통화로 읽고 x 12,
+        # 계절 변동 미반영)이라 text에 '가정'을 붙여 확인된 SAM처럼 읽히지 않게 한다(2026-10-15 스피커 검토, 모든 품목)
+        self.put("head.market_month", mv, f"{f_int(mv)}(월 매출 칸, 통화 미확인)", note=f"{node['subcategoryContextName']} 노드, spd-amz-market")
+        self.put("head.market_year", mv * 12, f"{f_int(mv * 12)}(가정: 통화 미확인 월 매출 x 12, 계절 변동 미반영)",
+                 note="월 매출 칸 x 12. 확인된 연 매출이 아니라 가정이므로 머리 숫자나 SAM 확정 값으로 쓰지 않는다", assumption=True)
         tp = c["head_topic"]
         t = next(x for x in self.m["topics"] if x["id"] == tp)
         ev = self.evidence("ev.head_topic_neg", f"{t['name_ko']} 부정 리뷰", f"{t['name_ko']} 부정 언급", self.neg_reviews(tp),
@@ -267,18 +323,28 @@ class G:
                                            "units": r["totalNumberUnitsSold"], "brands": r["totalBrands"], "asins": r["totalAsins"],
                                            "avg_price": r["avgPrice"], "avg_rating": r["avgRating"], "mom": r["momGrowth"],
                                            "mom12": r["momGrowth12"], "az": r["azRevenuePct"]} for r in T["subcategories"]]
+        node_rev = {}
+        for r in T["subcategories"]:
+            for nm in (r.get("subcategoryName"), r.get("subcategoryContextName")):
+                if nm and r.get("totalMonthlyRevenue"):
+                    node_rev[nm] = r["totalMonthlyRevenue"]
+        share_unit = {}
         for k, node in zip(self.mkeys, self.conf["market_nodes_brand_share"]):
             rows = T[f"brands_{k}"][:10]
             top10 = sum(r["marketshare"] or 0 for r in rows)
+            ok, unit = share_basis(T[f"brands_{k}"], node_rev.get(node))
+            share_unit[k] = {"confirmed": ok, "text": unit}
             self.tables[f"m.brands_{k}"] = [{"rank": i + 1, "brand": r["brandName"], "share": r["marketshare"],
                                              "share_text": f_pct(100 * (r["marketshare"] or 0)), "revenue": r["revenue"],
                                              "avg_price": r["avgPrice"], "rating": r["reviewRating"]} for i, r in enumerate(rows)]
-            self.put(f"m.top10_share_{k}", round(100 * top10, 1), f_pct(100 * top10), note=f"{node} 상위 10개 브랜드 marketshare 합(단위 미확인 값을 %로 읽음)")
+            self.put(f"m.top10_share_{k}", round(100 * top10, 1), f_pct(100 * top10), note=f"{node} 상위 10개 브랜드 marketshare 합({unit})")
             self.put(f"m.top1_{k}", rows[0]["brandName"], f"{rows[0]['brandName']} {f_pct(100 * rows[0]['marketshare'])}")
-            # 01장 경쟁 집중: 1위 브랜드 점유율 숫자만(top1은 이름과 함께 쓴 표기). marketshare 단위는 top10과 같이 미확인
+            # 01장 경쟁 집중: 1위 브랜드 점유율 숫자만(top1은 이름과 함께 쓴 표기). 단위 표기는 top10과 같음
             self.put(f"m.top1_share_{k}", round(100 * (rows[0]["marketshare"] or 0), 1), f_pct(100 * (rows[0]["marketshare"] or 0)),
-                     note=f"{node} 1위 브랜드({rows[0]['brandName']}) marketshare(단위 미확인 값을 %로 읽음)")
-        gw = self.conf["gender_words"]
+                     note=f"{node} 1위 브랜드({rows[0]['brandName']}) marketshare({unit})")
+        self.tables["meta.share_unit"] = share_unit
+        # 성별 낱말은 선택(2026-10-15). 없으면 모든 검색어가 공통이고, HTML은 성별 칸을 두지 않는다
+        gw = self.conf.get("gender_words") or {"female": [], "male": []}
         def gender(t):
             tl = f" {t.lower()} "
             if any(f" {w} " in tl or tl.strip().startswith(w + " ") for w in gw["female"]):
@@ -381,7 +447,7 @@ class G:
                    "price_per_oz": round(price / oz, 2) if price and oz and self.ubasis["basis"] == "oz" else None,
                    "unit_price": self.unit_price(self.ubasis, price, oz),
                    "weighted_star": a["weighted_mean_star"], "topic_neg_pct": self.wpct(neg, ids), "dir_low": len(low), "dir_high": len(high),
-                   "dir_n": n_dir, "dir_index": idx, "duration_values": len(vals), "duration_median": med,
+                   "dir_n": n_dir, "dir_index": idx, "dir_unclear": sections.direction_unclear(idx, n_dir), "duration_values": len(vals), "duration_median": med,
                    "strength": (a.get("strength") or {}).get("name_ko"), "weakness": (a.get("weakness") or {}).get("name_ko"),
                    "ev": {"topic_neg": evn, "dir_low": evl, "dir_high": evh, "duration": evd}}
             rows.append(row)
@@ -391,7 +457,8 @@ class G:
                      note=f"{self.ubasis['name']}(점수표 단위 가격 기준)")
             self.put(f"{k}.star", row["weighted_star"], f_star(row["weighted_star"]))
             self.put(f"{k}.topic_neg", row["topic_neg_pct"], f_pct(row["topic_neg_pct"]), evn)
-            self.put(f"{k}.dir_index", idx, "-" if idx is None else f"{idx:+.2f}", evl)
+            self.put(f"{k}.dir_index", idx, sections.fmt_index(idx, sections.direction_unclear(idx, n_dir)), evl,
+                     note="방향 불분명: 지수가 0에서 1.96 / sqrt(방향 라벨 리뷰 수)보다 가까움(리포트 11장과 같은 규칙)")
             self.put(f"{k}.duration_median", med, "-" if med is None else self.dur(med, c['duration_item']), evd)
         self.tables["s.scoreboard"] = rows
 
@@ -471,6 +538,8 @@ class G:
             self.put(f"p.gap{i}_other", g["other_avg_star"], f_star(g["other_avg_star"]), ev)
         for f in self.conf["focus"]:
             self.focus(f)
+        if self.early:          # 안전 판정(07c)은 라벨 뒤라 미리 쓰기 값에 넣지 않는다
+            return
         sc = self.safety
         # 07c_safety_summary와 같은 규칙: 부정 감성 인용 중 이상 반응으로 판정된 리뷰만 증상별로 묶는다
         neg_ids = {str(r["review_id"]) for r in read_jsonl(self.run / "07c_safety_input.jsonl") if r.get("sentiment") == "negative"}
@@ -487,6 +556,14 @@ class G:
             self.put(f"p.safety.{x['name']}", x["reviews"], f"{x['reviews']}개", ev)
         self.tables["p.safety"] = st
         self.put("p.safety_text", sc.get("negative_text"), sc.get("negative_text"))
+        # 2026-10-17 E2: 리포트와 같은 표기(05_metrics.json의 safety_check.label_text, notes.top_rank_text). 라벨을 늘어놓거나 상위 주제를 말할 때 이 표기를 쓴다
+        lt = ((self.m.get("safety_check") or {}).get("label_text"))
+        if lt:
+            self.put("p.safety_labels", lt, lt, note="안전 부정 라벨 전부(제품 위험과 몸 반응). 라벨을 늘어놓을 때는 이 표기를 통째로 쓴다")
+        tr = (self.m.get("notes") or {}).get("top_rank_text")
+        if tr:
+            self.put("p.top_rank", (self.m.get("must_cover") or {}).get("top_tie"), tr,
+                     note="상위 주제 표기. 값이 true(비슷한 수준)면 머리 주제를 단독 1위로 쓰지 않는다")
 
     def value_table(self, item, key, quote=True):
         it = self.dcounts["items"].get(item)
@@ -598,10 +675,16 @@ class G:
         terms = self.all_terms()
         rows = []
         symp_ids = {str(v["review_id"]) for v in self.verdicts if v.get("symptom_type")}
+        # 안전 주제의 부정 세부 이슈 라벨(other 빼고). 안전 기준이 neg_labels를 따로 정하지 않았으면 이 라벨을 모두 쓴다(2026-10-15).
+        # 전에는 07c 몸 반응 판정만 세어, 과열이나 녹음 같은 제품 위험 라벨이 있는 품목(스피커)에서 안전 기준이 몸 반응 몇 개로 줄었다
+        safety_neg_labels = sorted({l for row in self.labels if row["topic"] == self.safety_tid and row.get("direction") == "negative"
+                                    for l in row["labels"] if l != "other"})
         for s in self.conf["standards"]:
+            if s.get("safety") and not s.get("neg_labels") and safety_neg_labels:
+                s = dict(s, neg_labels=safety_neg_labels)
             neg = set().union(*[self.label_reviews[l] for l in s.get("neg_labels") or []]) if s.get("neg_labels") else set()
             if s.get("safety"):
-                neg |= symp_ids
+                neg |= safety_complaints(self.tags, self.safety_tid, symp_ids)
             pos = set().union(*[self.label_reviews[l] for l in s.get("pos_labels") or []]) if s.get("pos_labels") else set()
             qf = (lambda r: (self.tag.get((r, self.safety_tid)) or {}).get("quote")) if s.get("safety") else \
                 (lambda r, s=s: next((self.label_quote(l)(r) for l in s.get("neg_labels") or [] if r in self.label_reviews[l]), None))
@@ -876,24 +959,15 @@ class G:
         bs = R["bootstrap"]
         T = R["texts"]
         self.put("a.robust.n", bs["n"], f"{bs['n']:,}번", note=f"난수 씨앗 {bs['seed']}")
-        # A장 정확도 두 줄: 설계 정보 추출 감사, 웹 조사 주장 확인
-        da = self.run / "14b_detail_audit_summary.json"
-        if da.exists():
-            d = json.loads(da.read_text(encoding="utf-8"))
-            self.put("a.detail_audit", d["fail_rate"], f"표본 {d['sample']}개 중 FAIL {d['fail']}개({d['fail_rate'] * 100:.1f}%)")
-        rc = self.run / "15_research_check.json"
-        if rc.exists():
-            d = json.loads(rc.read_text(encoding="utf-8"))
-            self.put("a.research_verified", d.get("verified"), f"{d.get('claims')}개 중 {d.get('verified')}개")
         self.put("a.robust.head_first", bs["head_first_pct"], T["head_first"],
                  note=f"다시 뽑기에서 {nm[R['head_topic']]}가 부정 언급 리뷰어(가중) 1위로 남은 비율")
-        self.put("a.robust.head_neg_ci", bs["head_neg_ci"], T["head_neg_ci"], note="머리 숫자 2의 95% 구간(다시 뽑기)")
-        self.put("a.robust.weakest", R["base"]["weakest"], T["weakest"], note="머리 숫자 3, 괄호는 다시 뽑기의 95% 이상을 덮는 범위")
-        self.put("a.robust.weakest_dist", bs["weakest_dist"], T["weakest_dist"], note="머리 숫자 3의 다시 뽑기 분포")
-        self.put("a.robust.loo_flips", sum(1 for r in rows[1:] if r["flips"]), T["loo_flips"],
-                 note="상품 하나를 뺐을 때 결론(불만 1위, 약한 쪽 과반, 최대 약점 과반)이나 불만 지도 상위 3개 순서가 바뀐 경우 수")
+        self.put("a.robust.head_neg_ci", bs["head_neg_ci"], T["head_neg_ci"], note="머리 주제 부정 언급 리뷰어 비율(head.topic_neg)의 95% 구간(다시 뽑기). 머리 숫자 줄 순서로 부르지 않는다")
+        self.put("a.robust.weakest", R["base"]["weakest"], T["weakest"], note="최대 약점이 머리 주제인 상품 수(head.topic_weakest), 괄호는 다시 뽑기의 95% 이상을 덮는 범위")
+        self.put("a.robust.weakest_dist", bs["weakest_dist"], T["weakest_dist"], note="최대 약점이 머리 주제인 상품 수의 다시 뽑기 분포")
+        self.put("a.robust.loo_flips", sum(1 for r in loo[1:] if r["flips"]), T["loo_flips"],
+                 note="상품 하나를 뺐을 때 결론(불만 1위, 약한 쪽 과반, 최대 약점 과반)이 '빼지 않음'과 달라진 경우 수. 상위 3개 순서만 바뀐 것은 표에만 적고 세지 않는다")
         self.put("a.robust.loo_head_neg", None, f"{f_pct(min(r['head_neg'] for r in loo[1:]))}~{f_pct(max(r['head_neg'] for r in loo[1:]))}",
-                 note="상품 하나씩 뺐을 때 머리 숫자 2의 범위")
+                 note="상품 하나씩 뺐을 때 머리 주제 부정 언급 리뷰어 비율의 범위")
         self.put("a.robust.loo_low_share", None,
                  f"{f_pct(min(r['low_share'] for r in loo[1:]))}~{f_pct(max(r['low_share'] for r in loo[1:]))}",
                  note=f"상품 하나씩 뺐을 때 {di['low']['name']} 쪽 비율의 범위")
@@ -902,6 +976,17 @@ class G:
             self.put(f"{k}.head_neg", r["head_neg"], f_pct(r["head_neg"]))
             self.put(f"{k}.weakest", r["weakest"], f"{r['remain']}개 중 {r['weakest']}개")
             self.put(f"{k}.low_share", r["low_share"], f_pct(r["low_share"]))
+
+    def audits(self):
+        """A장 정확도 두 줄: 설계 정보 추출 감사, 웹 조사 주장 확인(라벨과 상관없어 미리 쓰기 값에도 넣음)"""
+        da = self.run / "14b_detail_audit_summary.json"
+        if da.exists():
+            d = json.loads(da.read_text(encoding="utf-8"))
+            self.put("a.detail_audit", d["fail_rate"], f"표본 {d['sample']}개 중 FAIL {d['fail']}개({d['fail_rate'] * 100:.1f}%)")
+        rc = self.run / "15_research_check.json"
+        if rc.exists():
+            d = json.loads(rc.read_text(encoding="utf-8"))
+            self.put("a.research_verified", d.get("verified"), f"{d.get('claims')}개 중 {d.get('verified')}개")
 
     def accuracy(self):
         """정답 세트 정확도(05_metrics.json accuracy.sonnet)를 A장 문장용 키로. 감성은 방향 일치와 mixed 일치를 따로 적는다."""
@@ -942,8 +1027,8 @@ class G:
         ] + list(self.conf.get("caveats_extra") or [])
 
 
-def build(run):
-    g = G(run)
+def compute(run, early=False, all_labels=False):
+    g = G(run, early=early, all_labels=all_labels)
     g.head()
     g.market_ch()
     g.scoreboard()
@@ -951,8 +1036,16 @@ def build(run):
     g.problems()
     g.standards()
     g.specs_link()
-    g.robustness()
+    if not early:            # 견고성 점검(22_robustness)은 라벨 뒤 단계라 미리 쓰기 값에 넣지 않는다
+        g.robustness()
+    g.audits()
     g.accuracy()
+    # 원인 번호(안 B): 03 원인과 04 기준표 "원인 N 대응"을 같은 표로
+    causes = make_causes(g.conf.get("focus") or [], g.conf.get("standards") or [], g.label_topic, g.label_reviews, g.label_name,
+                         g.conf.get("preference_labels") or [], g.conf.get("cause_min_reviews", 10))
+    g.tables["p.causes"] = causes
+    for row in g.tables.get("std.board") or []:
+        row["causes"] = [c["n"] for c in causes if c["standard"] == row["id"]]
     g.tables["meta.focus"] = [{"id": f["id"], "title": f.get("title"), "split_label": f.get("split_label"),
                                "split_label_name": g.label_name.get(f.get("split_label"), f.get("split_label"))} for f in g.conf.get("focus") or []]
     g.tables["meta.brand_nodes"] = list(g.conf.get("market_nodes_brand_share") or [])
@@ -976,20 +1069,59 @@ def build(run):
                        "labels": f"07b_issue_labels.jsonl {len(g.labels):,}개", "details": f"14_details.jsonl {len(g.details):,}개",
                        "market": "market/market.json(spd-amz-market, 2026-10-07)", "research": "15_research.yaml",
                        **({"specs": "23_specs_verified.json(브랜드 사이트와 소매점 상품 페이지, 다시 열어 확인한 값만)"} if (run / "23_specs_verified.json").exists() else {})}}
-    write_json(run / "16_guide_metrics.json", out)
-    slim = {**out, "ev": {k: {x: e[x] for x in ("t", "s", "n") if x in e} for k, e in g.ev.items()},
-            "note": "16_guide_metrics.json에서 ev의 리뷰 id 목록(i)과 표시 인용(q)만 뺀 작성자용 파일. 값, 표, 인용은 같음"}
-    write_json(run / "16_guide_writer_input.json", slim)
-    print(f"16_guide_metrics.json: 값 {len(g.values)}개, 표 {len(g.tables)}개, 근거 묶음 {len(g.ev)}개"
-          f"(리뷰 id {sum(len(e['i']) for e in g.ev.values()):,}개)")
+    return g, out
+
+
+def write_out(run, g, out, sfx=""):
+    write_json(run / f"16_guide_metrics{sfx}.json", out)
+    slim = {**out, "ev": {k: {x: e[x] for x in ("t", "s", "n") if x in e} for k, e in out["ev"].items()},
+            "note": f"16_guide_metrics{sfx}.json에서 ev의 리뷰 id 목록(i)과 표시 인용(q)만 뺀 작성자용 파일. 값, 표, 인용은 같음"}
+    write_json(run / f"16_guide_writer_input{sfx}.json", slim)
+    print(f"16_guide_metrics{sfx}.json: 값 {len(out['values'])}개, 표 {len(out['tables'])}개, 근거 묶음 {len(out['ev'])}개"
+          f"(리뷰 id {sum(len(e['i']) for e in out['ev'].values()):,}개)")
+
+
+def build(run):
+    g, out = compute(run)
+    write_out(run, g, out)
+    return 0
+
+
+def early_filter(a, b, conf):
+    """라벨 전 값에서 라벨에 기대는 것을 뺀다. a는 라벨이 하나도 없다고 본 계산, b는 모든 리뷰에 모든 라벨이 붙었다고 본 계산.
+    두 계산이 다른 값과 표, 안전 기준(std.<안전 기준 id>.*, 07c), 견고성(머리 숫자 3의 다시 뽑기 범위)에 기대는 값은 late_keys로 돌린다."""
+    dump = lambda x: json.dumps(x, ensure_ascii=False, sort_keys=True)
+    safety_std = {s["id"] for s in conf.get("standards") or [] if s.get("safety")}
+    late = sorted(k for k in set(a["values"]) | set(b["values"])
+                  if dump(a["values"].get(k)) != dump(b["values"].get(k)) or k.split(".")[:2] in [["std", x] for x in safety_std]
+                  or k in ("head.topic_weakest",))
+    late_t = sorted(k for k in set(a["tables"]) | set(b["tables"]) if dump(a["tables"].get(k)) != dump(b["tables"].get(k))
+                    or k in ("std.board", "p.causes", "a.robust"))
+    values = {k: v for k, v in a["values"].items() if k not in late}
+    tables = {k: v for k, v in a["tables"].items() if k not in late_t}
+    used = {v.get("ev") for v in values.values()} | set(re.findall(r'"(ev\.[^"]+)"', dump(tables)))
+    return {**a, "values": values, "tables": tables, "ev": {k: e for k, e in a["ev"].items() if k in used},
+            "quotes": {k: q for k, q in a["quotes"].items() if k in used}, "mode": "early", "late_keys": late, "late_tables": late_t,
+            "note_early": "라벨 전 미리 쓰기용(01, 02, A장). late_keys와 late_tables는 라벨 뒤 16_guide_metrics.json에만 있으므로 쓰지 않는다"}
+
+
+def build_early(run):
+    ga, a = compute(run, early=True)
+    _, b = compute(run, early=True, all_labels=True)
+    out = early_filter(a, b, ga.conf)
+    write_out(run, ga, out, "_early")
+    print(f"  --early: 라벨에 기대는 값 {len(out['late_keys'])}개, 표 {len(out['late_tables'])}개는 뺌(late_keys). 라벨 뒤 guide_metrics.py로 16_guide_metrics.json")
     return 0
 
 
 def main():
     ap = argparse.ArgumentParser(description="개발 가이드 숫자")
     ap.add_argument("run", nargs="?")
+    ap.add_argument("--early", action="store_true",
+                    help="라벨 전 미리 쓰기용(01, 02, A장): 16_guide_metrics_early.json, 16_guide_writer_input_early.json(라벨에 기대는 값은 뺌)")
     args = ap.parse_args()
-    sys.exit(build(resolve_run(args.run)))
+    run = resolve_run(args.run)
+    sys.exit(build_early(run) if args.early else build(run))
 
 
 if __name__ == "__main__":

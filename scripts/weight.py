@@ -7,6 +7,8 @@
       04_gold_eval.json(있으면 부록의 정확도 숫자를 리포트 표기로 옮겨 accuracy에 넣는다)
 출력: 05_metrics.json(리포트 문장에 쓰는 모든 숫자), 05_tables.md(리포트에 그대로 붙일 표),
       05_quote_pool.json(리포트 작성자용 인용 후보: 주제와 감성마다 최대 10개를 브랜드와 별점 고르게, 2026-10-14)
+      --early: 세부 이슈 라벨 전에 같은 계산으로 05_metrics_early.json, 05_tables_early.md, 05_quote_pool_early.json을 쓴다
+        (1~7장과 9장을 라벨을 기다리지 않고 미리 쓰는 데 씀, 2026-10-16. 세부 이슈, 안전, 견고성, 변형 신호의 방향 표 말고는 라벨 뒤 값과 같다).
 
 사용: python scripts/weight.py [회차] --weights-only
   태그와 스키마 없이 가중치만 계산해 05_weights_preview.md(ASIN별 묶음, 표본 수, 실제 %, 방식, 가중치, 경고)를 쓴다.
@@ -40,7 +42,7 @@ from collections import Counter, defaultdict
 from itertools import combinations
 
 import sections
-from pipeline_io import (ASIN_COLS, DIST_COLS, REVIEW_COLS, SENTIMENTS, SIDE_KO, STARS, category_conf, die,
+from pipeline_io import (ASIN_COLS, DIST_COLS, REVIEW_COLS, SENTIMENTS, SIDE_KO, STARS, category_conf, common_topic, die,
                          fmt_pct, fmt_star, load_config, load_csv_or_die, load_schema, now_iso, pct,
                          read_jsonl, real_shares, resolve_run, star_groups, write_json)
 
@@ -48,6 +50,7 @@ from pipeline_io import (ASIN_COLS, DIST_COLS, REVIEW_COLS, SENTIMENTS, SIDE_KO,
 # 리뷰마다 하나씩 붙는 주제(전체 만족도)는 1~3장 분포에만 보이고, 주제끼리 비교하는 곳
 # (ASIN별 강점과 약점, 영향 분석, 공출현)에서는 뺀다. 리뷰 단위 총평이라 별점과 같은 뜻이 되기 때문이다.
 COMPARE_EXCLUDE = ("overall",)
+TIE_PCT = 60                    # 다시 뽑기에서 머리 주제가 1위로 남은 비율이 이보다 낮으면 상위 주제를 "비슷한 수준"으로 씀(2026-10-17 E2)
 
 
 OFF_CATEGORY = "off_category"   # review-tagger가 카테고리 밖 리뷰에 다는 표시(주제가 아님)
@@ -323,7 +326,7 @@ QUOTE_POOL_PER = 10
 QUOTE_MIN_CHARS = 15
 
 
-def quote_pool(run, reviews, tags, brand_of_asin, metrics, per=QUOTE_POOL_PER):
+def quote_pool(run, reviews, tags, brand_of_asin, metrics, per=QUOTE_POOL_PER, suffix=""):
     """리포트 작성자가 04_tags.jsonl과 02_reviews.csv를 통째로 읽지 않게, 인용 후보만 모은 작은 파일(05_quote_pool.json).
     주제와 감성마다 최대 per개: 별점을 돌아가며 하나씩, 같은 별점 안에서는 지금까지 덜 뽑힌 브랜드부터(시드 고정).
     짧은 인용(QUOTE_MIN_CHARS 미만)은 긴 것이 모자랄 때만. 05_metrics.json의 quote_candidates에 있는 리뷰의 브랜드도 함께 적는다."""
@@ -369,7 +372,7 @@ def quote_pool(run, reviews, tags, brand_of_asin, metrics, per=QUOTE_POOL_PER):
             for v in o:
                 walk(v)
     walk(metrics)
-    write_json(run / "05_quote_pool.json", {
+    write_json(run / f"05_quote_pool{suffix}.json", {
         "note": "리포트 작성자용 인용 후보. 04_tags.jsonl의 quote와 02_reviews.csv의 별점, 01_asins.csv의 브랜드를 그대로 옮긴 것. "
                 "주제.감성마다 최대 10개(별점을 돌아가며, 브랜드 고르게). tags는 그 주제와 감성의 전체 태그 수",
         "per_pair": per, "pairs": out,
@@ -386,6 +389,8 @@ def main():
                     help="ASIN별 강점과 약점 후보의 최소 언급 수(그 ASIN 안에서, 정답지 기준 10)")
     ap.add_argument("--weights-only", action="store_true", help="태그 없이 05_weights_preview.md만 만든다")
     ap.add_argument("--as-of", default=None, help="시간 추이 기준 날짜 YYYY-MM-DD(기본: 회차 이름의 날짜, 없으면 오늘)")
+    ap.add_argument("--early", action="store_true",
+                    help="세부 이슈 라벨 전 미리 쓰기용: 05_metrics_early.json, 05_tables_early.md, 05_quote_pool_early.json을 쓴다(같은 계산)")
     args = ap.parse_args()
     run = resolve_run(args.run)
     conf = load_config()
@@ -569,19 +574,44 @@ def main():
     rob = run / "05_robustness.json"
     if rob.exists():          # robustness.py가 만든 견고성 점검(부록 문장용 표기와 요약)
         r = json.loads(rob.read_text(encoding="utf-8"))
-        metrics["robustness"] = {"texts": r["texts"], "bootstrap": r["bootstrap"], "base": r["base"],
+        metrics["robustness"] = {"texts": r["texts"], "definitions": r.get("definitions", {}), "bootstrap": r["bootstrap"], "base": r["base"],
                                  "leave_one_out_flips": sum(1 for x in r["leave_one_out"][1:] if x["flips"]),
                                  "leave_one_out_runs": len(r["leave_one_out"]) - 1,
                                  "leave_one_out_head_neg": [x["head_neg"] for x in r["leave_one_out"][1:]],
                                  "leave_one_out_head_neg_text": f"{min(x['head_neg'] for x in r['leave_one_out'][1:]):.1f}%~"
                                                                 f"{max(x['head_neg'] for x in r['leave_one_out'][1:]):.1f}%"}
-    write_json(run / "05_metrics.json", metrics)
-    n_q, n_p = quote_pool(run, reviews, tags, brand_of_asin, metrics)
-    (run / "05_tables.md").write_text(render_tables({**metrics, "_schema_names": schema}), encoding="utf-8")
+    # 2026-10-17 E2(모든 품목): 문장 표기를 스크립트가 정해 리포트와 가이드가 같은 말을 쓰게 한다.
+    # 상위 주제가 비슷한 수준(다시 뽑기에서 1위로 남은 비율 TIE_PCT% 미만)이면 단독 1위로 쓰지 않는 표기(notes.top_rank_text, must_cover.top_tie)
+    rb = (metrics.get("robustness") or {}).get("bootstrap") or {}
+    top = metrics["must_cover"]["weakness"]
+    if top and rb.get("head_first_pct") is not None:          # 견고성 점검(22_robustness)이 있을 때만
+        txt = ", ".join(f"{t['name_ko']} {t['neg_reviewer_pct']:.1f}%" for t in top)
+        hp = rb.get("head_first_pct")
+        tie = hp is not None and hp < TIE_PCT
+        metrics["must_cover"]["top_tie"] = tie
+        metrics["notes"]["top_rank_text"] = (f"부정 언급 리뷰어(가중) {txt}는 비슷한 수준이다(다시 뽑기에서 1위로 남은 비율: {top[0]['name_ko']} {hp:.1f}%)"
+                                             if tie else f"부정 언급 리뷰어(가중) {txt} 순이다")
+    # 안전 부정 라벨 전부(제품 위험과 몸 반응). 라벨을 늘어놓을 때는 이 표기를 통째로 옮긴다(8장, 12장, 가이드 03장). 12장은 안전 실행 항목이 있어야 한다
+    sc = metrics.get("safety_check")
+    sid = common_topic(schema, "safety")
+    if sc is not None and counts_path.exists() and sid:
+        ent = json.loads(counts_path.read_text(encoding="utf-8"))["topics"].get(f"{sid}.negative") or {}
+        labs = sorted([l for l in ent.get("labels") or [] if l["id"] != "other" and l.get("reviews")], key=lambda l: (-l["reviews"], l["id"]))
+        if labs:
+            sc["label_text"] = "안전 부정 라벨: " + ", ".join(f"{l['name_ko']} {l['reviews']}개" for l in labs)
+            metrics["must_cover"]["safety_action"] = {"rule": "안전 부정 라벨이 있으면 12장 제품 전략에 안전 실행 항목(라벨 이름 하나 이상)을 둔다",
+                                               "labels": [l["name_ko"] for l in labs]}
+    sfx = "_early" if args.early else ""          # --early: 라벨 전 미리 쓰기용 파일 이름(값은 같은 계산)
+    write_json(run / f"05_metrics{sfx}.json", metrics)
+    n_q, n_p = quote_pool(run, reviews, tags, brand_of_asin, metrics, suffix=sfx)
+    (run / f"05_tables{sfx}.md").write_text(render_tables({**metrics, "_schema_names": schema}), encoding="utf-8")
     s = metrics["summary"]
     print(f"집계 완료: 리뷰 {s['reviews']}개, 태그 {s['tags']}개, 표본 평균 {s['sample_mean_star']}★, "
           f"가중 평균 {s['weighted_mean_star']}★. 자체 검사 통과(ASIN {s['asins']}개).")
-    print(f"  리포트 작성자용 인용 후보: 주제와 감성 {n_p}칸, 인용 {n_q}개 → 05_quote_pool.json")
+    print(f"  리포트 작성자용 인용 후보: 주제와 감성 {n_p}칸, 인용 {n_q}개 → 05_quote_pool{sfx}.json")
+    if args.early:
+        print("  --early: 세부 이슈 라벨 전 미리 쓰기용 05_metrics_early.json, 05_tables_early.md, 05_quote_pool_early.json(1~7장과 9장). "
+              "라벨 뒤에 weight.py를 다시 돌려 05_metrics.json을 만든다.")
     for w in weighting["warnings"]:
         print(f"  주의: {w}")
 

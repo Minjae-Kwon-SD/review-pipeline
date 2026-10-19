@@ -95,9 +95,7 @@ guide:
   duration_min_values: 3
   duration_bins: [4, 8, 12, 20]         # 재생 시간 구간(시간)
   number_names: {battery_runtime_hours: 말한 재생 시간, time_to_problem_days: 문제까지 걸린 날, price_paid_usd: 낸 가격}
-  gender_words:
-    male: [" for men", " men ", " men's", "mens", "guys"]
-    female: ["women", "womens", "women's", "for her", "girls"]
+  # gender_words 없음: 성별로 사는 품목이 아니라 모든 검색어를 공통으로 본다(2026-10-15)
   fastest_term_min_volume: 10000
   growth:
     window_weeks: 4
@@ -107,6 +105,10 @@ guide:
   caveat_subcategory: "Portable Bluetooth Speakers"
   caveats_extra:
     - "팀 DB에서 리뷰가 많은 상품 10개를 골랐고, 유료 수집은 켜지 않았다(팀 DB 리뷰만)."
+  # 03장 원인 번호(guide_metrics.make_causes, 2026-10-17 안 B): 집중 분석의 부정 라벨을 기준마다 설계 결함과 선호 차이로 나누고 리뷰 많은 순 2개씩 원인 하나.
+  # 선호 차이(사람마다 원하는 것이 달라 선택지나 안내로 대응할 불만)로 볼 라벨. 나머지는 설계 결함. 스피커 회차 작성자가 정한 원인 3, 4, 17의 라벨을 옮김
+  preference_labels: [bass_overpowering, no_eq_control, too_quiet, wish_bit_louder, app_problems, lights_annoying, annoying_prompts]
+  cause_min_reviews: 10                 # 리뷰가 이보다 적은 라벨은 원인에 넣지 않음
   focus:                                # 03장 집중 분석 4개
     - id: sound
       title: 음질과 음량

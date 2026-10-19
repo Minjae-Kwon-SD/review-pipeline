@@ -8,6 +8,7 @@ call_tool(server, tool, arguments)는 initialize, notifications/initialized, too
 import json
 import os
 import re
+import threading
 import time
 import urllib.error
 import urllib.request
@@ -77,13 +78,14 @@ class Session:
         return json.loads(body)
 
     def _post(self, payload):
-        """네트워크 오류는 2초, 4초, 8초 쉬고 다시 부른다. HTTP 4xx는 바로 멈춘다."""
+        """네트워크 오류, HTTP 5xx와 429(요청이 너무 많음)는 2초, 4초, 8초 쉬고 다시 부른다. 그 밖의 HTTP 4xx는 바로 멈춘다.
+        429는 2026-10-16 시장 데이터를 4개씩 동시에 부르면서 더함."""
         what = payload.get("method")
         for attempt in range(len(RETRY_WAITS) + 1):
             try:
                 return self._post_once(payload)
             except urllib.error.HTTPError as e:
-                if e.code < 500 or attempt == len(RETRY_WAITS):
+                if (e.code < 500 and e.code != 429) or attempt == len(RETRY_WAITS):
                     hint = " 토큰이 맞는지 확인해 주세요." if e.code in (401, 403) else ""
                     raise MCPError(f"{self.server} {what}: HTTP {e.code}.{hint}") from None
                 err = f"HTTP {e.code}"
@@ -124,11 +126,14 @@ class Session:
             raise MCPError(f"{self.server} {tool}: 결과가 JSON이 아닙니다: {text[:200]}") from None
 
 
-_SESSIONS = {}
+_LOCAL = threading.local()   # 스레드마다 세션을 따로 둔다(2026-10-16, market.py fetch가 4개씩 동시에 부름). Session은 스레드 안전하지 않다
 
 
 def call_tool(server, tool, arguments):
-    """도구 하나를 부르고 (원문 텍스트, 읽은 값)을 돌려준다. 같은 서버는 세션을 다시 쓴다."""
-    if server not in _SESSIONS:
-        _SESSIONS[server] = Session(server)
-    return _SESSIONS[server].call(tool, arguments)
+    """도구 하나를 부르고 (원문 텍스트, 읽은 값)을 돌려준다. 같은 서버는 같은 스레드 안에서 세션을 다시 쓴다."""
+    sessions = getattr(_LOCAL, "sessions", None)
+    if sessions is None:
+        sessions = _LOCAL.sessions = {}
+    if server not in sessions:
+        sessions[server] = Session(server)
+    return sessions[server].call(tool, arguments)

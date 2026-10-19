@@ -288,7 +288,15 @@ def leftover_problems(run, text):
 
 
 def category_conf(run):
-    """회차 이름의 첫 부분(perfume-db-... -> perfume)으로 config/categories/<카테고리>.yaml을 읽는다. 없으면 빈 dict."""
-    cat = Path(run).name.split("-")[0]
+    """회차 이름의 첫 부분(perfume-db-... -> perfume)으로 config/categories/<카테고리>.yaml을 읽는다. 없으면 빈 dict.
+    회차 폴더에 category_overrides.yaml이 있으면 그 파일의 맨 위 키(예: guide)가 같은 키를 통째로 바꾼다.
+    같은 품목을 다시 돌려 승인 라벨 id가 달라졌을 때 가이드 라벨 목록을 그 회차 것으로 쓰기 위함(2026-10-18 요가 매트 r2)."""
+    run = Path(run)
+    cat = run.name.split("-")[0]
     p = ROOT / "config" / "categories" / f"{cat}.yaml"
-    return (load_yaml(p) or {}) if p.exists() else {}
+    conf = (load_yaml(p) or {}) if p.exists() else {}
+    rd = run if run.is_absolute() or run.parent != Path(".") else ROOT / "runs" / run.name
+    ov = rd / "category_overrides.yaml"
+    if ov.exists():
+        conf = {**conf, **(load_yaml(ov) or {})}
+    return conf

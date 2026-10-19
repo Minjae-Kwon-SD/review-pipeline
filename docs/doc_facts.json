@@ -1,5 +1,5 @@
 {
-  "made_at": "2026-10-15T10:20:18+09:00",
+  "made_at": "2026-10-15T22:32:23+09:00",
   "run": "bluetoothspeaker-2026-10-14",
   "facts": {
     "gold.reviews": {
@@ -107,7 +107,7 @@
       "source": "14b_detail_audit_summary.json"
     },
     "html.report_numbers": {
-      "text": "2170개",
+      "text": "2171개",
       "source": "06_report_html_check.json numbers_checked"
     },
     "html.report_drill": {
@@ -123,7 +123,7 @@
       "source": "07_guide_html_check.json numbers_checked"
     },
     "html.guide_bundles": {
-      "text": "219개",
+      "text": "224개",
       "source": "07_guide_html_check.json evidence_bundles"
     },
     "html.guide_links": {
@@ -131,7 +131,7 @@
       "source": "07_guide_html_check.json source_links"
     },
     "html.guide_kb": {
-      "text": "2130KB",
+      "text": "2132KB",
       "source": "07_guide_html_check.json size_kb"
     },
     "detail.values": {
@@ -171,7 +171,7 @@
       "source": "05_robustness.json texts.head_neg_ci"
     },
     "robust.loo_flips": {
-      "text": "10번 중 10번",
+      "text": "10번 중 5번",
       "source": "05_robustness.json texts.loo_flips"
     },
     "robust.weakest": {
@@ -375,7 +375,7 @@
       "source": "08_timing.md 시간 나눔"
     },
     "tests": {
-      "text": "413개",
+      "text": "414개",
       "source": "tests/test_scripts.py 실행 결과의 확인 개수"
     },
     "ref.report.reviews": {
@@ -1664,7 +1664,7 @@
       }
     },
     "bluetoothspeaker-2026-10-14": {
-      "made_at": "2026-10-15T10:20:18+09:00",
+      "made_at": "2026-10-15T22:32:23+09:00",
       "facts": {
         "gold.reviews": {
           "text": "40개",
@@ -1771,7 +1771,7 @@
           "source": "14b_detail_audit_summary.json"
         },
         "html.report_numbers": {
-          "text": "2170개",
+          "text": "2171개",
           "source": "06_report_html_check.json numbers_checked"
         },
         "html.report_drill": {
@@ -1787,7 +1787,7 @@
           "source": "07_guide_html_check.json numbers_checked"
         },
         "html.guide_bundles": {
-          "text": "219개",
+          "text": "224개",
           "source": "07_guide_html_check.json evidence_bundles"
         },
         "html.guide_links": {
@@ -1795,7 +1795,7 @@
           "source": "07_guide_html_check.json source_links"
         },
         "html.guide_kb": {
-          "text": "2130KB",
+          "text": "2132KB",
           "source": "07_guide_html_check.json size_kb"
         },
         "detail.values": {
@@ -1835,7 +1835,7 @@
           "source": "05_robustness.json texts.head_neg_ci"
         },
         "robust.loo_flips": {
-          "text": "10번 중 10번",
+          "text": "10번 중 5번",
           "source": "05_robustness.json texts.loo_flips"
         },
         "robust.weakest": {
@@ -2039,7 +2039,7 @@
           "source": "08_timing.md 시간 나눔"
         },
         "tests": {
-          "text": "413개",
+          "text": "414개",
           "source": "tests/test_scripts.py 실행 결과의 확인 개수"
         },
         "ref.report.reviews": {

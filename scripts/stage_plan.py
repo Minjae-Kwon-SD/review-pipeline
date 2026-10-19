@@ -196,6 +196,9 @@ def check(conf):
         for a in s.get("after") or []:
             if a not in S:
                 errors.append(f"{s['id']}의 뒤 단계 {a}가 정의에 없음")
+        for e in s.get("edits") or []:      # 고치기 고리가 바꾸는 입력은 그 단계의 입력이어야 함
+            if e not in (s.get("inputs") or []):
+                errors.append(f"{s['id']}의 edits {e}가 inputs에 없음")
         for o in s.get("outputs") or []:
             for other, pat in owner.items():
                 if o == pat[1] or fnmatch.fnmatch(o, pat[1]) or fnmatch.fnmatch(pat[1], o):

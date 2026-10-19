@@ -8,7 +8,8 @@
         - 머리 주제가 가장 큰 약점인 ASIN 수의 분포와, 다시 뽑기의 95% 이상을 덮는 가장 좁은 범위
     (2) 상품 하나씩 빼기: ASIN마다 그 ASIN을 빼고 머리 주제 부정 리뷰어 비율, 불만 1위와 2위, 최대 약점 상품 수,
         약한 쪽 대 센 쪽 라벨 리뷰 수(config guide.direction_index), 불만 지도 상위 3개를 다시 계산한다.
-        뒤집힘: 머리 주제가 1위가 아님, 약한 쪽이 절반 이하, 최대 약점 상품이 남은 상품의 과반이 아님.
+        뒤집힘: '빼지 않음'의 결론과 달라진 것만 센다(2026-10-15). 결론 셋은 머리 주제가 1위인지, 약한 쪽이 절반을 넘는지,
+        최대 약점 상품이 남은 상품의 과반인지. 처음부터 성립하지 않던 결론은 상품을 빼도 '바뀐 것'이 아니다.
     가중치는 리뷰마다 원래 표본에서 정한 값을 그대로 쓴다(가중치는 ASIN 안에서 정해지므로 상품을 빼도 다른 ASIN의 값은 같고,
     다시 뽑기에서는 근사). 계산 규칙은 weight.py와 같다(주제 비교에서 전체 만족도 제외, 최대 약점은 언급 --strength-min개 이상인 주제 중
     부정 언급 리뷰어 비율이 가장 높은 주제, 같으면 부정 언급 수). '빼지 않음'과 '다시 뽑지 않음' 값이 05_metrics.json과 같은지 스스로 확인한다.
@@ -23,7 +24,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from issues import review_weights  # noqa: E402
-from pipeline_io import ROOT, die, load_schema, load_yaml, now_iso, read_jsonl, resolve_run, write_json  # noqa: E402
+from pipeline_io import ROOT, category_conf, die, load_schema, load_yaml, now_iso, read_jsonl, resolve_run, write_json  # noqa: E402
 
 for _s in (sys.stdout, sys.stderr):
     try:
@@ -42,7 +43,7 @@ class Data:
     def __init__(self, run, strength_min):
         self.run = run
         cat = run.name.split("-")[0]
-        self.conf = (load_yaml(ROOT / "config" / "categories" / f"{cat}.yaml") or {})["guide"]
+        self.conf = category_conf(run)["guide"]
         self.schema = load_schema(run)
         self.reviews, self.weight = review_weights(run)
         tags = [t for t in read_jsonl(run / "04_tags.jsonl")]
@@ -138,14 +139,16 @@ def leave_one_out(D):
         wl = sum(D.weight[i] for i in D.low & idset)
         wh = sum(D.weight[i] for i in D.high & idset)
         share = r1(100.0 * wl / (wl + wh)) if wl + wh else None
+        state = {"first": order[0], "low_major": None if share is None else share > 50, "weak_major": weakest * 2 > remain}
+        base_state = rows[0]["state"] if rows else state
         flips = []
-        if order[0] != D.head:
+        if state["first"] != base_state["first"]:
             flips.append(f"불만 1위가 {D.name[order[0]]}로 바뀜")
-        if share is not None and share <= 50:
-            flips.append(f"{D.di['low']['name']} 쪽이 절반 이하")
-        if weakest * 2 <= remain:
-            flips.append("최대 약점 상품이 과반 아님")
-        rows.append({"out": out, "reviews": len(ids), "head_neg": r1(p[D.head]), "first": order[0], "first_pct": r1(p[order[0]]),
+        if state["low_major"] is not None and base_state["low_major"] is not None and state["low_major"] != base_state["low_major"]:
+            flips.append(f"{D.di['low']['name']} 쪽이 " + ("절반을 넘게 됨" if state["low_major"] else "절반 이하로 바뀜"))
+        if state["weak_major"] != base_state["weak_major"]:
+            flips.append("최대 약점 상품이 " + ("과반이 됨" if state["weak_major"] else "과반이 아니게 됨"))
+        rows.append({"state": state} | {"out": out, "reviews": len(ids), "head_neg": r1(p[D.head]), "first": order[0], "first_pct": r1(p[order[0]]),
                      "second": order[1], "second_pct": r1(p[order[1]]), "weakest": weakest, "remain": remain,
                      "low": low, "high": high, "low_share": share, "top3": order[:3], "flips": flips})
     base = rows[0]["top3"]
@@ -176,10 +179,20 @@ def run_all(run, n, seed, strength_min):
         "weakest_dist": ", ".join(f"{k}개 {v:.1f}%" for k, v in bs["weakest_dist"].items()),
         "loo_flips": f"{len(loo) - 1}번 중 {sum(1 for r in loo[1:] if r['flips'])}번",
     }
+    # 2026-10-17 E4: 표기마다 무엇을 센 값인지 한 줄(작성자 둘이 loo_flips를 서로 다르게 읽음)
+    kinds = sorted({f.split("이 ")[0].split("가 ")[0] for r in loo[1:] for f in r["flips"]})
+    definitions = {
+        "weakest": f"가장 큰 약점이 {D.name[D.head]}인 상품 수(괄호는 리뷰를 다시 뽑았을 때 대부분 들어가는 범위)",
+        "head_first": f"리뷰를 {n}번 다시 뽑았을 때 {D.name[D.head]} 주제가 부정 언급 리뷰어 비율 1위로 남은 비율",
+        "head_neg_ci": f"리뷰를 다시 뽑았을 때 {D.name[D.head]} 부정 언급 리뷰어 비율의 95% 범위",
+        "loo_flips": "상품을 하나씩 뺀 계산 가운데 세 결론(불만 1위 주제, 방향 지수 라벨 쪽이 절반을 넘는지, "
+                     "최대 약점 상품이 과반인지) 중 하나라도 바뀐 횟수"
+                     + (f". 이번에 바뀐 것: {', '.join(kinds)}" if kinds else ""),
+    }
     out = {"made_at": now_iso(), "run": run.name, "head_topic": D.head, "head_name": D.name[D.head],
            "rules": {"strength_min_mentions": strength_min, "exclude": list(EXCLUDE), "direction_index": D.di},
            "base": {"head_neg": loo[0]["head_neg"], "weakest": weakest, "asins": total, "weakest_by_asin": weak_of},
-           "bootstrap": bs, "leave_one_out": loo, "texts": texts, "names": D.name}
+           "bootstrap": bs, "leave_one_out": loo, "texts": texts, "definitions": definitions, "names": D.name}
     write_json(run / "05_robustness.json", out)
     print(f"견고성 점검: 다시 뽑기 {n}번(씨앗 {seed}) {D.name[D.head]} 1위 유지 {texts['head_first']}, 부정 리뷰어 95% 구간 {texts['head_neg_ci']}, "
           f"최대 약점 상품 {texts['weakest']} [{texts['weakest_dist']}]")

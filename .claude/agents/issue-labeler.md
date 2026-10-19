@@ -15,6 +15,8 @@ effort: high
 
 ## 입력 (runs/<회차>/ 아래, 회차와 주제 id는 메인 세션이 알려 줌)
 
+- **다른 회차는 열지 않는다(2026-10-17)**: 읽는 파일은 이 회차 폴더(runs/<회차>/)와 이 지시문이 이름을 적은 파일(config/, .claude/agents/ 등)뿐이다. runs/ 아래 다른 회차의 리포트, 가이드, 태그, 라벨, 감사 파일은 형식이나 문체 참고로도 열지 않는다(rt 시험에서 작성자가 원본 회차 결과를 열어 보고 써서 비교가 흐려짐). 형식은 이 지시문과 config/report_template_ko.md만 따른다.
+
 - 07a_issue_plan.json: 이 주제의 두 방향(negative, positive)마다 인용 수, 표본 수, 표본 파일, 기타만 둘지(only_other)
 - 07a_issue_samples/<주제>_negative.jsonl, <주제>_positive.jsonl: 표본 인용(review_id, asin, star, sentiment, quote). 이것만 읽는다.
 - 03_schema_approved.yaml: 이 주제의 definition, include, exclude(주제 경계 확인용)

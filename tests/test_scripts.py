@@ -159,7 +159,7 @@ def test_sections():
     eq("신뢰 신호", (ts["verified"], ts["unverified"], ts["vine"]["reviews"], ts["helpful_total"],
                     ts["helpful_negative_pct"], ts["helpful_weighted_complaints"], [x["review_id"] for x in ts["top_helpful"]]),
        ({"reviews": 2, "mean_star": 3.0, "negative_pct": 50.0}, {"reviews": 1, "mean_star": 2.0, "negative_pct": 100.0}, 1, 8,
-        62.5, [{"topic": "longevity_projection", "votes": 5, "share_pct": 50.0}, {"topic": "scent", "votes": 5, "share_pct": 50.0}],
+        62.5, [{"topic": "longevity_projection", "votes": 5, "share_pct": 100.0}, {"topic": "scent", "votes": 5, "share_pct": 100.0}],
         ["r1", "r3"]))
 
 
@@ -212,7 +212,7 @@ def test_variant():
     eq("상품 합친 사이즈별 방향", [(r["variant"], r["reviews"], r["asins"], r["high"], r["low"], r["index"]) for r in sigs[0]["pooled"]],
        [("S", 32, 2, 0, 12, -1.0), ("XL", 32, 2, 12, 0, 1.0)])
     eq("ASIN 안 사이즈 행 방향", [(r["variant"], r["direction"]) for r in sigs[0]["asins"][0]["rows"]],
-       [("S", {"high": 0, "low": 6, "index": -1.0}), ("XL", {"high": 6, "low": 0, "index": 1.0})])
+       [("S", {"high": 0, "low": 6, "index": -1.0, "unclear": False}), ("XL", {"high": 6, "low": 0, "index": 1.0, "unclear": False})])
 
 
 def test_issues(tmp):
@@ -396,11 +396,22 @@ def test_issues(tmp):
     bad = ok.replace("리뷰 10개", "리뷰 9개").replace("리뷰 5개", "리뷰 10개").replace("나머지 1개", "나머지 2개")
     eq("리포트 개수 대조(틀림)", len(check_issue_counts(run_, bad, brands)), 3)
     eq("안전 문장 대조(틀림)", len(check_issue_counts(run_, ok.replace("두통 1개(가중 3.3%)", "두통 2개(가중 3.3%)"), brands)), 1)
+    # 2026-10-17 E2: 10장 밖이라도 같은 문장에 브랜드가 있고 그 브랜드 값이면 통과, 브랜드가 없거나 값이 다르면 오류
+    in12 = ok.replace("## 12. 전략 방향\n샘플\n", "## 12. 전략 방향\nBrandA는 부정 24.9%이고 금방 날아감 리뷰 5개다. 샘플\n")   # E4: 소수점은 문장 끝 아님
+    eq("12장 브랜드 안 수", (check_issue_counts(run_, in12, brands), len(check_issue_counts(run_, in12.replace("BrandA는", "그 브랜드는"), brands)),
+                         len(check_issue_counts(run_, in12.replace("리뷰 5개다", "리뷰 4개다"), brands))), ([], 1, 1))
     # 부정어 경고: 같은 문장 안 인용 바로 앞 세 단어
     from audit_quotes import negation_before
     r = {"title": "T", "body": "It no longer smells the same or has staying power. Not bad. It stays with you"}
     eq("부정어 경고", (negation_before("smells the same", r), negation_before("It stays with you", r),
                      negation_before("has staying power", r)), ("longer", None, None))
+    # 문장 숫자 대조(E3): metrics에 없는 단위 숫자는 오류, 계산 규칙 상수 1.96은 허용(2026-10-17 rt7)
+    from audit_quotes import check_prose_numbers
+    pn = Path(tmp) / "prose-2099-01-01"
+    pn.mkdir()
+    (pn / "05_metrics.json").write_text(json.dumps({"a": 3.2, "b": "12개"}), encoding="utf-8")
+    eq("문장 숫자 대조", (check_prose_numbers(pn, "부정 3.2%, 리뷰 12개. 0에서 1.96 / sqrt(n)보다 가까우면 불분명.\n"),
+                       len(check_prose_numbers(pn, "부정 4.4%다.\n"))), ([], 1))
 
 
 def test_price_band():
@@ -547,6 +558,35 @@ def test_collect(tmp):
     out = run("collect.py", "pull", run_, "--mode", "paid", "--confirm-paid", expect=2)
     if "유료 수집이 꺼져 있습니다" not in out:
         FAILS.append(f"꺼진 유료 수집을 거부하지 않음:\n{out}")
+    # 2026-10-19: 유료 수집은 회차 시작 때 담당자 답(00_collect_plan.yaml)이 숫자로 허용해야 하고, 상한, 정렬, 페이지는 그 파일 값
+    sys.path.insert(0, str(SCRIPTS))
+    import collect
+    import contextlib
+    import io
+    base_paid = {"enabled": True, "max_pages_per_star": 1, "max_scrape_calls": 10, "scrape_below_db_reviews": 100}
+    for plan, msg in [(None, "없이는 부르지 않습니다"), ("source: db\nmax_paid_calls: 0\n", "허용하지 않습니다"),
+                      ("source: paid_below\nmax_paid_calls: 0\n", "허용하지 않습니다"), ("source: paid_all\nmax_paid_calls: 5\nsort: top\n", "recent나 helpful")]:
+        pr = tmp / f"plan-{len(msg)}-{bool(plan)}"
+        pr.mkdir(exist_ok=True)
+        if plan:
+            (pr / "00_collect_plan.yaml").write_text(plan, encoding="utf-8")
+        err = io.StringIO()
+        try:
+            with contextlib.redirect_stderr(err):
+                collect.collect_plan_paid(pr, base_paid)
+            FAILS.append(f"수집 계획 거부 안 함: {plan}")
+        except SystemExit:
+            if msg not in err.getvalue():
+                FAILS.append(f"수집 계획 거부 문구 다름({msg}): {err.getvalue()}")
+    pr = tmp / "plan-ok"
+    pr.mkdir(exist_ok=True)
+    (pr / "00_collect_plan.yaml").write_text("source: paid_below\nmax_paid_calls: 30\nsort: helpful\npages_per_star: 2\npaid_below_db_reviews: 50\n", encoding="utf-8")
+    got = collect.collect_plan_paid(pr, base_paid)
+    eq("수집 계획 상한은 작은 쪽, 정렬과 페이지와 기준은 계획 값", (got["max_scrape_calls"], got["sort"], got["max_pages_per_star"], got["scrape_below_db_reviews"]),
+       (10, "helpful", 2, 50))
+    (pr / "00_collect_plan.yaml").write_text("source: paid_all\nmax_paid_calls: 5\n", encoding="utf-8")
+    got = collect.collect_plan_paid(pr, base_paid)
+    eq("paid_all은 selected 전부(기준 0), 정렬 기본 recent", (got["max_scrape_calls"], got["sort"], got["scrape_below_db_reviews"]), (5, "recent", 0))
     summary = {"fiveStar": {"percentage": 70}, "fourStar": {"percentage": 10}, "threeStar": {"percentage": 5},
                "twoStar": {"percentage": 5}, "oneStar": {"percentage": 10}}
     base = {"asin": "B0COLLECT1", "variant_asin": "B0COLLECT2", "verified_purchase": True, "vine_review": False,
@@ -1070,6 +1110,49 @@ def test_guide_pipeline(tmp):
     eq("리뷰 0개 근거 묶음은 링크가 아님", ("data-drill" in g.tnum("0개", "ev.z"), "data-drill" in g.tnum("4개", "ev.a")), (False, True))
 
 
+def test_speaker_review_fixes():
+    """2026-10-15 스피커 06, 07 검토 다섯 가지(모든 품목 규칙): 도움돼요 분모(3★ 포함), 점유율 단위 확인, 안전 기준 범위,
+    가정 값은 머리 숫자 금지, 성별 검색어가 없으면 성별 표와 문장 없음. 견고성 뒤집힘은 test_robustness_specs."""
+    sys.path.insert(0, str(SCRIPTS))
+    import sections
+    import guide_metrics as gm
+    import guide_check as gc
+    import render_guide_html as rg
+    # 1. 도움돼요: 1~2★ 6표, 3★ 2표, 4~5★ 2표 -> 합계 10표 대비 60.0%, 20.0%, 20.0%(3★를 빼고 나누면 75%, 25%가 됨)
+    rv = [{"review_id": "h1", "asin": "A", "star": "1", "title": "t", "verified": "true", "vine": "false", "helpful_votes": "6"},
+          {"review_id": "h2", "asin": "A", "star": "3", "title": "t", "verified": "true", "vine": "false", "helpful_votes": "2"},
+          {"review_id": "h3", "asin": "A", "star": "5", "title": "t", "verified": "true", "vine": "false", "helpful_votes": "2"}]
+    ts = sections.trust_signals(rv, [], ("overall",))
+    eq("도움돼요 별점 쪽 비율은 합계 대비", (ts["helpful_total"], ts["helpful_negative_pct"], ts["helpful_mid_pct"], ts["helpful_positive_pct"]),
+       (10, 60.0, 20.0, 20.0))
+    # 3. 점유율: revenue ÷ marketshare가 모두 같고 노드 매출과도 같으면 매출 점유율로 확인, 하나라도 어긋나면 단위 미확인
+    rows = [{"revenue": 400.0, "marketshare": 0.4}, {"revenue": 100.0, "marketshare": 0.1}]
+    eq("점유율 단위 확인", (gm.share_basis(rows, 1000.0)[0], gm.share_basis(rows)[0], gm.share_basis(rows, 2000.0)[0],
+                       gm.share_basis([{"revenue": 400.0, "marketshare": 0.4}, {"revenue": 100.0, "marketshare": 0.2}])[0],
+                       gm.share_basis(rows[:1])[0]), (True, True, False, False, False))
+    # 5. 안전 기준: 몸 반응 판정 리뷰 + 안전 주제 부정 태그 전부(제품 위험, 기타 포함). 긍정과 다른 주제는 아님
+    tags = [{"review_id": "s1", "topic": "safety", "sentiment": "negative"}, {"review_id": "s2", "topic": "safety", "sentiment": "negative"},
+            {"review_id": "s3", "topic": "safety", "sentiment": "positive"}, {"review_id": "s4", "topic": "quality", "sentiment": "negative"}]
+    eq("안전 기준 불만 범위", sorted(gm.safety_complaints(tags, "safety", {"s1", "s9"})), ["s1", "s2", "s9"])
+    # 3, 4. 가이드 검사: 가정 값을 머리 숫자로 쓰면 FAIL, 성별 표가 비었는데 성별 검색어 수를 쓰면 FAIL
+    M = {"values": {"head.market_year": {"text": "1", "assumption": True}, "head.market_month": {"text": "2"}},
+         "tables": {"m.terms_female": [], "m.terms_male": []}}
+    nl = chr(10)
+    bad = nl.join(["## 머리 숫자", "- [head.market_year] 연", "", "## 01 시장", "- 여성 0개 [m:m.terms_female_n]", ""])
+    good = nl.join(["## 머리 숫자", "- [head.market_month] 월", "", "## 01 시장", "- 연 1 [m:head.market_year]은 가정", ""])
+    eq("가정 값 머리 숫자와 성별 문장 검사", (len(gc.head_gender_problems(bad, M)), gc.head_gender_problems(good, M)), (2, []))
+    M["tables"]["m.terms_female"] = [{"term": "x"}]
+    eq("성별 표가 있으면 성별 문장 허용", gc.head_gender_problems("- 여성 1개 [m:m.terms_female_n]", M), [])
+    # 4. 성별 검색어가 하나도 없으면 HTML에 성별 표 제목을 두지 않음
+    g = object.__new__(rg.R)
+    g.T = lambda s, **k: s.format(**k) if k else s
+    g.M = {"tables": {"m.terms_female": [], "m.terms_male": [], "m.terms_common": [{"term": "speaker", "volume_text": "10", "yoy_text": "-"}]}}
+    h = g.insert_for("검색 수요")
+    eq("성별 없는 품목의 검색 수요 표", ("여성 검색어" in h, "남성 검색어" in h, "speaker" in h), (False, False, True))
+    g.M["tables"]["m.terms_female"] = [{"term": "speaker for women", "volume_text": "5", "yoy_text": "-"}]
+    eq("성별 검색어가 있으면 성별 표", "여성 검색어" in g.insert_for("검색 수요"), True)
+
+
 def test_i18n(tmp):
     """render_html Lang(문구 파일과 이름표, 빠진 문구 기록, notes 틀)와 translate_prep check(줄 수, 숫자, 인용, 한글)"""
     sys.path.insert(0, str(SCRIPTS))
@@ -1127,7 +1210,11 @@ def test_robustness_specs(tmp):
     rows, weak = rb.leave_one_out(D)
     eq("상품별 최대 약점", weak, {"A": "a", "B": "a", "C": "b"})
     eq("빼지 않음 줄", (rows[0]["head_neg"], rows[0]["weakest"], rows[0]["low"], rows[0]["high"], rows[0]["flips"]), (41.7, 2, 4, 1, []))
-    eq("A를 빼면 최대 약점 과반 아님", rows[1]["flips"], ["최대 약점 상품이 과반 아님"])
+    eq("A를 빼면 최대 약점 과반 아님", rows[1]["flips"], ["최대 약점 상품이 과반이 아니게 됨"])
+    D.head = "b"        # 처음부터 과반이 아닌 결론은 상품을 빼도 '바뀜'으로 세지 않는다
+    rows_b, _ = rb.leave_one_out(D)
+    eq("처음부터 성립하지 않던 결론은 뒤집힘 아님", [f for r in rows_b for f in r["flips"] if "최대 약점" in f], [])
+    D.head = "a"
     b1, b2 = rb.bootstrap(D, 200, 7), rb.bootstrap(D, 200, 7)
     eq("다시 뽑기는 씨앗이 같으면 같음", b1, b2)
     eq("95% 범위가 분포를 덮음", sum(v for k, v in b1["weakest_dist"].items() if b1["weakest_range"][0] <= int(k) <= b1["weakest_range"][1]) >= 95, True)
@@ -1178,6 +1265,19 @@ def test_off_category(tmp):
     tags = [t for t in tags if t["review_id"] != off] + [{"review_id": off, "topic": "off_category", "sentiment": "neutral", "quote": "x"}]
     (r / "04_tags.jsonl").write_text("".join(json.dumps(t, ensure_ascii=False) + chr(10) for t in tags), encoding="utf-8")
     run("weight.py", r)
+    # 2026-10-16 미리 쓰기: 라벨 전 상태(07a, 07b, 07c, 견고성 파일 없음)의 같은 이름 회차로 --early를 돌려 라벨 뒤 값과 대조
+    pre = Path(tmp) / "pre" / r.name
+    shutil.copytree(r, pre, ignore=lambda d, names: [n for n in names if n.startswith(("07a_", "07b_", "07c_", "05_"))])
+    run("weight.py", pre, "--early")
+    for n in ("05_metrics_early.json", "05_tables_early.md", "05_quote_pool_early.json"):
+        shutil.copy(pre / n, r / n)
+    if str(SCRIPTS) not in sys.path:
+        sys.path.insert(0, str(SCRIPTS))
+    import report_parts
+    early_tables = {"1-7": chr(10).join("{{표: " + x + "}}" for x in ("요약", "분포", "주제별 언급", "주제 평가", "영향 분석", "시간 추이", "공출현", "신뢰 신호")),
+                    "9": "{{표: 브랜드별 비교}}" + chr(10) + "{{표: ASIN별 비교}}"}
+    eq("라벨 전 --early와 라벨 뒤 값이 1~7장과 9장 범위에서 같음(숫자와 표)",
+       (report_parts.compare_metrics(r), report_parts.compare_tables(r, early_tables)), ((True, []), []))
     m = json.loads((r / "05_metrics.json").read_text(encoding="utf-8"))
     eq("weight.py가 off_category 리뷰를 뺌", (m["summary"]["reviews"], m["off_category"]["reviews"]), (1211, 1))
     out = run("render_html.py", "build", r)
@@ -1483,6 +1583,19 @@ def test_g9_review_fixes(tmp):
     run("timing_report.py", "mark", d, "end", "22_robustness", "--kind", "script")
     st = json.loads((d / "state.json").read_text(encoding="utf-8"))["steps"]["22_robustness"]
     eq("입력이 도중에 바뀌면 needs_human", (st["status"], "input_hash" in st), ("needs_human", False))
+    # 2026-10-17 E4: 고치기 고리가 바꾸는 입력(edits, 09의 06_report.md)은 완료를 막지 않음. 다른 입력이 바뀌면 그대로 needs_human
+    for f in ("06_report.md", "05_metrics.json"):
+        (d / f).write_text("a\n", encoding="utf-8")
+    run("timing_report.py", "mark", d, "start", "09_report_check", "--kind", "agents")
+    (d / "06_report.md").write_text("b\n", encoding="utf-8")
+    run("timing_report.py", "mark", d, "end", "09_report_check", "--kind", "agents")
+    st = json.loads((d / "state.json").read_text(encoding="utf-8"))["steps"]["09_report_check"]
+    ev = [e for e in map(json.loads, (d / "timing.jsonl").read_text(encoding="utf-8").splitlines()) if e.get("step") == "09_report_check"][-1]
+    eq("고치기 입력만 바뀌면 done", (st["status"], "input_hash" in st, ev.get("edited")), ("done", True, ["06_report.md"]))
+    run("timing_report.py", "mark", d, "start", "09_report_check", "--kind", "agents")
+    (d / "05_metrics.json").write_text("b\n", encoding="utf-8")
+    run("timing_report.py", "mark", d, "end", "09_report_check", "--kind", "agents")
+    eq("다른 입력이 바뀌면 needs_human", json.loads((d / "state.json").read_text(encoding="utf-8"))["steps"]["09_report_check"]["status"], "needs_human")
 
 
 def test_g10_rules_known(tmp):
@@ -1625,6 +1738,241 @@ def test_price_complaints():
     eq("가격 묶음 표기", (V["price.band0.range"]["text"], V["price.band0.skin_neg"]["text"], V["price.band0.star"]["text"],
                        V["price.band0.head_neg"]["value"], V["price.unpriced"]["value"], g.ev["ev.price.band0.skin_neg"]["n"]),
        ("1.00~1.50달러/oz", "50.0%", "3.75★", 50.0, 1, 1))
+
+
+def test_guide_split_1017(tmp):
+    """2026-10-17 가이드 장 묶음(안 B): guide_metrics.make_causes(원인 번호 규칙), early_filter(라벨에 기대는 값 빼기),
+    guide_parts.py assemble(장 순서, 맡지 않은 장, 원인 번호 대조, 방향 부호, 1위 단정 경고)."""
+    import yaml
+    sys.path.insert(0, str(SCRIPTS))
+    import guide_metrics as gm
+    # 1. 원인 번호: 집중 분석 순서, 기준 순서, 설계 결함 다음 선호 차이, 리뷰 많은 순 2개씩, 리뷰 10개 미만 라벨은 뺌
+    focus = [{"id": "snd", "title": "소리", "topics": ["sq"]}, {"id": "bat", "title": "배터리", "topics": ["bl"]}]
+    stds = [{"id": "s1", "title": "음질", "neg_labels": ["a", "b", "c", "p", "tiny"]}, {"id": "s2", "title": "배터리", "neg_labels": ["d"]},
+            {"id": "s3", "title": "가격", "neg_labels": ["x"]}]
+    topic = {"a": "sq", "b": "sq", "c": "sq", "p": "sq", "tiny": "sq", "d": "bl", "x": "pv"}
+    revs = {"a": set(range(50)), "b": set(range(30)), "c": set(range(40)), "p": set(range(20)), "tiny": set(range(3)), "d": set(range(12)),
+            "x": set(range(99))}
+    cs = gm.make_causes(focus, stds, topic, revs, {"a": "A불만"}, preference=["p"])
+    eq("원인 번호 규칙", [(c["n"], c["focus"], c["standard_n"], c["type"], [l["id"] for l in c["labels"]]) for c in cs],
+       [(1, "snd", 1, "설계 결함", ["a", "c"]), (2, "snd", 1, "설계 결함", ["b"]), (3, "snd", 1, "선호 차이", ["p"]),
+        (4, "bat", 2, "설계 결함", ["d"])])
+    eq("원인 라벨의 키와 이름", (cs[0]["labels"][0]["key"], cs[0]["labels"][0]["name"], cs[0]["labels"][1]["name"]), ("std.s1.label.a", "A불만", "c"))
+    # 2. early_filter: 두 계산(라벨 없음, 모든 라벨)이 다른 값과 안전 기준, 머리 숫자 3은 late_keys로, 남은 값이 쓰는 근거 묶음만 남김
+    a = {"values": {"m.x": {"value": 1, "text": "1", "ev": "ev.m"}, "std.s1.neg": {"value": 0, "text": "0개", "ev": "ev.s"},
+                    "std.saf.neg": {"value": 5, "text": "5개", "ev": None}, "head.topic_weakest": {"value": 3, "text": "3개", "ev": None}},
+         "tables": {"m.t": [1], "s.scoreboard": [{"dir": 0}]}, "ev": {"ev.m": {}, "ev.s": {}, "ev.z": {}}, "quotes": {"ev.m": [], "ev.s": []}}
+    b = {**a, "values": {**a["values"], "std.s1.neg": {"value": 9, "text": "9개", "ev": "ev.s"}}, "tables": {"m.t": [1], "s.scoreboard": [{"dir": 1}]}}
+    out = gm.early_filter(a, b, {"standards": [{"id": "saf", "safety": True}]})
+    eq("미리 쓰기 값 고르기", (sorted(out["values"]), out["late_keys"], sorted(out["tables"]), sorted(out["ev"]), out["mode"]),
+       (["m.x"], ["head.topic_weakest", "std.s1.neg", "std.saf.neg"], ["m.t"], ["ev.m"], "early"))
+    # 3. guide_parts.py assemble: 묶음 넷을 장 순서로 잇고, 원인 번호와 방향 부호를 대조
+    r = Path(tmp) / "bluetoothspeaker-2099-01-01"
+    r.mkdir()
+    (r / "03_schema_approved.yaml").write_text(yaml.safe_dump({"topics": [{"id": "battery_life", "name_ko": "배터리와 충전", "side": "P"}]},
+                                                              allow_unicode=True), encoding="utf-8")
+    M = {"values": {"s.B1.dir_index": {"value": 0.09, "text": "+0.09"}, "a.robust.head_first": {"value": 51.6, "text": "51.6%"},
+                    "s.B2.dir_index": {"value": -0.1, "text": "-0.10(방향 불분명)"}},
+         "tables": {"p.causes": [{"n": 1, "type": "설계 결함", "standard": "sound"}, {"n": 2, "type": "선호 차이", "standard": "sound"}],
+                    "std.board": [{"id": "sound", "causes": [1, 2]}, {"id": "value", "causes": []}]}}
+    (r / "16_guide_metrics.json").write_text(json.dumps(M, ensure_ascii=False), encoding="utf-8")
+    parts = {"01-02-A": "## 01 시장 개요\n시장.\n## 02 경쟁사\nAnker +0.09 [m:s.B1.dir_index]로 저음 부족 쪽이다. Boom -0.10(방향 불분명) [m:s.B2.dir_index]은 저음 부족 쪽으로 읽지 않는다.\n## A 데이터와 방법\n방법.\n",
+             "03": "## 03 문제\n- 원인 1(설계 결함), 저음: 근거\n- 원인 2(선호 차이), 취향: 근거\n",
+             "04": "## 04 포지셔닝\n#### 기준 1: 음질(원인 1, 2 대응)\n#### 기준 2: 가격(03 원인 밖)\n",
+             "head-05": "# 가이드\n> 부제\n## 머리 숫자\n- 배터리와 충전은 비슷한 수준이다.\n## 05 한 장 요약\n요약.\n"}
+    for k, v in parts.items():
+        (r / f"17_guide_part_{k}.md").write_text(v, encoding="utf-8")
+    run("guide_parts.py", "assemble", r)
+    g = (r / "17_guide.md").read_text(encoding="utf-8")
+    eq("가이드 합치기 순서", [l for l in g.splitlines() if l.startswith("#") and not l.startswith("####")],
+       ["# 가이드", "## 머리 숫자", "## 01 시장 개요", "## 02 경쟁사", "## 03 문제", "## 04 포지셔닝", "## 05 한 장 요약", "## A 데이터와 방법"])
+    eq("부제는 제목 뒤", g.splitlines()[1], "> 부제")
+    bad = {**parts, "03": "## 03 문제\n- 원인 1(선호 차이), 저음: 근거\n## 04 포지셔닝\n",
+           "04": "## 04 포지셔닝\n#### 기준 1: 음질(원인 1 대응)\n#### 기준 2: 가격(03 원인 밖)\n",
+           "01-02-A": parts["01-02-A"].replace("저음 부족 쪽", "저음 과다 쪽"),
+           "head-05": parts["head-05"].replace("비슷한 수준이다", "주제 중 가장 높고 단독 1위다")}
+    for k, v in bad.items():
+        (r / f"17_guide_part_{k}.md").write_text(v, encoding="utf-8")
+    out = run("guide_parts.py", "assemble", r, expect=1)
+    chk = json.loads((r / "17_guide_parts_check.json").read_text(encoding="utf-8"))
+    eq("가이드 합치기 FAIL 종류", (any("맡지 않은 장 '## 04'" in e for e in chk["errors"]), any("원인 1: '선호 차이'" in e for e in chk["errors"]),
+                               any("기준 1 제목의 원인 [1]" in e for e in chk["errors"]), any("'저음 과다' 쪽으로 씀" in e for e in chk["errors"]),
+                               len(chk["warnings"])), (True, True, True, True, 1))
+    (r / "17_guide_part_04.md").unlink()
+    run("guide_parts.py", "assemble", r, expect=1)
+    eq("묶음 빠짐", any("17_guide_part_04.md 없음" in e for e in json.loads((r / "17_guide_parts_check.json").read_text(encoding="utf-8"))["errors"]), True)
+    run("guide_parts.py", "check", r, "--part", "03", expect=1)
+    # 2026-10-19: 미리 쓴 판은 _early.md로 따로 두고 --early로 검사, assemble은 미리 쓴 판을 읽지 않음.
+    # 가이드 기계 검사는 합치기 기록이 없거나 FAIL이면 오류(한 명이 전체를 쓴 가이드를 막음)
+    (r / "17_guide_part_01-02-A_early.md").write_text(parts["01-02-A"], encoding="utf-8")
+    run("guide_parts.py", "check", r, "--part", "01-02-A", "--early")
+    run("guide_parts.py", "check", r, "--part", "03", "--early", expect=1)
+    sys.path.insert(0, str(SCRIPTS))
+    import guide_check as gc
+    eq("합치기 FAIL이면 가이드 검사 오류", len(gc.parts_problems(r)), 1)
+    (r / "17_guide_parts_check.json").unlink()
+    eq("합치기 기록 없으면 가이드 검사 오류", "없음" in gc.parts_problems(r)[0], True)
+    for k, v in parts.items():
+        (r / f"17_guide_part_{k}.md").write_text(v, encoding="utf-8")
+    run("guide_parts.py", "assemble", r)
+    eq("합치기 PASS면 오류 없음", gc.parts_problems(r), [])
+
+
+def test_e2_1017(tmp):
+    """2026-10-17 E2: 방향 불분명 규칙(sections.direction_unclear), cross_check.py(방향 부호, 1위 단정, 안전 라벨 구성)"""
+    import yaml
+    sys.path.insert(0, str(SCRIPTS))
+    import sections as sec
+    eq("방향 불분명 규칙", (sec.direction_unclear(-0.14, 28), sec.direction_unclear(0.88, 16), sec.direction_unclear(None, 3),
+                       sec.fmt_index(-0.14, True), sec.fmt_index(0.88, False)), (True, False, None, "-0.14(방향 불분명)", "+0.88"))
+    r = Path(tmp) / "bluetoothspeaker-2098-01-01"
+    r.mkdir()
+    (r / "01_asins.csv").write_text("asin,title,brand,price_usd,price_band,amazon_rating,status,reason\n"
+                                    "B1,t,Anker,1,low,4.5,selected,x\nB2,t,JBL,1,low,4.5,selected,x\n", encoding="utf-8")
+    (r / "03_schema_approved.yaml").write_text(yaml.safe_dump({"topics": [
+        {"id": "battery_life", "name_ko": "배터리와 충전", "side": "P"}, {"id": "safety", "name_ko": "안전", "side": "P"}]},
+        allow_unicode=True), encoding="utf-8")
+    (r / "05_robustness.json").write_text(json.dumps({"bootstrap": {"head_first_pct": 51.6}}), encoding="utf-8")
+    (r / "07b_issue_counts.json").write_text(json.dumps({"topics": {"safety.negative": {"labels": [
+        {"id": "hot", "name_ko": "뜨거워짐", "reviews": 7}, {"id": "smoke", "name_ko": "연기나 불", "reviews": 4},
+        {"id": "ear", "name_ko": "귀 통증", "reviews": 3}, {"id": "other", "name_ko": "기타", "reviews": 1}]}}}, ensure_ascii=False), encoding="utf-8")
+    (r / "07b_issue_labels.jsonl").write_text(json.dumps({"review_id": "R1", "labels": ["ear"]}) + "\n", encoding="utf-8")
+    (r / "07c_safety_verdicts.yaml").write_text(yaml.safe_dump({"audit": {"verdicts": [{"review_id": "R1", "verdict": "symptom", "symptom_type": "귀"}]}},
+                                                              allow_unicode=True), encoding="utf-8")
+    (r / "06_report.md").write_text("## 8. 핵심\n배터리와 충전은 주제 중 가장 높은 약점이다.\nAnker Black -0.20로 저음 과다 쪽이다.\n"
+                                    "안전 부정 라벨: 뜨거워짐 7개만 적고 연기나 불은 뺀 줄은 없음.\n", encoding="utf-8")
+    (r / "17_guide.md").write_text("## 02 경쟁사\nAnker +0.30 방향은 저음 부족 쪽이다.\n## 03 문제\n안전 부정에서 제품 위험은 뜨거워짐, 연기나 불이다.\n"
+                                   "JBL +0.05(방향 불분명), 배터리와 충전은 품질과 비슷한 수준으로 불만 1위다.\n", encoding="utf-8")
+    run("cross_check.py", r, expect=1)
+    ck = json.loads((r / "19_cross_check.json").read_text(encoding="utf-8"))
+    eq("대조 오류 종류", (sum("방향 부호 반대: Anker" in e for e in ck["errors"]), sum("1위 단정" in e for e in ck["errors"]),
+                     sum("안전 라벨 구성" in e for e in ck["errors"])), (1, 1, 0))
+    (r / "17_guide.md").write_text("## 03 문제\n안전 부정에서 제품 위험은 뜨거워짐만이고 연기나 불은 없다고 적음, 귀 통증 따로.\n", encoding="utf-8")
+    (r / "06_report.md").write_text("## 8. 핵심\n안전 부정 라벨: 뜨거워짐 7개, 귀 통증 3개.\n", encoding="utf-8")
+    run("cross_check.py", r, expect=1)
+    ck = json.loads((r / "19_cross_check.json").read_text(encoding="utf-8"))
+    eq("안전 라벨 빠짐(몸 반응 라벨은 세지 않음)", [e.split(":")[0] for e in ck["errors"]], ["안전 라벨 구성 빠짐"])
+
+
+def test_speedup_1016(tmp):
+    """2026-10-16 속도 개선: report_parts.py(장 묶음 합치기와 표 끼우기, 라벨 전과 뒤 숫자와 표 대조), timing_report.py retry 기록,
+    market.Fetcher 동시 호출에서도 호출 한도를 지킴, mcp_http는 HTTP 429를 다시 부름"""
+    nl = chr(10)
+    if str(SCRIPTS) not in sys.path:
+        sys.path.insert(0, str(SCRIPTS))
+    # 1. report_parts.py assemble: 묶음 7개를 틀 순서로 잇고 {{표: 이름}} 자리에 05_tables.md 블록을 끼운다
+    r = Path(tmp) / "parts-2026-10-16"
+    r.mkdir()
+    (r / "05_tables.md").write_text(nl.join(["<!-- 표:요약 -->", "| a |", "<!-- /표:요약 -->", "", "<!-- 표:분포 -->", "| b |", "<!-- /표:분포 -->", ""]),
+                                    encoding="utf-8")
+    first = ["# 아마존 리뷰 분석: 시험", "", "> 데이터: x", "", "{{표: 요약}}", ""]
+    for i in range(1, 8):
+        first += [f"## {i}. 장", ""] + (["{{표: 분포}}", ""] if i == 1 else []) + ["**데이터 읽기** 내용", ""]
+    parts = {"1-7": nl.join(first), "8": "## 8. 핵심 인사이트" + nl + nl + "### 강점" + nl, "9": "## 9. 브랜드(ASIN)별 비교" + nl,
+             "10": "## 10. 브랜드 심층" + nl, "11": "## 11. 변형 신호" + nl, "12": "## 12. 전략 방향" + nl, "appendix": "## 부록: 방법과 한계" + nl}
+    for k, v in parts.items():
+        (r / f"06_report_part_{k}.md").write_text(v, encoding="utf-8")
+    run("report_parts.py", "assemble", r)
+    rep_ = (r / "06_report.md").read_text(encoding="utf-8")
+    eq("표를 끼우고 표 자리를 남기지 않음", ("<!-- 표:요약 -->" + nl + "| a |" + nl + "<!-- /표:요약 -->" in rep_, "<!-- 표:분포 -->" in rep_, "{{표:" in rep_),
+       (True, True, False))
+    eq("장 순서는 틀과 같음", re.findall(r"^## (\d+)\.", rep_, re.M), [str(i) for i in range(1, 13)])
+    chk = json.loads((r / "06_report_parts_check.json").read_text(encoding="utf-8"))
+    eq("합치기 검사 PASS", (chk["status"], chk["tables_inserted"], chk["metrics_compared"]), ("PASS", ["분포", "요약"], False))
+    # 라벨 전(early)과 뒤(final) 숫자 대조: 라벨 뒤에만 생기는 키(issues, top_issues, generated_at 등)만 다르면 같다고 본다
+    (r / "05_metrics_early.json").write_text(json.dumps({"summary": {"reviews": 10}, "generated_at": "a",
+                                                        "brand_deep": [{"strengths": [{"topic": "x", "top_issues": []}]}]}), encoding="utf-8")
+    (r / "05_metrics.json").write_text(json.dumps({"summary": {"reviews": 10}, "generated_at": "b", "issues": {"x": 1},
+                                                  "brand_deep": [{"strengths": [{"topic": "x", "top_issues": [1]}]}]}), encoding="utf-8")
+    (r / "05_metrics_early.json").write_text(json.dumps({"summary": {"reviews": 10}, "generated_at": "a", "variant_signals": [{"rows": []}],
+                                                        "brand_deep": [{"strengths": [{"topic": "x", "top_issues": []}]}]}), encoding="utf-8")
+    (r / "05_tables_early.md").write_text((r / "05_tables.md").read_text(encoding="utf-8"), encoding="utf-8")
+    run("report_parts.py", "assemble", r)
+    eq("라벨에 기대는 키(세부 이슈, 변형 신호 등)만 다르면 같다고 봄", json.loads((r / "06_report_parts_check.json").read_text(encoding="utf-8"))["metrics_compared"], True)
+    (r / "05_tables_early.md").write_text((r / "05_tables.md").read_text(encoding="utf-8").replace("| b |", "| b2 |"), encoding="utf-8")
+    out = run("report_parts.py", "assemble", r, expect=1)
+    if "미리 쓴 장이 쓰는 표가 라벨 전후로 다름: 분포" not in out:
+        FAILS.append(f"미리 쓴 장의 표가 라벨 전후로 다른데 잡지 못함:{nl}{out}")
+    (r / "05_tables_early.md").unlink()
+    (r / "05_metrics.json").write_text(json.dumps({"summary": {"reviews": 11}, "issues": {}}), encoding="utf-8")
+    out = run("report_parts.py", "assemble", r, expect=1)
+    if "summary" not in out or "다시 써" not in out:
+        FAILS.append(f"early와 final 숫자가 다른데 잡지 못함:{nl}{out}")
+    (r / "05_metrics.json").write_text(json.dumps({"summary": {"reviews": 10}}), encoding="utf-8")
+    # 표를 직접 붙인 묶음, 다른 장 제목, 묶음 파일 빠짐은 FAIL
+    (r / "06_report_part_9.md").write_text("## 9. 브랜드(ASIN)별 비교" + nl + "<!-- 표:브랜드별 비교 -->" + nl, encoding="utf-8")
+    out = run("report_parts.py", "check", r, "--part", "9", expect=1)
+    if "표를 직접 붙였음" not in out:
+        FAILS.append(f"표를 직접 붙인 묶음을 잡지 못함:{nl}{out}")
+    (r / "06_report_part_9.md").write_text("## 9. 비교" + nl + "## 10. 심층" + nl, encoding="utf-8")
+    out = run("report_parts.py", "check", r, "--part", "9", expect=1)
+    if "장 제목이 맞지 않음" not in out:
+        FAILS.append(f"다른 장 제목을 잡지 못함:{nl}{out}")
+    (r / "06_report_part_9.md").write_text(parts["9"], encoding="utf-8")
+    (r / "06_report_part_12.md").unlink()
+    out = run("report_parts.py", "assemble", r, expect=1)
+    if "묶음 파일 없음: 06_report_part_12.md" not in out:
+        FAILS.append(f"빠진 묶음 파일을 잡지 못함:{nl}{out}")
+    # 2. timing_report.py retry: 다시 부른 기록을 남기고 시간 표가 단계별로 센다
+    d = Path(tmp) / "retry-2026-10-16"
+    d.mkdir()
+    run("timing_report.py", "mark", d, "start", "22_robustness", "--kind", "script")
+    run("timing_report.py", "retry", d, "22_robustness", "--batches", "B1_01, B1_02", "--reason", "인용 검사 실패")
+    run("timing_report.py", "mark", d, "end", "22_robustness", "--kind", "script", "--calls", "3", "--retries", "1")
+    ev = [json.loads(l) for l in (d / "timing.jsonl").read_text(encoding="utf-8").splitlines()]
+    eq("retry 기록(단계, 묶음, 이유)", [(e["step"], e["batches"], e["reason"]) for e in ev if e["event"] == "retry"],
+       [("22_robustness", ["B1_01", "B1_02"], "인용 검사 실패")])
+    out = run("timing_report.py", "report", d)
+    if "다시 부른 기록(retry): 22_robustness 1번(묶음 2개)" not in out:
+        FAILS.append(f"시간 표가 retry 기록을 세지 않음:{nl}{out}")
+    out = run("timing_report.py", "pause", d, "--reason", "wrong", expect=2)
+    if "limit|pc_off" not in out:
+        FAILS.append(f"pause의 --reason 검사가 빠짐:{nl}{out}")
+    # 3. market.Fetcher: 4개씩 동시에 불러도 호출 한도를 넘지 않고 기록이 섞이지 않는다
+    import market
+    import threading
+    import time
+    f = market.Fetcher(Path(tmp) / "mk2", 3)
+    seen, lock = [], threading.Lock()
+
+    def fake(*a, **k):
+        with lock:
+            seen.append(a)
+        time.sleep(0.05)
+        return ("[]", [])
+    market.call_tool = fake
+    market.run_all([lambda i=i: f.get("products_history", {"asin": f"B0{i}"}, f"B0{i}") for i in range(8)], 4)
+    log = [json.loads(l) for l in (Path(tmp) / "mk2" / "market" / "calls.jsonl").read_text(encoding="utf-8").splitlines()]
+    eq("동시 호출에서도 한도 3을 지킴(성공 3, 한도 기록 5)", (len(seen), f.calls, len(log), sum(1 for x in log if x.get("error") == "호출 한도")), (3, 3, 8, 5))
+    eq("run_all은 1이면 차례로", market.run_all([lambda: seen.append("x")], 1), None)
+    import mcp_http
+    import urllib.error
+    s = mcp_http.Session.__new__(mcp_http.Session)
+    s.server, tries = "x", []
+
+    def once(payload):
+        tries.append(1)
+        if len(tries) == 1:
+            raise urllib.error.HTTPError("u", 429, "too many", {}, None)
+        return {"ok": 1}
+    s._post_once = once
+    waits = mcp_http.RETRY_WAITS
+    mcp_http.RETRY_WAITS = (0, 0, 0)
+    try:
+        eq("HTTP 429는 쉬고 다시 부름", (s._post({"method": "m"}), len(tries)), ({"ok": 1}, 2))
+        tries.clear()
+
+        def bad(payload):
+            tries.append(1)
+            raise urllib.error.HTTPError("u", 401, "no", {}, None)
+        s._post_once = bad
+        try:
+            s._post({"method": "m"})
+            FAILS.append("HTTP 401에서 멈추지 않음")
+        except mcp_http.MCPError:
+            eq("HTTP 401은 바로 멈춤", len(tries), 1)
+    finally:
+        mcp_http.RETRY_WAITS = waits
 
 
 def main():
@@ -2023,6 +2371,28 @@ def main():
         p = subprocess.run([sys.executable, str(proj / ".claude" / "hooks" / "timing.py")], input=b"not json",
                            capture_output=True)
         eq("Hook이 잘못된 입력에도 종료 코드 0", p.returncode, 0)
+        # 다른 회차 막는 Hook(2026-10-17): 하위 에이전트만, 지금 회차와 config는 열고, 다른 회차와 시험 기록, 저장소 전체 훑기는 막음
+        shutil.copy(HERE.parent / ".claude" / "hooks" / "guard_runs.py", proj / ".claude" / "hooks" / "guard_runs.py")
+        (proj / "runs" / "r0").mkdir()
+
+        def guard(tool, inp, agent="a1"):
+            d = {"tool_name": tool, "tool_input": inp, **({"agent_id": agent} if agent else {})}
+            p = subprocess.run([sys.executable, str(proj / ".claude" / "hooks" / "guard_runs.py")], input=json.dumps(d).encode("utf-8"),
+                               capture_output=True)
+            out = p.stdout.decode("utf-8")
+            return ("deny" if '"deny"' in out else "allow", p.returncode)
+        P = str(proj)
+        eq("다른 회차 막기", [guard("Read", {"file_path": P + "\\runs\\r0\\06_report.md"}),
+                           guard("Read", {"file_path": P + "\\runs\\r1\\05_metrics.json"}),
+                           guard("Read", {"file_path": P + "\\runs\\r0\\06_report.md"}, agent=None),
+                           guard("Read", {"file_path": P + "\\docs\\experiments_1016.md"}),
+                           guard("Read", {"file_path": P + "\\config\\report_template_ko.md"}),
+                           guard("Grep", {"pattern": "x"}),
+                           guard("Grep", {"pattern": "x", "path": P + "\\runs\\r1"}),
+                           guard("Glob", {"pattern": "runs/*/06_report*.md", "path": P}),
+                           guard("Glob", {"pattern": "*.md", "path": P + "\\config"}),
+                           guard("Bash", {"command": "cat runs/r0/06_report.md"})],
+           [("deny", 0), ("allow", 0), ("allow", 0), ("deny", 0), ("allow", 0), ("deny", 0), ("allow", 0), ("deny", 0), ("allow", 0), ("deny", 0)])
 
         test_star_groups()
         test_price_band()
@@ -2041,6 +2411,7 @@ def main():
         test_guide_pipeline(Path(tmp))
         test_i18n(Path(tmp))
         test_robustness_specs(Path(tmp))
+        test_speaker_review_fixes()
         test_off_category(Path(tmp))
         test_fake_category(Path(tmp))
         test_sentiment_split()
@@ -2052,6 +2423,9 @@ def main():
         except BaseException as e:   # 고치기 전 재현용: 예외도 실패로 센다
             FAILS.append(f"test_g9_review_fixes 예외: {type(e).__name__}: {e}")
         test_g10_rules_known(Path(tmp))
+        test_speedup_1016(Path(tmp))
+        test_guide_split_1017(Path(tmp))
+        test_e2_1017(Path(tmp))
 
     if FAILS:
         print("실패:")

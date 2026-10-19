@@ -1,0 +1,17 @@
+{
+  "made_at": "2026-10-17T13:43:25+09:00",
+  "source_run": "hairremovalcream-2026-10-10",
+  "files": {
+    "report_exemplar.md": {
+      "lines": 136,
+      "leaks": [],
+      "status": "PASS"
+    },
+    "guide_exemplar.md": {
+      "lines": 189,
+      "leaks": [],
+      "status": "PASS"
+    }
+  },
+  "status": "PASS"
+}

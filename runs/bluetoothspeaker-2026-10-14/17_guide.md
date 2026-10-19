@@ -5,8 +5,8 @@
 - [head.topic_neg] 배터리와 충전을 부정으로 말한 리뷰어 비율(별점 가중)로 불만 1위지만, 다시 뽑기에서 1위로 남은 비율이 51.6% [m:a.robust.head_first]뿐이라 품질과 내구성 3.1% [m:p.map.quality], 음질과 사실상 같은 수준이고 세 주제를 함께 첫 개발 관문으로 둔다
 - [head.topic_weakest] 가장 큰 약점이 배터리와 충전인 상품 수, 모두 손바닥 크기나 샤워용 작은 스피커(JBL Go 4, JBL Clip 5, Soundcore Select 4 Go)이고 나머지 상품은 음질, 조작, 품질, 포장이 가장 큰 약점
 - [head.dir_ratio] 음질 불만의 방향은 저음 부족 쪽 라벨이 훨씬 많고, 가중해도 저음 부족 1.2% [m:head.dir_high_w] 대 저음 과다 0.3% [m:head.dir_low_w]로 같은 방향
-- [m.top10_share_PBT] Portable Bluetooth Speakers 노드의 상위 10개 브랜드 점유율 합(단위 미확인 값을 %로 읽음), 1위는 JBL 40.7% [m:m.top1_PBT]
-- [head.market_month] Portable Bluetooth Speakers 노드의 월 매출 칸, 달러로 읽으면 500,117,948(월 매출을 달러로 읽을 때 연 환산) [m:head.market_year]
+- [m.top10_share_PBT] Portable Bluetooth Speakers 노드의 상위 10개 브랜드 점유율 합(브랜드 매출 ÷ 노드 매출로 확인한 매출 점유율), 1위는 JBL 40.7% [m:m.top1_PBT]
+- [head.market_month] Portable Bluetooth Speakers 노드의 월 매출 칸(기간은 월, 통화는 확인 못 함). 연 환산은 가정이라 머리 숫자로 쓰지 않음
 
 ## 01 시장 개요
 **TL;DR** 블루투스 스피커는 이미 넓게 찾는 범주이고(공통 검색어 검색량 합 5,225,292 [m:m.terms_common_volume]), Portable Bluetooth Speakers 노드는 JBL 한 브랜드가 40.7% [m:m.top1_share_PBT]를 차지한다. 첫 상품은 JBL의 작은 단계와 같은 값대에서 재생 시간과 충전 신뢰로 차별하는 손바닥 크기 방수 스피커를 확인이 필요한 권고로 둔다.
@@ -18,12 +18,12 @@
 - **넓은 범위의 보고서**: 와이파이와 스마트 스피커까지 넣은 미국 무선 스피커 시장은 2024년 61.4억 달러다 [r:mkt_10].
 - **성장률**: 미국 들고 다니는 블루투스 스피커는 연평균 10.1% [r:mkt_04], 미국 무선 스피커 전체는 12.01% [r:mkt_11]로 본다.
 - **유통 경로**: 세계 들고 다니는 블루투스 스피커 매출의 약 62.10%가 매장 유통이라는 보고서가 있어 [r:mkt_08], 아마존 노드 값은 시장 전체의 일부로만 읽는다.
-- **SAM(아마존 미국 노드)**: Portable Bluetooth Speakers는 41,676,496(월 매출 칸, 단위 미확인) [m:head.market_month], 500,117,948(월 매출을 달러로 읽을 때 연 환산) [m:head.market_year]이다.
+- **SAM(아마존 미국 노드, 확인 필요)**: Portable Bluetooth Speakers는 41,676,496(월 매출 칸, 통화 미확인) [m:head.market_month]이다. 연 크기는 500,117,948(가정: 통화 미확인 월 매출 x 12, 계절 변동 미반영) [m:head.market_year]로 어림한 가정이고, 확인된 SAM이 아니다.
 - **SOM(확인 필요)**: 상위 10개 브랜드 몫 73.8% [m:m.top10_share_PBT] 밖에서 시작하고, 목표 금액은 매출 칸 단위를 확인한 뒤 정한다.
 
 ### 판정 3개
 - **침투: 이미 넓게 찾는 범주**: 공통 검색어 94개 [m:m.terms_common_n]의 한 달 검색량 합이 5,225,292 [m:m.terms_common_volume]라, 새 범주를 알리는 일보다 이미 찾는 사람에게 고르게 하는 일이 과제다.
-- **경쟁 집중: JBL 한 브랜드 중심**: 상위 10개 브랜드 점유율 합 73.8% [m:m.top10_share_PBT], 1위 JBL 40.7% [m:m.top1_PBT]이고(점유율 칸은 단위 미확인 값을 %로 읽음), 검색어도 jbl bluetooth speaker, jbl, jbl speaker처럼 브랜드 이름이 앞선다.
+- **경쟁 집중: JBL 한 브랜드 중심**: 상위 10개 브랜드 점유율 합 73.8% [m:m.top10_share_PBT], 1위 JBL 40.7% [m:m.top1_PBT]이고(브랜드 매출 ÷ 노드 매출로 확인한 매출 점유율), 검색어도 jbl bluetooth speaker, jbl, jbl speaker처럼 브랜드 이름이 앞선다.
 - **기회: 같은 값대의 재생 시간 신뢰**: 시장 가격 1구간 27.42~131.31 [m:m.price_band1_range]의 매출 비중은 17.4% [m:m.price_band1_share]로 작아 싼 값만으로 들어갈 자리는 아니고, 배터리와 충전이 불만 1위라 조사 상품의 작은 단계와 같은 값대에서 재생 시간 신뢰로 차별할 자리를 찾는다. 빠르게 크는 검색어는 이력이 없어 판단하지 않는다.
 
 가장 큰 약점이 배터리와 충전인 상품은 10개 중 3개(리뷰를 다시 뽑아 보면 2~4개) [m:head.topic_weakest]로 JBL Go 4, JBL Clip 5, Soundcore Select 4 Go이고 셋 다 작은 스피커다. 다만 몇 안 되는 상품에서 나란히 보인 것이고 크기가 원인이라는 뜻은 아니다(작은 DEWALT 상품은 품질과 내구성이 가장 큰 약점).
@@ -31,8 +31,7 @@
 Outdoor Speakers 노드는 상위 10개 합 68.8% [m:m.top10_share_OUT], 1위 Polk Audio 14.8% [m:m.top1_OUT]로 덜 몰려 있고, 조사 상품은 이 노드에 없다.
 
 ### 검색 수요
-- 검색어는 성별 구분이 없는 공통 검색어 94개 [m:m.terms_common_n]가 전부이고, 여성 검색어는 0개 [m:m.terms_female_n]다.
-- 남성 검색어도 0개 [m:m.terms_male_n]라 성별로 상품을 나누지 않는다.
+- 검색어는 성별로 나뉘지 않고 94개 [m:m.terms_common_n]를 함께 보며, 성별로 상품을 나누지 않는다.
 - 상위 검색어는 bluetooth speaker, jbl bluetooth speaker, dewalt, jbl, jbl speaker 순으로 브랜드 이름이 든 검색어가 많다.
 - 쓰는 곳 검색어는 shower speaker 58,183 [m:std.water.term.shower speaker]가 방수 검색어 가운데 가장 크고, outdoor speakers 38,397 [m:std.loudness.term.outdoor speakers]가 뒤를 잇는다.
 - 크기 검색어는 jbl clip 41,755 [m:std.portability.term.jbl clip], small bluetooth speaker 26,328 [m:std.portability.term.small bluetooth speaker]처럼 작은 스피커를 찾는 말이 크다.
@@ -261,7 +260,7 @@ Outdoor Speakers 노드는 상위 10개 합 68.8% [m:m.top10_share_OUT], 1위 Po
 > "클립이 약해서 고정이 안 된다" (DEWALT, 2★, R1OU7LUX1WQ8XO)
 
 #### 기준 9: 발열과 안전(원인 7 대응)
-- 감점 기준: 이 기준의 부정은 몸 반응 리뷰 3개 [m:std.safety.neg], 가중 0.0% [m:std.safety.neg_pct]만 세고, 충전 단자 과열과 녹음, 충전 중 연기는 안전 인용으로 따로 본다.
+- 감점 기준: 안전 부정 리뷰 26개 [m:std.safety.neg], 가중 0.1% [m:std.safety.neg_pct]이고, 몸 반응 판정 리뷰 말고는 대부분 기기가 뜨거워짐 7개 [m:std.safety.label.overheats], 충전 단자나 케이블이 녹거나 탐 7개 [m:std.safety.label.charging_port_melt], 연기가 나거나 불이 붙음 4개 [m:std.safety.label.smoke_or_fire] 같은 제품 위험 쪽 말이고, 불이 나거나 터질까 걱정 4개 [m:std.safety.label.fire_risk_worry]는 실제 일이 아니라 걱정이다.
 - 만족 기준: 긍정 리뷰는 0개 [m:std.safety.pos]라 발열과 과열 언급이 없는 수준을 기준으로 둔다.
 - 개발 기준: 셀과 배터리는 UN 38.3 [r:reg_08]과 IEC 62133-2 [r:tst_14], 완제품은 UL 62368-1 [r:tst_15]로 시험한다. 충전 단자 온도 상한은 확인 필요(조사 근거 없음).
 - 상세페이지 문구: "Battery tested to UN 38.3 and IEC 62133-2" (UN 38.3과 IEC 62133-2 시험을 거친 배터리). 시험 통과 뒤에만 쓴다.
@@ -370,7 +369,7 @@ Outdoor Speakers 노드는 상위 10개 합 68.8% [m:m.top10_share_OUT], 1위 Po
 - 배터리와 충전 부정 비율(머리 숫자)의 다시 뽑기 구간은 2.8%~3.5% [m:a.robust.head_neg_ci]이다.
 - 가장 큰 약점이 배터리와 충전인 상품 수의 다시 뽑기 분포는 0개 0.1%, 1개 3.2%, 2개 28.9%, 3개 46.1%, 4개 20.9%, 5개 0.8% [m:a.robust.weakest_dist]다.
 - 상품을 하나씩 빼도 배터리와 충전 부정은 3.0%~3.4% [m:a.robust.loo_head_neg], 저음 과다 쪽 비율은 10.2%~26.2% [m:a.robust.loo_low_share] 안에 있다.
-- 상품을 하나씩 뺀 계산에서 결론이 바뀐 것으로 센 경우는 10번 중 10번 [m:a.robust.loo_flips]이다. 전체 데이터에서도 저음 과다 쪽이 절반 이하이고 최대 약점 상품이 과반이 아니어서 이 두 항목은 늘 바뀜으로 셈되고, 불만 1위가 실제로 바뀐 것은 JBL Flip 5, JBL Go 4, JBL Clip 5, JBL Charge 6, Soundcore Select 4 Go를 뺐을 때다.
+- 상품을 하나씩 뺀 계산에서 결론이 바뀐 경우는 10번 중 5번 [m:a.robust.loo_flips]이고, 모두 불만 1위가 바뀐 경우다(JBL Flip 5, JBL Go 4, JBL Clip 5, JBL Charge 6, Soundcore Select 4 Go를 뺐을 때). 저음 과다 쪽이 절반 이하이고 최대 약점 상품이 과반이 아닌 것은 전체 데이터에서도 그래서 바뀜으로 세지 않는다.
 - 이 점검은 고른 상품 안의 표본 흔들림만 재고, 어떤 상품을 골랐는지에 따른 치우침은 재지 못한다.
 
 ### 주의 사항
@@ -378,7 +377,7 @@ Outdoor Speakers 노드는 상위 10개 합 68.8% [m:m.top10_share_OUT], 1위 Po
 - 자유 서술에서 뽑은 수치(말한 재생 시간, 문제까지 걸린 날 등)는 리뷰어가 적은 값이라 측정값이 아니고 방향과 분포로만 읽는다.
 - 개발 기준의 사양 숫자는 웹 조사 출처를 근거로 한 시작점이라 시험으로 확인해야 한다.
 - 조사 상품이 적고 대부분 한 하위 카테고리(Portable Bluetooth Speakers)라 상품끼리, 하위 카테고리끼리의 비교가 약하고, JBL 상품이 가장 많아 결과가 이 브랜드 쪽으로 기울 수 있다.
-- 시장 데이터(spd-amz-market)의 매출, 점유율, 증감, 승률 칸은 문서에 단위가 없어 단위 미확인으로 적었고, 연 환산 값은 월 매출 칸을 달러로 가정한 것이다.
+- 시장 데이터(spd-amz-market)의 매출, 증감, 승률 칸은 문서에 단위가 없어 단위 미확인으로 적었고(점유율 칸은 브랜드 매출 ÷ 노드 매출과 같아 매출 점유율로 확인), 연 환산 값은 통화를 확인하지 못한 월 매출 칸에 12를 곱한 가정이라 머리 숫자로 쓰지 않았다.
 - ASIN은 매출 순위가 아니라 공유 DB에 리뷰가 많은 후보 가운데 고른 상품이고(상품 확인 관문에서 사람이 확인), 팀 DB 리뷰만 썼으며 유료 수집은 켜지 않았다.
 - 성장 배수 머리 숫자는 후보 검색어 264개 [m:m.growth_candidates] 가운데 주간 이력을 받은 검색어가 0개 [m:m.growth_ranked]라 쓰지 않았고, 시장 데이터의 yoYChangePct 칸은 뜻과 단위가 확인되지 않아 검색 수요 표의 전년 대비 칸도 참고로만 본다.
 - 배터리와 고장 집중 분석의 문제까지 걸린 날은 같은 설계 정보 항목이라 두 분석에서 같은 값이고, 배터리 문제만의 기간이 아니다.

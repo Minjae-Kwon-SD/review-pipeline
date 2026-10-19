@@ -19,7 +19,7 @@
       관문 답(human 단계 end, wait end)이 안에 든 단계는 기다림이 섞였으므로 AI 작업에 넣지 않고 이름만 적는다.
     담당자 라벨링 = gold/, gold_score/의 gold_label_times.json에서 화면을 연 때부터 마지막 저장이나 제출까지(다시 열면 더함).
     담당자 기다림 = wait start~end(와 human 단계의 start~end)에서 라벨링과 멈춤을 뺀 것.
-    멈춤 = pause 기록. 끝 기록 없는 에이전트 실행은 시간에 넣지 않고 개수만 센다. 기록이 없는 값은 "기록 없음".
+    멈춤 = pause 기록. 다시 부름 = retry 기록(단계와 묶음 id, 2026-10-16. 시간 표가 단계별 재시도 수를 적는다). 끝 기록 없는 에이전트 실행은 시간에 넣지 않고 개수만 센다. 기록이 없는 값은 "기록 없음".
     같은 단계를 두 번 이상 시작했으면 단계마다 마지막 시도만 더한 값을 따로 적는다.
 """
 import argparse
@@ -53,6 +53,16 @@ def stage_files(run, step):
     return stage_plan.input_files(run, st) if st else None
 
 
+def stage_edits(step):
+    """단계의 고치기 고리가 바꿔도 되는 입력 파일(config/stages.yaml의 edits)"""
+    try:
+        import stage_plan
+        st = stage_plan.stage_by_id(stage_plan.load_conf()).get(step)
+    except SystemExit:
+        return []
+    return (st or {}).get("edits") or []
+
+
 HUMAN_KINDS = ("human",)
 
 
@@ -78,6 +88,11 @@ def mark(run, edge, step, kind, calls=None, retries=None, workers=None, force=Fa
         # 단계가 스스로 만든 입력(시작 때 없던 파일, 예: 12_market의 market/raw)은 보지 않는다.
         now = stage_files(run, step) or {}
         changed = sorted(f for f, h in prev["input_files_start"].items() if now.get(f) != h)
+        # 2026-10-17 E4: 단계의 고치기 고리가 바꾸는 입력(stages.yaml edits, 예: 09의 06_report.md)은 완료를 막지 않고 기록만
+        edits = set(stage_edits(step))
+        if edits & set(changed):
+            ev["edited"] = sorted(edits & set(changed))
+            changed = [f for f in changed if f not in edits]
         if changed:
             status = "needs_human"
             ev["status"] = status
@@ -116,6 +131,13 @@ def wait(run, edge, gate, force=False):
             return 1
     append_event(run, {"ts": ts, "event": "wait_" + edge, "gate": gate})
     print(f"{gate}: 기다림 {edge}")
+    return 0
+
+
+def retry(run, step, batches, reason):
+    """묶음을 다시 부를 때마다 남기는 기록(2026-10-16). 재시도 수가 상한 안인지, 동시 수를 올린 뒤 실패가 느는지 보려고 센다."""
+    append_event(run, {"ts": now_iso(), "event": "retry", "step": step, "batches": batches, "reason": reason})
+    print(f"{step}: 다시 부름 기록(묶음 {len(batches)}개)")
     return 0
 
 
@@ -308,6 +330,17 @@ def report(run):
         notes.append("- 두 번 이상 시작한 단계: " + ", ".join(f"{n} {c}번" for n, c in retried.items())
                      + f". 단계마다 마지막 시도만 더한 기계 시간은 {sum(last_try.values()):.1f}분입니다"
                      " (단계 사이의 짧은 틈은 빠짐).")
+    rts = [e for e in read_jsonl(path) if e.get("event") == "retry"]
+    if rts:
+        per = {}
+        for e in rts:
+            c = per.setdefault(e.get("step") or "?", [0, 0])
+            c[0] += 1
+            c[1] += len(e.get("batches") or [])
+        notes.append("- 다시 부른 기록(retry): " + ", ".join(f"{st} {c}번(묶음 {b}개)" for st, (c, b) in per.items())
+                     + ". 동시 수를 올린 뒤 늘었는지 지난 회차와 비교합니다.")
+    else:
+        notes.append("- 다시 부른 기록(retry): 없음")
     notes += split_section(run, read_jsonl(path), rows)
     (run / "08_timing.md").write_text("\n".join(lines + [""] + notes) + "\n", encoding="utf-8")
     print("\n".join(notes))
@@ -316,11 +349,13 @@ def report(run):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=["mark", "wait", "pause", "report"])
-    ap.add_argument("args", nargs="*", help="mark: [회차] start|end|stop <단계 이름>, wait: [회차] start|end <관문>, pause: [회차], report: [회차]")
+    ap.add_argument("mode", choices=["mark", "wait", "pause", "report", "retry"])
+    ap.add_argument("args", nargs="*", help="mark: [회차] start|end|stop <단계 이름>, wait: [회차] start|end <관문>, pause: [회차], report: [회차], "
+                                             "retry: [회차] <단계 이름> --batches <묶음 id들> --reason <한 줄>")
     ap.add_argument("--kind", default="script", choices=["script", "agents", "human"])
     ap.add_argument("--force", action="store_true", help="사람 쪽 단계나 기다림을 시작 30초 안에 끝으로 찍어야 할 때")
-    ap.add_argument("--reason", choices=["limit", "pc_off"], help="pause: 사용량 한도 limit, PC 꺼짐 pc_off")
+    ap.add_argument("--reason", help="pause: 사용량 한도 limit, PC 꺼짐 pc_off. retry: 다시 부른 이유 한 줄")
+    ap.add_argument("--batches", default="", help="retry: 다시 부른 묶음 id들(쉼표로 구분)")
     ap.add_argument("--calls", type=int, default=None)
     ap.add_argument("--retries", type=int, default=None)
     ap.add_argument("--workers", type=int, default=None)
@@ -328,9 +363,17 @@ def main():
     if a.mode == "report":
         sys.exit(report(resolve_run(a.args[0] if a.args else None)))
     if a.mode == "pause":
-        if not a.reason:
+        if a.reason not in ("limit", "pc_off"):
             ap.error("pause에는 --reason limit|pc_off를 주세요.")
         sys.exit(pause(resolve_run(a.args[0] if a.args else None), a.reason))
+    if a.mode == "retry":
+        if len(a.args) == 1:
+            run, step = resolve_run(None), a.args[0]
+        elif len(a.args) == 2:
+            run, step = resolve_run(a.args[0]), a.args[1]
+        else:
+            ap.error("retry에는 [회차] <단계 이름>을 주세요.")
+        sys.exit(retry(run, step, [b.strip() for b in a.batches.split(",") if b.strip()], a.reason or ""))
     if len(a.args) == 2:
         run, (edge, step) = resolve_run(None), a.args
     elif len(a.args) == 3:

@@ -1,17 +1,55 @@
 {
-  "checked_at": "2026-10-15T10:21:05+09:00",
-  "status": "PASS",
+  "checked_at": "2026-10-19T05:17:21+00:00",
+  "status": "FAIL",
   "docs": {
     "README.md": {
-      "unknown_numbers": [],
-      "missing_paths": [],
+      "unknown_numbers": [
+        "168행 '01': |  | 가이드의 숫자, 표, 근거 리뷰 묶음(--early: 라벨 전 01, 02, A장용 값, p.causes: 03과 04가 함께 따르는 ",
+        "168행 '02': |  | 가이드의 숫자, 표, 근거 리뷰 묶음(--early: 라벨 전 01, 02, A장용 값, p.causes: 03과 04가 함께 따르는 ",
+        "168행 '03': |  | 가이드의 숫자, 표, 근거 리뷰 묶음(--early: 라벨 전 01, 02, A장용 값, p.causes: 03과 04가 함께 따르는 ",
+        "168행 '04': |  | 가이드의 숫자, 표, 근거 리뷰 묶음(--early: 라벨 전 01, 02, A장용 값, p.causes: 03과 04가 함께 따르는 ",
+        "169행 '01': |  | 가이드 장 묶음(01-02-A, 03, 04, head-05)을 17_guide.md로 합치고 원인 번호와 방향 부호를 대조 |",
+        "169행 '02': |  | 가이드 장 묶음(01-02-A, 03, 04, head-05)을 17_guide.md로 합치고 원인 번호와 방향 부호를 대조 |",
+        "169행 '03': |  | 가이드 장 묶음(01-02-A, 03, 04, head-05)을 17_guide.md로 합치고 원인 번호와 방향 부호를 대조 |",
+        "169행 '04': |  | 가이드 장 묶음(01-02-A, 03, 04, head-05)을 17_guide.md로 합치고 원인 번호와 방향 부호를 대조 |",
+        "169행 '05': |  | 가이드 장 묶음(01-02-A, 03, 04, head-05)을 17_guide.md로 합치고 원인 번호와 방향 부호를 대조 |"
+      ],
+      "missing_paths": [
+        "02_reviews.csv",
+        "04_gold_eval.json",
+        "costs.jsonl",
+        "gold/",
+        "gold/gold_tagging.html",
+        "gold_score/"
+      ],
       "middle_dots": 0
     },
     "docs/walkthrough.md": {
       "unknown_numbers": [],
-      "missing_paths": [],
+      "missing_paths": [
+        "06_report_en.md",
+        "costs.jsonl"
+      ],
       "middle_dots": 0
     }
   },
-  "errors": []
+  "errors": [
+    "README.md 숫자 출처 없음 168행 '01': |  | 가이드의 숫자, 표, 근거 리뷰 묶음(--early: 라벨 전 01, 02, A장용 값, p.causes: 03과 04가 함께 따르는 ",
+    "README.md 숫자 출처 없음 168행 '02': |  | 가이드의 숫자, 표, 근거 리뷰 묶음(--early: 라벨 전 01, 02, A장용 값, p.causes: 03과 04가 함께 따르는 ",
+    "README.md 숫자 출처 없음 168행 '03': |  | 가이드의 숫자, 표, 근거 리뷰 묶음(--early: 라벨 전 01, 02, A장용 값, p.causes: 03과 04가 함께 따르는 ",
+    "README.md 숫자 출처 없음 168행 '04': |  | 가이드의 숫자, 표, 근거 리뷰 묶음(--early: 라벨 전 01, 02, A장용 값, p.causes: 03과 04가 함께 따르는 ",
+    "README.md 숫자 출처 없음 169행 '01': |  | 가이드 장 묶음(01-02-A, 03, 04, head-05)을 17_guide.md로 합치고 원인 번호와 방향 부호를 대조 |",
+    "README.md 숫자 출처 없음 169행 '02': |  | 가이드 장 묶음(01-02-A, 03, 04, head-05)을 17_guide.md로 합치고 원인 번호와 방향 부호를 대조 |",
+    "README.md 숫자 출처 없음 169행 '03': |  | 가이드 장 묶음(01-02-A, 03, 04, head-05)을 17_guide.md로 합치고 원인 번호와 방향 부호를 대조 |",
+    "README.md 숫자 출처 없음 169행 '04': |  | 가이드 장 묶음(01-02-A, 03, 04, head-05)을 17_guide.md로 합치고 원인 번호와 방향 부호를 대조 |",
+    "README.md 숫자 출처 없음 169행 '05': |  | 가이드 장 묶음(01-02-A, 03, 04, head-05)을 17_guide.md로 합치고 원인 번호와 방향 부호를 대조 |",
+    "README.md 없는 경로 02_reviews.csv",
+    "README.md 없는 경로 04_gold_eval.json",
+    "README.md 없는 경로 costs.jsonl",
+    "README.md 없는 경로 gold/",
+    "README.md 없는 경로 gold/gold_tagging.html",
+    "README.md 없는 경로 gold_score/",
+    "docs/walkthrough.md 없는 경로 06_report_en.md",
+    "docs/walkthrough.md 없는 경로 costs.jsonl"
+  ]
 }

@@ -1,0 +1,194 @@
+# 요가 매트 카테고리. collect.py rank, asin-selector가 읽는다.
+# 2026-10-17 초안(담당자 결정 "요가 매트로가": 처음 보는 품목이 들어왔다고 보고 수집부터 끝까지, 빠르게 하되 정확도 유지).
+# 범위: 요가와 필라테스, 홈트레이닝에 까는 매트(일반 요가 매트, 두꺼운 운동 매트, 여행용 접이식 매트, 천연 고무와 코르크 매트).
+# 매트 가방과 끈, 요가 블록과 타월만 파는 상품, 기구 밑에 까는 바닥 보호 매트, 퍼즐식 바닥 매트, 아이 놀이 매트, 캠핑 매트는 뺀다.
+category: yogamat
+name_ko: 요가 매트
+
+# 공유 DB에 리뷰가 적을 수 있어 크림 회차처럼 매출 순으로 고른다(collect.py rank, 무료). DB 리뷰가 모자란 상품은 유료 수집 대상 후보(need_paid)이고,
+# 켤지는 담당자에게 묻는다.
+selection:
+  seeds: ["yoga mat", "thick yoga mat", "non slip yoga mat", "exercise mat"]
+  pick: 10                  # 매출 순 앞 10개에 rank_pick
+  min_db_reviews: 100       # 공유 DB 리뷰가 이보다 적으면 need_paid=yes
+  max_product_calls: 25     # products_byasin(무료) 호출 상한
+
+# 공유 DB의 search_reviews keyword(리뷰 제목과 본문 부분일치). collect.py candidates(DB로 고르는 방식)에서만 쓴다.
+keywords: [yoga mat, exercise mat, pilates mat, Gaiam, Manduka, Lululemon, BalanceFrom]
+
+# 상품 제목(대소문자 무시, 부분일치)에 하나라도 있으면 후보, title_exclude가 하나라도 있으면 뺀다.
+title_include: [Yoga Mat, Exercise Mat, Pilates Mat, Fitness Mat, Workout Mat, Gym Mat]
+title_exclude: [Mat Bag, Mat Strap, Carrying Strap, Block, Towel Only, Equipment Mat, Treadmill, Bike Mat, Floor Protector, Puzzle,
+                Interlocking, Foam Tiles, Play Mat, Baby, Kids, Camping, Sleeping Pad, Car Mat, Mouse Pad, Doormat]
+
+# kind_hint 규칙: 먼저 맞는 것(제품 이름이 먼저, 색 이름은 쓰지 않음)
+kind_rules:
+  thick: [1/2, 1/2-Inch, 1 inch, 10mm, 12mm, 15mm, 20mm, Extra Thick, Thick]
+  travel: [Travel, Foldable, Folding, 1mm, 2mm]
+  natural: [Natural Rubber, Cork, Jute]
+  standard: [4mm, 5mm, 6mm, 1/4, 1/4-Inch, 1/8]
+
+# 리뷰 리포트(render_html.py, issues.py가 읽음)
+report:
+  title: {ko: "아마존 리뷰 분석: 요가 매트", en: "Amazon Review Analysis: Yoga Mats"}
+  helpful_min_voted_reviews: 30
+
+# 상품 사양 수집(specs.py, product-spec-collector가 읽음). 초안이고, 세부 이슈와 설계 정보 항목 승인 뒤 다시 본다.
+specs:
+  scoreboard_items: [thickness, size, material]   # 가이드 점수표에 나란히 놓을 사양(확인된 값만, guide_metrics.py)
+  items:
+    - id: thickness
+      name_ko: 두께
+      ask: "두께(mm, inch). 여러 두께면 모두"
+      format: list
+    - id: size
+      name_ko: 크기와 무게
+      ask: "길이와 너비(inch, cm)와 무게"
+      format: text
+    - id: material
+      name_ko: 재질
+      ask: "재질(TPE, NBR, PVC, 천연 고무, 코르크, PU 등)과 겉면 마감"
+      format: text
+    - id: grip_claim
+      name_ko: 미끄럼 방지 표시
+      ask: "미끄럼 방지(non-slip, 양면 질감 등)와 땀이나 젖었을 때 그립에 대한 제조사 표시"
+      format: text
+    - id: odor_safety
+      name_ko: 냄새와 성분 표시
+      ask: "냄새 관련 표시, 라텍스나 PVC, 프탈레이트, 독성 물질 없음 같은 성분 표시와 인증(SGS 등)"
+      format: list
+    - id: extras
+      name_ko: 구성품과 그 밖의 기능
+      ask: "끈이나 가방 포함 여부, 정렬선, 양면 사용, 세척 방법(물세척, 세탁기)"
+      format: list
+    - id: list_price
+      name_ko: 정가
+      ask: "출처 사이트에 적힌 가격(통화 포함). 여러 구성이면 모두"
+      format: list
+
+# 시장 데이터(market.py, market_build.py, guide_metrics.py가 읽음). 노드는 runs/hairremoval-db-2026-10-08/market/raw/subcategories_search_all.json에서
+# 찾았다(2026-10-17): Yoga Mats(부모 Yoga Equipment 3422251), Exercise Mats 3407941(부모 3407891). 하위 카테고리 도구는 문맥 이름으로 부른다.
+market:
+  seed: "yoga mat"
+  parent_node: 3422251                  # Yoga Equipment(자식: Yoga Mats, Blocks, Straps 등)
+  context_nodes: [3422251, 3407891]
+  max_nodes: 15
+  nodes:
+    YM: "Yoga Mats"
+    EM: "Exercise Mats"
+  term_words: [yoga, mat, mats, exercise, pilates, "non slip", thick, gaiam, manduka, lululemon, balancefrom]
+
+# 제품 개발 가이드(guide_metrics.py, robustness.py가 읽음). 2026-10-17 세부 이슈(07:12Z)와 설계 정보 항목(07:00Z) 승인 뒤 Claude가 정함(관문 밖 결정).
+guide:
+  title: 아마존 미국 요가 매트 제품 개발 가이드
+  market_node_head: "3422301"           # 머리 숫자의 시장 노드(Yoga Mats)
+  market_nodes_brand_share: ["Yoga Mats", "Exercise Mats"]   # market.nodes 순서(YM, EM)
+  head_topic: build_durability          # 부정 언급 리뷰어(가중) 1위 만듦새와 내구성 8.9%, 2위 디자인과 크기 6.2%, 3위 끈 5.0%
+  direction_index:                      # 방향 지수 = (high - low) / (high + low): 너무 얇음과 너무 두껍거나 푹신함
+    topic: cushioning
+    high: {name: 너무 얇음, labels: [too_thin, lacks_cushion]}
+    low: {name: 너무 두껍거나 푹신함, labels: [too_thick_soft]}
+    min_reviews: 15
+  duration_item: durability_elapsed_days   # 숫자 항목(리뷰어가 말한 손상까지 걸린 날). 점수표의 숫자 칸
+  duration_min_values: 3
+  duration_bins: [7, 30, 180, 365]      # 손상까지 걸린 날 구간
+  number_names: {durability_elapsed_days: 손상까지 걸린 날, odor_duration_days: 냄새가 간 날, thickness_mm: 말한 두께(mm)}
+  # gender_words 없음: 성별로 나뉘는 품목이 아니라 모든 검색어를 공통으로 본다
+  fastest_term_min_volume: 10000
+  growth:
+    window_weeks: 4
+    min_volume: 10000
+    exclude_words: [block, blocks, strap, towel, bag, wheel, ball, socks, pants, leggings, shorts, bra, puzzle, interlocking, kids, treadmill]   # 매트가 아닌 검색어
+  price_bands: 3
+  caveat_subcategory: "Yoga Mats"
+  caveats_extra:
+    - "DB 리뷰 수 순으로 상품 6개를 골랐고, 리뷰가 모자란 상품은 담당자 승인 상한 안에서 유료 수집한 리뷰를 더했다."
+  # 03장 원인 번호: 선호 차이(사람마다 원하는 것이 달라 선택지나 안내로 대응할 불만)로 볼 라벨. 나머지는 설계 결함
+  preference_labels: [too_thick_soft, too_hard, too_thick_to_balance, dislike_color_print, too_heavy, strap_not_included]
+  cause_min_reviews: 10
+  focus:                                # 03장 집중 분석 4개
+    - id: durability
+      title: 만듦새와 내구성
+      topics: [build_durability, residue_transfer]
+      items: [damage_type, durability_elapsed_days, use_location]
+    - id: thickness
+      title: 두께, 쿠션, 균형
+      topics: [cushioning, stability]
+      items: [thickness_feel, thickness_mm, body_part_effect, activity]
+      split_label: too_thin             # 운동 종류, 쓰는 곳 값마다 너무 얇음 비율
+    - id: grip
+      title: 그립과 미끄럼
+      topics: [grip_traction]
+      items: [grip_condition, surface_texture, activity, use_location]
+    - id: odor
+      title: 냄새와 성분
+      topics: [odor, safety]
+      items: [odor_outcome, odor_duration_days]
+  standards:                            # 04장 소비자 기준표 후보
+    - id: durability
+      title: 찢어짐과 내구성
+      neg_labels: [tears_holes, crumbles_sheds, top_layer_peels, surface_wear, defect_on_arrival, curls_not_flat, low_quality, weak_durability]
+      pos_labels: [good_quality, sturdy_durable, holds_up_in_use, easy_to_clean]
+      items: [damage_type, durability_elapsed_days]
+      search_words: ["durable", "thick"]
+    - id: thickness
+      title: 두께와 쿠션
+      neg_labels: [too_thin, thinner_than_listed, lacks_cushion, knee_joint_pain, too_thick_soft, too_hard, compresses_flat]
+      pos_labels: [good_thickness, cushion_comfort, joint_floor_protection]
+      items: [thickness_feel, thickness_mm, body_part_effect]
+      search_words: ["thick", "extra thick"]
+    - id: grip
+      title: 그립과 미끄럼
+      neg_labels: [surface_slippery, slips_when_sweaty, slides_on_floor, grip_wears_off]
+      pos_labels: [surface_grip_good, grips_when_sweaty, stays_on_floor, grippier_than_others]
+      items: [grip_condition, surface_texture]
+      search_words: ["non slip", "hot yoga"]
+    - id: stability
+      title: 균형과 늘어남
+      neg_labels: [mat_stretches, too_thick_to_balance, hard_to_balance, squeaks, bunches_folds]
+      pos_labels: [stable_for_balance, no_stretch]
+      items: [activity]
+      search_words: ["pilates", "balance"]
+    - id: odor
+      title: 냄새
+      neg_labels: [chemical_plastic_smell, fishy_sulfur_smell, smell_persists, initial_smell_aired_out, smell_after_use, bad_smell_unspecified]
+      pos_labels: [no_odor, fades_by_airing, fades_by_washing, fades_over_time]
+      items: [odor_outcome, odor_duration_days]
+      search_words: ["non toxic", "natural rubber"]
+    - id: safety
+      title: 성분과 안전
+      neg_labels: []
+      pos_labels: []
+      safety: true                      # 07c 이상 반응 판정을 쓴다
+      items: []
+      search_words: []
+    - id: size
+      title: 크기, 무게, 휴대
+      neg_labels: [too_narrow, too_short, smaller_than_standard, too_heavy, bulky_to_carry_store]
+      pos_labels: [good_size, long_enough, lightweight_portable, easy_roll_store]
+      items: [size_bulk_direction]
+      search_words: ["large", "travel"]
+    - id: strap
+      title: 끈과 구성품
+      neg_labels: [strap_missing, strap_not_included, strap_loose_slips, strap_flimsy]
+      pos_labels: [strap_easy_carry, strap_included_liked]
+      items: [strap_issue]
+      search_words: ["with strap", "carrying strap"]
+    - id: residue
+      title: 묻어남과 표면 마감
+      neg_labels: [dye_color_transfer, material_shedding, sticks_to_walls_floors]
+      pos_labels: []
+      items: [damage_type]
+      search_words: []
+    - id: listing
+      title: 설명과 실물
+      neg_labels: [strap_missing_vs_listing, thinner_than_listed, color_mismatch, nonslip_claim_false, used_item_received, counterfeit_suspected, not_as_described_general]
+      pos_labels: [looks_as_pictured, thickness_as_listed, as_described_general]
+      items: []
+      search_words: []
+    - id: value
+      title: 가격 대비 가치
+      neg_labels: [not_worth_money, overpriced, expected_better_for_price, should_last_longer, got_what_paid_for]
+      pos_labels: [good_value, low_price, good_for_price, quality_for_price, cheaper_than_others]
+      items: [comparison_reference]
+      search_words: ["cheap", "best"]

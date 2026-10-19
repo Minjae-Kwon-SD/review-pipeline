@@ -2,6 +2,7 @@
 
 모든 비교에서 전체 만족도(COMPARE_EXCLUDE)는 뺀다. 숫자는 여기서만 만들고 report-writer는 옮기기만 한다.
 """
+import html
 import re
 from collections import Counter, defaultdict
 from datetime import date
@@ -14,10 +15,10 @@ GROUP_KO = {"negative": "부정(1,2★)", "neutral": "중립(3★)", "positive":
 
 
 def as_of_date(run_name, override=None):
-    """기준 날짜: --as-of, 아니면 회차 이름 끝의 YYYY-MM-DD, 아니면 오늘."""
+    """기준 날짜: --as-of, 아니면 회차 이름 끝의 YYYY-MM-DD(뒤에 -r<번호>가 붙어도), 아니면 오늘."""
     if override:
         return date.fromisoformat(override)
-    m = re.search(r"(\d{4}-\d{2}-\d{2})$", run_name)
+    m = re.search(r"(\d{4}-\d{2}-\d{2})(?:-r\d+)?$", run_name)   # 다시 돌린 회차(-r2)도 이름의 날짜를 쓴다(2026-10-18)
     return date.fromisoformat(m.group(1)) if m else date.today()
 
 
@@ -103,20 +104,27 @@ def trust_signals(reviews, tags, exclude, top=8, min_voted=None):
     total_hv = sum(_hv(r) for r in reviews)
     neg_hv = sum(_hv(r) for r in reviews if int(r["star"]) <= 2)
     pos_hv = sum(_hv(r) for r in reviews if int(r["star"]) >= 4)
+    mid_hv = total_hv - neg_hv - pos_hv
     hv_of = {r["review_id"]: _hv(r) for r in reviews}
     topic_hv = Counter()
+    complainers = set()
     for t in tags:
         if t["sentiment"] == "negative" and t["topic"] not in exclude:
             topic_hv[t["topic"]] += hv_of.get(t["review_id"], 0)
-    neg_tag_hv = sum(topic_hv.values())
+            complainers.add(t["review_id"])
+    # 주제 비중의 분모: 불만 주제를 하나라도 부정으로 말한 리뷰가 받은 표(리뷰마다 한 번). 주제마다 더한 합을 분모로 쓰면
+    # 여러 주제를 말한 리뷰의 표가 겹쳐 세여 비중이 작아진다(2026-10-15 스피커 검토). 리뷰 하나가 여러 주제면 합이 100%를 넘는다
+    complaint_hv = sum(hv_of.get(r, 0) for r in complainers)
     top_reviews = sorted(reviews, key=lambda r: (-_hv(r), r["review_id"]))[:top]
     return {"verified": block(ver), "unverified": block(unver), "vine": block(vine),
             "helpful_total": total_hv, "helpful_reviews": sum(1 for r in reviews if _hv(r) > 0),
             "helpful_min_voted": min_voted,
             "helpful_provisional": min_voted is not None and sum(1 for r in reviews if _hv(r) > 0) < min_voted,
-            "helpful_negative_reviews": neg_hv, "helpful_positive_reviews": pos_hv,
-            "helpful_negative_pct": pct(neg_hv, neg_hv + pos_hv), "helpful_positive_pct": pct(pos_hv, neg_hv + pos_hv),
-            "helpful_weighted_complaints": [{"topic": tp, "votes": v, "share_pct": pct(v, neg_tag_hv)}
+            "helpful_negative_reviews": neg_hv, "helpful_positive_reviews": pos_hv, "helpful_mid_reviews": mid_hv,
+            # 별점 쪽 비율의 분모는 표 합계(3★ 포함). 3★를 빼고 나누면 합계 문장과 분모가 달라 읽는 사람이 헷갈린다(2026-10-15)
+            "helpful_negative_pct": pct(neg_hv, total_hv), "helpful_positive_pct": pct(pos_hv, total_hv), "helpful_mid_pct": pct(mid_hv, total_hv),
+            "helpful_complaint_base": complaint_hv,
+            "helpful_weighted_complaints": [{"topic": tp, "votes": v, "share_pct": pct(v, complaint_hv)}
                                             for tp, v in sorted(topic_hv.items(), key=lambda x: (-x[1], x[0])) if v > 0],
             "top_helpful": [{"review_id": r["review_id"], "asin": r["asin"], "star": int(r["star"]), "title": r["title"],
                              "votes": _hv(r)} for r in top_reviews if _hv(r) > 0]}
@@ -212,7 +220,8 @@ ML_PER_OZ = 29.5735
 def variant_parts(text):
     """'Size: 1 Fl Oz (Pack of 1); Scent: Rose' → {'Size': '1 Fl Oz (Pack of 1)', 'Scent': 'Rose'}"""
     out = {}
-    for part in str(text or "").split(";"):
+    # 변형 글자에 남은 HTML 엔티티(&amp;)를 먼저 푼다. 안 풀면 ";"에서 잘려 "Here &amp"가 된다(2026-10-18 요가 매트 r2)
+    for part in html.unescape(str(text or "")).split(";"):
         if ":" in part:
             k, v = part.split(":", 1)
             out[k.strip()] = v.strip()
@@ -304,7 +313,16 @@ def direction_counts(ids, high_ids, low_ids, min_n=5):
     """리뷰 묶음에서 방향 라벨(high, low)이 붙은 리뷰 수와 방향 지수 (high - low) / (high + low). 둘을 합쳐 min_n개 미만이면 지수 없음."""
     h = sum(1 for i in ids if i in high_ids)
     lo = sum(1 for i in ids if i in low_ids)
-    return {"high": h, "low": lo, "index": round((h - lo) / (h + lo), 2) if h + lo >= min_n else None}
+    idx = round((h - lo) / (h + lo), 2) if h + lo >= min_n else None
+    return {"high": h, "low": lo, "index": idx, "unclear": direction_unclear(idx, h + lo)}
+
+
+def direction_unclear(idx, n):
+    """방향 불분명(2026-10-17 E2, 모든 품목): 지수 = (high - low) / n이 반반(0)에서 1.96 / sqrt(n)보다 가깝다(두 방향이 같다는 가설을
+    95%로 버리지 못함). 리포트 11장과 가이드 점수표가 같은 규칙을 쓴다. 지수가 없으면 None."""
+    if idx is None or not n:
+        return None
+    return abs(idx) < 1.96 / n ** 0.5
 
 
 def variant_signals(reviews, tags, weight, schema, prices, exclude, direction=None, labels=None, max_keys=3, **kw):
@@ -396,8 +414,8 @@ def variant_signal(reviews, tags, weight, schema, prices, exclude, min_reviews=1
     return out
 
 
-def fmt_index(x):
-    return "-" if x is None else f"{x:+.2f}"
+def fmt_index(x, unclear=None):
+    return "-" if x is None else f"{x:+.2f}" + ("(방향 불분명)" if unclear else "")
 
 
 def render_variant(vs, schema, brand_of_asin):
@@ -410,7 +428,7 @@ def render_variant(vs, schema, brand_of_asin):
         lines += [f"상품을 합친 {vs['key']}별 방향({d['high']} 대 {d['low']}, 방향 지수 = ({d['high']} - {d['low']}) / 합)", "",
                   f"| {vs['key']} | 리뷰 | 상품 수 | {d['high']} | {d['low']} | 방향 지수 |", "|---|---|---|---|---|---|"]
         for r in vs["pooled"]:
-            lines.append(f"| {r['variant']} | {r['reviews']} | {r['asins']} | {r['high']} | {r['low']} | {fmt_index(r['index'])} |")
+            lines.append(f"| {r['variant']} | {r['reviews']} | {r['asins']} | {r['high']} | {r['low']} | {fmt_index(r['index'], r.get('unclear'))} |")
         lines.append("")
     for a in vs["asins"]:
         if not a["rows"]:
@@ -424,7 +442,7 @@ def render_variant(vs, schema, brand_of_asin):
             price = f"{r['price']:.2f}달러" if r["price"] else "가격 없음"
             per = (f"{r['price_per_oz']:.2f}달러 | " if r["price_per_oz"] else "- | ") if has_oz else ""
             dd = r.get("direction")
-            ex = [str(dd["high"]), str(dd["low"]), fmt_index(dd["index"])] if d and dd else []
+            ex = [str(dd["high"]), str(dd["low"]), fmt_index(dd["index"], dd.get("unclear"))] if d and dd else []
             lines.append(f"| {r['variant']} | {r['reviews']} | {r['tags']} | {price} | {per}"
                          + " | ".join([fmt_pct(r["neg_reviewer_pct"][tp]) for tp in a["topics"]] + ex) + " |")
         lines.append("")
@@ -573,7 +591,8 @@ def render_trust(ts, schema):
              "",
              f"도움돼요: 합계 {ts['helpful_total']}표(1표 이상 받은 리뷰 {ts['helpful_reviews']}개). "
              f"1~2★ 리뷰가 {ts['helpful_negative_reviews']}표({fmt_pct(ts['helpful_negative_pct'])}), "
-             f"4~5★ 리뷰가 {ts['helpful_positive_reviews']}표({fmt_pct(ts['helpful_positive_pct'])})를 받았습니다(3★ 제외).",
+             f"3★ 리뷰가 {ts['helpful_mid_reviews']}표({fmt_pct(ts['helpful_mid_pct'])}), "
+             f"4~5★ 리뷰가 {ts['helpful_positive_reviews']}표({fmt_pct(ts['helpful_positive_pct'])})를 받았습니다(비율은 합계 대비).",
              "", "| 순위 | 불만 주제(도움돼요 가중)" + (" (잠정)" if ts.get("helpful_provisional") else "") + " | 도움돼요 표 | 비중 |", "|---|---|---|---|"]
     lines += [f"| {i} | {name(x['topic'])} | {x['votes']} | {fmt_pct(x['share_pct'])} |"
               for i, x in enumerate(ts["helpful_weighted_complaints"][:8], 1)]
@@ -581,7 +600,9 @@ def render_trust(ts, schema):
     lines += [f"| {i} | {x['star']}★ | {x['title'].replace('|', '/')} | {x['votes']} | {x['review_id']} |"
               for i, x in enumerate(ts["top_helpful"], 1)]
     lines += ["", f"표본은 별점을 골라 모은 것이라 이 장의 숫자는 원본(가중 안 함)입니다. Vine 리뷰는 {ts['vine']['reviews']}개뿐이라 참고용입니다. "
-                  "불만 주제 순위는 그 주제를 부정으로 말한 리뷰가 받은 도움돼요 표의 합입니다(전체 만족도 제외)."
+                  "불만 주제 순위는 그 주제를 부정으로 말한 리뷰가 받은 도움돼요 표의 합입니다(전체 만족도 제외). "
+                  f"비중은 불만 주제를 하나라도 부정으로 말한 리뷰가 받은 표 {ts['helpful_complaint_base']}표 대비이고, "
+                  "리뷰 하나가 여러 주제를 말하면 주제마다 세므로 합이 100%를 넘습니다."
               + (f" 표를 받은 리뷰가 {ts['helpful_reviews']}개로 기준 {ts['helpful_min_voted']}개보다 적어 순위는 잠정이고 해석하지 않습니다."
                  if ts.get("helpful_provisional") else "")]
     return lines
