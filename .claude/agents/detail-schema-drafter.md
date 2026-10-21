@@ -20,7 +20,7 @@ effort: high
 - config/detail_rules.yaml(저장소 맨 위): 품목에 묶이지 않는 공통 경계 규칙. 같은 이름의 항목(purchase_context, comparison_reference 등)을 만들면 fill_rule과 허용 값 설명이 이 규칙과 어긋나지 않게 쓴다(value_notes의 값 설명 포함). 예시 인용은 표본에서만 고른다.
 - 13_detail_sample.csv: 스크립트가 ASIN과 별점 묶음이 고르게 섞이게 뽑은 리뷰 150개(review_id, asin, brand, star, title, body). 제목과 본문을 모두 읽는다. 영어가 아닌 리뷰도 읽는다.
 - config/categories/<카테고리>.yaml: 카테고리 이름과 상품 범위(카테고리는 회차 이름의 첫 부분).
-- 03_schema_approved.yaml: 이미 태깅한 주제. 07a_issues_approved.yaml: 이미 붙인 세부 이슈 라벨(있을 때만).
+- 03_schema_approved.yaml이 있으면 그것, 없으면 03_schema_draft.yaml: 태깅할 주제(2026-10-21부터 스키마 초안이 끝나면 바로 시작하므로 승인본이 아직 없을 수 있음. 승인에서 주제가 바뀌어도 설계 정보 항목은 주제 태그와 겹치지 않게만 정하면 되고, 겹침은 07a 뒤 메인 세션이 따로 메모함). 07a_issues_approved.yaml: 이미 붙인 세부 이슈 라벨(있을 때만).
   2026-10-10부터 이 단계는 스키마 승인 직후, 세부 이슈 승인 전에 돌 수 있다. 07a_issues_approved.yaml이 없으면 주제와의 겹침만 보고,
   출력 맨 위에 `labels_checked: false`를 적는다(세부 이슈 승인 뒤 메인 세션이 라벨과의 겹침을 따로 메모한다).
 

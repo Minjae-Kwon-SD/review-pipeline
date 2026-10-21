@@ -82,3 +82,5 @@ runs/**/13_detail_sample.csv
 runs/**/raw/
 runs/**/07b_label_input/
 runs/**/14_detail_input/
+# 다시 돌리기 회차(replay.py, 2026-10-21): 비교용이라 올리지 않음
+runs/*-replay*/

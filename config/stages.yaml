@@ -12,26 +12,27 @@
 # 근거와 한계: docs/compare_v2_result.md, docs/decisions_log.md.
 
 limits:
-  bulk_concurrency: 16         # 대량 작업자(sonnet) 동시 실행(이슈 라벨, 설계 정보 추출). 2026-10-12 담당자 결정 4에서 8로, 2026-10-16 16으로(추천 숫자대로)
-  tagging_concurrency: 20      # 태깅(05_tagging) review-tagger 동시 실행. 2026-10-09 담당자 결정(추천안) 8, 2026-10-12 12로, 2026-10-16 20으로(추천 숫자대로)
+  bulk_concurrency: 50         # 대량 작업자(sonnet) 동시 실행(이슈 라벨, 설계 정보 추출). 2026-10-12 담당자 결정 4에서 8로, 2026-10-16 16으로(추천 숫자대로), 2026-10-20 50으로(남은 묶음을 한 번에)
+  tagging_concurrency: 50      # 태깅(05_tagging) review-tagger 동시 실행. 2026-10-09 담당자 결정(추천안) 8, 2026-10-12 12로, 2026-10-16 20으로(추천 숫자대로), 2026-10-20 50으로(남은 묶음을 한 번에)
   worker_max_batches: 4        # 작업자 하나가 맡는 묶음
   worker_max_reviews: 200      # 작업자 하나가 맡는 리뷰
   retry_per_batch: 2           # 묶음마다 재시도
   retry_per_stage: 4           # 단계 전체 재시도 호출
   top_writers: 15              # 상위 모델 작성자 동시 실행(예: 주제별 issue-labeler 15개, 장 묶음별 report-writer). 2026-10-09 1에서 4로, 2026-10-16 15로(추천 숫자대로)
-  top_auditors: 2              # 상위 모델 감사자. 문서 하나에는 감사자 하나(같은 문서를 나눠 감사하지 않음), 리포트 감사와 가이드 감사는 동시에. 2026-10-12 1에서 2로
+  top_auditors: 3              # 상위 모델 감사자. 문서 하나에는 감사자 하나(같은 문서를 나눠 감사하지 않음), 리포트 감사와 가이드 감사는 동시에. 2026-10-12 1에서 2로, 2026-10-20 담당자 결정 3으로(라벨 검사 반쪽 둘이 추출 감사와 겹쳐도 같이 돌게)
   review_lenses: 4             # 검토형(같은 큰 자료를 여럿이 봄) 읽기 전용 렌즈. 매번 담당자 허락
 
 stages:
   - {id: 01_inputs, kind: script, inputs: [01_asins.csv, 02_reviews.csv, 02_star_distribution.csv],
      outputs: [00_input_check.json, 03_schema_sample.csv, 03_schema_input.csv], after: [02_schema_draft]}
   - {id: 02_schema_draft, kind: agents, inputs: [03_schema_sample.csv, "config:config/topics_common.yaml"],
-     code: [.claude/agents/schema-drafter.md], outputs: [03_schema_draft.yaml], after: [03_schema_approval]}
-  - {id: 03_schema_approval, kind: human, inputs: [03_schema_draft.yaml], outputs: [03_schema_approved.yaml], after: [05_tagging, 13_detail_schema_draft, 15_research]}
+     code: [.claude/agents/schema-drafter.md], outputs: [03_schema_draft.yaml], after: [03_schema_approval, 13_detail_schema_draft]}
+  - {id: 03_schema_approval, kind: human, inputs: [03_schema_draft.yaml], outputs: [03_schema_approved.yaml], after: [05_tagging]}
   - {id: 05_tagging, kind: agents, bulk: true, method: per_batch, inputs: [03_schema_approved.yaml, "config:config/topics_common.yaml", 04_batches.json, "04_tag_input/*.csv"],
      code: [.claude/agents/review-tagger.md], expect: {batches: 04_batches.json, output: "04_tags_{model}_{batch_id}.jsonl"},
      outputs: ["04_tags_sonnet_*.jsonl", "04_tags_top_*.jsonl"], after: [06_tag_check]}
   - {id: 06_tag_check, kind: agents, inputs: ["04_tags_sonnet_*.jsonl", 04_audit_sample.jsonl, "config:config/topics_common.yaml"], code: [.claude/agents/evidence-auditor.md],
+     edits: ["04_tags_sonnet_*.jsonl"],   # 2026-10-21: 실패 묶음 다시 태깅이 바꾸는 입력(완료를 막지 않음)
      outputs: [04_tags.jsonl, 04_quote_check_sonnet.json, 04_tag_audit.yaml, 04_tag_audit_summary.json], after: [07a_issue_draft, 22_robustness, 08a_report_early, 16a_guide_metrics_early]}
   - {id: 07a_issue_draft, kind: agents, inputs: [04_tags.jsonl], code: [.claude/agents/issue-labeler.md], outputs: [07a_issues_draft.yaml],
      after: [07a_issue_approval]}
@@ -61,8 +62,8 @@ stages:
   - {id: 11_html, kind: script, inputs: [06_report.md, 05_metrics.json, 07b_issue_counts.json],
      outputs: [06_report.html, 06_report_html_numbers.json, 06_report_html_check.json], after: []}
   - {id: 12_market, kind: script, inputs: ["market/raw/*.json"], outputs: [market/market.json, market/market_summary.md], after: [16a_guide_metrics_early, 16_guide_metrics, 15_research]}
-  # 2026-10-10 앞당기기: 13_detail_schema_draft와 15_research는 03 스키마 승인(과 12_market) 뒤 바로, 태깅과 같은 때 돌린다(review-run.md "앞당겨 돌리는 단계").
-  - {id: 13_detail_schema_draft, kind: agents, inputs: [13_detail_sample.csv, 03_schema_approved.yaml], code: [.claude/agents/detail-schema-drafter.md, config/detail_rules.yaml],
+  # 2026-10-10 앞당기기: 13_detail_schema_draft는 태깅과 같은 때 돌린다(2026-10-21부터 02 스키마 초안이 끝나면 바로, 승인을 기다리지 않음). 15_research는 2026-10-20부터 12_market 뒤 바로(스키마를 기다리지 않음)(review-run.md "앞당겨 돌리는 단계").
+  - {id: 13_detail_schema_draft, kind: agents, inputs: [13_detail_sample.csv, 03_schema_draft.yaml], code: [.claude/agents/detail-schema-drafter.md, config/detail_rules.yaml],
      outputs: [13_detail_schema_draft.yaml], after: [13a_detail_schema_approval]}
   - {id: 13a_detail_schema_approval, kind: human, inputs: [13_detail_schema_draft.yaml], outputs: [13_detail_schema_approved.yaml], after: [14_detail_extract]}
   - {id: 14_detail_extract, kind: agents, bulk: true, method: v2, inputs: [13_detail_schema_approved.yaml, 14_detail_batches.json, "14_detail_input/*.jsonl"],
@@ -71,8 +72,8 @@ stages:
   - {id: 14b_detail_check, kind: agents, inputs: ["14_details_B*.jsonl", 14b_detail_audit_sample.jsonl, 14_known_exceptions.yaml],
      code: [.claude/agents/evidence-auditor.md, config/detail_rules.yaml],
      outputs: [14_details.jsonl, 14_detail_counts.json, 14b_detail_audit.yaml, 14b_detail_audit_summary.json], after: [16a_guide_metrics_early, 16_guide_metrics]}
-  - {id: 15_research, kind: agents, inputs: [03_schema_approved.yaml, market/market.json], code: [.claude/agents/benchmark-researcher.md],
-     outputs: [15_research.yaml, 15_research_check.json], after: [17a_guide_early, 17_guide_write]}
+  - {id: 15_research, kind: agents, inputs: [market/market.json, "config:config/topics_common.yaml"], code: [.claude/agents/benchmark-researcher.md, scripts/research.py],
+     outputs: [15_research.yaml, 15_research_check.json, 15_research_followup_input.json, 15_research_followup.yaml, 15_research_first.yaml], after: [17a_guide_early, 17_guide_write]}
   - {id: 23_specs, kind: agents, inputs: [23_spec_input.json], code: [.claude/agents/product-spec-collector.md],
      outputs: [23_specs.yaml, 23_specs_check.json, 23_specs_verified.json], after: [16a_guide_metrics_early, 16_guide_metrics]}
   # 2026-10-17 가이드 장 묶음(안 B): 01, 02, A장은 세부 이슈 라벨 전에 guide_metrics.py --early 값으로 미리 쓰고 미리 감사한다(16a, 17a).

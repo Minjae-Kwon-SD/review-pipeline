@@ -1,6 +1,6 @@
 """5단계: 태깅 묶음 나누기.
 
-사용: python scripts/tag_batches.py plan [회차] [--size 50]
+사용: python scripts/tag_batches.py plan [회차] [--size 75]
   ASIN마다 리뷰를 date, review_id 순으로 size개씩 나눠 04_batches.json에 쓴다.
   묶음 id는 <ASIN>_<두 자리 번호>(예: B0GFGL26JD_01). ASIN 묶음은 sonnet이 태깅한다(04_tags_sonnet_<묶음>.jsonl).
   정답 세트 리뷰(gold/gold_reviews.csv)만 담은 gold 묶음을 따로 하나 두고, sonnet(04_tags_sonnet_gold.jsonl, 시험 태깅
@@ -77,7 +77,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("mode", choices=["plan"])
     ap.add_argument("run", nargs="?")
-    ap.add_argument("--size", type=int, default=50)
+    ap.add_argument("--size", type=int, default=75)   # 2026-10-20 담당자 결정(50에서 75, 태거가 줄어 공통 몫 토큰이 줄고 정확도는 같거나 나음)
     args = ap.parse_args()
     sys.exit(plan(resolve_run(args.run), args.size))
 

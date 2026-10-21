@@ -9,11 +9,20 @@
     research_cache/<주소 해시>.json에 남긴다(열어 본 때 포함). 다음 확인에서 잠깐 실패로 열지 못하면 남긴 글자로 확인하고
     source를 cache(열어 본 때)로 적는다. 남긴 글자가 없으면 회차 안의 이전 확인 기록(15_research_check*.json)에서 그 주장이
     live로 확인된 가장 최근 기록을 찾아 source를 previous_check(확인한 때)로 적는다. 페이지가 없어졌거나(404) 원문 문장이 사라졌으면 unverified다.
+  python scripts/research.py followup-plan [회차] [--max 15]
+    보충 조사(2026-10-20 담당자 결정) 입력: 15_research.yaml의 not_found와 15_research_check.json에서 verified가 아닌 주장을
+    15_research_followup_input.json에 모은다(kind: not_found 또는 unverified). 0개면 보충 조사를 하지 않는다.
+    대상은 max개까지(찾지 못한 것 먼저, 2026-10-20 담당자 결정: 보충이 가이드를 늦추지 않게). 남은 것은 skipped 개수로 적는다.
+  python scripts/research.py merge [회차]
+    보충 조사 결과(15_research_followup.yaml, id는 fu_로 시작)를 합친다. 처음 한 번 15_research.yaml을 15_research_first.yaml로 남기고,
+    언제나 첫 조사(15_research_first.yaml) + 보충 주장으로 15_research.yaml을 다시 쓴다. not_found는 보충 조사의 것으로 바꾼다.
+    id가 fu_로 시작하지 않거나 첫 조사 id와 겹치면 합치지 않고 종료 코드 1. 합친 뒤 check를 다시 돌린다.
 """
 import argparse
 import html
 import json
 import re
+import shutil
 import sys
 import urllib.error
 import urllib.request
@@ -46,11 +55,29 @@ def page_text(url, timeout=30):
     with urllib.request.urlopen(req, timeout=timeout) as r:
         raw = r.read()
         ctype = r.headers.get("Content-Type", "")
-    if "pdf" in ctype.lower():
-        return None, "PDF라 글자를 읽지 못함"
+    if "pdf" in ctype.lower() or raw[:5] == b"%PDF-":
+        return pdf_text(raw)
     text = raw.decode("utf-8", errors="replace")
     text = re.sub(r"<(script|style|noscript)[^>]*>.*?</\1>", " ", text, flags=re.S | re.I)
     text = re.sub(r"<[^>]+>", " ", text)
+    return text, None
+
+
+def pdf_text(raw):
+    """PDF 글자(2026-10-20). pypdf가 있으면 쪽마다 글자를 뽑는다. 없거나 글자가 없으면(그림만 있는 PDF) 읽지 못함."""
+    try:
+        import io
+        import logging
+        from pypdf import PdfReader
+        logging.getLogger("pypdf").setLevel(logging.ERROR)   # 글꼴 경고(fontTools 없음)는 글자 뽑기와 무관
+    except ImportError:
+        return None, "PDF라 글자를 읽지 못함(pypdf 없음)"
+    try:
+        text = "\n".join((pg.extract_text() or "") for pg in PdfReader(io.BytesIO(raw)).pages)
+    except Exception as e:  # noqa: BLE001
+        return None, f"PDF를 열지 못함 {type(e).__name__}"
+    if not text.strip():
+        return None, "PDF에 글자가 없음"
     return text, None
 
 
@@ -162,12 +189,78 @@ def check(run):
     return 0
 
 
+def followup_plan(run, max_items=15):
+    data = load_yaml(run / "15_research.yaml") or {}
+    cp = run / "15_research_check.json"
+    if not cp.exists():
+        print("15_research_check.json이 없습니다. research.py check를 먼저 돌리세요.")
+        return 1
+    chk = json.loads(cp.read_text(encoding="utf-8"))
+    claims = {c.get("id"): c for c in data.get("claims") or []}
+    items = [{"kind": "not_found", "area": x.get("area"), "what": x.get("what"), "tried": x.get("tried") or []}
+             for x in data.get("not_found") or []]
+    for r in chk.get("items") or []:
+        if r.get("status") == "verified":
+            continue
+        c = claims.get(r.get("id")) or {}
+        items.append({"kind": "unverified", "id": r.get("id"), "area": r.get("area"), "claim_ko": c.get("claim_ko"),
+                      "subject": c.get("subject"), "url": r.get("url"), "reason": r.get("reason")})
+    skipped = max(0, len(items) - max_items)
+    items = items[:max_items]
+    n = Counter(x["kind"] for x in items)
+    write_json(run / "15_research_followup_input.json", {"made_at": now_iso(), "count": len(items),
+                                                         "not_found": n["not_found"], "unverified": n["unverified"],
+                                                         "max": max_items, "skipped": skipped, "items": items})
+    print(f"보충 조사 대상: 찾지 못한 것 {n['not_found']}개, 확인 안 된 주장 {n['unverified']}개 → 15_research_followup_input.json"
+          + (f", 상한 {max_items}개라 {skipped}개는 뺌" if skipped else "") + ("(0개라 보충 조사 안 함)" if not items else ""))
+    return 0
+
+
+def merge(run):
+    import yaml
+    cur, first, fu = run / "15_research.yaml", run / "15_research_first.yaml", run / "15_research_followup.yaml"
+    if not fu.exists():
+        print("15_research_followup.yaml이 없습니다.")
+        return 1
+    if not first.exists():
+        shutil.copyfile(cur, first)
+    base = load_yaml(first) or {}
+    add = load_yaml(fu) or {}
+    ids = {c.get("id") for c in base.get("claims") or []}
+    errs, new = [], []
+    for c in add.get("claims") or []:
+        cid = str(c.get("id") or "")
+        if not cid.startswith("fu_"):
+            errs.append(f"{cid or '(id 없음)'}: id가 fu_로 시작하지 않음")
+        elif cid in ids:
+            errs.append(f"{cid}: id가 겹침")
+        else:
+            ids.add(cid)
+            new.append(c)
+    if errs:
+        print("보충 조사를 합치지 않음:\n  " + "\n  ".join(errs))
+        return 1
+    out = dict(base)
+    out["claims"] = list(base.get("claims") or []) + new
+    out["not_found"] = add.get("not_found") or []
+    out["followup"] = {"merged_at": now_iso(), "added": len(new), "first_file": first.name, "followup_file": fu.name}
+    with open(cur, "w", encoding="utf-8") as f:
+        yaml.safe_dump(out, f, allow_unicode=True, sort_keys=False, width=1000)
+    print(f"보충 조사 합침: 첫 조사 {len(base.get('claims') or [])}개 + 보충 {len(new)}개 → 15_research.yaml"
+          f"(첫 조사는 {first.name}), 남은 찾지 못한 것 {len(out['not_found'])}개. research.py check를 다시 돌리세요.")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser(description="웹 조사 주장 확인")
-    ap.add_argument("mode", choices=["check"])
+    ap.add_argument("mode", choices=["check", "followup-plan", "merge"])
     ap.add_argument("run", nargs="?")
+    ap.add_argument("--max", type=int, default=15)
     args = ap.parse_args()
-    sys.exit(check(resolve_run(args.run)))
+    run = resolve_run(args.run)
+    if args.mode == "followup-plan":
+        sys.exit(followup_plan(run, args.max))
+    sys.exit({"check": check, "merge": merge}[args.mode](run))
 
 
 if __name__ == "__main__":

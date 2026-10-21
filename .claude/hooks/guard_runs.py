@@ -5,10 +5,12 @@
 - Read: file_path, Grep/Glob: path와 pattern, Bash: command 문자열을 본다.
 - Grep/Glob에서 path가 없거나 저장소 맨 위, runs/ 자체면 다른 회차까지 훑으므로 막고 path를 지금 회차로 주라고 알린다.
 - 막을 때는 permissionDecision deny와 이유를 돌려준다. 그 밖의 오류는 막지 않고 넘긴다(종료 코드 0).
+- 막은 기록은 runs/<CURRENT>/guard_log.jsonl에 한 줄씩 남긴다(2026-10-19, 대시보드의 금지 파일 감시가 읽음).
 """
 import json
 import re
 import sys
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -77,11 +79,29 @@ def decide(data):
     return None
 
 
+def log_hit(data, why):
+    """막은 호출을 지금 회차의 guard_log.jsonl에 적는다. 실패해도 막는 것은 그대로 한다."""
+    try:
+        cur = current_run()
+        run = ROOT / "runs" / cur if cur else None
+        if not run or not run.is_dir():
+            return
+        inp = data.get("tool_input") or {}
+        target = inp.get("file_path") or inp.get("path") or inp.get("pattern") or inp.get("command") or ""
+        row = {"ts": datetime.now().astimezone().isoformat(timespec="seconds"), "agent_type": data.get("agent_type"),
+               "agent_id": data.get("agent_id"), "tool": data.get("tool_name"), "target": rel(target)[:300], "reason": why}
+        with open(run / "guard_log.jsonl", "a", encoding="utf-8", newline="\n") as f:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+    except Exception as e:
+        print(f"guard hook log: {e}", file=sys.stderr)
+
+
 def main():
     try:
         data = json.loads(sys.stdin.buffer.read().decode("utf-8") or "{}")
         why = decide(data)
         if why:
+            log_hit(data, why)
             out = json.dumps({"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "deny",
                                                      "permissionDecisionReason": why}}, ensure_ascii=False)
             sys.stdout.buffer.write((out + "\n").encode("utf-8"))   # Windows 파이프 기본 인코딩(cp949)을 피함

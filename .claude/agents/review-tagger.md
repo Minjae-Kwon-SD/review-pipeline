@@ -37,7 +37,7 @@ gold 폴더(정답 세트 태그, 메모, 번역)와 다른 태그 파일(04_tag
 
 ## 출력: 04_tags_{모델 표시}_{batch_id}.jsonl
 
-예: 04_tags_sonnet_B0GFGL26JD_01.jsonl, 04_tags_top_gold.jsonl. 한 줄에 태그 하나, 칸은 정확히 네 개.
+{모델 표시}는 프롬프트의 "모델 표시" 값 그대로다: sonnet이면 04_tags_sonnet_<묶음>.jsonl(gold 묶음도 sonnet이면 04_tags_sonnet_gold.jsonl), top이면 04_tags_top_<묶음>.jsonl. 다른 모델 표시의 파일에 쓰지 않는다(2026-10-21: gold sonnet 태거가 예시의 04_tags_top_gold.jsonl에 써서 상위 모델 결과를 덮음). 예: 04_tags_sonnet_B0GFGL26JD_01.jsonl. 한 줄에 태그 하나, 칸은 정확히 네 개.
 
 ```json
 {"review_id": "R1XXXXXXXXXXXX", "topic": "longevity_projection", "sentiment": "negative", "quote": "fades after an hour"}
@@ -61,6 +61,12 @@ gold 폴더(정답 세트 태그, 메모, 번역)와 다른 태그 파일(04_tag
    없으면 그 리뷰에 단 다른 주제들의 감성으로 정한다: 긍정과 부정이 섞이면 mixed, 한쪽뿐이면 그쪽.
    quote는 총평 문장이 있으면 그 문장, 없으면 리뷰의 가장 핵심적인 평가 부분(제목도 됨)을 원문 그대로.
    총평 문장이 없을 때의 이 인용은 다른 주제의 인용과 같거나 겹쳐도 된다(overall은 리뷰 단위라 주제 집계에서 빠짐).
+   **총평 문장인지 가리는 법(2026-10-21, 다시 돌리기 태그 감사 FAIL 6개 중 4개가 overall 감성)**:
+   - 총평 문장은 이유나 속성 없이 제품 전체를 판정하는 말뿐이다(Love it, Great mat, Not good, Waste of money 같은 말). 제목이어도 속성이나 이유를 말하면("Thick and comfortable", "Tears easily", "I'm slipping") 총평이 아니다.
+   - "Recommend", "Don't recommend", "Would buy again" 같은 추천과 재구매 말은 총평 문장으로 치지 않는다(스키마 tagging_rule). 이것만 있으면 총평 문장이 없는 것으로 보고 다른 주제 감성으로 정한다.
+   - 총평 문장이 있으면 그 감성이다. 본문의 다른 문장에 단점이나 장점이 있어도 overall은 바꾸지 않는다(그 단점과 장점은 그 주제에 단다). mixed는 총평 문장 자체에 유보가 붙은 경우뿐이다("I love it, with some caveats", "Good mat but too thin"처럼 같은 문장 안에서 좋다와 아쉽다가 함께 있을 때). 2026-10-21 둘째 다시 돌리기에서 총평 문장이 있는데 본문 단점을 보고 mixed로 단 것이 태그 감사 FAIL 3개였다.
+   - 총평 문장이 없을 때: 이 리뷰에 단 다른 주제 태그에 positive와 negative(또는 mixed)가 하나라도 같이 있으면 mixed. 제목 하나의 분위기로 정하지 않는다.
+   - 다른 주제 태그를 달 때도 그 주제의 exclude를 먼저 본다. 막연한 칭찬("The mat is good")은 overall에만, 두꺼워서 균형을 잃는다는 말은 안정감 쪽 주제에만 단다(쿠션 주제에 같이 달지 않음).
    스키마의 overall exclude("이유가 붙은 평가는 이유 주제")는 이유 주제에도 함께 달라는 뜻이고, overall을 빼라는 뜻이 아니다.
    스키마 overall에 tagging_rule이 있으면 그 문장이 이 규칙보다 먼저다.
 7. 별점은 감성의 근거로 쓰지 않는다. 별점이 낮아도 글이 칭찬이면 positive다.
@@ -92,4 +98,6 @@ gold 폴더(정답 세트 태그, 메모, 번역)와 다른 태그 파일(04_tag
 - 이 묶음의 리뷰를 하나도 빠뜨리지 않고 읽었는가. 모든 리뷰에 overall이 하나씩 있는가(off_category 리뷰는 그 한 줄만)
 - 인용에서 부정어를 잘라 내 감성이 반대로 읽히지 않는가
 - 모든 줄의 sentiment가 네 값 중 하나이고, 같은 리뷰에 같은 주제가 두 번 없는가
-- quote를 하나씩 원문과 다시 대조했는가
+- overall 줄마다: 인용이 위 기준의 총평 문장인가, 아니면 총평이 없어 다른 주제 감성으로 정했는가. 총평 문장이 있으면 그 문장의 감성(문장 안 유보가 있을 때만 mixed), 없을 때만 다른 주제 감성으로(긍정과 부정이 같이 있으면 mixed)
+- quote를 하나씩 원문과 다시 대조했는가. quote는 본문(또는 제목)에서 글자를 그대로 복사한 연속 구간이다. 다시 타이핑하거나 줄이거나 맞춤법을 고치지 않는다(따옴표, 말줄임, 공백도 원문 그대로)
+- review_id를 입력 파일의 review_id 칸에서 그대로 복사했는가(다시 타이핑하지 않음). 출력의 review_id 종류 수가 입력 파일의 리뷰 수와 같은가(2026-10-21: 지난 시험 회차의 다시 태깅 6묶음이 원문에 없는 인용, review_id 오타, 태그 없는 리뷰 때문)

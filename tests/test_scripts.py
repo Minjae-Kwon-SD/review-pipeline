@@ -1097,6 +1097,102 @@ def test_guide_pipeline(tmp):
     page = "<p>The U.S. perfume market was valued at USD 9.21 billion in 2024</p><p>and is expected to grow at a CAGR of 5.1%.</p>"
     eq("출처 원문 찾기", (research.found("The U.S. perfume market was valued at USD 9.21 billion in 2024 and is expected to grow at a CAGR of 5.1%.", page),
                        research.found("valued at USD 10 billion", page)), (True, False))
+    # research.py 보충 조사(2026-10-20): not_found와 unverified를 모으고, fu_ 주장을 합치고, 다시 합쳐도 같음
+    rr = Path(tmp) / "rs-2026-10-20"
+    rr.mkdir()
+    (rr / "15_research.yaml").write_text(yaml.safe_dump({"claims": [
+        {"id": "mkt_01", "area": "market", "claim_ko": "가", "url": "https://example.org/a", "quote": "a"},
+        {"id": "reg_01", "area": "regulation", "claim_ko": "나", "url": "https://example.org/b", "quote": "b"}],
+        "not_found": [{"area": "market", "what": "미국만의 규모", "tried": ["us widget market"]}]}, allow_unicode=True), encoding="utf-8")
+    (rr / "15_research_check.json").write_text(json.dumps({"items": [
+        {"id": "mkt_01", "area": "market", "url": "https://example.org/a", "status": "verified"},
+        {"id": "reg_01", "area": "regulation", "url": "https://example.org/b", "status": "unverified", "reason": "페이지에 원문 문장이 없음"}]}), encoding="utf-8")
+    run("research.py", "followup-plan", rr)
+    fi = json.loads((rr / "15_research_followup_input.json").read_text(encoding="utf-8"))
+    eq("보충 조사 대상", (fi["count"], fi["not_found"], fi["unverified"], fi["items"][1]["id"]), (2, 1, 1, "reg_01"))
+    run("research.py", "followup-plan", rr, "--max", "1")
+    fi1 = json.loads((rr / "15_research_followup_input.json").read_text(encoding="utf-8"))
+    eq("보충 조사 상한(찾지 못한 것 먼저)", (fi1["count"], fi1["skipped"], fi1["items"][0]["kind"]), (1, 1, "not_found"))
+    run("research.py", "followup-plan", rr)
+    run("research.py", "merge", rr, expect=1)
+    (rr / "15_research_followup.yaml").write_text(yaml.safe_dump({"claims": [
+        {"id": "fu_reg_01", "area": "regulation", "claim_ko": "나", "url": "https://example.org/c", "quote": "c", "replaces": "reg_01"}],
+        "not_found": []}, allow_unicode=True), encoding="utf-8")
+    run("research.py", "merge", rr)
+    run("research.py", "merge", rr)
+    mg = yaml.safe_load((rr / "15_research.yaml").read_text(encoding="utf-8"))
+    first = yaml.safe_load((rr / "15_research_first.yaml").read_text(encoding="utf-8"))
+    eq("보충 조사 합치기(두 번 해도 같음)", ([c["id"] for c in mg["claims"]], mg["not_found"], mg["followup"]["added"], len(first["claims"]), len(first["not_found"])),
+       (["mkt_01", "reg_01", "fu_reg_01"], [], 1, 2, 1))
+    (rr / "15_research_followup.yaml").write_text(yaml.safe_dump({"claims": [{"id": "reg_02", "area": "regulation"}, {"id": "mkt_01"}]}), encoding="utf-8")
+    out = run("research.py", "merge", rr, expect=1)
+    # replay.py: 고른 단계와 뒤 단계 출력만 지우고 정답지는 복사하지 않음(2026-10-21)
+    src = Path(tmp) / "rp" / "runs" / "zz-2026-10-21"
+    (src / "gold").mkdir(parents=True)
+    (src / "gold" / "gold_tags.jsonl").write_text("x", encoding="utf-8")
+    for f in ["16_guide_metrics.json", "17_guide.md", "17_guide_v1.md", "18_guide_audit.yaml", "07_guide.html", "05_metrics.json", "timing.jsonl"]:
+        (src / f).write_text("x", encoding="utf-8")
+    (src / "state.json").write_text(json.dumps({"run": src.name, "steps": {"16_guide_metrics": {"status": "done"}, "07_weight": {"status": "done"}}}), encoding="utf-8")
+    dest = Path(tmp) / "rp_out"
+    run("replay.py", src, "zz-2026-10-21-replay", "--from", "16_guide_metrics", "--dest", dest)
+    nr = dest / "zz-2026-10-21-replay"
+    st = json.loads((nr / "state.json").read_text(encoding="utf-8"))
+    eq("다시 돌리기 복사", (sorted(p.name for p in nr.iterdir()), list(st["steps"]), list((nr / "gold").iterdir())),
+       (["05_metrics.json", "gold", "replay_info.json", "state.json"], ["07_weight"], []))
+    run("replay.py", src, "zz-2026-10-21-r2", "--from", "17_guide_write", "--only", "--dest", dest)
+    eq("다시 돌리기 --only", sorted(p.name for p in (dest / "zz-2026-10-21-r2").iterdir()),
+       ["05_metrics.json", "07_guide.html", "16_guide_metrics.json", "18_guide_audit.yaml", "gold", "replay_info.json", "state.json"])
+    run("replay.py", src, "other-2026-10-21", "--from", "17_guide_write", "--dest", dest, expect=2)
+    # schedule_sim.py: 앞 단계를 바꾸면 회차 길이가 바뀜
+    sr = Path(tmp) / "sim-2026-10-21"
+    sr.mkdir()
+    evs = []
+    for sid, a0, a1 in [("01_inputs", 0, 1), ("02_schema_draft", 1, 6), ("03_schema_approval", 6, 8), ("13_detail_schema_draft", 8, 20)]:
+        evs += [{"ts": f"2026-10-21T10:{a0:02d}:00+09:00", "event": "step_start", "step": sid}, {"ts": f"2026-10-21T10:{a1:02d}:00+09:00", "event": "step_end", "step": sid}]
+    (sr / "timing.jsonl").write_text("\n".join(json.dumps(e) for e in evs) + "\n", encoding="utf-8")
+    sout = run("schedule_sim.py", sr, "--pred", "13_detail_schema_draft=03_schema_approval")
+    eq("순서 시뮬레이션(앞 단계를 승인으로 되돌리면 늦어짐)", "차이 +" in sout, True)
+    # guide_metrics 회차 사실: 수집 계획 pick에 따라 상품 고른 방식 문장(2026-10-21)
+    import guide_metrics as gm0
+    gg = object.__new__(gm0.G)
+    gg.run = rr
+    (rr / "00_collect_plan.yaml").write_text("pick: manual\n", encoding="utf-8")
+    gg.m = {"summary": {"reviews": 10, "asins": 2, "sample_mean_star": 3.0, "weighted_mean_star": 4.0}}
+    gg.tables, gg.values, gg.asins = {}, {}, [{}, {}]
+    gg.conf = {"duration_item": "d", "growth": {"min_volume": 1}}
+    gg.item_name = lambda k: k
+    cv = gg.caveats()
+    eq("가이드 회차 사실(담당자 지정)", any("담당자가 직접 지정한 2개" in c for c in cv) and not any("매출 상위" in c or "사람이 확인" in c for c in cv), True)
+    # guide_metrics.plan_problems: 품목 가이드 계획과 guide 절 대조(2026-10-20)
+    import guide_metrics as gm
+    plan = {"head_topic": "a", "direction_index": {"topic": "c", "high": {"name": "두꺼움"}, "low": {"name": "얇음"}},
+            "focus": [{"id": "f1", "title": "F", "topics": ["a", "b"]}], "standards": [{"id": "s1", "title": "S", "topics": ["a"]}]}
+    ok = {"head_topic": "a", "direction_index": {"topic": "c", "high": {"name": "두꺼움", "labels": ["thick"]}, "low": {"name": "얇음", "labels": ["thin"]}},
+          "focus": [{"id": "f1", "title": "F", "topics": ["a", "b"], "items": ["x"]}], "standards": [{"id": "s1", "title": "S", "neg_labels": ["la"]}]}
+    lt = {"thick": "c", "thin": "c", "la": "a", "lg": "g"}
+    eq("가이드 계획 같음", gm.plan_problems(ok, plan, lt), [])
+    bad = json.loads(json.dumps(ok)); bad["direction_index"]["topic"] = "g"; bad["standards"][0]["neg_labels"] = ["lg"]
+    eq("가이드 계획 다름(방향 주제, 기준 라벨 주제)", len(gm.plan_problems(bad, plan, lt)), 2)
+    # research.py: PDF 글자 읽기(2026-10-20)
+    stream = b"BT /F1 12 Tf 72 720 Td (Widgets must carry a warning label.) Tj ET"
+    objs = [b"<< /Type /Catalog /Pages 2 0 R >>", b"<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+            b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>",
+            b"<< /Length %d >>\nstream\n" % len(stream) + stream + b"\nendstream", b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>"]
+    pdf, offs = b"%PDF-1.4\n", []
+    for i, o in enumerate(objs, 1):
+        offs.append(len(pdf)); pdf += b"%d 0 obj\n" % i + o + b"\nendobj\n"
+    xref = len(pdf)
+    pdf += b"xref\n0 6\n0000000000 65535 f \n" + b"".join(b"%010d 00000 n \n" % x for x in offs)
+    pdf += b"trailer << /Size 6 /Root 1 0 R >>\nstartxref\n%d\n%%%%EOF" % xref
+    pt, perr = research.pdf_text(pdf)
+    eq("PDF 글자 읽기", (perr, research.found("must carry a warning label", pt or "")), (None, True))
+    eq("글자 없는 PDF", research.pdf_text(b"%PDF-1.4 broken")[0], None)
+    # wait_files.py: 다 있으면 0, 빠지면 timeout 뒤 1
+    (rr / "a.md").write_text("x", encoding="utf-8")
+    run("wait_files.py", rr, "a.md", "--settle", "0", "--timeout", "5", "--poll", "0.2")
+    wout = run("wait_files.py", rr, "a.md", "b.md", "--settle", "0", "--timeout", "0.5", "--poll", "0.2", expect=1)
+    eq("파일 기다리기 빠진 파일", "b.md" in wout, True)
+    eq("보충 조사 id 검사", ("reg_02: id가 fu_로 시작하지 않음" in out, "mkt_01: id가 fu_로 시작하지 않음" in out), (True, True))
     # render_guide_html: [m:키]는 그 키의 표기를 찾아 링크로, 표기가 없거나 확인 안 된 출처는 기록
     import render_guide_html as rg
     g = object.__new__(rg.R)
@@ -1312,6 +1408,8 @@ def test_fake_category(tmp):
         eq("작성자용 입력: 값, 표, 인용은 같고 ev의 리뷰 id 목록만 빠짐",
            (W["values"] == M["values"], W["tables"] == M["tables"], W["quotes"] == M["quotes"], sorted(W["ev"]) == sorted(M["ev"]),
             any("i" in e or "q" in e for e in W["ev"].values())), (True, True, True, True, False))
+        sk = [k for k in M["values"] if k.startswith("std.") and k.count(".") == 2 and k.endswith((".neg_pct", ".best"))]
+        eq("기준표 불만 비율과 최저 상품에 정의 문구(2026-10-21)", (len(sk) > 0, all("분모" in (M["values"][k].get("note") or "") for k in sk)), (True, True))
         eq("설정 없는 표는 만들지 않음", (any(k.startswith("std.spec.") for k in M["tables"]), "meta.anatomy" in M["tables"],
                                      "f.scent_accuracy.note_x_direction" in M["tables"]), (False, False, False))
         run("render_guide_html.py", "build", r)
@@ -1596,6 +1694,19 @@ def test_g9_review_fixes(tmp):
     (d / "05_metrics.json").write_text("b\n", encoding="utf-8")
     run("timing_report.py", "mark", d, "end", "09_report_check", "--kind", "agents")
     eq("다른 입력이 바뀌면 needs_human", json.loads((d / "state.json").read_text(encoding="utf-8"))["steps"]["09_report_check"]["status"], "needs_human")
+    # 2026-10-21: edits 글롭(06의 04_tags_sonnet_*.jsonl)
+    for f in ("04_tags_sonnet_A_01.jsonl", "04_audit_sample.jsonl"):
+        (d / f).write_text("a\n", encoding="utf-8")
+    run("timing_report.py", "mark", d, "start", "06_tag_check", "--kind", "agents")
+    (d / "04_tags_sonnet_A_01.jsonl").write_text("b\n", encoding="utf-8")
+    run("timing_report.py", "mark", d, "end", "06_tag_check", "--kind", "agents")
+    eq("다시 태깅이 바꾼 묶음 파일은 done(글롭 edits)", json.loads((d / "state.json").read_text(encoding="utf-8"))["steps"]["06_tag_check"]["status"], "done")
+    # wait_files --batches: 묶음 계획의 sonnet 묶음 파일을 기다림
+    (d / "04_batches.json").write_text(json.dumps({"batches": [{"batch_id": "A_01", "models": ["sonnet"]}, {"batch_id": "gold", "models": ["top"]}]}), encoding="utf-8")
+    run("wait_files.py", d, "--batches", "04_batches.json", "--settle", "0", "--timeout", "5", "--poll", "0.2")
+    (d / "04_batches.json").write_text(json.dumps({"batches": [{"batch_id": "A_02", "models": ["sonnet"]}]}), encoding="utf-8")
+    wo = run("wait_files.py", d, "--batches", "04_batches.json", "--settle", "0", "--timeout", "0.5", "--poll", "0.2", expect=1)
+    eq("묶음 파일이 빠지면 기다림이 끝나지 않음", "04_tags_sonnet_A_02.jsonl" in wo, True)
 
 
 def test_g10_rules_known(tmp):
@@ -1973,6 +2084,94 @@ def test_speedup_1016(tmp):
             eq("HTTP 401은 바로 멈춤", len(tries), 1)
     finally:
         mcp_http.RETRY_WAITS = waits
+
+
+def test_dashboard_1019(tmp):
+    """2026-10-19 대시보드(scripts/dashboard.py snapshot): 사람 차례, 멈춤, 남은 시간, 정한 것, 신호등, 유료 호출, 막은 기록, 장별 상태"""
+    from datetime import datetime, timedelta
+    proj = Path(tmp) / "dash_proj"
+    (proj / "scripts").mkdir(parents=True)
+    (proj / ".claude" / "hooks").mkdir(parents=True)
+    for f in ("dashboard.py", "dashboard.html", "pipeline_io.py"):
+        shutil.copy(SCRIPTS / f, proj / "scripts" / f)
+    shutil.copy(HERE.parent / ".claude" / "hooks" / "guard_runs.py", proj / ".claude" / "hooks" / "guard_runs.py")
+    now = datetime.now().astimezone().replace(microsecond=0)
+
+    def at(base, m):
+        return (base + timedelta(minutes=m)).isoformat()
+
+    def write_run(name, events, steps):
+        d = proj / "runs" / name
+        d.mkdir(parents=True)
+        (d / "timing.jsonl").write_text("".join(json.dumps(e, ensure_ascii=False) + "\n" for e in events), encoding="utf-8")
+        (d / "state.json").write_text(json.dumps({"run": name, "steps": steps}, ensure_ascii=False), encoding="utf-8")
+        return d
+    # 지난 회차: 주제 초안 끝 0분, 정답지 기다림 10~40분, 리포트와 가이드 HTML 끝 90분 → 남은 AI 시간 60분, 정답지까지 10분
+    p0 = now - timedelta(days=2)
+    past = [{"ts": at(p0, 0), "event": "step_end", "step": "02_schema_draft", "kind": "agents", "status": "done"},
+            {"ts": at(p0, 10), "event": "step_start", "step": "04_gold_tagging", "kind": "human", "status": "needs_human"},
+            {"ts": at(p0, 10), "event": "wait_start", "gate": "04_gold_tagging"},
+            {"ts": at(p0, 40), "event": "wait_end", "gate": "04_gold_tagging"},
+            {"ts": at(p0, 40), "event": "step_end", "step": "04_gold_tagging", "kind": "human", "status": "done"},
+            {"ts": at(p0, 80), "event": "step_end", "step": "11_html", "kind": "script", "status": "done"},
+            {"ts": at(p0, 90), "event": "step_end", "step": "19_guide_html", "kind": "script", "status": "done"}]
+    write_run("cat-2098-01-01", past, {"11_html": {"status": "done"}, "19_guide_html": {"status": "done"}})
+    write_run("cat-rt2-2098-01-01", past, {"11_html": {"status": "done"}, "19_guide_html": {"status": "done"}})   # 시험 사본은 빠짐
+    c0 = now - timedelta(minutes=5)
+    cur = [{"ts": at(c0, 0), "event": "step_end", "step": "02_schema_draft", "kind": "agents", "status": "done"},
+           {"ts": at(c0, 1), "event": "step_start", "step": "23_specs", "kind": "agents", "status": "running"},
+           {"ts": at(c0, 1), "event": "SubagentStart", "agent_type": "product-spec-collector", "agent_id": "a1"},
+           {"ts": at(c0, 2), "event": "SubagentStart", "agent_type": "schema-drafter", "agent_id": "a2"},
+           {"ts": at(c0, 3), "event": "SubagentStop", "agent_type": "schema-drafter", "agent_id": "a2"},
+           "깨진 줄"]
+    d = proj / "runs" / "cat-2098-01-02"
+    d.mkdir(parents=True)
+    (d / "timing.jsonl").write_text("".join((json.dumps(e, ensure_ascii=False) if isinstance(e, dict) else e) + "\n" for e in cur), encoding="utf-8")
+    (d / "state.json").write_text(json.dumps({"run": d.name, "steps": {
+        "02_schema_draft": {"status": "done", "kind": "agents", "updated": at(c0, 0)},
+        "23_specs": {"status": "running", "kind": "agents", "updated": at(c0, 1)},
+        "05_tagging": {"status": "needs_human", "kind": "agents", "updated": at(c0, 2)}}}), encoding="utf-8")
+    (proj / "runs" / "CURRENT").write_text(d.name, encoding="utf-8")
+    (d / "00_auto_decisions.md").write_text("# 관문\n- 00_asin_review: 7개 승인\n\n| 관문 | 무엇 |\n|---|---|\n| 05a_pilot | 계속 |\n", encoding="utf-8")
+    (d / "04_tag_audit_summary.json").write_text(json.dumps({"status": "FAIL", "fail_rate": 0.08}), encoding="utf-8")
+    (d / "07_audit.yaml").write_text("audit:\n  overall_status: FAIL\n  findings:\n    - status: FAIL\n    - status: PASS\n", encoding="utf-8")
+    (d / "raw").mkdir()
+    (d / "raw" / "paid_calls.jsonl").write_text("{}\n{}\n{}\n", encoding="utf-8")
+    (d / "00_collect_plan.yaml").write_text("source: paid_below\nmax_paid_calls: 2\n", encoding="utf-8")
+    (d / "17_guide_part_01-02-A_early.md").write_text("x", encoding="utf-8")
+    (d / "06_report_part_8.md").write_text("x", encoding="utf-8")
+    hook = subprocess.run([sys.executable, str(proj / ".claude" / "hooks" / "guard_runs.py")], capture_output=True,
+                          input=json.dumps({"tool_name": "Read", "agent_id": "a9", "agent_type": "report-writer",
+                                            "tool_input": {"file_path": str(proj / "runs" / "cat-2098-01-01" / "06_report.md")}}).encode("utf-8"))
+    eq("막은 호출은 막고 기록", ('"deny"' in hook.stdout.decode("utf-8"), hook.returncode), (True, 0))
+
+    def snap():
+        p = subprocess.run([sys.executable, str(proj / "scripts" / "dashboard.py"), "snapshot"], capture_output=True)
+        return json.loads(p.stdout.decode("utf-8"))
+    s = snap()
+    eq("대시보드 도는 단계와 에이전트", ([r["id"] for r in s["running"]], [a["agent_type"] for a in s["agents"]]), (["23_specs"], ["product-spec-collector"]))
+    eq("대시보드 멈춘 단계", [r["id"] for r in s["stuck"]], ["05_tagging"])
+    eq("대시보드 정한 것(목록과 표, 머리줄 뺌)", [x["text"] for x in s["decisions"]], ["00_asin_review: 7개 승인", "05a_pilot / 계속"])
+    chk = {c["name"]: (c["status"], c["detail"]) for c in s["checks"]}
+    eq("대시보드 신호등", (chk["태그 감사"], chk["리포트 감사"], chk["입력 검사"][0]), (("FAIL", "실패 8.0%"), ("FAIL", "지적 FAIL 1개"), "NONE"))
+    eq("대시보드 유료 호출", s["paid"], {"calls": 3, "limit": 2})
+    eq("대시보드 막은 기록", [(g["agent_type"], g["target"]) for g in s["guard"]], [("report-writer", "runs/cat-2098-01-01/06_report.md")])
+    ch = s["chapters"]
+    eq("대시보드 장별 상태", ([x["state"] for x in ch["guide"]][:2], [x["state"] for x in ch["report"]][:2], ch["guide_early_ran"]),
+       (["early", "none"], ["none", "done"], "waiting"))
+    e = s["eta"]
+    eq("대시보드 남은 시간(지난 회차 60분 - 지난 5분, 시험 사본 뺌)", (e["state"], round(e["minutes_left"]), round(e["gold_minutes"]), e["runs"]),
+       ("ok", 55, 5, ["cat-2098-01-01"]))
+    eq("대시보드 지난 회차(시험 사본 뺌)", [h["run"] for h in s["history"]], ["cat-2098-01-01", "cat-2098-01-02"])
+    eq("대시보드 사람 차례 없음, 끝 아님", (s["human_turn"], s["finished"]), ([], False))
+    # 정답지 기다림이 열리면 사람 차례가 되고, 그 시간은 남은 시간 시계에서 빠짐
+    with open(d / "timing.jsonl", "a", encoding="utf-8") as f:
+        f.write(json.dumps({"ts": at(c0, 0), "event": "wait_start", "gate": "04_gold_tagging"}) + "\n")
+    s = snap()
+    eq("대시보드 정답지 차례", ([r["name"] for r in s["human_turn"]], round(s["eta"]["minutes_left"])), (["정답지 달기"], 60))
+    p = subprocess.run([sys.executable, "-c", "import sys; sys.path.insert(0, sys.argv[1]); import dashboard as d; "
+                        "print(d.open_path('../outside.txt')[0], d.open_path('runs/none.txt')[0])", str(proj / "scripts")], capture_output=True)
+    eq("대시보드 바로가기는 저장소 안 파일만", p.stdout.decode("utf-8").split(), ["False", "False"])
 
 
 def main():
@@ -2426,6 +2625,7 @@ def main():
         test_speedup_1016(Path(tmp))
         test_guide_split_1017(Path(tmp))
         test_e2_1017(Path(tmp))
+        test_dashboard_1019(Path(tmp))
 
     if FAILS:
         print("실패:")
@@ -2433,7 +2633,7 @@ def main():
             print(" -", f)
         sys.exit(1)
     print(f"스크립트 자체 시험 통과({CHECKS[0]}개 확인): 입력 검사, 별점 묶음 보정, 수집 변환, 스키마 검사, 정답 세트 고르기와 형식, 태그 검사, 가중 집계, 채점, "
-          "검수 집계, 리포트 검사, 시간 표와 단계 상태, 시간 기록 Hook")
+          "검수 집계, 리포트 검사, 시간 표와 단계 상태, 시간 기록 Hook, 대시보드")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 {
   "env": {
-    "CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS": "3600000"
+    "CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS": "3600000",
+    "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS": "50"
   },
   "permissions": {
     "allow": [

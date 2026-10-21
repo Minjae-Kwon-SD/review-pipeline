@@ -1,0 +1,28 @@
+# 품목 단위 가이드 장 선택(2026-10-20 담당자 결정: 회차마다 바뀌지 않게 고정).
+# 품목 설정(config/categories/<카테고리>.yaml)에 guide_plan: yogamat 를 적으면 guide_metrics.py가 그 설정의 guide 절이 이 계획과 같은지 본다.
+# 고정하는 것: 머리 주제, 방향 지수의 주제와 두 방향 이름, 집중 분석과 기준표의 id, 제목, 주제(순서 포함).
+# 고정하지 않는 것: 라벨 id(회차마다 승인 라벨이 다름), 설계 정보 항목(items), 검색어. 메인 세션이 이 회차 승인 라벨과 항목에서 고르되,
+# 라벨은 그 기준의 주제(topics)에 속한 것만 쓴다.
+# 처음 정한 근거: yogamatx3-2026-10-20의 guide 절(1회차, r2와 같은 머리 주제와 방향 지수 주제).
+product: 요가 매트          # 품목 이름. 새 품목 설정을 만들 때 이 이름이 같은 계획을 찾는다
+head_topic: build_durability
+direction_index:
+  topic: cushioning
+  high: {name: 너무 두꺼움, means: 두껍거나 물렁해서 불편하다는 불만}
+  low: {name: 너무 얇음, means: 얇거나 표기보다 얇다는 불만}
+focus:
+  - {id: cushion, title: "두께와 쿠션, 안정감", topics: [cushioning, stability]}
+  - {id: grip, title: 그립과 미끄럼, topics: [grip_traction]}
+  - {id: durability, title: "만듦새와 내구성, 묻어남", topics: [build_durability, residue_transfer]}
+  - {id: odor, title: 냄새와 몸 반응, topics: [odor, safety]}
+standards:
+  - {id: cushion, title: 두께와 쿠션, topics: [cushioning]}
+  - {id: stability, title: 안정감과 늘어남, topics: [stability]}
+  - {id: grip, title: 그립과 미끄럼, topics: [grip_traction]}
+  - {id: durability, title: 만듦새와 내구성, topics: [build_durability]}
+  - {id: residue, title: 묻어남과 얼룩, topics: [residue_transfer]}
+  - {id: odor, title: 냄새, topics: [odor]}
+  - {id: body_safety, title: 몸 반응과 성분, topics: [safety]}
+  - {id: size_carry, title: "크기와 휴대, 끈", topics: [carry_strap, design]}
+  - {id: listing, title: 설명과 실물, topics: [trust]}
+  - {id: value, title: 가격 대비 가치, topics: [price_value]}

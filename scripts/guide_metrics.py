@@ -45,6 +45,7 @@ for _s in (sys.stdout, sys.stderr):
         pass
 
 EV_MAX = 80
+MARKET_MISSING = "시장 데이터를 받지 못함(서버 오류)"   # spd-amz-market 응답이 없는 회차의 시장 칸 표기(2026-10-19 담당자 결정)
 EXCLUDE = ("overall",)
 
 
@@ -214,13 +215,17 @@ class G:
     # ------------------------------------------------ 머리
     def head(self):
         c = self.conf
-        node = next(r for r in self.market["tables"]["subcategories"] if str(r["id"]) == str(c["market_node_head"]))
-        mv = node["totalMonthlyRevenue"]
-        # 월 매출 칸은 기간(월)만 칸 이름으로 알고 통화는 문서에 없다. 연 환산은 확인된 값이 아니라 가정(통화를 마켓 통화로 읽고 x 12,
-        # 계절 변동 미반영)이라 text에 '가정'을 붙여 확인된 SAM처럼 읽히지 않게 한다(2026-10-15 스피커 검토, 모든 품목)
-        self.put("head.market_month", mv, f"{f_int(mv)}(월 매출 칸, 통화 미확인)", note=f"{node['subcategoryContextName']} 노드, spd-amz-market")
-        self.put("head.market_year", mv * 12, f"{f_int(mv * 12)}(가정: 통화 미확인 월 매출 x 12, 계절 변동 미반영)",
-                 note="월 매출 칸 x 12. 확인된 연 매출이 아니라 가정이므로 머리 숫자나 SAM 확정 값으로 쓰지 않는다", assumption=True)
+        node = next((r for r in self.market["tables"].get("subcategories") or [] if str(r["id"]) == str(c["market_node_head"])), None)
+        if node is None:      # 시장 데이터를 받지 못한 회차(2026-10-19 요가 매트, 서버 오류): 값 없이 표기만
+            self.put("head.market_month", None, MARKET_MISSING, note="spd-amz-market 응답 없음(market/market.json 하위 카테고리 0행)")
+            self.put("head.market_year", None, MARKET_MISSING, note="spd-amz-market 응답 없음", assumption=True)
+        else:
+            mv = node["totalMonthlyRevenue"]
+            # 월 매출 칸은 기간(월)만 칸 이름으로 알고 통화는 문서에 없다. 연 환산은 확인된 값이 아니라 가정(통화를 마켓 통화로 읽고 x 12,
+            # 계절 변동 미반영)이라 text에 '가정'을 붙여 확인된 SAM처럼 읽히지 않게 한다(2026-10-15 스피커 검토, 모든 품목)
+            self.put("head.market_month", mv, f"{f_int(mv)}(월 매출 칸, 통화 미확인)", note=f"{node['subcategoryContextName']} 노드, spd-amz-market")
+            self.put("head.market_year", mv * 12, f"{f_int(mv * 12)}(가정: 통화 미확인 월 매출 x 12, 계절 변동 미반영)",
+                     note="월 매출 칸 x 12. 확인된 연 매출이 아니라 가정이므로 머리 숫자나 SAM 확정 값으로 쓰지 않는다", assumption=True)
         tp = c["head_topic"]
         t = next(x for x in self.m["topics"] if x["id"] == tp)
         ev = self.evidence("ev.head_topic_neg", f"{t['name_ko']} 부정 리뷰", f"{t['name_ko']} 부정 언급", self.neg_reviews(tp),
@@ -305,6 +310,9 @@ class G:
             self.put("head.growth_recent", b["recent"], f_int(b["recent"]))
             self.put("head.growth_prior", b["prior"], f_int(b["prior"]))
             self.put("head.growth_weeks", b["recent_weeks"], f"{b['recent_weeks']}(1년 전 {b['prior_weeks']})")
+        elif not self.market["tables"].get("subcategories"):      # 시장 데이터를 받지 못한 회차
+            for k in ("head.fastest_term", "head.growth_multiple", "head.growth_recent", "head.growth_prior", "head.growth_weeks"):
+                self.put(k, None, MARKET_MISSING, note="spd-amz-market 응답 없음(검색어 이력 0)")
 
     def all_terms(self):
         seen = {}
@@ -330,7 +338,13 @@ class G:
                     node_rev[nm] = r["totalMonthlyRevenue"]
         share_unit = {}
         for k, node in zip(self.mkeys, self.conf["market_nodes_brand_share"]):
-            rows = T[f"brands_{k}"][:10]
+            rows = (T.get(f"brands_{k}") or [])[:10]
+            if not rows:      # 시장 데이터를 받지 못한 회차: 점유율 칸은 표기만
+                share_unit[k] = {"confirmed": False, "text": MARKET_MISSING}
+                self.tables[f"m.brands_{k}"] = []
+                for key in (f"m.top10_share_{k}", f"m.top1_{k}", f"m.top1_share_{k}"):
+                    self.put(key, None, MARKET_MISSING, note=f"{node} 브랜드 표 0행(spd-amz-market 응답 없음)")
+                continue
             top10 = sum(r["marketshare"] or 0 for r in rows)
             ok, unit = share_basis(T[f"brands_{k}"], node_rev.get(node))
             share_unit[k] = {"confirmed": ok, "text": unit}
@@ -363,9 +377,15 @@ class G:
             self.put(f"m.terms_{g}_n", len(groups[g]), f"{f_int(len(groups[g]))}개")
             self.put(f"m.terms_{g}_volume", sum(r.get("volume30Day") or 0 for r in groups[g]),
                      f_int(sum(r.get("volume30Day") or 0 for r in groups[g])))
-        brands = [r for k in self.mkeys for r in T[f"brands_{k}"] if r.get("avgPrice")]
+        brands = [r for k in self.mkeys for r in T.get(f"brands_{k}") or [] if r.get("avgPrice")]
         prices = sorted(r["avgPrice"] for r in brands)
         nb = self.conf.get("price_bands", 3)
+        if not prices:      # 시장 데이터를 받지 못한 회차: 가격대 칸은 표기만
+            self.tables["m.price_bands"] = []
+            for i in range(1, nb + 1):
+                for key in (f"m.price_band{i}_rating", f"m.price_band{i}_share", f"m.price_band{i}_range"):
+                    self.put(key, None, MARKET_MISSING, note="브랜드 표 0행(spd-amz-market 응답 없음)")
+            return
         cuts = [prices[int(len(prices) * i / nb)] for i in range(1, nb)]
         bands = defaultdict(list)
         for r in brands:
@@ -721,10 +741,14 @@ class G:
                    "ev": {"neg": evn, "pos": evp}}
             rows.append(row)
             k = f"std.{s['id']}"
-            self.put(f"{k}.neg", len(neg), f"{f_int(len(neg))}개", evn)
-            self.put(f"{k}.neg_pct", row["neg_weighted_pct"], f_pct(row["neg_weighted_pct"]), evn)
-            self.put(f"{k}.pos", len(pos), f"{f_int(len(pos))}개", evp)
-            self.put(f"{k}.best", best["brand"], f"{best['brand']} {f_pct(best['neg_pct'])}")
+            # 정의 문구(2026-10-21: 다시 돌리기 가이드 감사에서 이 비율의 정의와 분모가 없어 03장 주제 비율과 같은 지표처럼 읽힌다는 확인 불가 10개)
+            std_def = (f"기준 '{s['title']}'의 부정 세부 이슈 라벨(neg_labels) 가운데 하나라도 붙은 리뷰")
+            self.put(f"{k}.neg", len(neg), f"{f_int(len(neg))}개", evn, note=f"{std_def} 수(원본)")
+            self.put(f"{k}.neg_pct", row["neg_weighted_pct"], f_pct(row["neg_weighted_pct"]), evn,
+                     note=f"{std_def}의 가중 비율. 분모는 전체 리뷰(가중). 세부 이슈 라벨로 세므로 03장 불만 지도의 주제 비율(그 주제를 부정으로 말한 리뷰어)과 다른 지표")
+            self.put(f"{k}.pos", len(pos), f"{f_int(len(pos))}개", evp, note=f"기준 '{s['title']}'의 긍정 세부 이슈 라벨이 붙은 리뷰 수(원본)")
+            self.put(f"{k}.best", best["brand"], f"{best['brand']} {f_pct(best['neg_pct'])}",
+                     note=f"{std_def}의 가중 비율이 가장 낮은 상품. 분모는 그 상품의 리뷰(가중). 같은 값의 상품이 더 있을 수 있으니 by_asin을 함께 본다")
             for x in neg_labels:
                 self.put(f"{k}.label.{x['id']}", x["reviews"], f"{x['reviews']}개", self.evidence(
                     f"ev.label.{x['id']}", x["name"], x["name"] + " 라벨이 붙은", self.label_reviews[x["id"]], self.label_quote(x["id"])))
@@ -844,7 +868,7 @@ class G:
                      score.get(best["asin"], {}).get("subcategory") or "-", note="부정이 가장 적은 상품의 하위 카테고리")
             for r in rows:
                 k = f"std.spec.{b1['id']}.{r['asin']}"
-                self.put(f"{k}.neg_pct", r["neg_pct"], f_pct(r["neg_pct"]))
+                self.put(f"{k}.neg_pct", r["neg_pct"], f_pct(r["neg_pct"]), note="이 상품 리뷰 가운데 이 기준 부정 세부 이슈 라벨이 붙은 리뷰의 가중 비율(분모는 그 상품의 리뷰)")
                 self.put(f"{k}.duration", r["duration_median"], f"값 {r['duration_values']}개" +
                          ("" if r["duration_median"] is None else f", 중앙값 {self.dur(r['duration_median'], self.conf['duration_item'])}"))
 
@@ -1008,9 +1032,15 @@ class G:
         log_p = self.run / "02_collect_log.json"
         mode = (json.loads(log_p.read_text(encoding="utf-8")).get("mode") if log_p.exists() else None) or "db"
         src = "유료 수집 표본(별점마다 고르게 받음)" if mode == "paid" else "공유 리뷰 DB 표본"
-        by_rank = bool((category_conf(self.run) or {}).get("selection"))     # collect.py rank(검색 순위와 매출)로 후보를 골랐는지
-        pick = (f"ASIN은 카테고리 검색어의 매출 상위 후보 가운데 고른 {len(self.asins)}개다(상품 확인 관문에서 사람이 확인)." if by_rank else
-                f"ASIN은 매출 순위가 아니라 공유 DB에 리뷰가 많은 후보 가운데 고른 {len(self.asins)}개다(상품 확인 관문에서 사람이 확인).")
+        # 고른 방식은 수집 계획(00_collect_plan.yaml의 pick)을 따른다(2026-10-21: 세 회차 가이드 첫 감사가 모두 이 문장을 FAIL로 봄.
+        # pick: manual인데 품목 설정에 selection이 있다는 이유로 "매출 상위 후보", 자동 승인인데 "사람이 확인"이라고 적었음)
+        plan_p = self.run / "00_collect_plan.yaml"
+        how = (load_yaml(plan_p) or {}).get("pick") if plan_p.exists() else None
+        if how is None:
+            how = "rank" if (category_conf(self.run) or {}).get("selection") else "db"
+        pick = {"manual": f"ASIN은 담당자가 직접 지정한 {len(self.asins)}개다(수집 계획 pick: manual).",
+                "rank": f"ASIN은 카테고리 검색어의 매출 상위 후보 가운데 고른 {len(self.asins)}개다(상품 확인은 추천안대로 자동 승인)."}.get(
+            how, f"ASIN은 매출 순위가 아니라 공유 DB에 리뷰가 많은 후보 가운데 고른 {len(self.asins)}개다(상품 확인은 추천안대로 자동 승인).")
         return [
             f"리뷰는 {src}(리뷰 {n['reviews']:,}개, ASIN {n['asins']}개)이라 낮은 별점이 실제보다 많다(표본 평균 {n['sample_mean_star']:.2f}★, "
             f"가중 평균 {n['weighted_mean_star']:.2f}★). 비율은 별점 묶음 가중으로 되돌렸다.",
@@ -1027,7 +1057,64 @@ class G:
         ] + list(self.conf.get("caveats_extra") or [])
 
 
+def plan_problems(guide, plan, label_topic):
+    """품목 가이드 계획(config/guide_plans/<이름>.yaml, 2026-10-20)과 guide 절이 다른 곳. 라벨 id는 회차마다 달라 비교하지 않고,
+    라벨이 그 장의 주제에 속하는지만 본다(label_topic: 라벨 id -> 주제, 07a_issues_approved.yaml)."""
+    out = []
+    if guide.get("head_topic") != plan.get("head_topic"):
+        out.append(f"머리 주제 {guide.get('head_topic')} != 계획 {plan.get('head_topic')}")
+    di, pd = guide.get("direction_index") or {}, plan.get("direction_index") or {}
+    if di.get("topic") != pd.get("topic"):
+        out.append(f"방향 지수 주제 {di.get('topic')} != 계획 {pd.get('topic')}")
+    for side in ("high", "low"):
+        a, b = (di.get(side) or {}), (pd.get(side) or {})
+        if a.get("name") != b.get("name"):
+            out.append(f"방향 지수 {side} 이름 {a.get('name')} != 계획 {b.get('name')}")
+        for lab in a.get("labels") or []:
+            if label_topic.get(lab) not in (None, pd.get("topic")):
+                out.append(f"방향 지수 {side} 라벨 {lab}이 {pd.get('topic')} 주제가 아님({label_topic.get(lab)})")
+    for key, name in (("focus", "집중 분석"), ("standards", "기준표")):
+        got = [(x.get("id"), x.get("title")) for x in guide.get(key) or []]
+        want = [(x.get("id"), x.get("title")) for x in plan.get(key) or []]
+        if got != want:
+            out.append(f"{name} 목록(id, 제목, 순서)이 계획과 다름: {got} != {want}")
+            continue
+        for g, p in zip(guide.get(key) or [], plan.get(key) or []):
+            if key == "focus" and list(g.get("topics") or []) != list(p.get("topics") or []):
+                out.append(f"집중 분석 {g.get('id')} 주제 {g.get('topics')} != 계획 {p.get('topics')}")
+            if key == "standards":
+                for lab in (g.get("neg_labels") or []) + (g.get("pos_labels") or []):
+                    tp = label_topic.get(lab)
+                    if tp is not None and tp not in (p.get("topics") or []):
+                        out.append(f"기준 {g.get('id')} 라벨 {lab}이 계획 주제 {p.get('topics')} 밖({tp})")
+    return out
+
+
+def check_plan(run):
+    """품목 설정에 guide_plan이 있으면 guide 절을 그 계획과 대조한다. 다르면 멈춘다(16단계를 돌리지 않음)."""
+    name = (category_conf(run) or {}).get("guide_plan")
+    if not name:
+        return
+    pp = ROOT / "config" / "guide_plans" / f"{name}.yaml"
+    if not pp.exists():
+        die(f"품목 설정의 guide_plan: {name}인데 {pp.relative_to(ROOT)}이 없습니다.")
+    plan = load_yaml(pp) or {}
+    ap = run / "07a_issues_approved.yaml"
+    label_topic = {}
+    if ap.exists():
+        for t in (load_yaml(ap) or {}).get("topics") or []:
+            for d in (t.get("directions") or {}).values():
+                for lab in d.get("labels") or []:
+                    label_topic[lab["id"]] = t["topic"]
+    bad = plan_problems(category_conf(run).get("guide") or {}, plan, label_topic)
+    if bad:
+        die(f"guide 절이 품목 가이드 계획({pp.relative_to(ROOT)})과 다릅니다. 계획대로 guide 절을 고친 뒤 다시 돌리세요:\n  "
+            + "\n  ".join(bad))
+    print(f"guide 절이 품목 가이드 계획 {name}과 같음(머리 주제, 방향 지수, 집중 분석 {len(plan.get('focus') or [])}개, 기준 {len(plan.get('standards') or [])}개)")
+
+
 def compute(run, early=False, all_labels=False):
+    check_plan(run)
     g = G(run, early=early, all_labels=all_labels)
     g.head()
     g.market_ch()

@@ -23,6 +23,7 @@
     같은 단계를 두 번 이상 시작했으면 단계마다 마지막 시도만 더한 값을 따로 적는다.
 """
 import argparse
+import fnmatch
 import json
 import sys
 from datetime import datetime
@@ -89,10 +90,11 @@ def mark(run, edge, step, kind, calls=None, retries=None, workers=None, force=Fa
         now = stage_files(run, step) or {}
         changed = sorted(f for f, h in prev["input_files_start"].items() if now.get(f) != h)
         # 2026-10-17 E4: 단계의 고치기 고리가 바꾸는 입력(stages.yaml edits, 예: 09의 06_report.md)은 완료를 막지 않고 기록만
-        edits = set(stage_edits(step))
-        if edits & set(changed):
-            ev["edited"] = sorted(edits & set(changed))
-            changed = [f for f in changed if f not in edits]
+        edits = stage_edits(step)     # 글롭도 됨(2026-10-21: 06의 다시 태깅이 바꾸는 04_tags_sonnet_*.jsonl)
+        hit = sorted(f for f in changed if any(fnmatch.fnmatch(f, e) for e in edits))
+        if hit:
+            ev["edited"] = hit
+            changed = [f for f in changed if f not in hit]
         if changed:
             status = "needs_human"
             ev["status"] = status

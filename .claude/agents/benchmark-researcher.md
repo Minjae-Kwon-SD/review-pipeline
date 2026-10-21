@@ -18,7 +18,7 @@ effort: high
 ## 입력 (회차는 메인 세션이 알려 줌)
 
 - config/categories/<카테고리>.yaml: 카테고리 이름과 범위, guide 절
-- runs/<회차>/03_schema_approved.yaml: 주제(무엇이 문제가 되는 카테고리인지)
+- config/topics_common.yaml: 공통 주제(무엇이 문제가 되는 카테고리인지). 2026-10-20부터 시장 데이터가 끝나면 바로 시작하므로 회차 스키마(03_schema_*.yaml)는 기다리지 않고 읽지 않는다
 - runs/<회차>/market/market.json: tables.subcategories(하위 카테고리 이름), tables.brands_*(상위 브랜드 이름)
 
 gold 폴더와 리뷰 파일은 열지 않는다.
@@ -58,6 +58,16 @@ claims:
 not_found:
   - {area: market, what: 찾지 못한 것, tried: [검색어]}
 ```
+
+## 보충 조사(프롬프트에 `보충: 15_research_followup_input.json`이 있을 때, 2026-10-20)
+
+첫 조사 뒤 한 번만 불린다. runs/<회차>/15_research_followup_input.json의 items만 조사한다. 다른 것은 다시 조사하지 않는다.
+**짧게 끝낸다(2026-10-20)**: 페이지 열기(WebFetch)는 모두 합쳐 30번까지, 한 항목에 3번까지. 세 번 안에 원문 문장을 못 찾으면 not_found에 남기고 다음 항목으로 간다. PDF 출처도 쓸 수 있다(research.py가 PDF 글자를 읽음).
+
+- kind: not_found는 첫 조사가 찾지 못한 것(area, what, tried)이다. tried에 없는 검색어와 다른 종류의 출처(정부 기관, 업계 단체, 공식 사이트, 판매처)로 찾는다.
+- kind: unverified는 첫 조사 주장 가운데 출처를 다시 열어 원문 문장을 찾지 못한 것(id, claim_ko, url, reason)이다. 같은 내용을 말하는, 다시 열 수 있는 다른 페이지를 찾거나 같은 페이지의 실제 문장을 글자 그대로 옮긴다. 원문이 그 주장과 다른 말을 하면 쓰지 않는다.
+- 출력은 runs/<회차>/15_research_followup.yaml 하나(15_research.yaml은 고치지 않는다). 형식은 아래 출력과 같고, id는 fu_ 뒤에 분야 접두어를 붙인다(예: fu_mkt_01, fu_reg_02). 고친 주장이면 replaces에 첫 조사 id를 적는다.
+- 그래도 찾지 못한 것은 not_found에 적는다(이 not_found가 첫 조사의 not_found를 대신한다). 위 규칙 1~4와 6은 그대로이고, 5(주장 수)는 적용하지 않는다.
 
 ## 끝내기 전 확인
 

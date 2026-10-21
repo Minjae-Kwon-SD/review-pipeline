@@ -26,7 +26,7 @@ CLAUDE.md                  이 파일
 config/                    stages.yaml(단계마다 입력, 출력, 뒤 단계, 상한), pipeline.yaml(유료 수집 스위치, 별점 묶음과 경고 기준), categories/<카테고리>.yaml(검색어와 제목 규칙),
                            topics_common.yaml(공통 주제 11개), report_template_ko.md,
                            topics_perfume_candidates.yaml(v0 손 시험용, v1에서는 읽지 않음)
-scripts/                   collect, check_inputs, eval_gold(+ gold_sheet.html), tag_batches, audit_quotes, issues, weight(+ sections), render_html, market(+ market_build), detail, research, guide_metrics, guide_parts, guide_check, guide_diff, render_guide_html, exemplar, copy_check, cross_check, translate_prep, robustness, specs, report_lines, report_parts, stage_plan, stage_packet, timing_report, doc_facts
+scripts/                   collect, check_inputs, eval_gold(+ gold_sheet.html), tag_batches, audit_quotes, issues, weight(+ sections), render_html, market(+ market_build), detail, research, guide_metrics, guide_parts, guide_check, guide_diff, render_guide_html, exemplar, copy_check, cross_check, translate_prep, robustness, specs, report_lines, report_parts, stage_plan, stage_packet, timing_report, doc_facts, dashboard(+ dashboard.html, 돌리는 사람용 화면), wait_files(작성자 출력 파일이 다 생기면 끝 알림), replay(끝난 회차를 복사해 고른 단계만 다시 돌릴 준비), schedule_sim(시간 기록으로 단계 순서만 바꾼 회차 길이 계산)
                            (+ pipeline_io, mcp_http 도우미. mcp_http는 .mcp.json의 서버를 HTTP로 부르고 토큰은 환경 변수에서만 읽음)
 tests/                     가짜 회차로 스크립트를 손계산과 맞춰 보는 시험(python tests/test_scripts.py)
 runs/CURRENT               지금 회차 이름 한 줄
@@ -102,6 +102,7 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | 14_details.jsonl, 14_detail_counts.json, 14_detail_check.json | detail.py extract-check | 검사를 통과한 값(리뷰 id, 항목, 값, 인용), 항목과 값마다 리뷰 수와 가중 비율 |
 | 14b_detail_audit_sample.jsonl, 14b_detail_audit.yaml, 14b_detail_audit_summary.json | detail.py, evidence-auditor | 추출 감사 |
 | 15_research.yaml, 15_research_check.json | benchmark-researcher, research.py check | 웹 조사 주장(출처 URL, 원문 문장)과 다시 열어 확인한 결과 |
+| 15_research_followup_input.json, 15_research_followup.yaml, 15_research_first.yaml | research.py followup-plan, benchmark-researcher(보충), research.py merge | 보충 조사 한 번(2026-10-20): 첫 조사가 찾지 못한 것과 확인 안 된 주장만, fu_ 주장, 합치기 전 첫 조사. merge가 15_research.yaml에 합친다 |
 | 05_robustness.json | robustness.py | 견고성 점검: 다시 뽑기(씨앗 고정)와 상품 하나씩 빼기. metrics의 robustness와 가이드 A장 표의 원본 |
 | 23_spec_input.json, 23_specs.yaml | specs.py prep, product-spec-collector | 상품마다 모을 사양 항목, 모은 값(출처 주소, 원문 문장, 같은 상품인지 확인한 정도) |
 | 23_specs_check.json, 23_specs_verified.json | specs.py check | 사양 값마다 다시 열어 확인한 결과, 확인된 값만(가이드가 씀) |
@@ -128,12 +129,15 @@ config/stages.yaml, 설계는 docs/multi_agent_design_v2.md에 있다. 바뀌지
 | docs/github_upload_plan.md, .gitignore | 메인 세션 | 저장소에 올릴 것과 뺄 것 초안(최종은 담당자) |
 | state.json | timing_report.py mark, stage_plan.py baseline | 단계별 상태, 입력 해시(같으면 그 단계를 건너뜀), 호출과 재시도 수 |
 | packets/<종류>_w<번호>.md, packets/<종류>_plan.json | stage_packet.py | 작업자 하나의 작업 파일(필요한 기준 원문 필드, 대상, 출력 경로, 검사, 상한)과 배정 요약 |
+| replay_info.json | replay.py | 다시 돌리기 회차의 원본, 다시 할 단계, 지운 파일(2026-10-21). 고친 단계만 다시 돌려 비교할 때 씀(정답지는 복사하지 않음) |
+| config/guide_plans/<품목>.yaml | 사람(담당자 결정), 처음 품목은 메인 세션이 만들고 담당자 확인 | 품목 단위 가이드 장 선택(머리 주제, 방향 지수 주제와 두 방향 이름, 집중 분석과 기준표의 id, 제목, 주제). 품목 설정의 guide_plan으로 연결, guide_metrics.py가 guide 절과 대조 |
 | config/detail_rules.yaml | 사람(담당자 결정) | 설계 정보 항목의 공통 경계 규칙(품목에 묶이지 않음). 작업 파일에는 맡은 항목이 걸린 규칙만 원문 그대로, 감사자도 함께 읽음 |
 | 14_known_exceptions.yaml | 메인 세션(담당자 결정) | 그 회차에만 적용하는 첫 추출 검사의 알려진 예외(review_id, item, 이유). extract-check가 KNOWN으로 따로 보임 |
 | 06_report_concl_packet.md, 06_report_conclusions.yaml | report_lines.py packet, report-writer | 장마다 한 줄 결론을 쓸 작은 입력, 결론 문장(report_lines.py insert가 06_report.md에 넣음) |
 | config/exemplars/<품목>/report_exemplar.md, guide_exemplar.md, exemplar_check.json | exemplar.py build | 형식 견본(다른 회차 문서의 내용을 자리표로 바꾼 것)과 남은 내용 검사. 작성자는 회차와 다른 품목의 견본만 읽음 |
 | 19_copy_check.json | copy_check.py | 견본 원본 회차와 같은 낱말 8개 조각의 비율(스크립트 문장 뺌), 가장 긴 같은 구간 |
 | .claude/hooks/guard_runs.py | 사람(한 번) | PreToolUse Hook. 하위 에이전트가 runs/CURRENT 밖의 회차 폴더와 시험 기록을 열지 못하게 막음 |
+| guard_log.jsonl | guard_runs.py | 막은 호출 한 줄씩(ts, agent_type, tool, target, reason). 대시보드의 금지 파일 감시가 읽음 |
 
 태그 한 줄 예시:
 

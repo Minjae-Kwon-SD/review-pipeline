@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>파이프라인 대시보드</title>
+<style>
+  :root { --bg: #f7f7f5; --card: #ffffff; --text: #1f1f1f; --muted: #6b6b6b; --line: #dedede;
+          --accent: #2f5fd0; --done: #2e7d4f; --warn: #b5541c; --bad: #c62828; --wait: #9a7b00;
+          --done-bg: #e6f3eb; --warn-bg: #fdf0e6; --bad-bg: #fbe9e9; --run-bg: #e8eefc; --wait-bg: #fbf5d9; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #17181a; --card: #222326; --text: #ececec; --muted: #a0a0a0; --line: #3a3b3f;
+            --accent: #8aa8ff; --done: #6fcf97; --warn: #f2994a; --bad: #ff7b7b; --wait: #e8c547;
+            --done-bg: #1f3328; --warn-bg: #3a2a1c; --bad-bg: #3d2224; --run-bg: #23304d; --wait-bg: #3a3418; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 15px/1.55 -apple-system, "Segoe UI", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
+  header { position: sticky; top: 0; z-index: 5; background: var(--card); border-bottom: 1px solid var(--line);
+           padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+  header h1 { font-size: 16px; margin: 0; }
+  #runname { font-family: ui-monospace, Consolas, monospace; font-size: 13px; color: var(--muted); }
+  #pill { font-weight: 700; padding: 3px 10px; border-radius: 999px; font-size: 13px; }
+  .spacer { flex: 1; }
+  #updated { color: var(--muted); font-size: 12px; }
+  button { font: inherit; padding: 6px 12px; border: 1px solid var(--line); border-radius: 6px;
+           background: var(--bg); color: var(--text); cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button.small { padding: 2px 8px; font-size: 13px; }
+  main { max-width: 1100px; margin: 0 auto; padding: 16px; display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 860px) { main { grid-template-columns: 1fr; } }
+  .wide { grid-column: 1 / -1; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; min-width: 0; }
+  .card h2 { font-size: 15px; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+  .q { width: 22px; height: 22px; padding: 0; border-radius: 50%; font-size: 13px; line-height: 20px; color: var(--muted); }
+  .helpbox { display: none; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px;
+             font-size: 13px; color: var(--muted); margin: -2px 0 10px; }
+  .helpbox.open { display: block; }
+  .muted { color: var(--muted); }
+  .small-t { font-size: 13px; }
+  .banner { grid-column: 1 / -1; border-radius: 10px; padding: 12px 16px; font-weight: 600; display: none;
+            align-items: center; gap: 12px; flex-wrap: wrap; }
+  .banner.show { display: flex; }
+  .banner .msg { flex: 1; min-width: 200px; }
+  #b-human { background: var(--wait-bg); border: 2px solid var(--wait); font-size: 17px; }
+  #b-problem { background: var(--bad-bg); border: 2px solid var(--bad); }
+  #b-stall { background: var(--warn-bg); border: 2px solid var(--warn); }
+  #b-done { background: var(--done-bg); border: 2px solid var(--done); }
+  #b-sound { background: var(--run-bg); border: 1px solid var(--accent); font-weight: 500; }
+  .stats { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .stat { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; min-width: 92px; }
+  .stat b { display: block; font-size: 20px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 12px; color: var(--muted); }
+  .steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 6px; }
+  @media (max-width: 520px) { .steps { grid-template-columns: 1fr 1fr; } .step { padding: 5px 6px; } }
+  #history { min-width: 640px; }
+  .step { border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; font-size: 13px; display: flex; gap: 8px; align-items: flex-start; }
+  .step .dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 5px; flex: none; background: var(--line); }
+  .step .nm { font-weight: 600; }
+  .step .sub { color: var(--muted); font-size: 12px; }
+  .s-done .dot { background: var(--done); }
+  .s-running { background: var(--run-bg); border-color: var(--accent); }
+  .s-running .dot { background: var(--accent); animation: blink 1.2s infinite; }
+  .s-needs_human { background: var(--wait-bg); border-color: var(--wait); }
+  .s-needs_human .dot { background: var(--wait); }
+  .s-stuck { background: var(--bad-bg); border-color: var(--bad); }
+  .s-stuck .dot { background: var(--bad); }
+  .s-none { opacity: .55; }
+  @keyframes blink { 50% { opacity: .3; } }
+  .toggle-row { display: flex; gap: 10px; align-items: center; margin: 8px 0; font-size: 13px; }
+  ul.plain { list-style: none; margin: 0; padding: 0; }
+  ul.plain li { border-top: 1px solid var(--line); padding: 6px 0; font-size: 14px; }
+  ul.plain li:first-child { border-top: 0; }
+  .grp { font-size: 12px; color: var(--muted); }
+  .new { background: var(--wait-bg); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { border-top: 1px solid var(--line); padding: 6px 4px; text-align: left; vertical-align: top; }
+  th { color: var(--muted); font-weight: 500; border-top: 0; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl-wrap { overflow-x: auto; }
+  .light { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: -1px; margin-right: 6px; background: var(--line); }
+  .l-PASS { background: var(--done); } .l-FAIL { background: var(--bad); } .l-WARN, .l-UNKNOWN { background: var(--warn); }
+  .l-EMPTY { background: var(--warn); } .l-NONE { background: var(--line); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; font-size: 13px; }
+  .c-done { background: var(--done-bg); border-color: var(--done); }
+  .c-early { background: var(--run-bg); border-color: var(--accent); }
+  .c-none { opacity: .6; }
+  .linkbtns { display: flex; flex-wrap: wrap; gap: 6px; }
+  .set-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px 16px; }
+  .set-grid label { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+  input[type=range] { width: 140px; }
+  input[type=number] { width: 64px; font: inherit; padding: 2px 4px; background: var(--bg); color: var(--text); border: 1px solid var(--line); border-radius: 4px; }
+  .err { color: var(--bad); }
+  code { font-family: ui-monospace, Consolas, monospace; font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>파이프라인 대시보드</h1>
+  <span id="runname"></span>
+  <span id="pill"></span>
+  <span class="spacer"></span>
+  <span id="updated"></span>
+  <button id="btn-sound" class="primary">소리 켜기</button>
+</header>
+
+<main>
+  <div id="b-sound" class="banner show"><span class="msg">브라우저는 한 번 누르기 전에는 소리를 막아 둡니다. 위의 "소리 켜기"를 한 번 눌러 주세요. 윈도우 알림 허락도 이때 묻습니다.</span></div>
+  <div id="b-human" class="banner"><span class="msg" id="b-human-msg"></span><button id="btn-ack" class="primary">확인했어요</button></div>
+  <div id="b-problem" class="banner"><span class="msg" id="b-problem-msg"></span></div>
+  <div id="b-stall" class="banner"><span class="msg" id="b-stall-msg"></span></div>
+  <div id="b-done" class="banner"><span class="msg" id="b-done-msg"></span></div>
+
+  <section class="card wide" id="sec-progress">
+    <h2>지금 회차 진행판 <button class="q" data-help="h-progress">?</button></h2>
+    <div class="helpbox" id="h-progress">단계마다 색으로 상태를 보여 줍니다. 파랑은 도는 중, 노랑은 사람 차례, 빨강은 멈춤(재시도를 다 썼거나 도는 동안 입력이 바뀜), 초록은 끝남, 흐린 칸은 아직 안 함(끝난 회차에서는 돌지 않은 단계)입니다. 남은 시간은 지난 회차 3개가 같은 단계를 끝낸 뒤 끝까지 걸린 AI 시간의 가운데 값이라 대략입니다. 처음 하는 품목이나 리뷰 수가 크게 다르면 어긋납니다. 빨강이면 state.json에서 그 단계 기록을 보고, 메인 세션에 "그 단계부터 다시 해"라고 알려 주세요.</div>
+    <div class="stats" id="stats"></div>
+    <div class="small-t" id="eta"></div>
+    <div class="small-t muted" id="agents" style="margin:6px 0 10px"></div>
+    <div class="toggle-row"><label><input type="checkbox" id="hide-done"> 끝난 단계 접기</label></div>
+    <div class="steps" id="steps"></div>
+  </section>
+
+  <section class="card" id="sec-decisions">
+    <h2>자동으로 정한 것 <button class="q" data-help="h-decisions">?</button></h2>
+    <div class="helpbox" id="h-decisions">정답지 말고는 관문이 추천안대로 저절로 넘어갑니다. 무엇을 왜 승인했는지가 00_auto_decisions.md에 쌓이고 여기 보입니다. 새 줄은 노랗게 표시되고 "띵" 소리가 납니다. 틀린 게 있으면 메인 세션 채팅에 "○○ 관문 이렇게 고쳐"라고 쓰면 그 관문만 되돌려 다시 돌립니다.</div>
+    <ul class="plain" id="decisions"></ul>
+  </section>
+
+  <section class="card" id="sec-checks">
+    <h2>점검 신호등 <button class="q" data-help="h-checks">?</button></h2>
+    <div class="helpbox" id="h-checks">스크립트와 감사자가 남긴 검사 결과입니다. 초록 통과, 빨강 실패, 주황 경고, 회색은 아직 그 단계 전입니다. 빨강이 뜨면 대개 메인 세션이 그 묶음만 다시 돌리거나 고치기를 합니다. 같은 검사가 두 번 넘게 빨강이면 메인 세션 보고를 확인해 주세요. 유료 호출은 시작 때 정한 상한(00_collect_plan.yaml)을 넘으면 빨강입니다. 테스트는 저장소 스크립트 자체 시험(python tests/test_scripts.py)이고 1분쯤 걸립니다.</div>
+    <div class="tbl-wrap"><table id="checks"></table></div>
+    <div class="toggle-row" style="margin-top:10px"><span id="paid"></span></div>
+    <div class="toggle-row"><button class="small" id="btn-tests">테스트 돌리기</button><span id="tests" class="small-t"></span></div>
+  </section>
+
+  <section class="card" id="sec-chapters">
+    <h2>장별 쓰기 상태 <button class="q" data-help="h-chapters">?</button></h2>
+    <div class="helpbox" id="h-chapters">리포트와 가이드는 장 묶음으로 나눠 씁니다. 파랑은 라벨 전에 미리 쓴 판, 초록은 다 쓴 판, 흐린 칸은 아직입니다. 리포트 1~7장과 9장, 가이드 01-02-A는 미리 쓰기 대상이라, 끝난 회차인데 "미리 쓰기"가 기록 없음이면 그 회차는 미리 쓰기가 돌지 않은 것입니다(시간이 더 걸린 이유일 수 있음).</div>
+    <div id="chapters"></div>
+  </section>
+
+  <section class="card" id="sec-guard">
+    <h2>금지 파일 감시 <button class="q" data-help="h-guard">?</button></h2>
+    <div class="helpbox" id="h-guard">하위 에이전트가 다른 회차 폴더나 시험 기록처럼 열면 안 되는 파일을 열려다 막힌 기록입니다(.claude/hooks/guard_runs.py). 막았으니 내용은 읽히지 않았지만, 시험 회차라면 왜 열려고 했는지 메인 세션에 확인해 주세요. 빨강이 생기면 경고음이 납니다.</div>
+    <div id="guard"></div>
+  </section>
+
+  <section class="card" id="sec-links">
+    <h2>바로가기 <button class="q" data-help="h-links">?</button></h2>
+    <div class="helpbox" id="h-links">누르면 이 PC의 기본 프로그램으로 엽니다. 정답지 화면은 정답지 차례에만 생깁니다. 저장소 밖 파일은 열지 않습니다.</div>
+    <div class="linkbtns" id="links"></div>
+    <div id="link-err" class="err small-t"></div>
+  </section>
+
+  <section class="card" id="sec-settings">
+    <h2>소리와 알림 <button class="q" data-help="h-settings">?</button></h2>
+    <div class="helpbox" id="h-settings">설정은 이 브라우저에 남아 다시 열어도 그대로입니다. 사람 차례 소리는 "확인했어요"를 누를 때까지 정한 간격마다 다시 울립니다. 멈춤 의심은 도는 단계가 있는데 기록 파일이 정한 분 넘게 그대로일 때입니다. 윈도우 알림은 브라우저를 내려 둬도 화면 구석에 뜹니다(처음 한 번 허락 필요).</div>
+    <div class="set-grid">
+      <label><input type="checkbox" id="set-on"> 소리 켜기</label>
+      <label>볼륨 <input type="range" id="set-vol" min="0" max="100"> <span id="vol-v"></span></label>
+      <label><input type="checkbox" id="set-k-human"> 사람 차례 <button class="small" data-test="human">들어 보기</button></label>
+      <label><input type="checkbox" id="set-k-problem"> 문제 생김 <button class="small" data-test="problem">들어 보기</button></label>
+      <label><input type="checkbox" id="set-k-done"> 회차 끝 <button class="small" data-test="done">들어 보기</button></label>
+      <label><input type="checkbox" id="set-k-decision"> 정한 것 나옴 <button class="small" data-test="decision">들어 보기</button></label>
+      <label>사람 차례 다시 울림 <input type="number" id="set-repeat" min="0" max="60" step="1">분마다(0은 한 번만)</label>
+      <label>멈춤 의심 기준 <input type="number" id="set-stall" min="2" max="120" step="1">분</label>
+      <label><input type="checkbox" id="set-notify"> 윈도우 알림 창 <span id="notify-state" class="muted small-t"></span></label>
+    </div>
+  </section>
+
+  <section class="card wide" id="sec-history">
+    <h2>지난 회차 기록 <button class="q" data-help="h-history">?</button></h2>
+    <div class="helpbox" id="h-history">회차마다 상품 수, 리뷰 수, AI 작업 시간(08_timing.md의 벽시계 값, 기다림과 라벨링 뺌), 정답지 점수(sonnet 주제 F1, 감성 방향, mixed), 태그 감사 실패 비율입니다. 시간 줄이기 비교 페이지의 시간 규칙과는 정의가 달라 숫자가 다를 수 있습니다. 시험 사본(-rt) 회차와 채점용 세트 점수는 넣지 않습니다. 이번 회차가 평소보다 느린지 볼 때 기준으로 쓰세요.</div>
+    <div class="tbl-wrap"><table id="history"></table></div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var POLL_MS = 5000;
+  var KINDS = ["human", "problem", "done", "decision"];
+  var DEFAULTS = { on: true, vol: 70, k_human: true, k_problem: true, k_done: true, k_decision: true, repeat: 1, stall: 10, notify: true };
+  var S = load("dash_settings", DEFAULTS);
+  for (var k in DEFAULTS) if (!(k in S)) S[k] = DEFAULTS[k];
+  var acked = load("dash_acked", {});
+  var seenDecisions = load("dash_seen_dec", {});
+  var prev = null, snap = null, audioCtx = null, unlocked = false, lastHumanBeep = 0, stallFired = {}, serverSkew = 0;
+
+  function load(key, dflt) { try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : JSON.parse(JSON.stringify(dflt)); } catch (e) { return JSON.parse(JSON.stringify(dflt)); } }
+  function save(key, v) { try { localStorage.setItem(key, JSON.stringify(v)); } catch (e) {} }
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function t(s) { var d = s ? new Date(s) : null; return d && !isNaN(d) ? d : null; }
+  function nowServer() { return new Date(Date.now() + serverSkew); }
+  function ago(s) {
+    var d = t(s); if (!d) return "";
+    var m = Math.round((nowServer() - d) / 60000);
+    if (m < 1) return "방금";
+    if (m < 60) return m + "분 전";
+    var h = Math.floor(m / 60); if (h < 24) return h + "시간 " + (m % 60) + "분 전";
+    return Math.floor(h / 24) + "일 전";
+  }
+  function mins(s) { var d = t(s); return d ? (nowServer() - d) / 60000 : null; }
+  function clock(s) { var d = t(s); return d ? d.toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }) : ""; }
+
+  // ---------- 소리 ----------
+  function ctx() {
+    if (!audioCtx) { var A = window.AudioContext || window.webkitAudioContext; if (A) audioCtx = new A(); }
+    return audioCtx;
+  }
+  function tone(freq, start, dur, type, gain) {
+    var c = ctx(); if (!c) return;
+    var o = c.createOscillator(), g = c.createGain();
+    o.type = type || "sine"; o.frequency.value = freq;
+    var v = (S.vol / 100) * (gain || 0.3), t0 = c.currentTime + start;
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(Math.max(v, 0.0002), t0 + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    o.connect(g); g.connect(c.destination); o.start(t0); o.stop(t0 + dur + 0.05);
+  }
+  var SOUNDS = {
+    human: function () { [523, 659, 784, 523, 659, 784].forEach(function (f, i) { tone(f, i * 0.16 + (i > 2 ? 0.25 : 0), 0.22, "triangle", 0.4); }); },
+    problem: function () { tone(220, 0, 0.28, "square", 0.18); tone(220, 0.38, 0.28, "square", 0.18); tone(196, 0.76, 0.4, "square", 0.18); },
+    done: function () { [784, 988, 1175, 1568].forEach(function (f, i) { tone(f, i * 0.13, 0.35, "sine", 0.35); }); },
+    decision: function () { tone(1319, 0, 0.5, "sine", 0.25); }
+  };
+  function play(kind, force) {
+    if (!force && (!S.on || !S["k_" + kind])) return;
+    if (!unlocked && !force) return;
+    var c = ctx(); if (c && c.state === "suspended") c.resume();
+    SOUNDS[kind]();
+  }
+  function notify(kind, title, body) {
+    if (!S.notify || !("Notification" in window) || Notification.permission !== "granted") return;
+    if (!S["k_" + kind]) return;
+    try { new Notification(title, { body: body, tag: "dash-" + kind + "-" + title, renotify: true }); } catch (e) {}
+  }
+  window.dashAlerts = [];       // 시험용 기록(어떤 알림이 났는지)
+  function alert_(kind, title, body) { window.dashAlerts.push(kind + ": " + title); play(kind); notify(kind, title, body); }
+
+  $("btn-sound").onclick = function () {
+    unlocked = true; S.on = true; lastHumanBeep = 0; save("dash_settings", S); syncSettings();
+    var c = ctx(); if (c && c.state === "suspended") c.resume();
+    tone(880, 0, 0.15, "sine", 0.25);
+    if (S.notify && "Notification" in window && Notification.permission === "default") Notification.requestPermission().then(syncSettings);
+    $("b-sound").classList.remove("show");
+    this.textContent = "소리 켜짐"; this.classList.remove("primary");
+    render();
+  };
+
+  // ---------- 설정 ----------
+  function syncSettings() {
+    $("set-on").checked = S.on; $("set-vol").value = S.vol; $("vol-v").textContent = S.vol;
+    KINDS.forEach(function (k) { $("set-k-" + k).checked = S["k_" + k]; });
+    $("set-repeat").value = S.repeat; $("set-stall").value = S.stall; $("set-notify").checked = S.notify;
+    var ns = !("Notification" in window) ? "(이 브라우저는 지원 안 함)" : Notification.permission === "granted" ? "(허락됨)" :
+             Notification.permission === "denied" ? "(막힘: 브라우저 주소창 왼쪽 자물쇠에서 허용)" : "(소리 켜기를 누르면 물음)";
+    $("notify-state").textContent = ns;
+  }
+  $("set-on").onchange = function () { S.on = this.checked; save("dash_settings", S); };
+  $("set-vol").oninput = function () { S.vol = +this.value; $("vol-v").textContent = S.vol; save("dash_settings", S); };
+  $("set-vol").onchange = function () { play("decision", true); };
+  KINDS.forEach(function (k) { $("set-k-" + k).onchange = function () { S["k_" + k] = this.checked; save("dash_settings", S); }; });
+  $("set-repeat").onchange = function () { S.repeat = Math.max(0, +this.value || 0); save("dash_settings", S); };
+  $("set-stall").onchange = function () { S.stall = Math.max(2, +this.value || 10); save("dash_settings", S); render(); };
+  $("set-notify").onchange = function () {
+    S.notify = this.checked; save("dash_settings", S);
+    if (S.notify && "Notification" in window && Notification.permission === "default") Notification.requestPermission().then(syncSettings);
+    syncSettings();
+  };
+  document.querySelectorAll("[data-test]").forEach(function (b) {
+    b.onclick = function (e) { e.preventDefault(); unlocked = true; play(b.getAttribute("data-test"), true); };
+  });
+  document.querySelectorAll(".q").forEach(function (b) {
+    b.onclick = function () { $(b.getAttribute("data-help")).classList.toggle("open"); };
+  });
+  var hide = load("dash_hide_done", false);
+  $("hide-done").checked = hide;
+  $("hide-done").onchange = function () { hide = this.checked; save("dash_hide_done", hide); render(); };
+  $("btn-ack").onclick = function () { if (snap) { acked[humanKey(snap)] = true; save("dash_acked", acked); } render(); };
+
+  // ---------- 바로가기, 테스트 ----------
+  function post(url, body) {
+    return fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) })
+      .then(function (r) { return r.json(); });
+  }
+  $("btn-tests").onclick = function () { post("/api/tests").then(poll); };
+
+  // ---------- 판단 ----------
+  function humanKey(s) { return s.run + "|" + s.human_turn.map(function (r) { return r.id + "@" + r.since; }).join(","); }
+  function stalled(s) {
+    if (!s.running.length || s.human_turn.length || s.finished) return null;
+    var m = mins(s.last_activity);
+    return m != null && m >= S.stall ? Math.floor(m) : null;
+  }
+  function problems(s) {
+    var out = [];
+    s.stuck.forEach(function (r) { out.push({ key: "stuck:" + r.id + "@" + r.updated, text: r.name + " 단계가 멈춤(" + ago(r.updated) + ")" }); });
+    s.checks.forEach(function (c) { if (c.status === "FAIL") out.push({ key: "check:" + c.name + "@" + c.updated, text: c.name + " 실패" + (c.detail ? "(" + c.detail + ")" : "") }); });
+    if (s.guard.length) out.push({ key: "guard:" + s.guard.length, text: "금지 파일 열기 시도 " + s.guard.length + "번(막음)" });
+    if (s.paid.limit != null && s.paid.calls > s.paid.limit) out.push({ key: "paid:" + s.paid.calls, text: "유료 호출 " + s.paid.calls + "번, 상한 " + s.paid.limit + "번을 넘음" });
+    return out;
+  }
+
+  function detect(s) {
+    // 처음 읽을 때는 지금 상태를 기준으로 삼고 소리를 내지 않는다(사람 차례만 예외)
+    if (prev && prev.run === s.run) {
+      var before = {}; problems(prev).forEach(function (p) { before[p.key] = 1; });
+      var fresh = problems(s).filter(function (p) { return !before[p.key]; });
+      if (fresh.length) alert_("problem", "문제 생김: " + s.run, fresh.map(function (p) { return p.text; }).join("\n"));
+      if (s.finished && !prev.finished) alert_("done", "회차 끝: " + s.run, "리포트와 가이드 HTML이 다 나왔습니다.");
+      if (s.decisions.length > prev.decisions.length) {
+        var nd = s.decisions.slice(prev.decisions.length);
+        alert_("decision", "정한 것 " + nd.length + "개", nd.map(function (d) { return d.text; }).join("\n").slice(0, 300));
+      }
+    }
+    var st = stalled(s), sk = s.run + "@" + s.last_activity;
+    if (st != null && !stallFired[sk]) { stallFired[sk] = 1; alert_("problem", "멈춤 의심: " + s.run, st + "분째 기록이 그대로입니다."); }
+    if (s.human_turn.length && !acked[humanKey(s)]) {
+      var gap = S.repeat > 0 ? S.repeat * 60000 : Infinity;
+      if (!lastHumanBeep || (Date.now() - lastHumanBeep) >= gap) {
+        lastHumanBeep = Date.now();
+        alert_("human", "사람 차례: " + s.human_turn.map(function (r) { return r.name; }).join(", "), "대시보드에서 확인을 눌러 주세요.");
+      }
+    } else { lastHumanBeep = 0; }
+  }
+
+  // ---------- 그리기 ----------
+  var STATUS_KO = { done: "끝남", running: "도는 중", needs_human: "사람 차례", waiting: "아직", none: "기록 없음", stuck: "멈춤" };
+  function render() {
+    var s = snap; if (!s) return;
+    if (s.error) { $("runname").textContent = s.run || ""; $("pill").textContent = s.error; return; }
+    $("runname").textContent = s.run + (s.following_current ? " (CURRENT)" : "");
+    $("updated").textContent = "읽은 때 " + new Date().toLocaleTimeString("ko-KR");
+    var st = stalled(s), pr = problems(s), pill = $("pill");
+    var state = s.finished ? ["끝남", "--done-bg", "--done"] : s.human_turn.length ? ["사람 차례", "--wait-bg", "--wait"] :
+                s.stuck.length ? ["멈춤", "--bad-bg", "--bad"] : st != null ? ["멈춤 의심", "--warn-bg", "--warn"] :
+                s.running.length ? ["진행 중", "--run-bg", "--accent"] : ["쉬는 중", "--bg", "--muted"];
+    pill.textContent = state[0]; pill.style.background = "var(" + state[1] + ")"; pill.style.color = "var(" + state[2] + ")";
+    document.title = (s.human_turn.length ? "● " : "") + state[0] + " - 파이프라인 대시보드";
+
+    var hk = humanKey(s);
+    $("b-human").classList.toggle("show", s.human_turn.length > 0);
+    $("btn-ack").style.display = acked[hk] ? "none" : "";
+    $("b-human-msg").innerHTML = s.human_turn.map(function (r) {
+      return esc(r.name) + " 차례입니다" + (r.since ? " (" + ago(r.since) + "부터)" : "");
+    }).join("<br>") + (s.human_turn.some(function (r) { return r.id === "04_gold_tagging"; }) ? "<br><span class='small-t'>바로가기의 \"정답지 화면\"을 열어 태깅하고, 제출로 받은 두 파일을 gold 폴더에 저장한 뒤 메인 세션에 알려 주세요.</span>" : "") +
+      (acked[hk] ? "<br><span class='small-t muted'>확인함. 다시 울리지 않습니다.</span>" : "");
+    $("b-problem").classList.toggle("show", pr.length > 0);
+    $("b-problem-msg").innerHTML = pr.map(function (p) { return esc(p.text); }).join("<br>");
+    $("b-stall").classList.toggle("show", st != null);
+    $("b-stall-msg").textContent = st != null ? st + "분째 응답 없음. 도는 단계: " + s.running.map(function (r) { return r.name; }).join(", ") + ". 메인 세션 창이 멈췄거나 사용량 한도에 닿았는지 확인해 주세요." : "";
+    $("b-done").classList.toggle("show", !!s.finished);
+    $("b-done-msg").textContent = s.finished ? "회차가 끝났습니다. 리포트와 가이드는 바로가기에서 열 수 있습니다." : "";
+
+    // 진행판
+    var steps = s.steps, n = function (f) { return steps.filter(f).length; };
+    var doneN = n(function (r) { return r.status === "done"; }), total = n(function (r) { return r.status !== "none"; });
+    $("stats").innerHTML = [
+      [doneN + " / " + total, "끝난 단계"], [s.running.length, "도는 단계"], [s.agents.length, "도는 에이전트"],
+      [s.human_turn.length, "사람 차례"], [ago(s.last_activity) || "-", "마지막 기록"]
+    ].map(function (x) { return "<div class='stat'><b>" + esc(x[0]) + "</b><span>" + x[1] + "</span></div>"; }).join("");
+    var e = s.eta || {};
+    $("eta").innerHTML = e.state === "finished" ? "남은 시간: 끝남" :
+      e.state === "ok" ? "남은 시간 예상: <b>끝까지 약 " + Math.round(e.minutes_left) + "분</b>" +
+        (e.minutes_left === 0 ? " (지난 회차보다 오래 걸리는 중)" : "") +
+        (e.gold_minutes != null ? ", 정답지 차례까지 약 " + Math.round(e.gold_minutes) + "분" : "") +
+        " <span class='muted'>(마지막으로 끝난 단계 '" + esc(e.milestone_name) + "' 기준, 지난 회차 " + e.runs.length + "개의 가운데 값, 범위 " + e.spread[0] + "~" + e.spread[1] + "분, 기다림 뺌)</span>" :
+      "남은 시간 예상: <span class='muted'>" + esc(e.why || "기록 부족") + "</span>";
+    $("agents").innerHTML = s.agents.length ? "도는 에이전트: " + s.agents.map(function (a) {
+      var m = mins(a.since); return esc(a.agent_type) + " " + (m != null ? Math.floor(m) + "분째" : "");
+    }).join(", ") : "도는 에이전트 없음";
+    $("steps").innerHTML = steps.filter(function (r) { return !(hide && r.status === "done"); }).map(function (r) {
+      var cls = r.status === "needs_human" && r.kind !== "human" && r.kind !== "auto" ? "stuck" : r.status;
+      var sub = STATUS_KO[cls] || r.status;
+      if (r.status === "running" || r.status === "needs_human") sub += r.since ? ", " + ago(r.since) + "부터" : "";
+      else if (r.status === "done" && r.updated) sub += ", " + clock(r.updated);
+      if (r.kind === "human") sub += ", 사람"; else if (r.kind === "auto") sub += ", 자동 관문";
+      if (r.retries) sub += ", 재시도 " + r.retries;
+      return "<div class='step s-" + cls + "' title='" + esc(r.id) + "'><span class='dot'></span><div><div class='nm'>" + esc(r.name) +
+             "</div><div class='sub'>" + esc(sub) + "</div></div></div>";
+    }).join("");
+
+    // 정한 것
+    var sd = seenDecisions[s.run] || 0;
+    $("decisions").innerHTML = s.decisions.length ? s.decisions.slice().reverse().map(function (d, i) {
+      var isNew = (s.decisions.length - i) > sd;
+      return "<li" + (isNew ? " class='new'" : "") + ">" + (d.group ? "<div class='grp'>" + esc(d.group) + "</div>" : "") + esc(d.text) + "</li>";
+    }).join("") : "<li class='muted'>아직 없음(00_auto_decisions.md가 없거나 비어 있음)</li>";
+    if (s.decisions.length !== sd) { setTimeout(function () { seenDecisions[s.run] = s.decisions.length; save("dash_seen_dec", seenDecisions); }, 60000); }
+
+    // 신호등
+    var KO = { PASS: "통과", FAIL: "실패", WARN: "경고", EMPTY: "표본 없음", UNKNOWN: "확인 필요", NONE: "아직" };
+    var pending = s.checks.filter(function (c) { return c.status === "NONE"; });
+    $("checks").innerHTML = "<tr><th>검사</th><th>결과</th><th>내용</th></tr>" + s.checks.filter(function (c) { return c.status !== "NONE"; }).map(function (c) {
+      return "<tr title='" + esc(c.what) + "'><td>" + esc(c.name) + "</td><td><span class='light l-" + esc(c.status) + "'></span>" +
+             esc(KO[c.status] || c.status) + "</td><td class='muted'>" + esc(c.detail) + "</td></tr>";
+    }).join("") + (pending.length ? "<tr><td colspan='3' class='muted' title='" + esc(pending.map(function (c) { return c.name; }).join(", ")) + "'><span class='light l-NONE'></span>아직 안 한 검사 " + pending.length + "개</td></tr>" : "");
+    var p = s.paid, over = p.limit != null && p.calls > p.limit, near = p.limit && p.calls >= 0.8 * p.limit;
+    $("paid").innerHTML = "<span class='light " + (over ? "l-FAIL" : near ? "l-WARN" : p.calls || p.limit ? "l-PASS" : "l-NONE") + "'></span>유료 호출 " +
+      p.calls + "번" + (p.limit != null ? " / 상한 " + p.limit + "번" : " (수집 계획 파일 없음 또는 유료 안 씀)");
+    var ts_ = s.tests || {};
+    $("tests").innerHTML = ts_.state === "running" ? "<span class='light l-WARN'></span>도는 중..." :
+      ts_.state === "pass" ? "<span class='light l-PASS'></span>" + esc(ts_.line) + " (" + ago(ts_.at) + ")" :
+      ts_.state === "fail" ? "<span class='light l-FAIL'></span>" + esc(ts_.line) : "<span class='muted'>아직 안 돌림</span>";
+
+    // 장별
+    var ch = s.chapters, CK = { done: "다 씀", early: "미리 씀", none: "아직" };
+    function chips(list) { return "<div class='chips'>" + list.map(function (x) { return "<span class='chip c-" + x.state + "'>" + esc(x.part) + " " + CK[x.state] + (x.early_planned ? " *" : "") + "</span>"; }).join("") + "</div>"; }
+    function er(v) { return v ? (STATUS_KO[v] || v) : "기록 없음"; }
+    $("chapters").innerHTML = "<div class='small-t' style='margin-bottom:4px'><b>리포트</b> (미리 쓰기: " + er(ch.report_early_ran) + ", 합치기 " + (ch.report_merged ? "됨" : "전") + ", HTML " + (ch.report_done ? "있음" : "없음") + ")</div>" +
+      chips(ch.report) + "<div class='small-t' style='margin:10px 0 4px'><b>가이드</b> (미리 쓰기: " + er(ch.guide_early_ran) + ", 합치기 " + (ch.guide_merged ? "됨" : "전") + ", HTML " + (ch.guide_done ? "있음" : "없음") + ")</div>" +
+      chips(ch.guide) + "<div class='small-t muted' style='margin-top:6px'>* 미리 쓰기 대상 묶음</div>";
+
+    // 금지 파일
+    $("guard").innerHTML = s.guard.length ? "<div class='small-t'><span class='light l-FAIL'></span>막은 기록 " + s.guard.length + "번</div><ul class='plain'>" +
+      s.guard.slice(-8).reverse().map(function (g) { return "<li class='small-t'>" + esc(clock(g.ts)) + " " + esc(g.agent_type || "") + " " + esc(g.tool || "") + ": <code>" + esc(g.target) + "</code><br><span class='muted'>" + esc(g.reason) + "</span></li>"; }).join("") + "</ul>" :
+      "<div class='small-t'><span class='light l-PASS'></span>막은 기록 없음</div>";
+
+    // 바로가기
+    $("links").innerHTML = s.links.map(function (l) { return "<button class='small' data-open='" + esc(l.path) + "'>" + esc(l.name) + "</button>"; }).join("");
+    document.querySelectorAll("[data-open]").forEach(function (b) {
+      b.onclick = function () { post("/api/open", { path: b.getAttribute("data-open") }).then(function (r) { $("link-err").textContent = r.ok ? "" : r.error; }); };
+    });
+
+    // 지난 회차
+    function pct(v) { return v == null ? "-" : (100 * v).toFixed(1) + "%"; }
+    $("history").innerHTML = "<tr><th>회차</th><th class='num'>상품</th><th class='num'>리뷰</th><th class='num'>AI 작업</th><th class='num'>주제 F1</th><th class='num'>감성 방향</th><th class='num'>mixed</th><th class='num'>태그 감사 실패</th><th>열기</th></tr>" +
+      s.history.slice().sort(function (a, b) { return (b.date + b.run).localeCompare(a.date + a.run); }).map(function (h) {
+        return "<tr" + (h.current ? " class='new'" : "") + "><td>" + esc(h.run) + "</td><td class='num'>" + (h.products == null ? "-" : h.products) +
+          "</td><td class='num'>" + (h.reviews == null ? "-" : h.reviews.toLocaleString()) + "</td><td class='num'>" + (h.ai_minutes == null ? "-" : h.ai_minutes + "분") +
+          "</td><td class='num'>" + (h.topic_f1 == null ? "-" : h.topic_f1.toFixed(2)) + "</td><td class='num'>" + pct(h.direction) + "</td><td class='num'>" + pct(h.mixed) +
+          "</td><td class='num'>" + pct(h.tag_audit_fail) + "</td><td>" +
+          (h.report ? "<button class='small' data-open='" + esc(h.report) + "'>리포트</button> " : "") +
+          (h.guide ? "<button class='small' data-open='" + esc(h.guide) + "'>가이드</button>" : "") + "</td></tr>";
+      }).join("");
+    document.querySelectorAll("#history [data-open]").forEach(function (b) {
+      b.onclick = function () { post("/api/open", { path: b.getAttribute("data-open") }).then(function (r) { $("link-err").textContent = r.ok ? "" : r.error; }); };
+    });
+  }
+
+  function poll() {
+    fetch("/api/state", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (s) {
+      if (s.now) serverSkew = new Date(s.now) - Date.now();
+      snap = s;
+      if (!s.error) detect(s);
+      render();
+      prev = s;
+    }).catch(function () {
+      $("pill").textContent = "대시보드 스크립트와 연결 끊김"; $("pill").style.color = "var(--bad)";
+    });
+  }
+  syncSettings();
+  poll();
+  setInterval(poll, POLL_MS);
+})();
+</script>
+</body>
+</html>
